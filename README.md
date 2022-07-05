@@ -23,7 +23,5 @@ Here are some ideas to get you started:
 
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=klmhyeonwoo&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
 
-##### <a target='_blank' href="https://bedecked-hosta-ff2.notion.site/klm-hyeon-woo-Portfolio-e85001f474004e92849d1120a8e4b1af">NOTION</a>
-
 </div>
 

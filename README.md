@@ -21,7 +21,5 @@ Here are some ideas to get you started:
 <img width="800px" height="auto" src="https://user-images.githubusercontent.com/19422885/177278564-286e9b26-6fa7-4b34-8812-f32e53e3875a.png"></img>
 <br/><br/>
 
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=klmhyeonwoo&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
-
 </div>
 

@@ -14,6 +14,12 @@ Here are some ideas to get you started:
 - ⚡ Fun fact: ...
 -->
 
+<div align="center">
+
+<img width="800px" height="auto" src="https://user-images.githubusercontent.com/19422885/177278564-286e9b26-6fa7-4b34-8812-f32e53e3875a.png"></img>
+<br/><br/>
+
+</div>
 
 <div align="center">
 
@@ -27,12 +33,6 @@ Here are some ideas to get you started:
 <img src="https://img.shields.io/badge/Adobe%20XD-470137?style=for-the-badge&logo=Adobe%20XD&logoColor=#FF61F6"/>
 <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white"/>
 <img src="https://img.shields.io/badge/Adobe%20Illustrator-FF9A00?style=for-the-badge&logo=adobe%20illustrator&logoColor=white"/>
-
-<br/><br/>
-<div align="center">
-
-<img width="800px" height="auto" src="https://user-images.githubusercontent.com/19422885/177278564-286e9b26-6fa7-4b34-8812-f32e53e3875a.png"></img>
-<br/><br/>
 
 </div>
 </div>

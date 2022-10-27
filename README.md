@@ -14,11 +14,11 @@ Here are some ideas to get you started:
 - ⚡ Fun fact: ...
 -->
 
+
 <br/><br/>
 
 <div align="center">
-
-<img width="800px" height="auto" src="https://user-images.githubusercontent.com/19422885/177278564-286e9b26-6fa7-4b34-8812-f32e53e3875a.png"></img>
+<img height="auto" src="https://user-images.githubusercontent.com/19422885/198323884-f26b56d9-cfc1-499d-bbb8-74e7c8f8c01b.png"></img>
 <br/><br/>
 
 </div>

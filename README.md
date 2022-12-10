@@ -22,7 +22,7 @@ Here are some ideas to get you started:
 <div align="center">
 <a href="[klmhyeonwoo.oopy.io](https://klmhyeonwoo.oopy.io/)" target="_blank">
   <img style="height:125px" src="https://user-images.githubusercontent.com/19422885/206861312-7dbd3708-98dc-4b97-82e9-96f25581bc94.gif"></img>
-  <img height="auto" src="https://user-images.githubusercontent.com/19422885/206861256-c1f27a42-0f35-47cb-8e0c-e74e53552303.png"></img>
+  <img height="auto" src="https://user-images.githubusercontent.com/19422885/206861535-83792ac1-7d32-4e8c-9c0a-c03168967a87.png"></img>
 </a>
 
 <br/><br/>

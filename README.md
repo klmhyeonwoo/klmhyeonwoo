@@ -15,11 +15,14 @@ Here are some ideas to get you started:
 -->
 
 
+
+
 <br/><br/>
 
 <div align="center">
 <a href="[klmhyeonwoo.oopy.io](https://klmhyeonwoo.oopy.io/)" target="_blank">
-  <img height="auto" src="https://user-images.githubusercontent.com/19422885/206861037-e0f67253-28fd-403c-aa73-b7135c9a382c.png"></img>
+  <img style="height:125px" src="https://user-images.githubusercontent.com/19422885/206861312-7dbd3708-98dc-4b97-82e9-96f25581bc94.gif"></img>
+  <img height="auto" src="https://user-images.githubusercontent.com/19422885/206861256-c1f27a42-0f35-47cb-8e0c-e74e53552303.png"></img>
 </a>
 
 <br/><br/>

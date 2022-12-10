@@ -19,8 +19,9 @@ Here are some ideas to get you started:
 
 <div align="center">
 <a href="[klmhyeonwoo.oopy.io](https://klmhyeonwoo.oopy.io/)" target="_blank">
-  <img height="auto" src="https://user-images.githubusercontent.com/19422885/206860749-328009a1-0da8-4052-985c-51ba2f1936d3.png"></img>
+  <img height="auto" src="https://user-images.githubusercontent.com/19422885/206861037-e0f67253-28fd-403c-aa73-b7135c9a382c.png"></img>
 </a>
+
 <br/><br/>
 
 </div>

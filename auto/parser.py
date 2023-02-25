@@ -11,6 +11,8 @@ markdown_text = """
 <img style="height:110px" src="https://user-images.githubusercontent.com/19422885/206861312-7dbd3708-98dc-4b97-82e9-96f25581bc94.gif"></img>
 </div>
 
+<hr>
+
 ### 최근 포스팅
 """
 lst = []

@@ -53,6 +53,7 @@ jobs:
       run: |
         cd auto
         python parser.py
+        cd ..
     - name: Set date in environment variable
       run: echo "DATE=$(date +'%Y년 %m월 %d일 %H시 %M분')" >> $GITHUB_ENV
     - name: Add & Commit # Add Commit

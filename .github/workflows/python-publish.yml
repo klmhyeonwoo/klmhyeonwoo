@@ -1,13 +1,8 @@
-# This workflow will upload a Python Package using Twine when a release is created
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python#publishing-to-package-registries
-
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-name: Upload Python Package
-
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+ 
+name: README Updater
+ 
 on:
   push:
     branches: [ main ]
@@ -15,10 +10,7 @@ on:
     branches: [ main ]
   schedule:
     - cron: "0 0 */1 * *"
-
-permissions:
-  contents: read
-
+ 
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -34,11 +26,12 @@ jobs:
         pip install feedparser
     - name: Update README
       run: |
-        cd auto
-        python parse.py
-    - name: Publish package
-      uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
-      with:
-        message: '블로그 자동 업데이트'
-        user: __token__
-        password: ${{ secrets.PYPI_API_TOKEN }}
+        python main.py
+    - name: Commit README
+      run: |
+        git add .
+        git diff
+        git config --local user.email "gentlemonster77@likelion.org"
+        git config --local user.name "klmhyeonwoo"
+        git commit -m "블로그 업데이트"
+        git push

@@ -1,4 +1,4 @@
-name: findyourfuturecomapany # 워크플로우 이름 지정
+name: tistory # 워크플로우 이름 지정
 
 on:
   schedule:

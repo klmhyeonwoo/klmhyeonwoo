@@ -60,7 +60,7 @@ jobs:
       with:
         message: '블로그 자동 업데이트 : ${{ env.DATE }}'
         author_name: 'GitHub-Actions-Bot'
-        add: '*.json'
+        add: '*.MD'
         push: false
     - name: Push
       uses: ad-m/github-push-action@master

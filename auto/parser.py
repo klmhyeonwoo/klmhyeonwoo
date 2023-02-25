@@ -5,13 +5,14 @@ tistory_blog_uri = "https://klmhyeonwooo.tistory.com/"
 feed = feedparser.parse(tistory_blog_uri+"/rss")
 
 markdown_text = """
+
 ![dino.gif](./dino.gif)
 
 <div align="center">
 <img style="height:110px" src="https://user-images.githubusercontent.com/19422885/206861312-7dbd3708-98dc-4b97-82e9-96f25581bc94.gif"></img>
 </div>
 
-<hr style="width:1px;"/>
+<hr style="height:1px;"/>
 
 ### 최근 포스팅
 """

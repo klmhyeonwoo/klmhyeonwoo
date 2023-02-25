@@ -1,37 +1,74 @@
-# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
- 
-name: README Updater
- 
+name: findyourfuturecomapany # 워크플로우 이름 지정
+
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
   schedule:
     - cron: "0 0 */1 * *"
- 
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "Person to greet"
+        required: true
+        default: "bossm0n5t3r"
+      home:
+        description: "location"
+        required: false
+        default: "The Octoverse"
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python 3.7
-      uses: actions/setup-python@v2
       with:
-        python-version: '3.7'
+        token: ${{ secrets.TOKEN }}
+        persist-credentials: false
+        fetch-depth: 0
+      
+      # 한국 시간으로 변경
+    - name: Set Timezone to +9 (GMT+9)
+      uses: szenius/set-timezone@v1.0
+      with:
+        timezoneLinux: "Asia/Seoul"
+          
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v1
+      with:
+          python-version: '3.x'
+          architecture: 'x64'
+    - name: Setup Chromedriver
+      uses: nanasess/setup-chromedriver@v1.0.1
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        # pip install -r requirements.txt
+        pip install requests
+        pip install lxml
+        pip install datetime
         pip install feedparser
-    - name: Update README
+    - name: Install ubuntu package # 우분투 관련 패키지도 설치
+      run: |        
+        sudo apt-get install fonts-unfonts-core
+        sudo apt-get install fonts-unfonts-extra
+        wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add        
+        sudo apt-get install google-chrome-stable    
+        wget https://chromedriver.storage.googleapis.com/2.40/chromedriver_linux64.zip
+        unzip ./chromedriver_linux64.zip   
+    - name: Run Scraper with python
       run: |
-        python main.py
-    - name: Commit README
-      run: |
-        git add .
-        git diff
-        git config --local user.email "gentlemonster77@likelion.org"
-        git config --local user.name "klmhyeonwoo"
-        git commit -m "블로그 업데이트"
-        git push
+        cd auto
+        python tistory.py
+    - name: Set date in environment variable
+      run: echo "DATE=$(date +'%Y년 %m월 %d일 %H시 %M분')" >> $GITHUB_ENV
+    - name: Add & Commit # Add Commit
+      uses: EndBug/add-and-commit@v7
+      with:
+        message: '블로그 자동 업데이트 : ${{ env.DATE }}'
+        author_name: 'GitHub-Actions-Bot'
+        add: '*.json'
+        push: false
+    - name: Push
+      uses: ad-m/github-push-action@master
+      with:
+        branch: 'main'
+        github_token: ${{ secrets.PYPI_API_TOKEN }}

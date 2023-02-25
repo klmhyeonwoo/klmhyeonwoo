@@ -21,7 +21,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        token: ${{ secrets.TOKEN }}
+        token: ${{ secrets.PYPI_API_TOKEN }}
         persist-credentials: false
         fetch-depth: 0
       

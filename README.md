@@ -16,8 +16,8 @@
 때문에 다양한 부분을 도전하고, 탐구하며 다양한 프로젝트를 개발해왔습니다.</span>
 
 ### 최근 포스팅
+- [React Hooks의 종류와 사용법](https://klmhyeonwooo.tistory.com/67)<br>
+- [클래스형 컴포넌트와 함수형 컴포넌트의 차이](https://klmhyeonwooo.tistory.com/66)<br>
 - [그 동안 남의 시선에서 벗어나지 못했던 것 같다](https://klmhyeonwooo.tistory.com/65)<br>
 - [React의 Virtual DOM](https://klmhyeonwooo.tistory.com/64)<br>
 - [토스 채용 서비스인 줄 알았는데,,](https://klmhyeonwooo.tistory.com/63)<br>
-- [This의 여러 쓰임새](https://klmhyeonwooo.tistory.com/62)<br>
-- [Call · Apply · Bind의 차이점](https://klmhyeonwooo.tistory.com/61)<br>

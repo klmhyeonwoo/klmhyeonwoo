@@ -16,8 +16,8 @@
 때문에 다양한 부분을 도전하고, 탐구하며 다양한 프로젝트를 개발해왔습니다.</span>
 
 ### 최근 포스팅
+- [[에러일지] React The href attribute requires a valid value to be accessible.](https://klmhyeonwooo.tistory.com/73)<br>
+- [[에러일지] ESLint - Function component is not a function declaration](https://klmhyeonwooo.tistory.com/72)<br>
 - [협업을 위한 eslint와 prettier](https://klmhyeonwooo.tistory.com/71)<br>
 - [프론트엔드 웹 성능 최적화 방법은 뭐가 있을까?](https://klmhyeonwooo.tistory.com/70)<br>
 - [SSR의 특징을 가진 Next.js를 왜 사용해요?](https://klmhyeonwooo.tistory.com/69)<br>
-- [CSR(React)과 SSR(Next)의 차이 그리고 SEO](https://klmhyeonwooo.tistory.com/68)<br>
-- [React Hooks의 종류와 사용법](https://klmhyeonwooo.tistory.com/67)<br>

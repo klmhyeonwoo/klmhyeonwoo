@@ -15,9 +15,13 @@
 사람들에게 편리함과 도움을 제공하는 매체에 관심이 많습니다.<br/>
 때문에 다양한 부분을 도전하고, 탐구하며 다양한 프로젝트를 개발해왔습니다.</span>
 
+### 개발 회고록
+- [리크루팅을 위해 어플라이 사이트를 개발했다](https://klmhyeonwooo.tistory.com/74)<br>
+- [그 동안 남의 시선에서 벗어나지 못했던 것 같다](https://klmhyeonwooo.tistory.com/65)<br>
+
 ### 최근 포스팅
+- [리크루팅을 위해 어플라이 사이트를 개발했다.](https://klmhyeonwooo.tistory.com/74)<br>
 - [[에러일지] React The href attribute requires a valid value to be accessible.](https://klmhyeonwooo.tistory.com/73)<br>
 - [[에러일지] ESLint - Function component is not a function declaration](https://klmhyeonwooo.tistory.com/72)<br>
 - [협업을 위한 eslint와 prettier](https://klmhyeonwooo.tistory.com/71)<br>
 - [프론트엔드 웹 성능 최적화 방법은 뭐가 있을까?](https://klmhyeonwooo.tistory.com/70)<br>
-- [SSR의 특징을 가진 Next.js를 왜 사용해요?](https://klmhyeonwooo.tistory.com/69)<br>

@@ -20,7 +20,7 @@
 - [그 동안 남의 시선에서 벗어나지 못했던 것 같다](https://klmhyeonwooo.tistory.com/65)<br>
 
 ### 최근 포스팅
-- [리크루팅을 위해 어플라이 사이트를 개발했다.](https://klmhyeonwooo.tistory.com/74)<br>
+- [리크루팅을 위해 어플라이 사이트를 개발했다](https://klmhyeonwooo.tistory.com/74)<br>
 - [[에러일지] React The href attribute requires a valid value to be accessible.](https://klmhyeonwooo.tistory.com/73)<br>
 - [[에러일지] ESLint - Function component is not a function declaration](https://klmhyeonwooo.tistory.com/72)<br>
 - [협업을 위한 eslint와 prettier](https://klmhyeonwooo.tistory.com/71)<br>

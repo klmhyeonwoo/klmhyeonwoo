@@ -20,8 +20,8 @@
 - [그 동안 남의 시선에서 벗어나지 못했던 것 같다](https://klmhyeonwooo.tistory.com/65)<br>
 
 ### 최근 포스팅
+- [리덕스(Redux) 미들웨어](https://klmhyeonwooo.tistory.com/79)<br>
+- [리덕스(Redux) 그리고 RTK(Redux Tool Kit)의 등장](https://klmhyeonwooo.tistory.com/78)<br>
 - [함수형 컴포넌트와 클래스 컴포넌트 리마인드](https://klmhyeonwooo.tistory.com/77)<br>
 - [React JSX 개념에 대한 리마인드](https://klmhyeonwooo.tistory.com/76)<br>
 - [[독학 일대기] SSR을 위한 Next.js 학습](https://klmhyeonwooo.tistory.com/75)<br>
-- [리크루팅을 위해 어플라이 사이트를 개발했다](https://klmhyeonwooo.tistory.com/74)<br>
-- [[에러일지] React The href attribute requires a valid value to be accessible.](https://klmhyeonwooo.tistory.com/73)<br>

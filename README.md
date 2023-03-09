@@ -16,12 +16,13 @@
 때문에 다양한 부분을 도전하고, 탐구하며 다양한 프로젝트를 개발해왔습니다.</span>
 
 ### 개발 회고록
+- [시간 낭비 그리고 쓸데 없다고 생각했는데](https://klmhyeonwooo.tistory.com/80)<br>
 - [리크루팅을 위해 어플라이 사이트를 개발했다](https://klmhyeonwooo.tistory.com/74)<br>
 - [그 동안 남의 시선에서 벗어나지 못했던 것 같다](https://klmhyeonwooo.tistory.com/65)<br>
 
 ### 최근 포스팅
+- [시간 낭비 그리고 쓸데 없다고 생각했는데](https://klmhyeonwooo.tistory.com/80)<br>
 - [리덕스(Redux) 미들웨어](https://klmhyeonwooo.tistory.com/79)<br>
 - [리덕스(Redux) 그리고 RTK(Redux Tool Kit)의 등장](https://klmhyeonwooo.tistory.com/78)<br>
 - [함수형 컴포넌트와 클래스 컴포넌트 리마인드](https://klmhyeonwooo.tistory.com/77)<br>
 - [React JSX 개념에 대한 리마인드](https://klmhyeonwooo.tistory.com/76)<br>
-- [[독학 일대기] SSR을 위한 Next.js 학습](https://klmhyeonwooo.tistory.com/75)<br>

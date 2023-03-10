@@ -16,13 +16,13 @@
 때문에 다양한 부분을 도전하고, 탐구하며 다양한 프로젝트를 개발해왔습니다.</span>
 
 ### 개발 회고록
-- [시간 낭비 그리고 쓸데 없다고 생각했는데](https://klmhyeonwooo.tistory.com/80)<br>
+- [잘하고 있다, 쓸모 없는 것은 없다](https://klmhyeonwooo.tistory.com/80)<br>
 - [리크루팅을 위해 어플라이 사이트를 개발했다](https://klmhyeonwooo.tistory.com/74)<br>
 - [그 동안 남의 시선에서 벗어나지 못했던 것 같다](https://klmhyeonwooo.tistory.com/65)<br>
 
 ### 최근 포스팅
-- [시간 낭비 그리고 쓸데 없다고 생각했는데](https://klmhyeonwooo.tistory.com/80)<br>
+- [화살표 함수는 대체 언제 사용해야할까?](https://klmhyeonwooo.tistory.com/81)<br>
+- [잘하고 있다, 쓸모 없는 것은 없다](https://klmhyeonwooo.tistory.com/80)<br>
 - [리덕스(Redux) 미들웨어](https://klmhyeonwooo.tistory.com/79)<br>
 - [리덕스(Redux) 그리고 RTK(Redux Tool Kit)의 등장](https://klmhyeonwooo.tistory.com/78)<br>
 - [함수형 컴포넌트와 클래스 컴포넌트 리마인드](https://klmhyeonwooo.tistory.com/77)<br>
-- [React JSX 개념에 대한 리마인드](https://klmhyeonwooo.tistory.com/76)<br>

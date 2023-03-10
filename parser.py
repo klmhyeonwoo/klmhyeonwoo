@@ -22,7 +22,7 @@ markdown_text = """
 때문에 다양한 부분을 도전하고, 탐구하며 다양한 프로젝트를 개발해왔습니다.</span>
 
 ### 개발 회고록
-- [잘하고 있다, 쓸모 없는 것은 없다](https://klmhyeonwooo.tistory.com/80)<br>
+- [경험의 미학](https://klmhyeonwooo.tistory.com/80)<br>
 - [리크루팅을 위해 어플라이 사이트를 개발했다](https://klmhyeonwooo.tistory.com/74)<br>
 - [그 동안 남의 시선에서 벗어나지 못했던 것 같다](https://klmhyeonwooo.tistory.com/65)<br>
 

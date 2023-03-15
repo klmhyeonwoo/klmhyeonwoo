@@ -21,8 +21,8 @@
 - [그 동안 남의 시선에서 벗어나지 못했던 것 같다](https://klmhyeonwooo.tistory.com/65)<br>
 
 ### 최근 포스팅
+- [브라우저는 어떻게 작동할까?](https://klmhyeonwooo.tistory.com/83)<br>
+- [보안 정책에 관련된 SOP와 CORS](https://klmhyeonwooo.tistory.com/82)<br>
 - [화살표 함수는 대체 언제 사용해야할까?](https://klmhyeonwooo.tistory.com/81)<br>
 - [경험의 미학](https://klmhyeonwooo.tistory.com/80)<br>
 - [리덕스(Redux) 미들웨어](https://klmhyeonwooo.tistory.com/79)<br>
-- [리덕스(Redux) 그리고 RTK(Redux Tool Kit)의 등장](https://klmhyeonwooo.tistory.com/78)<br>
-- [함수형 컴포넌트와 클래스 컴포넌트 리마인드](https://klmhyeonwooo.tistory.com/77)<br>

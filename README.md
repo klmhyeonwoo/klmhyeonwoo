@@ -21,8 +21,8 @@
 - [그 동안 남의 시선에서 벗어나지 못했던 것 같다](https://klmhyeonwooo.tistory.com/65)<br>
 
 ### 최근 포스팅
+- [Node OpenSSL 3.0 문제를 겪어보셨나요?](https://klmhyeonwooo.tistory.com/87)<br>
 - [RESTful하다, REST하다?](https://klmhyeonwooo.tistory.com/86)<br>
 - [웹 접근성을 왜 지켜야해요?](https://klmhyeonwooo.tistory.com/85)<br>
 - [왜 크로스 브라우징(Cross Browsing)을 고려해야해요?](https://klmhyeonwooo.tistory.com/84)<br>
 - [브라우저는 어떻게 작동할까?](https://klmhyeonwooo.tistory.com/83)<br>
-- [보안 정책에 관련된 SOP와 CORS](https://klmhyeonwooo.tistory.com/82)<br>

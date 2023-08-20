@@ -1,6 +1,8 @@
 
 <div align="center">
-<img style="height:70px" src="https://user-images.githubusercontent.com/19422885/206861312-7dbd3708-98dc-4b97-82e9-96f25581bc94.gif"></img>
+  
+<!-- <img style="height:70px" src="https://user-images.githubusercontent.com/19422885/206861312-7dbd3708-98dc-4b97-82e9-96f25581bc94.gif"></img>
+   -->
   
 ![dino.gif](./dino.gif)
 

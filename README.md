@@ -21,8 +21,8 @@
 - [그 동안 남의 시선에서 벗어나지 못했던 것 같다](https://klmhyeonwooo.tistory.com/65)<br>
 
 ### 최근 포스팅
+- [3개월 안에 토스 코어에서 사용하는 모든 기술 스택 찍먹하기](https://klmhyeonwooo.tistory.com/90)<br>
 - [정든 멋쟁이사자처럼을 떠나며](https://klmhyeonwooo.tistory.com/89)<br>
 - [리액트 라이브러리 리마인드 - 1](https://klmhyeonwooo.tistory.com/88)<br>
 - [Node OpenSSL 3.0 문제를 겪어보셨나요?](https://klmhyeonwooo.tistory.com/87)<br>
 - [RESTful하다, REST하다?](https://klmhyeonwooo.tistory.com/86)<br>
-- [웹 접근성을 왜 지켜야해요?](https://klmhyeonwooo.tistory.com/85)<br>

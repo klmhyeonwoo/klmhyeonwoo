@@ -55,3 +55,4 @@ with open(os.path.join(BASE_DIR, 'feed.json'), 'w+',encoding='utf-8') as json_fi
 f = open("README.md", mode="w", encoding="utf-8")
 f.write(markdown_text)
 f.close()
+print("성공")

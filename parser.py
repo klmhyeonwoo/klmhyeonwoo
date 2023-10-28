@@ -13,7 +13,7 @@ markdown_text = """
 
 </div>
 
-## 느릿느릿 프론트엔드 👀
+## 배움을 즐거워하고 브랜딩하는 프론트엔드 개발자 🦄
 
 <span style="color:#4E5968; font-size:10px;">
 <strong>사용자의 편안한 UX와 UI를 중요시 하는 프론트엔드 개발자</strong>입니다.<br/>
@@ -42,7 +42,7 @@ for i in feed['entries']:
     # dt = datetime.datetime.strptime(
     #     i['published'], "%a, %d %b %Y %H:%M:%S %z").strftime("%b %d, %Y")
     markdown_text += f"- [{i['title']}]({i['link']})<br>\n"
-    parsing_data[uniqueKey] = {
+    parsing_data["post_" + str(uniqueKey)] = {
       "title" : i['title'],
       "link" : i['link'],
       "date" : datetime.datetime.strptime(i['published'], "%a, %d %b %Y %H:%M:%S %z").strftime("%b %d, %Y")

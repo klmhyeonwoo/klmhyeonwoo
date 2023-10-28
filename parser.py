@@ -34,6 +34,7 @@ markdown_text = """
 lst = []
 parsing_data = {}
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+print(BASE_DIR)
 uniqueKey = 0
 
 for i in feed['entries']:

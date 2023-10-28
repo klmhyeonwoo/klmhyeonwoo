@@ -34,6 +34,7 @@ markdown_text = """
 lst = []
 parsing_data = {}
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR += "/data"
 print(BASE_DIR)
 uniqueKey = 0
 

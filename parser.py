@@ -42,7 +42,7 @@ for i in feed['entries']:
     # dt = datetime.datetime.strptime(
     #     i['published'], "%a, %d %b %Y %H:%M:%S %z").strftime("%b %d, %Y")
     markdown_text += f"- [{i['title']}]({i['link']})<br>\n"
-    parsing_data["post_" + str(uniqueKey)] = {
+    parsing_data[uniqueKey] = {
       "title" : i['title'],
       "link" : i['link'],
       "date" : datetime.datetime.strptime(i['published'], "%a, %d %b %Y %H:%M:%S %z").strftime("%b %d, %Y")

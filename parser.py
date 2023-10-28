@@ -50,7 +50,7 @@ for i in feed['entries']:
     print("-", i['link'], i['title'])
     uniqueKey += 1
 
-parsing_data = dict(sorted(parsing_data.items(), key=lambda item: item[1]['date'], reverse=True))
+parsing_data = dict(sorted(parsing_data.items(), key=lambda item: datetime.datetime.strptime(item[1]['date'], '%b %d, %Y'), reverse=True))
   
 with open(os.path.join(BASE_DIR, 'feed.json'), 'w+',encoding='utf-8') as json_file:
     json.dump(parsing_data, json_file, ensure_ascii = False, indent='\t')

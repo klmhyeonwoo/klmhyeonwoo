@@ -13,7 +13,7 @@ markdown_text = """
 
 </div>
 
-## 끊임없이 브랜딩하는 개발자  👋🏻
+## 느릿느릿 프론트엔드 👀
 
 <span style="color:#4E5968; font-size:10px;">
 <strong>사용자의 편안한 UX와 UI를 중요시 하는 프론트엔드 개발자</strong>입니다.<br/>

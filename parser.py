@@ -52,6 +52,8 @@ for i in feed['entries']:
   
 with open(os.path.join(BASE_DIR, 'feed.json'), 'w+',encoding='utf-8') as json_file:
     json.dump(parsing_data, json_file, ensure_ascii = False, indent='\t')
+
+print(parsing_data)
 f = open("README.md", mode="w", encoding="utf-8")
 f.write(markdown_text)
 f.close()

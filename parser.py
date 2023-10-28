@@ -34,7 +34,6 @@ markdown_text = """
 lst = []
 parsing_data = {}
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-BASE_DIR += "/data"
 print(BASE_DIR)
 uniqueKey = 0
 
@@ -49,9 +48,9 @@ for i in feed['entries']:
     }
     print("-", i['link'], i['title'])
     uniqueKey += 1
-
-f = open("README.md", mode="w", encoding="utf-8")
+  
 with open(os.path.join(BASE_DIR, 'news.json'), 'w+',encoding='utf-8') as json_file:
     json.dump(parsing_data, json_file, ensure_ascii = False, indent='\t')
+f = open("README.md", mode="w", encoding="utf-8")
 f.write(markdown_text)
 f.close()

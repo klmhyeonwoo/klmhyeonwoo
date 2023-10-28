@@ -1,5 +1,7 @@
 import feedparser
 import datetime
+import os
+import json
 
 tistory_blog_uri = "https://klmhyeonwooo.tistory.com/"
 feed = feedparser.parse(tistory_blog_uri+"/rss")
@@ -30,13 +32,24 @@ markdown_text = """
 """
 
 lst = []
+parsing_data = {}
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+uniqueKey = 0
 
 for i in feed['entries']:
     # dt = datetime.datetime.strptime(
     #     i['published'], "%a, %d %b %Y %H:%M:%S %z").strftime("%b %d, %Y")
     markdown_text += f"- [{i['title']}]({i['link']})<br>\n"
+    parsing_data[uniqueKey] = {
+      "title" : i['title'],
+      "link" : i['link'],
+      "date" : datetime.datetime.strptime(i['published'], "%a, %d %b %Y %H:%M:%S %z").strftime("%b %d, %Y")
+    }
     print("-", i['link'], i['title'])
+    uniqueKey += 1
 
 f = open("README.md", mode="w", encoding="utf-8")
+with open(os.path.join(BASE_DIR, 'news.json'), 'w+',encoding='utf-8') as json_file:
+    json.dump(parsing_data, json_file, ensure_ascii = False, indent='\t')
 f.write(markdown_text)
 f.close()

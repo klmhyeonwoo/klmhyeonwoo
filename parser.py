@@ -3,7 +3,7 @@ import datetime
 import os
 import json
 
-feed_list = ["https://klmhyeonwooo.tistory.com/", "https://minwoo-it-factory.tistory.com", "https://apape1225.tistory.com"]
+feed_list = ["https://klmhyeonwooo.tistory.com/", "https://minwoo-it-factory.tistory.com", "https://apape1225.tistory.com", "https://starlikedh.tistory.com/"]
 
 markdown_text = """
 <div align="center">

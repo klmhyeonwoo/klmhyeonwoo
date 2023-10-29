@@ -1,4 +1,9 @@
 {
+	"feed-25": {
+		"title": "8번째 슈코데이_토스 개발자와 함께하는 세미나 후기",
+		"link": "https://starlikedh.tistory.com/entry/%EC%8A%88%EC%BD%94%EB%8D%B0%EC%9D%B4%ED%9B%84%EA%B8%B0",
+		"date": "Oct 28, 2023"
+	},
 	"feed-5": {
 		"title": "eks + argo cd +jenkins 로 ci/cd 구축하기",
 		"link": "https://minwoo-it-factory.tistory.com/entry/eks-argo-cd-jenkins-%EB%A1%9C-cicd-%EA%B5%AC%EC%B6%95%ED%95%98%EA%B8%B0",
@@ -49,6 +54,11 @@
 		"link": "https://apape1225.tistory.com/139",
 		"date": "Oct 01, 2023"
 	},
+	"feed-26": {
+		"title": "디지털 미래혁신대전 2023 방문후기",
+		"link": "https://starlikedh.tistory.com/entry/%EB%94%94%EC%A7%80%ED%84%B8%EB%AF%B8%EB%9E%98%ED%98%81%EC%8B%A0%EB%8C%80%EC%A0%84%ED%9B%84%EA%B8%B0",
+		"date": "Sep 30, 2023"
+	},
 	"feed-10": {
 		"title": "[Spring] 배포 서버의 도커 컨테이너에 크롤링 환경 구축하기",
 		"link": "https://minwoo-it-factory.tistory.com/entry/Spring-%EB%B0%B0%ED%8F%AC-%EC%84%9C%EB%B2%84%EC%9D%98-%EB%8F%84%EC%BB%A4-%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88%EC%97%90-%ED%81%AC%EB%A1%A4%EB%A7%81-%ED%99%98%EA%B2%BD-%EA%B5%AC%EC%B6%95%ED%95%98%EA%B8%B0",
@@ -83,6 +93,11 @@
 		"title": "[programmers] 118667번 - 두 큐 합 같게 만들기 (brute force, 2022 KAKAO TECH INTERNSHIP)",
 		"link": "https://apape1225.tistory.com/137",
 		"date": "Sep 18, 2023"
+	},
+	"feed-27": {
+		"title": "카카오 공개 기술 세미나 후기",
+		"link": "https://starlikedh.tistory.com/entry/%EC%B9%B4%EC%B9%B4%EC%98%A4%EA%B3%B5%EA%B0%9C%EA%B8%B0%EC%88%A0%EC%84%B8%EB%AF%B8%EB%82%98%ED%9B%84%EA%B8%B0",
+		"date": "Sep 17, 2023"
 	},
 	"feed-21": {
 		"title": "[프로그래머스] 17679번 - 프렌즈4블록 (구현, 2018 KAKAO BLIND RECRUITMENT)",
@@ -123,5 +138,15 @@
 		"title": "정든 멋쟁이사자처럼을 떠나며",
 		"link": "https://klmhyeonwooo.tistory.com/89",
 		"date": "Aug 20, 2023"
+	},
+	"feed-28": {
+		"title": "무선 LAN",
+		"link": "https://starlikedh.tistory.com/entry/%EB%AC%B4%EC%84%A0-LAN",
+		"date": "Aug 19, 2023"
+	},
+	"feed-29": {
+		"title": "응용 계층",
+		"link": "https://starlikedh.tistory.com/entry/%EC%9D%91%EC%9A%A9-%EA%B3%84%EC%B8%B5",
+		"date": "Aug 05, 2023"
 	}
 }

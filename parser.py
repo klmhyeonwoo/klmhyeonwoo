@@ -41,8 +41,7 @@ for tistory_blog_uri in feed_list:
     feed = feedparser.parse(tistory_blog_uri+"/rss")
     for i in feed['entries']:
         # print(i)
-        markdown_text += f"- [{i['title']}]({i['link']})<br>\n"
-        parsing_data[uniqueKey] = {
+        parsing_data["feed-" + str(uniqueKey)] = {
             "title" : i['title'],
             "link" : i['link'],
             "date" : datetime.datetime.strptime(i['published'], "%a, %d %b %Y %H:%M:%S %z").strftime("%b %d, %Y")
@@ -51,6 +50,10 @@ for tistory_blog_uri in feed_list:
         uniqueKey += 1
 
 parsing_data = dict(sorted(parsing_data.items(), key=lambda item: datetime.datetime.strptime(item[1]['date'], '%b %d, %Y'), reverse=True))
+
+for i in feed_list[0]['entries']:
+    # print(i)
+    markdown_text += f"- [{i['title']}]({i['link']})<br>\n"
   
 with open(os.path.join(BASE_DIR, 'feed.json'), 'w+',encoding='utf-8') as json_file:
     json.dump(parsing_data, json_file, ensure_ascii = False, indent='\t')

@@ -4,7 +4,6 @@ import os
 import json
 
 feed_list = ["https://klmhyeonwooo.tistory.com/", "https://minwoo-it-factory.tistory.com"]
-feed = feedparser.parse(tistory_blog_uri+"/rss")
 
 markdown_text = """
 <div align="center">

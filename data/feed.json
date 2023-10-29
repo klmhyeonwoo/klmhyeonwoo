@@ -1,8 +1,58 @@
 {
+	"5": {
+		"title": "eks + argo cd +jenkins 로 ci/cd 구축하기",
+		"link": "https://minwoo-it-factory.tistory.com/entry/eks-argo-cd-jenkins-%EB%A1%9C-cicd-%EA%B5%AC%EC%B6%95%ED%95%98%EA%B8%B0",
+		"date": "Oct 24, 2023"
+	},
+	"6": {
+		"title": "ngrinder entity 조회방식 vs dto 조회방식 성능테스트 결과",
+		"link": "https://minwoo-it-factory.tistory.com/entry/ngrinder-entity-%EC%A1%B0%ED%9A%8C%EB%B0%A9%EC%8B%9D-vs-dto-%EC%A1%B0%ED%9A%8C%EB%B0%A9%EC%8B%9D-%EC%84%B1%EB%8A%A5%ED%85%8C%EC%8A%A4%ED%8A%B8-%EA%B2%B0%EA%B3%BC",
+		"date": "Oct 17, 2023"
+	},
 	"0": {
 		"title": "배포를 하기에는 시간이 너무 많이 들고, 로컬 서버를 공유하고 싶다면?",
 		"link": "https://klmhyeonwooo.tistory.com/96",
 		"date": "Oct 16, 2023"
+	},
+	"7": {
+		"title": "server sent event (sse) 사용시 connection pool 부족 문제",
+		"link": "https://minwoo-it-factory.tistory.com/entry/server-sent-event-sse-%EC%82%AC%EC%9A%A9%EC%8B%9C-connection-pool-%EB%B6%80%EC%A1%B1-%EB%AC%B8%EC%A0%9C",
+		"date": "Oct 08, 2023"
+	},
+	"8": {
+		"title": "nginx port 분리하여 blue/green 배포",
+		"link": "https://minwoo-it-factory.tistory.com/entry/nginx-port-%EB%B6%84%EB%A6%AC%ED%95%98%EC%97%AC-bluegreen-%EB%B0%B0%ED%8F%AC",
+		"date": "Oct 04, 2023"
+	},
+	"9": {
+		"title": "실습으로 배우는 선착순 이벤트 시스템 - review",
+		"link": "https://minwoo-it-factory.tistory.com/entry/%EC%8B%A4%EC%8A%B5%EC%9C%BC%EB%A1%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EC%84%A0%EC%B0%A9%EC%88%9C-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EC%8B%9C%EC%8A%A4%ED%85%9C-review",
+		"date": "Oct 02, 2023"
+	},
+	"10": {
+		"title": "[Spring] 배포 서버의 도커 컨테이너에 크롤링 환경 구축하기",
+		"link": "https://minwoo-it-factory.tistory.com/entry/Spring-%EB%B0%B0%ED%8F%AC-%EC%84%9C%EB%B2%84%EC%9D%98-%EB%8F%84%EC%BB%A4-%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88%EC%97%90-%ED%81%AC%EB%A1%A4%EB%A7%81-%ED%99%98%EA%B2%BD-%EA%B5%AC%EC%B6%95%ED%95%98%EA%B8%B0",
+		"date": "Sep 28, 2023"
+	},
+	"11": {
+		"title": "로드밸런싱 , 다중서버 oauth 401 error",
+		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%A1%9C%EB%93%9C%EB%B0%B8%EB%9F%B0%EC%8B%B1-%EB%8B%A4%EC%A4%91%EC%84%9C%EB%B2%84-oauth-401-error",
+		"date": "Sep 26, 2023"
+	},
+	"12": {
+		"title": "clean code 3장 요약",
+		"link": "https://minwoo-it-factory.tistory.com/entry/clean-code-3%EC%9E%A5-%EC%9A%94%EC%95%BD",
+		"date": "Sep 24, 2023"
+	},
+	"13": {
+		"title": "clean code 2장 요약",
+		"link": "https://minwoo-it-factory.tistory.com/entry/clean-code-2%EC%9E%A5-%EC%9A%94%EC%95%BD",
+		"date": "Sep 24, 2023"
+	},
+	"14": {
+		"title": "kafka 실행시켜보기 (feat. docker)",
+		"link": "https://minwoo-it-factory.tistory.com/entry/kafka-%EC%8B%A4%ED%96%89%EC%8B%9C%EC%BC%9C%EB%B3%B4%EA%B8%B0-feat-docker",
+		"date": "Sep 23, 2023"
 	},
 	"1": {
 		"title": "아이패드의 분기처리, 그러니까 브라우저에서 아이패드인걸 어떻게 구분해요?",

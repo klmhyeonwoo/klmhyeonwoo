@@ -3,7 +3,7 @@ import datetime
 import os
 import json
 
-feed_list = ["https://klmhyeonwooo.tistory.com/", "https://minwoo-it-factory.tistory.com", "https://apape1225.tistory.com", "https://starlikedh.tistory.com/"]
+feed_list = ["https://klmhyeonwooo.tistory.com?5기 김현우", "https://minwoo-it-factory.tistory.com?11기 김현우", "https://apape1225.tistory.com?11기 성창규", "https://starlikedh.tistory.com?6기 정다혜"]
 
 markdown_text = """
 <div align="center">
@@ -38,13 +38,15 @@ print(BASE_DIR)
 uniqueKey = 0
 
 for tistory_blog_uri in feed_list:
-    feed = feedparser.parse(tistory_blog_uri+"/rss")
+    feed = feedparser.parse(tistory_blog_uri.split("?")[0]+"/rss")
+    writer = tistory_blog_uri.split("?")[1]
     for i in feed['entries']:
         # print(i)
         parsing_data["feed-" + str(uniqueKey)] = {
             "title" : i['title'],
             "link" : i['link'],
-            "date" : datetime.datetime.strptime(i['published'], "%a, %d %b %Y %H:%M:%S %z").strftime("%b %d, %Y")
+            "date" : datetime.datetime.strptime(i['published'], "%a, %d %b %Y %H:%M:%S %z").strftime("%b %d, %Y"),
+            "writer" : writer,
         }
         print("-", i['link'], i['title'])
         uniqueKey += 1

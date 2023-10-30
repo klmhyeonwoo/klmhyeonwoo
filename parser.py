@@ -53,7 +53,7 @@ for tistory_blog_uri in feed_list:
 
 parsing_data = dict(sorted(parsing_data.items(), key=lambda item: datetime.datetime.strptime(item[1]['date'], '%b %d, %Y'), reverse=True))
 
-feed = feedparser.parse(feed_list[0]+"/rss")
+feed = feedparser.parse(feed_list[0].split("?")[0]+"/rss")
 for i in feed['entries']:
     # print(i)
     markdown_text += f"- [{i['title']}]({i['link']})<br>\n"

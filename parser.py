@@ -3,7 +3,7 @@ import datetime
 import os
 import json
 
-feed_list = ["https://klmhyeonwooo.tistory.com?5기 김현우", "https://minwoo-it-factory.tistory.com?11기 김민우", "https://apape1225.tistory.com?11기 성창규", "https://starlikedh.tistory.com?6기 정다혜"]
+feed_list = ["https://klmhyeonwooo.tistory.com?5기 김현우", "https://minwoo-it-factory.tistory.com?11기 김민우", "https://apape1225.tistory.com?11기 성창규", "https://starlikedh.tistory.com?6기 정다혜", "https://v2.velog.io/rss/handmk?11기 손민기", "https://v2.velog.io/rss/yunh03?11기 전윤환", "https://ub775.tistory.com?11기 강명균"]
 
 markdown_text = """
 <div align="center">
@@ -37,17 +37,30 @@ BASE_DIR += "/data"
 print(BASE_DIR)
 uniqueKey = 0
 
-for tistory_blog_uri in feed_list:
-    feed = feedparser.parse(tistory_blog_uri.split("?")[0]+"/rss")
-    writer = tistory_blog_uri.split("?")[1]
+for BLOG_URL in feed_list:
+    if (BLOG_URL.find("velog.io") != -1):
+        feed = feedparser.parse(BLOG_URL.split("?")[0])
+    else:
+        feed = feedparser.parse(BLOG_URL.split("?")[0]+"/rss")
+      
+    feed = feedparser.parse(BLOG_URL.split("?")[0]+"/rss")
+    writer = BLOG_URL.split("?")[1]
     for i in feed['entries']:
         # print(i)
-        parsing_data["feed-" + str(uniqueKey)] = {
-            "title" : i['title'],
-            "link" : i['link'],
-            "date" : datetime.datetime.strptime(i['published'], "%a, %d %b %Y %H:%M:%S %z").strftime("%b %d, %Y"),
-            "writer" : writer,
-        }
+        if (BLOG_URL.find("velog.io") != -1):
+          parsing_data[uniqueKey] = { 
+              "title" : i['title'],
+              "link" : i['link'],
+              "date" : datetime.datetime.strptime(i['published'], '%a, %d %b %Y %H:%M:%S %Z').strftime("%b %d, %Y"),
+              "writer" : writer,
+          }
+        else:
+            parsing_data[uniqueKey] = { 
+              "title" : i['title'],
+              "link" : i['link'],
+              "date" : datetime.datetime.strptime(i['published'], "%a, %d %b %Y %H:%M:%S %z").strftime("%b %d, %Y"),
+              "writer" : writer,
+            }
         print("-", i['link'], i['title'])
         uniqueKey += 1
 

@@ -47,14 +47,14 @@ for BLOG_URL in feed_list:
     for i in feed['entries']:
         # print(i)
         if (BLOG_URL.find("velog.io") != -1):
-          parsing_data[uniqueKey] = { 
+          parsing_data["feed-" + str(uniqueKey)] = { 
               "title" : i['title'],
               "link" : i['link'],
               "date" : datetime.datetime.strptime(i['published'], '%a, %d %b %Y %H:%M:%S %Z').strftime("%b %d, %Y"),
               "writer" : writer,
           }
         else:
-            parsing_data[uniqueKey] = { 
+            parsing_data["feed-" + str(uniqueKey)] = { 
               "title" : i['title'],
               "link" : i['link'],
               "date" : datetime.datetime.strptime(i['published'], "%a, %d %b %Y %H:%M:%S %z").strftime("%b %d, %Y"),

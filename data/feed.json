@@ -1,5 +1,11 @@
 {
 	"feed-0": {
+		"title": "디프만 14기에 합격을 했는데요, 느낀 점이 정말 많아요",
+		"link": "https://klmhyeonwooo.tistory.com/99",
+		"date": "Nov 01, 2023",
+		"writer": "5기 김현우"
+	},
+	"feed-1": {
 		"title": "프론트엔드의 뜨거운 감자, 리액트 쿼리",
 		"link": "https://klmhyeonwooo.tistory.com/98",
 		"date": "Oct 30, 2023",
@@ -35,7 +41,7 @@
 		"date": "Oct 17, 2023",
 		"writer": "11기 김민우"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "배포를 하기에는 시간이 너무 많이 들고, 로컬 서버를 공유하고 싶다면?",
 		"link": "https://klmhyeonwooo.tistory.com/96",
 		"date": "Oct 16, 2023",
@@ -137,7 +143,7 @@
 		"date": "Sep 06, 2023",
 		"writer": "11기 성창규"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "아이패드의 분기처리, 그러니까 브라우저에서 아이패드인걸 어떻게 구분해요?",
 		"link": "https://klmhyeonwooo.tistory.com/93",
 		"date": "Sep 02, 2023",
@@ -149,16 +155,10 @@
 		"date": "Aug 29, 2023",
 		"writer": "11기 성창규"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "대체 Yarn을 왜 사용해요?",
 		"link": "https://klmhyeonwooo.tistory.com/91",
 		"date": "Aug 28, 2023",
-		"writer": "5기 김현우"
-	},
-	"feed-4": {
-		"title": "3개월 안에 토스 코어에서 사용하는 모든 기술 스택 찍먹하기",
-		"link": "https://klmhyeonwooo.tistory.com/90",
-		"date": "Aug 27, 2023",
 		"writer": "5기 김현우"
 	},
 	"feed-24": {

@@ -21,8 +21,8 @@
 - [그 동안 남의 시선에서 벗어나지 못했던 것 같다](https://klmhyeonwooo.tistory.com/65)<br>
 
 ### 최근 포스팅
+- [디프만 14기에 합격을 했는데요, 느낀 점이 정말 많아요](https://klmhyeonwooo.tistory.com/99)<br>
 - [프론트엔드의 뜨거운 감자, 리액트 쿼리](https://klmhyeonwooo.tistory.com/98)<br>
 - [배포를 하기에는 시간이 너무 많이 들고, 로컬 서버를 공유하고 싶다면?](https://klmhyeonwooo.tistory.com/96)<br>
 - [아이패드의 분기처리, 그러니까 브라우저에서 아이패드인걸 어떻게 구분해요?](https://klmhyeonwooo.tistory.com/93)<br>
 - [대체 Yarn을 왜 사용해요?](https://klmhyeonwooo.tistory.com/91)<br>
-- [3개월 안에 토스 코어에서 사용하는 모든 기술 스택 찍먹하기](https://klmhyeonwooo.tistory.com/90)<br>

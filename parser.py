@@ -43,7 +43,6 @@ for BLOG_URL in feed_list:
     else:
         feed = feedparser.parse(BLOG_URL.split("?")[0]+"/rss")
       
-    feed = feedparser.parse(BLOG_URL.split("?")[0]+"/rss")
     writer = BLOG_URL.split("?")[1]
     for i in feed['entries']:
         # print(i)

@@ -1,4 +1,16 @@
 {
+	"feed-0": {
+		"title": "아이폰 사파리에서 Box Shadow가 적용되지 않는 크로스 브라우징 현상",
+		"link": "https://klmhyeonwooo.tistory.com/101",
+		"date": "Nov 10, 2023",
+		"writer": "5기 김현우"
+	},
+	"feed-1": {
+		"title": "NextJS에서 Proxy 설정하기",
+		"link": "https://klmhyeonwooo.tistory.com/100",
+		"date": "Nov 10, 2023",
+		"writer": "5기 김현우"
+	},
 	"feed-5": {
 		"title": "docker에 prometheus + grafana 올리기 (Spring boot)",
 		"link": "https://minwoo-it-factory.tistory.com/entry/docker%EC%97%90-prometheus-grafana-%EC%98%AC%EB%A6%AC%EA%B8%B0-Spring-boot",
@@ -17,7 +29,7 @@
 		"date": "Nov 04, 2023",
 		"writer": "6기 정다혜"
 	},
-	"feed-0": {
+	"feed-2": {
 		"title": "디프만 14기에 합격을 했는데요, 느낀 점이 정말 많아요",
 		"link": "https://klmhyeonwooo.tistory.com/99",
 		"date": "Nov 01, 2023",
@@ -29,7 +41,7 @@
 		"date": "Nov 01, 2023",
 		"writer": "11기 강명균"
 	},
-	"feed-1": {
+	"feed-3": {
 		"title": "프론트엔드의 뜨거운 감자, 리액트 쿼리",
 		"link": "https://klmhyeonwooo.tistory.com/98",
 		"date": "Oct 30, 2023",
@@ -65,7 +77,7 @@
 		"date": "Oct 17, 2023",
 		"writer": "11기 김민우"
 	},
-	"feed-2": {
+	"feed-4": {
 		"title": "배포를 하기에는 시간이 너무 많이 들고, 로컬 서버를 공유하고 싶다면?",
 		"link": "https://klmhyeonwooo.tistory.com/96",
 		"date": "Oct 16, 2023",
@@ -191,23 +203,11 @@
 		"date": "Sep 06, 2023",
 		"writer": "11기 성창규"
 	},
-	"feed-3": {
-		"title": "아이패드의 분기처리, 그러니까 브라우저에서 아이패드인걸 어떻게 구분해요?",
-		"link": "https://klmhyeonwooo.tistory.com/93",
-		"date": "Sep 02, 2023",
-		"writer": "5기 김현우"
-	},
 	"feed-23": {
 		"title": "[프로그래머스] 72411번 - 메뉴 리뉴얼 (구현, 2021 KAKAO BLIND RECRUITMENT)",
 		"link": "https://apape1225.tistory.com/133",
 		"date": "Aug 29, 2023",
 		"writer": "11기 성창규"
-	},
-	"feed-4": {
-		"title": "대체 Yarn을 왜 사용해요?",
-		"link": "https://klmhyeonwooo.tistory.com/91",
-		"date": "Aug 28, 2023",
-		"writer": "5기 김현우"
 	},
 	"feed-24": {
 		"title": "[멋쟁이사자처럼] 전국 연합 해커톤 후기",

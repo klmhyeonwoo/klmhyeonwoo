@@ -1,11 +1,17 @@
 {
 	"feed-0": {
+		"title": "지연 시간 없이 웹 폰트 서빙하기 (feat. 사용자에게 버벅이는 순간 없애기)",
+		"link": "https://klmhyeonwooo.tistory.com/102",
+		"date": "Nov 11, 2023",
+		"writer": "5기 김현우"
+	},
+	"feed-1": {
 		"title": "아이폰 사파리에서 Box Shadow가 적용되지 않는 크로스 브라우징 현상",
 		"link": "https://klmhyeonwooo.tistory.com/101",
 		"date": "Nov 10, 2023",
 		"writer": "5기 김현우"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "NextJS에서 Proxy 설정하기",
 		"link": "https://klmhyeonwooo.tistory.com/100",
 		"date": "Nov 10, 2023",
@@ -29,7 +35,7 @@
 		"date": "Nov 04, 2023",
 		"writer": "6기 정다혜"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "디프만 14기에 합격을 했는데요, 느낀 점이 정말 많아요",
 		"link": "https://klmhyeonwooo.tistory.com/99",
 		"date": "Nov 01, 2023",
@@ -41,7 +47,7 @@
 		"date": "Nov 01, 2023",
 		"writer": "11기 강명균"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "프론트엔드의 뜨거운 감자, 리액트 쿼리",
 		"link": "https://klmhyeonwooo.tistory.com/98",
 		"date": "Oct 30, 2023",
@@ -76,12 +82,6 @@
 		"link": "https://minwoo-it-factory.tistory.com/entry/ngrinder-entity-%EC%A1%B0%ED%9A%8C%EB%B0%A9%EC%8B%9D-vs-dto-%EC%A1%B0%ED%9A%8C%EB%B0%A9%EC%8B%9D-%EC%84%B1%EB%8A%A5%ED%85%8C%EC%8A%A4%ED%8A%B8-%EA%B2%B0%EA%B3%BC",
 		"date": "Oct 17, 2023",
 		"writer": "11기 김민우"
-	},
-	"feed-4": {
-		"title": "배포를 하기에는 시간이 너무 많이 들고, 로컬 서버를 공유하고 싶다면?",
-		"link": "https://klmhyeonwooo.tistory.com/96",
-		"date": "Oct 16, 2023",
-		"writer": "5기 김현우"
 	},
 	"feed-31": {
 		"title": "[AWS] RDS에서 외부 접속이 되지 않을 때 (Connection timed out)",

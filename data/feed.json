@@ -1,17 +1,23 @@
 {
 	"feed-0": {
+		"title": "PWA의 핵심, 서비스 워커가 뭘까?",
+		"link": "https://klmhyeonwooo.tistory.com/103",
+		"date": "Nov 12, 2023",
+		"writer": "5기 김현우"
+	},
+	"feed-1": {
 		"title": "지연 시간 없이 웹 폰트 서빙하기 (feat. 사용자에게 버벅이는 순간 없애기)",
 		"link": "https://klmhyeonwooo.tistory.com/102",
 		"date": "Nov 11, 2023",
 		"writer": "5기 김현우"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "아이폰 사파리에서 Box Shadow가 적용되지 않는 크로스 브라우징 현상",
 		"link": "https://klmhyeonwooo.tistory.com/101",
 		"date": "Nov 10, 2023",
 		"writer": "5기 김현우"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "NextJS에서 Proxy 설정하기",
 		"link": "https://klmhyeonwooo.tistory.com/100",
 		"date": "Nov 10, 2023",
@@ -35,7 +41,7 @@
 		"date": "Nov 04, 2023",
 		"writer": "6기 정다혜"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "디프만 14기에 합격을 했는데요, 느낀 점이 정말 많아요",
 		"link": "https://klmhyeonwooo.tistory.com/99",
 		"date": "Nov 01, 2023",
@@ -46,12 +52,6 @@
 		"link": "https://ub775.tistory.com/entry/%EC%86%8C%EC%88%98-%ED%8C%90%EC%A0%95",
 		"date": "Nov 01, 2023",
 		"writer": "11기 강명균"
-	},
-	"feed-4": {
-		"title": "프론트엔드의 뜨거운 감자, 리액트 쿼리",
-		"link": "https://klmhyeonwooo.tistory.com/98",
-		"date": "Oct 30, 2023",
-		"writer": "5기 김현우"
 	},
 	"feed-26": {
 		"title": "8번째 슈코데이_토스 개발자와 함께하는 세미나 후기",

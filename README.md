@@ -17,8 +17,8 @@
 - [그 동안 남의 시선에서 벗어나지 못했던 것 같다](https://klmhyeonwooo.tistory.com/65)<br>
 
 ### 최근 포스팅
+- [웹앱을 위한 PWA 구현하기 - 1](https://klmhyeonwooo.tistory.com/105)<br>
 - [Recoil에 한번 빠져보려고 하는데, Redux를 첨가한..](https://klmhyeonwooo.tistory.com/104)<br>
 - [PWA의 핵심, 서비스 워커가 뭘까?](https://klmhyeonwooo.tistory.com/103)<br>
 - [지연 시간 없이 웹 폰트 서빙하기 (feat. 사용자에게 버벅이는 순간 없애기)](https://klmhyeonwooo.tistory.com/102)<br>
 - [아이폰 사파리에서 Box Shadow가 적용되지 않는 크로스 브라우징 현상](https://klmhyeonwooo.tistory.com/101)<br>
-- [NextJS에서 Proxy 설정하기](https://klmhyeonwooo.tistory.com/100)<br>

@@ -1,5 +1,11 @@
 {
 	"feed-0": {
+		"title": "웹앱을 위한 PWA 구현하기 - 1",
+		"link": "https://klmhyeonwooo.tistory.com/105",
+		"date": "Nov 14, 2023",
+		"writer": "5기 김현우"
+	},
+	"feed-1": {
 		"title": "Recoil에 한번 빠져보려고 하는데, Redux를 첨가한..",
 		"link": "https://klmhyeonwooo.tistory.com/104",
 		"date": "Nov 14, 2023",
@@ -11,27 +17,21 @@
 		"date": "Nov 13, 2023",
 		"writer": "11기 김민우"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "PWA의 핵심, 서비스 워커가 뭘까?",
 		"link": "https://klmhyeonwooo.tistory.com/103",
 		"date": "Nov 12, 2023",
 		"writer": "5기 김현우"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "지연 시간 없이 웹 폰트 서빙하기 (feat. 사용자에게 버벅이는 순간 없애기)",
 		"link": "https://klmhyeonwooo.tistory.com/102",
 		"date": "Nov 11, 2023",
 		"writer": "5기 김현우"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "아이폰 사파리에서 Box Shadow가 적용되지 않는 크로스 브라우징 현상",
 		"link": "https://klmhyeonwooo.tistory.com/101",
-		"date": "Nov 10, 2023",
-		"writer": "5기 김현우"
-	},
-	"feed-4": {
-		"title": "NextJS에서 Proxy 설정하기",
-		"link": "https://klmhyeonwooo.tistory.com/100",
 		"date": "Nov 10, 2023",
 		"writer": "5기 김현우"
 	},

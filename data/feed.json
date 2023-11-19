@@ -47,6 +47,12 @@
 		"date": "Nov 11, 2023",
 		"writer": "5기 김현우"
 	},
+	"feed-25": {
+		"title": "스마트 국토엑스포 2023 방문후기",
+		"link": "https://starlikedh.tistory.com/entry/%EC%8A%A4%EB%A7%88%ED%8A%B8-%EA%B5%AD%ED%86%A0%EC%97%91%EC%8A%A4%ED%8F%AC-2023-%EB%B0%A9%EB%AC%B8%ED%9B%84%EA%B8%B0",
+		"date": "Nov 11, 2023",
+		"writer": "6기 정다혜"
+	},
 	"feed-4": {
 		"title": "아이폰 사파리에서 Box Shadow가 적용되지 않는 크로스 브라우징 현상",
 		"link": "https://klmhyeonwooo.tistory.com/101",
@@ -65,7 +71,7 @@
 		"date": "Nov 06, 2023",
 		"writer": "11기 김민우"
 	},
-	"feed-25": {
+	"feed-26": {
 		"title": "IaC(Infrastructure as Code) 개요",
 		"link": "https://starlikedh.tistory.com/entry/IaCInfrastructure-as-Code-%EA%B0%9C%EC%9A%94",
 		"date": "Nov 04, 2023",
@@ -77,7 +83,7 @@
 		"date": "Nov 01, 2023",
 		"writer": "11기 강명균"
 	},
-	"feed-26": {
+	"feed-27": {
 		"title": "8번째 슈코데이_토스 개발자와 함께하는 세미나 후기",
 		"link": "https://starlikedh.tistory.com/entry/%EC%8A%88%EC%BD%94%EB%8D%B0%EC%9D%B4%ED%9B%84%EA%B8%B0",
 		"date": "Oct 28, 2023",
@@ -161,7 +167,7 @@
 		"date": "Oct 01, 2023",
 		"writer": "11기 성창규"
 	},
-	"feed-27": {
+	"feed-28": {
 		"title": "디지털 미래혁신대전 2023 방문후기",
 		"link": "https://starlikedh.tistory.com/entry/%EB%94%94%EC%A7%80%ED%84%B8%EB%AF%B8%EB%9E%98%ED%98%81%EC%8B%A0%EB%8C%80%EC%A0%84%ED%9B%84%EA%B8%B0",
 		"date": "Sep 30, 2023",
@@ -203,7 +209,7 @@
 		"date": "Sep 18, 2023",
 		"writer": "11기 성창규"
 	},
-	"feed-28": {
+	"feed-29": {
 		"title": "카카오 공개 기술 세미나 후기",
 		"link": "https://starlikedh.tistory.com/entry/%EC%B9%B4%EC%B9%B4%EC%98%A4%EA%B3%B5%EA%B0%9C%EA%B8%B0%EC%88%A0%EC%84%B8%EB%AF%B8%EB%82%98%ED%9B%84%EA%B8%B0",
 		"date": "Sep 17, 2023",
@@ -226,12 +232,6 @@
 		"link": "https://velog.io/@yunh03/macOS%EC%97%90%EC%84%9C-Docker-Permission-denied-%ED%95%B4%EA%B2%B0%ED%95%98%EA%B8%B0",
 		"date": "Aug 21, 2023",
 		"writer": "11기 전윤환"
-	},
-	"feed-29": {
-		"title": "무선 LAN",
-		"link": "https://starlikedh.tistory.com/entry/%EB%AC%B4%EC%84%A0-LAN",
-		"date": "Aug 19, 2023",
-		"writer": "6기 정다혜"
 	},
 	"feed-38": {
 		"title": "리눅스에서 FTP 연결 없이 터미널로 서버에 파일 전송하기",

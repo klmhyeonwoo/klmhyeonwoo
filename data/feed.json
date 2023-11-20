@@ -1,4 +1,10 @@
 {
+	"feed-5": {
+		"title": "Spring Data JPA 에서 Page와 Slice",
+		"link": "https://minwoo-it-factory.tistory.com/entry/Spring-Data-JPA-%EC%97%90%EC%84%9C-Page%EC%99%80-Slice",
+		"date": "Nov 19, 2023",
+		"writer": "11기 김민우"
+	},
 	"feed-15": {
 		"title": "[2023 오픈데이터포럼 해커톤] 우수상 수상 후기!",
 		"link": "https://apape1225.tistory.com/145",
@@ -29,7 +35,7 @@
 		"date": "Nov 14, 2023",
 		"writer": "5기 김현우"
 	},
-	"feed-5": {
+	"feed-6": {
 		"title": "kubernetes awsLoadBalancerController 설치 및 환경변수 secret설정",
 		"link": "https://minwoo-it-factory.tistory.com/entry/kubernetes-awsLoadBalancerController-%EC%84%A4%EC%B9%98-%EB%B0%8F-%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-secret%EC%84%A4%EC%A0%95",
 		"date": "Nov 13, 2023",
@@ -59,13 +65,13 @@
 		"date": "Nov 10, 2023",
 		"writer": "5기 김현우"
 	},
-	"feed-6": {
+	"feed-7": {
 		"title": "docker에 prometheus + grafana 올리기 (Spring boot)",
 		"link": "https://minwoo-it-factory.tistory.com/entry/docker%EC%97%90-prometheus-grafana-%EC%98%AC%EB%A6%AC%EA%B8%B0-Spring-boot",
 		"date": "Nov 07, 2023",
 		"writer": "11기 김민우"
 	},
-	"feed-7": {
+	"feed-8": {
 		"title": "Dynamodb 이슈해결 , 페이지네이션",
 		"link": "https://minwoo-it-factory.tistory.com/entry/Dynamodb-%EC%9D%B4%EC%8A%88%ED%95%B4%EA%B2%B0-%ED%8E%98%EC%9D%B4%EC%A7%80%EB%84%A4%EC%9D%B4%EC%85%98",
 		"date": "Nov 06, 2023",
@@ -89,7 +95,7 @@
 		"date": "Oct 28, 2023",
 		"writer": "6기 정다혜"
 	},
-	"feed-8": {
+	"feed-9": {
 		"title": "eks + argo cd +jenkins 로 ci/cd 구축하기",
 		"link": "https://minwoo-it-factory.tistory.com/entry/eks-argo-cd-jenkins-%EB%A1%9C-cicd-%EA%B5%AC%EC%B6%95%ED%95%98%EA%B8%B0",
 		"date": "Oct 24, 2023",
@@ -107,7 +113,7 @@
 		"date": "Oct 24, 2023",
 		"writer": "11기 성창규"
 	},
-	"feed-9": {
+	"feed-10": {
 		"title": "ngrinder entity 조회방식 vs dto 조회방식 성능테스트 결과",
 		"link": "https://minwoo-it-factory.tistory.com/entry/ngrinder-entity-%EC%A1%B0%ED%9A%8C%EB%B0%A9%EC%8B%9D-vs-dto-%EC%A1%B0%ED%9A%8C%EB%B0%A9%EC%8B%9D-%EC%84%B1%EB%8A%A5%ED%85%8C%EC%8A%A4%ED%8A%B8-%EA%B2%B0%EA%B3%BC",
 		"date": "Oct 17, 2023",
@@ -137,19 +143,19 @@
 		"date": "Oct 10, 2023",
 		"writer": "11기 전윤환"
 	},
-	"feed-10": {
+	"feed-11": {
 		"title": "server sent event (sse) 사용시 connection pool 부족 문제",
 		"link": "https://minwoo-it-factory.tistory.com/entry/server-sent-event-sse-%EC%82%AC%EC%9A%A9%EC%8B%9C-connection-pool-%EB%B6%80%EC%A1%B1-%EB%AC%B8%EC%A0%9C",
 		"date": "Oct 08, 2023",
 		"writer": "11기 김민우"
 	},
-	"feed-11": {
+	"feed-12": {
 		"title": "nginx port 분리하여 blue/green 배포",
 		"link": "https://minwoo-it-factory.tistory.com/entry/nginx-port-%EB%B6%84%EB%A6%AC%ED%95%98%EC%97%AC-bluegreen-%EB%B0%B0%ED%8F%AC",
 		"date": "Oct 04, 2023",
 		"writer": "11기 김민우"
 	},
-	"feed-12": {
+	"feed-13": {
 		"title": "실습으로 배우는 선착순 이벤트 시스템 - review",
 		"link": "https://minwoo-it-factory.tistory.com/entry/%EC%8B%A4%EC%8A%B5%EC%9C%BC%EB%A1%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EC%84%A0%EC%B0%A9%EC%88%9C-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EC%8B%9C%EC%8A%A4%ED%85%9C-review",
 		"date": "Oct 02, 2023",
@@ -173,7 +179,7 @@
 		"date": "Sep 30, 2023",
 		"writer": "6기 정다혜"
 	},
-	"feed-13": {
+	"feed-14": {
 		"title": "[Spring] 배포 서버의 도커 컨테이너에 크롤링 환경 구축하기",
 		"link": "https://minwoo-it-factory.tistory.com/entry/Spring-%EB%B0%B0%ED%8F%AC-%EC%84%9C%EB%B2%84%EC%9D%98-%EB%8F%84%EC%BB%A4-%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88%EC%97%90-%ED%81%AC%EB%A1%A4%EB%A7%81-%ED%99%98%EA%B2%BD-%EA%B5%AC%EC%B6%95%ED%95%98%EA%B8%B0",
 		"date": "Sep 28, 2023",
@@ -190,12 +196,6 @@
 		"link": "https://velog.io/@yunh03/Spring-Boot-React-%EC%B9%B4%EC%B9%B4%EC%98%A4-%EC%86%8C%EC%85%9C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EB%8F%84%EC%9E%85%ED%95%98%EA%B8%B0-1",
 		"date": "Sep 27, 2023",
 		"writer": "11기 전윤환"
-	},
-	"feed-14": {
-		"title": "로드밸런싱 , 다중서버 oauth 401 error",
-		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%A1%9C%EB%93%9C%EB%B0%B8%EB%9F%B0%EC%8B%B1-%EB%8B%A4%EC%A4%91%EC%84%9C%EB%B2%84-oauth-401-error",
-		"date": "Sep 26, 2023",
-		"writer": "11기 김민우"
 	},
 	"feed-22": {
 		"title": "[programmers] [3차] 17683번 - 방금그곡 (구현, 2018 KAKAO BLIND RECRUITMENT)",

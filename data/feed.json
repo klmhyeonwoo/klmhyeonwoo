@@ -1,17 +1,11 @@
 {
 	"feed-0": {
-		"title": "[rollup.js] rollup -c 실행 시, Cannot use import statement outside a module",
-		"link": "https://klmhyeonwooo.tistory.com/109",
-		"date": "Nov 30, 2023",
-		"writer": "5기 김현우"
-	},
-	"feed-1": {
 		"title": "PWA랑 Git Action을 첨가한 멋쟁이사자처럼 피드 개발기",
 		"link": "https://klmhyeonwooo.tistory.com/108",
 		"date": "Nov 27, 2023",
 		"writer": "5기 김현우"
 	},
-	"feed-2": {
+	"feed-1": {
 		"title": "CJS, AMD, UMD, ESM",
 		"link": "https://klmhyeonwooo.tistory.com/107",
 		"date": "Nov 27, 2023",
@@ -29,7 +23,7 @@
 		"date": "Nov 26, 2023",
 		"writer": "11기 성창규"
 	},
-	"feed-3": {
+	"feed-2": {
 		"title": "자바스크립트 패키지 매니저, PNPM 란?",
 		"link": "https://klmhyeonwooo.tistory.com/106",
 		"date": "Nov 21, 2023",
@@ -65,9 +59,15 @@
 		"date": "Nov 15, 2023",
 		"writer": "11기 성창규"
 	},
-	"feed-4": {
+	"feed-3": {
 		"title": "웹앱을 위한 PWA 구현하기 - 1",
 		"link": "https://klmhyeonwooo.tistory.com/105",
+		"date": "Nov 14, 2023",
+		"writer": "5기 김현우"
+	},
+	"feed-4": {
+		"title": "Recoil에 한번 빠져보려고 하는데, Redux를 첨가한..",
+		"link": "https://klmhyeonwooo.tistory.com/104",
 		"date": "Nov 14, 2023",
 		"writer": "5기 김현우"
 	},

@@ -1,4 +1,10 @@
 {
+	"feed-25": {
+		"title": "GOODBYE 2023, HELLO 2024.",
+		"link": "https://starlikedh.tistory.com/entry/GOODBYE-2023-HELLO-2024",
+		"date": "Dec 31, 2023",
+		"writer": "6기 정다혜"
+	},
 	"feed-30": {
 		"title": "[c++] 1181번 단어 정렬",
 		"link": "https://velog.io/@handmk/c-1181%EB%B2%88-%EB%8B%A8%EC%96%B4-%EC%A0%95%EB%A0%AC",
@@ -101,7 +107,7 @@
 		"date": "Nov 19, 2023",
 		"writer": "11기 김민우"
 	},
-	"feed-25": {
+	"feed-26": {
 		"title": "Bootstrap IaC 툴 및 Vagrant 실습",
 		"link": "https://starlikedh.tistory.com/entry/Bootstrap-IaC-%ED%88%B4-Vagrant-%EC%8B%A4%EC%8A%B5",
 		"date": "Nov 18, 2023",
@@ -137,13 +143,13 @@
 		"date": "Nov 13, 2023",
 		"writer": "11기 김민우"
 	},
-	"feed-26": {
+	"feed-27": {
 		"title": "스마트 국토엑스포 2023 방문후기",
 		"link": "https://starlikedh.tistory.com/entry/%EC%8A%A4%EB%A7%88%ED%8A%B8-%EA%B5%AD%ED%86%A0%EC%97%91%EC%8A%A4%ED%8F%AC-2023-%EB%B0%A9%EB%AC%B8%ED%9B%84%EA%B8%B0",
 		"date": "Nov 11, 2023",
 		"writer": "6기 정다혜"
 	},
-	"feed-27": {
+	"feed-28": {
 		"title": "클라우드 컴퓨팅과 클라우드 네이티브",
 		"link": "https://starlikedh.tistory.com/entry/%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%EC%BB%B4%ED%93%A8%ED%8C%85%EA%B3%BC-%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%EB%84%A4%EC%9D%B4%ED%8B%B0%EB%B8%8C",
 		"date": "Nov 11, 2023",
@@ -161,7 +167,7 @@
 		"date": "Nov 06, 2023",
 		"writer": "11기 김민우"
 	},
-	"feed-28": {
+	"feed-29": {
 		"title": "IaC(Infrastructure as Code) 개요",
 		"link": "https://starlikedh.tistory.com/entry/IaCInfrastructure-as-Code-%EA%B0%9C%EC%9A%94",
 		"date": "Nov 04, 2023",
@@ -172,12 +178,6 @@
 		"link": "https://ub775.tistory.com/entry/%EC%86%8C%EC%88%98-%ED%8C%90%EC%A0%95",
 		"date": "Nov 01, 2023",
 		"writer": "11기 강명균"
-	},
-	"feed-29": {
-		"title": "8번째 슈코데이_토스 개발자와 함께하는 세미나 후기",
-		"link": "https://starlikedh.tistory.com/entry/%EC%8A%88%EC%BD%94%EB%8D%B0%EC%9D%B4%ED%9B%84%EA%B8%B0",
-		"date": "Oct 28, 2023",
-		"writer": "6기 정다혜"
 	},
 	"feed-9": {
 		"title": "eks + argo cd +jenkins 로 ci/cd 구축하기",

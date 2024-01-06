@@ -1,9 +1,9 @@
 {
-	"feed-25": {
-		"title": "GOODBYE 2023, HELLO 2024.",
-		"link": "https://starlikedh.tistory.com/entry/GOODBYE-2023-HELLO-2024",
-		"date": "Dec 31, 2023",
-		"writer": "6기 정다혜"
+	"feed-15": {
+		"title": "[2023 K-PaaS활용 디지털 사회혁신 서비스 개발, 아이디어 공모전 특별상 수상] 특별상 수상 후기!",
+		"link": "https://apape1225.tistory.com/148",
+		"date": "Jan 05, 2024",
+		"writer": "11기 성창규"
 	},
 	"feed-30": {
 		"title": "[c++] 1181번 단어 정렬",
@@ -83,7 +83,7 @@
 		"date": "Nov 27, 2023",
 		"writer": "11기 손민기"
 	},
-	"feed-15": {
+	"feed-16": {
 		"title": "[programmers] 250136번 - PCCP 기출문제 2번(BFS, PCCP 기출문제)",
 		"link": "https://apape1225.tistory.com/147",
 		"date": "Nov 26, 2023",
@@ -95,7 +95,7 @@
 		"date": "Nov 21, 2023",
 		"writer": "5기 김현우"
 	},
-	"feed-16": {
+	"feed-17": {
 		"title": "[멋쟁이사자처럼 지원페이지] #4 업데이트 진행 (MSA 구조 개요)",
 		"link": "https://apape1225.tistory.com/146",
 		"date": "Nov 20, 2023",
@@ -107,25 +107,25 @@
 		"date": "Nov 19, 2023",
 		"writer": "11기 김민우"
 	},
-	"feed-26": {
+	"feed-25": {
 		"title": "Bootstrap IaC 툴 및 Vagrant 실습",
 		"link": "https://starlikedh.tistory.com/entry/Bootstrap-IaC-%ED%88%B4-Vagrant-%EC%8B%A4%EC%8A%B5",
 		"date": "Nov 18, 2023",
 		"writer": "6기 정다혜"
 	},
-	"feed-17": {
+	"feed-18": {
 		"title": "[2023 오픈데이터포럼 해커톤] 우수상 수상 후기!",
 		"link": "https://apape1225.tistory.com/145",
 		"date": "Nov 17, 2023",
 		"writer": "11기 성창규"
 	},
-	"feed-18": {
+	"feed-19": {
 		"title": "[programmers] 1835번 - 단체사진 찍기(Brute force, 2017 카카오코드 본선)",
 		"link": "https://apape1225.tistory.com/144",
 		"date": "Nov 16, 2023",
 		"writer": "11기 성창규"
 	},
-	"feed-19": {
+	"feed-20": {
 		"title": "[programmers] 92342번 - 양궁대회 (BFS, 2022 KAKAO BLIND RECRUITMENT)",
 		"link": "https://apape1225.tistory.com/143",
 		"date": "Nov 15, 2023",
@@ -143,13 +143,13 @@
 		"date": "Nov 13, 2023",
 		"writer": "11기 김민우"
 	},
-	"feed-27": {
+	"feed-26": {
 		"title": "스마트 국토엑스포 2023 방문후기",
 		"link": "https://starlikedh.tistory.com/entry/%EC%8A%A4%EB%A7%88%ED%8A%B8-%EA%B5%AD%ED%86%A0%EC%97%91%EC%8A%A4%ED%8F%AC-2023-%EB%B0%A9%EB%AC%B8%ED%9B%84%EA%B8%B0",
 		"date": "Nov 11, 2023",
 		"writer": "6기 정다혜"
 	},
-	"feed-28": {
+	"feed-27": {
 		"title": "클라우드 컴퓨팅과 클라우드 네이티브",
 		"link": "https://starlikedh.tistory.com/entry/%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%EC%BB%B4%ED%93%A8%ED%8C%85%EA%B3%BC-%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%EB%84%A4%EC%9D%B4%ED%8B%B0%EB%B8%8C",
 		"date": "Nov 11, 2023",
@@ -167,7 +167,7 @@
 		"date": "Nov 06, 2023",
 		"writer": "11기 김민우"
 	},
-	"feed-29": {
+	"feed-28": {
 		"title": "IaC(Infrastructure as Code) 개요",
 		"link": "https://starlikedh.tistory.com/entry/IaCInfrastructure-as-Code-%EA%B0%9C%EC%9A%94",
 		"date": "Nov 04, 2023",
@@ -179,19 +179,25 @@
 		"date": "Nov 01, 2023",
 		"writer": "11기 강명균"
 	},
+	"feed-29": {
+		"title": "8번째 슈코데이_토스 개발자와 함께하는 세미나 후기",
+		"link": "https://starlikedh.tistory.com/entry/%EC%8A%88%EC%BD%94%EB%8D%B0%EC%9D%B4%ED%9B%84%EA%B8%B0",
+		"date": "Oct 28, 2023",
+		"writer": "6기 정다혜"
+	},
 	"feed-9": {
 		"title": "eks + argo cd +jenkins 로 ci/cd 구축하기",
 		"link": "https://minwoo-it-factory.tistory.com/entry/eks-argo-cd-jenkins-%EB%A1%9C-cicd-%EA%B5%AC%EC%B6%95%ED%95%98%EA%B8%B0",
 		"date": "Oct 24, 2023",
 		"writer": "11기 김민우"
 	},
-	"feed-20": {
+	"feed-21": {
 		"title": "[programmers] 150368번 - 이모티콘 할인행사 (brute force, 2023 KAKAO BLIND RECRUITMENT)",
 		"link": "https://apape1225.tistory.com/142",
 		"date": "Oct 24, 2023",
 		"writer": "11기 성창규"
 	},
-	"feed-21": {
+	"feed-22": {
 		"title": "[programmers] 42860번 - 조이스틱 (구현, 그리디, LEVEL.2)",
 		"link": "https://apape1225.tistory.com/141",
 		"date": "Oct 24, 2023",
@@ -245,13 +251,13 @@
 		"date": "Oct 02, 2023",
 		"writer": "11기 김민우"
 	},
-	"feed-22": {
+	"feed-23": {
 		"title": "[programmers] 42890번 - 후보키 (brute force, 2019 KAKAO BLIND RECRUITMENT)",
 		"link": "https://apape1225.tistory.com/140",
 		"date": "Oct 01, 2023",
 		"writer": "11기 성창규"
 	},
-	"feed-23": {
+	"feed-24": {
 		"title": "[programmers] 60058번 - 괄호 변환(재귀함수, 2020 KAKAO BLIND RECRUITMENT)",
 		"link": "https://apape1225.tistory.com/139",
 		"date": "Oct 01, 2023",
@@ -274,12 +280,6 @@
 		"link": "https://velog.io/@yunh03/Spring-Boot-React-%EC%B9%B4%EC%B9%B4%EC%98%A4-%EC%86%8C%EC%85%9C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EB%8F%84%EC%9E%85%ED%95%98%EA%B8%B0-1",
 		"date": "Sep 27, 2023",
 		"writer": "11기 전윤환"
-	},
-	"feed-24": {
-		"title": "[programmers] [3차] 17683번 - 방금그곡 (구현, 2018 KAKAO BLIND RECRUITMENT)",
-		"link": "https://apape1225.tistory.com/138",
-		"date": "Sep 18, 2023",
-		"writer": "11기 성창규"
 	},
 	"feed-46": {
 		"title": "2023 멋쟁이사자처럼 대학 11기 해커톤 후기",

@@ -1,11 +1,17 @@
 {
+	"feed-5": {
+		"title": "MYSQL ST_DISTANCE_SPHERE 함수",
+		"link": "https://minwoo-it-factory.tistory.com/entry/MYSQL-STDISTANCESPHERE-%ED%95%A8%EC%88%98",
+		"date": "Jan 17, 2024",
+		"writer": "11기 김민우"
+	},
 	"feed-30": {
 		"title": "[Linux/Ubuntu] 가상 머신으로 실무 환경 구축(1)",
 		"link": "https://velog.io/@handmk/LinuxUbuntu-%EA%B0%80%EC%83%81-%EB%A8%B8%EC%8B%A0%EC%9C%BC%EB%A1%9C-%EC%8B%A4%EB%AC%B4-%ED%99%98%EA%B2%BD-%EA%B5%AC%EC%B6%951",
 		"date": "Jan 16, 2024",
 		"writer": "11기 손민기"
 	},
-	"feed-5": {
+	"feed-6": {
 		"title": "도메인주도개발 시작하기 3장",
 		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-3%EC%9E%A5",
 		"date": "Jan 15, 2024",
@@ -29,7 +35,7 @@
 		"date": "Jan 13, 2024",
 		"writer": "11기 강명균"
 	},
-	"feed-6": {
+	"feed-7": {
 		"title": "도메인주도개발 시작하기 2장",
 		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-2%EC%9E%A5",
 		"date": "Jan 12, 2024",
@@ -77,13 +83,13 @@
 		"date": "Jan 09, 2024",
 		"writer": "11기 강명균"
 	},
-	"feed-7": {
+	"feed-8": {
 		"title": "Spring log를 ELK를 구축하여 실시간 모니터링",
 		"link": "https://minwoo-it-factory.tistory.com/entry/Spring-log%EB%A5%BC-ELK%EB%A5%BC-%EA%B5%AC%EC%B6%95%ED%95%98%EC%97%AC-%EC%8B%A4%EC%8B%9C%EA%B0%84-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81",
 		"date": "Jan 08, 2024",
 		"writer": "11기 김민우"
 	},
-	"feed-8": {
+	"feed-9": {
 		"title": "mysql DB 데이터 백업/복구(export/import) dump뜨는법",
 		"link": "https://minwoo-it-factory.tistory.com/entry/mysql-DB-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B0%B1%EC%97%85%EB%B3%B5%EA%B5%ACexportimport-dump%EB%9C%A8%EB%8A%94%EB%B2%95",
 		"date": "Jan 06, 2024",
@@ -209,7 +215,7 @@
 		"date": "Nov 20, 2023",
 		"writer": "11기 성창규"
 	},
-	"feed-9": {
+	"feed-10": {
 		"title": "Spring Data JPA 에서 Page와 Slice",
 		"link": "https://minwoo-it-factory.tistory.com/entry/Spring-Data-JPA-%EC%97%90%EC%84%9C-Page%EC%99%80-Slice",
 		"date": "Nov 19, 2023",
@@ -245,19 +251,19 @@
 		"date": "Nov 14, 2023",
 		"writer": "5기 김현우"
 	},
-	"feed-10": {
+	"feed-11": {
 		"title": "kubernetes awsLoadBalancerController 설치 및 환경변수 secret설정",
 		"link": "https://minwoo-it-factory.tistory.com/entry/kubernetes-awsLoadBalancerController-%EC%84%A4%EC%B9%98-%EB%B0%8F-%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-secret%EC%84%A4%EC%A0%95",
 		"date": "Nov 13, 2023",
 		"writer": "11기 김민우"
 	},
-	"feed-11": {
+	"feed-12": {
 		"title": "docker에 prometheus + grafana 올리기 (Spring boot)",
 		"link": "https://minwoo-it-factory.tistory.com/entry/docker%EC%97%90-prometheus-grafana-%EC%98%AC%EB%A6%AC%EA%B8%B0-Spring-boot",
 		"date": "Nov 07, 2023",
 		"writer": "11기 김민우"
 	},
-	"feed-12": {
+	"feed-13": {
 		"title": "Dynamodb 이슈해결 , 페이지네이션",
 		"link": "https://minwoo-it-factory.tistory.com/entry/Dynamodb-%EC%9D%B4%EC%8A%88%ED%95%B4%EA%B2%B0-%ED%8E%98%EC%9D%B4%EC%A7%80%EB%84%A4%EC%9D%B4%EC%85%98",
 		"date": "Nov 06, 2023",
@@ -269,7 +275,7 @@
 		"date": "Nov 01, 2023",
 		"writer": "11기 강명균"
 	},
-	"feed-13": {
+	"feed-14": {
 		"title": "eks + argo cd +jenkins 로 ci/cd 구축하기",
 		"link": "https://minwoo-it-factory.tistory.com/entry/eks-argo-cd-jenkins-%EB%A1%9C-cicd-%EA%B5%AC%EC%B6%95%ED%95%98%EA%B8%B0",
 		"date": "Oct 24, 2023",
@@ -280,12 +286,6 @@
 		"link": "https://apape1225.tistory.com/142",
 		"date": "Oct 24, 2023",
 		"writer": "11기 성창규"
-	},
-	"feed-14": {
-		"title": "ngrinder entity 조회방식 vs dto 조회방식 성능테스트 결과",
-		"link": "https://minwoo-it-factory.tistory.com/entry/ngrinder-entity-%EC%A1%B0%ED%9A%8C%EB%B0%A9%EC%8B%9D-vs-dto-%EC%A1%B0%ED%9A%8C%EB%B0%A9%EC%8B%9D-%EC%84%B1%EB%8A%A5%ED%85%8C%EC%8A%A4%ED%8A%B8-%EA%B2%B0%EA%B3%BC",
-		"date": "Oct 17, 2023",
-		"writer": "11기 김민우"
 	},
 	"feed-45": {
 		"title": "[AWS] RDS에서 외부 접속이 되지 않을 때 (Connection timed out)",

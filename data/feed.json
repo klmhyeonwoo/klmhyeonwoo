@@ -5,13 +5,25 @@
 		"date": "Jan 29, 2024",
 		"writer": "11기 손민기"
 	},
+	"feed-5": {
+		"title": "도메인주도설계 6장",
+		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EC%84%A4%EA%B3%84-6%EC%9E%A5",
+		"date": "Jan 26, 2024",
+		"writer": "11기 김민우"
+	},
+	"feed-6": {
+		"title": "도메인주도설계 5장",
+		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EC%84%A4%EA%B3%84-5%EC%9E%A5",
+		"date": "Jan 26, 2024",
+		"writer": "11기 김민우"
+	},
 	"feed-25": {
 		"title": "스프링부트_01",
 		"link": "https://starlikedh.tistory.com/entry/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8",
 		"date": "Jan 20, 2024",
 		"writer": "6기 정다혜"
 	},
-	"feed-5": {
+	"feed-7": {
 		"title": "Spring jpa의 사실과 오해",
 		"link": "https://minwoo-it-factory.tistory.com/entry/Spring-jpa%EC%9D%98-%EC%82%AC%EC%8B%A4%EA%B3%BC-%EC%98%A4%ED%95%B4",
 		"date": "Jan 19, 2024",
@@ -23,13 +35,19 @@
 		"date": "Jan 19, 2024",
 		"writer": "11기 손민기"
 	},
+	"feed-8": {
+		"title": "도메인주도개발 시작하기 4장",
+		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-4%EC%9E%A5",
+		"date": "Jan 18, 2024",
+		"writer": "11기 김민우"
+	},
 	"feed-15": {
 		"title": "[DDD] chapter 3",
 		"link": "https://apape1225.tistory.com/152",
 		"date": "Jan 18, 2024",
 		"writer": "11기 성창규"
 	},
-	"feed-6": {
+	"feed-9": {
 		"title": "MYSQL ST_DISTANCE_SPHERE 함수",
 		"link": "https://minwoo-it-factory.tistory.com/entry/MYSQL-STDISTANCESPHERE-%ED%95%A8%EC%88%98",
 		"date": "Jan 17, 2024",
@@ -41,7 +59,7 @@
 		"date": "Jan 16, 2024",
 		"writer": "11기 손민기"
 	},
-	"feed-7": {
+	"feed-10": {
 		"title": "도메인주도개발 시작하기 3장",
 		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-3%EC%9E%A5",
 		"date": "Jan 15, 2024",
@@ -65,7 +83,7 @@
 		"date": "Jan 13, 2024",
 		"writer": "11기 강명균"
 	},
-	"feed-8": {
+	"feed-11": {
 		"title": "도메인주도개발 시작하기 2장",
 		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-2%EC%9E%A5",
 		"date": "Jan 12, 2024",
@@ -113,13 +131,13 @@
 		"date": "Jan 09, 2024",
 		"writer": "11기 강명균"
 	},
-	"feed-9": {
+	"feed-12": {
 		"title": "Spring log를 ELK를 구축하여 실시간 모니터링",
 		"link": "https://minwoo-it-factory.tistory.com/entry/Spring-log%EB%A5%BC-ELK%EB%A5%BC-%EA%B5%AC%EC%B6%95%ED%95%98%EC%97%AC-%EC%8B%A4%EC%8B%9C%EA%B0%84-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81",
 		"date": "Jan 08, 2024",
 		"writer": "11기 김민우"
 	},
-	"feed-10": {
+	"feed-13": {
 		"title": "mysql DB 데이터 백업/복구(export/import) dump뜨는법",
 		"link": "https://minwoo-it-factory.tistory.com/entry/mysql-DB-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B0%B1%EC%97%85%EB%B3%B5%EA%B5%ACexportimport-dump%EB%9C%A8%EB%8A%94%EB%B2%95",
 		"date": "Jan 06, 2024",
@@ -245,7 +263,7 @@
 		"date": "Nov 20, 2023",
 		"writer": "11기 성창규"
 	},
-	"feed-11": {
+	"feed-14": {
 		"title": "Spring Data JPA 에서 Page와 Slice",
 		"link": "https://minwoo-it-factory.tistory.com/entry/Spring-Data-JPA-%EC%97%90%EC%84%9C-Page%EC%99%80-Slice",
 		"date": "Nov 19, 2023",
@@ -274,24 +292,6 @@
 		"link": "https://klmhyeonwooo.tistory.com/105",
 		"date": "Nov 14, 2023",
 		"writer": "5기 김현우"
-	},
-	"feed-12": {
-		"title": "kubernetes awsLoadBalancerController 설치 및 환경변수 secret설정",
-		"link": "https://minwoo-it-factory.tistory.com/entry/kubernetes-awsLoadBalancerController-%EC%84%A4%EC%B9%98-%EB%B0%8F-%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-secret%EC%84%A4%EC%A0%95",
-		"date": "Nov 13, 2023",
-		"writer": "11기 김민우"
-	},
-	"feed-13": {
-		"title": "docker에 prometheus + grafana 올리기 (Spring boot)",
-		"link": "https://minwoo-it-factory.tistory.com/entry/docker%EC%97%90-prometheus-grafana-%EC%98%AC%EB%A6%AC%EA%B8%B0-Spring-boot",
-		"date": "Nov 07, 2023",
-		"writer": "11기 김민우"
-	},
-	"feed-14": {
-		"title": "Dynamodb 이슈해결 , 페이지네이션",
-		"link": "https://minwoo-it-factory.tistory.com/entry/Dynamodb-%EC%9D%B4%EC%8A%88%ED%95%B4%EA%B2%B0-%ED%8E%98%EC%9D%B4%EC%A7%80%EB%84%A4%EC%9D%B4%EC%85%98",
-		"date": "Nov 06, 2023",
-		"writer": "11기 김민우"
 	},
 	"feed-47": {
 		"title": "[AWS] RDS에서 외부 접속이 되지 않을 때 (Connection timed out)",

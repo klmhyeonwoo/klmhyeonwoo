@@ -35,6 +35,12 @@
 		"date": "Feb 07, 2024",
 		"writer": "11기 성창규"
 	},
+	"feed-8": {
+		"title": "도메인주도설계 7장",
+		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EC%84%A4%EA%B3%84-7%EC%9E%A5",
+		"date": "Feb 04, 2024",
+		"writer": "11기 김민우"
+	},
 	"feed-18": {
 		"title": "[DDD] chapter 4",
 		"link": "https://apape1225.tistory.com/153",
@@ -47,13 +53,13 @@
 		"date": "Jan 29, 2024",
 		"writer": "11기 손민기"
 	},
-	"feed-8": {
+	"feed-9": {
 		"title": "도메인주도설계 6장",
 		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EC%84%A4%EA%B3%84-6%EC%9E%A5",
 		"date": "Jan 26, 2024",
 		"writer": "11기 김민우"
 	},
-	"feed-9": {
+	"feed-10": {
 		"title": "도메인주도설계 5장",
 		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EC%84%A4%EA%B3%84-5%EC%9E%A5",
 		"date": "Jan 26, 2024",
@@ -65,7 +71,7 @@
 		"date": "Jan 20, 2024",
 		"writer": "6기 정다혜"
 	},
-	"feed-10": {
+	"feed-11": {
 		"title": "Spring jpa의 사실과 오해",
 		"link": "https://minwoo-it-factory.tistory.com/entry/Spring-jpa%EC%9D%98-%EC%82%AC%EC%8B%A4%EA%B3%BC-%EC%98%A4%ED%95%B4",
 		"date": "Jan 19, 2024",
@@ -77,7 +83,7 @@
 		"date": "Jan 19, 2024",
 		"writer": "11기 손민기"
 	},
-	"feed-11": {
+	"feed-12": {
 		"title": "도메인주도개발 시작하기 4장",
 		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-4%EC%9E%A5",
 		"date": "Jan 18, 2024",
@@ -89,7 +95,7 @@
 		"date": "Jan 18, 2024",
 		"writer": "11기 성창규"
 	},
-	"feed-12": {
+	"feed-13": {
 		"title": "MYSQL ST_DISTANCE_SPHERE 함수",
 		"link": "https://minwoo-it-factory.tistory.com/entry/MYSQL-STDISTANCESPHERE-%ED%95%A8%EC%88%98",
 		"date": "Jan 17, 2024",
@@ -101,7 +107,7 @@
 		"date": "Jan 16, 2024",
 		"writer": "11기 손민기"
 	},
-	"feed-13": {
+	"feed-14": {
 		"title": "도메인주도개발 시작하기 3장",
 		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-3%EC%9E%A5",
 		"date": "Jan 15, 2024",
@@ -124,12 +130,6 @@
 		"link": "https://ub775.tistory.com/entry/FastAPI-%EB%AC%B8%EC%84%9C%ED%99%94",
 		"date": "Jan 13, 2024",
 		"writer": "11기 강명균"
-	},
-	"feed-14": {
-		"title": "도메인주도개발 시작하기 2장",
-		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-2%EC%9E%A5",
-		"date": "Jan 12, 2024",
-		"writer": "11기 김민우"
 	},
 	"feed-22": {
 		"title": "[FLOWBIT] 비트코인 자동거래 시스템에서 예측 가격 제공 서비스로 전환! ✨",

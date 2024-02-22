@@ -1,11 +1,17 @@
 {
+	"feed-15": {
+		"title": "[DDD] chapter 8",
+		"link": "https://apape1225.tistory.com/157",
+		"date": "Feb 21, 2024",
+		"writer": "11기 성창규"
+	},
 	"feed-44": {
 		"title": "Spring Boot에서 ChatGPT 활용하기 #1: API 연결 테스트",
 		"link": "https://velog.io/@yunh03/Spring-Boot%EC%97%90%EC%84%9C-ChatGPT-%ED%99%9C%EC%9A%A9%ED%95%98%EA%B8%B0-1-API-%EC%97%B0%EA%B2%B0-%ED%85%8C%EC%8A%A4%ED%8A%B8",
 		"date": "Feb 19, 2024",
 		"writer": "11기 전윤환"
 	},
-	"feed-15": {
+	"feed-16": {
 		"title": "[DDD] chapter 7",
 		"link": "https://apape1225.tistory.com/156",
 		"date": "Feb 16, 2024",
@@ -23,7 +29,7 @@
 		"date": "Feb 11, 2024",
 		"writer": "11기 김민우"
 	},
-	"feed-16": {
+	"feed-17": {
 		"title": "[DDD] chapter 6",
 		"link": "https://apape1225.tistory.com/155",
 		"date": "Feb 10, 2024",
@@ -35,7 +41,7 @@
 		"date": "Feb 09, 2024",
 		"writer": "11기 김민우"
 	},
-	"feed-17": {
+	"feed-18": {
 		"title": "[DDD] chapter 5",
 		"link": "https://apape1225.tistory.com/154",
 		"date": "Feb 07, 2024",
@@ -47,7 +53,7 @@
 		"date": "Feb 04, 2024",
 		"writer": "11기 김민우"
 	},
-	"feed-18": {
+	"feed-19": {
 		"title": "[DDD] chapter 4",
 		"link": "https://apape1225.tistory.com/153",
 		"date": "Feb 03, 2024",
@@ -95,7 +101,7 @@
 		"date": "Jan 18, 2024",
 		"writer": "11기 김민우"
 	},
-	"feed-19": {
+	"feed-20": {
 		"title": "[DDD] chapter 3",
 		"link": "https://apape1225.tistory.com/152",
 		"date": "Jan 18, 2024",
@@ -119,13 +125,13 @@
 		"date": "Jan 15, 2024",
 		"writer": "11기 김민우"
 	},
-	"feed-20": {
+	"feed-21": {
 		"title": "[DDD] chapter2",
 		"link": "https://apape1225.tistory.com/151",
 		"date": "Jan 13, 2024",
 		"writer": "11기 성창규"
 	},
-	"feed-21": {
+	"feed-22": {
 		"title": "[DDD] chapter 1",
 		"link": "https://apape1225.tistory.com/150",
 		"date": "Jan 13, 2024",
@@ -137,7 +143,7 @@
 		"date": "Jan 13, 2024",
 		"writer": "11기 강명균"
 	},
-	"feed-22": {
+	"feed-23": {
 		"title": "[FLOWBIT] 비트코인 자동거래 시스템에서 예측 가격 제공 서비스로 전환! ✨",
 		"link": "https://apape1225.tistory.com/149",
 		"date": "Jan 12, 2024",
@@ -197,7 +203,7 @@
 		"date": "Jan 06, 2024",
 		"writer": "11기 손민기"
 	},
-	"feed-23": {
+	"feed-24": {
 		"title": "[2023 K-PaaS활용 디지털 사회혁신 서비스 개발, 아이디어 공모전 특별상 수상] 특별상 수상 후기!",
 		"link": "https://apape1225.tistory.com/148",
 		"date": "Jan 05, 2024",
@@ -280,12 +286,6 @@
 		"link": "https://velog.io/@handmk/Springboot-%EB%A9%94%EC%9D%BC%EC%9D%B8%EC%A6%9D-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85-%EA%B5%AC%ED%98%84",
 		"date": "Nov 27, 2023",
 		"writer": "11기 손민기"
-	},
-	"feed-24": {
-		"title": "[programmers] 250136번 - PCCP 기출문제 2번(BFS, PCCP 기출문제)",
-		"link": "https://apape1225.tistory.com/147",
-		"date": "Nov 26, 2023",
-		"writer": "11기 성창규"
 	},
 	"feed-3": {
 		"title": "자바스크립트 패키지 매니저, PNPM 란?",

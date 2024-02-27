@@ -1,4 +1,16 @@
 {
+	"feed-59": {
+		"title": "[Git/Github] .gitignore에 application.properties 추가하기",
+		"link": "https://ub775.tistory.com/entry/Git-gitignore%EC%97%90-applicationproperties-%EC%B6%94%EA%B0%80%ED%95%98%EA%B8%B0",
+		"date": "Feb 27, 2024",
+		"writer": "11기 강명균"
+	},
+	"feed-44": {
+		"title": "Spring Boot에서 ChatGPT 활용하기 #2: API로 GPT 응답 값 가져오기",
+		"link": "https://velog.io/@yunh03/Spring-Boot%EC%97%90%EC%84%9C-ChatGPT-%ED%99%9C%EC%9A%A9%ED%95%98%EA%B8%B0-2-API%EB%A1%9C-GPT-%EC%9D%91%EB%8B%B5-%EA%B0%92-%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0",
+		"date": "Feb 26, 2024",
+		"writer": "11기 전윤환"
+	},
 	"feed-5": {
 		"title": "도메인주도개발 시작하기 8장 애그리거트 트랜잭션관리",
 		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-8%EC%9E%A5-%EC%95%A0%EA%B7%B8%EB%A6%AC%EA%B1%B0%ED%8A%B8-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%EA%B4%80%EB%A6%AC",
@@ -11,7 +23,7 @@
 		"date": "Feb 21, 2024",
 		"writer": "11기 성창규"
 	},
-	"feed-44": {
+	"feed-45": {
 		"title": "Spring Boot에서 ChatGPT 활용하기 #1: API 연결 테스트",
 		"link": "https://velog.io/@yunh03/Spring-Boot%EC%97%90%EC%84%9C-ChatGPT-%ED%99%9C%EC%9A%A9%ED%95%98%EA%B8%B0-1-API-%EC%97%B0%EA%B2%B0-%ED%85%8C%EC%8A%A4%ED%8A%B8",
 		"date": "Feb 19, 2024",
@@ -137,7 +149,7 @@
 		"date": "Jan 13, 2024",
 		"writer": "11기 성창규"
 	},
-	"feed-58": {
+	"feed-60": {
 		"title": "[FastAPI] 문서화",
 		"link": "https://ub775.tistory.com/entry/FastAPI-%EB%AC%B8%EC%84%9C%ED%99%94",
 		"date": "Jan 13, 2024",
@@ -167,19 +179,19 @@
 		"date": "Jan 10, 2024",
 		"writer": "6기 정다혜"
 	},
-	"feed-45": {
+	"feed-46": {
 		"title": "Spring Security: There is no PasswordEncoder mapped for the id \"null\" 오류 해결",
 		"link": "https://velog.io/@yunh03/Spring-Security-There-is-no-PasswordEncoder-mapped-for-the-id-null-%EC%98%A4%EB%A5%98-%ED%95%B4%EA%B2%B0",
 		"date": "Jan 10, 2024",
 		"writer": "11기 전윤환"
 	},
-	"feed-59": {
+	"feed-61": {
 		"title": "[FastAPI] 매개변수 (parameter)",
 		"link": "https://ub775.tistory.com/entry/FastAPI-parameter",
 		"date": "Jan 10, 2024",
 		"writer": "11기 강명균"
 	},
-	"feed-60": {
+	"feed-62": {
 		"title": "[FastAPI] {\"Hello\": \"World\"}",
 		"link": "https://ub775.tistory.com/entry/FastAPI-Hello-World",
 		"date": "Jan 09, 2024",
@@ -221,7 +233,7 @@
 		"date": "Dec 27, 2023",
 		"writer": "11기 손민기"
 	},
-	"feed-46": {
+	"feed-47": {
 		"title": "nGrinder 성능 테스트 #2 - 'Performance Test' 설정 속성 알아보기",
 		"link": "https://velog.io/@yunh03/nGrinder-%EC%84%B1%EB%8A%A5-%ED%85%8C%EC%8A%A4%ED%8A%B8-2-Performance-Test-%EC%84%A4%EC%A0%95-%EC%86%8D%EC%84%B1-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0",
 		"date": "Dec 27, 2023",
@@ -233,7 +245,7 @@
 		"date": "Dec 26, 2023",
 		"writer": "11기 손민기"
 	},
-	"feed-47": {
+	"feed-48": {
 		"title": "nGrinder 성능 테스트 #1 - 시작하기",
 		"link": "https://velog.io/@yunh03/nGrinder-%EC%84%B1%EB%8A%A5-%ED%85%8C%EC%8A%A4%ED%8A%B8-1-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0",
 		"date": "Dec 24, 2023",
@@ -299,25 +311,25 @@
 		"date": "Nov 14, 2023",
 		"writer": "5기 김현우"
 	},
-	"feed-48": {
+	"feed-49": {
 		"title": "[AWS] RDS에서 외부 접속이 되지 않을 때 (Connection timed out)",
 		"link": "https://velog.io/@yunh03/AWS-RDS%EC%97%90%EC%84%9C-%EC%99%B8%EB%B6%80-%EC%A0%91%EC%86%8D%EC%9D%B4-%EB%90%98%EC%A7%80-%EC%95%8A%EC%9D%84-%EB%95%8C-Connection-timed-out",
 		"date": "Oct 16, 2023",
 		"writer": "11기 전윤환"
 	},
-	"feed-49": {
+	"feed-50": {
 		"title": "CI/CD란 무엇일까?",
 		"link": "https://velog.io/@yunh03/CICD%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C",
 		"date": "Oct 15, 2023",
 		"writer": "11기 전윤환"
 	},
-	"feed-50": {
+	"feed-51": {
 		"title": "Cookie, Session, Token(JWT) 정리하기",
 		"link": "https://velog.io/@yunh03/Cookie-Session-TokenJWT-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B3%A0-%EC%A0%95%EB%A6%AC%ED%95%98%EA%B8%B0",
 		"date": "Oct 13, 2023",
 		"writer": "11기 전윤환"
 	},
-	"feed-51": {
+	"feed-52": {
 		"title": "'Spring Boot + React' 카카오 소셜 로그인 도입하기 (2)",
 		"link": "https://velog.io/@yunh03/Spring-Boot-React-%EC%B9%B4%EC%B9%B4%EC%98%A4-%EC%86%8C%EC%85%9C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EB%8F%84%EC%9E%85%ED%95%98%EA%B8%B0-2",
 		"date": "Oct 10, 2023",
@@ -329,37 +341,37 @@
 		"date": "Sep 27, 2023",
 		"writer": "11기 손민기"
 	},
-	"feed-52": {
+	"feed-53": {
 		"title": "'Spring Boot + React' 카카오 소셜 로그인 도입하기 (1)",
 		"link": "https://velog.io/@yunh03/Spring-Boot-React-%EC%B9%B4%EC%B9%B4%EC%98%A4-%EC%86%8C%EC%85%9C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EB%8F%84%EC%9E%85%ED%95%98%EA%B8%B0-1",
 		"date": "Sep 27, 2023",
 		"writer": "11기 전윤환"
 	},
-	"feed-53": {
+	"feed-54": {
 		"title": "2023 멋쟁이사자처럼 대학 11기 해커톤 후기",
 		"link": "https://velog.io/@yunh03/2023-%EB%A9%8B%EC%9F%81%EC%9D%B4%EC%82%AC%EC%9E%90%EC%B2%98%EB%9F%BC-%EB%8C%80%ED%95%99-11%EA%B8%B0-%ED%95%B4%EC%BB%A4%ED%86%A4-%ED%9B%84%EA%B8%B0",
 		"date": "Aug 22, 2023",
 		"writer": "11기 전윤환"
 	},
-	"feed-54": {
+	"feed-55": {
 		"title": "macOS에서 Docker \"Permission denied\" 해결하기",
 		"link": "https://velog.io/@yunh03/macOS%EC%97%90%EC%84%9C-Docker-Permission-denied-%ED%95%B4%EA%B2%B0%ED%95%98%EA%B8%B0",
 		"date": "Aug 21, 2023",
 		"writer": "11기 전윤환"
 	},
-	"feed-55": {
+	"feed-56": {
 		"title": "리눅스에서 FTP 연결 없이 터미널로 서버에 파일 전송하기",
 		"link": "https://velog.io/@yunh03/%EB%A6%AC%EB%88%85%EC%8A%A4%EC%97%90%EC%84%9C-FTP-%EC%97%B0%EA%B2%B0-%EC%97%86%EC%9D%B4-%ED%84%B0%EB%AF%B8%EB%84%90%EB%A1%9C-%EC%84%9C%EB%B2%84%EC%97%90-%ED%8C%8C%EC%9D%BC-%EC%A0%84%EC%86%A1%ED%95%98%EA%B8%B0",
 		"date": "Aug 04, 2023",
 		"writer": "11기 전윤환"
 	},
-	"feed-56": {
+	"feed-57": {
 		"title": "Spring Boot와 React간 개발 환경 연동",
 		"link": "https://velog.io/@yunh03/Spring-Boot%EC%99%80-React%EA%B0%84-%EA%B0%9C%EB%B0%9C-%ED%99%98%EA%B2%BD-%EC%97%B0%EB%8F%99",
 		"date": "Jul 08, 2023",
 		"writer": "11기 전윤환"
 	},
-	"feed-57": {
+	"feed-58": {
 		"title": "Laravel Routing - 그룹화",
 		"link": "https://velog.io/@yunh03/Laravel-Routing-%EA%B7%B8%EB%A3%B9%ED%99%94",
 		"date": "Feb 10, 2023",

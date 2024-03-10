@@ -1,4 +1,16 @@
 {
+	"feed-15": {
+		"title": "[DDD] chapter 11",
+		"link": "https://apape1225.tistory.com/160",
+		"date": "Mar 09, 2024",
+		"writer": "11기 성창규"
+	},
+	"feed-16": {
+		"title": "[DDD] chapter 10",
+		"link": "https://apape1225.tistory.com/159",
+		"date": "Mar 09, 2024",
+		"writer": "11기 성창규"
+	},
 	"feed-44": {
 		"title": "Spring, 테스트 코드는 왜 작성할까?",
 		"link": "https://velog.io/@yunh03/Spring-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BD%94%EB%93%9C%EB%8A%94-%EC%99%9C-%EC%9E%91%EC%84%B1%ED%95%A0%EA%B9%8C",
@@ -29,7 +41,7 @@
 		"date": "Feb 28, 2024",
 		"writer": "11기 김민우"
 	},
-	"feed-15": {
+	"feed-17": {
 		"title": "[DDD] chapter 9",
 		"link": "https://apape1225.tistory.com/158",
 		"date": "Feb 27, 2024",
@@ -53,7 +65,7 @@
 		"date": "Feb 22, 2024",
 		"writer": "11기 김민우"
 	},
-	"feed-16": {
+	"feed-18": {
 		"title": "[DDD] chapter 8",
 		"link": "https://apape1225.tistory.com/157",
 		"date": "Feb 21, 2024",
@@ -65,7 +77,7 @@
 		"date": "Feb 19, 2024",
 		"writer": "11기 전윤환"
 	},
-	"feed-17": {
+	"feed-19": {
 		"title": "[DDD] chapter 7",
 		"link": "https://apape1225.tistory.com/156",
 		"date": "Feb 16, 2024",
@@ -83,7 +95,7 @@
 		"date": "Feb 11, 2024",
 		"writer": "11기 김민우"
 	},
-	"feed-18": {
+	"feed-20": {
 		"title": "[DDD] chapter 6",
 		"link": "https://apape1225.tistory.com/155",
 		"date": "Feb 10, 2024",
@@ -95,7 +107,7 @@
 		"date": "Feb 09, 2024",
 		"writer": "11기 김민우"
 	},
-	"feed-19": {
+	"feed-21": {
 		"title": "[DDD] chapter 5",
 		"link": "https://apape1225.tistory.com/154",
 		"date": "Feb 07, 2024",
@@ -107,7 +119,7 @@
 		"date": "Feb 04, 2024",
 		"writer": "11기 김민우"
 	},
-	"feed-20": {
+	"feed-22": {
 		"title": "[DDD] chapter 4",
 		"link": "https://apape1225.tistory.com/153",
 		"date": "Feb 03, 2024",
@@ -161,7 +173,7 @@
 		"date": "Jan 18, 2024",
 		"writer": "11기 김민우"
 	},
-	"feed-21": {
+	"feed-23": {
 		"title": "[DDD] chapter 3",
 		"link": "https://apape1225.tistory.com/152",
 		"date": "Jan 18, 2024",
@@ -173,15 +185,9 @@
 		"date": "Jan 16, 2024",
 		"writer": "11기 손민기"
 	},
-	"feed-22": {
+	"feed-24": {
 		"title": "[DDD] chapter2",
 		"link": "https://apape1225.tistory.com/151",
-		"date": "Jan 13, 2024",
-		"writer": "11기 성창규"
-	},
-	"feed-23": {
-		"title": "[DDD] chapter 1",
-		"link": "https://apape1225.tistory.com/150",
 		"date": "Jan 13, 2024",
 		"writer": "11기 성창규"
 	},
@@ -190,12 +196,6 @@
 		"link": "https://ub775.tistory.com/entry/FastAPI-%EB%AC%B8%EC%84%9C%ED%99%94",
 		"date": "Jan 13, 2024",
 		"writer": "11기 강명균"
-	},
-	"feed-24": {
-		"title": "[FLOWBIT] 비트코인 자동거래 시스템에서 예측 가격 제공 서비스로 전환! ✨",
-		"link": "https://apape1225.tistory.com/149",
-		"date": "Jan 12, 2024",
-		"writer": "11기 성창규"
 	},
 	"feed-33": {
 		"title": "[C++] 시간 복잡도 표기법",

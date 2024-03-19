@@ -17,8 +17,8 @@
 - [그 동안 남의 시선에서 벗어나지 못했던 것 같다](https://klmhyeonwooo.tistory.com/65)<br>
 
 ### 최근 포스팅
+- [Vue 공식 문서 훑어보기 - 감시자 ·  템플릿 참조 · 조건부 및 목록 렌더링](https://klmhyeonwooo.tistory.com/117)<br>
+- [Vue 공식 문서 훑어보기 - 라이프사이클 · 이벤트 핸들링 · 바인딩(폼, 클래스, 스타일)](https://klmhyeonwooo.tistory.com/116)<br>
+- [Vue 공식 문서 훑어보기 - 템플릿 문법 · 반응형 기초 · 계산되어진 속성](https://klmhyeonwooo.tistory.com/115)<br>
 - [Vite 환경에서 emotion의 pragma 반복을 줄여보기](https://klmhyeonwooo.tistory.com/114)<br>
 - [v-model의 특징 및 문제점, 그리고 활용 방식](https://klmhyeonwooo.tistory.com/113)<br>
-- [Vue3로 업데이트 되면서 어떤 부분이 변화했을까?](https://klmhyeonwooo.tistory.com/112)<br>
-- [[rollup.js] rollup -c 실행 시, Cannot use import statement outside a module](https://klmhyeonwooo.tistory.com/109)<br>
-- [PWA랑 Git Action을 첨가한 멋쟁이사자처럼 피드 개발기](https://klmhyeonwooo.tistory.com/108)<br>

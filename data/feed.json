@@ -1,11 +1,29 @@
 {
+	"feed-64": {
+		"title": "[SpringBoot] SpringBoot 3에서 Swagger-ui 적용하기 (Maven)",
+		"link": "https://ub775.tistory.com/entry/SpringBoot-SpringBoot-3%EC%97%90%EC%84%9C-Swagger-ui-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0-Maven",
+		"date": "Mar 27, 2024",
+		"writer": "11기 강명균"
+	},
+	"feed-5": {
+		"title": "면접을 위한 CS 전공지식 노트 5장",
+		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%A9%B4%EC%A0%91%EC%9D%84-%EC%9C%84%ED%95%9C-CS-%EC%A0%84%EA%B3%B5%EC%A7%80%EC%8B%9D-%EB%85%B8%ED%8A%B8-5%EC%9E%A5",
+		"date": "Mar 26, 2024",
+		"writer": "11기 김민우"
+	},
 	"feed-0": {
 		"title": "nth-child와 nth-of-type의 차이",
 		"link": "https://klmhyeonwooo.tistory.com/119",
 		"date": "Mar 25, 2024",
 		"writer": "5기 김현우"
 	},
-	"feed-5": {
+	"feed-6": {
+		"title": "면접을 위한 CS 전공지식 노트 2장",
+		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%A9%B4%EC%A0%91%EC%9D%84-%EC%9C%84%ED%95%9C-CS-%EC%A0%84%EA%B3%B5%EC%A7%80%EC%8B%9D-%EB%85%B8%ED%8A%B8-2%EC%9E%A5",
+		"date": "Mar 25, 2024",
+		"writer": "11기 김민우"
+	},
+	"feed-7": {
 		"title": "면접을 위한 CS 전공지식 노트 1장",
 		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%A9%B4%EC%A0%91%EC%9D%84-%EC%9C%84%ED%95%9C-CS-%EC%A0%84%EA%B3%B5%EC%A7%80%EC%8B%9D-%EB%85%B8%ED%8A%B8-1%EC%9E%A5",
 		"date": "Mar 24, 2024",
@@ -59,7 +77,7 @@
 		"date": "Mar 19, 2024",
 		"writer": "11기 전윤환"
 	},
-	"feed-6": {
+	"feed-8": {
 		"title": "mysql index를 타지않는 경우",
 		"link": "https://minwoo-it-factory.tistory.com/entry/mysql-index%EB%A5%BC-%ED%83%80%EC%A7%80%EC%95%8A%EB%8A%94-%EA%B2%BD%EC%9A%B0",
 		"date": "Mar 17, 2024",
@@ -71,8 +89,8 @@
 		"date": "Mar 16, 2024",
 		"writer": "11기 성창규"
 	},
-	"feed-64": {
-		"title": "\"설명해 보세요!\"",
+	"feed-65": {
+		"title": "[생각] \"설명해 보세요!\"",
 		"link": "https://ub775.tistory.com/entry/%EC%84%A4%EB%AA%85%ED%95%B4%EB%B3%B4%EC%84%B8%EC%9A%94",
 		"date": "Mar 16, 2024",
 		"writer": "11기 강명균"
@@ -83,13 +101,13 @@
 		"date": "Mar 11, 2024",
 		"writer": "11기 전윤환"
 	},
-	"feed-7": {
+	"feed-9": {
 		"title": "도메인주도개발 시작하기 11장 CQRS",
 		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-10%EC%9E%A5-CQRS",
 		"date": "Mar 10, 2024",
 		"writer": "11기 김민우"
 	},
-	"feed-8": {
+	"feed-10": {
 		"title": "도메인주도개발 시작하기 10장 이벤트",
 		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-10%EC%9E%A5-%EC%9D%B4%EB%B2%A4%ED%8A%B8",
 		"date": "Mar 10, 2024",
@@ -113,7 +131,7 @@
 		"date": "Mar 07, 2024",
 		"writer": "11기 전윤환"
 	},
-	"feed-9": {
+	"feed-11": {
 		"title": "도메인주도개발 시작하기 9장 바운디드컨텍스트",
 		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-8%EC%9E%A5",
 		"date": "Feb 28, 2024",
@@ -125,7 +143,7 @@
 		"date": "Feb 27, 2024",
 		"writer": "11기 성창규"
 	},
-	"feed-65": {
+	"feed-66": {
 		"title": "[Git/Github] .gitignore에 application.properties 추가하기",
 		"link": "https://ub775.tistory.com/entry/Git-gitignore%EC%97%90-applicationproperties-%EC%B6%94%EA%B0%80%ED%95%98%EA%B8%B0",
 		"date": "Feb 27, 2024",
@@ -137,7 +155,7 @@
 		"date": "Feb 26, 2024",
 		"writer": "11기 전윤환"
 	},
-	"feed-10": {
+	"feed-12": {
 		"title": "도메인주도개발 시작하기 8장 애그리거트 트랜잭션관리",
 		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-8%EC%9E%A5-%EC%95%A0%EA%B7%B8%EB%A6%AC%EA%B1%B0%ED%8A%B8-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%EA%B4%80%EB%A6%AC",
 		"date": "Feb 22, 2024",
@@ -161,13 +179,13 @@
 		"date": "Feb 16, 2024",
 		"writer": "11기 성창규"
 	},
-	"feed-11": {
+	"feed-13": {
 		"title": "Querydsl 방언 사용하기",
 		"link": "https://minwoo-it-factory.tistory.com/entry/Querydsl-%EB%B0%A9%EC%96%B8-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0",
 		"date": "Feb 12, 2024",
 		"writer": "11기 김민우"
 	},
-	"feed-12": {
+	"feed-14": {
 		"title": "Redis - Pipelining",
 		"link": "https://minwoo-it-factory.tistory.com/entry/Redis-Pipelining",
 		"date": "Feb 11, 2024",
@@ -179,23 +197,11 @@
 		"date": "Feb 10, 2024",
 		"writer": "11기 성창규"
 	},
-	"feed-13": {
-		"title": "mysql like함수 조회성능개선",
-		"link": "https://minwoo-it-factory.tistory.com/entry/mysql-like%ED%95%A8%EC%88%98-%EC%A1%B0%ED%9A%8C%EC%84%B1%EB%8A%A5%EA%B0%9C%EC%84%A0",
-		"date": "Feb 09, 2024",
-		"writer": "11기 김민우"
-	},
 	"feed-23": {
 		"title": "[DDD] chapter 5",
 		"link": "https://apape1225.tistory.com/154",
 		"date": "Feb 07, 2024",
 		"writer": "11기 성창규"
-	},
-	"feed-14": {
-		"title": "도메인주도설계 7장",
-		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EC%84%A4%EA%B3%84-7%EC%9E%A5",
-		"date": "Feb 04, 2024",
-		"writer": "11기 김민우"
 	},
 	"feed-24": {
 		"title": "[DDD] chapter 4",
@@ -233,7 +239,7 @@
 		"date": "Jan 16, 2024",
 		"writer": "11기 손민기"
 	},
-	"feed-66": {
+	"feed-67": {
 		"title": "[FastAPI] 문서화",
 		"link": "https://ub775.tistory.com/entry/FastAPI-%EB%AC%B8%EC%84%9C%ED%99%94",
 		"date": "Jan 13, 2024",
@@ -263,13 +269,13 @@
 		"date": "Jan 10, 2024",
 		"writer": "11기 전윤환"
 	},
-	"feed-67": {
+	"feed-68": {
 		"title": "[FastAPI] 매개변수 (parameter)",
 		"link": "https://ub775.tistory.com/entry/FastAPI-parameter",
 		"date": "Jan 10, 2024",
 		"writer": "11기 강명균"
 	},
-	"feed-68": {
+	"feed-69": {
 		"title": "[FastAPI] {\"Hello\": \"World\"}",
 		"link": "https://ub775.tistory.com/entry/FastAPI-Hello-World",
 		"date": "Jan 09, 2024",

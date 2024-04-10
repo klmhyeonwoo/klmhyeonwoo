@@ -222,7 +222,7 @@
 		"writer": "11기 성창규"
 	},
 	"feed-33": {
-		"title": "ERROR 2002 (HY000): Can't connect to local server through socket '/tmp/mysql.sock'",
+		"title": "[포트충돌해결] SpringBoot mariadb mysql 연동",
 		"link": "https://velog.io/@handmk/ERROR-2002-HY000-Cant-connect-to-local-server-through-socket-tmpmysql.sock-2",
 		"date": "Jan 29, 2024",
 		"writer": "11기 손민기"

@@ -78,19 +78,19 @@
 		"writer": "11기 전윤환"
 	},
 	"feed-2": {
-		"title": "Vue 공식 문서 훑어보기 - 감시자 &amp;middot; 템플릿 참조 &amp;middot; 조건부 및 목록 렌더링",
+		"title": "Vue 공식 문서 훑어보기 - 감시자 &middot;  템플릿 참조 &middot; 조건부 및 목록 렌더링",
 		"link": "https://klmhyeonwooo.tistory.com/117",
 		"date": "Mar 19, 2024",
 		"writer": "5기 김현우"
 	},
 	"feed-3": {
-		"title": "Vue 공식 문서 훑어보기 - 라이프사이클 &amp;middot; 이벤트 핸들링 &amp;middot; 바인딩(폼, 클래스, 스타일)",
+		"title": "Vue 공식 문서 훑어보기 - 라이프사이클 &middot; 이벤트 핸들링 &middot; 바인딩(폼, 클래스, 스타일)",
 		"link": "https://klmhyeonwooo.tistory.com/116",
 		"date": "Mar 19, 2024",
 		"writer": "5기 김현우"
 	},
 	"feed-4": {
-		"title": "Vue 공식 문서 훑어보기 - 템플릿 문법 &amp;middot; 반응형 기초 &amp;middot; 계산되어진 속성",
+		"title": "Vue 공식 문서 훑어보기 - 템플릿 문법 &middot; 반응형 기초 &middot; 계산되어진 속성",
 		"link": "https://klmhyeonwooo.tistory.com/115",
 		"date": "Mar 19, 2024",
 		"writer": "5기 김현우"
@@ -114,7 +114,7 @@
 		"writer": "11기 성창규"
 	},
 	"feed-67": {
-		"title": "[사고방식] &amp;quot;설명해 보세요!&amp;quot;",
+		"title": "[사고방식] &quot;설명해 보세요!&quot;",
 		"link": "https://ub775.tistory.com/entry/%EC%84%A4%EB%AA%85%ED%95%B4%EB%B3%B4%EC%84%B8%EC%9A%94",
 		"date": "Mar 16, 2024",
 		"writer": "11기 강명균"
@@ -288,7 +288,7 @@
 		"writer": "11기 강명균"
 	},
 	"feed-71": {
-		"title": "[FastAPI] {&amp;quot;Hello&amp;quot;: &amp;quot;World&amp;quot;}",
+		"title": "[FastAPI] {&quot;Hello&quot;: &quot;World&quot;}",
 		"link": "https://ub775.tistory.com/entry/FastAPI-Hello-World",
 		"date": "Jan 09, 2024",
 		"writer": "11기 강명균"

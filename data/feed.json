@@ -1,11 +1,29 @@
 {
 	"feed-5": {
-		"title": "@Mock vs @MockBean vs@InjectMocks",
-		"link": "http://minwoo-it-factory.tistory.com/entry/Mock-vs-MockBean-vsInjectMocks",
-		"date": "Apr 26, 2024",
+		"title": "점차 쌓이는 로그들 어떻게 처리해야할까 ?",
+		"link": "https://minwoo-it-factory.tistory.com/entry/%EC%A0%90%EC%B0%A8-%EC%8C%93%EC%9D%B4%EB%8A%94-%EB%A1%9C%EA%B7%B8%EB%93%A4-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%B2%98%EB%A6%AC%ED%95%B4%EC%95%BC%ED%95%A0%EA%B9%8C",
+		"date": "Apr 29, 2024",
 		"writer": "11기 김민우"
 	},
 	"feed-30": {
+		"title": "[CS] JWT란?",
+		"link": "https://velog.io/@handmk/CS-JWT%EB%9E%80",
+		"date": "Apr 29, 2024",
+		"writer": "11기 손민기"
+	},
+	"feed-6": {
+		"title": "Nginx Blue green 무중단 배포",
+		"link": "https://minwoo-it-factory.tistory.com/entry/Jenkins-Nginx-Blue-green-%EB%AC%B4%EC%A4%91%EB%8B%A8-%EB%B0%B0%ED%8F%AC",
+		"date": "Apr 27, 2024",
+		"writer": "11기 김민우"
+	},
+	"feed-7": {
+		"title": "@Mock vs @MockBean vs@InjectMocks",
+		"link": "https://minwoo-it-factory.tistory.com/entry/Mock-vs-MockBean-vsInjectMocks",
+		"date": "Apr 26, 2024",
+		"writer": "11기 김민우"
+	},
+	"feed-31": {
 		"title": "[c++] 1874번 스택수열",
 		"link": "https://velog.io/@handmk/c-1874%EB%B2%88-%EC%8A%A4%ED%83%9D%EC%88%98%EC%97%B4",
 		"date": "Apr 02, 2024",
@@ -17,7 +35,7 @@
 		"date": "Mar 31, 2024",
 		"writer": "11기 성창규"
 	},
-	"feed-31": {
+	"feed-32": {
 		"title": "[c++] 1253번 좋다",
 		"link": "https://velog.io/@handmk/c-1253%EB%B2%88-%EC%A2%8B%EB%8B%A4",
 		"date": "Mar 29, 2024",
@@ -29,15 +47,15 @@
 		"date": "Mar 27, 2024",
 		"writer": "11기 강명균"
 	},
-	"feed-6": {
+	"feed-8": {
 		"title": "면접을 위한 CS 전공지식 노트 4장",
-		"link": "http://minwoo-it-factory.tistory.com/entry/%EB%A9%B4%EC%A0%91%EC%9D%84-%EC%9C%84%ED%95%9C-CS-%EC%A0%84%EA%B3%B5%EC%A7%80%EC%8B%9D-%EB%85%B8%ED%8A%B8-4%EC%9E%A5",
+		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%A9%B4%EC%A0%91%EC%9D%84-%EC%9C%84%ED%95%9C-CS-%EC%A0%84%EA%B3%B5%EC%A7%80%EC%8B%9D-%EB%85%B8%ED%8A%B8-4%EC%9E%A5",
 		"date": "Mar 26, 2024",
 		"writer": "11기 김민우"
 	},
-	"feed-7": {
+	"feed-9": {
 		"title": "면접을 위한 CS 전공지식 노트 5장",
-		"link": "http://minwoo-it-factory.tistory.com/entry/%EB%A9%B4%EC%A0%91%EC%9D%84-%EC%9C%84%ED%95%9C-CS-%EC%A0%84%EA%B3%B5%EC%A7%80%EC%8B%9D-%EB%85%B8%ED%8A%B8-5%EC%9E%A5",
+		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%A9%B4%EC%A0%91%EC%9D%84-%EC%9C%84%ED%95%9C-CS-%EC%A0%84%EA%B3%B5%EC%A7%80%EC%8B%9D-%EB%85%B8%ED%8A%B8-5%EC%9E%A5",
 		"date": "Mar 26, 2024",
 		"writer": "11기 김민우"
 	},
@@ -47,15 +65,15 @@
 		"date": "Mar 25, 2024",
 		"writer": "5기 김현우"
 	},
-	"feed-8": {
+	"feed-10": {
 		"title": "면접을 위한 CS 전공지식 노트 2장",
-		"link": "http://minwoo-it-factory.tistory.com/entry/%EB%A9%B4%EC%A0%91%EC%9D%84-%EC%9C%84%ED%95%9C-CS-%EC%A0%84%EA%B3%B5%EC%A7%80%EC%8B%9D-%EB%85%B8%ED%8A%B8-2%EC%9E%A5",
+		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%A9%B4%EC%A0%91%EC%9D%84-%EC%9C%84%ED%95%9C-CS-%EC%A0%84%EA%B3%B5%EC%A7%80%EC%8B%9D-%EB%85%B8%ED%8A%B8-2%EC%9E%A5",
 		"date": "Mar 25, 2024",
 		"writer": "11기 김민우"
 	},
-	"feed-9": {
+	"feed-11": {
 		"title": "면접을 위한 CS 전공지식 노트 1장",
-		"link": "http://minwoo-it-factory.tistory.com/entry/%EB%A9%B4%EC%A0%91%EC%9D%84-%EC%9C%84%ED%95%9C-CS-%EC%A0%84%EA%B3%B5%EC%A7%80%EC%8B%9D-%EB%85%B8%ED%8A%B8-1%EC%9E%A5",
+		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%A9%B4%EC%A0%91%EC%9D%84-%EC%9C%84%ED%95%9C-CS-%EC%A0%84%EA%B3%B5%EC%A7%80%EC%8B%9D-%EB%85%B8%ED%8A%B8-1%EC%9E%A5",
 		"date": "Mar 24, 2024",
 		"writer": "11기 김민우"
 	},
@@ -65,7 +83,7 @@
 		"date": "Mar 24, 2024",
 		"writer": "11기 성창규"
 	},
-	"feed-32": {
+	"feed-33": {
 		"title": "[c++] 1940번 주몽",
 		"link": "https://velog.io/@handmk/c-1940%EB%B2%88-%EC%A3%BC%EB%AA%BD",
 		"date": "Mar 24, 2024",
@@ -107,9 +125,9 @@
 		"date": "Mar 19, 2024",
 		"writer": "11기 전윤환"
 	},
-	"feed-10": {
+	"feed-12": {
 		"title": "mysql index를 타지않는 경우",
-		"link": "http://minwoo-it-factory.tistory.com/entry/mysql-index%EB%A5%BC-%ED%83%80%EC%A7%80%EC%95%8A%EB%8A%94-%EA%B2%BD%EC%9A%B0",
+		"link": "https://minwoo-it-factory.tistory.com/entry/mysql-index%EB%A5%BC-%ED%83%80%EC%A7%80%EC%95%8A%EB%8A%94-%EA%B2%BD%EC%9A%B0",
 		"date": "Mar 17, 2024",
 		"writer": "11기 김민우"
 	},
@@ -131,15 +149,15 @@
 		"date": "Mar 11, 2024",
 		"writer": "11기 전윤환"
 	},
-	"feed-11": {
+	"feed-13": {
 		"title": "도메인주도개발 시작하기 11장 CQRS",
-		"link": "http://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-10%EC%9E%A5-CQRS",
+		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-10%EC%9E%A5-CQRS",
 		"date": "Mar 10, 2024",
 		"writer": "11기 김민우"
 	},
-	"feed-12": {
+	"feed-14": {
 		"title": "도메인주도개발 시작하기 10장 이벤트",
-		"link": "http://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-10%EC%9E%A5-%EC%9D%B4%EB%B2%A4%ED%8A%B8",
+		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-10%EC%9E%A5-%EC%9D%B4%EB%B2%A4%ED%8A%B8",
 		"date": "Mar 10, 2024",
 		"writer": "11기 김민우"
 	},
@@ -161,12 +179,6 @@
 		"date": "Mar 07, 2024",
 		"writer": "11기 전윤환"
 	},
-	"feed-13": {
-		"title": "도메인주도개발 시작하기 9장 바운디드컨텍스트",
-		"link": "http://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-8%EC%9E%A5",
-		"date": "Feb 28, 2024",
-		"writer": "11기 김민우"
-	},
 	"feed-20": {
 		"title": "[DDD] chapter 9",
 		"link": "https://apape1225.tistory.com/158",
@@ -184,12 +196,6 @@
 		"link": "https://velog.io/@yunh03/Spring-Boot%EC%97%90%EC%84%9C-ChatGPT-%ED%99%9C%EC%9A%A9%ED%95%98%EA%B8%B0-2-API%EB%A1%9C-GPT-%EC%9D%91%EB%8B%B5-%EA%B0%92-%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0",
 		"date": "Feb 26, 2024",
 		"writer": "11기 전윤환"
-	},
-	"feed-14": {
-		"title": "도메인주도개발 시작하기 8장 애그리거트 트랜잭션관리",
-		"link": "http://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-8%EC%9E%A5-%EC%95%A0%EA%B7%B8%EB%A6%AC%EA%B1%B0%ED%8A%B8-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%EA%B4%80%EB%A6%AC",
-		"date": "Feb 22, 2024",
-		"writer": "11기 김민우"
 	},
 	"feed-21": {
 		"title": "[DDD] chapter 8",
@@ -221,7 +227,7 @@
 		"date": "Feb 07, 2024",
 		"writer": "11기 성창규"
 	},
-	"feed-33": {
+	"feed-34": {
 		"title": "[포트충돌해결] SpringBoot mariadb mysql 연동",
 		"link": "https://velog.io/@handmk/ERROR-2002-HY000-Cant-connect-to-local-server-through-socket-tmpmysql.sock-2",
 		"date": "Jan 29, 2024",
@@ -239,13 +245,13 @@
 		"date": "Jan 20, 2024",
 		"writer": "6기 정다혜"
 	},
-	"feed-34": {
+	"feed-35": {
 		"title": "[c++] 11660번 구간 합 구하기 2",
 		"link": "https://velog.io/@handmk/c-%EA%B5%AC%EA%B0%84-%ED%95%A9-%EA%B5%AC%ED%95%98%EA%B8%B0-2",
 		"date": "Jan 19, 2024",
 		"writer": "11기 손민기"
 	},
-	"feed-35": {
+	"feed-36": {
 		"title": "[Linux/Ubuntu] 가상 머신으로 실무 환경 구축(1)",
 		"link": "https://velog.io/@handmk/LinuxUbuntu-%EA%B0%80%EC%83%81-%EB%A8%B8%EC%8B%A0%EC%9C%BC%EB%A1%9C-%EC%8B%A4%EB%AC%B4-%ED%99%98%EA%B2%BD-%EA%B5%AC%EC%B6%951",
 		"date": "Jan 16, 2024",
@@ -257,7 +263,7 @@
 		"date": "Jan 13, 2024",
 		"writer": "11기 강명균"
 	},
-	"feed-36": {
+	"feed-37": {
 		"title": "[C++] 시간 복잡도 표기법",
 		"link": "https://velog.io/@handmk/C-%EC%8B%9C%EA%B0%84-%EB%B3%B5%EC%9E%A1%EB%8F%84-%ED%91%9C%EA%B8%B0%EB%B2%95",
 		"date": "Jan 12, 2024",
@@ -299,19 +305,19 @@
 		"date": "Jan 06, 2024",
 		"writer": "6기 정다혜"
 	},
-	"feed-37": {
+	"feed-38": {
 		"title": "[SpringBoot] IoC, DI, AOP",
 		"link": "https://velog.io/@handmk/SpringBoot-IoC-DI-AOP",
 		"date": "Jan 06, 2024",
 		"writer": "11기 손민기"
 	},
-	"feed-38": {
+	"feed-39": {
 		"title": "[c++] 1181번 단어 정렬",
 		"link": "https://velog.io/@handmk/c-1181%EB%B2%88-%EB%8B%A8%EC%96%B4-%EC%A0%95%EB%A0%AC",
 		"date": "Dec 28, 2023",
 		"writer": "11기 손민기"
 	},
-	"feed-39": {
+	"feed-40": {
 		"title": "[SpringBoot] Web Socket을 이용한 실시간 주식 데이터",
 		"link": "https://velog.io/@handmk/SpringBoot-Web-Socket%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EC%8B%A4%EC%8B%9C%EA%B0%84-%EC%A3%BC%EC%8B%9D-%EB%8D%B0%EC%9D%B4%ED%84%B0",
 		"date": "Dec 27, 2023",
@@ -323,7 +329,7 @@
 		"date": "Dec 27, 2023",
 		"writer": "11기 전윤환"
 	},
-	"feed-40": {
+	"feed-41": {
 		"title": "[c++] 2609번 최대공약수와 최소공배수",
 		"link": "https://velog.io/@handmk/c-2609%EB%B2%88-%EC%B5%9C%EB%8C%80%EA%B3%B5%EC%95%BD%EC%88%98%EC%99%80-%EC%B5%9C%EC%86%8C%EA%B3%B5%EB%B0%B0%EC%88%98",
 		"date": "Dec 26, 2023",
@@ -335,32 +341,32 @@
 		"date": "Dec 24, 2023",
 		"writer": "11기 전윤환"
 	},
-	"feed-41": {
+	"feed-42": {
 		"title": "[c++] 1546번 평균",
 		"link": "https://velog.io/@handmk/c-1546%EB%B2%88-%ED%8F%89%EA%B7%A0",
 		"date": "Dec 22, 2023",
 		"writer": "11기 손민기"
 	},
-	"feed-42": {
+	"feed-43": {
 		"title": "[c++] 1259번 팰린드롬수",
 		"link": "https://velog.io/@handmk/c-1259%EB%B2%88-%ED%8C%B0%EB%A6%B0%EB%93%9C%EB%A1%AC%EC%88%98",
 		"date": "Dec 21, 2023",
 		"writer": "11기 손민기"
 	},
-	"feed-43": {
+	"feed-44": {
 		"title": "[c++] 1978번 소수찾기",
 		"link": "https://velog.io/@handmk/c-1978%EB%B2%88-%EC%86%8C%EC%88%98%EC%B0%BE%EA%B8%B0",
 		"date": "Dec 20, 2023",
 		"writer": "11기 손민기"
 	},
-	"feed-44": {
+	"feed-45": {
 		"title": "[c++] 2798번 블랙잭",
 		"link": "https://velog.io/@handmk/c-2798%EB%B2%88-%EB%B8%94%EB%9E%99%EC%9E%AD-qoge3jbx",
 		"date": "Dec 20, 2023",
 		"writer": "11기 손민기"
 	},
-	"feed-45": {
-		"title": "SpringBoot  메일인증 회원가입 구현(1)",
+	"feed-46": {
+		"title": "[SpringBoot]  메일인증 회원가입 구현",
 		"link": "https://velog.io/@handmk/Springboot-%EB%A9%94%EC%9D%BC%EC%9D%B8%EC%A6%9D-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85-%EA%B5%AC%ED%98%84",
 		"date": "Nov 27, 2023",
 		"writer": "11기 손민기"
@@ -388,12 +394,6 @@
 		"link": "https://velog.io/@yunh03/Spring-Boot-React-%EC%B9%B4%EC%B9%B4%EC%98%A4-%EC%86%8C%EC%85%9C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EB%8F%84%EC%9E%85%ED%95%98%EA%B8%B0-2",
 		"date": "Oct 10, 2023",
 		"writer": "11기 전윤환"
-	},
-	"feed-46": {
-		"title": "MariaDB - 우분투 서버에 설치",
-		"link": "https://velog.io/@handmk/MariaDB-%EC%9A%B0%EB%B6%84%ED%88%AC-%EC%84%9C%EB%B2%84%EC%97%90-%EC%84%A4%EC%B9%98",
-		"date": "Sep 27, 2023",
-		"writer": "11기 손민기"
 	},
 	"feed-60": {
 		"title": "'Spring Boot + React' 카카오 소셜 로그인 도입하기 (1)",

@@ -17,6 +17,12 @@
 		"date": "Apr 28, 2024",
 		"writer": "11기 성창규"
 	},
+	"feed-6": {
+		"title": "Nginx Blue green 무중단 배포",
+		"link": "https://minwoo-it-factory.tistory.com/entry/Jenkins-Nginx-Blue-green-%EB%AC%B4%EC%A4%91%EB%8B%A8-%EB%B0%B0%ED%8F%AC",
+		"date": "Apr 27, 2024",
+		"writer": "11기 김민우"
+	},
 	"feed-31": {
 		"title": "[c++] 1874번 스택수열",
 		"link": "https://velog.io/@handmk/c-1874%EB%B2%88-%EC%8A%A4%ED%83%9D%EC%88%98%EC%97%B4",
@@ -41,13 +47,13 @@
 		"date": "Mar 27, 2024",
 		"writer": "11기 강명균"
 	},
-	"feed-6": {
+	"feed-7": {
 		"title": "면접을 위한 CS 전공지식 노트 4장",
 		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%A9%B4%EC%A0%91%EC%9D%84-%EC%9C%84%ED%95%9C-CS-%EC%A0%84%EA%B3%B5%EC%A7%80%EC%8B%9D-%EB%85%B8%ED%8A%B8-4%EC%9E%A5",
 		"date": "Mar 26, 2024",
 		"writer": "11기 김민우"
 	},
-	"feed-7": {
+	"feed-8": {
 		"title": "면접을 위한 CS 전공지식 노트 5장",
 		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%A9%B4%EC%A0%91%EC%9D%84-%EC%9C%84%ED%95%9C-CS-%EC%A0%84%EA%B3%B5%EC%A7%80%EC%8B%9D-%EB%85%B8%ED%8A%B8-5%EC%9E%A5",
 		"date": "Mar 26, 2024",
@@ -59,13 +65,13 @@
 		"date": "Mar 25, 2024",
 		"writer": "5기 김현우"
 	},
-	"feed-8": {
+	"feed-9": {
 		"title": "면접을 위한 CS 전공지식 노트 2장",
 		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%A9%B4%EC%A0%91%EC%9D%84-%EC%9C%84%ED%95%9C-CS-%EC%A0%84%EA%B3%B5%EC%A7%80%EC%8B%9D-%EB%85%B8%ED%8A%B8-2%EC%9E%A5",
 		"date": "Mar 25, 2024",
 		"writer": "11기 김민우"
 	},
-	"feed-9": {
+	"feed-10": {
 		"title": "면접을 위한 CS 전공지식 노트 1장",
 		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%A9%B4%EC%A0%91%EC%9D%84-%EC%9C%84%ED%95%9C-CS-%EC%A0%84%EA%B3%B5%EC%A7%80%EC%8B%9D-%EB%85%B8%ED%8A%B8-1%EC%9E%A5",
 		"date": "Mar 24, 2024",
@@ -119,7 +125,7 @@
 		"date": "Mar 19, 2024",
 		"writer": "11기 전윤환"
 	},
-	"feed-10": {
+	"feed-11": {
 		"title": "mysql index를 타지않는 경우",
 		"link": "https://minwoo-it-factory.tistory.com/entry/mysql-index%EB%A5%BC-%ED%83%80%EC%A7%80%EC%95%8A%EB%8A%94-%EA%B2%BD%EC%9A%B0",
 		"date": "Mar 17, 2024",
@@ -143,13 +149,13 @@
 		"date": "Mar 11, 2024",
 		"writer": "11기 전윤환"
 	},
-	"feed-11": {
+	"feed-12": {
 		"title": "도메인주도개발 시작하기 11장 CQRS",
 		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-10%EC%9E%A5-CQRS",
 		"date": "Mar 10, 2024",
 		"writer": "11기 김민우"
 	},
-	"feed-12": {
+	"feed-13": {
 		"title": "도메인주도개발 시작하기 10장 이벤트",
 		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-10%EC%9E%A5-%EC%9D%B4%EB%B2%A4%ED%8A%B8",
 		"date": "Mar 10, 2024",
@@ -173,7 +179,7 @@
 		"date": "Mar 07, 2024",
 		"writer": "11기 전윤환"
 	},
-	"feed-13": {
+	"feed-14": {
 		"title": "도메인주도개발 시작하기 9장 바운디드컨텍스트",
 		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-8%EC%9E%A5",
 		"date": "Feb 28, 2024",
@@ -196,12 +202,6 @@
 		"link": "https://velog.io/@yunh03/Spring-Boot%EC%97%90%EC%84%9C-ChatGPT-%ED%99%9C%EC%9A%A9%ED%95%98%EA%B8%B0-2-API%EB%A1%9C-GPT-%EC%9D%91%EB%8B%B5-%EA%B0%92-%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0",
 		"date": "Feb 26, 2024",
 		"writer": "11기 전윤환"
-	},
-	"feed-14": {
-		"title": "도메인주도개발 시작하기 8장 애그리거트 트랜잭션관리",
-		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%A3%BC%EB%8F%84%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-8%EC%9E%A5-%EC%95%A0%EA%B7%B8%EB%A6%AC%EA%B1%B0%ED%8A%B8-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%EA%B4%80%EB%A6%AC",
-		"date": "Feb 22, 2024",
-		"writer": "11기 김민우"
 	},
 	"feed-22": {
 		"title": "[DDD] chapter 8",

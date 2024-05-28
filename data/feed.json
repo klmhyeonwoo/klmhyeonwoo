@@ -1,4 +1,10 @@
 {
+	"feed-0": {
+		"title": "3분만에 브라우저 익스텐션 만들어보기",
+		"link": "https://klmhyeonwooo.tistory.com/126",
+		"date": "May 27, 2024",
+		"writer": "5기 김현우"
+	},
 	"feed-67": {
 		"title": "[발상] 북카페",
 		"link": "https://ub775.tistory.com/entry/%EC%95%84%EC%9D%B4%EB%94%94%EC%96%B4-%EB%B6%81%EC%B9%B4%ED%8E%98",
@@ -17,19 +23,19 @@
 		"date": "May 18, 2024",
 		"writer": "11기 성창규"
 	},
-	"feed-0": {
+	"feed-1": {
 		"title": "캐치테이블에서 사용하는 Vanilla Extract이 뭘까?",
 		"link": "https://klmhyeonwooo.tistory.com/124",
 		"date": "May 17, 2024",
 		"writer": "5기 김현우"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "개발자는 내가 만드는 제품에 대한 애정을 가져야한다",
 		"link": "https://klmhyeonwooo.tistory.com/122",
 		"date": "May 12, 2024",
 		"writer": "5기 김현우"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "Vercel 배포 환경에서 404 Not Found가 발생하는 경우에 어떻게 해야할까?",
 		"link": "https://klmhyeonwooo.tistory.com/121",
 		"date": "May 12, 2024",
@@ -41,7 +47,7 @@
 		"date": "May 09, 2024",
 		"writer": "11기 전윤환"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "네이티브와 크로스 플랫폼 어플리케이션 그리고 하이브리드 앱",
 		"link": "https://klmhyeonwooo.tistory.com/120",
 		"date": "May 06, 2024",
@@ -106,12 +112,6 @@
 		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%A9%B4%EC%A0%91%EC%9D%84-%EC%9C%84%ED%95%9C-CS-%EC%A0%84%EA%B3%B5%EC%A7%80%EC%8B%9D-%EB%85%B8%ED%8A%B8-5%EC%9E%A5",
 		"date": "Mar 26, 2024",
 		"writer": "11기 김민우"
-	},
-	"feed-4": {
-		"title": "nth-child와 nth-of-type의 차이",
-		"link": "https://klmhyeonwooo.tistory.com/119",
-		"date": "Mar 25, 2024",
-		"writer": "5기 김현우"
 	},
 	"feed-11": {
 		"title": "면접을 위한 CS 전공지식 노트 2장",

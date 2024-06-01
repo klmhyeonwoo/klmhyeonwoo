@@ -17,8 +17,8 @@
 - [리크루팅을 위해 어플라이 사이트를 개발했다](https://klmhyeonwooo.tistory.com/74)<br>
 
 ### 최근 포스팅
+- [타입스크립트 딥다이브](https://klmhyeonwooo.tistory.com/129)<br>
+- [다국어를 지원할 때 언어에 따라 다른 CSS를 적용하고 싶을 때](https://klmhyeonwooo.tistory.com/127)<br>
 - [3분만에 브라우저 익스텐션 만들어보기](https://klmhyeonwooo.tistory.com/126)<br>
 - [캐치테이블에서 사용하는 Vanilla Extract이 뭘까?](https://klmhyeonwooo.tistory.com/124)<br>
 - [개발자는 내가 만드는 제품에 대한 애정을 가져야한다](https://klmhyeonwooo.tistory.com/122)<br>
-- [Vercel 배포 환경에서 404 Not Found가 발생하는 경우에 어떻게 해야할까?](https://klmhyeonwooo.tistory.com/121)<br>
-- [네이티브와 크로스 플랫폼 어플리케이션 그리고 하이브리드 앱](https://klmhyeonwooo.tistory.com/120)<br>

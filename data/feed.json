@@ -1,11 +1,17 @@
 {
 	"feed-5": {
+		"title": "Docker Mysql 테스트서버 DB분리",
+		"link": "https://minwoo-it-factory.tistory.com/entry/Docker-Mysql-%ED%85%8C%EC%8A%A4%ED%8A%B8%EC%84%9C%EB%B2%84-DB%EB%B6%84%EB%A6%AC",
+		"date": "Jun 07, 2024",
+		"writer": "11기 김민우"
+	},
+	"feed-6": {
 		"title": "Statement보다 PreparedStatement를 사용해야하는이유",
 		"link": "https://minwoo-it-factory.tistory.com/entry/Statement%EB%B3%B4%EB%8B%A4-PreparedStatement%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%B4%EC%95%BC%ED%95%98%EB%8A%94%EC%9D%B4%EC%9C%A0",
 		"date": "Jun 06, 2024",
 		"writer": "11기 김민우"
 	},
-	"feed-6": {
+	"feed-7": {
 		"title": "Let's Encrypt Https인증서 자동갱신",
 		"link": "https://minwoo-it-factory.tistory.com/entry/Lets-Encrypt-Https%EC%9D%B8%EC%A6%9D%EC%84%9C-%EC%9E%90%EB%8F%99%EA%B0%B1%EC%8B%A0",
 		"date": "Jun 03, 2024",
@@ -35,7 +41,7 @@
 		"date": "May 22, 2024",
 		"writer": "11기 강명균"
 	},
-	"feed-7": {
+	"feed-8": {
 		"title": "2023년, 그리고 지금의 2024년 회고록",
 		"link": "https://minwoo-it-factory.tistory.com/entry/2023%EB%85%84-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%EC%A7%80%EA%B8%88%EC%9D%98-2024%EB%85%84-%ED%9A%8C%EA%B3%A0%EB%A1%9D",
 		"date": "May 20, 2024",
@@ -65,13 +71,13 @@
 		"date": "May 09, 2024",
 		"writer": "11기 전윤환"
 	},
-	"feed-8": {
+	"feed-9": {
 		"title": "Java Stream map,foreach 차이 및 예제",
 		"link": "https://minwoo-it-factory.tistory.com/entry/Java-Stream-mapforeach-%EC%B0%A8%EC%9D%B4-%EB%B0%8F-%EC%98%88%EC%A0%9C",
 		"date": "May 04, 2024",
 		"writer": "11기 김민우"
 	},
-	"feed-9": {
+	"feed-10": {
 		"title": "점차 쌓이는 로그들 어떻게 처리해야할까 ?",
 		"link": "https://minwoo-it-factory.tistory.com/entry/%EC%A0%90%EC%B0%A8-%EC%8C%93%EC%9D%B4%EB%8A%94-%EB%A1%9C%EA%B7%B8%EB%93%A4-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%B2%98%EB%A6%AC%ED%95%B4%EC%95%BC%ED%95%A0%EA%B9%8C",
 		"date": "Apr 29, 2024",
@@ -89,7 +95,7 @@
 		"date": "Apr 28, 2024",
 		"writer": "11기 성창규"
 	},
-	"feed-10": {
+	"feed-11": {
 		"title": "Nginx Blue green 무중단 배포",
 		"link": "https://minwoo-it-factory.tistory.com/entry/Jenkins-Nginx-Blue-green-%EB%AC%B4%EC%A4%91%EB%8B%A8-%EB%B0%B0%ED%8F%AC",
 		"date": "Apr 27, 2024",
@@ -113,28 +119,22 @@
 		"date": "Mar 29, 2024",
 		"writer": "11기 손민기"
 	},
-	"feed-11": {
+	"feed-12": {
 		"title": "면접을 위한 CS 전공지식 노트 4장",
 		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%A9%B4%EC%A0%91%EC%9D%84-%EC%9C%84%ED%95%9C-CS-%EC%A0%84%EA%B3%B5%EC%A7%80%EC%8B%9D-%EB%85%B8%ED%8A%B8-4%EC%9E%A5",
 		"date": "Mar 26, 2024",
 		"writer": "11기 김민우"
 	},
-	"feed-12": {
+	"feed-13": {
 		"title": "면접을 위한 CS 전공지식 노트 5장",
 		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%A9%B4%EC%A0%91%EC%9D%84-%EC%9C%84%ED%95%9C-CS-%EC%A0%84%EA%B3%B5%EC%A7%80%EC%8B%9D-%EB%85%B8%ED%8A%B8-5%EC%9E%A5",
 		"date": "Mar 26, 2024",
 		"writer": "11기 김민우"
 	},
-	"feed-13": {
+	"feed-14": {
 		"title": "면접을 위한 CS 전공지식 노트 2장",
 		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%A9%B4%EC%A0%91%EC%9D%84-%EC%9C%84%ED%95%9C-CS-%EC%A0%84%EA%B3%B5%EC%A7%80%EC%8B%9D-%EB%85%B8%ED%8A%B8-2%EC%9E%A5",
 		"date": "Mar 25, 2024",
-		"writer": "11기 김민우"
-	},
-	"feed-14": {
-		"title": "면접을 위한 CS 전공지식 노트 1장",
-		"link": "https://minwoo-it-factory.tistory.com/entry/%EB%A9%B4%EC%A0%91%EC%9D%84-%EC%9C%84%ED%95%9C-CS-%EC%A0%84%EA%B3%B5%EC%A7%80%EC%8B%9D-%EB%85%B8%ED%8A%B8-1%EC%9E%A5",
-		"date": "Mar 24, 2024",
 		"writer": "11기 김민우"
 	},
 	"feed-18": {

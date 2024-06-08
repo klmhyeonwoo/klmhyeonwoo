@@ -4,7 +4,7 @@ import os
 import json
 
 feed_list = ["https://klmhyeonwooo.tistory.com?프론트엔드 김현우", 
-             "https://youngkdevlog.tistory.com/?iOS 송영규", 
+             "https://youngkdevlog.tistory.com?iOS 송영규", 
              "https://apape1225.tistory.com?백엔드 성창규", 
              "https://starlikedh.tistory.com?백엔드 정다혜", 
              "https://v2.velog.io/rss/handmk?백엔드 손민기", 

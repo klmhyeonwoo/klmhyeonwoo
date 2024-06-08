@@ -46,6 +46,7 @@ for BLOG_URL in feed_list:
           parsing_data["feed-" + str(uniqueKey)] = { 
               "title" : i['title'],
               "link" : i['link'],
+              "description": i['description'],
               "date" : datetime.datetime.strptime(i['published'], '%a, %d %b %Y %H:%M:%S %Z').strftime("%b %d, %Y"),
               "writer" : writer,
           }
@@ -53,6 +54,7 @@ for BLOG_URL in feed_list:
             parsing_data["feed-" + str(uniqueKey)] = { 
               "title" : i['title'],
               "link" : i['link'],
+              "description": i['description'],
               "date" : datetime.datetime.strptime(i['published'], "%a, %d %b %Y %H:%M:%S %z").strftime("%b %d, %Y"),
               "writer" : writer,
             }

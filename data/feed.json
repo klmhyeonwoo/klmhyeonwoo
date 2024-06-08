@@ -221,11 +221,23 @@
 		"date": "Feb 19, 2024",
 		"writer": "백엔드 전윤환"
 	},
+	"feed-69": {
+		"title": "소셜 로그인 접속 토큰 발급 500, 401, 400status 해결법: 카카오편?",
+		"link": "https://suho0303.tistory.com/63",
+		"date": "Feb 19, 2024",
+		"writer": "백엔드 이수호"
+	},
 	"feed-24": {
 		"title": "[DDD] chapter 7",
 		"link": "https://apape1225.tistory.com/156",
 		"date": "Feb 16, 2024",
 		"writer": "백엔드 성창규"
+	},
+	"feed-70": {
+		"title": "환경변수 @ConfigurationProperties로 간단히 관리하기 (with Kotlin)",
+		"link": "https://suho0303.tistory.com/62",
+		"date": "Jan 30, 2024",
+		"writer": "백엔드 이수호"
 	},
 	"feed-34": {
 		"title": "[포트충돌해결] SpringBoot mariadb mysql 연동",
@@ -256,6 +268,12 @@
 		"link": "https://velog.io/@handmk/LinuxUbuntu-%EA%B0%80%EC%83%81-%EB%A8%B8%EC%8B%A0%EC%9C%BC%EB%A1%9C-%EC%8B%A4%EB%AC%B4-%ED%99%98%EA%B2%BD-%EA%B5%AC%EC%B6%951",
 		"date": "Jan 16, 2024",
 		"writer": "백엔드 손민기"
+	},
+	"feed-71": {
+		"title": "스프링에서 gpt api 사용해보기",
+		"link": "https://suho0303.tistory.com/61",
+		"date": "Jan 16, 2024",
+		"writer": "백엔드 이수호"
 	},
 	"feed-37": {
 		"title": "[C++] 시간 복잡도 표기법",
@@ -347,11 +365,35 @@
 		"date": "Dec 20, 2023",
 		"writer": "백엔드 손민기"
 	},
+	"feed-72": {
+		"title": "스프링에서 실시간 에러 로그를 Discord로 받는 방법",
+		"link": "https://suho0303.tistory.com/60",
+		"date": "Dec 10, 2023",
+		"writer": "백엔드 이수호"
+	},
 	"feed-46": {
 		"title": "[SpringBoot]  메일인증 회원가입 구현",
 		"link": "https://velog.io/@handmk/Springboot-%EB%A9%94%EC%9D%BC%EC%9D%B8%EC%A6%9D-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85-%EA%B5%AC%ED%98%84",
 		"date": "Nov 27, 2023",
 		"writer": "백엔드 손민기"
+	},
+	"feed-73": {
+		"title": "DDD 10기 백엔드 파트 합격 후기",
+		"link": "https://suho0303.tistory.com/59",
+		"date": "Nov 26, 2023",
+		"writer": "백엔드 이수호"
+	},
+	"feed-74": {
+		"title": "스프링에서 실시간 에러 로그를 Slack으로 받는 방법",
+		"link": "https://suho0303.tistory.com/58",
+		"date": "Nov 22, 2023",
+		"writer": "백엔드 이수호"
+	},
+	"feed-75": {
+		"title": "슬랙 웹훅 url을 잊어버렸을 때",
+		"link": "https://suho0303.tistory.com/57",
+		"date": "Nov 20, 2023",
+		"writer": "백엔드 이수호"
 	},
 	"feed-57": {
 		"title": "[AWS] RDS에서 외부 접속이 되지 않을 때 (Connection timed out)",
@@ -377,11 +419,29 @@
 		"date": "Oct 10, 2023",
 		"writer": "백엔드 전윤환"
 	},
+	"feed-76": {
+		"title": "깃허브 릴리즈 노트 자동화 하기 - 2",
+		"link": "https://suho0303.tistory.com/56",
+		"date": "Oct 02, 2023",
+		"writer": "백엔드 이수호"
+	},
+	"feed-77": {
+		"title": "깃허브 릴리즈 노트 자동화 하기 - 1 : 버전 업데이트하기",
+		"link": "https://suho0303.tistory.com/55",
+		"date": "Sep 30, 2023",
+		"writer": "백엔드 이수호"
+	},
 	"feed-61": {
 		"title": "'Spring Boot + React' 카카오 소셜 로그인 도입하기 (1)",
 		"link": "https://velog.io/@yunh03/Spring-Boot-React-%EC%B9%B4%EC%B9%B4%EC%98%A4-%EC%86%8C%EC%85%9C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EB%8F%84%EC%9E%85%ED%95%98%EA%B8%B0-1",
 		"date": "Sep 27, 2023",
 		"writer": "백엔드 전윤환"
+	},
+	"feed-78": {
+		"title": "Cache 탐험",
+		"link": "https://suho0303.tistory.com/54",
+		"date": "Aug 28, 2023",
+		"writer": "백엔드 이수호"
 	},
 	"feed-62": {
 		"title": "2023 멋쟁이사자처럼 대학 11기 해커톤 후기",

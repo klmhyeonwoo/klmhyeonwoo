@@ -3,7 +3,14 @@ import datetime
 import os
 import json
 
-feed_list = ["https://klmhyeonwooo.tistory.com?프론트엔드 김현우", "https://minwoo-it-factory.tistory.com?백엔드 김민우", "https://apape1225.tistory.com?백엔드 성창규", "https://starlikedh.tistory.com?백엔드 정다혜", "https://v2.velog.io/rss/handmk?백엔드 손민기", "https://v2.velog.io/rss/yunh03?백엔드 전윤환", "https://ub775.tistory.com?백엔드 강명균"]
+feed_list = ["https://klmhyeonwooo.tistory.com?프론트엔드 김현우", 
+             "https://minwoo-it-factory.tistory.com?백엔드 김민우", 
+             "https://apape1225.tistory.com?백엔드 성창규", 
+             "https://starlikedh.tistory.com?백엔드 정다혜", 
+             "https://v2.velog.io/rss/handmk?백엔드 손민기", 
+             "https://v2.velog.io/rss/yunh03?백엔드 전윤환", 
+             "https://ub775.tistory.com?백엔드 강명균",
+             "https://suho0303.tistory.com?백엔드 이수호"]
 
 markdown_text = """
 <div align="center">

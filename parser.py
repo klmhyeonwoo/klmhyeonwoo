@@ -44,7 +44,7 @@ uniqueKey = 0
 for BLOG_URL in feed_list:
     if (BLOG_URL.find("velog.io") != -1):
         feed = feedparser.parse(BLOG_URL.split("?")[0])
-    else if (BLOG_URL.find("medium") != -1):
+    elif (BLOG_URL.find("medium") != -1):
         feed = feedparser.parse(BLOG_URL.split("?")[0]+"/feed")
     else:
         feed = feedparser.parse(BLOG_URL.split("?")[0]+"/rss")

@@ -257,6 +257,12 @@
 		"date": "Jan 27, 2024",
 		"writer": "백엔드 정다혜"
 	},
+	"feed-80": {
+		"title": "[JS] AbortController로 비동기 호출 중지하기(with fetch)",
+		"link": "https://medium.com/@ehdrbdndns/js-abortcontroller%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%B4-%EB%B9%84%EB%8F%99%EA%B8%B0-%ED%98%B8%EC%B6%9C-%EC%A4%91%EC%A7%80%ED%95%98%EA%B8%B0-with-fetch-ea0e8b3fe723?source=rss-6d4304b1a8a3------2",
+		"date": "Jan 25, 2024",
+		"writer": "프론트엔드 양동균"
+	},
 	"feed-26": {
 		"title": "스프링부트_01",
 		"link": "https://starlikedh.tistory.com/entry/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8",
@@ -268,6 +274,12 @@
 		"link": "https://velog.io/@handmk/c-%EA%B5%AC%EA%B0%84-%ED%95%A9-%EA%B5%AC%ED%95%98%EA%B8%B0-2",
 		"date": "Jan 19, 2024",
 		"writer": "백엔드 손민기"
+	},
+	"feed-81": {
+		"title": "[JS] SVG로 라인 차트(Line Chart)를 구현해보자",
+		"link": "https://medium.com/@ehdrbdndns/svg-svg%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%B4-%EB%9D%BC%EC%9D%B8-%EC%B0%A8%ED%8A%B8-line-chart-%EB%A5%BC-%EB%A7%8C%EB%93%A4%EC%96%B4%EB%B3%B4%EC%9E%90-0573023d9e6b?source=rss-6d4304b1a8a3------2",
+		"date": "Jan 19, 2024",
+		"writer": "프론트엔드 양동균"
 	},
 	"feed-36": {
 		"title": "[Linux/Ubuntu] 가상 머신으로 실무 환경 구축(1)",
@@ -316,6 +328,12 @@
 		"link": "https://velog.io/@handmk/SpringBoot-IoC-DI-AOP",
 		"date": "Jan 06, 2024",
 		"writer": "백엔드 손민기"
+	},
+	"feed-82": {
+		"title": "[React] React에서 Link Preview 구현하기",
+		"link": "https://medium.com/@ehdrbdndns/react-react%EC%97%90%EC%84%9C-link-preview-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0-cdfb31f154fe?source=rss-6d4304b1a8a3------2",
+		"date": "Dec 29, 2023",
+		"writer": "프론트엔드 양동균"
 	},
 	"feed-39": {
 		"title": "[c++] 1181번 단어 정렬",
@@ -377,6 +395,12 @@
 		"date": "Dec 10, 2023",
 		"writer": "백엔드 이수호"
 	},
+	"feed-83": {
+		"title": "[JS] SVG에서 <text> 태그의 실제 길이는 몇일까? getBBox()",
+		"link": "https://medium.com/@ehdrbdndns/svg-%EB%82%98%EC%9D%98-text-%EC%9A%94%EC%86%8C%EC%9D%98-%EA%B8%B8%EC%9D%B4%EB%8A%94-%EB%AA%87%EC%9D%BC%EA%B9%8C-ae3288a571da?source=rss-6d4304b1a8a3------2",
+		"date": "Dec 03, 2023",
+		"writer": "프론트엔드 양동균"
+	},
 	"feed-46": {
 		"title": "[SpringBoot]  메일인증 회원가입 구현",
 		"link": "https://velog.io/@handmk/Springboot-%EB%A9%94%EC%9D%BC%EC%9D%B8%EC%A6%9D-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85-%EA%B5%AC%ED%98%84",
@@ -401,6 +425,18 @@
 		"date": "Nov 20, 2023",
 		"writer": "백엔드 이수호"
 	},
+	"feed-84": {
+		"title": "[React] useState와 자동 리렌더링의 관계를 알아보자",
+		"link": "https://medium.com/@ehdrbdndns/react-usestate%EC%99%80-%EB%A0%8C%EB%8D%94%EB%A7%81%EA%B3%BC%EC%9D%98-%EB%AA%A8%ED%98%B8%ED%95%9C-%EA%B4%80%EA%B3%84%EB%A5%BC-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90-667e541dc93d?source=rss-6d4304b1a8a3------2",
+		"date": "Nov 18, 2023",
+		"writer": "프론트엔드 양동균"
+	},
+	"feed-85": {
+		"title": "[Redux] 리덕스 쿼리, 쉽게 이해하는 동작 원리 및 데이터 관리 방법",
+		"link": "https://medium.com/@ehdrbdndns/redux-%EB%A6%AC%EB%8D%95%EC%8A%A4-%EC%BF%BC%EB%A6%AC-%EC%89%BD%EA%B2%8C-%EC%9D%B4%ED%95%B4%ED%95%98%EB%8A%94-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC-%EB%B0%8F-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EA%B4%80%EB%A6%AC-%EB%B0%A9%EB%B2%95-6b087848a4ca?source=rss-6d4304b1a8a3------2",
+		"date": "Oct 30, 2023",
+		"writer": "프론트엔드 양동균"
+	},
 	"feed-57": {
 		"title": "[AWS] RDS에서 외부 접속이 되지 않을 때 (Connection timed out)",
 		"link": "https://velog.io/@yunh03/AWS-RDS%EC%97%90%EC%84%9C-%EC%99%B8%EB%B6%80-%EC%A0%91%EC%86%8D%EC%9D%B4-%EB%90%98%EC%A7%80-%EC%95%8A%EC%9D%84-%EB%95%8C-Connection-timed-out",
@@ -412,6 +448,12 @@
 		"link": "https://velog.io/@yunh03/CICD%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C",
 		"date": "Oct 15, 2023",
 		"writer": "백엔드 전윤환"
+	},
+	"feed-86": {
+		"title": "[Redux] 리덕스, 쉽게 이해하는 동작 원리",
+		"link": "https://medium.com/@ehdrbdndns/redux-%EB%A6%AC%EB%8D%95%EC%8A%A4-%EC%89%BD%EA%B2%8C-%EC%9D%B4%ED%95%B4%ED%95%98%EB%8A%94-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC-c0599b954953?source=rss-6d4304b1a8a3------2",
+		"date": "Oct 14, 2023",
+		"writer": "프론트엔드 양동균"
 	},
 	"feed-59": {
 		"title": "Cookie, Session, Token(JWT) 정리하기",

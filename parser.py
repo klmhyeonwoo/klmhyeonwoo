@@ -11,7 +11,7 @@ feed_list = ["https://klmhyeonwooo.tistory.com?프론트엔드 김현우",
              "https://v2.velog.io/rss/yunh03?백엔드 전윤환", 
              "https://ub775.tistory.com?백엔드 강명균",
              "https://suho0303.tistory.com?백엔드 이수호", 
-             "https://mjspring.medium.com/feed?테스트"]
+             "https://mjspring.medium.com?테스트"]
 
 markdown_text = """
 <div align="center">
@@ -44,6 +44,8 @@ uniqueKey = 0
 for BLOG_URL in feed_list:
     if (BLOG_URL.find("velog.io") != -1):
         feed = feedparser.parse(BLOG_URL.split("?")[0])
+    else if (BLOG_URL.find("medium") != -1):
+        feed = feedparser.parse(BLOG_URL.split("?")[0]+"/feed")
     else:
         feed = feedparser.parse(BLOG_URL.split("?")[0]+"/rss")
       

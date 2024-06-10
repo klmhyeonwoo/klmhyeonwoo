@@ -52,7 +52,7 @@ for BLOG_URL in feed_list:
     writer = BLOG_URL.split("?")[1]
     for i in feed['entries']:
         # print(i)
-        if (BLOG_URL.find("velog.io") != -1 || BLOG_URL.find("medium") != -1):
+        if (BLOG_URL.find("velog.io") != -1 or BLOG_URL.find("medium") != -1):
           parsing_data["feed-" + str(uniqueKey)] = { 
               "title" : i['title'],
               "link" : i['link'],

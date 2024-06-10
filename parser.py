@@ -10,7 +10,7 @@ feed_list = ["https://klmhyeonwooo.tistory.com?프론트엔드 김현우",
              "https://v2.velog.io/rss/handmk?백엔드 손민기", 
              "https://v2.velog.io/rss/yunh03?백엔드 전윤환", 
              "https://ub775.tistory.com?백엔드 강명균",
-             "https://suho0303.tistory.com?백엔드 이수호", 
+             "https://suho0303.tistory.com?백엔드 이수호",
              "https://medium.com/@ehdrbdndns?프론트엔드 양동균"]
 
 markdown_text = """
@@ -52,7 +52,7 @@ for BLOG_URL in feed_list:
     writer = BLOG_URL.split("?")[1]
     for i in feed['entries']:
         # print(i)
-        if (BLOG_URL.find("velog.io") != -1):
+        if (BLOG_URL.find("velog.io") != -1 || BLOG_URL.find("medium") != -1):
           parsing_data["feed-" + str(uniqueKey)] = { 
               "title" : i['title'],
               "link" : i['link'],

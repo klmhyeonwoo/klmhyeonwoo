@@ -11,7 +11,7 @@ feed_list = ["https://klmhyeonwooo.tistory.com?프론트엔드 김현우",
              "https://v2.velog.io/rss/yunh03?백엔드 전윤환", 
              "https://ub775.tistory.com?백엔드 강명균",
              "https://suho0303.tistory.com?백엔드 이수호", 
-             "https://mjspring.medium.com?테스트"]
+             "https://medium.com/@novoselski?테스트"]
 
 markdown_text = """
 <div align="center">

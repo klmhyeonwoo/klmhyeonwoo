@@ -9,7 +9,7 @@ feed_list = ["https://klmhyeonwooo.tistory.com?프론트엔드 김현우",
              "https://starlikedh.tistory.com?백엔드 정다혜", 
              "https://v2.velog.io/rss/handmk?백엔드 손민기", 
              "https://v2.velog.io/rss/yunh03?백엔드 전윤환",
-             "https://v2.velog.io/rss/thd0427?안드로이드 송규빈,
+             "https://v2.velog.io/rss/thd0427?안드로이드 송규빈",
              "https://ub775.tistory.com?백엔드 강명균",
              "https://suho0303.tistory.com?백엔드 이수호",
              "https://medium.com/@ehdrbdndns?프론트엔드 양동균"]

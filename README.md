@@ -1,7 +1,7 @@
 
 <div align="center">
   
-<img src="https://render.gitanimals.org/farms/{klmhyeonwoo}" height="220"/>
+<img src="https://render.gitanimals.org/farms/klmhyeonwoo" height="220"/>
 
 </div>
 

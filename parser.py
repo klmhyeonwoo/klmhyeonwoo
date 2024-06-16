@@ -17,14 +17,14 @@ feed_list = ["https://klmhyeonwooo.tistory.com?프론트엔드 김현우",
 markdown_text = """
 <div align="center">
   
-![dino.gif](./dino.gif)
+# ![dino.gif](./dino.gif)
 
 </div>
 
 ## klm hyeon woo
 
 <span style="color:#4E5968; font-size:10px;">
-브랜딩을 좋아하는 개발자입니다 🦄
+네트워킹이랑 브랜딩할 때 제일 행복한 개발자입니다 🏄🏼‍♂️
 
 ### 회고록
 - [개발자는 내가 만드는 제품에 대한 애정을 가져야한다](https://klmhyeonwooo.tistory.com/122)<br>
@@ -85,3 +85,5 @@ f = open("README.md", mode="w", encoding="utf-8")
 f.write(markdown_text)
 f.close()
 print("성공")
+
+<img src="https://render.gitanimals.org/farms/{klmhyeonwoo}" height="220"/>

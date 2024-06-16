@@ -18,6 +18,7 @@ markdown_text = """
 <div align="center">
   
 # ![dino.gif](./dino.gif)
+<img src="https://render.gitanimals.org/farms/{klmhyeonwoo}" height="220"/>
 
 </div>
 
@@ -85,5 +86,3 @@ f = open("README.md", mode="w", encoding="utf-8")
 f.write(markdown_text)
 f.close()
 print("성공")
-
-<img src="https://render.gitanimals.org/farms/{klmhyeonwoo}" height="220"/>

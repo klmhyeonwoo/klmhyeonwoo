@@ -1,7 +1,6 @@
 
 <div align="center">
   
-# ![dino.gif](./dino.gif)
 <img src="https://render.gitanimals.org/farms/{klmhyeonwoo}" height="220"/>
 
 </div>
@@ -9,7 +8,7 @@
 ## klm hyeon woo
 
 <span style="color:#4E5968; font-size:10px;">
-네트워킹이랑 브랜딩할 때 제일 행복한 개발자입니다 🏄🏼‍♂️
+네트워킹이랑 브랜딩할 때 제일 햄볶음밥 개발자입니다 🏄🏼‍♂️
 
 ### 회고록
 - [개발자는 내가 만드는 제품에 대한 애정을 가져야한다](https://klmhyeonwooo.tistory.com/122)<br>

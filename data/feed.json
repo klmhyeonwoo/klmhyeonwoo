@@ -1,4 +1,10 @@
 {
+	"feed-5": {
+		"title": "Swift 메모리 관점에서의 Image",
+		"link": "https://youngkdevlog.tistory.com/69",
+		"date": "Jun 18, 2024",
+		"writer": "iOS 송영규"
+	},
 	"feed-0": {
 		"title": "Vite 환경에서 구글 애널리틱스 3분만에 적용하기",
 		"link": "https://klmhyeonwooo.tistory.com/131",
@@ -29,7 +35,7 @@
 		"date": "Jun 09, 2024",
 		"writer": "백엔드 강명균"
 	},
-	"feed-5": {
+	"feed-6": {
 		"title": "모듈화란? with Tuist",
 		"link": "https://youngkdevlog.tistory.com/68",
 		"date": "Jun 03, 2024",
@@ -53,7 +59,7 @@
 		"date": "May 27, 2024",
 		"writer": "프론트엔드 김현우"
 	},
-	"feed-6": {
+	"feed-7": {
 		"title": "SwiftData 알아보기",
 		"link": "https://youngkdevlog.tistory.com/67",
 		"date": "May 24, 2024",
@@ -77,7 +83,7 @@
 		"date": "May 09, 2024",
 		"writer": "백엔드 전윤환"
 	},
-	"feed-7": {
+	"feed-8": {
 		"title": "InjectionIII 라이브러리를 적용하면서 마주한 이슈들",
 		"link": "https://youngkdevlog.tistory.com/66",
 		"date": "May 02, 2024",
@@ -95,13 +101,13 @@
 		"date": "Apr 28, 2024",
 		"writer": "백엔드 성창규"
 	},
-	"feed-8": {
+	"feed-9": {
 		"title": "Swift 찍먹하기",
 		"link": "https://youngkdevlog.tistory.com/65",
 		"date": "Apr 23, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-9": {
+	"feed-10": {
 		"title": "객체 지향 프로그래밍을 설계할 때는 SOLID 원칙을 지켜야 한다.",
 		"link": "https://youngkdevlog.tistory.com/64",
 		"date": "Apr 12, 2024",
@@ -161,19 +167,19 @@
 		"date": "Mar 16, 2024",
 		"writer": "백엔드 강명균"
 	},
-	"feed-10": {
+	"feed-11": {
 		"title": "[visionOS] Apple Vision Pro 챌린지 Part.3 세션 정리 및 느낀 점",
 		"link": "https://youngkdevlog.tistory.com/63",
 		"date": "Mar 13, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-11": {
+	"feed-12": {
 		"title": "[컴퓨터 구조] 시스템 버스(System Bus) 및 동작 방식",
 		"link": "https://youngkdevlog.tistory.com/62",
 		"date": "Mar 12, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-12": {
+	"feed-13": {
 		"title": "[알고리즘] 구간 합, 누적 합(Prefix Sum)",
 		"link": "https://youngkdevlog.tistory.com/61",
 		"date": "Mar 11, 2024",
@@ -209,16 +215,10 @@
 		"date": "Mar 06, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-13": {
+	"feed-14": {
 		"title": "XCode15+ Image Color Assets 관리 방법의 변화",
 		"link": "https://youngkdevlog.tistory.com/60",
 		"date": "Mar 05, 2024",
-		"writer": "iOS 송영규"
-	},
-	"feed-14": {
-		"title": "XCode Archive 시 has no member Error 발생",
-		"link": "https://youngkdevlog.tistory.com/59",
-		"date": "Mar 04, 2024",
 		"writer": "iOS 송영규"
 	},
 	"feed-23": {

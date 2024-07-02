@@ -24,7 +24,7 @@ markdown_text = """
 ## klm hyeon woo
 
 <span style="color:#4E5968; font-size:10px;">
-네트워킹 좋아하고, 데브렐에 관심이 많은 삼평동 연구원입니다만 🏄🏼‍♂️
+네트워킹 좋아하고, 데브렐에 관심이 많은 삼평동 연구원입니다만 🫨
 
 ### 회고록
 - [개발자는 내가 만드는 제품에 대한 애정을 가져야한다](https://klmhyeonwooo.tistory.com/122)<br>

@@ -1,4 +1,16 @@
 {
+	"feed-70": {
+		"title": "Compose 부수 효과 총정리",
+		"link": "https://velog.io/@thd0427/Compose-%EB%B6%80%EC%88%98-%ED%9A%A8%EA%B3%BC-%EC%B4%9D%EC%A0%95%EB%A6%AC",
+		"date": "Jul 04, 2024",
+		"writer": "안드로이드 송규빈"
+	},
+	"feed-90": {
+		"title": "[개발] NVM 설치와 사용 예시",
+		"link": "https://ub775.tistory.com/entry/%EA%B0%9C%EB%B0%9C-NVM-%EC%84%A4%EC%B9%98%EC%99%80-%EC%82%AC%EC%9A%A9-%EC%98%88%EC%8B%9C",
+		"date": "Jul 04, 2024",
+		"writer": "백엔드 강명균"
+	},
 	"feed-0": {
 		"title": "Reduce로 코드 클린하게 만들기",
 		"link": "https://klmhyeonwooo.tistory.com/135",
@@ -17,7 +29,7 @@
 		"date": "Jul 02, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-70": {
+	"feed-71": {
 		"title": "안드로이드 카카오/네이버 로그인 처리 (Feat. ViewModel)",
 		"link": "https://velog.io/@thd0427/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C-%EC%B9%B4%EC%B9%B4%EC%98%A4%EB%84%A4%EC%9D%B4%EB%B2%84-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EC%B2%98%EB%A6%AC-Feat.-ViewModel",
 		"date": "Jul 02, 2024",
@@ -71,7 +83,7 @@
 		"date": "Jun 12, 2024",
 		"writer": "프론트엔드 김현우"
 	},
-	"feed-71": {
+	"feed-72": {
 		"title": "완벽한 공부법 책을 읽고 , , ,",
 		"link": "https://velog.io/@thd0427/%EC%99%84%EB%B2%BD%ED%95%9C-%EA%B3%B5%EB%B6%80%EB%B2%95-%EC%B1%85%EC%9D%84-%EC%9D%BD%EA%B3%A0",
 		"date": "Jun 12, 2024",
@@ -83,7 +95,7 @@
 		"date": "Jun 09, 2024",
 		"writer": "백엔드 성창규"
 	},
-	"feed-90": {
+	"feed-91": {
 		"title": "[LeetCode] 209. Minimum Size Subarray Sum",
 		"link": "https://ub775.tistory.com/entry/LeetCode-209-Minimum-Size-Subarray-Sum",
 		"date": "Jun 09, 2024",
@@ -101,7 +113,7 @@
 		"date": "May 24, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-91": {
+	"feed-92": {
 		"title": "[일상] 독서를 하자",
 		"link": "https://ub775.tistory.com/entry/%EC%95%84%EC%9D%B4%EB%94%94%EC%96%B4-%EB%B6%81%EC%B9%B4%ED%8E%98",
 		"date": "May 22, 2024",
@@ -197,7 +209,7 @@
 		"date": "Mar 16, 2024",
 		"writer": "백엔드 성창규"
 	},
-	"feed-92": {
+	"feed-93": {
 		"title": "[일상] &quot;설명해 보세요!&quot;",
 		"link": "https://ub775.tistory.com/entry/%EC%84%A4%EB%AA%85%ED%95%B4%EB%B3%B4%EC%84%B8%EC%9A%94",
 		"date": "Mar 16, 2024",
@@ -245,7 +257,7 @@
 		"date": "Mar 07, 2024",
 		"writer": "백엔드 전윤환"
 	},
-	"feed-72": {
+	"feed-73": {
 		"title": "reified를 inline 함수에서만 사용하는 이유를 아시나요? (with. JVM 타입 소거)",
 		"link": "https://velog.io/@thd0427/reified%EB%8A%94-%EC%99%9C-inline-%ED%95%A8%EC%88%98%EC%97%90%EC%84%9C%EB%A7%8C-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C-with.-%ED%83%80%EC%9E%85-%EC%86%8C%EA%B1%B0",
 		"date": "Mar 06, 2024",
@@ -269,55 +281,55 @@
 		"date": "Feb 19, 2024",
 		"writer": "백엔드 전윤환"
 	},
-	"feed-93": {
+	"feed-94": {
 		"title": "소셜 로그인 접속 토큰 발급 500, 401, 400status 해결법: 카카오편?",
 		"link": "https://suho0303.tistory.com/63",
 		"date": "Feb 19, 2024",
 		"writer": "백엔드 이수호"
 	},
-	"feed-73": {
+	"feed-74": {
 		"title": "Android SDUI 도입기(with. GraphQL, Apollo)",
 		"link": "https://velog.io/@thd0427/Android-SDUI-%EB%8F%84%EC%9E%85%EA%B8%B0with.-GraphQL-Apollo",
 		"date": "Feb 15, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-74": {
+	"feed-75": {
 		"title": "UI Layer을 위한 새로운 코딩 컨벤션을 구축했던 이유",
 		"link": "https://velog.io/@thd0427/UI-Layer%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%83%88%EB%A1%9C%EC%9A%B4-%EC%BD%94%EB%94%A9-%EC%BB%A8%EB%B2%A4%EC%85%98%EC%9D%84-%EA%B5%AC%EC%B6%95%ED%96%88%EB%8D%98-%EC%9D%B4%EC%9C%A0",
 		"date": "Feb 15, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-75": {
+	"feed-76": {
 		"title": "MVC-> 클린아키텍처 + MVVM 리팩토링을 했던 나의 생각 - 2",
 		"link": "https://velog.io/@thd0427/MVC-%ED%81%B4%EB%A6%B0%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-MVVM-%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81%EC%9D%84-%ED%96%88%EB%8D%98-%EB%82%98%EC%9D%98-%EC%83%9D%EA%B0%81-2",
 		"date": "Feb 15, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-76": {
+	"feed-77": {
 		"title": "MVC-> 클린아키텍처 + MVVM 리팩토링을 했던 나의 생각 - 1",
 		"link": "https://velog.io/@thd0427/MVC-%ED%81%B4%EB%A6%B0%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-MVVM-%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81%EC%9D%84-%ED%96%88%EB%8D%98-%EB%82%98%EC%9D%98-%EC%83%9D%EA%B0%81-1",
 		"date": "Feb 15, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-77": {
+	"feed-78": {
 		"title": "1년동안 OKR을 진행한 애자일 형태의 조직 구성  🎉",
 		"link": "https://velog.io/@thd0427/1%EB%85%84%EB%8F%99%EC%95%88-OKR%EC%9D%84-%EC%A7%84%ED%96%89%ED%95%98%EB%A9%B0-%EC%8A%A4%ED%94%84%EB%A6%B0%ED%8A%B8-18%EA%B0%9C%EB%A5%BC-%EC%99%84%EC%88%98%ED%95%9C-%EC%9D%B4%EC%95%BC%EA%B8%B0",
 		"date": "Feb 15, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-78": {
+	"feed-79": {
 		"title": "RecyclerView의 이벤트 처리 방식 개선",
 		"link": "https://velog.io/@thd0427/RecyclerView%EC%9D%98-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EC%B2%98%EB%A6%AC-%EB%B0%A9%EC%8B%9D-%EA%B0%9C%EC%84%A0",
 		"date": "Feb 15, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-79": {
+	"feed-80": {
 		"title": "RecyclerView ViewBinder 사용으로 중복 코드 줄이기",
 		"link": "https://velog.io/@thd0427/RecyclerView-ViewBinder-%EC%82%AC%EC%9A%A9%EC%9C%BC%EB%A1%9C-%EC%A4%91%EB%B3%B5-%EC%BD%94%EB%93%9C-%EC%A4%84%EC%9D%B4%EA%B8%B0",
 		"date": "Feb 15, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-94": {
+	"feed-95": {
 		"title": "환경변수 @ConfigurationProperties로 간단히 관리하기 (with Kotlin)",
 		"link": "https://suho0303.tistory.com/62",
 		"date": "Jan 30, 2024",
@@ -335,7 +347,7 @@
 		"date": "Jan 27, 2024",
 		"writer": "백엔드 정다혜"
 	},
-	"feed-103": {
+	"feed-104": {
 		"title": "[JS] AbortController로 비동기 호출 중지하기(with fetch)",
 		"link": "https://medium.com/@ehdrbdndns/js-abortcontroller%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%B4-%EB%B9%84%EB%8F%99%EA%B8%B0-%ED%98%B8%EC%B6%9C-%EC%A4%91%EC%A7%80%ED%95%98%EA%B8%B0-with-fetch-ea0e8b3fe723?source=rss-6d4304b1a8a3------2",
 		"date": "Jan 25, 2024",
@@ -353,7 +365,7 @@
 		"date": "Jan 19, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-104": {
+	"feed-105": {
 		"title": "[JS] SVG로 라인 차트(Line Chart)를 구현해보자",
 		"link": "https://medium.com/@ehdrbdndns/svg-svg%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%B4-%EB%9D%BC%EC%9D%B8-%EC%B0%A8%ED%8A%B8-line-chart-%EB%A5%BC-%EB%A7%8C%EB%93%A4%EC%96%B4%EB%B3%B4%EC%9E%90-0573023d9e6b?source=rss-6d4304b1a8a3------2",
 		"date": "Jan 19, 2024",
@@ -365,7 +377,7 @@
 		"date": "Jan 16, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-95": {
+	"feed-96": {
 		"title": "스프링에서 gpt api 사용해보기",
 		"link": "https://suho0303.tistory.com/61",
 		"date": "Jan 16, 2024",
@@ -407,7 +419,7 @@
 		"date": "Jan 06, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-105": {
+	"feed-106": {
 		"title": "[React] React에서 Link Preview 구현하기",
 		"link": "https://medium.com/@ehdrbdndns/react-react%EC%97%90%EC%84%9C-link-preview-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0-cdfb31f154fe?source=rss-6d4304b1a8a3------2",
 		"date": "Dec 29, 2023",
@@ -467,13 +479,13 @@
 		"date": "Dec 20, 2023",
 		"writer": "백엔드 손민기"
 	},
-	"feed-96": {
+	"feed-97": {
 		"title": "스프링에서 실시간 에러 로그를 Discord로 받는 방법",
 		"link": "https://suho0303.tistory.com/60",
 		"date": "Dec 10, 2023",
 		"writer": "백엔드 이수호"
 	},
-	"feed-106": {
+	"feed-107": {
 		"title": "[JS] SVG에서 <text> 태그의 실제 길이는 몇일까? getBBox()",
 		"link": "https://medium.com/@ehdrbdndns/svg-%EB%82%98%EC%9D%98-text-%EC%9A%94%EC%86%8C%EC%9D%98-%EA%B8%B8%EC%9D%B4%EB%8A%94-%EB%AA%87%EC%9D%BC%EA%B9%8C-ae3288a571da?source=rss-6d4304b1a8a3------2",
 		"date": "Dec 03, 2023",
@@ -485,31 +497,31 @@
 		"date": "Nov 27, 2023",
 		"writer": "백엔드 손민기"
 	},
-	"feed-97": {
+	"feed-98": {
 		"title": "DDD 10기 백엔드 파트 합격 후기",
 		"link": "https://suho0303.tistory.com/59",
 		"date": "Nov 26, 2023",
 		"writer": "백엔드 이수호"
 	},
-	"feed-98": {
+	"feed-99": {
 		"title": "스프링에서 실시간 에러 로그를 Slack으로 받는 방법",
 		"link": "https://suho0303.tistory.com/58",
 		"date": "Nov 22, 2023",
 		"writer": "백엔드 이수호"
 	},
-	"feed-99": {
+	"feed-100": {
 		"title": "슬랙 웹훅 url을 잊어버렸을 때",
 		"link": "https://suho0303.tistory.com/57",
 		"date": "Nov 20, 2023",
 		"writer": "백엔드 이수호"
 	},
-	"feed-107": {
+	"feed-108": {
 		"title": "[React] useState와 자동 리렌더링의 관계를 알아보자",
 		"link": "https://medium.com/@ehdrbdndns/react-usestate%EC%99%80-%EB%A0%8C%EB%8D%94%EB%A7%81%EA%B3%BC%EC%9D%98-%EB%AA%A8%ED%98%B8%ED%95%9C-%EA%B4%80%EA%B3%84%EB%A5%BC-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90-667e541dc93d?source=rss-6d4304b1a8a3------2",
 		"date": "Nov 18, 2023",
 		"writer": "프론트엔드 양동균"
 	},
-	"feed-108": {
+	"feed-109": {
 		"title": "[Redux] 리덕스 쿼리, 쉽게 이해하는 동작 원리 및 데이터 관리 방법",
 		"link": "https://medium.com/@ehdrbdndns/redux-%EB%A6%AC%EB%8D%95%EC%8A%A4-%EC%BF%BC%EB%A6%AC-%EC%89%BD%EA%B2%8C-%EC%9D%B4%ED%95%B4%ED%95%98%EB%8A%94-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC-%EB%B0%8F-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EA%B4%80%EB%A6%AC-%EB%B0%A9%EB%B2%95-6b087848a4ca?source=rss-6d4304b1a8a3------2",
 		"date": "Oct 30, 2023",
@@ -527,7 +539,7 @@
 		"date": "Oct 15, 2023",
 		"writer": "백엔드 전윤환"
 	},
-	"feed-109": {
+	"feed-110": {
 		"title": "[Redux] 리덕스, 쉽게 이해하는 동작 원리",
 		"link": "https://medium.com/@ehdrbdndns/redux-%EB%A6%AC%EB%8D%95%EC%8A%A4-%EC%89%BD%EA%B2%8C-%EC%9D%B4%ED%95%B4%ED%95%98%EB%8A%94-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC-c0599b954953?source=rss-6d4304b1a8a3------2",
 		"date": "Oct 14, 2023",
@@ -545,13 +557,13 @@
 		"date": "Oct 10, 2023",
 		"writer": "백엔드 전윤환"
 	},
-	"feed-100": {
+	"feed-101": {
 		"title": "깃허브 릴리즈 노트 자동화 하기 - 2",
 		"link": "https://suho0303.tistory.com/56",
 		"date": "Oct 02, 2023",
 		"writer": "백엔드 이수호"
 	},
-	"feed-101": {
+	"feed-102": {
 		"title": "깃허브 릴리즈 노트 자동화 하기 - 1 : 버전 업데이트하기",
 		"link": "https://suho0303.tistory.com/55",
 		"date": "Sep 30, 2023",
@@ -563,7 +575,7 @@
 		"date": "Sep 27, 2023",
 		"writer": "백엔드 전윤환"
 	},
-	"feed-102": {
+	"feed-103": {
 		"title": "Cache 탐험",
 		"link": "https://suho0303.tistory.com/54",
 		"date": "Aug 28, 2023",
@@ -593,25 +605,25 @@
 		"date": "Jul 08, 2023",
 		"writer": "백엔드 전윤환"
 	},
-	"feed-80": {
+	"feed-81": {
 		"title": "Zip vs Combine",
 		"link": "https://velog.io/@thd0427/Zip-vs-Combine",
 		"date": "May 23, 2023",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-81": {
+	"feed-82": {
 		"title": "APK -> App Bundle 적용기",
 		"link": "https://velog.io/@thd0427/APK-App-Bundle-%EC%A0%81%EC%9A%A9%EA%B8%B0",
 		"date": "May 04, 2023",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-82": {
+	"feed-83": {
 		"title": "ROOM DB를 Migration 하자",
 		"link": "https://velog.io/@thd0427/ROOM-DB%EB%A5%BC-Migration-%ED%95%98%EC%9E%90",
 		"date": "Feb 26, 2023",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-83": {
+	"feed-84": {
 		"title": "Android Notification Icon 적용기",
 		"link": "https://velog.io/@thd0427/Android-Notification-Icon-%EC%A0%81%EC%9A%A9%EA%B8%B0",
 		"date": "Feb 23, 2023",
@@ -623,39 +635,33 @@
 		"date": "Feb 10, 2023",
 		"writer": "백엔드 전윤환"
 	},
-	"feed-84": {
+	"feed-85": {
 		"title": "RecyclerView를 데코해보자 ! - ItemDecoration",
 		"link": "https://velog.io/@thd0427/RecyclerView%EB%A5%BC-%EB%8D%B0%EC%BD%94%ED%95%B4%EB%B3%B4%EC%9E%90-ItemDecoration",
 		"date": "Dec 30, 2022",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-85": {
+	"feed-86": {
 		"title": "Glide 관찰기 (Feat. 속도, 캐시)",
 		"link": "https://velog.io/@thd0427/Glide-%EA%B4%80%EC%B0%B0%EA%B8%B0-Feat.-%EC%86%8D%EB%8F%84-%EC%BA%90%EC%8B%9C",
 		"date": "Oct 04, 2022",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-86": {
+	"feed-87": {
 		"title": "[Kotlin] const val과 val (Feat. Companion Object, Object)",
 		"link": "https://velog.io/@thd0427/Kotlin-const-val%EA%B3%BC-val-Feat.-Companion-Object-Object",
 		"date": "Oct 01, 2022",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-87": {
+	"feed-88": {
 		"title": "View와 View 성능 개선 (Feat. ConstraintLayout / RelativeLayout)",
 		"link": "https://velog.io/@thd0427/View%EC%99%80-View-%EC%84%B1%EB%8A%A5-%EA%B0%9C%EC%84%A0-Feat.-ConstraintLayout-RelativeLayout",
 		"date": "Sep 27, 2022",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-88": {
+	"feed-89": {
 		"title": "[Kotlin] 프로그래머스 가장 긴 팰린드롬",
 		"link": "https://velog.io/@thd0427/Kotlin-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4-%EA%B0%80%EC%9E%A5-%EA%B8%B4-%ED%8C%B0%EB%A6%B0%EB%93%9C%EB%A1%AC",
-		"date": "Sep 22, 2022",
-		"writer": "안드로이드 송규빈"
-	},
-	"feed-89": {
-		"title": "멀티 프로세스 / 멀티 스레드 / 멀티코어",
-		"link": "https://velog.io/@thd0427/%EB%A9%80%ED%8B%B0-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EB%A9%80%ED%8B%B0-%EC%8A%A4%EB%A0%88%EB%93%9C-%EB%A9%80%ED%8B%B0%EC%BD%94%EC%96%B4",
 		"date": "Sep 22, 2022",
 		"writer": "안드로이드 송규빈"
 	}

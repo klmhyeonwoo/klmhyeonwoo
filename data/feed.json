@@ -1,4 +1,10 @@
 {
+	"feed-0": {
+		"title": "git stash 했던 내용이 사라졌을 때 당황하지 마세요",
+		"link": "https://klmhyeonwooo.tistory.com/136",
+		"date": "Jul 09, 2024",
+		"writer": "프론트엔드 김현우"
+	},
 	"feed-5": {
 		"title": "네이버 부스트캠프 9기 베이직 과정 회고",
 		"link": "https://youngkdevlog.tistory.com/71",
@@ -23,7 +29,7 @@
 		"date": "Jul 04, 2024",
 		"writer": "백엔드 강명균"
 	},
-	"feed-0": {
+	"feed-1": {
 		"title": "Reduce로 코드 클린하게 만들기",
 		"link": "https://klmhyeonwooo.tistory.com/135",
 		"date": "Jul 02, 2024",
@@ -53,19 +59,19 @@
 		"date": "Jun 30, 2024",
 		"writer": "백엔드 성창규"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "분리된 파일의 tanstack mutate 메소드를 컴포넌트 안에서 사용하기",
 		"link": "https://klmhyeonwooo.tistory.com/134",
 		"date": "Jun 28, 2024",
 		"writer": "프론트엔드 김현우"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "getComputedStyle과 parseFloat, parseInt의 조합",
 		"link": "https://klmhyeonwooo.tistory.com/133",
 		"date": "Jun 26, 2024",
 		"writer": "프론트엔드 김현우"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "React의 커밋 페이즈, 렌더 페이즈 단계",
 		"link": "https://klmhyeonwooo.tistory.com/132",
 		"date": "Jun 24, 2024",
@@ -88,12 +94,6 @@
 		"link": "https://youngkdevlog.tistory.com/69",
 		"date": "Jun 18, 2024",
 		"writer": "iOS 송영규"
-	},
-	"feed-4": {
-		"title": "Vite 환경에서 구글 애널리틱스 3분만에 적용하기",
-		"link": "https://klmhyeonwooo.tistory.com/131",
-		"date": "Jun 12, 2024",
-		"writer": "프론트엔드 김현우"
 	},
 	"feed-73": {
 		"title": "완벽한 공부법 책을 읽고 , , ,",

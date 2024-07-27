@@ -1,62 +1,68 @@
 {
 	"feed-5": {
+		"title": "GCD 공식문서 읽고 정리하기",
+		"link": "https://youngkdevlog.tistory.com/84",
+		"date": "Jul 26, 2024",
+		"writer": "iOS 송영규"
+	},
+	"feed-6": {
+		"title": "네이버 부스트캠프 9기 챌린지 과정 2주차 회고",
+		"link": "https://youngkdevlog.tistory.com/83",
+		"date": "Jul 26, 2024",
+		"writer": "iOS 송영규"
+	},
+	"feed-70": {
+		"title": "Route는 왜 직렬화가 가능해야 할까?",
+		"link": "https://velog.io/@thd0427/Route%EB%8A%94-%EC%99%9C-%EC%A7%81%EB%A0%AC%ED%99%94%EA%B0%80-%EA%B0%80%EB%8A%A5%ED%95%B4%EC%95%BC-%ED%95%A0%EA%B9%8C",
+		"date": "Jul 26, 2024",
+		"writer": "안드로이드 송규빈"
+	},
+	"feed-7": {
 		"title": "9일차 학습정리",
 		"link": "https://youngkdevlog.tistory.com/82",
 		"date": "Jul 25, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-6": {
+	"feed-8": {
 		"title": "함수형 프로그래밍 with. Swift",
 		"link": "https://youngkdevlog.tistory.com/81",
 		"date": "Jul 24, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-7": {
+	"feed-9": {
 		"title": "7일차 학습정리",
 		"link": "https://youngkdevlog.tistory.com/80",
 		"date": "Jul 23, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-8": {
+	"feed-10": {
 		"title": "객체 지향 프로그래밍이란?",
 		"link": "https://youngkdevlog.tistory.com/79",
 		"date": "Jul 22, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-9": {
+	"feed-11": {
 		"title": "Heap이 Stack에 비해 느릴 수 밖에 없는 이유",
 		"link": "https://youngkdevlog.tistory.com/77",
 		"date": "Jul 21, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-10": {
+	"feed-12": {
 		"title": "네이버 부스트캠프 9기 챌린지 과정 1주차 회고",
 		"link": "https://youngkdevlog.tistory.com/76",
 		"date": "Jul 19, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-11": {
+	"feed-13": {
 		"title": "메모리의 구조",
 		"link": "https://youngkdevlog.tistory.com/75",
 		"date": "Jul 18, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-12": {
+	"feed-14": {
 		"title": "토크나이저, 렉서, 파서 (Tokenizer, Lexer, Parser)",
 		"link": "https://youngkdevlog.tistory.com/74",
 		"date": "Jul 17, 2024",
-		"writer": "iOS 송영규"
-	},
-	"feed-13": {
-		"title": "M1 맥에 우분투 가상환경 설치하고 swift 설치하기!",
-		"link": "https://youngkdevlog.tistory.com/73",
-		"date": "Jul 16, 2024",
-		"writer": "iOS 송영규"
-	},
-	"feed-14": {
-		"title": "Git 학습하기",
-		"link": "https://youngkdevlog.tistory.com/72",
-		"date": "Jul 15, 2024",
 		"writer": "iOS 송영규"
 	},
 	"feed-0": {
@@ -65,13 +71,13 @@
 		"date": "Jul 09, 2024",
 		"writer": "프론트엔드 김현우"
 	},
-	"feed-70": {
+	"feed-71": {
 		"title": "깃허브와 지라 워크플로우 자동화",
 		"link": "https://velog.io/@thd0427/%EA%B9%83%ED%97%88%EB%B8%8C%EC%99%80-%EC%A7%80%EB%9D%BC-%EC%9B%8C%ED%81%AC%ED%94%8C%EB%A1%9C%EC%9A%B0-%EC%9E%90%EB%8F%99%ED%99%94",
 		"date": "Jul 05, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-71": {
+	"feed-72": {
 		"title": "공식 문서 기반의 Compose 부수 효과 총정리",
 		"link": "https://velog.io/@thd0427/Compose-%EB%B6%80%EC%88%98-%ED%9A%A8%EA%B3%BC-%EC%B4%9D%EC%A0%95%EB%A6%AC",
 		"date": "Jul 04, 2024",
@@ -95,7 +101,7 @@
 		"date": "Jul 02, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-72": {
+	"feed-73": {
 		"title": "안드로이드 카카오/네이버 로그인 처리 (Feat. ViewModel)",
 		"link": "https://velog.io/@thd0427/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C-%EC%B9%B4%EC%B9%B4%EC%98%A4%EB%84%A4%EC%9D%B4%EB%B2%84-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EC%B2%98%EB%A6%AC-Feat.-ViewModel",
 		"date": "Jul 02, 2024",
@@ -137,7 +143,7 @@
 		"date": "Jun 19, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-73": {
+	"feed-74": {
 		"title": "완벽한 공부법 책을 읽고 , , ,",
 		"link": "https://velog.io/@thd0427/%EC%99%84%EB%B2%BD%ED%95%9C-%EA%B3%B5%EB%B6%80%EB%B2%95-%EC%B1%85%EC%9D%84-%EC%9D%BD%EA%B3%A0",
 		"date": "Jun 12, 2024",
@@ -263,7 +269,7 @@
 		"date": "Mar 07, 2024",
 		"writer": "백엔드 전윤환"
 	},
-	"feed-74": {
+	"feed-75": {
 		"title": "reified를 inline 함수에서만 사용하는 이유를 아시나요? (with. JVM 타입 소거)",
 		"link": "https://velog.io/@thd0427/reified%EB%8A%94-%EC%99%9C-inline-%ED%95%A8%EC%88%98%EC%97%90%EC%84%9C%EB%A7%8C-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C-with.-%ED%83%80%EC%9E%85-%EC%86%8C%EA%B1%B0",
 		"date": "Mar 06, 2024",
@@ -293,43 +299,43 @@
 		"date": "Feb 19, 2024",
 		"writer": "백엔드 이수호"
 	},
-	"feed-75": {
+	"feed-76": {
 		"title": "Android SDUI 도입기(with. GraphQL, Apollo)",
 		"link": "https://velog.io/@thd0427/Android-SDUI-%EB%8F%84%EC%9E%85%EA%B8%B0with.-GraphQL-Apollo",
 		"date": "Feb 15, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-76": {
+	"feed-77": {
 		"title": "UI Layer을 위한 새로운 코딩 컨벤션을 구축했던 이유",
 		"link": "https://velog.io/@thd0427/UI-Layer%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%83%88%EB%A1%9C%EC%9A%B4-%EC%BD%94%EB%94%A9-%EC%BB%A8%EB%B2%A4%EC%85%98%EC%9D%84-%EA%B5%AC%EC%B6%95%ED%96%88%EB%8D%98-%EC%9D%B4%EC%9C%A0",
 		"date": "Feb 15, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-77": {
+	"feed-78": {
 		"title": "MVC-> 클린아키텍처 + MVVM 리팩토링을 했던 나의 생각 - 2",
 		"link": "https://velog.io/@thd0427/MVC-%ED%81%B4%EB%A6%B0%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-MVVM-%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81%EC%9D%84-%ED%96%88%EB%8D%98-%EB%82%98%EC%9D%98-%EC%83%9D%EA%B0%81-2",
 		"date": "Feb 15, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-78": {
+	"feed-79": {
 		"title": "MVC-> 클린아키텍처 + MVVM 리팩토링을 했던 나의 생각 - 1",
 		"link": "https://velog.io/@thd0427/MVC-%ED%81%B4%EB%A6%B0%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-MVVM-%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81%EC%9D%84-%ED%96%88%EB%8D%98-%EB%82%98%EC%9D%98-%EC%83%9D%EA%B0%81-1",
 		"date": "Feb 15, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-79": {
+	"feed-80": {
 		"title": "1년동안 OKR을 진행한 애자일 형태의 조직 구성  🎉",
 		"link": "https://velog.io/@thd0427/1%EB%85%84%EB%8F%99%EC%95%88-OKR%EC%9D%84-%EC%A7%84%ED%96%89%ED%95%98%EB%A9%B0-%EC%8A%A4%ED%94%84%EB%A6%B0%ED%8A%B8-18%EA%B0%9C%EB%A5%BC-%EC%99%84%EC%88%98%ED%95%9C-%EC%9D%B4%EC%95%BC%EA%B8%B0",
 		"date": "Feb 15, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-80": {
+	"feed-81": {
 		"title": "RecyclerView의 이벤트 처리 방식 개선",
 		"link": "https://velog.io/@thd0427/RecyclerView%EC%9D%98-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EC%B2%98%EB%A6%AC-%EB%B0%A9%EC%8B%9D-%EA%B0%9C%EC%84%A0",
 		"date": "Feb 15, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-81": {
+	"feed-82": {
 		"title": "RecyclerView ViewBinder 사용으로 중복 코드 줄이기",
 		"link": "https://velog.io/@thd0427/RecyclerView-ViewBinder-%EC%82%AC%EC%9A%A9%EC%9C%BC%EB%A1%9C-%EC%A4%91%EB%B3%B5-%EC%BD%94%EB%93%9C-%EC%A4%84%EC%9D%B4%EA%B8%B0",
 		"date": "Feb 15, 2024",
@@ -611,25 +617,25 @@
 		"date": "Jul 08, 2023",
 		"writer": "백엔드 전윤환"
 	},
-	"feed-82": {
+	"feed-83": {
 		"title": "Zip vs Combine",
 		"link": "https://velog.io/@thd0427/Zip-vs-Combine",
 		"date": "May 23, 2023",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-83": {
+	"feed-84": {
 		"title": "APK -> App Bundle 적용기",
 		"link": "https://velog.io/@thd0427/APK-App-Bundle-%EC%A0%81%EC%9A%A9%EA%B8%B0",
 		"date": "May 04, 2023",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-84": {
+	"feed-85": {
 		"title": "ROOM DB를 Migration 하자",
 		"link": "https://velog.io/@thd0427/ROOM-DB%EB%A5%BC-Migration-%ED%95%98%EC%9E%90",
 		"date": "Feb 26, 2023",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-85": {
+	"feed-86": {
 		"title": "Android Notification Icon 적용기",
 		"link": "https://velog.io/@thd0427/Android-Notification-Icon-%EC%A0%81%EC%9A%A9%EA%B8%B0",
 		"date": "Feb 23, 2023",
@@ -641,28 +647,22 @@
 		"date": "Feb 10, 2023",
 		"writer": "백엔드 전윤환"
 	},
-	"feed-86": {
+	"feed-87": {
 		"title": "RecyclerView를 데코해보자 ! - ItemDecoration",
 		"link": "https://velog.io/@thd0427/RecyclerView%EB%A5%BC-%EB%8D%B0%EC%BD%94%ED%95%B4%EB%B3%B4%EC%9E%90-ItemDecoration",
 		"date": "Dec 30, 2022",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-87": {
+	"feed-88": {
 		"title": "Glide 관찰기 (Feat. 속도, 캐시)",
 		"link": "https://velog.io/@thd0427/Glide-%EA%B4%80%EC%B0%B0%EA%B8%B0-Feat.-%EC%86%8D%EB%8F%84-%EC%BA%90%EC%8B%9C",
 		"date": "Oct 04, 2022",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-88": {
+	"feed-89": {
 		"title": "[Kotlin] const val과 val (Feat. Companion Object, Object)",
 		"link": "https://velog.io/@thd0427/Kotlin-const-val%EA%B3%BC-val-Feat.-Companion-Object-Object",
 		"date": "Oct 01, 2022",
-		"writer": "안드로이드 송규빈"
-	},
-	"feed-89": {
-		"title": "View와 View 성능 개선 (Feat. ConstraintLayout / RelativeLayout)",
-		"link": "https://velog.io/@thd0427/View%EC%99%80-View-%EC%84%B1%EB%8A%A5-%EA%B0%9C%EC%84%A0-Feat.-ConstraintLayout-RelativeLayout",
-		"date": "Sep 27, 2022",
 		"writer": "안드로이드 송규빈"
 	}
 }

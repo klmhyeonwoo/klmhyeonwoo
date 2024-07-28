@@ -12,13 +12,13 @@
 		"writer": "iOS 송영규"
 	},
 	"feed-70": {
-		"title": "Route는 왜 직렬화가 가능해야 할까?",
+		"title": "Compose navigation route는 왜 직렬화가 가능해야 할까?",
 		"link": "https://velog.io/@thd0427/Route%EB%8A%94-%EC%99%9C-%EC%A7%81%EB%A0%AC%ED%99%94%EA%B0%80-%EA%B0%80%EB%8A%A5%ED%95%B4%EC%95%BC-%ED%95%A0%EA%B9%8C",
 		"date": "Jul 26, 2024",
 		"writer": "안드로이드 송규빈"
 	},
 	"feed-7": {
-		"title": "9일차 학습정리",
+		"title": "발행-구독 패턴(Publisher-Subscriber Pattern)",
 		"link": "https://youngkdevlog.tistory.com/82",
 		"date": "Jul 25, 2024",
 		"writer": "iOS 송영규"
@@ -30,7 +30,7 @@
 		"writer": "iOS 송영규"
 	},
 	"feed-9": {
-		"title": "7일차 학습정리",
+		"title": "Swift 정규표현식",
 		"link": "https://youngkdevlog.tistory.com/80",
 		"date": "Jul 23, 2024",
 		"writer": "iOS 송영규"

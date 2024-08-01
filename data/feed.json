@@ -1,17 +1,23 @@
 {
 	"feed-5": {
+		"title": "day13-14학습정리",
+		"link": "https://youngkdevlog.tistory.com/88",
+		"date": "Jul 31, 2024",
+		"writer": "iOS 송영규"
+	},
+	"feed-6": {
 		"title": "GCD Sync, Async, Serial, Concurrent 조합해보기",
 		"link": "https://youngkdevlog.tistory.com/87",
 		"date": "Jul 30, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-6": {
+	"feed-7": {
 		"title": "동시성, 병렬성, 동기(sync), 비동기(async) 개념 정리",
 		"link": "https://youngkdevlog.tistory.com/86",
 		"date": "Jul 29, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-7": {
+	"feed-8": {
 		"title": "캐시 데이터 용량 표시 방식 개선하기: ByteFormatter",
 		"link": "https://youngkdevlog.tistory.com/85",
 		"date": "Jul 29, 2024",
@@ -23,13 +29,13 @@
 		"date": "Jul 29, 2024",
 		"writer": "프론트엔드 양동균"
 	},
-	"feed-8": {
+	"feed-9": {
 		"title": "GCD 공식문서 읽고 정리하기",
 		"link": "https://youngkdevlog.tistory.com/84",
 		"date": "Jul 26, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-9": {
+	"feed-10": {
 		"title": "네이버 부스트캠프 9기 챌린지 과정 2주차 회고",
 		"link": "https://youngkdevlog.tistory.com/83",
 		"date": "Jul 26, 2024",
@@ -41,34 +47,28 @@
 		"date": "Jul 26, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-10": {
+	"feed-11": {
 		"title": "발행-구독 패턴(Publisher-Subscriber Pattern)",
 		"link": "https://youngkdevlog.tistory.com/82",
 		"date": "Jul 25, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-11": {
+	"feed-12": {
 		"title": "함수형 프로그래밍 with. Swift",
 		"link": "https://youngkdevlog.tistory.com/81",
 		"date": "Jul 24, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-12": {
+	"feed-13": {
 		"title": "Swift 정규표현식",
 		"link": "https://youngkdevlog.tistory.com/80",
 		"date": "Jul 23, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-13": {
+	"feed-14": {
 		"title": "Static Dispatch &amp; Dynamic Dispatch",
 		"link": "https://youngkdevlog.tistory.com/79",
 		"date": "Jul 22, 2024",
-		"writer": "iOS 송영규"
-	},
-	"feed-14": {
-		"title": "Heap이 Stack에 비해 느릴 수 밖에 없는 이유",
-		"link": "https://youngkdevlog.tistory.com/77",
-		"date": "Jul 21, 2024",
 		"writer": "iOS 송영규"
 	},
 	"feed-0": {

@@ -1,35 +1,47 @@
 {
+	"feed-5": {
+		"title": "day16-17 학습 정리",
+		"link": "https://youngkdevlog.tistory.com/90",
+		"date": "Aug 05, 2024",
+		"writer": "iOS 송영규"
+	},
 	"feed-25": {
+		"title": "코딩자율학습단 스프링부트_2장",
+		"link": "https://starlikedh.tistory.com/entry/%EC%BD%94%EB%94%A9%EC%9E%90%EC%9C%A8%ED%95%99%EC%8A%B5%EB%8B%A8-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B82%EC%9E%A5",
+		"date": "Aug 04, 2024",
+		"writer": "백엔드 정다혜"
+	},
+	"feed-26": {
 		"title": "코딩자율학습단 스프링부트_1장",
 		"link": "https://starlikedh.tistory.com/entry/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-1",
 		"date": "Aug 03, 2024",
 		"writer": "백엔드 정다혜"
 	},
-	"feed-5": {
+	"feed-6": {
 		"title": "네이버 부스트캠프 9기 챌린지 과정 3주차 회고",
 		"link": "https://youngkdevlog.tistory.com/89",
 		"date": "Aug 02, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-6": {
+	"feed-7": {
 		"title": "day13-14학습정리",
 		"link": "https://youngkdevlog.tistory.com/88",
 		"date": "Jul 31, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-7": {
+	"feed-8": {
 		"title": "GCD Sync, Async, Serial, Concurrent 조합해보기",
 		"link": "https://youngkdevlog.tistory.com/87",
 		"date": "Jul 30, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-8": {
+	"feed-9": {
 		"title": "동시성, 병렬성, 동기(sync), 비동기(async) 개념 정리",
 		"link": "https://youngkdevlog.tistory.com/86",
 		"date": "Jul 29, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-9": {
+	"feed-10": {
 		"title": "캐시 데이터 용량 표시 방식 개선하기: ByteFormatter",
 		"link": "https://youngkdevlog.tistory.com/85",
 		"date": "Jul 29, 2024",
@@ -41,13 +53,13 @@
 		"date": "Jul 29, 2024",
 		"writer": "프론트엔드 양동균"
 	},
-	"feed-10": {
+	"feed-11": {
 		"title": "GCD 공식문서 읽고 정리하기",
 		"link": "https://youngkdevlog.tistory.com/84",
 		"date": "Jul 26, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-11": {
+	"feed-12": {
 		"title": "네이버 부스트캠프 9기 챌린지 과정 2주차 회고",
 		"link": "https://youngkdevlog.tistory.com/83",
 		"date": "Jul 26, 2024",
@@ -59,22 +71,16 @@
 		"date": "Jul 26, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-12": {
+	"feed-13": {
 		"title": "발행-구독 패턴(Publisher-Subscriber Pattern)",
 		"link": "https://youngkdevlog.tistory.com/82",
 		"date": "Jul 25, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-13": {
+	"feed-14": {
 		"title": "함수형 프로그래밍 with. Swift",
 		"link": "https://youngkdevlog.tistory.com/81",
 		"date": "Jul 24, 2024",
-		"writer": "iOS 송영규"
-	},
-	"feed-14": {
-		"title": "Swift 정규표현식",
-		"link": "https://youngkdevlog.tistory.com/80",
-		"date": "Jul 23, 2024",
 		"writer": "iOS 송영규"
 	},
 	"feed-0": {
@@ -401,13 +407,13 @@
 		"date": "Jan 12, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-26": {
+	"feed-27": {
 		"title": "스프링 DB 데이터 접근 활용 기술_04",
 		"link": "https://starlikedh.tistory.com/entry/%EC%8A%A4%ED%94%84%EB%A7%81-DB-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%91%EA%B7%BC-%ED%99%9C%EC%9A%A9-%EA%B8%B0%EC%88%A004",
 		"date": "Jan 10, 2024",
 		"writer": "백엔드 정다혜"
 	},
-	"feed-27": {
+	"feed-28": {
 		"title": "스프링 DB 데이터 접근 활용 기술_03",
 		"link": "https://starlikedh.tistory.com/entry/%EC%8A%A4%ED%94%84%EB%A7%81-DB-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%91%EA%B7%BC-%ED%99%9C%EC%9A%A9-%EA%B8%B0%EC%88%A003",
 		"date": "Jan 10, 2024",
@@ -419,15 +425,9 @@
 		"date": "Jan 10, 2024",
 		"writer": "백엔드 전윤환"
 	},
-	"feed-28": {
+	"feed-29": {
 		"title": "스프링 DB 데이터 접근 활용 기술_02",
 		"link": "https://starlikedh.tistory.com/entry/%EC%8A%A4%ED%94%84%EB%A7%81-DB-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%91%EA%B7%BC-%ED%99%9C%EC%9A%A9-%EA%B8%B0%EC%88%A002",
-		"date": "Jan 06, 2024",
-		"writer": "백엔드 정다혜"
-	},
-	"feed-29": {
-		"title": "스프링 DB 데이터 접근 활용 기술_01",
-		"link": "https://starlikedh.tistory.com/entry/%EC%8A%A4%ED%94%84%EB%A7%81-DB-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%91%EA%B7%BC-%ED%99%9C%EC%9A%A9-%EA%B8%B0%EC%88%A001",
 		"date": "Jan 06, 2024",
 		"writer": "백엔드 정다혜"
 	},

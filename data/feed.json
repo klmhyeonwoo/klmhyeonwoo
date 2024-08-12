@@ -1,65 +1,89 @@
 {
+	"feed-0": {
+		"title": "협업 시에 이슈 관리자와 리뷰어를 일일이 설정하기 불편한가요?",
+		"link": "https://klmhyeonwooo.tistory.com/137",
+		"date": "Aug 12, 2024",
+		"writer": "프론트엔드 김현우"
+	},
 	"feed-5": {
-		"title": "day18,19 학습정리",
+		"title": "네이버 부스트캠프 웹・모바일 9기 챌린지 과정을 마치며",
+		"link": "https://youngkdevlog.tistory.com/93",
+		"date": "Aug 11, 2024",
+		"writer": "iOS 송영규"
+	},
+	"feed-25": {
+		"title": "코딩자율학습단 스프링부트_5장",
+		"link": "https://starlikedh.tistory.com/entry/%EC%BD%94%EB%94%A9%EC%9E%90%EC%9C%A8%ED%95%99%EC%8A%B5%EB%8B%A8-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B85%EC%9E%A5",
+		"date": "Aug 11, 2024",
+		"writer": "백엔드 정다혜"
+	},
+	"feed-26": {
+		"title": "코딩자율학습단 스프링부트_4장",
+		"link": "https://starlikedh.tistory.com/entry/%EC%BD%94%EB%94%A9%EC%9E%90%EC%9C%A8%ED%95%99%EC%8A%B5%EB%8B%A8-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B84%EC%9E%A5",
+		"date": "Aug 10, 2024",
+		"writer": "백엔드 정다혜"
+	},
+	"feed-6": {
+		"title": "TCP/IP 소켓 통신 개념 및 Network 프레임워크",
 		"link": "https://youngkdevlog.tistory.com/92",
 		"date": "Aug 07, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-25": {
+	"feed-27": {
 		"title": "코딩자율학습단 스프링부트_3장",
 		"link": "https://starlikedh.tistory.com/entry/%EC%BD%94%EB%94%A9%EC%9E%90%EC%9C%A8%ED%95%99%EC%8A%B5%EB%8B%A8-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B83%EC%9E%A5",
 		"date": "Aug 06, 2024",
 		"writer": "백엔드 정다혜"
 	},
-	"feed-6": {
+	"feed-7": {
 		"title": "SQL 기본 쿼리문 정리",
 		"link": "https://youngkdevlog.tistory.com/91",
 		"date": "Aug 05, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-7": {
+	"feed-8": {
 		"title": "HTTP Request, Response 구조",
 		"link": "https://youngkdevlog.tistory.com/90",
 		"date": "Aug 05, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-26": {
+	"feed-28": {
 		"title": "코딩자율학습단 스프링부트_2장",
 		"link": "https://starlikedh.tistory.com/entry/%EC%BD%94%EB%94%A9%EC%9E%90%EC%9C%A8%ED%95%99%EC%8A%B5%EB%8B%A8-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B82%EC%9E%A5",
 		"date": "Aug 04, 2024",
 		"writer": "백엔드 정다혜"
 	},
-	"feed-27": {
+	"feed-29": {
 		"title": "코딩자율학습단 스프링부트_1장",
 		"link": "https://starlikedh.tistory.com/entry/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-1",
 		"date": "Aug 03, 2024",
 		"writer": "백엔드 정다혜"
 	},
-	"feed-8": {
+	"feed-9": {
 		"title": "네이버 부스트캠프 웹・모바일 9기 챌린지 과정 3주차 회고",
 		"link": "https://youngkdevlog.tistory.com/89",
 		"date": "Aug 02, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-9": {
+	"feed-10": {
 		"title": "Git 동작 방식",
 		"link": "https://youngkdevlog.tistory.com/88",
 		"date": "Jul 31, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-10": {
+	"feed-11": {
 		"title": "GCD Sync, Async, Serial, Concurrent 조합해보기",
 		"link": "https://youngkdevlog.tistory.com/87",
 		"date": "Jul 30, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-11": {
+	"feed-12": {
 		"title": "동시성, 병렬성, 동기(sync), 비동기(async) 개념 정리",
 		"link": "https://youngkdevlog.tistory.com/86",
 		"date": "Jul 29, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-12": {
+	"feed-13": {
 		"title": "캐시 데이터 용량 표시 방식 개선하기: ByteFormatter",
 		"link": "https://youngkdevlog.tistory.com/85",
 		"date": "Jul 29, 2024",
@@ -71,15 +95,9 @@
 		"date": "Jul 29, 2024",
 		"writer": "프론트엔드 양동균"
 	},
-	"feed-13": {
+	"feed-14": {
 		"title": "GCD 공식문서 읽고 정리하기",
 		"link": "https://youngkdevlog.tistory.com/84",
-		"date": "Jul 26, 2024",
-		"writer": "iOS 송영규"
-	},
-	"feed-14": {
-		"title": "네이버 부스트캠프 웹・모바일 9기 챌린지 과정 2주차 회고",
-		"link": "https://youngkdevlog.tistory.com/83",
 		"date": "Jul 26, 2024",
 		"writer": "iOS 송영규"
 	},
@@ -89,7 +107,7 @@
 		"date": "Jul 26, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-0": {
+	"feed-1": {
 		"title": "git stash 했던 내용이 사라졌을 때 당황하지 마세요",
 		"link": "https://klmhyeonwooo.tistory.com/136",
 		"date": "Jul 09, 2024",
@@ -113,7 +131,7 @@
 		"date": "Jul 04, 2024",
 		"writer": "백엔드 강명균"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "Reduce로 코드 클린하게 만들기",
 		"link": "https://klmhyeonwooo.tistory.com/135",
 		"date": "Jul 02, 2024",
@@ -137,22 +155,16 @@
 		"date": "Jun 30, 2024",
 		"writer": "백엔드 성창규"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "분리된 파일의 tanstack mutate 메소드를 컴포넌트 안에서 사용하기",
 		"link": "https://klmhyeonwooo.tistory.com/134",
 		"date": "Jun 28, 2024",
 		"writer": "프론트엔드 김현우"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "getComputedStyle과 parseFloat, parseInt의 조합",
 		"link": "https://klmhyeonwooo.tistory.com/133",
 		"date": "Jun 26, 2024",
-		"writer": "프론트엔드 김현우"
-	},
-	"feed-4": {
-		"title": "React의 커밋 페이즈, 렌더 페이즈 단계",
-		"link": "https://klmhyeonwooo.tistory.com/132",
-		"date": "Jun 24, 2024",
 		"writer": "프론트엔드 김현우"
 	},
 	"feed-31": {
@@ -412,18 +424,6 @@
 		"link": "https://velog.io/@handmk/C-%EC%8B%9C%EA%B0%84-%EB%B3%B5%EC%9E%A1%EB%8F%84-%ED%91%9C%EA%B8%B0%EB%B2%95",
 		"date": "Jan 12, 2024",
 		"writer": "백엔드 손민기"
-	},
-	"feed-28": {
-		"title": "스프링 DB 데이터 접근 활용 기술_04",
-		"link": "https://starlikedh.tistory.com/entry/%EC%8A%A4%ED%94%84%EB%A7%81-DB-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%91%EA%B7%BC-%ED%99%9C%EC%9A%A9-%EA%B8%B0%EC%88%A004",
-		"date": "Jan 10, 2024",
-		"writer": "백엔드 정다혜"
-	},
-	"feed-29": {
-		"title": "스프링 DB 데이터 접근 활용 기술_03",
-		"link": "https://starlikedh.tistory.com/entry/%EC%8A%A4%ED%94%84%EB%A7%81-DB-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%91%EA%B7%BC-%ED%99%9C%EC%9A%A9-%EA%B8%B0%EC%88%A003",
-		"date": "Jan 10, 2024",
-		"writer": "백엔드 정다혜"
 	},
 	"feed-57": {
 		"title": "Spring Security: There is no PasswordEncoder mapped for the id \"null\" 오류 해결",

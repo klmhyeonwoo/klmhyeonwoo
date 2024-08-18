@@ -1,23 +1,29 @@
 {
 	"feed-25": {
+		"title": "코딩자율학습단 스프링부트_11장",
+		"link": "https://starlikedh.tistory.com/entry/%EC%BD%94%EB%94%A9%EC%9E%90%EC%9C%A8%ED%95%99%EC%8A%B5%EB%8B%A8-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B811%EC%9E%A5",
+		"date": "Aug 17, 2024",
+		"writer": "백엔드 정다혜"
+	},
+	"feed-26": {
 		"title": "코딩자율학습단 스프링부트_10장",
 		"link": "https://starlikedh.tistory.com/entry/%EC%BD%94%EB%94%A9%EC%9E%90%EC%9C%A8%ED%95%99%EC%8A%B5%EB%8B%A8-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B810%EC%9E%A5",
 		"date": "Aug 16, 2024",
 		"writer": "백엔드 정다혜"
 	},
-	"feed-26": {
+	"feed-27": {
 		"title": "코딩자율학습단 스프링부트_9장",
 		"link": "https://starlikedh.tistory.com/entry/%EC%BD%94%EB%94%A9%EC%9E%90%EC%9C%A8%ED%95%99%EC%8A%B5%EB%8B%A8-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B89%EC%9E%A5",
 		"date": "Aug 15, 2024",
 		"writer": "백엔드 정다혜"
 	},
-	"feed-27": {
+	"feed-28": {
 		"title": "코딩자율학습단 스프링부트_8장",
 		"link": "https://starlikedh.tistory.com/entry/%EC%BD%94%EB%94%A9%EC%9E%90%EC%9C%A8%ED%95%99%EC%8A%B5%EB%8B%A8-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B88%EC%9E%A5",
 		"date": "Aug 14, 2024",
 		"writer": "백엔드 정다혜"
 	},
-	"feed-28": {
+	"feed-29": {
 		"title": "코딩자율학습단 스프링부트_7장",
 		"link": "https://starlikedh.tistory.com/entry/%EC%BD%94%EB%94%A9%EC%9E%90%EC%9C%A8%ED%95%99%EC%8A%B5%EB%8B%A8-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B87%EC%9E%A5",
 		"date": "Aug 13, 2024",
@@ -28,12 +34,6 @@
 		"link": "https://klmhyeonwooo.tistory.com/137",
 		"date": "Aug 12, 2024",
 		"writer": "프론트엔드 김현우"
-	},
-	"feed-29": {
-		"title": "코딩자율학습단 스프링부트_6장",
-		"link": "https://starlikedh.tistory.com/entry/%EC%BD%94%EB%94%A9%EC%9E%90%EC%9C%A8%ED%95%99%EC%8A%B5%EB%8B%A8-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B86%EC%9E%A5",
-		"date": "Aug 12, 2024",
-		"writer": "백엔드 정다혜"
 	},
 	"feed-70": {
 		"title": "Android Baseline Profile란",

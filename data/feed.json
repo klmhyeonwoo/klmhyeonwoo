@@ -1,32 +1,44 @@
 {
+	"feed-5": {
+		"title": "IBOutlet과 IBAction",
+		"link": "https://youngkdevlog.tistory.com/95",
+		"date": "Aug 21, 2024",
+		"writer": "iOS 송영규"
+	},
+	"feed-6": {
+		"title": "View Life Cycle",
+		"link": "https://youngkdevlog.tistory.com/94",
+		"date": "Aug 21, 2024",
+		"writer": "iOS 송영규"
+	},
 	"feed-25": {
+		"title": "코딩자율학습단 스프링부트_14장",
+		"link": "https://starlikedh.tistory.com/entry/%EC%BD%94%EB%94%A9%EC%9E%90%EC%9C%A8%ED%95%99%EC%8A%B5%EB%8B%A8-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B814%EC%9E%A5",
+		"date": "Aug 21, 2024",
+		"writer": "백엔드 정다혜"
+	},
+	"feed-26": {
 		"title": "코딩자율학습단 스프링부트_13장",
 		"link": "https://starlikedh.tistory.com/entry/%EC%BD%94%EB%94%A9%EC%9E%90%EC%9C%A8%ED%95%99%EC%8A%B5%EB%8B%A8-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B813%EC%9E%A5",
 		"date": "Aug 20, 2024",
 		"writer": "백엔드 정다혜"
 	},
-	"feed-26": {
+	"feed-27": {
 		"title": "코딩자율학습단 스프링부트_12장",
 		"link": "https://starlikedh.tistory.com/entry/%EC%BD%94%EB%94%A9%EC%9E%90%EC%9C%A8%ED%95%99%EC%8A%B5%EB%8B%A8-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B812%EC%9E%A5",
 		"date": "Aug 19, 2024",
 		"writer": "백엔드 정다혜"
 	},
-	"feed-27": {
+	"feed-28": {
 		"title": "코딩자율학습단 스프링부트_11장",
 		"link": "https://starlikedh.tistory.com/entry/%EC%BD%94%EB%94%A9%EC%9E%90%EC%9C%A8%ED%95%99%EC%8A%B5%EB%8B%A8-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B811%EC%9E%A5",
 		"date": "Aug 17, 2024",
 		"writer": "백엔드 정다혜"
 	},
-	"feed-28": {
+	"feed-29": {
 		"title": "코딩자율학습단 스프링부트_10장",
 		"link": "https://starlikedh.tistory.com/entry/%EC%BD%94%EB%94%A9%EC%9E%90%EC%9C%A8%ED%95%99%EC%8A%B5%EB%8B%A8-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B810%EC%9E%A5",
 		"date": "Aug 16, 2024",
-		"writer": "백엔드 정다혜"
-	},
-	"feed-29": {
-		"title": "코딩자율학습단 스프링부트_9장",
-		"link": "https://starlikedh.tistory.com/entry/%EC%BD%94%EB%94%A9%EC%9E%90%EC%9C%A8%ED%95%99%EC%8A%B5%EB%8B%A8-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B89%EC%9E%A5",
-		"date": "Aug 15, 2024",
 		"writer": "백엔드 정다혜"
 	},
 	"feed-0": {
@@ -47,57 +59,51 @@
 		"date": "Aug 12, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-5": {
+	"feed-7": {
 		"title": "네이버 부스트캠프 웹・모바일 9기 챌린지 과정을 마치며",
 		"link": "https://youngkdevlog.tistory.com/93",
 		"date": "Aug 11, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-6": {
+	"feed-8": {
 		"title": "TCP/IP 소켓 통신 개념 및 Network 프레임워크",
 		"link": "https://youngkdevlog.tistory.com/92",
 		"date": "Aug 07, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-7": {
+	"feed-9": {
 		"title": "SQL 기본 쿼리문 정리",
 		"link": "https://youngkdevlog.tistory.com/91",
 		"date": "Aug 05, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-8": {
+	"feed-10": {
 		"title": "HTTP Request, Response 구조",
 		"link": "https://youngkdevlog.tistory.com/90",
 		"date": "Aug 05, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-9": {
+	"feed-11": {
 		"title": "네이버 부스트캠프 웹・모바일 9기 챌린지 과정 3주차 회고",
 		"link": "https://youngkdevlog.tistory.com/89",
 		"date": "Aug 02, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-10": {
+	"feed-12": {
 		"title": "Git 동작 방식",
 		"link": "https://youngkdevlog.tistory.com/88",
 		"date": "Jul 31, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-11": {
+	"feed-13": {
 		"title": "GCD Sync, Async, Serial, Concurrent 조합해보기",
 		"link": "https://youngkdevlog.tistory.com/87",
 		"date": "Jul 30, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-12": {
+	"feed-14": {
 		"title": "동시성, 병렬성, 동기(sync), 비동기(async) 개념 정리",
 		"link": "https://youngkdevlog.tistory.com/86",
-		"date": "Jul 29, 2024",
-		"writer": "iOS 송영규"
-	},
-	"feed-13": {
-		"title": "캐시 데이터 용량 표시 방식 개선하기: ByteFormatter",
-		"link": "https://youngkdevlog.tistory.com/85",
 		"date": "Jul 29, 2024",
 		"writer": "iOS 송영규"
 	},
@@ -106,12 +112,6 @@
 		"link": "https://medium.com/@ehdrbdndns/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%ED%8C%A8%EB%9F%AC%EB%8B%A4%EC%9E%84-%ED%95%A8%EC%88%98%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%EC%9D%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-with-javascript-295af1620914?source=rss-6d4304b1a8a3------2",
 		"date": "Jul 29, 2024",
 		"writer": "프론트엔드 양동균"
-	},
-	"feed-14": {
-		"title": "GCD 공식문서 읽고 정리하기",
-		"link": "https://youngkdevlog.tistory.com/84",
-		"date": "Jul 26, 2024",
-		"writer": "iOS 송영규"
 	},
 	"feed-72": {
 		"title": "Compose navigation route는 왜 직렬화가 가능해야 할까?",

@@ -17,8 +17,8 @@
 - [리크루팅을 위해 어플라이 사이트를 개발했다](https://klmhyeonwooo.tistory.com/74)<br>
 
 ### 최근 포스팅
+- [레이어 서비스는 퍼널을 어떻게 관리했을까요?](https://klmhyeonwooo.tistory.com/138)<br>
 - [협업 시에 이슈 관리자와 리뷰어를 일일이 설정하기 불편한가요?](https://klmhyeonwooo.tistory.com/137)<br>
 - [git stash 했던 내용이 사라졌을 때 당황하지 마세요](https://klmhyeonwooo.tistory.com/136)<br>
 - [Reduce로 코드 클린하게 만들기](https://klmhyeonwooo.tistory.com/135)<br>
 - [분리된 파일의 tanstack mutate 메소드를 컴포넌트 안에서 사용하기](https://klmhyeonwooo.tistory.com/134)<br>
-- [getComputedStyle과 parseFloat, parseInt의 조합](https://klmhyeonwooo.tistory.com/133)<br>

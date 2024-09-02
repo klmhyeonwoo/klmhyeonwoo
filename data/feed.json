@@ -1,4 +1,10 @@
 {
+	"feed-0": {
+		"title": "레이어 서비스는 퍼널을 어떻게 관리했을까요?",
+		"link": "https://klmhyeonwooo.tistory.com/138",
+		"date": "Sep 01, 2024",
+		"writer": "프론트엔드 김현우"
+	},
 	"feed-30": {
 		"title": "[멋쟁이사자처럼] 12기 아이디어톤 1등 수상🥇",
 		"link": "https://velog.io/@handmk/%EB%A9%8B%EC%9F%81%EC%9D%B4%EC%82%AC%EC%9E%90%EC%B2%98%EB%9F%BC-12%EA%B8%B0-%EC%95%84%EC%9D%B4%EB%94%94%EC%96%B4%ED%86%A4-1%EB%93%B1-%EC%88%98%EC%83%81",
@@ -65,7 +71,7 @@
 		"date": "Aug 21, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-0": {
+	"feed-1": {
 		"title": "협업 시에 이슈 관리자와 리뷰어를 일일이 설정하기 불편한가요?",
 		"link": "https://klmhyeonwooo.tistory.com/137",
 		"date": "Aug 12, 2024",
@@ -131,7 +137,7 @@
 		"date": "Jul 26, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "git stash 했던 내용이 사라졌을 때 당황하지 마세요",
 		"link": "https://klmhyeonwooo.tistory.com/136",
 		"date": "Jul 09, 2024",
@@ -155,7 +161,7 @@
 		"date": "Jul 04, 2024",
 		"writer": "백엔드 강명균"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "Reduce로 코드 클린하게 만들기",
 		"link": "https://klmhyeonwooo.tistory.com/135",
 		"date": "Jul 02, 2024",
@@ -179,16 +185,10 @@
 		"date": "Jun 30, 2024",
 		"writer": "백엔드 성창규"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "분리된 파일의 tanstack mutate 메소드를 컴포넌트 안에서 사용하기",
 		"link": "https://klmhyeonwooo.tistory.com/134",
 		"date": "Jun 28, 2024",
-		"writer": "프론트엔드 김현우"
-	},
-	"feed-4": {
-		"title": "getComputedStyle과 parseFloat, parseInt의 조합",
-		"link": "https://klmhyeonwooo.tistory.com/133",
-		"date": "Jun 26, 2024",
 		"writer": "프론트엔드 김현우"
 	},
 	"feed-33": {

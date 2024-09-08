@@ -1,4 +1,10 @@
 {
+	"feed-5": {
+		"title": "왁뮤 3.0 출시 및 장애 대응 기록",
+		"link": "https://youngkdevlog.tistory.com/97",
+		"date": "Sep 07, 2024",
+		"writer": "iOS 송영규"
+	},
 	"feed-15": {
 		"title": "[산업기능요원] 크나큰 실수 기념 광기의 회고록 #3",
 		"link": "https://apape1225.tistory.com/169",
@@ -71,19 +77,19 @@
 		"date": "Aug 23, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-5": {
+	"feed-6": {
 		"title": "UIScene, UIWindowScene, UIWindow",
 		"link": "https://youngkdevlog.tistory.com/96",
 		"date": "Aug 22, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-6": {
+	"feed-7": {
 		"title": "IBOutlet과 IBAction",
 		"link": "https://youngkdevlog.tistory.com/95",
 		"date": "Aug 21, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-7": {
+	"feed-8": {
 		"title": "View Life Cycle",
 		"link": "https://youngkdevlog.tistory.com/94",
 		"date": "Aug 21, 2024",
@@ -101,46 +107,40 @@
 		"date": "Aug 12, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-8": {
+	"feed-9": {
 		"title": "네이버 부스트캠프 웹・모바일 9기 챌린지 과정을 마치며",
 		"link": "https://youngkdevlog.tistory.com/93",
 		"date": "Aug 11, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-9": {
+	"feed-10": {
 		"title": "TCP/IP 소켓 통신 개념 및 Network 프레임워크",
 		"link": "https://youngkdevlog.tistory.com/92",
 		"date": "Aug 07, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-10": {
+	"feed-11": {
 		"title": "SQL 기본 쿼리문 정리",
 		"link": "https://youngkdevlog.tistory.com/91",
 		"date": "Aug 05, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-11": {
+	"feed-12": {
 		"title": "HTTP Request, Response 구조",
 		"link": "https://youngkdevlog.tistory.com/90",
 		"date": "Aug 05, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-12": {
+	"feed-13": {
 		"title": "네이버 부스트캠프 웹・모바일 9기 챌린지 과정 3주차 회고",
 		"link": "https://youngkdevlog.tistory.com/89",
 		"date": "Aug 02, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-13": {
+	"feed-14": {
 		"title": "Git 동작 방식",
 		"link": "https://youngkdevlog.tistory.com/88",
 		"date": "Jul 31, 2024",
-		"writer": "iOS 송영규"
-	},
-	"feed-14": {
-		"title": "GCD Sync, Async, Serial, Concurrent 조합해보기",
-		"link": "https://youngkdevlog.tistory.com/87",
-		"date": "Jul 30, 2024",
 		"writer": "iOS 송영규"
 	},
 	"feed-104": {

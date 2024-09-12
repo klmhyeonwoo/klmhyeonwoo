@@ -1,11 +1,17 @@
 {
 	"feed-30": {
+		"title": "[DEPLOY] GCP Ubuntu VM 인스턴스 생성",
+		"link": "https://velog.io/@handmk/DEPLOY-GCP-Ubuntu-VM-%EC%83%9D%EC%84%B1",
+		"date": "Sep 11, 2024",
+		"writer": "백엔드 손민기"
+	},
+	"feed-31": {
 		"title": "[ERROR] Docker failed to solve: error getting credentials - err: exit status 1, out: “",
 		"link": "https://velog.io/@handmk/ERROR-failed-to-solve-error-getting-credentials-err-exit-status-1-out",
 		"date": "Sep 10, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-31": {
+	"feed-32": {
 		"title": "[GAGU] LLM 이미지 생성 모델 + 3D 랜더링",
 		"link": "https://velog.io/@handmk/GAGU-LLM-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%83%9D%EC%84%B1-%EB%AA%A8%EB%8D%B8-3D-%EB%9E%9C%EB%8D%94%EB%A7%81",
 		"date": "Sep 10, 2024",
@@ -29,7 +35,7 @@
 		"date": "Sep 07, 2024",
 		"writer": "백엔드 성창규"
 	},
-	"feed-32": {
+	"feed-33": {
 		"title": "[ERROR] 413 Request Entity Too Large",
 		"link": "https://velog.io/@handmk/%EC%82%AC%EC%9D%B4%EB%93%9C-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-GAGU-413-Request-Entity-Too-Large",
 		"date": "Sep 06, 2024",
@@ -47,13 +53,13 @@
 		"date": "Sep 01, 2024",
 		"writer": "프론트엔드 김현우"
 	},
-	"feed-33": {
+	"feed-34": {
 		"title": "[멋쟁이사자처럼] 12기 아이디어톤 1등 수상🥇",
 		"link": "https://velog.io/@handmk/%EB%A9%8B%EC%9F%81%EC%9D%B4%EC%82%AC%EC%9E%90%EC%B2%98%EB%9F%BC-12%EA%B8%B0-%EC%95%84%EC%9D%B4%EB%94%94%EC%96%B4%ED%86%A4-1%EB%93%B1-%EC%88%98%EC%83%81",
 		"date": "Aug 28, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-34": {
+	"feed-35": {
 		"title": "[멋쟁이사자처럼] 11기 해커톤 회고",
 		"link": "https://velog.io/@handmk/%EB%A9%8B%EC%9F%81%EC%9D%B4%EC%82%AC%EC%9E%90%EC%B2%98%EB%9F%BC-11th-%ED%95%B4%EC%BB%A4%ED%86%A4-%ED%9A%8C%EA%B3%A0",
 		"date": "Aug 28, 2024",
@@ -203,8 +209,8 @@
 		"date": "Jul 02, 2024",
 		"writer": "프론트엔드 김현우"
 	},
-	"feed-35": {
-		"title": "[SpringBoot] AWS EC2 Ubuntu 서버 배포",
+	"feed-36": {
+		"title": "[DEPLOY] Spring Boot AWS EC2 Ubuntu 서버 배포",
 		"link": "https://velog.io/@handmk/SpringBoot-AWS-EC2-Ubuntu-%EC%84%9C%EB%B2%84-%EB%B0%B0%ED%8F%AC",
 		"date": "Jul 02, 2024",
 		"writer": "백엔드 손민기"
@@ -227,13 +233,13 @@
 		"date": "Jun 28, 2024",
 		"writer": "프론트엔드 김현우"
 	},
-	"feed-36": {
+	"feed-37": {
 		"title": "[SpringBoot] Kakao Login",
 		"link": "https://velog.io/@handmk/SpringBoot-Kakao-Login",
 		"date": "Jun 20, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-37": {
+	"feed-38": {
 		"title": "[SpringBoot] Spring-Security 정리",
 		"link": "https://velog.io/@handmk/SpringBoot-Spring-Security-%EC%A0%95%EB%A6%AC",
 		"date": "Jun 19, 2024",
@@ -275,7 +281,7 @@
 		"date": "May 09, 2024",
 		"writer": "백엔드 전윤환"
 	},
-	"feed-38": {
+	"feed-39": {
 		"title": "[CS] JWT란?",
 		"link": "https://velog.io/@handmk/CS-JWT%EB%9E%80",
 		"date": "Apr 29, 2024",
@@ -287,7 +293,7 @@
 		"date": "Apr 28, 2024",
 		"writer": "백엔드 성창규"
 	},
-	"feed-39": {
+	"feed-40": {
 		"title": "[c++] 1874번 스택수열",
 		"link": "https://velog.io/@handmk/c-1874%EB%B2%88-%EC%8A%A4%ED%83%9D%EC%88%98%EC%97%B4",
 		"date": "Apr 02, 2024",
@@ -299,7 +305,7 @@
 		"date": "Mar 31, 2024",
 		"writer": "백엔드 성창규"
 	},
-	"feed-40": {
+	"feed-41": {
 		"title": "[c++] 1253번 좋다",
 		"link": "https://velog.io/@handmk/c-1253%EB%B2%88-%EC%A2%8B%EB%8B%A4",
 		"date": "Mar 29, 2024",
@@ -311,7 +317,7 @@
 		"date": "Mar 24, 2024",
 		"writer": "백엔드 성창규"
 	},
-	"feed-41": {
+	"feed-42": {
 		"title": "[c++] 1940번 주몽",
 		"link": "https://velog.io/@handmk/c-1940%EB%B2%88-%EC%A3%BC%EB%AA%BD",
 		"date": "Mar 24, 2024",
@@ -431,8 +437,8 @@
 		"date": "Jan 30, 2024",
 		"writer": "백엔드 이수호"
 	},
-	"feed-42": {
-		"title": "[🐛 에러해결] SpringBoot mariadb mysql 연동",
+	"feed-43": {
+		"title": "[ERROR] SpringBoot mariadb mysql 연동",
 		"link": "https://velog.io/@handmk/ERROR-2002-HY000-Cant-connect-to-local-server-through-socket-tmpmysql.sock-2",
 		"date": "Jan 29, 2024",
 		"writer": "백엔드 손민기"
@@ -443,7 +449,7 @@
 		"date": "Jan 25, 2024",
 		"writer": "프론트엔드 양동균"
 	},
-	"feed-43": {
+	"feed-44": {
 		"title": "[c++] 11660번 구간 합 구하기 5",
 		"link": "https://velog.io/@handmk/c-%EA%B5%AC%EA%B0%84-%ED%95%A9-%EA%B5%AC%ED%95%98%EA%B8%B0-2",
 		"date": "Jan 19, 2024",
@@ -455,7 +461,7 @@
 		"date": "Jan 19, 2024",
 		"writer": "프론트엔드 양동균"
 	},
-	"feed-44": {
+	"feed-45": {
 		"title": "[Linux/Ubuntu] 가상 머신으로 실무 환경 구축(1)",
 		"link": "https://velog.io/@handmk/LinuxUbuntu-%EA%B0%80%EC%83%81-%EB%A8%B8%EC%8B%A0%EC%9C%BC%EB%A1%9C-%EC%8B%A4%EB%AC%B4-%ED%99%98%EA%B2%BD-%EA%B5%AC%EC%B6%951",
 		"date": "Jan 16, 2024",
@@ -467,7 +473,7 @@
 		"date": "Jan 16, 2024",
 		"writer": "백엔드 이수호"
 	},
-	"feed-45": {
+	"feed-46": {
 		"title": "[C++] 시간 복잡도 표기법",
 		"link": "https://velog.io/@handmk/C-%EC%8B%9C%EA%B0%84-%EB%B3%B5%EC%9E%A1%EB%8F%84-%ED%91%9C%EA%B8%B0%EB%B2%95",
 		"date": "Jan 12, 2024",
@@ -479,7 +485,7 @@
 		"date": "Jan 10, 2024",
 		"writer": "백엔드 전윤환"
 	},
-	"feed-46": {
+	"feed-47": {
 		"title": "[SpringBoot] IoC, DI, AOP",
 		"link": "https://velog.io/@handmk/SpringBoot-IoC-DI-AOP",
 		"date": "Jan 06, 2024",
@@ -491,13 +497,13 @@
 		"date": "Dec 29, 2023",
 		"writer": "프론트엔드 양동균"
 	},
-	"feed-47": {
+	"feed-48": {
 		"title": "[c++] 1181번 단어 정렬",
 		"link": "https://velog.io/@handmk/c-1181%EB%B2%88-%EB%8B%A8%EC%96%B4-%EC%A0%95%EB%A0%AC",
 		"date": "Dec 28, 2023",
 		"writer": "백엔드 손민기"
 	},
-	"feed-48": {
+	"feed-49": {
 		"title": "[SpringBoot] Web Socket을 이용한 실시간 주식 데이터",
 		"link": "https://velog.io/@handmk/SpringBoot-Web-Socket%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EC%8B%A4%EC%8B%9C%EA%B0%84-%EC%A3%BC%EC%8B%9D-%EB%8D%B0%EC%9D%B4%ED%84%B0",
 		"date": "Dec 27, 2023",
@@ -508,12 +514,6 @@
 		"link": "https://velog.io/@yunh03/nGrinder-%EC%84%B1%EB%8A%A5-%ED%85%8C%EC%8A%A4%ED%8A%B8-2-Performance-Test-%EC%84%A4%EC%A0%95-%EC%86%8D%EC%84%B1-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0",
 		"date": "Dec 27, 2023",
 		"writer": "백엔드 전윤환"
-	},
-	"feed-49": {
-		"title": "[c++] 2609번 최대공약수와 최소공배수",
-		"link": "https://velog.io/@handmk/c-2609%EB%B2%88-%EC%B5%9C%EB%8C%80%EA%B3%B5%EC%95%BD%EC%88%98%EC%99%80-%EC%B5%9C%EC%86%8C%EA%B3%B5%EB%B0%B0%EC%88%98",
-		"date": "Dec 26, 2023",
-		"writer": "백엔드 손민기"
 	},
 	"feed-60": {
 		"title": "nGrinder 성능 테스트 #1 - 시작하기",

@@ -11,6 +11,12 @@
 		"date": "Sep 17, 2024",
 		"writer": "백엔드 손민기"
 	},
+	"feed-0": {
+		"title": "레이어 서비스의 SPA에서 동적 오픈그래프 대응해보기",
+		"link": "https://klmhyeonwooo.tistory.com/139",
+		"date": "Sep 13, 2024",
+		"writer": "프론트엔드 김현우"
+	},
 	"feed-32": {
 		"title": "[SpringBoot] STOMP chatting 서버 구축",
 		"link": "https://velog.io/@handmk/SpringBoot-STOMP-chatting-%EC%84%9C%EB%B2%84-%EA%B5%AC%EC%B6%95",
@@ -65,7 +71,7 @@
 		"date": "Sep 05, 2024",
 		"writer": "백엔드 전윤환"
 	},
-	"feed-0": {
+	"feed-1": {
 		"title": "레이어 서비스는 퍼널을 어떻게 관리했을까요?",
 		"link": "https://klmhyeonwooo.tistory.com/138",
 		"date": "Sep 01, 2024",
@@ -137,7 +143,7 @@
 		"date": "Aug 21, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "협업 시에 이슈 관리자와 리뷰어를 일일이 설정하기 불편한가요?",
 		"link": "https://klmhyeonwooo.tistory.com/137",
 		"date": "Aug 12, 2024",
@@ -197,7 +203,7 @@
 		"date": "Jul 26, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "git stash 했던 내용이 사라졌을 때 당황하지 마세요",
 		"link": "https://klmhyeonwooo.tistory.com/136",
 		"date": "Jul 09, 2024",
@@ -221,7 +227,7 @@
 		"date": "Jul 04, 2024",
 		"writer": "백엔드 강명균"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "Reduce로 코드 클린하게 만들기",
 		"link": "https://klmhyeonwooo.tistory.com/135",
 		"date": "Jul 02, 2024",
@@ -244,12 +250,6 @@
 		"link": "https://apape1225.tistory.com/168",
 		"date": "Jun 30, 2024",
 		"writer": "백엔드 성창규"
-	},
-	"feed-4": {
-		"title": "분리된 파일의 tanstack mutate 메소드를 컴포넌트 안에서 사용하기",
-		"link": "https://klmhyeonwooo.tistory.com/134",
-		"date": "Jun 28, 2024",
-		"writer": "프론트엔드 김현우"
 	},
 	"feed-40": {
 		"title": "[SpringBoot] Kakao Login",

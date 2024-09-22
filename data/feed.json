@@ -1,4 +1,10 @@
 {
+	"feed-15": {
+		"title": "[programmers] 258712번 - 가장 많이 받은 선물(DP, 2024 KAKAO WINTER INTERNSHIP)",
+		"link": "https://apape1225.tistory.com/171",
+		"date": "Sep 21, 2024",
+		"writer": "백엔드 성창규"
+	},
 	"feed-5": {
 		"title": "네이버 부스트캠프 웹・모바일 9기 멤버십 과정 1차 학습스프린트 회고",
 		"link": "https://youngkdevlog.tistory.com/98",
@@ -53,13 +59,13 @@
 		"date": "Sep 07, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-15": {
+	"feed-16": {
 		"title": "[Javascript] 객체에 정의되지 않은 요소의 참조를 예방하는 방법",
 		"link": "https://apape1225.tistory.com/170",
 		"date": "Sep 07, 2024",
 		"writer": "백엔드 성창규"
 	},
-	"feed-16": {
+	"feed-17": {
 		"title": "[산업기능요원] 크나큰 실수 기념 광기의 회고록 #3",
 		"link": "https://apape1225.tistory.com/169",
 		"date": "Sep 07, 2024",
@@ -245,7 +251,7 @@
 		"date": "Jul 02, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-17": {
+	"feed-18": {
 		"title": "[백준 알고리즘] 2579번 - 계단오르기 (Dynamic programming)",
 		"link": "https://apape1225.tistory.com/168",
 		"date": "Jun 30, 2024",
@@ -269,7 +275,7 @@
 		"date": "Jun 12, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-18": {
+	"feed-19": {
 		"title": "[산업기능요원] 마카오 워크샵 기념 회고록 #2",
 		"link": "https://apape1225.tistory.com/167",
 		"date": "Jun 09, 2024",
@@ -287,7 +293,7 @@
 		"date": "May 22, 2024",
 		"writer": "백엔드 강명균"
 	},
-	"feed-19": {
+	"feed-20": {
 		"title": "[programmers] 258711번 - 도넛과 막대 그래프(BFS, 2024 KAKAO WINTER INTERNSHIP)",
 		"link": "https://apape1225.tistory.com/165",
 		"date": "May 18, 2024",
@@ -305,7 +311,7 @@
 		"date": "Apr 29, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-20": {
+	"feed-21": {
 		"title": "[산업기능요원] 정직원 기념 회사 적응 회고록 #1",
 		"link": "https://apape1225.tistory.com/164",
 		"date": "Apr 28, 2024",
@@ -317,7 +323,7 @@
 		"date": "Apr 02, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-21": {
+	"feed-22": {
 		"title": "[FLOWBIT] BITCOIN SERVICE의 DDD 구조 작성",
 		"link": "https://apape1225.tistory.com/163",
 		"date": "Mar 31, 2024",
@@ -329,7 +335,7 @@
 		"date": "Mar 29, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-22": {
+	"feed-23": {
 		"title": "도메인 주도 개발 시작하기: DDD 핵심 개념 정리부터 구현까지 - 최범균",
 		"link": "https://apape1225.tistory.com/162",
 		"date": "Mar 24, 2024",
@@ -353,7 +359,7 @@
 		"date": "Mar 19, 2024",
 		"writer": "백엔드 전윤환"
 	},
-	"feed-23": {
+	"feed-24": {
 		"title": "[산업기능요원] 산업기능요원 개발자 구직 성공 후기",
 		"link": "https://apape1225.tistory.com/161",
 		"date": "Mar 16, 2024",
@@ -370,12 +376,6 @@
 		"link": "https://velog.io/@yunh03/%EC%98%A4%EB%A5%98-%ED%95%B4%EA%B2%B0-SQL-ERROR-1406-Data-too-long-for-column-at-row-1",
 		"date": "Mar 11, 2024",
 		"writer": "백엔드 전윤환"
-	},
-	"feed-24": {
-		"title": "[DDD] chapter 11",
-		"link": "https://apape1225.tistory.com/160",
-		"date": "Mar 09, 2024",
-		"writer": "백엔드 성창규"
 	},
 	"feed-55": {
 		"title": "Spring, 테스트 코드는 왜 작성할까?",

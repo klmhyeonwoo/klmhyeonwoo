@@ -1,4 +1,10 @@
 {
+	"feed-0": {
+		"title": "CKEditor에서 커스텀 버튼 및 기능 추가하는 방법",
+		"link": "https://klmhyeonwooo.tistory.com/140",
+		"date": "Sep 23, 2024",
+		"writer": "프론트엔드 김현우"
+	},
 	"feed-15": {
 		"title": "[programmers] 258712번 - 가장 많이 받은 선물(DP, 2024 KAKAO WINTER INTERNSHIP)",
 		"link": "https://apape1225.tistory.com/171",
@@ -23,7 +29,7 @@
 		"date": "Sep 17, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-0": {
+	"feed-1": {
 		"title": "레이어 서비스의 SPA에서 동적 오픈그래프 대응해보기",
 		"link": "https://klmhyeonwooo.tistory.com/139",
 		"date": "Sep 13, 2024",
@@ -83,7 +89,7 @@
 		"date": "Sep 05, 2024",
 		"writer": "백엔드 전윤환"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "레이어 서비스는 퍼널을 어떻게 관리했을까요?",
 		"link": "https://klmhyeonwooo.tistory.com/138",
 		"date": "Sep 01, 2024",
@@ -155,7 +161,7 @@
 		"date": "Aug 21, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "협업 시에 이슈 관리자와 리뷰어를 일일이 설정하기 불편한가요?",
 		"link": "https://klmhyeonwooo.tistory.com/137",
 		"date": "Aug 12, 2024",
@@ -209,7 +215,7 @@
 		"date": "Jul 26, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "git stash 했던 내용이 사라졌을 때 당황하지 마세요",
 		"link": "https://klmhyeonwooo.tistory.com/136",
 		"date": "Jul 09, 2024",
@@ -232,12 +238,6 @@
 		"link": "https://ub775.tistory.com/entry/%EA%B0%9C%EB%B0%9C-NVM-%EC%84%A4%EC%B9%98%EC%99%80-%EC%82%AC%EC%9A%A9-%EC%98%88%EC%8B%9C",
 		"date": "Jul 04, 2024",
 		"writer": "백엔드 강명균"
-	},
-	"feed-4": {
-		"title": "Reduce로 코드 클린하게 만들기",
-		"link": "https://klmhyeonwooo.tistory.com/135",
-		"date": "Jul 02, 2024",
-		"writer": "프론트엔드 김현우"
 	},
 	"feed-39": {
 		"title": "[DEPLOY] Spring Boot AWS EC2 Ubuntu 서버 배포",

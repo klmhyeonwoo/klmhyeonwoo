@@ -1,4 +1,10 @@
 {
+	"feed-15": {
+		"title": "[programmers] 340211번 -  충돌위험 찾기 (구현, [PCCP 기출문제] 3번)",
+		"link": "https://apape1225.tistory.com/172",
+		"date": "Sep 28, 2024",
+		"writer": "백엔드 성창규"
+	},
 	"feed-50": {
 		"title": "Spring Boot에서 CORS 설정 시 addCorsMappings 에러",
 		"link": "https://velog.io/@yunh03/Spring-Boot%EC%97%90%EC%84%9C-CORS-%EC%84%A4%EC%A0%95-%EC%8B%9C-addCorsMappings-%EC%97%90%EB%9F%AC",
@@ -17,7 +23,7 @@
 		"date": "Sep 23, 2024",
 		"writer": "프론트엔드 김현우"
 	},
-	"feed-15": {
+	"feed-16": {
 		"title": "[programmers] 258712번 - 가장 많이 받은 선물(DP, 2024 KAKAO WINTER INTERNSHIP)",
 		"link": "https://apape1225.tistory.com/171",
 		"date": "Sep 21, 2024",
@@ -77,13 +83,13 @@
 		"date": "Sep 07, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-16": {
+	"feed-17": {
 		"title": "[Javascript] 객체에 정의되지 않은 요소의 참조를 예방하는 방법",
 		"link": "https://apape1225.tistory.com/170",
 		"date": "Sep 07, 2024",
 		"writer": "백엔드 성창규"
 	},
-	"feed-17": {
+	"feed-18": {
 		"title": "[산업기능요원] 크나큰 실수 기념 광기의 회고록 #3",
 		"link": "https://apape1225.tistory.com/169",
 		"date": "Sep 07, 2024",
@@ -263,7 +269,7 @@
 		"date": "Jul 02, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-18": {
+	"feed-19": {
 		"title": "[백준 알고리즘] 2579번 - 계단오르기 (Dynamic programming)",
 		"link": "https://apape1225.tistory.com/168",
 		"date": "Jun 30, 2024",
@@ -287,7 +293,7 @@
 		"date": "Jun 12, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-19": {
+	"feed-20": {
 		"title": "[산업기능요원] 마카오 워크샵 기념 회고록 #2",
 		"link": "https://apape1225.tistory.com/167",
 		"date": "Jun 09, 2024",
@@ -305,7 +311,7 @@
 		"date": "May 22, 2024",
 		"writer": "백엔드 강명균"
 	},
-	"feed-20": {
+	"feed-21": {
 		"title": "[programmers] 258711번 - 도넛과 막대 그래프(BFS, 2024 KAKAO WINTER INTERNSHIP)",
 		"link": "https://apape1225.tistory.com/165",
 		"date": "May 18, 2024",
@@ -323,7 +329,7 @@
 		"date": "Apr 29, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-21": {
+	"feed-22": {
 		"title": "[산업기능요원] 정직원 기념 회사 적응 회고록 #1",
 		"link": "https://apape1225.tistory.com/164",
 		"date": "Apr 28, 2024",
@@ -335,7 +341,7 @@
 		"date": "Apr 02, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-22": {
+	"feed-23": {
 		"title": "[FLOWBIT] BITCOIN SERVICE의 DDD 구조 작성",
 		"link": "https://apape1225.tistory.com/163",
 		"date": "Mar 31, 2024",
@@ -347,7 +353,7 @@
 		"date": "Mar 29, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-23": {
+	"feed-24": {
 		"title": "도메인 주도 개발 시작하기: DDD 핵심 개념 정리부터 구현까지 - 최범균",
 		"link": "https://apape1225.tistory.com/162",
 		"date": "Mar 24, 2024",
@@ -370,12 +376,6 @@
 		"link": "https://velog.io/@yunh03/Ubuntu-MariaDB-%EC%99%B8%EB%B6%80-%EC%A0%91%EC%86%8D-%ED%97%88%EC%9A%A9",
 		"date": "Mar 19, 2024",
 		"writer": "백엔드 전윤환"
-	},
-	"feed-24": {
-		"title": "[산업기능요원] 산업기능요원 개발자 구직 성공 후기",
-		"link": "https://apape1225.tistory.com/161",
-		"date": "Mar 16, 2024",
-		"writer": "백엔드 성창규"
 	},
 	"feed-93": {
 		"title": "[일상] &quot;설명해 보세요!&quot;",

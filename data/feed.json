@@ -1,4 +1,10 @@
 {
+	"feed-0": {
+		"title": "브라우저 렌더링 파이프라인",
+		"link": "https://klmhyeonwooo.tistory.com/142",
+		"date": "Oct 04, 2024",
+		"writer": "프론트엔드 김현우"
+	},
 	"feed-30": {
 		"title": "[java] 10989번 수 정렬하기 3",
 		"link": "https://velog.io/@handmk/java-10989%EB%B2%88-%EC%88%98-%EC%A0%95%EB%A0%AC%ED%95%98%EA%B8%B0-3",
@@ -29,7 +35,7 @@
 		"date": "Sep 24, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-0": {
+	"feed-1": {
 		"title": "CKEditor에서 커스텀 버튼 및 기능 추가하는 방법",
 		"link": "https://klmhyeonwooo.tistory.com/140",
 		"date": "Sep 23, 2024",
@@ -59,7 +65,7 @@
 		"date": "Sep 17, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "레이어 서비스의 SPA에서 동적 오픈그래프 대응해보기",
 		"link": "https://klmhyeonwooo.tistory.com/139",
 		"date": "Sep 13, 2024",
@@ -119,7 +125,7 @@
 		"date": "Sep 05, 2024",
 		"writer": "백엔드 전윤환"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "레이어 서비스는 퍼널을 어떻게 관리했을까요?",
 		"link": "https://klmhyeonwooo.tistory.com/138",
 		"date": "Sep 01, 2024",
@@ -191,7 +197,7 @@
 		"date": "Aug 21, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "협업 시에 이슈 관리자와 리뷰어를 일일이 설정하기 불편한가요?",
 		"link": "https://klmhyeonwooo.tistory.com/137",
 		"date": "Aug 12, 2024",
@@ -244,12 +250,6 @@
 		"link": "https://velog.io/@thd0427/Route%EB%8A%94-%EC%99%9C-%EC%A7%81%EB%A0%AC%ED%99%94%EA%B0%80-%EA%B0%80%EB%8A%A5%ED%95%B4%EC%95%BC-%ED%95%A0%EA%B9%8C",
 		"date": "Jul 26, 2024",
 		"writer": "안드로이드 송규빈"
-	},
-	"feed-4": {
-		"title": "git stash 했던 내용이 사라졌을 때 당황하지 마세요",
-		"link": "https://klmhyeonwooo.tistory.com/136",
-		"date": "Jul 09, 2024",
-		"writer": "프론트엔드 김현우"
 	},
 	"feed-73": {
 		"title": "깃허브와 지라 워크플로우 자동화",

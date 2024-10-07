@@ -1,4 +1,10 @@
 {
+	"feed-5": {
+		"title": "View Draw Cycle",
+		"link": "https://youngkdevlog.tistory.com/100",
+		"date": "Oct 07, 2024",
+		"writer": "iOS 송영규"
+	},
 	"feed-0": {
 		"title": "브라우저 렌더링 파이프라인",
 		"link": "https://klmhyeonwooo.tistory.com/142",
@@ -47,7 +53,7 @@
 		"date": "Sep 21, 2024",
 		"writer": "백엔드 성창규"
 	},
-	"feed-5": {
+	"feed-6": {
 		"title": "네이버 부스트캠프 웹・모바일 9기 멤버십 과정 1차 학습스프린트 회고",
 		"link": "https://youngkdevlog.tistory.com/98",
 		"date": "Sep 20, 2024",
@@ -95,7 +101,7 @@
 		"date": "Sep 10, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-6": {
+	"feed-7": {
 		"title": "왁뮤 3.0 출시 및 장애 대응 기록",
 		"link": "https://youngkdevlog.tistory.com/97",
 		"date": "Sep 07, 2024",
@@ -179,19 +185,19 @@
 		"date": "Aug 23, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-7": {
+	"feed-8": {
 		"title": "UIScene, UIWindowScene, UIWindow",
 		"link": "https://youngkdevlog.tistory.com/96",
 		"date": "Aug 22, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-8": {
+	"feed-9": {
 		"title": "IBOutlet과 IBAction",
 		"link": "https://youngkdevlog.tistory.com/95",
 		"date": "Aug 21, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-9": {
+	"feed-10": {
 		"title": "View Life Cycle",
 		"link": "https://youngkdevlog.tistory.com/94",
 		"date": "Aug 21, 2024",
@@ -209,34 +215,28 @@
 		"date": "Aug 12, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-10": {
+	"feed-11": {
 		"title": "네이버 부스트캠프 웹・모바일 9기 챌린지 과정을 마치며",
 		"link": "https://youngkdevlog.tistory.com/93",
 		"date": "Aug 11, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-11": {
+	"feed-12": {
 		"title": "TCP/IP 소켓 통신 개념 및 Network 프레임워크",
 		"link": "https://youngkdevlog.tistory.com/92",
 		"date": "Aug 07, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-12": {
+	"feed-13": {
 		"title": "SQL 기본 쿼리문 정리",
 		"link": "https://youngkdevlog.tistory.com/91",
 		"date": "Aug 05, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-13": {
+	"feed-14": {
 		"title": "HTTP Request, Response 구조",
 		"link": "https://youngkdevlog.tistory.com/90",
 		"date": "Aug 05, 2024",
-		"writer": "iOS 송영규"
-	},
-	"feed-14": {
-		"title": "네이버 부스트캠프 웹・모바일 9기 챌린지 과정 3주차 회고",
-		"link": "https://youngkdevlog.tistory.com/89",
-		"date": "Aug 02, 2024",
 		"writer": "iOS 송영규"
 	},
 	"feed-104": {

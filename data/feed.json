@@ -1,4 +1,16 @@
 {
+	"feed-0": {
+		"title": "오래된 브라우저에서 자바스크립트가 지원을 안해요, 폴리필(Polyfill)",
+		"link": "https://klmhyeonwooo.tistory.com/145",
+		"date": "Oct 11, 2024",
+		"writer": "프론트엔드 김현우"
+	},
+	"feed-15": {
+		"title": "[오픽] 순공 28분 IH 후기",
+		"link": "https://apape1225.tistory.com/173",
+		"date": "Oct 11, 2024",
+		"writer": "백엔드 성창규"
+	},
 	"feed-30": {
 		"title": "[Java] 2839번 설탕 배달",
 		"link": "https://velog.io/@handmk/Java-2839%EB%B2%88-%EC%84%A4%ED%83%95-%EB%B0%B0%EB%8B%AC",
@@ -11,7 +23,7 @@
 		"date": "Oct 07, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-0": {
+	"feed-1": {
 		"title": "브라우저 렌더링 파이프라인",
 		"link": "https://klmhyeonwooo.tistory.com/142",
 		"date": "Oct 04, 2024",
@@ -29,7 +41,7 @@
 		"date": "Sep 30, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-15": {
+	"feed-16": {
 		"title": "[programmers] 340211번 -  충돌위험 찾기 (구현, [PCCP 기출문제] 3번)",
 		"link": "https://apape1225.tistory.com/172",
 		"date": "Sep 28, 2024",
@@ -47,13 +59,13 @@
 		"date": "Sep 24, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "CKEditor에서 커스텀 버튼 및 기능 추가하는 방법",
 		"link": "https://klmhyeonwooo.tistory.com/140",
 		"date": "Sep 23, 2024",
 		"writer": "프론트엔드 김현우"
 	},
-	"feed-16": {
+	"feed-17": {
 		"title": "[programmers] 258712번 - 가장 많이 받은 선물(DP, 2024 KAKAO WINTER INTERNSHIP)",
 		"link": "https://apape1225.tistory.com/171",
 		"date": "Sep 21, 2024",
@@ -77,7 +89,7 @@
 		"date": "Sep 17, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "레이어 서비스의 SPA에서 동적 오픈그래프 대응해보기",
 		"link": "https://klmhyeonwooo.tistory.com/139",
 		"date": "Sep 13, 2024",
@@ -113,13 +125,13 @@
 		"date": "Sep 07, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-17": {
+	"feed-18": {
 		"title": "[Javascript] 객체에 정의되지 않은 요소의 참조를 예방하는 방법",
 		"link": "https://apape1225.tistory.com/170",
 		"date": "Sep 07, 2024",
 		"writer": "백엔드 성창규"
 	},
-	"feed-18": {
+	"feed-19": {
 		"title": "[산업기능요원] 크나큰 실수 기념 광기의 회고록 #3",
 		"link": "https://apape1225.tistory.com/169",
 		"date": "Sep 07, 2024",
@@ -137,7 +149,7 @@
 		"date": "Sep 05, 2024",
 		"writer": "백엔드 전윤환"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "레이어 서비스는 퍼널을 어떻게 관리했을까요?",
 		"link": "https://klmhyeonwooo.tistory.com/138",
 		"date": "Sep 01, 2024",
@@ -208,12 +220,6 @@
 		"link": "https://youngkdevlog.tistory.com/94",
 		"date": "Aug 21, 2024",
 		"writer": "iOS 송영규"
-	},
-	"feed-4": {
-		"title": "협업 시에 이슈 관리자와 리뷰어를 일일이 설정하기 불편한가요?",
-		"link": "https://klmhyeonwooo.tistory.com/137",
-		"date": "Aug 12, 2024",
-		"writer": "프론트엔드 김현우"
 	},
 	"feed-71": {
 		"title": "Android Baseline Profile란",
@@ -287,7 +293,7 @@
 		"date": "Jul 02, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-19": {
+	"feed-20": {
 		"title": "[백준 알고리즘] 2579번 - 계단오르기 (Dynamic programming)",
 		"link": "https://apape1225.tistory.com/168",
 		"date": "Jun 30, 2024",
@@ -311,7 +317,7 @@
 		"date": "Jun 12, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-20": {
+	"feed-21": {
 		"title": "[산업기능요원] 마카오 워크샵 기념 회고록 #2",
 		"link": "https://apape1225.tistory.com/167",
 		"date": "Jun 09, 2024",
@@ -329,7 +335,7 @@
 		"date": "May 22, 2024",
 		"writer": "백엔드 강명균"
 	},
-	"feed-21": {
+	"feed-22": {
 		"title": "[programmers] 258711번 - 도넛과 막대 그래프(BFS, 2024 KAKAO WINTER INTERNSHIP)",
 		"link": "https://apape1225.tistory.com/165",
 		"date": "May 18, 2024",
@@ -347,7 +353,7 @@
 		"date": "Apr 29, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-22": {
+	"feed-23": {
 		"title": "[산업기능요원] 정직원 기념 회사 적응 회고록 #1",
 		"link": "https://apape1225.tistory.com/164",
 		"date": "Apr 28, 2024",
@@ -359,7 +365,7 @@
 		"date": "Apr 02, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-23": {
+	"feed-24": {
 		"title": "[FLOWBIT] BITCOIN SERVICE의 DDD 구조 작성",
 		"link": "https://apape1225.tistory.com/163",
 		"date": "Mar 31, 2024",
@@ -370,12 +376,6 @@
 		"link": "https://velog.io/@handmk/c-1253%EB%B2%88-%EC%A2%8B%EB%8B%A4",
 		"date": "Mar 29, 2024",
 		"writer": "백엔드 손민기"
-	},
-	"feed-24": {
-		"title": "도메인 주도 개발 시작하기: DDD 핵심 개념 정리부터 구현까지 - 최범균",
-		"link": "https://apape1225.tistory.com/162",
-		"date": "Mar 24, 2024",
-		"writer": "백엔드 성창규"
 	},
 	"feed-49": {
 		"title": "[c++] 1940번 주몽",

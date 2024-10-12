@@ -17,8 +17,8 @@
 - [리크루팅을 위해 어플라이 사이트를 개발했다](https://klmhyeonwooo.tistory.com/74)<br>
 
 ### 최근 포스팅
+- [오래된 브라우저에서 자바스크립트가 지원을 안해요, 폴리필(Polyfill)](https://klmhyeonwooo.tistory.com/145)<br>
 - [브라우저 렌더링 파이프라인](https://klmhyeonwooo.tistory.com/142)<br>
 - [CKEditor에서 커스텀 버튼 및 기능 추가하는 방법](https://klmhyeonwooo.tistory.com/140)<br>
 - [레이어 서비스의 SPA에서 동적 오픈그래프 대응해보기](https://klmhyeonwooo.tistory.com/139)<br>
 - [레이어 서비스는 퍼널을 어떻게 관리했을까요?](https://klmhyeonwooo.tistory.com/138)<br>
-- [협업 시에 이슈 관리자와 리뷰어를 일일이 설정하기 불편한가요?](https://klmhyeonwooo.tistory.com/137)<br>

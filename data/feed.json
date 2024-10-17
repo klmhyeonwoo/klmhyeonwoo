@@ -1,4 +1,16 @@
 {
+	"feed-30": {
+		"title": "[GAGU] 웹소켓 연결 시 고민",
+		"link": "https://velog.io/@handmk/GAGU-%EC%9B%B9%EC%86%8C%EC%BC%93-%EC%97%B0%EA%B2%B0-%EC%8B%9C-%EA%B3%A0%EB%AF%BC",
+		"date": "Oct 16, 2024",
+		"writer": "백엔드 손민기"
+	},
+	"feed-31": {
+		"title": "[GAGU] 웹소켓 연결 시 Authorization Header 추출 에러",
+		"link": "https://velog.io/@handmk/GAGU-%EC%9B%B9%EC%86%8C%EC%BC%93-%EC%97%B0%EA%B2%B0-%EC%8B%9C-Authorization-Header-%EC%B6%94%EC%B6%9C-%EC%97%90%EB%9F%AC",
+		"date": "Oct 16, 2024",
+		"writer": "백엔드 손민기"
+	},
 	"feed-5": {
 		"title": "SwiftUI 프로젝트에서 AppDelegate, SceneDelegate 사용하기",
 		"link": "https://youngkdevlog.tistory.com/102",
@@ -23,7 +35,7 @@
 		"date": "Oct 11, 2024",
 		"writer": "백엔드 성창규"
 	},
-	"feed-30": {
+	"feed-32": {
 		"title": "[Java] 2839번 설탕 배달",
 		"link": "https://velog.io/@handmk/Java-2839%EB%B2%88-%EC%84%A4%ED%83%95-%EB%B0%B0%EB%8B%AC",
 		"date": "Oct 10, 2024",
@@ -41,13 +53,13 @@
 		"date": "Oct 04, 2024",
 		"writer": "프론트엔드 김현우"
 	},
-	"feed-31": {
+	"feed-33": {
 		"title": "[Java] 10989번 수 정렬하기 3",
 		"link": "https://velog.io/@handmk/java-10989%EB%B2%88-%EC%88%98-%EC%A0%95%EB%A0%AC%ED%95%98%EA%B8%B0-3",
 		"date": "Oct 03, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-32": {
+	"feed-34": {
 		"title": "[java] 15829번 Hashing",
 		"link": "https://velog.io/@handmk/java-15829%EB%B2%88-Hashing",
 		"date": "Sep 30, 2024",
@@ -65,7 +77,7 @@
 		"date": "Sep 28, 2024",
 		"writer": "백엔드 전윤환"
 	},
-	"feed-33": {
+	"feed-35": {
 		"title": "[KNBOT] 대학교 챗봇 만들기(3)",
 		"link": "https://velog.io/@handmk/KNBOT-%EB%8C%80%ED%95%99%EA%B5%90-%EC%B1%97%EB%B4%87-%EB%A7%8C%EB%93%A4%EA%B8%B03",
 		"date": "Sep 24, 2024",
@@ -89,13 +101,13 @@
 		"date": "Sep 20, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-34": {
+	"feed-36": {
 		"title": "[KNBOT] 대학교 챗봇 만들기(2)",
 		"link": "https://velog.io/@handmk/KNBOT-%EB%8C%80%ED%95%99%EA%B5%90-%EC%B1%97%EB%B4%87-%EB%A7%8C%EB%93%A4%EA%B8%B0",
 		"date": "Sep 17, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-35": {
+	"feed-37": {
 		"title": "[KNBOT] 대학교 챗봇 만들기(1)",
 		"link": "https://velog.io/@handmk/KNBOT-%EB%8C%80%ED%95%99%EA%B5%90-%EC%B1%97%EB%B4%87-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EA%B8%B0%ED%9A%8D%EB%8B%A8%EA%B3%84",
 		"date": "Sep 17, 2024",
@@ -107,25 +119,25 @@
 		"date": "Sep 13, 2024",
 		"writer": "프론트엔드 김현우"
 	},
-	"feed-36": {
+	"feed-38": {
 		"title": "[SpringBoot] STOMP chatting 서버 구축",
 		"link": "https://velog.io/@handmk/SpringBoot-STOMP-chatting-%EC%84%9C%EB%B2%84-%EA%B5%AC%EC%B6%95",
 		"date": "Sep 13, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-37": {
+	"feed-39": {
 		"title": "[DEPLOY] GCP Ubuntu VM 인스턴스 생성",
 		"link": "https://velog.io/@handmk/DEPLOY-GCP-Ubuntu-VM-%EC%83%9D%EC%84%B1",
 		"date": "Sep 11, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-38": {
+	"feed-40": {
 		"title": "[ERROR] Docker failed to solve: error getting credentials - err: exit status 1, out: “",
 		"link": "https://velog.io/@handmk/ERROR-failed-to-solve-error-getting-credentials-err-exit-status-1-out",
 		"date": "Sep 10, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-39": {
+	"feed-41": {
 		"title": "[GAGU] LLM 이미지 생성 모델 + 3D 랜더링",
 		"link": "https://velog.io/@handmk/GAGU-LLM-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%83%9D%EC%84%B1-%EB%AA%A8%EB%8D%B8-3D-%EB%9E%9C%EB%8D%94%EB%A7%81",
 		"date": "Sep 10, 2024",
@@ -149,7 +161,7 @@
 		"date": "Sep 07, 2024",
 		"writer": "백엔드 성창규"
 	},
-	"feed-40": {
+	"feed-42": {
 		"title": "[ERROR] 413 Request Entity Too Large",
 		"link": "https://velog.io/@handmk/%EC%82%AC%EC%9D%B4%EB%93%9C-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-GAGU-413-Request-Entity-Too-Large",
 		"date": "Sep 06, 2024",
@@ -167,13 +179,13 @@
 		"date": "Sep 01, 2024",
 		"writer": "프론트엔드 김현우"
 	},
-	"feed-41": {
+	"feed-43": {
 		"title": "[멋쟁이사자처럼] 12기 아이디어톤 1등 수상🥇",
 		"link": "https://velog.io/@handmk/%EB%A9%8B%EC%9F%81%EC%9D%B4%EC%82%AC%EC%9E%90%EC%B2%98%EB%9F%BC-12%EA%B8%B0-%EC%95%84%EC%9D%B4%EB%94%94%EC%96%B4%ED%86%A4-1%EB%93%B1-%EC%88%98%EC%83%81",
 		"date": "Aug 28, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-42": {
+	"feed-44": {
 		"title": "[멋쟁이사자처럼] 11기 해커톤 회고",
 		"link": "https://velog.io/@handmk/%EB%A9%8B%EC%9F%81%EC%9D%B4%EC%82%AC%EC%9E%90%EC%B2%98%EB%9F%BC-11th-%ED%95%B4%EC%BB%A4%ED%86%A4-%ED%9A%8C%EA%B3%A0",
 		"date": "Aug 28, 2024",
@@ -281,7 +293,7 @@
 		"date": "Jul 04, 2024",
 		"writer": "백엔드 강명균"
 	},
-	"feed-43": {
+	"feed-45": {
 		"title": "[DEPLOY] Spring Boot AWS EC2 Ubuntu 서버 배포",
 		"link": "https://velog.io/@handmk/SpringBoot-AWS-EC2-Ubuntu-%EC%84%9C%EB%B2%84-%EB%B0%B0%ED%8F%AC",
 		"date": "Jul 02, 2024",
@@ -299,13 +311,13 @@
 		"date": "Jun 30, 2024",
 		"writer": "백엔드 성창규"
 	},
-	"feed-44": {
+	"feed-46": {
 		"title": "[SpringBoot] Kakao Login",
 		"link": "https://velog.io/@handmk/SpringBoot-Kakao-Login",
 		"date": "Jun 20, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-45": {
+	"feed-47": {
 		"title": "[SpringBoot] Spring-Security 정리",
 		"link": "https://velog.io/@handmk/SpringBoot-Spring-Security-%EC%A0%95%EB%A6%AC",
 		"date": "Jun 19, 2024",
@@ -347,7 +359,7 @@
 		"date": "May 09, 2024",
 		"writer": "백엔드 전윤환"
 	},
-	"feed-46": {
+	"feed-48": {
 		"title": "[CS] JWT란?",
 		"link": "https://velog.io/@handmk/CS-JWT%EB%9E%80",
 		"date": "Apr 29, 2024",
@@ -359,7 +371,7 @@
 		"date": "Apr 28, 2024",
 		"writer": "백엔드 성창규"
 	},
-	"feed-47": {
+	"feed-49": {
 		"title": "[c++] 1874번 스택수열",
 		"link": "https://velog.io/@handmk/c-1874%EB%B2%88-%EC%8A%A4%ED%83%9D%EC%88%98%EC%97%B4",
 		"date": "Apr 02, 2024",
@@ -370,18 +382,6 @@
 		"link": "https://apape1225.tistory.com/163",
 		"date": "Mar 31, 2024",
 		"writer": "백엔드 성창규"
-	},
-	"feed-48": {
-		"title": "[c++] 1253번 좋다",
-		"link": "https://velog.io/@handmk/c-1253%EB%B2%88-%EC%A2%8B%EB%8B%A4",
-		"date": "Mar 29, 2024",
-		"writer": "백엔드 손민기"
-	},
-	"feed-49": {
-		"title": "[c++] 1940번 주몽",
-		"link": "https://velog.io/@handmk/c-1940%EB%B2%88-%EC%A3%BC%EB%AA%BD",
-		"date": "Mar 24, 2024",
-		"writer": "백엔드 손민기"
 	},
 	"feed-53": {
 		"title": "RabbitMQ를 이용해서 응답 시간을 반의 반의 반의 반으로 줄여보자",

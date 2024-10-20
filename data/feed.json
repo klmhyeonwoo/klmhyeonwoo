@@ -1,4 +1,16 @@
 {
+	"feed-0": {
+		"title": "HTML에 meta 속성 중 http-equiv은 무엇을 의미할까요?",
+		"link": "https://klmhyeonwooo.tistory.com/146",
+		"date": "Oct 19, 2024",
+		"writer": "프론트엔드 김현우"
+	},
+	"feed-5": {
+		"title": "네이버 부스트캠프 웹・모바일 9기 멤버십 과정 2차 학습스프린트 회고",
+		"link": "https://youngkdevlog.tistory.com/103",
+		"date": "Oct 19, 2024",
+		"writer": "iOS 송영규"
+	},
 	"feed-30": {
 		"title": "[GAGU] Git Action 을 사용한 CI/CD 파이프 구축",
 		"link": "https://velog.io/@handmk/GAGU-Git-Action-%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%9C-CICD-%ED%8C%8C%EC%9D%B4%ED%94%84-%EA%B5%AC%EC%B6%95",
@@ -59,19 +71,19 @@
 		"date": "Oct 16, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-5": {
+	"feed-6": {
 		"title": "SwiftUI 프로젝트에서 AppDelegate, SceneDelegate 사용하기",
 		"link": "https://youngkdevlog.tistory.com/102",
 		"date": "Oct 12, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-6": {
+	"feed-7": {
 		"title": "SwiftLint SPM으로 설치하기",
 		"link": "https://youngkdevlog.tistory.com/101",
 		"date": "Oct 12, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-0": {
+	"feed-1": {
 		"title": "오래된 브라우저에서 자바스크립트가 지원을 안해요, 폴리필(Polyfill)",
 		"link": "https://klmhyeonwooo.tistory.com/145",
 		"date": "Oct 11, 2024",
@@ -89,13 +101,13 @@
 		"date": "Oct 10, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-7": {
+	"feed-8": {
 		"title": "View Draw Cycle",
 		"link": "https://youngkdevlog.tistory.com/100",
 		"date": "Oct 07, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "브라우저 렌더링 파이프라인",
 		"link": "https://klmhyeonwooo.tistory.com/142",
 		"date": "Oct 04, 2024",
@@ -131,7 +143,7 @@
 		"date": "Sep 24, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "CKEditor에서 커스텀 버튼 및 기능 추가하는 방법",
 		"link": "https://klmhyeonwooo.tistory.com/140",
 		"date": "Sep 23, 2024",
@@ -143,7 +155,7 @@
 		"date": "Sep 21, 2024",
 		"writer": "백엔드 성창규"
 	},
-	"feed-8": {
+	"feed-9": {
 		"title": "네이버 부스트캠프 웹・모바일 9기 멤버십 과정 1차 학습스프린트 회고",
 		"link": "https://youngkdevlog.tistory.com/98",
 		"date": "Sep 20, 2024",
@@ -161,7 +173,7 @@
 		"date": "Sep 17, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "레이어 서비스의 SPA에서 동적 오픈그래프 대응해보기",
 		"link": "https://klmhyeonwooo.tistory.com/139",
 		"date": "Sep 13, 2024",
@@ -191,7 +203,7 @@
 		"date": "Sep 10, 2024",
 		"writer": "백엔드 손민기"
 	},
-	"feed-9": {
+	"feed-10": {
 		"title": "왁뮤 3.0 출시 및 장애 대응 기록",
 		"link": "https://youngkdevlog.tistory.com/97",
 		"date": "Sep 07, 2024",
@@ -214,12 +226,6 @@
 		"link": "https://velog.io/@yunh03/GitHub-Codespace%EC%97%90%EC%84%9C-Java-%EB%B2%84%EC%A0%84-%EB%B3%80%EA%B2%BD%ED%95%98%EA%B8%B0",
 		"date": "Sep 05, 2024",
 		"writer": "백엔드 전윤환"
-	},
-	"feed-4": {
-		"title": "레이어 서비스는 퍼널을 어떻게 관리했을까요?",
-		"link": "https://klmhyeonwooo.tistory.com/138",
-		"date": "Sep 01, 2024",
-		"writer": "프론트엔드 김현우"
 	},
 	"feed-25": {
 		"title": "코딩자율학습단 9기 완료 후기",
@@ -257,20 +263,20 @@
 		"date": "Aug 23, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-10": {
+	"feed-11": {
 		"title": "UIScene, UIWindowScene, UIWindow",
 		"link": "https://youngkdevlog.tistory.com/96",
 		"date": "Aug 22, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-11": {
+	"feed-12": {
 		"title": "IBOutlet과 IBAction",
 		"link": "https://youngkdevlog.tistory.com/95",
 		"date": "Aug 21, 2024",
 		"writer": "iOS 송영규"
 	},
-	"feed-12": {
-		"title": "View Life Cycle",
+	"feed-13": {
+		"title": "View(ViewController) Life Cycle",
 		"link": "https://youngkdevlog.tistory.com/94",
 		"date": "Aug 21, 2024",
 		"writer": "iOS 송영규"
@@ -281,16 +287,10 @@
 		"date": "Aug 12, 2024",
 		"writer": "안드로이드 송규빈"
 	},
-	"feed-13": {
+	"feed-14": {
 		"title": "네이버 부스트캠프 웹・모바일 9기 챌린지 과정을 마치며",
 		"link": "https://youngkdevlog.tistory.com/93",
 		"date": "Aug 11, 2024",
-		"writer": "iOS 송영규"
-	},
-	"feed-14": {
-		"title": "TCP/IP 소켓 통신 개념 및 Network 프레임워크",
-		"link": "https://youngkdevlog.tistory.com/92",
-		"date": "Aug 07, 2024",
 		"writer": "iOS 송영규"
 	},
 	"feed-104": {

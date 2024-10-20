@@ -3,7 +3,7 @@ import datetime
 import os
 import json
 
-feed_list = ["https://klmhyeonwooo.tistory.com?klmhyeonwoo", 
+feed_list = ["https://klmhyeonwooo.tistory.com?느릿느릿 프론트엔드", 
              "https://youngkdevlog.tistory.com?YoungKyu", 
              "https://v2.velog.io/rss/k-svelte-master?타락한스벨트전도사", 
              "https://v2.velog.io/rss/koomin1227?koomin",
@@ -13,7 +13,10 @@ feed_list = ["https://klmhyeonwooo.tistory.com?klmhyeonwoo",
              "https://v2.velog.io/rss/rorror1?Park Junha",
              "https://v2.velog.io/rss/jhbae0420?junhyeong",
              "https://v2.velog.io/rss/woogur29?우혁",
-             "https://v2.velog.io/rss/imike?imike",
+             "https://v2.velog.io/rss/imike?imike"
+             "https://v2.velog.io/rss/teo?teo.v",
+             "https://v2.velog.io/rss/kwonhl0211?Doeon Kwon 권도언,
+             "https://v2.velog.io/rss/yeolyi1310/개발자 성열",
             ]
 
 markdown_text = """

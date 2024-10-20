@@ -15,7 +15,7 @@ feed_list = ["https://klmhyeonwooo.tistory.com?느릿느릿 프론트엔드",
              "https://v2.velog.io/rss/woogur29?우혁",
              "https://v2.velog.io/rss/imike?imike"
              "https://v2.velog.io/rss/teo?teo.v",
-             "https://v2.velog.io/rss/kwonhl0211?Doeon Kwon 권도언,
+             "https://v2.velog.io/rss/kwonhl0211?Doeon Kwon 권도언",
              "https://v2.velog.io/rss/yeolyi1310/개발자 성열",
             ]
 

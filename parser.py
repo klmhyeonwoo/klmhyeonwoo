@@ -3,16 +3,18 @@ import datetime
 import os
 import json
 
-feed_list = ["https://klmhyeonwooo.tistory.com?프론트엔드 김현우", 
-             "https://youngkdevlog.tistory.com?iOS 송영규", 
-             "https://apape1225.tistory.com?백엔드 성창규", 
-             "https://starlikedh.tistory.com?백엔드 정다혜", 
-             "https://v2.velog.io/rss/handmk?백엔드 손민기", 
-             "https://v2.velog.io/rss/yunh03?백엔드 전윤환",
-             "https://v2.velog.io/rss/thd0427?안드로이드 송규빈",
-             "https://ub775.tistory.com?백엔드 강명균",
-             "https://suho0303.tistory.com?백엔드 이수호",
-             "https://medium.com/@ehdrbdndns?프론트엔드 양동균"]
+feed_list = ["https://klmhyeonwooo.tistory.com?klmhyeonwoo", 
+             "https://youngkdevlog.tistory.com?YoungKyu", 
+             "https://v2.velog.io/rss/k-svelte-master?타락한스벨트전도사", 
+             "https://v2.velog.io/rss/koomin1227?koomin",
+             "https://v2.velog.io/rss/handmk?HandMK",
+             "https://v2.velog.io/rss/endmoseung?endmoseung",
+             "https://v2.velog.io/rss/thd0427?송규빈",
+             "https://v2.velog.io/rss/rorror1?Park Junha",
+             "https://v2.velog.io/rss/jhbae0420?junhyeong",
+             "https://v2.velog.io/rss/woogur29?우혁",
+             "https://v2.velog.io/rss/imike?imike",
+            ]
 
 markdown_text = """
 <div align="center">

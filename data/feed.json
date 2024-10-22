@@ -1,4 +1,10 @@
 {
+	"feed-107": {
+		"title": "[우테코 7기] 1주차 프리코스 회고",
+		"link": "https://velog.io/@rorror1/%EC%9A%B0%ED%85%8C%EC%BD%94-7%EA%B8%B0-1%EC%A3%BC%EC%B0%A8-%ED%94%84%EB%A6%AC%EC%BD%94%EC%8A%A4-%ED%9A%8C%EA%B3%A0",
+		"date": "Oct 21, 2024",
+		"writer": "Park Junha"
+	},
 	"feed-0": {
 		"title": "Remix의 v1, v2 각각 다른 Nested Route 비교하기",
 		"link": "https://klmhyeonwooo.tistory.com/147",
@@ -41,7 +47,7 @@
 		"date": "Oct 19, 2024",
 		"writer": "YoungKyu"
 	},
-	"feed-128": {
+	"feed-129": {
 		"title": "React Hydration의 내부 동작 원리",
 		"link": "https://velog.io/@woogur29/React-Hydration%EC%9D%98-%EB%82%B4%EB%B6%80-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC",
 		"date": "Oct 18, 2024",
@@ -59,19 +65,19 @@
 		"date": "Oct 15, 2024",
 		"writer": "koomin"
 	},
-	"feed-107": {
+	"feed-108": {
 		"title": "[우테코 7기] IntelliJ 코드 스타일 설정하기!",
 		"link": "https://velog.io/@rorror1/%EC%9A%B0%ED%85%8C%EC%BD%94-7%EA%B8%B0-IntelliJ-%EC%BD%94%EB%93%9C-%EC%8A%A4%ED%83%80%EC%9D%BC-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0",
 		"date": "Oct 15, 2024",
 		"writer": "Park Junha"
 	},
-	"feed-108": {
+	"feed-109": {
 		"title": "서류 탈락을 거듭한 끝에 깨달은 신입 개발자 이력서 작성법",
 		"link": "https://velog.io/@jhbae0420/%EC%84%9C%EB%A5%98-%ED%83%88%EB%9D%BD%EC%9D%84-%EA%B1%B0%EB%93%AD%ED%95%9C-%EB%81%9D%EC%97%90-%EA%B9%A8%EB%8B%AC%EC%9D%80-%EC%8B%A0%EC%9E%85-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9D%B4%EB%A0%A5%EC%84%9C-%EC%9E%91%EC%84%B1%EB%B2%95",
 		"date": "Oct 13, 2024",
 		"writer": "junhyeong"
 	},
-	"feed-129": {
+	"feed-130": {
 		"title": "React Context의 내부 동작 원리",
 		"link": "https://velog.io/@woogur29/React-Context%EC%9D%98-%EB%82%B4%EB%B6%80-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC",
 		"date": "Oct 13, 2024",
@@ -107,7 +113,7 @@
 		"date": "Oct 12, 2024",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-148": {
+	"feed-149": {
 		"title": "Swift 앱을 위한 Systemd",
 		"link": "https://velog.io/@imike/SwiftSystemd",
 		"date": "Oct 12, 2024",
@@ -209,7 +215,7 @@
 		"date": "Sep 20, 2024",
 		"writer": "koomin"
 	},
-	"feed-130": {
+	"feed-131": {
 		"title": "useSyncExternalStore의 내부 동작 원리",
 		"link": "https://velog.io/@woogur29/useSyncExternalStore%EC%9D%98-%EB%82%B4%EB%B6%80-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC",
 		"date": "Sep 18, 2024",
@@ -221,13 +227,13 @@
 		"date": "Sep 13, 2024",
 		"writer": "koomin"
 	},
-	"feed-131": {
+	"feed-132": {
 		"title": "forwardRef의 내부 동작 원리",
 		"link": "https://velog.io/@woogur29/forwardRef%EC%9D%98-%EB%82%B4%EB%B6%80-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC",
 		"date": "Sep 10, 2024",
 		"writer": "우혁"
 	},
-	"feed-152": {
+	"feed-153": {
 		"title": "2024 카카오 겨울 인턴십 전환 후기",
 		"link": "https://velog.io/@yeolyi1310/2024-kakao-internship",
 		"date": "Sep 10, 2024",
@@ -245,19 +251,19 @@
 		"date": "Sep 07, 2024",
 		"writer": "YoungKyu"
 	},
-	"feed-153": {
+	"feed-154": {
 		"title": "Next.js는 싫은데 SSR은 쓰고 싶었던 블로그 개발기",
 		"link": "https://velog.io/@yeolyi1310/Next.js%EB%8A%94-%EC%8B%AB%EC%9D%80%EB%8D%B0-SSR%EC%9D%80-%EC%93%B0%EA%B3%A0-%EC%8B%B6%EC%97%88%EB%8D%98-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EA%B0%9C%EB%B0%9C%EA%B8%B0",
 		"date": "Sep 07, 2024",
 		"writer": "개발자 성열"
 	},
-	"feed-149": {
+	"feed-150": {
 		"title": "컴공, 디자인 취준생 분들에게 하고 싶은 말",
 		"link": "https://velog.io/@kwonhl0211/%EC%BB%B4%EA%B3%B5-%EB%94%94%EC%9E%90%EC%9D%B8-%EC%B7%A8%EC%A4%80%EC%83%9D-%EB%B6%84%EB%93%A4%EC%97%90%EA%B2%8C-%ED%95%98%EA%B3%A0-%EC%8B%B6%EC%9D%80-%EB%A7%90",
 		"date": "Sep 05, 2024",
 		"writer": "Doeon Kwon 권도언"
 	},
-	"feed-132": {
+	"feed-133": {
 		"title": "useRef의 내부 동작 원리",
 		"link": "https://velog.io/@woogur29/useRef%EC%9D%98-%EB%82%B4%EB%B6%80-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC",
 		"date": "Sep 03, 2024",
@@ -281,7 +287,7 @@
 		"date": "Aug 27, 2024",
 		"writer": "koomin"
 	},
-	"feed-133": {
+	"feed-134": {
 		"title": "Suspense 톺아보기 🔎",
 		"link": "https://velog.io/@woogur29/Suspense-%ED%86%BA%EC%95%84%EB%B3%B4%EA%B8%B0",
 		"date": "Aug 27, 2024",
@@ -317,7 +323,7 @@
 		"date": "Aug 21, 2024",
 		"writer": "YoungKyu"
 	},
-	"feed-134": {
+	"feed-135": {
 		"title": "Error Boundary 톺아보기 🔎",
 		"link": "https://velog.io/@woogur29/React-ErrorBoundary-%ED%86%BA%EC%95%84%EB%B3%B4%EA%B8%B0",
 		"date": "Aug 19, 2024",
@@ -353,19 +359,19 @@
 		"date": "Aug 12, 2024",
 		"writer": "송규빈"
 	},
-	"feed-135": {
+	"feed-136": {
 		"title": "자바스크립트의 동작 원리(실행 컨텍스트, 비동기, 이벤트 루프)",
 		"link": "https://velog.io/@woogur29/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%9D%98-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC%EC%8B%A4%ED%96%89-%EC%BB%A8%ED%85%8D%EC%8A%A4%ED%8A%B8-%EB%B9%84%EB%8F%99%EA%B8%B0-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%A3%A8%ED%94%84",
 		"date": "Aug 12, 2024",
 		"writer": "우혁"
 	},
-	"feed-136": {
+	"feed-137": {
 		"title": "낙관적 업데이트할 때 쿼리 요청을 취소하는 이유(Tanstack Query Optimistic Updates)",
 		"link": "https://velog.io/@woogur29/%EB%82%99%EA%B4%80%EC%A0%81-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8%ED%95%A0-%EB%95%8C-%EC%BF%BC%EB%A6%AC-%EC%9A%94%EC%B2%AD%EC%9D%84-%EC%B7%A8%EC%86%8C%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0Tanstack-Query-Optimistic-Updates",
 		"date": "Aug 11, 2024",
 		"writer": "우혁"
 	},
-	"feed-137": {
+	"feed-138": {
 		"title": "리액트 베일 아웃(bail out) 톺아보기 🔎",
 		"link": "https://velog.io/@woogur29/%EB%A6%AC%EC%95%A1%ED%8A%B8-bail-out-%ED%86%BA%EC%95%84%EB%B3%B4%EA%B8%B0",
 		"date": "Aug 10, 2024",
@@ -377,7 +383,7 @@
 		"date": "Aug 05, 2024",
 		"writer": "eunbinn"
 	},
-	"feed-138": {
+	"feed-139": {
 		"title": "Shadow DOM 톺아보기 🔎",
 		"link": "https://velog.io/@woogur29/Shadow-DOM-%ED%86%BA%EC%95%84%EB%B3%B4%EA%B8%B0",
 		"date": "Aug 05, 2024",
@@ -407,13 +413,13 @@
 		"date": "Jul 29, 2024",
 		"writer": "koomin"
 	},
-	"feed-139": {
+	"feed-140": {
 		"title": "Swagger(Open API) 문서를 기반으로 TypeScript 타입 정의를 자동으로 생성하기",
 		"link": "https://velog.io/@woogur29/SwaggerOpen-API-%EB%AC%B8%EC%84%9C%EB%A5%BC-%EA%B8%B0%EB%B0%98%EC%9C%BC%EB%A1%9C-TypeScript-%ED%83%80%EC%9E%85-%EC%A0%95%EC%9D%98%EB%A5%BC-%EC%9E%90%EB%8F%99%EC%9C%BC%EB%A1%9C-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0",
 		"date": "Jul 29, 2024",
 		"writer": "우혁"
 	},
-	"feed-150": {
+	"feed-151": {
 		"title": "Claude로 코드리뷰 경험 개선하기",
 		"link": "https://velog.io/@kwonhl0211/Claude%EB%A1%9C-%EC%BD%94%EB%93%9C%EB%A6%AC%EB%B7%B0-%EA%B2%BD%ED%97%98-%EA%B0%9C%EC%84%A0%ED%95%98%EA%B8%B0",
 		"date": "Jul 29, 2024",
@@ -425,25 +431,25 @@
 		"date": "Jul 26, 2024",
 		"writer": "송규빈"
 	},
-	"feed-140": {
+	"feed-141": {
 		"title": "useEffect의 내부 동작 원리",
 		"link": "https://velog.io/@woogur29/useEffect%EC%9D%98-%EB%82%B4%EB%B6%80-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC-r2a8dve6",
 		"date": "Jul 25, 2024",
 		"writer": "우혁"
 	},
-	"feed-141": {
+	"feed-142": {
 		"title": "Zero-Runtime CSS 라이브러리 비교하기",
 		"link": "https://velog.io/@woogur29/Zero-Runtime-CSS-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%EB%B9%84%EA%B5%90%ED%95%98%EA%B8%B0",
 		"date": "Jul 25, 2024",
 		"writer": "우혁"
 	},
-	"feed-142": {
+	"feed-143": {
 		"title": "Github Labels 한번에 추가하기",
 		"link": "https://velog.io/@woogur29/Github-Labels-%ED%95%9C%EB%B2%88%EC%97%90-%EC%B6%94%EA%B0%80%ED%95%98%EA%B8%B0",
 		"date": "Jul 24, 2024",
 		"writer": "우혁"
 	},
-	"feed-109": {
+	"feed-110": {
 		"title": "Nginx 이용해 Https 적용하기",
 		"link": "https://velog.io/@jhbae0420/Nginx-%EC%9D%B4%EC%9A%A9%ED%95%B4-https-%EB%A6%AC%EB%8B%A4%EC%9D%B4%EB%A0%89%ED%8A%B8",
 		"date": "Jul 23, 2024",
@@ -467,7 +473,7 @@
 		"date": "Jul 19, 2024",
 		"writer": "koomin"
 	},
-	"feed-143": {
+	"feed-144": {
 		"title": "리액트의 내부 동작 원리",
 		"link": "https://velog.io/@woogur29/%EB%A6%AC%EC%95%A1%ED%8A%B8%EC%9D%98-%EB%82%B4%EB%B6%80-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC",
 		"date": "Jul 19, 2024",
@@ -479,13 +485,13 @@
 		"date": "Jul 18, 2024",
 		"writer": "eunbinn"
 	},
-	"feed-144": {
+	"feed-145": {
 		"title": "[🚨 Error 🚨] map함수 비동기 에러",
 		"link": "https://velog.io/@woogur29/Error-map%ED%95%A8%EC%88%98-%EB%B9%84%EB%8F%99%EA%B8%B0-%EC%97%90%EB%9F%AC",
 		"date": "Jul 16, 2024",
 		"writer": "우혁"
 	},
-	"feed-145": {
+	"feed-146": {
 		"title": "Open Graph 데이터 파싱해서 북마크 생성하기",
 		"link": "https://velog.io/@woogur29/Open-Graph-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%8C%8C%EC%8B%B1%ED%95%B4%EC%84%9C-%EB%B6%81%EB%A7%88%ED%81%AC-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0",
 		"date": "Jul 13, 2024",
@@ -509,7 +515,7 @@
 		"date": "Jul 04, 2024",
 		"writer": "송규빈"
 	},
-	"feed-151": {
+	"feed-152": {
 		"title": "앞으로 제품 디자인은 어떻게 바뀔까? 멀티모달 프로덕트와 생성형 UI에 대한 생각 정리",
 		"link": "https://velog.io/@kwonhl0211/%EC%95%9E%EC%9C%BC%EB%A1%9C-%EC%A0%9C%ED%92%88-%EB%94%94%EC%9E%90%EC%9D%B8%EC%9D%80-%EC%96%B4%EB%96%BB%EA%B2%8C-%EB%B0%94%EB%80%94%EA%B9%8C-%EB%A9%80%ED%8B%B0%EB%AA%A8%EB%8B%AC-%ED%94%84%EB%A1%9C%EB%8D%95%ED%8A%B8%EC%99%80-%EC%83%9D%EC%84%B1%ED%98%95-UI%EC%97%90-%EB%8C%80%ED%95%9C-%EC%83%9D%EA%B0%81-%EC%A0%95%EB%A6%AC",
 		"date": "Jul 04, 2024",
@@ -521,13 +527,13 @@
 		"date": "Jul 02, 2024",
 		"writer": "송규빈"
 	},
-	"feed-146": {
+	"feed-147": {
 		"title": "[🚨 Error 🚨] Yarn PnP cannot find module  에러",
 		"link": "https://velog.io/@woogur29/Error-Yarn-PnP-cannot-find-module-%EC%97%90%EB%9F%AC",
 		"date": "Jun 28, 2024",
 		"writer": "우혁"
 	},
-	"feed-147": {
+	"feed-148": {
 		"title": "패키지 매니저 톺아보기 🔎",
 		"link": "https://velog.io/@woogur29/%ED%8C%A8%ED%82%A4%EC%A7%80-%EB%A7%A4%EB%8B%88%EC%A0%80-%ED%86%BA%EC%95%84%EB%B3%B4%EA%B8%B0",
 		"date": "Jun 26, 2024",
@@ -557,7 +563,7 @@
 		"date": "May 16, 2024",
 		"writer": "endmoseung"
 	},
-	"feed-110": {
+	"feed-111": {
 		"title": "실무 활용 중심의 MySQL 부트캠프 수강 후기",
 		"link": "https://velog.io/@jhbae0420/%EC%8B%A4%EB%AC%B4-%ED%99%9C%EC%9A%A9-%EC%A4%91%EC%8B%AC%EC%9D%98-MySQL-%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84-%EC%88%98%EA%B0%95-%ED%9B%84%EA%B8%B0",
 		"date": "May 12, 2024",
@@ -575,7 +581,7 @@
 		"date": "May 05, 2024",
 		"writer": "endmoseung"
 	},
-	"feed-111": {
+	"feed-112": {
 		"title": "스터디 참가 기능의 동시성 문제 해결하기(Sycronized, 비관적 락, 낙관적 락)",
 		"link": "https://velog.io/@jhbae0420/%EC%8A%A4%ED%84%B0%EB%94%94-%EC%B0%B8%EA%B0%80-%EA%B8%B0%EB%8A%A5%EC%9D%98-%EB%8F%99%EC%8B%9C%EC%84%B1-%EB%AC%B8%EC%A0%9C-%ED%95%B4%EA%B2%B0%ED%95%98%EA%B8%B0",
 		"date": "Apr 28, 2024",
@@ -605,13 +611,13 @@
 		"date": "Apr 01, 2024",
 		"writer": "endmoseung"
 	},
-	"feed-112": {
+	"feed-113": {
 		"title": "팀 프로젝트 이슈 대응기: 지각부터 컨벤션 논란까지",
 		"link": "https://velog.io/@jhbae0420/%ED%8C%80%EC%9E%A5%EC%9C%BC%EB%A1%9C%EC%84%9C-%EC%82%AC%EC%9D%B4%EB%93%9C-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EB%A5%BC-%EC%A7%84%ED%96%89%ED%95%B4%EB%B3%B4%EB%A9%B0",
 		"date": "Mar 31, 2024",
 		"writer": "junhyeong"
 	},
-	"feed-113": {
+	"feed-114": {
 		"title": "강의에서 배운 내용을 내 지식으로 만들기(feat.유데미 Spring Boot 3 & Spring Framework 6 마스터하기 수강후기)",
 		"link": "https://velog.io/@jhbae0420/%EA%B0%95%EC%9D%98%EC%97%90%EC%84%9C-%EB%B0%B0%EC%9A%B4-%EB%82%B4%EC%9A%A9%EC%9D%84-%EB%82%B4-%EC%A7%80%EC%8B%9D%EC%9C%BC%EB%A1%9C-%EB%A7%8C%EB%93%A4%EA%B8%B0",
 		"date": "Mar 17, 2024",
@@ -641,7 +647,7 @@
 		"date": "Mar 06, 2024",
 		"writer": "송규빈"
 	},
-	"feed-114": {
+	"feed-115": {
 		"title": "@Nested를 활용하여 계층 구조의 테스트 코드 작성하기",
 		"link": "https://velog.io/@jhbae0420/Nested%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%98%EC%97%AC-%EA%B3%84%EC%B8%B5-%EA%B5%AC%EC%A1%B0%EC%9D%98-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BD%94%EB%93%9C-%EC%9E%91%EC%84%B1%ED%95%98%EA%B8%B0",
 		"date": "Feb 18, 2024",
@@ -695,13 +701,13 @@
 		"date": "Feb 15, 2024",
 		"writer": "eunbinn"
 	},
-	"feed-115": {
+	"feed-116": {
 		"title": "나의 글쓰기 파이프라인 개선하기 (feat. 글또 세미나)",
 		"link": "https://velog.io/@jhbae0420/%EB%82%98%EC%9D%98-%EA%B8%80%EC%93%B0%EA%B8%B0-%ED%8C%8C%EC%9D%B4%ED%94%84%EB%9D%BC%EC%9D%B8-%EA%B0%9C%EC%84%A0%ED%95%98%EA%B8%B0-feat.-%EA%B8%80%EB%98%90-%EC%84%B8%EB%AF%B8%EB%82%98-2pmk0eu3",
 		"date": "Feb 10, 2024",
 		"writer": "junhyeong"
 	},
-	"feed-116": {
+	"feed-117": {
 		"title": "\b비용 절감과 성능 향상을 위해 Docker 이미지 최적화",
 		"link": "https://velog.io/@jhbae0420/%EB%B9%84%EC%9A%A9%EC%9D%84-%EC%A4%84%EC%9D%B4%EA%B8%B0-%EC%9C%84%ED%95%B4-Docker-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%B5%9C%EC%A0%81%ED%99%94",
 		"date": "Feb 04, 2024",
@@ -713,7 +719,7 @@
 		"date": "Jan 26, 2024",
 		"writer": "endmoseung"
 	},
-	"feed-117": {
+	"feed-118": {
 		"title": "요구사항에 맞는 패스워드 암호화 알고리즘 선택하기(Bcrypt, Scrypt, Argon2)",
 		"link": "https://velog.io/@jhbae0420/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%EC%97%90-%EB%A7%9E%EB%8A%94-%ED%8C%A8%EC%8A%A4%EC%9B%8C%EB%93%9C-%EC%95%94%ED%98%B8%ED%99%94-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EC%84%A0%ED%83%9D%ED%95%98%EA%B8%B0Bcrypt-Scrypt-Argon2",
 		"date": "Jan 19, 2024",
@@ -731,7 +737,7 @@
 		"date": "Jan 06, 2024",
 		"writer": "endmoseung"
 	},
-	"feed-118": {
+	"feed-119": {
 		"title": "스프링 시큐리티의 CSRF 필터 해제를 통한 403 Forbidden 에러 해결",
 		"link": "https://velog.io/@jhbae0420/%EB%BD%80%EB%AA%A8%EB%8F%84%EB%A1%9C-%EB%A9%94%EC%9D%B4%ED%8A%B8-%EC%8A%A4%ED%94%84%EB%A7%81-%EC%8B%9C%ED%81%90%EB%A6%AC%ED%8B%B0%EC%9D%98-CSRF-%ED%95%84%ED%84%B0-%ED%95%B4%EC%A0%9C%EB%A5%BC-%ED%86%B5%ED%95%9C-403-Forbidden-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0",
 		"date": "Jan 05, 2024",
@@ -749,13 +755,13 @@
 		"date": "Dec 23, 2023",
 		"writer": "endmoseung"
 	},
-	"feed-119": {
+	"feed-120": {
 		"title": "예비 사용자의 의견을 받아 기획 고도화하기",
 		"link": "https://velog.io/@jhbae0420/%EB%BD%80%EB%AA%A8%EB%8F%84%EB%A1%9C-%EB%A9%94%EC%9D%B4%ED%8A%B8-%EC%98%88%EB%B9%84-%EC%82%AC%EC%9A%A9%EC%9E%90%EC%9D%98-%EC%9D%98%EA%B2%AC%EC%9D%84-%EB%B0%9B%EC%95%84-%EA%B8%B0%ED%9A%8D-%EA%B3%A0%EB%8F%84%ED%99%94%ED%95%98%EA%B8%B0",
 		"date": "Dec 22, 2023",
 		"writer": "junhyeong"
 	},
-	"feed-120": {
+	"feed-121": {
 		"title": "사용자가 있는 서비스 만들어보기",
 		"link": "https://velog.io/@jhbae0420/%EB%BD%80%EB%AA%A8%EB%8F%84%EB%A1%9C-%EB%A9%94%EC%9D%B4%ED%8A%B8-%EC%82%AC%EC%9A%A9%EC%9E%90%EA%B0%80-%EC%9E%88%EB%8A%94-%EC%84%9C%EB%B9%84%EC%8A%A4-%EB%A7%8C%EB%93%A4%EC%96%B4%EB%B3%B4%EA%B8%B0",
 		"date": "Dec 07, 2023",
@@ -785,7 +791,7 @@
 		"date": "Nov 16, 2023",
 		"writer": "endmoseung"
 	},
-	"feed-121": {
+	"feed-122": {
 		"title": "나의 삶 : 과거부터 현재까지",
 		"link": "https://velog.io/@jhbae0420/%EB%82%98%EC%9D%98-%EC%82%B6-%EA%B3%BC%EA%B1%B0%EB%B6%80%ED%84%B0-%ED%98%84%EC%9E%AC%EA%B9%8C%EC%A7%80",
 		"date": "Nov 07, 2023",
@@ -803,7 +809,7 @@
 		"date": "Sep 24, 2023",
 		"writer": "eunbinn"
 	},
-	"feed-122": {
+	"feed-123": {
 		"title": "SSE를 활용한 채팅방 목록 업데이트 기능에서 발생한 에러 해결(OSIV)",
 		"link": "https://velog.io/@jhbae0420/SSE%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-%EC%B1%84%ED%8C%85%EB%B0%A9-%EB%AA%A9%EB%A1%9D-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8-%EA%B8%B0%EB%8A%A5%EC%97%90%EC%84%9C-%EB%B0%9C%EC%83%9D%ED%95%9C-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0OSIV",
 		"date": "Sep 13, 2023",
@@ -821,7 +827,7 @@
 		"date": "Sep 04, 2023",
 		"writer": "eunbinn"
 	},
-	"feed-123": {
+	"feed-124": {
 		"title": "실시간 채팅방 목록 업데이트를 위해 SSE(Server-Sent Events) 활용",
 		"link": "https://velog.io/@jhbae0420/%EC%B1%84%ED%8C%85%EB%AA%A9%EB%A1%9D-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8%EB%A5%BC-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%A0%EA%B9%8CSSE",
 		"date": "Sep 03, 2023",
@@ -845,25 +851,25 @@
 		"date": "Jul 10, 2023",
 		"writer": "endmoseung"
 	},
-	"feed-124": {
+	"feed-125": {
 		"title": "쿠키를 활용한 인증에서 SameSite 문제 해결하기",
 		"link": "https://velog.io/@jhbae0420/%EC%BF%A0%ED%82%A4%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-%EC%9D%B8%EC%A6%9D%EC%97%90%EC%84%9C-SameSite-%EB%AC%B8%EC%A0%9C-%ED%95%B4%EA%B2%B0%ED%95%98%EA%B8%B0",
 		"date": "Jun 30, 2023",
 		"writer": "junhyeong"
 	},
-	"feed-125": {
+	"feed-126": {
 		"title": "[오브젝트] 절차지향적인 코드를 통해 배운 캡슐화",
 		"link": "https://velog.io/@jhbae0420/%EC%98%A4%EB%B8%8C%EC%A0%9D%ED%8A%B8-%EC%A0%88%EC%B0%A8%EC%A7%80%ED%96%A5%EC%A0%81%EC%9D%B8-%EC%BD%94%EB%93%9C%EB%A5%BC-%ED%86%B5%ED%95%B4-%EB%B0%B0%EC%9A%B4-%EC%BA%A1%EC%8A%90%ED%99%94",
 		"date": "Jun 26, 2023",
 		"writer": "junhyeong"
 	},
-	"feed-126": {
+	"feed-127": {
 		"title": "[오브젝트] 책이라고 다 맞는 건 아니다",
 		"link": "https://velog.io/@jhbae0420/%EC%98%A4%EB%B8%8C%EC%A0%9D%ED%8A%B8-%EC%B1%85%EC%9D%B4%EB%9D%BC%EA%B3%A0-%EB%8B%A4-%EB%A7%9E%EB%8A%94%EA%B1%B4-%EC%95%84%EB%8B%88%EB%8B%A4",
 		"date": "Jun 25, 2023",
 		"writer": "junhyeong"
 	},
-	"feed-127": {
+	"feed-128": {
 		"title": "나에게 일이란 어떤 의미일까",
 		"link": "https://velog.io/@jhbae0420/%EB%82%98%EC%97%90%EA%B2%8C-%EC%9D%BC%EC%9D%B4%EB%9E%80-%EC%96%B4%EB%96%A4-%EC%9D%98%EB%AF%B8%EC%9D%BC%EA%B9%8C",
 		"date": "Jun 21, 2023",

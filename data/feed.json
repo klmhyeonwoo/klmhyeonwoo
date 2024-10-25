@@ -1,4 +1,16 @@
 {
+	"feed-5": {
+		"title": "Swift Concurrency - Task",
+		"link": "https://youngkdevlog.tistory.com/105",
+		"date": "Oct 24, 2024",
+		"writer": "YoungKyu"
+	},
+	"feed-27": {
+		"title": "분산락을 적용할 때 절대 하면 안되는 것",
+		"link": "https://velog.io/@koomin1227/%EB%B6%84%EC%82%B0%EB%9D%BD%EC%9D%84-%EC%A0%81%EC%9A%A9%ED%95%A0-%EB%95%8C-%EC%A0%88%EB%8C%80-%ED%95%98%EB%A9%B4-%EC%95%88%EB%90%98%EB%8A%94-%EA%B2%83",
+		"date": "Oct 24, 2024",
+		"writer": "koomin"
+	},
 	"feed-107": {
 		"title": "[우테코 7기] 1주차 프리코스 회고",
 		"link": "https://velog.io/@rorror1/%EC%9A%B0%ED%85%8C%EC%BD%94-7%EA%B8%B0-1%EC%A3%BC%EC%B0%A8-%ED%94%84%EB%A6%AC%EC%BD%94%EC%8A%A4-%ED%9A%8C%EA%B3%A0",
@@ -11,7 +23,7 @@
 		"date": "Oct 20, 2024",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-5": {
+	"feed-6": {
 		"title": "Swift Task 내에서 weak self를 붙여야 하는가",
 		"link": "https://youngkdevlog.tistory.com/104",
 		"date": "Oct 20, 2024",
@@ -41,7 +53,7 @@
 		"date": "Oct 19, 2024",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-6": {
+	"feed-7": {
 		"title": "네이버 부스트캠프 웹・모바일 9기 멤버십 과정 2차 학습스프린트 회고",
 		"link": "https://youngkdevlog.tistory.com/103",
 		"date": "Oct 19, 2024",
@@ -59,7 +71,7 @@
 		"date": "Oct 17, 2024",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-27": {
+	"feed-28": {
 		"title": "마커 클러스터링 도입해 사용자 경험을 개선하기",
 		"link": "https://velog.io/@koomin1227/%EB%A7%88%EC%BB%A4-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0%EB%A7%81-%EC%A4%80%EB%B9%84%ED%95%B4%EB%B4%A4%EC%8A%B5%EB%8B%88%EB%8B%A4..-%EA%B7%B8%EB%9F%B0%EB%8D%B0-%EC%9D%B4%EC%A0%9C-%EB%B0%B1%EC%97%94%EB%93%9C%EB%A5%BC-%EA%B3%81%EB%93%A4%EC%9D%B8",
 		"date": "Oct 15, 2024",
@@ -83,13 +95,13 @@
 		"date": "Oct 13, 2024",
 		"writer": "우혁"
 	},
-	"feed-7": {
+	"feed-8": {
 		"title": "SwiftUI 프로젝트에서 AppDelegate, SceneDelegate 사용하기",
 		"link": "https://youngkdevlog.tistory.com/102",
 		"date": "Oct 12, 2024",
 		"writer": "YoungKyu"
 	},
-	"feed-8": {
+	"feed-9": {
 		"title": "SwiftLint SPM으로 설치하기",
 		"link": "https://youngkdevlog.tistory.com/101",
 		"date": "Oct 12, 2024",
@@ -149,7 +161,7 @@
 		"date": "Oct 09, 2024",
 		"writer": "eunbinn"
 	},
-	"feed-9": {
+	"feed-10": {
 		"title": "View Draw Cycle",
 		"link": "https://youngkdevlog.tistory.com/100",
 		"date": "Oct 07, 2024",
@@ -161,7 +173,7 @@
 		"date": "Oct 06, 2024",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-28": {
+	"feed-29": {
 		"title": "사용자 1000명에 DB의 CPU 사용률이 90퍼가 넘는다고?",
 		"link": "https://velog.io/@koomin1227/%EC%82%AC%EC%9A%A9%EC%9E%90-1000%EB%AA%85%EC%97%90-DB%EC%9D%98-CPU-%EC%82%AC%EC%9A%A9%EB%A5%A0%EC%9D%B4-90%ED%8D%BC%EA%B0%80-%EB%84%98%EB%8A%94%EB%8B%A4%EA%B3%A0",
 		"date": "Oct 06, 2024",
@@ -185,13 +197,13 @@
 		"date": "Sep 29, 2024",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-29": {
+	"feed-30": {
 		"title": "초기 유저 1000명 모으는 법",
 		"link": "https://velog.io/@koomin1227/%EC%B4%88%EA%B8%B0-%EC%9C%A0%EC%A0%80-1000%EB%AA%85-%EB%AA%A8%EC%9C%BC%EB%8A%94-%EB%B2%95",
 		"date": "Sep 28, 2024",
 		"writer": "koomin"
 	},
-	"feed-30": {
+	"feed-31": {
 		"title": "B-Tree를 직접 구현해보고 성능 비교하기 - 삭제편",
 		"link": "https://velog.io/@koomin1227/B-Tree%EB%A5%BC-%EC%A7%81%EC%A0%91-%EA%B5%AC%ED%98%84%ED%95%B4%EB%B3%B4%EA%B3%A0-%EC%84%B1%EB%8A%A5-%EB%B9%84%EA%B5%90%ED%95%98%EA%B8%B0-%EC%82%AD%EC%A0%9C%ED%8E%B8",
 		"date": "Sep 24, 2024",
@@ -203,13 +215,13 @@
 		"date": "Sep 23, 2024",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-10": {
+	"feed-11": {
 		"title": "네이버 부스트캠프 웹・모바일 9기 멤버십 과정 1차 학습스프린트 회고",
 		"link": "https://youngkdevlog.tistory.com/98",
 		"date": "Sep 20, 2024",
 		"writer": "YoungKyu"
 	},
-	"feed-31": {
+	"feed-32": {
 		"title": "B Tree를 직접 구현 해보고 성능 비교하기",
 		"link": "https://velog.io/@koomin1227/B-Tree%EB%A5%BC-%EC%A7%81%EC%A0%91-%EA%B5%AC%ED%98%84-%ED%95%B4%EB%B3%B4%EA%B3%A0-%EC%84%B1%EB%8A%A5-%EB%B9%84%EA%B5%90%ED%95%98%EA%B8%B0",
 		"date": "Sep 20, 2024",
@@ -221,7 +233,7 @@
 		"date": "Sep 18, 2024",
 		"writer": "우혁"
 	},
-	"feed-32": {
+	"feed-33": {
 		"title": "서비스를 운영하기 위해 고려할 점",
 		"link": "https://velog.io/@koomin1227/%EC%84%9C%EB%B9%84%EC%8A%A4%EB%A5%BC-%EC%9A%B4%EC%98%81%ED%95%98%EA%B8%B0-%EC%9C%84%ED%95%B4-%EA%B3%A0%EB%A0%A4%ED%95%A0-%EC%A0%90",
 		"date": "Sep 13, 2024",
@@ -245,7 +257,7 @@
 		"date": "Sep 08, 2024",
 		"writer": "eunbinn"
 	},
-	"feed-11": {
+	"feed-12": {
 		"title": "왁뮤 3.0 출시 및 장애 대응 기록",
 		"link": "https://youngkdevlog.tistory.com/97",
 		"date": "Sep 07, 2024",
@@ -269,19 +281,19 @@
 		"date": "Sep 03, 2024",
 		"writer": "우혁"
 	},
-	"feed-33": {
+	"feed-34": {
 		"title": "페이징 처리를 안하면 어떻게 될까?",
 		"link": "https://velog.io/@koomin1227/%ED%8E%98%EC%9D%B4%EC%A7%95-%EC%B2%98%EB%A6%AC%EB%A5%BC-%EC%95%88%ED%95%98%EB%A9%B4-%EC%96%B4%EB%96%BB%EA%B2%8C-%EB%90%A0%EA%B9%8C",
 		"date": "Sep 02, 2024",
 		"writer": "koomin"
 	},
-	"feed-34": {
+	"feed-35": {
 		"title": "DISTINCT COUNT 작업 성능 최적화하기",
 		"link": "https://velog.io/@koomin1227/DISTINCT-COUNT-%EC%9E%91%EC%97%85-%EC%84%B1%EB%8A%A5-%EC%B5%9C%EC%A0%81%ED%99%94%ED%95%98%EA%B8%B0",
 		"date": "Sep 01, 2024",
 		"writer": "koomin"
 	},
-	"feed-35": {
+	"feed-36": {
 		"title": "모바일에서 \n걷기 인식 최적화하여 \n어뷰징 방지하기",
 		"link": "https://velog.io/@koomin1227/%EA%B1%B7%EB%8A%94-%EC%83%81%ED%83%9C%EC%99%80-%EC%9E%90%EB%8F%99%EC%B0%A8%EB%A5%BC-%ED%83%84-%EC%83%81%ED%83%9C%EB%A5%BC-%EA%B5%AC%EB%B6%84%ED%95%98%EC%97%AC-%EC%96%B4%EB%B7%B0%EC%A7%95-%EB%B0%A9%EC%A7%80%ED%95%98%EA%B8%B0",
 		"date": "Aug 27, 2024",
@@ -293,7 +305,7 @@
 		"date": "Aug 27, 2024",
 		"writer": "우혁"
 	},
-	"feed-36": {
+	"feed-37": {
 		"title": "Redis를 사용하여 랭킹 시스템을 구현하면 정말 빠를까?",
 		"link": "https://velog.io/@koomin1227/Redis%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EC%97%AC-%EB%9E%AD%ED%82%B9-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%84-%EA%B5%AC%ED%98%84%ED%95%98%EB%A9%B4-%EC%A0%95%EB%A7%90-%EB%B9%A0%EB%A5%BC%EA%B9%8C",
 		"date": "Aug 24, 2024",
@@ -305,21 +317,15 @@
 		"date": "Aug 23, 2024",
 		"writer": "송규빈"
 	},
-	"feed-12": {
+	"feed-13": {
 		"title": "UIScene, UIWindowScene, UIWindow",
 		"link": "https://youngkdevlog.tistory.com/96",
 		"date": "Aug 22, 2024",
 		"writer": "YoungKyu"
 	},
-	"feed-13": {
+	"feed-14": {
 		"title": "IBOutlet과 IBAction",
 		"link": "https://youngkdevlog.tistory.com/95",
-		"date": "Aug 21, 2024",
-		"writer": "YoungKyu"
-	},
-	"feed-14": {
-		"title": "View(ViewController) Life Cycle",
-		"link": "https://youngkdevlog.tistory.com/94",
 		"date": "Aug 21, 2024",
 		"writer": "YoungKyu"
 	},
@@ -329,25 +335,25 @@
 		"date": "Aug 19, 2024",
 		"writer": "우혁"
 	},
-	"feed-37": {
+	"feed-38": {
 		"title": "CloudWatch를 활용해 서버의 상태를 실시간으로 알림 받기",
 		"link": "https://velog.io/@koomin1227/%EB%8B%B9%EC%8B%A0%EC%9D%98-EC2%EA%B0%80-%EC%A3%BD%EC%9D%80%ED%9B%84%EC%97%90-%ED%9B%84%ED%9A%8C%ED%95%98%EC%A7%80%EB%A7%90%EA%B3%A0-%EC%A7%80%EA%B8%88-%EB%8B%B9%EC%9E%A5-%ED%95%B4%EC%95%BC%ED%95%98%EB%8A%94-%EC%9D%BC",
 		"date": "Aug 13, 2024",
 		"writer": "koomin"
 	},
-	"feed-38": {
+	"feed-39": {
 		"title": "Code Deploy 의 결과를 놓치지 않는 법",
 		"link": "https://velog.io/@koomin1227/Code-Deploy-%EC%9D%98-%EA%B2%B0%EA%B3%BC%EB%A5%BC-%EB%86%93%EC%B9%98%EC%A7%80-%EC%95%8A%EB%8A%94-%EB%B2%95",
 		"date": "Aug 13, 2024",
 		"writer": "koomin"
 	},
-	"feed-39": {
+	"feed-40": {
 		"title": "백엔드 개발자의 좌충우돌 앱스토어 배포기",
 		"link": "https://velog.io/@koomin1227/%EB%B0%B1%EC%97%94%EB%93%9C-%EA%B0%9C%EB%B0%9C%EC%9E%90%EC%9D%98-%EC%A2%8C%EC%B6%A9%EC%9A%B0%EB%8F%8C-%EC%95%B1%EC%8A%A4%ED%86%A0%EC%96%B4-%EB%B0%B0%ED%8F%AC%EA%B8%B0",
 		"date": "Aug 12, 2024",
 		"writer": "koomin"
 	},
-	"feed-40": {
+	"feed-41": {
 		"title": "TestFlight 로 베타 테스트 해보기",
 		"link": "https://velog.io/@koomin1227/TestFlight-%EB%A1%9C-%EB%B2%A0%ED%83%80-%ED%85%8C%EC%8A%A4%ED%8A%B8-%ED%95%B4%EB%B3%B4%EA%B8%B0",
 		"date": "Aug 12, 2024",
@@ -389,25 +395,25 @@
 		"date": "Aug 05, 2024",
 		"writer": "우혁"
 	},
-	"feed-41": {
+	"feed-42": {
 		"title": "분산락을 사용하여 동시성 문제 해결하기",
 		"link": "https://velog.io/@koomin1227/%EB%B6%84%EC%82%B0%EB%9D%BD%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EC%97%AC-%EB%8F%99%EC%8B%9C%EC%84%B1-%EB%AC%B8%EC%A0%9C-%ED%95%B4%EA%B2%B0%ED%95%98%EA%B8%B0",
 		"date": "Aug 04, 2024",
 		"writer": "koomin"
 	},
-	"feed-42": {
+	"feed-43": {
 		"title": "동시성 문제와의 첫 만남: 동시성 문제의 발견과정과 원인 탐구",
 		"link": "https://velog.io/@koomin1227/%EB%8F%99%EC%8B%9C%EC%84%B1-%EB%AC%B8%EC%A0%9C%EC%99%80%EC%9D%98-%EC%B2%AB-%EB%A7%8C%EB%82%A8-%EB%B0%B0%ED%8F%AC-%ED%9B%84-%EB%B0%9C%EC%83%9D%ED%95%9C-%EB%AC%B8%EC%A0%9C%EC%9D%98-%EC%8B%A4%EC%B2%B4",
 		"date": "Aug 03, 2024",
 		"writer": "koomin"
 	},
-	"feed-43": {
+	"feed-44": {
 		"title": "인프콘 2024 후기: 개발자로서의 성장을 위한 여정",
 		"link": "https://velog.io/@koomin1227/%EC%9D%B8%ED%94%84%EC%BD%98-2024-%ED%9B%84%EA%B8%B0-%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A1%9C%EC%84%9C%EC%9D%98-%EC%84%B1%EC%9E%A5%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%97%AC%EC%A0%95",
 		"date": "Aug 02, 2024",
 		"writer": "koomin"
 	},
-	"feed-44": {
+	"feed-45": {
 		"title": "애플 회원탈퇴 까지 구현해서 앱스토어 심사통과하기",
 		"link": "https://velog.io/@koomin1227/%EC%95%A0%ED%94%8C-%ED%9A%8C%EC%9B%90%ED%83%88%ED%87%B4-%EA%B9%8C%EC%A7%80-%EA%B5%AC%ED%98%84%ED%95%B4%EC%84%9C-%EC%95%B1%EC%8A%A4%ED%86%A0%EC%96%B4-%EC%8B%AC%EC%82%AC%ED%86%B5%EA%B3%BC%ED%95%98%EA%B8%B0",
 		"date": "Jul 29, 2024",
@@ -455,7 +461,7 @@
 		"date": "Jul 23, 2024",
 		"writer": "junhyeong"
 	},
-	"feed-45": {
+	"feed-46": {
 		"title": "DB 조회 방법에 따른 성능 차이",
 		"link": "https://velog.io/@koomin1227/DB-%EC%A1%B0%ED%9A%8C-%EB%B0%A9%EB%B2%95%EC%97%90-%EB%94%B0%EB%A5%B8-%EC%84%B1%EB%8A%A5-%EC%B0%A8%EC%9D%B4",
 		"date": "Jul 21, 2024",
@@ -466,12 +472,6 @@
 		"link": "https://velog.io/@endmoseung/%EC%83%81%EB%B0%98%EA%B8%B0-%ED%9A%8C%EA%B3%A0-feat-Maker",
 		"date": "Jul 20, 2024",
 		"writer": "endmoseung"
-	},
-	"feed-46": {
-		"title": "스프링으로 Apple 로그인 이해하고 구현하기",
-		"link": "https://velog.io/@koomin1227/BE-%EC%97%90%EC%84%9C-%EC%95%A0%ED%94%8C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0",
-		"date": "Jul 19, 2024",
-		"writer": "koomin"
 	},
 	"feed-144": {
 		"title": "리액트의 내부 동작 원리",

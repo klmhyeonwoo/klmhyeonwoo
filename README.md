@@ -17,8 +17,8 @@
 - [리크루팅을 위해 어플라이 사이트를 개발했다](https://klmhyeonwooo.tistory.com/74)<br>
 
 ### 최근 포스팅
+- [Remix에서 서버 Action 상태 값에 따른 로딩 체크하기](https://klmhyeonwooo.tistory.com/148)<br>
 - [Remix의 v1, v2 각각 다른 Nested Route 비교하기](https://klmhyeonwooo.tistory.com/147)<br>
 - [HTML에 meta 속성 중 http-equiv은 무엇을 의미할까요?](https://klmhyeonwooo.tistory.com/146)<br>
 - [오래된 브라우저에서 자바스크립트가 지원을 안해요, 폴리필(Polyfill)](https://klmhyeonwooo.tistory.com/145)<br>
 - [브라우저 렌더링 파이프라인](https://klmhyeonwooo.tistory.com/142)<br>
-- [CKEditor에서 커스텀 버튼 및 기능 추가하는 방법](https://klmhyeonwooo.tistory.com/140)<br>

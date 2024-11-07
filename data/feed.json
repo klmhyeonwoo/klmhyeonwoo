@@ -1,5 +1,11 @@
 {
 	"feed-5": {
+		"title": "Tuist 없이 모듈 만들기 with DemoApp",
+		"link": "https://youngkdevlog.tistory.com/108",
+		"date": "Nov 07, 2024",
+		"writer": "YoungKyu"
+	},
+	"feed-6": {
 		"title": "네이버 클라우드 VPC 서버에 연결이 되지 않는 문제",
 		"link": "https://youngkdevlog.tistory.com/107",
 		"date": "Nov 03, 2024",
@@ -59,7 +65,7 @@
 		"date": "Oct 27, 2024",
 		"writer": "endmoseung"
 	},
-	"feed-6": {
+	"feed-7": {
 		"title": "Swift Concurrency - Sendable",
 		"link": "https://youngkdevlog.tistory.com/106",
 		"date": "Oct 25, 2024",
@@ -77,7 +83,7 @@
 		"date": "Oct 25, 2024",
 		"writer": "eunbinn"
 	},
-	"feed-7": {
+	"feed-8": {
 		"title": "Swift Concurrency - Task",
 		"link": "https://youngkdevlog.tistory.com/105",
 		"date": "Oct 24, 2024",
@@ -101,7 +107,7 @@
 		"date": "Oct 20, 2024",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-8": {
+	"feed-9": {
 		"title": "Swift Task 내에서 weak self를 붙여야 하는가",
 		"link": "https://youngkdevlog.tistory.com/104",
 		"date": "Oct 20, 2024",
@@ -131,7 +137,7 @@
 		"date": "Oct 19, 2024",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-9": {
+	"feed-10": {
 		"title": "네이버 부스트캠프 웹・모바일 9기 멤버십 과정 2차 학습스프린트 회고",
 		"link": "https://youngkdevlog.tistory.com/103",
 		"date": "Oct 19, 2024",
@@ -173,13 +179,13 @@
 		"date": "Oct 13, 2024",
 		"writer": "우혁"
 	},
-	"feed-10": {
+	"feed-11": {
 		"title": "SwiftUI 프로젝트에서 AppDelegate, SceneDelegate 사용하기",
 		"link": "https://youngkdevlog.tistory.com/102",
 		"date": "Oct 12, 2024",
 		"writer": "YoungKyu"
 	},
-	"feed-11": {
+	"feed-12": {
 		"title": "SwiftLint SPM으로 설치하기",
 		"link": "https://youngkdevlog.tistory.com/101",
 		"date": "Oct 12, 2024",
@@ -239,7 +245,7 @@
 		"date": "Oct 09, 2024",
 		"writer": "eunbinn"
 	},
-	"feed-12": {
+	"feed-13": {
 		"title": "View Draw Cycle",
 		"link": "https://youngkdevlog.tistory.com/100",
 		"date": "Oct 07, 2024",
@@ -281,7 +287,7 @@
 		"date": "Sep 24, 2024",
 		"writer": "koomin"
 	},
-	"feed-13": {
+	"feed-14": {
 		"title": "네이버 부스트캠프 웹・모바일 9기 멤버십 과정 1차 학습스프린트 회고",
 		"link": "https://youngkdevlog.tistory.com/98",
 		"date": "Sep 20, 2024",
@@ -322,12 +328,6 @@
 		"link": "https://velog.io/@eunbinn/js-dates-finally-fixed",
 		"date": "Sep 08, 2024",
 		"writer": "eunbinn"
-	},
-	"feed-14": {
-		"title": "왁뮤 3.0 출시 및 장애 대응 기록",
-		"link": "https://youngkdevlog.tistory.com/97",
-		"date": "Sep 07, 2024",
-		"writer": "YoungKyu"
 	},
 	"feed-159": {
 		"title": "Next.js는 싫은데 SSR은 쓰고 싶었던 블로그 개발기",

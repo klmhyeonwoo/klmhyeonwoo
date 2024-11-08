@@ -23,7 +23,7 @@
 - [HTML에 meta 속성 중 http-equiv은 무엇을 의미할까요?](https://klmhyeonwooo.tistory.com/146)<br>
 - [오래된 브라우저에서 자바스크립트가 지원을 안해요, 폴리필(Polyfill)](https://klmhyeonwooo.tistory.com/145)<br>
 
-### 경험
+### -
 - **devchat-kr** (2024.01 ~ Currently active)
 - **depromeet 16th Organizer** (2024.10 ~ Currently active)
 - **depromeet 15th** (2024.06 ~ 2024.10)
@@ -33,6 +33,6 @@
 - **likelion 6th Organizer** (2018.04 ~ 2018.12)
 - **likelion 5th** (2017.06 ~ 2018.02)
 
-### 커리어
+### -
 - **AhnLab** — Frontend Developer (2024.01 ~ Currently employed)
 - **JiranFamily** — Frontend / Editor Developer (2023.04 ~ 2024.01)

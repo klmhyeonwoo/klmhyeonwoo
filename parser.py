@@ -86,6 +86,23 @@ with open(os.path.join(BASE_DIR, 'feed.json'), 'w+',encoding='utf-8') as json_fi
     json.dump(parsing_data, json_file, ensure_ascii = False, indent='\t')
 
 print(parsing_data)
+
+markdown_text += """
+## Experience
+- **devchat-kr** (2024.01 ~ Currently active)
+- **depromeet 16th Organizer** (2024.10 ~ Currently active)
+- **depromeet 15th** (2024.06 ~ 2024.10)
+- **depromeet 14th** (2023.11 ~ 2024.02)
+- **likelion 11st Organizer** (2023.03 ~ 2024.10)
+- **sopt 21st** (2018.05 ~ 2018.12)
+- **likelion 6th Organizer** (2018.04 ~ 2018.12)
+- **likelion 5th** (2017.06 ~ 2018.02)
+
+## Work
+- **AhnLab** — Frontend Developer (2024.01 ~ Currently employed)
+- **JiranFamily** — Frontend / Editor Developer (2023.04 ~ 2024.01)
+"""
+
 f = open("README.md", mode="w", encoding="utf-8")
 f.write(markdown_text)
 f.close()

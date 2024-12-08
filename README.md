@@ -16,11 +16,11 @@
 - [리크루팅을 위해 어플라이 사이트를 개발했다](https://klmhyeonwooo.tistory.com/74)<br>
 
 ### 최근 포스팅
+- [해시 값을 이용해 문자열 변경 사항 확인하기](https://klmhyeonwooo.tistory.com/150)<br>
 - [프로젝트를 진행하면서 오너쉽을 가져야하는 이유들](https://klmhyeonwooo.tistory.com/149)<br>
 - [Remix에서 서버 Action 상태 값에 따른 로딩 체크하기](https://klmhyeonwooo.tistory.com/148)<br>
 - [Remix의 v1, v2 각각 다른 Nested Route 비교하기](https://klmhyeonwooo.tistory.com/147)<br>
 - [HTML에 meta 속성 중 http-equiv은 무엇을 의미할까요?](https://klmhyeonwooo.tistory.com/146)<br>
-- [오래된 브라우저에서 자바스크립트가 지원을 안해요, 폴리필(Polyfill)](https://klmhyeonwooo.tistory.com/145)<br>
 
 ### -
 - **devchat-kr** (2024.01 ~ Currently active)

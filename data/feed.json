@@ -1,4 +1,10 @@
 {
+	"feed-0": {
+		"title": "해시 값을 이용해 문자열 변경 사항 확인하기",
+		"link": "https://klmhyeonwooo.tistory.com/150",
+		"date": "Dec 07, 2024",
+		"writer": "느릿느릿 프론트엔드"
+	},
 	"feed-15": {
 		"title": "'use client'가 CSR이라고 알고 있는 거 아니죠? Next.js 면접질문 정복",
 		"link": "https://velog.io/@k-svelte-master/nextjs-rsc-csr-ssr",
@@ -149,7 +155,7 @@
 		"date": "Oct 29, 2024",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-0": {
+	"feed-1": {
 		"title": "프로젝트를 진행하면서 오너쉽을 가져야하는 이유들",
 		"link": "https://klmhyeonwooo.tistory.com/149",
 		"date": "Oct 28, 2024",
@@ -161,7 +167,7 @@
 		"date": "Oct 28, 2024",
 		"writer": "우혁"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "Remix에서 서버 Action 상태 값에 따른 로딩 체크하기",
 		"link": "https://klmhyeonwooo.tistory.com/148",
 		"date": "Oct 27, 2024",
@@ -215,7 +221,7 @@
 		"date": "Oct 21, 2024",
 		"writer": "Park Junha"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "Remix의 v1, v2 각각 다른 Nested Route 비교하기",
 		"link": "https://klmhyeonwooo.tistory.com/147",
 		"date": "Oct 20, 2024",
@@ -245,7 +251,7 @@
 		"date": "Oct 20, 2024",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "HTML에 meta 속성 중 http-equiv은 무엇을 의미할까요?",
 		"link": "https://klmhyeonwooo.tistory.com/146",
 		"date": "Oct 19, 2024",
@@ -328,12 +334,6 @@
 		"link": "https://velog.io/@imike/SwiftSystemd",
 		"date": "Oct 12, 2024",
 		"writer": "imikehttps://v2.velog.io/rss/teo"
-	},
-	"feed-4": {
-		"title": "오래된 브라우저에서 자바스크립트가 지원을 안해요, 폴리필(Polyfill)",
-		"link": "https://klmhyeonwooo.tistory.com/145",
-		"date": "Oct 11, 2024",
-		"writer": "느릿느릿 프론트엔드"
 	},
 	"feed-31": {
 		"title": "이것때문에 야근하는 프론트엔드 분들께",

@@ -1,11 +1,29 @@
 {
+	"feed-15": {
+		"title": "제발 cursor말고 windsurf 쓰세요!!",
+		"link": "https://velog.io/@k-svelte-master/windsurf-flitter-cursor",
+		"date": "Dec 10, 2024",
+		"writer": "타락한스벨트전도사"
+	},
+	"feed-16": {
+		"title": "GPT에게 질문을 못한다고요? 축하드립니다.",
+		"link": "https://velog.io/@k-svelte-master/can-not-ask-to-gpt",
+		"date": "Dec 10, 2024",
+		"writer": "타락한스벨트전도사"
+	},
+	"feed-137": {
+		"title": "useTransition의 내부 동작 원리",
+		"link": "https://velog.io/@woogur29/useTransition%EC%9D%98-%EB%82%B4%EB%B6%80-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC",
+		"date": "Dec 10, 2024",
+		"writer": "우혁"
+	},
 	"feed-0": {
 		"title": "해시 값을 이용해 문자열 변경 사항 확인하기",
 		"link": "https://klmhyeonwooo.tistory.com/150",
 		"date": "Dec 07, 2024",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-15": {
+	"feed-17": {
 		"title": "'use client'가 CSR이라고 알고 있는 거 아니죠? Next.js 면접질문 정복",
 		"link": "https://velog.io/@k-svelte-master/nextjs-rsc-csr-ssr",
 		"date": "Dec 06, 2024",
@@ -17,25 +35,25 @@
 		"date": "Dec 02, 2024",
 		"writer": "koomin"
 	},
-	"feed-137": {
+	"feed-138": {
 		"title": "React lazy의 내부 동작 원리",
 		"link": "https://velog.io/@woogur29/lazy%EC%9D%98-%EB%82%B4%EB%B6%80-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC",
 		"date": "Dec 02, 2024",
 		"writer": "우혁"
 	},
-	"feed-138": {
+	"feed-139": {
 		"title": "Readable Stream, Writable Stream 톺아보기",
 		"link": "https://velog.io/@woogur29/Readable-Stream-Writable-Stream-%ED%86%BA%EC%95%84%EB%B3%B4%EA%B8%B0",
 		"date": "Nov 28, 2024",
 		"writer": "우혁"
 	},
-	"feed-139": {
+	"feed-140": {
 		"title": "use Hook의 내부 동작 원리",
 		"link": "https://velog.io/@woogur29/use-Hook%EC%9D%98-%EB%82%B4%EB%B6%80-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC",
 		"date": "Nov 26, 2024",
 		"writer": "우혁"
 	},
-	"feed-16": {
+	"feed-18": {
 		"title": "Symbol이 뭔지는 들어봤는데... 면접에서는 이렇게 답하세요",
 		"link": "https://velog.io/@k-svelte-master/js-symbol-guide",
 		"date": "Nov 24, 2024",
@@ -53,25 +71,25 @@
 		"date": "Nov 23, 2024",
 		"writer": "endmoseung"
 	},
-	"feed-140": {
+	"feed-141": {
 		"title": "서버 컴포넌트가 생성되는 과정(2 - 클라이언트)",
 		"link": "https://velog.io/@woogur29/React-Server-Components%EA%B0%80-%EC%83%9D%EC%84%B1%EB%90%98%EB%8A%94-%EB%82%B4%EB%B6%80-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC2-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8",
 		"date": "Nov 22, 2024",
 		"writer": "우혁"
 	},
-	"feed-17": {
+	"feed-19": {
 		"title": "내 글이 요즘IT에 올라갔다?! - 오픈소스로 배운 것들",
 		"link": "https://velog.io/@k-svelte-master/notionpresso-opensource-guide",
 		"date": "Nov 21, 2024",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-141": {
+	"feed-142": {
 		"title": "서버 컴포넌트가 생성되는 과정(1 - 서버)",
 		"link": "https://velog.io/@woogur29/%EC%84%9C%EB%B2%84-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EA%B0%80-%EC%83%9D%EC%84%B1%EB%90%98%EB%8A%94-%EB%82%B4%EB%B6%80-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC1-%EC%84%9C%EB%B2%84",
 		"date": "Nov 20, 2024",
 		"writer": "우혁"
 	},
-	"feed-142": {
+	"feed-143": {
 		"title": "React에서 무시되는 값(null, undefined, boolean)들을 어떻게 처리될까?",
 		"link": "https://velog.io/@woogur29/React%EC%97%90%EC%84%9C-%EB%AC%B4%EC%8B%9C%EB%90%98%EB%8A%94-%EA%B0%92null-undefined-boolean%EB%93%A4%EC%9D%84-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%B2%98%EB%A6%AC%ED%95%A0%EA%B9%8C",
 		"date": "Nov 13, 2024",
@@ -83,7 +101,7 @@
 		"date": "Nov 12, 2024",
 		"writer": "koomin"
 	},
-	"feed-18": {
+	"feed-20": {
 		"title": "프론트엔드 성능 측정, 이제는 자동화하자! - Playwright와 Chrome Trace로 시작하기",
 		"link": "https://velog.io/@k-svelte-master/frontend-performance-optimizer",
 		"date": "Nov 10, 2024",
@@ -119,7 +137,7 @@
 		"date": "Nov 07, 2024",
 		"writer": "YoungKyu"
 	},
-	"feed-143": {
+	"feed-144": {
 		"title": "Progressive Hydration의 내부 동작 원리",
 		"link": "https://velog.io/@woogur29/Progressive-Hydration%EC%9D%98-%EB%82%B4%EB%B6%80-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC",
 		"date": "Nov 07, 2024",
@@ -131,7 +149,7 @@
 		"date": "Nov 03, 2024",
 		"writer": "YoungKyu"
 	},
-	"feed-19": {
+	"feed-21": {
 		"title": "외부 라이브러리 없이 Next.js에서 다국어 지원 구현하기",
 		"link": "https://velog.io/@k-svelte-master/nextjs-i18n-no-libarary",
 		"date": "Nov 03, 2024",
@@ -143,13 +161,13 @@
 		"date": "Oct 30, 2024",
 		"writer": "송규빈"
 	},
-	"feed-20": {
+	"feed-22": {
 		"title": "코드로 이어진 우리들의 이야기: 노션 오픈소스를 만들며 깨달은 것들 💫",
 		"link": "https://velog.io/@k-svelte-master/notionpresso-opensource",
 		"date": "Oct 29, 2024",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-21": {
+	"feed-23": {
 		"title": "면접관이 React Router 동작 원리를 물어본다면? History API로 답변하세요 🎯",
 		"link": "https://velog.io/@k-svelte-master/react-router-interview",
 		"date": "Oct 29, 2024",
@@ -161,7 +179,7 @@
 		"date": "Oct 28, 2024",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-144": {
+	"feed-145": {
 		"title": "Suspense가 Hydration중에 동작하는 방식",
 		"link": "https://velog.io/@woogur29/Suspense%EA%B0%80-Hydration%EC%A4%91%EC%97%90-%EB%8F%99%EC%9E%91%ED%95%98%EB%8A%94-%EB%B0%A9%EC%8B%9D",
 		"date": "Oct 28, 2024",
@@ -173,7 +191,7 @@
 		"date": "Oct 27, 2024",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-22": {
+	"feed-24": {
 		"title": "API 수정 요청? 이제 그만! BFF로 프론트엔드에 책임 떠넘기기 🙅‍♂️💼",
 		"link": "https://velog.io/@k-svelte-master/bff-api-pattern",
 		"date": "Oct 27, 2024",
@@ -191,7 +209,7 @@
 		"date": "Oct 25, 2024",
 		"writer": "YoungKyu"
 	},
-	"feed-23": {
+	"feed-25": {
 		"title": "개발자라면 스스로 블로그 만들 수 있어야 겠죠?",
 		"link": "https://velog.io/@k-svelte-master/notion-free-blog",
 		"date": "Oct 25, 2024",
@@ -233,19 +251,19 @@
 		"date": "Oct 20, 2024",
 		"writer": "YoungKyu"
 	},
-	"feed-24": {
+	"feed-26": {
 		"title": "주니어 개발자라면 꼭 알아야 할 API 연동 꿀팁! 백엔드 답 없이도 빠르게 진행하기",
 		"link": "https://velog.io/@k-svelte-master/api-master-frontend",
 		"date": "Oct 20, 2024",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-25": {
+	"feed-27": {
 		"title": "DB 설계로 고민하는 주니어 개발자들, 이 비밀 전략을 아시나요?",
 		"link": "https://velog.io/@k-svelte-master/database-table-tips-easyrd",
 		"date": "Oct 20, 2024",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-26": {
+	"feed-28": {
 		"title": "브릿지 패턴 쓰는법 알려줄게 - 실전 디자인패턴",
 		"link": "https://velog.io/@k-svelte-master/design-pattern-junior-to-senior",
 		"date": "Oct 20, 2024",
@@ -263,13 +281,13 @@
 		"date": "Oct 19, 2024",
 		"writer": "YoungKyu"
 	},
-	"feed-145": {
+	"feed-146": {
 		"title": "React Hydration의 내부 동작 원리",
 		"link": "https://velog.io/@woogur29/React-Hydration%EC%9D%98-%EB%82%B4%EB%B6%80-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC",
 		"date": "Oct 18, 2024",
 		"writer": "우혁"
 	},
-	"feed-27": {
+	"feed-29": {
 		"title": "React 원리만 안다면 이런거까지 할 수 있습니다 ㄷㄷ",
 		"link": "https://velog.io/@k-svelte-master/react-flitter-canvas",
 		"date": "Oct 17, 2024",
@@ -293,7 +311,7 @@
 		"date": "Oct 13, 2024",
 		"writer": "junhyeong"
 	},
-	"feed-146": {
+	"feed-147": {
 		"title": "React Context의 내부 동작 원리",
 		"link": "https://velog.io/@woogur29/React-Context%EC%9D%98-%EB%82%B4%EB%B6%80-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC",
 		"date": "Oct 13, 2024",
@@ -311,19 +329,19 @@
 		"date": "Oct 12, 2024",
 		"writer": "YoungKyu"
 	},
-	"feed-28": {
+	"feed-30": {
 		"title": "프론트엔드 채용, \"특이\"하면 눈길을 끈다 - 내가 텍스트 필드를 캔버스로 만든 이유",
 		"link": "https://velog.io/@k-svelte-master/textfield-canvas-for-fun",
 		"date": "Oct 12, 2024",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-29": {
+	"feed-31": {
 		"title": "\b3~4년차 프론트엔드는 이력서에 어떤 내용을 넣어야 하나요?",
 		"link": "https://velog.io/@k-svelte-master/frontend-interaction-examples",
 		"date": "Oct 12, 2024",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-30": {
+	"feed-32": {
 		"title": "면접관이 왜 프론트엔드로 지원했냐고 물었을때 어떻게 답하실 건가요?",
 		"link": "https://velog.io/@k-svelte-master/developer-career",
 		"date": "Oct 12, 2024",
@@ -335,7 +353,7 @@
 		"date": "Oct 12, 2024",
 		"writer": "imikehttps://v2.velog.io/rss/teo"
 	},
-	"feed-31": {
+	"feed-33": {
 		"title": "이것때문에 야근하는 프론트엔드 분들께",
 		"link": "https://velog.io/@k-svelte-master/for-overworking-frontend",
 		"date": "Oct 10, 2024",
@@ -347,7 +365,7 @@
 		"date": "Oct 10, 2024",
 		"writer": "endmoseung"
 	},
-	"feed-32": {
+	"feed-34": {
 		"title": "프론트엔드 개발자라면 페이지 전환 정도는 할 수 있어야죠? 못한다고요? 😱",
 		"link": "https://velog.io/@k-svelte-master/frontend-page-transition-please",
 		"date": "Oct 09, 2024",
@@ -365,23 +383,11 @@
 		"date": "Oct 07, 2024",
 		"writer": "YoungKyu"
 	},
-	"feed-33": {
-		"title": "서류 탈락한 회사에서 이직 제안이 온 이유?",
-		"link": "https://velog.io/@k-svelte-master/why-company-contact-me-again",
-		"date": "Oct 06, 2024",
-		"writer": "타락한스벨트전도사"
-	},
 	"feed-39": {
 		"title": "사용자 1000명에 DB의 CPU 사용률이 90퍼가 넘는다고?",
 		"link": "https://velog.io/@koomin1227/%EC%82%AC%EC%9A%A9%EC%9E%90-1000%EB%AA%85%EC%97%90-DB%EC%9D%98-CPU-%EC%82%AC%EC%9A%A9%EB%A5%A0%EC%9D%B4-90%ED%8D%BC%EA%B0%80-%EB%84%98%EB%8A%94%EB%8B%A4%EA%B3%A0",
 		"date": "Oct 06, 2024",
 		"writer": "koomin"
-	},
-	"feed-34": {
-		"title": "useCallback과 useMemo의 차이를 아시나요? - 제대로 답하자 면접질문",
-		"link": "https://velog.io/@k-svelte-master/react-hook-real-knowledge",
-		"date": "Oct 04, 2024",
-		"writer": "타락한스벨트전도사"
 	},
 	"feed-40": {
 		"title": "초기 유저 1000명 모으는 법",
@@ -401,7 +407,7 @@
 		"date": "Sep 20, 2024",
 		"writer": "koomin"
 	},
-	"feed-147": {
+	"feed-148": {
 		"title": "useSyncExternalStore의 내부 동작 원리",
 		"link": "https://velog.io/@woogur29/useSyncExternalStore%EC%9D%98-%EB%82%B4%EB%B6%80-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC",
 		"date": "Sep 18, 2024",
@@ -413,7 +419,7 @@
 		"date": "Sep 13, 2024",
 		"writer": "koomin"
 	},
-	"feed-148": {
+	"feed-149": {
 		"title": "forwardRef의 내부 동작 원리",
 		"link": "https://velog.io/@woogur29/forwardRef%EC%9D%98-%EB%82%B4%EB%B6%80-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC",
 		"date": "Sep 10, 2024",
@@ -443,7 +449,7 @@
 		"date": "Sep 05, 2024",
 		"writer": "Doeon Kwon 권도언"
 	},
-	"feed-149": {
+	"feed-150": {
 		"title": "useRef의 내부 동작 원리",
 		"link": "https://velog.io/@woogur29/useRef%EC%9D%98-%EB%82%B4%EB%B6%80-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC",
 		"date": "Sep 03, 2024",
@@ -467,7 +473,7 @@
 		"date": "Aug 27, 2024",
 		"writer": "koomin"
 	},
-	"feed-150": {
+	"feed-151": {
 		"title": "Suspense 톺아보기 🔎",
 		"link": "https://velog.io/@woogur29/Suspense-%ED%86%BA%EC%95%84%EB%B3%B4%EA%B8%B0",
 		"date": "Aug 27, 2024",
@@ -485,7 +491,7 @@
 		"date": "Aug 23, 2024",
 		"writer": "송규빈"
 	},
-	"feed-151": {
+	"feed-152": {
 		"title": "Error Boundary 톺아보기 🔎",
 		"link": "https://velog.io/@woogur29/React-ErrorBoundary-%ED%86%BA%EC%95%84%EB%B3%B4%EA%B8%B0",
 		"date": "Aug 19, 2024",
@@ -521,19 +527,19 @@
 		"date": "Aug 12, 2024",
 		"writer": "송규빈"
 	},
-	"feed-152": {
+	"feed-153": {
 		"title": "자바스크립트의 동작 원리(실행 컨텍스트, 비동기, 이벤트 루프)",
 		"link": "https://velog.io/@woogur29/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%9D%98-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC%EC%8B%A4%ED%96%89-%EC%BB%A8%ED%85%8D%EC%8A%A4%ED%8A%B8-%EB%B9%84%EB%8F%99%EA%B8%B0-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%A3%A8%ED%94%84",
 		"date": "Aug 12, 2024",
 		"writer": "우혁"
 	},
-	"feed-153": {
+	"feed-154": {
 		"title": "낙관적 업데이트할 때 쿼리 요청을 취소하는 이유(Tanstack Query Optimistic Updates)",
 		"link": "https://velog.io/@woogur29/%EB%82%99%EA%B4%80%EC%A0%81-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8%ED%95%A0-%EB%95%8C-%EC%BF%BC%EB%A6%AC-%EC%9A%94%EC%B2%AD%EC%9D%84-%EC%B7%A8%EC%86%8C%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0Tanstack-Query-Optimistic-Updates",
 		"date": "Aug 11, 2024",
 		"writer": "우혁"
 	},
-	"feed-154": {
+	"feed-155": {
 		"title": "리액트 베일 아웃(bail out) 톺아보기 🔎",
 		"link": "https://velog.io/@woogur29/%EB%A6%AC%EC%95%A1%ED%8A%B8-bail-out-%ED%86%BA%EC%95%84%EB%B3%B4%EA%B8%B0",
 		"date": "Aug 10, 2024",
@@ -545,7 +551,7 @@
 		"date": "Aug 05, 2024",
 		"writer": "eunbinn"
 	},
-	"feed-155": {
+	"feed-156": {
 		"title": "Shadow DOM 톺아보기 🔎",
 		"link": "https://velog.io/@woogur29/Shadow-DOM-%ED%86%BA%EC%95%84%EB%B3%B4%EA%B8%B0",
 		"date": "Aug 05, 2024",
@@ -568,12 +574,6 @@
 		"link": "https://velog.io/@koomin1227/%EC%9D%B8%ED%94%84%EC%BD%98-2024-%ED%9B%84%EA%B8%B0-%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A1%9C%EC%84%9C%EC%9D%98-%EC%84%B1%EC%9E%A5%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%97%AC%EC%A0%95",
 		"date": "Aug 02, 2024",
 		"writer": "koomin"
-	},
-	"feed-156": {
-		"title": "Swagger(Open API) 문서를 기반으로 TypeScript 타입 정의를 자동으로 생성하기",
-		"link": "https://velog.io/@woogur29/SwaggerOpen-API-%EB%AC%B8%EC%84%9C%EB%A5%BC-%EA%B8%B0%EB%B0%98%EC%9C%BC%EB%A1%9C-TypeScript-%ED%83%80%EC%9E%85-%EC%A0%95%EC%9D%98%EB%A5%BC-%EC%9E%90%EB%8F%99%EC%9C%BC%EB%A1%9C-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0",
-		"date": "Jul 29, 2024",
-		"writer": "우혁"
 	},
 	"feed-159": {
 		"title": "Claude로 코드리뷰 경험 개선하기",

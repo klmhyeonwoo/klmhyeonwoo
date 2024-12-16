@@ -14,11 +14,11 @@
 - [개발자는 내가 만드는 제품에 대한 애정을 가져야한다](https://klmhyeonwooo.tistory.com/122)<br>
 
 ### 최근 포스팅
+- [Axios Interceptor에서 상태 값에 따른 라우트 이동시키기 (feat. 글로벌 네비게이터)](https://klmhyeonwooo.tistory.com/151)<br>
 - [해시 값을 이용해 문자열 변경 사항 확인하기](https://klmhyeonwooo.tistory.com/150)<br>
 - [프로젝트를 진행하면서 오너쉽을 가져야하는 이유들](https://klmhyeonwooo.tistory.com/149)<br>
 - [Remix에서 서버 Action 상태 값에 따른 로딩 체크하기](https://klmhyeonwooo.tistory.com/148)<br>
 - [Remix의 v1, v2 각각 다른 Nested Route 비교하기](https://klmhyeonwooo.tistory.com/147)<br>
-- [HTML에 meta 속성 중 http-equiv은 무엇을 의미할까요?](https://klmhyeonwooo.tistory.com/146)<br>
 
 ### -
 - **devchat-kr** (2024.01 ~ Currently active)

@@ -86,6 +86,7 @@ print(parsing_data)
 
 markdown_text += """
 ### -
+- **notion korea** (2024.12 ~ Currently active)
 - **devchat-kr** (2024.01 ~ Currently active)
 - **depromeet 16th Organizer** (2024.10 ~ Currently active)
 - **depromeet 15th** (2024.06 ~ 2024.10)

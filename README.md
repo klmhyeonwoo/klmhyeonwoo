@@ -21,6 +21,7 @@
 - [Remix의 v1, v2 각각 다른 Nested Route 비교하기](https://klmhyeonwooo.tistory.com/147)<br>
 
 ### -
+- **notion korea** (2024.12 ~ Currently active)
 - **devchat-kr** (2024.01 ~ Currently active)
 - **depromeet 16th Organizer** (2024.10 ~ Currently active)
 - **depromeet 15th** (2024.06 ~ 2024.10)

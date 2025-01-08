@@ -415,7 +415,7 @@
 	},
 	"feed-57": {
 		"title": "NextJS 우아하게 사용하기",
-		"link": "https://velog.io/@endmoseung/NextJS-%EC%9A%B0%EC%95%84%ED%95%98%EA%B2%8C-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0",
+		"link": "https://velog.io/@endmoseung/nextjs-use-gracefully",
 		"date": "Oct 10, 2024",
 		"writer": "endmoseung"
 	},
@@ -655,7 +655,7 @@
 	},
 	"feed-59": {
 		"title": "개발자가 클라우드를 공부하는 이유",
-		"link": "https://velog.io/@endmoseung/%EA%B0%9C%EB%B0%9C%EC%9E%90%EA%B0%80-%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C%EB%A5%BC-%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0",
+		"link": "https://velog.io/@endmoseung/why-developers-study-the-cloud",
 		"date": "Jun 06, 2024",
 		"writer": "endmoseung"
 	},
@@ -739,7 +739,7 @@
 	},
 	"feed-65": {
 		"title": "NextJS Middleware와 CDN으로 이런것도 가능해요.",
-		"link": "https://velog.io/@endmoseung/NextJS-Middleware%EC%99%80-CDN%EC%9C%BC%EB%A1%9C-%EC%9D%B4%EB%9F%B0%EA%B2%83%EB%8F%84-%EA%B0%80%EB%8A%A5%ED%95%B4%EC%9A%94",
+		"link": "https://velog.io/@endmoseung/nextJS-middleware-cloudfront",
 		"date": "Mar 11, 2024",
 		"writer": "endmoseung"
 	},
@@ -859,7 +859,7 @@
 	},
 	"feed-70": {
 		"title": "이미지 최적화 근데 AWS와 NextJs를 곁들인",
-		"link": "https://velog.io/@endmoseung/%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%B5%9C%EC%A0%81%ED%99%94-feat-NextJS",
+		"link": "https://velog.io/@endmoseung/image-optimization-aws-nextjs",
 		"date": "Dec 23, 2023",
 		"writer": "endmoseung"
 	},

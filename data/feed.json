@@ -1,5 +1,11 @@
 {
 	"feed-0": {
+		"title": "낙관적 업데이트에 대해서 알고계세요?",
+		"link": "https://klmhyeonwooo.tistory.com/153",
+		"date": "Jan 14, 2025",
+		"writer": "느릿느릿 프론트엔드"
+	},
+	"feed-1": {
 		"title": "useEffect isLoading &middot; tanstack isLoading &middot; suspenseQuery 의 차이점",
 		"link": "https://klmhyeonwooo.tistory.com/152",
 		"date": "Jan 12, 2025",
@@ -89,7 +95,7 @@
 		"date": "Dec 16, 2024",
 		"writer": "koomin"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "Axios Interceptor에서 상태 값에 따른 라우트 이동시키기 (feat. 글로벌 네비게이터)",
 		"link": "https://klmhyeonwooo.tistory.com/151",
 		"date": "Dec 15, 2024",
@@ -113,7 +119,7 @@
 		"date": "Dec 10, 2024",
 		"writer": "우혁"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "해시 값을 이용해 문자열 변경 사항 확인하기",
 		"link": "https://klmhyeonwooo.tistory.com/150",
 		"date": "Dec 07, 2024",
@@ -269,7 +275,7 @@
 		"date": "Oct 29, 2024",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "프로젝트를 진행하면서 오너쉽을 가져야하는 이유들",
 		"link": "https://klmhyeonwooo.tistory.com/149",
 		"date": "Oct 28, 2024",
@@ -280,12 +286,6 @@
 		"link": "https://velog.io/@woogur29/Suspense%EA%B0%80-Hydration%EC%A4%91%EC%97%90-%EB%8F%99%EC%9E%91%ED%95%98%EB%8A%94-%EB%B0%A9%EC%8B%9D",
 		"date": "Oct 28, 2024",
 		"writer": "우혁"
-	},
-	"feed-4": {
-		"title": "Remix에서 서버 Action 상태 값에 따른 로딩 체크하기",
-		"link": "https://klmhyeonwooo.tistory.com/148",
-		"date": "Oct 27, 2024",
-		"writer": "느릿느릿 프론트엔드"
 	},
 	"feed-28": {
 		"title": "API 수정 요청? 이제 그만! BFF로 프론트엔드에 책임 떠넘기기 🙅‍♂️💼",

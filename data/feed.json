@@ -1,17 +1,23 @@
 {
+	"feed-0": {
+		"title": "리액트 훅을 통해 메모이제이션 해보셨어요?",
+		"link": "https://klmhyeonwooo.tistory.com/154",
+		"date": "Jan 17, 2025",
+		"writer": "느릿느릿 프론트엔드"
+	},
 	"feed-35": {
 		"title": "FCM 으로 대량 푸시 알림 빨리 보내기~",
 		"link": "https://velog.io/@koomin1227/FCM-%EC%9C%BC%EB%A1%9C-%EB%8C%80%EB%9F%89-%ED%91%B8%EC%8B%9C-%EC%95%8C%EB%A6%BC-%EB%B9%A8%EB%A6%AC-%EB%B3%B4%EB%82%B4%EA%B8%B0",
 		"date": "Jan 15, 2025",
 		"writer": "koomin"
 	},
-	"feed-0": {
+	"feed-1": {
 		"title": "낙관적 업데이트에 대해서 알고계세요?",
 		"link": "https://klmhyeonwooo.tistory.com/153",
 		"date": "Jan 14, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "useEffect isLoading &middot; tanstack isLoading &middot; suspenseQuery 의 차이점",
 		"link": "https://klmhyeonwooo.tistory.com/152",
 		"date": "Jan 12, 2025",
@@ -101,7 +107,7 @@
 		"date": "Dec 16, 2024",
 		"writer": "koomin"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "Axios Interceptor에서 상태 값에 따른 라우트 이동시키기 (feat. 글로벌 네비게이터)",
 		"link": "https://klmhyeonwooo.tistory.com/151",
 		"date": "Dec 15, 2024",
@@ -125,7 +131,7 @@
 		"date": "Dec 10, 2024",
 		"writer": "우혁"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "해시 값을 이용해 문자열 변경 사항 확인하기",
 		"link": "https://klmhyeonwooo.tistory.com/150",
 		"date": "Dec 07, 2024",
@@ -280,12 +286,6 @@
 		"link": "https://velog.io/@k-svelte-master/react-router-interview",
 		"date": "Oct 29, 2024",
 		"writer": "타락한스벨트전도사"
-	},
-	"feed-4": {
-		"title": "프로젝트를 진행하면서 오너쉽을 가져야하는 이유들",
-		"link": "https://klmhyeonwooo.tistory.com/149",
-		"date": "Oct 28, 2024",
-		"writer": "느릿느릿 프론트엔드"
 	},
 	"feed-148": {
 		"title": "Suspense가 Hydration중에 동작하는 방식",

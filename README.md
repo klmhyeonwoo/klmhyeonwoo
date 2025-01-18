@@ -14,11 +14,11 @@
 - [개발자는 내가 만드는 제품에 대한 애정을 가져야한다](https://klmhyeonwooo.tistory.com/122)<br>
 
 ### 최근 포스팅
+- [리액트 훅을 통해 메모이제이션 해보셨어요?](https://klmhyeonwooo.tistory.com/154)<br>
 - [낙관적 업데이트에 대해서 알고계세요?](https://klmhyeonwooo.tistory.com/153)<br>
 - [useEffect isLoading &middot; tanstack isLoading &middot; suspenseQuery 의 차이점](https://klmhyeonwooo.tistory.com/152)<br>
 - [Axios Interceptor에서 상태 값에 따른 라우트 이동시키기 (feat. 글로벌 네비게이터)](https://klmhyeonwooo.tistory.com/151)<br>
 - [해시 값을 이용해 문자열 변경 사항 확인하기](https://klmhyeonwooo.tistory.com/150)<br>
-- [프로젝트를 진행하면서 오너쉽을 가져야하는 이유들](https://klmhyeonwooo.tistory.com/149)<br>
 
 ### -
 - **notion korea** (2024.12 ~ Currently active)

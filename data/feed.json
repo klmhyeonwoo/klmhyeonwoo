@@ -1,11 +1,17 @@
 {
 	"feed-0": {
+		"title": "[톺아보기 시리즈] 타입스크립트의 타입과 인터페이스 차이",
+		"link": "https://klmhyeonwooo.tistory.com/157",
+		"date": "Feb 03, 2025",
+		"writer": "느릿느릿 프론트엔드"
+	},
+	"feed-1": {
 		"title": "[톺아보기 시리즈] getElementById, getElementsByClassName, querySelector, querySelectorAll",
 		"link": "https://klmhyeonwooo.tistory.com/156",
 		"date": "Jan 30, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "[톺아보기 시리즈] 컴파운드 패턴 써보셨어요?",
 		"link": "https://klmhyeonwooo.tistory.com/155",
 		"date": "Jan 30, 2025",
@@ -17,7 +23,7 @@
 		"date": "Jan 20, 2025",
 		"writer": "우혁"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "[톺아보기 시리즈] 리액트 훅을 통해 메모이제이션하기",
 		"link": "https://klmhyeonwooo.tistory.com/154",
 		"date": "Jan 17, 2025",
@@ -29,16 +35,10 @@
 		"date": "Jan 15, 2025",
 		"writer": "koomin"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "[톺아보기 시리즈] 낙관적 업데이트에 대해서 알고계세요?",
 		"link": "https://klmhyeonwooo.tistory.com/153",
 		"date": "Jan 14, 2025",
-		"writer": "느릿느릿 프론트엔드"
-	},
-	"feed-4": {
-		"title": "useEffect isLoading &middot; tanstack isLoading &middot; suspenseQuery 의 차이점",
-		"link": "https://klmhyeonwooo.tistory.com/152",
-		"date": "Jan 12, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
 	"feed-15": {

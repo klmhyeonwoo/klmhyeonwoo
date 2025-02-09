@@ -1,4 +1,10 @@
 {
+	"feed-75": {
+		"title": "Release 빌드와 Debug 빌드에서의 Compose 성능 차이 Deep Dive",
+		"link": "https://velog.io/@thd0427/Release-%EB%B9%8C%EB%93%9C%EC%99%80-Debug-%EB%B9%8C%EB%93%9C%EC%97%90%EC%84%9C%EC%9D%98-Compose-%EC%84%B1%EB%8A%A5-%EC%B0%A8%EC%9D%B4-Deep-Dive",
+		"date": "Feb 08, 2025",
+		"writer": "송규빈"
+	},
 	"feed-137": {
 		"title": "TypeScript의 satisfies 연산자",
 		"link": "https://velog.io/@woogur29/TypeScript%EC%9D%98-satisfies-%EC%97%B0%EC%82%B0%EC%9E%90-%ED%86%BA%EC%95%84%EB%B3%B4%EA%B8%B0",
@@ -239,14 +245,8 @@
 		"date": "Nov 10, 2024",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-75": {
-		"title": "MutableStateFlow value로 값 업데이트가 위험한 이유",
-		"link": "https://velog.io/@thd0427/MutableStateFlow-value%EB%A1%9C-%EA%B0%92-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8%EA%B0%80-%EC%9C%84%ED%97%98%ED%95%9C-%EC%9D%B4%EC%9C%A0",
-		"date": "Nov 09, 2024",
-		"writer": "송규빈"
-	},
 	"feed-76": {
-		"title": "응답 모델을 모두 Nullable로 하면 좋은 이유 (feat.Gson 사용 시 null 문제)",
+		"title": "응답 모델을 모두 Nullable로 하는 것을 지향하는 이유 (feat.Gson 사용 시 null 문제)",
 		"link": "https://velog.io/@thd0427/%EC%9D%91%EB%8B%B5-%EB%AA%A8%EB%8D%B8%EC%9D%84-%EB%AA%A8%EB%91%90-Nullable%EB%A1%9C-%ED%95%98%EB%A9%B4-%EC%A2%8B%EC%9D%80-%EC%9D%B4%EC%9C%A0-feat.Gson-%EC%82%AC%EC%9A%A9-%EC%8B%9C-null-%EB%AC%B8%EC%A0%9C",
 		"date": "Nov 09, 2024",
 		"writer": "송규빈"

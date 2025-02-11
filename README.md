@@ -14,11 +14,11 @@
 - [개발자는 내가 만드는 제품에 대한 애정을 가져야한다](https://klmhyeonwooo.tistory.com/122)<br>
 
 ### 최근 포스팅
+- [[작성 중] 직접 IT 컨퍼런스를 열게 되었어요, 그것도 멋진 연사분들과 함께요!](https://klmhyeonwooo.tistory.com/158)<br>
 - [[톺아보기 시리즈] 타입스크립트의 타입과 인터페이스 차이](https://klmhyeonwooo.tistory.com/157)<br>
 - [[톺아보기 시리즈] getElementById, getElementsByClassName, querySelector, querySelectorAll](https://klmhyeonwooo.tistory.com/156)<br>
 - [[톺아보기 시리즈] 컴파운드 패턴 써보셨어요?](https://klmhyeonwooo.tistory.com/155)<br>
 - [[톺아보기 시리즈] 리액트 훅을 통해 메모이제이션하기](https://klmhyeonwooo.tistory.com/154)<br>
-- [[톺아보기 시리즈] 낙관적 업데이트에 대해서 알고계세요?](https://klmhyeonwooo.tistory.com/153)<br>
 
 ### -
 - **notion korea** (2024.12 ~ Currently active)

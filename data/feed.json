@@ -1,4 +1,10 @@
 {
+	"feed-5": {
+		"title": "MVC, MVVM, Clean Architecture 정리",
+		"link": "https://youngkdevlog.tistory.com/112",
+		"date": "Mar 14, 2025",
+		"writer": "YoungKyu"
+	},
 	"feed-95": {
 		"title": "[번역] 리액트에서의 단일 책임 원칙: 컴포넌트 집중의 기술",
 		"link": "https://velog.io/@eunbinn/single-responsibility-principle-in-react",
@@ -119,7 +125,7 @@
 		"date": "Jan 11, 2025",
 		"writer": "endmoseung"
 	},
-	"feed-5": {
+	"feed-6": {
 		"title": "네이버 부스트캠프 웹・모바일 9기를 마치며",
 		"link": "https://youngkdevlog.tistory.com/111",
 		"date": "Jan 06, 2025",
@@ -161,7 +167,7 @@
 		"date": "Dec 23, 2024",
 		"writer": "eunbinn"
 	},
-	"feed-6": {
+	"feed-7": {
 		"title": "네이버 클라우드 서버 인스턴스 만들기",
 		"link": "https://youngkdevlog.tistory.com/110",
 		"date": "Dec 22, 2024",
@@ -293,13 +299,13 @@
 		"date": "Nov 09, 2024",
 		"writer": "송규빈"
 	},
-	"feed-7": {
+	"feed-8": {
 		"title": "nohup 명령어를 사용해도 서버가 꺼지는 문제",
 		"link": "https://youngkdevlog.tistory.com/109",
 		"date": "Nov 08, 2024",
 		"writer": "YoungKyu"
 	},
-	"feed-8": {
+	"feed-9": {
 		"title": "Tuist 없이 모듈 만들기 with DemoApp",
 		"link": "https://youngkdevlog.tistory.com/108",
 		"date": "Nov 07, 2024",
@@ -311,7 +317,7 @@
 		"date": "Nov 07, 2024",
 		"writer": "우혁"
 	},
-	"feed-9": {
+	"feed-10": {
 		"title": "네이버 클라우드 VPC 서버에 연결이 되지 않는 문제",
 		"link": "https://youngkdevlog.tistory.com/107",
 		"date": "Nov 03, 2024",
@@ -359,7 +365,7 @@
 		"date": "Oct 27, 2024",
 		"writer": "endmoseung"
 	},
-	"feed-10": {
+	"feed-11": {
 		"title": "Swift Concurrency - Sendable",
 		"link": "https://youngkdevlog.tistory.com/106",
 		"date": "Oct 25, 2024",
@@ -377,7 +383,7 @@
 		"date": "Oct 25, 2024",
 		"writer": "eunbinn"
 	},
-	"feed-11": {
+	"feed-12": {
 		"title": "Swift Concurrency - Task",
 		"link": "https://youngkdevlog.tistory.com/105",
 		"date": "Oct 24, 2024",
@@ -395,7 +401,7 @@
 		"date": "Oct 21, 2024",
 		"writer": "Park Junha"
 	},
-	"feed-12": {
+	"feed-13": {
 		"title": "Swift Task 내에서 weak self를 붙여야 하는가",
 		"link": "https://youngkdevlog.tistory.com/104",
 		"date": "Oct 20, 2024",
@@ -419,7 +425,7 @@
 		"date": "Oct 20, 2024",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-13": {
+	"feed-14": {
 		"title": "네이버 부스트캠프 웹・모바일 9기 멤버십 과정 2차 학습스프린트 회고",
 		"link": "https://youngkdevlog.tistory.com/103",
 		"date": "Oct 19, 2024",
@@ -460,12 +466,6 @@
 		"link": "https://velog.io/@woogur29/React-Context%EC%9D%98-%EB%82%B4%EB%B6%80-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC",
 		"date": "Oct 13, 2024",
 		"writer": "우혁"
-	},
-	"feed-14": {
-		"title": "SwiftUI 프로젝트에서 AppDelegate, SceneDelegate 사용하기",
-		"link": "https://youngkdevlog.tistory.com/102",
-		"date": "Oct 12, 2024",
-		"writer": "YoungKyu"
 	},
 	"feed-157": {
 		"title": "Swift 앱을 위한 Systemd",

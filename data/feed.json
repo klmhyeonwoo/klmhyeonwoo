@@ -1,6 +1,6 @@
 {
 	"feed-0": {
-		"title": "AbortController 사용해보기",
+		"title": "AbortController로 비동기 웹 요청을 부분적으로 제어하기",
 		"link": "https://klmhyeonwooo.tistory.com/162",
 		"date": "Mar 18, 2025",
 		"writer": "느릿느릿 프론트엔드"

@@ -14,11 +14,11 @@
 - [개발자는 내가 만드는 제품에 대한 애정을 가져야한다](https://klmhyeonwooo.tistory.com/122)<br>
 
 ### 최근 포스팅
+- [vue3에서 pinia를 선호하는 이유는 무엇일까?](https://klmhyeonwooo.tistory.com/163)<br>
 - [AbortController로 비동기 웹 요청을 부분적으로 제어하기](https://klmhyeonwooo.tistory.com/162)<br>
 - [다른 사람들도 쉽게 알 수 있게 노드 버전을 세팅해보세요](https://klmhyeonwooo.tistory.com/161)<br>
 - [브라우저 또는 다른 탭에서 동일한 데이터로 동기화하기](https://klmhyeonwooo.tistory.com/159)<br>
 - [우리도 IT 컨퍼런스 한번 열어보자!](https://klmhyeonwooo.tistory.com/158)<br>
-- [[톺아보기 시리즈] 타입스크립트의 타입과 인터페이스 차이](https://klmhyeonwooo.tistory.com/157)<br>
 
 ### -
 - **notion korea** (2024.12 ~ Currently active)

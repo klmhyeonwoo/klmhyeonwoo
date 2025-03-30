@@ -1,4 +1,10 @@
 {
+	"feed-5": {
+		"title": "AVFAudio - AVAudioSession",
+		"link": "https://youngkdevlog.tistory.com/113",
+		"date": "Mar 29, 2025",
+		"writer": "YoungKyu"
+	},
 	"feed-0": {
 		"title": "vue3에서 pinia를 선호하는 이유는 무엇일까?",
 		"link": "https://klmhyeonwooo.tistory.com/163",
@@ -17,7 +23,7 @@
 		"date": "Mar 16, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-5": {
+	"feed-6": {
 		"title": "MVC, MVVM, Clean Architecture 정리",
 		"link": "https://youngkdevlog.tistory.com/112",
 		"date": "Mar 14, 2025",
@@ -125,7 +131,7 @@
 		"date": "Jan 11, 2025",
 		"writer": "endmoseung"
 	},
-	"feed-6": {
+	"feed-7": {
 		"title": "네이버 부스트캠프 웹・모바일 9기를 마치며",
 		"link": "https://youngkdevlog.tistory.com/111",
 		"date": "Jan 06, 2025",
@@ -167,7 +173,7 @@
 		"date": "Dec 23, 2024",
 		"writer": "eunbinn"
 	},
-	"feed-7": {
+	"feed-8": {
 		"title": "네이버 클라우드 서버 인스턴스 만들기",
 		"link": "https://youngkdevlog.tistory.com/110",
 		"date": "Dec 22, 2024",
@@ -299,13 +305,13 @@
 		"date": "Nov 09, 2024",
 		"writer": "송규빈"
 	},
-	"feed-8": {
+	"feed-9": {
 		"title": "nohup 명령어를 사용해도 서버가 꺼지는 문제",
 		"link": "https://youngkdevlog.tistory.com/109",
 		"date": "Nov 08, 2024",
 		"writer": "YoungKyu"
 	},
-	"feed-9": {
+	"feed-10": {
 		"title": "Tuist 없이 모듈 만들기 with DemoApp",
 		"link": "https://youngkdevlog.tistory.com/108",
 		"date": "Nov 07, 2024",
@@ -317,7 +323,7 @@
 		"date": "Nov 07, 2024",
 		"writer": "우혁"
 	},
-	"feed-10": {
+	"feed-11": {
 		"title": "네이버 클라우드 VPC 서버에 연결이 되지 않는 문제",
 		"link": "https://youngkdevlog.tistory.com/107",
 		"date": "Nov 03, 2024",
@@ -365,7 +371,7 @@
 		"date": "Oct 27, 2024",
 		"writer": "endmoseung"
 	},
-	"feed-11": {
+	"feed-12": {
 		"title": "Swift Concurrency - Sendable",
 		"link": "https://youngkdevlog.tistory.com/106",
 		"date": "Oct 25, 2024",
@@ -383,7 +389,7 @@
 		"date": "Oct 25, 2024",
 		"writer": "eunbinn"
 	},
-	"feed-12": {
+	"feed-13": {
 		"title": "Swift Concurrency - Task",
 		"link": "https://youngkdevlog.tistory.com/105",
 		"date": "Oct 24, 2024",
@@ -401,7 +407,7 @@
 		"date": "Oct 21, 2024",
 		"writer": "Park Junha"
 	},
-	"feed-13": {
+	"feed-14": {
 		"title": "Swift Task 내에서 weak self를 붙여야 하는가",
 		"link": "https://youngkdevlog.tistory.com/104",
 		"date": "Oct 20, 2024",
@@ -424,12 +430,6 @@
 		"link": "https://velog.io/@k-svelte-master/design-pattern-junior-to-senior",
 		"date": "Oct 20, 2024",
 		"writer": "타락한스벨트전도사"
-	},
-	"feed-14": {
-		"title": "네이버 부스트캠프 웹・모바일 9기 멤버십 과정 2차 학습스프린트 회고",
-		"link": "https://youngkdevlog.tistory.com/103",
-		"date": "Oct 19, 2024",
-		"writer": "YoungKyu"
 	},
 	"feed-153": {
 		"title": "React Hydration의 내부 동작 원리",

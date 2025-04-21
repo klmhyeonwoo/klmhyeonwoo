@@ -1,5 +1,11 @@
 {
 	"feed-0": {
+		"title": "4월에서야 하는 개발자 회고 - 작성 중이에요",
+		"link": "https://klmhyeonwooo.tistory.com/166",
+		"date": "Apr 20, 2025",
+		"writer": "느릿느릿 프론트엔드"
+	},
+	"feed-1": {
 		"title": "Vue의 Composable &middot; React의 Custom Hook을 사용하는 이유와 분리 기준",
 		"link": "https://klmhyeonwooo.tistory.com/165",
 		"date": "Apr 17, 2025",
@@ -35,19 +41,19 @@
 		"date": "Mar 29, 2025",
 		"writer": "YoungKyu"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "vue3에서 pinia를 선호하는 이유는 무엇일까?",
 		"link": "https://klmhyeonwooo.tistory.com/163",
 		"date": "Mar 27, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "AbortController로 비동기 웹 요청을 부분적으로 제어하기",
 		"link": "https://klmhyeonwooo.tistory.com/162",
 		"date": "Mar 18, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "다른 사람들도 쉽게 알 수 있게 노드 버전을 세팅해보세요",
 		"link": "https://klmhyeonwooo.tistory.com/161",
 		"date": "Mar 16, 2025",
@@ -64,12 +70,6 @@
 		"link": "https://velog.io/@eunbinn/single-responsibility-principle-in-react",
 		"date": "Mar 09, 2025",
 		"writer": "eunbinn"
-	},
-	"feed-4": {
-		"title": "브라우저 또는 다른 탭에서 동일한 데이터로 동기화하기",
-		"link": "https://klmhyeonwooo.tistory.com/159",
-		"date": "Mar 08, 2025",
-		"writer": "느릿느릿 프론트엔드"
 	},
 	"feed-137": {
 		"title": "requestAnimationFrame(rAF) 톺아보기",

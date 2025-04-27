@@ -1,4 +1,10 @@
 {
+	"feed-15": {
+		"title": "글을 잘쓰고 싶나요? 제 시스템 프롬프트 써보세요",
+		"link": "https://velog.io/@k-svelte-master/claude-writing-special-prompt",
+		"date": "Apr 26, 2025",
+		"writer": "타락한스벨트전도사"
+	},
 	"feed-0": {
 		"title": "4월이 되서야 하는 프론트엔드 회고",
 		"link": "https://klmhyeonwooo.tistory.com/167",
@@ -35,7 +41,7 @@
 		"date": "Mar 31, 2025",
 		"writer": "YoungKyu"
 	},
-	"feed-15": {
+	"feed-16": {
 		"title": "MCP의 모든 것을 알아봅시다.",
 		"link": "https://velog.io/@k-svelte-master/what-is-mcp",
 		"date": "Mar 31, 2025",
@@ -95,7 +101,7 @@
 		"date": "Feb 17, 2025",
 		"writer": "eunbinn"
 	},
-	"feed-16": {
+	"feed-17": {
 		"title": "LLM 서비스에서 프론트엔드 살아남기",
 		"link": "https://velog.io/@k-svelte-master/llm-frontend-tips",
 		"date": "Feb 11, 2025",
@@ -137,19 +143,19 @@
 		"date": "Jan 15, 2025",
 		"writer": "koomin"
 	},
-	"feed-17": {
+	"feed-18": {
 		"title": "라미레포트로 IT컬럼 글쓰기 - 3",
 		"link": "https://velog.io/@k-svelte-master/llami-report-3",
 		"date": "Jan 11, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-18": {
+	"feed-19": {
 		"title": "라미레포트로 IT 컬럼쓰기 2",
 		"link": "https://velog.io/@k-svelte-master/%EB%9D%BC%EB%AF%B8%EB%A0%88%ED%8F%AC%ED%8A%B8%EB%A1%9C-IT-%EC%BB%AC%EB%9F%BC%EC%93%B0%EA%B8%B0-2",
 		"date": "Jan 11, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-19": {
+	"feed-20": {
 		"title": "라미레포트로, IT컬럼 원고뽑기 - 1",
 		"link": "https://velog.io/@k-svelte-master/llami-report-posting-1",
 		"date": "Jan 11, 2025",
@@ -173,7 +179,7 @@
 		"date": "Jan 05, 2025",
 		"writer": "junhyeong"
 	},
-	"feed-20": {
+	"feed-21": {
 		"title": "requestAnimationFrame의 성능이슈를 알고 있나요? - 자바스크립트 런타임 이해하기",
 		"link": "https://velog.io/@k-svelte-master/optimize-request-animation-frame-frontend",
 		"date": "Dec 29, 2024",
@@ -221,13 +227,13 @@
 		"date": "Dec 16, 2024",
 		"writer": "koomin"
 	},
-	"feed-21": {
+	"feed-22": {
 		"title": "제발 cursor말고 windsurf 쓰세요!!",
 		"link": "https://velog.io/@k-svelte-master/windsurf-flitter-cursor",
 		"date": "Dec 10, 2024",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-22": {
+	"feed-23": {
 		"title": "GPT에게 질문을 못한다고요? 축하드립니다.",
 		"link": "https://velog.io/@k-svelte-master/can-not-ask-to-gpt",
 		"date": "Dec 10, 2024",
@@ -239,7 +245,7 @@
 		"date": "Dec 10, 2024",
 		"writer": "우혁"
 	},
-	"feed-23": {
+	"feed-24": {
 		"title": "'use client'가 CSR이라고 알고 있는 거 아니죠? Next.js 면접질문 정복",
 		"link": "https://velog.io/@k-svelte-master/nextjs-rsc-csr-ssr",
 		"date": "Dec 06, 2024",
@@ -269,7 +275,7 @@
 		"date": "Nov 26, 2024",
 		"writer": "우혁"
 	},
-	"feed-24": {
+	"feed-25": {
 		"title": "Symbol이 뭔지는 들어봤는데... 면접에서는 이렇게 답하세요",
 		"link": "https://velog.io/@k-svelte-master/js-symbol-guide",
 		"date": "Nov 24, 2024",
@@ -293,7 +299,7 @@
 		"date": "Nov 22, 2024",
 		"writer": "우혁"
 	},
-	"feed-25": {
+	"feed-26": {
 		"title": "내 글이 요즘IT에 올라갔다?! - 오픈소스로 배운 것들",
 		"link": "https://velog.io/@k-svelte-master/notionpresso-opensource-guide",
 		"date": "Nov 21, 2024",
@@ -317,7 +323,7 @@
 		"date": "Nov 12, 2024",
 		"writer": "koomin"
 	},
-	"feed-26": {
+	"feed-27": {
 		"title": "프론트엔드 성능 측정, 이제는 자동화하자! - Playwright와 Chrome Trace로 시작하기",
 		"link": "https://velog.io/@k-svelte-master/frontend-performance-optimizer",
 		"date": "Nov 10, 2024",
@@ -353,7 +359,7 @@
 		"date": "Nov 03, 2024",
 		"writer": "YoungKyu"
 	},
-	"feed-27": {
+	"feed-28": {
 		"title": "외부 라이브러리 없이 Next.js에서 다국어 지원 구현하기",
 		"link": "https://velog.io/@k-svelte-master/nextjs-i18n-no-libarary",
 		"date": "Nov 03, 2024",
@@ -365,13 +371,13 @@
 		"date": "Oct 30, 2024",
 		"writer": "송규빈"
 	},
-	"feed-28": {
+	"feed-29": {
 		"title": "코드로 이어진 우리들의 이야기: 노션 오픈소스를 만들며 깨달은 것들 💫",
 		"link": "https://velog.io/@k-svelte-master/notionpresso-opensource",
 		"date": "Oct 29, 2024",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-29": {
+	"feed-30": {
 		"title": "면접관이 React Router 동작 원리를 물어본다면? History API로 답변하세요 🎯",
 		"link": "https://velog.io/@k-svelte-master/react-router-interview",
 		"date": "Oct 29, 2024",
@@ -383,7 +389,7 @@
 		"date": "Oct 28, 2024",
 		"writer": "우혁"
 	},
-	"feed-30": {
+	"feed-31": {
 		"title": "API 수정 요청? 이제 그만! BFF로 프론트엔드에 책임 떠넘기기 🙅‍♂️💼",
 		"link": "https://velog.io/@k-svelte-master/bff-api-pattern",
 		"date": "Oct 27, 2024",
@@ -401,7 +407,7 @@
 		"date": "Oct 25, 2024",
 		"writer": "YoungKyu"
 	},
-	"feed-31": {
+	"feed-32": {
 		"title": "개발자라면 스스로 블로그 만들 수 있어야 겠죠?",
 		"link": "https://velog.io/@k-svelte-master/notion-free-blog",
 		"date": "Oct 25, 2024",
@@ -425,21 +431,15 @@
 		"date": "Oct 21, 2024",
 		"writer": "Park Junha"
 	},
-	"feed-32": {
+	"feed-33": {
 		"title": "주니어 개발자라면 꼭 알아야 할 API 연동 꿀팁! 백엔드 답 없이도 빠르게 진행하기",
 		"link": "https://velog.io/@k-svelte-master/api-master-frontend",
 		"date": "Oct 20, 2024",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-33": {
+	"feed-34": {
 		"title": "DB 설계로 고민하는 주니어 개발자들, 이 비밀 전략을 아시나요?",
 		"link": "https://velog.io/@k-svelte-master/database-table-tips-easyrd",
-		"date": "Oct 20, 2024",
-		"writer": "타락한스벨트전도사"
-	},
-	"feed-34": {
-		"title": "브릿지 패턴 쓰는법 알려줄게 - 실전 디자인패턴",
-		"link": "https://velog.io/@k-svelte-master/design-pattern-junior-to-senior",
 		"date": "Oct 20, 2024",
 		"writer": "타락한스벨트전도사"
 	},

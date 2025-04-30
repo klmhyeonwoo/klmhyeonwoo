@@ -14,11 +14,11 @@
 - [개발자는 내가 만드는 제품에 대한 애정을 가져야한다](https://klmhyeonwooo.tistory.com/122)<br>
 
 ### 최근 포스팅
+- [npm install vs npm ci](https://klmhyeonwooo.tistory.com/168)<br>
 - [4월이 되서야 하는 프론트엔드 회고](https://klmhyeonwooo.tistory.com/167)<br>
 - [Vue의 Composable &middot; React의 Custom Hook을 사용하는 이유와 분리 기준](https://klmhyeonwooo.tistory.com/165)<br>
 - [vue3에서 pinia를 선호하는 이유는 무엇일까?](https://klmhyeonwooo.tistory.com/163)<br>
 - [AbortController로 비동기 웹 요청을 부분적으로 제어하기](https://klmhyeonwooo.tistory.com/162)<br>
-- [다른 사람들도 쉽게 알 수 있게 노드 버전을 세팅해보세요](https://klmhyeonwooo.tistory.com/161)<br>
 
 ### -
 - **notion korea** (2024.12 ~ Currently active)

@@ -21,5 +21,6 @@
 - [Vue의 Composable &middot; React의 Custom Hook을 사용하는 이유와 분리 기준](https://klmhyeonwooo.tistory.com/165)<br>
 - [vue3에서 pinia를 선호하는 이유는 무엇일까?](https://klmhyeonwooo.tistory.com/163)<br>
 
-이력 · http://bit.ly/3GBXpKD
-포트폴리오 · http://bit.ly/4cPxTO7
+### 경험
+- 이력 · http://bit.ly/3GBXpKD <br/>
+- 포트폴리오 · http://bit.ly/4cPxTO7

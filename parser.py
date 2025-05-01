@@ -86,8 +86,9 @@ with open(os.path.join(BASE_DIR, 'feed.json'), 'w+',encoding='utf-8') as json_fi
 print(parsing_data)
 
 markdown_text += """
-이력 · http://bit.ly/3GBXpKD
-포트폴리오 · http://bit.ly/4cPxTO7
+### 경험
+- 이력 · http://bit.ly/3GBXpKD <br/>
+- 포트폴리오 · http://bit.ly/4cPxTO7
 """
 
 f = open("README.md", mode="w", encoding="utf-8")

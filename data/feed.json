@@ -1,11 +1,17 @@
 {
 	"feed-0": {
+		"title": "[...].filter(Boolean)을 넣으면 어떤 일이 일어날까?",
+		"link": "https://klmhyeonwooo.tistory.com/170",
+		"date": "May 02, 2025",
+		"writer": "느릿느릿 프론트엔드"
+	},
+	"feed-1": {
 		"title": "클라이언트 사이드 말고, 서버 사이드로도 mixed content 에러가 뜰까?",
 		"link": "https://klmhyeonwooo.tistory.com/169",
 		"date": "May 02, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "npm install vs npm ci",
 		"link": "https://klmhyeonwooo.tistory.com/168",
 		"date": "Apr 29, 2025",
@@ -23,7 +29,7 @@
 		"date": "Apr 26, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "4월이 되서야 하는 프론트엔드 회고",
 		"link": "https://klmhyeonwooo.tistory.com/167",
 		"date": "Apr 22, 2025",
@@ -35,7 +41,7 @@
 		"date": "Apr 21, 2025",
 		"writer": "endmoseung"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "Vue의 Composable &middot; React의 Custom Hook을 사용하는 이유와 분리 기준",
 		"link": "https://klmhyeonwooo.tistory.com/165",
 		"date": "Apr 17, 2025",
@@ -70,12 +76,6 @@
 		"link": "https://youngkdevlog.tistory.com/113",
 		"date": "Mar 29, 2025",
 		"writer": "YoungKyu"
-	},
-	"feed-4": {
-		"title": "vue3에서 pinia를 선호하는 이유는 무엇일까?",
-		"link": "https://klmhyeonwooo.tistory.com/163",
-		"date": "Mar 27, 2025",
-		"writer": "느릿느릿 프론트엔드"
 	},
 	"feed-8": {
 		"title": "MVC, MVVM, Clean Architecture 정리",

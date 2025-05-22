@@ -1,5 +1,17 @@
 {
 	"feed-5": {
+		"title": "애플 로그인 서버부터 클라이언트까지(Swift + Nest.js + TypeScript)",
+		"link": "https://youngkdevlog.tistory.com/120",
+		"date": "May 22, 2025",
+		"writer": "YoungKyu"
+	},
+	"feed-6": {
+		"title": "CoreData 개요 및 동시성",
+		"link": "https://youngkdevlog.tistory.com/119",
+		"date": "May 21, 2025",
+		"writer": "YoungKyu"
+	},
+	"feed-7": {
 		"title": "AWS EC2 npm run build 시 멈추는 문제",
 		"link": "https://youngkdevlog.tistory.com/118",
 		"date": "May 19, 2025",
@@ -17,7 +29,7 @@
 		"date": "May 15, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-6": {
+	"feed-8": {
 		"title": "Alamofire 기능 정리",
 		"link": "https://youngkdevlog.tistory.com/117",
 		"date": "May 12, 2025",
@@ -71,7 +83,7 @@
 		"date": "Apr 21, 2025",
 		"writer": "endmoseung"
 	},
-	"feed-7": {
+	"feed-9": {
 		"title": "테스트 가능한 오디오 관리 객체 설계하기",
 		"link": "https://youngkdevlog.tistory.com/116",
 		"date": "Apr 17, 2025",
@@ -83,7 +95,7 @@
 		"date": "Apr 03, 2025",
 		"writer": "eunbinn"
 	},
-	"feed-8": {
+	"feed-10": {
 		"title": "Audio 기본 지식 이해하기(Sample, Frame, Sampling Rate, Channel, Bit Depth)",
 		"link": "https://youngkdevlog.tistory.com/114",
 		"date": "Mar 31, 2025",
@@ -95,13 +107,13 @@
 		"date": "Mar 31, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-9": {
+	"feed-11": {
 		"title": "AVFAudio - AVAudioSession",
 		"link": "https://youngkdevlog.tistory.com/113",
 		"date": "Mar 29, 2025",
 		"writer": "YoungKyu"
 	},
-	"feed-10": {
+	"feed-12": {
 		"title": "MVC, MVVM, Clean Architecture 정리",
 		"link": "https://youngkdevlog.tistory.com/112",
 		"date": "Mar 14, 2025",
@@ -197,7 +209,7 @@
 		"date": "Jan 11, 2025",
 		"writer": "endmoseung"
 	},
-	"feed-11": {
+	"feed-13": {
 		"title": "네이버 부스트캠프 웹・모바일 9기를 마치며",
 		"link": "https://youngkdevlog.tistory.com/111",
 		"date": "Jan 06, 2025",
@@ -239,7 +251,7 @@
 		"date": "Dec 23, 2024",
 		"writer": "eunbinn"
 	},
-	"feed-12": {
+	"feed-14": {
 		"title": "네이버 클라우드 서버 인스턴스 만들기",
 		"link": "https://youngkdevlog.tistory.com/110",
 		"date": "Dec 22, 2024",
@@ -364,18 +376,6 @@
 		"link": "https://velog.io/@thd0427/%EC%9D%91%EB%8B%B5-%EB%AA%A8%EB%8D%B8%EC%9D%84-%EB%AA%A8%EB%91%90-Nullable%EB%A1%9C-%ED%95%98%EB%A9%B4-%EC%A2%8B%EC%9D%80-%EC%9D%B4%EC%9C%A0-feat.Gson-%EC%82%AC%EC%9A%A9-%EC%8B%9C-null-%EB%AC%B8%EC%A0%9C",
 		"date": "Nov 09, 2024",
 		"writer": "송규빈"
-	},
-	"feed-13": {
-		"title": "nohup 명령어를 사용해도 서버가 꺼지는 문제",
-		"link": "https://youngkdevlog.tistory.com/109",
-		"date": "Nov 08, 2024",
-		"writer": "YoungKyu"
-	},
-	"feed-14": {
-		"title": "Tuist 없이 모듈 만들기 with DemoApp",
-		"link": "https://youngkdevlog.tistory.com/108",
-		"date": "Nov 07, 2024",
-		"writer": "YoungKyu"
 	},
 	"feed-151": {
 		"title": "Progressive Hydration의 내부 동작 원리",

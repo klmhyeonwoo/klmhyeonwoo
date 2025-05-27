@@ -16,11 +16,11 @@
 - [4월이 되서야 하는 프론트엔드 회고](https://klmhyeonwooo.tistory.com/167)<br>
 
 ### 최근 포스팅
+- [word-break의 auto-phrase 속성은 어떤 역할을 할까?](https://klmhyeonwooo.tistory.com/175)<br>
 - [React와 Vue의 이벤트 바인딩 방식은 왜 다를까?](https://klmhyeonwooo.tistory.com/174)<br>
 - [여러 프로덕트를 마주하며 느꼈던 프로덕트에 대한 고찰](https://klmhyeonwooo.tistory.com/172)<br>
 - [Search Params 잘 쓰고 있었는데, Next 15에서는 왜 타입이 Promise 일까?](https://klmhyeonwooo.tistory.com/171)<br>
 - [[...].filter(Boolean)을 넣으면 어떤 일이 일어날까?](https://klmhyeonwooo.tistory.com/170)<br>
-- [클라이언트 사이드 말고, 서버 사이드로도 mixed content 에러가 뜰까?](https://klmhyeonwooo.tistory.com/169)<br>
 
 ### 경험
 - 이력 · http://bit.ly/3GBXpKD <br/>

@@ -16,11 +16,11 @@
 - [4월이 되서야 하는 프론트엔드 회고](https://klmhyeonwooo.tistory.com/167)<br>
 
 ### 최근 포스팅
+- [웹 페이지의 애니메이션을 최적화하는 여러 방안들은 무엇일까?](https://klmhyeonwooo.tistory.com/178)<br>
 - [내가, 그리고 누군가 필요로 하는 프로덕트 만들기 (feat. MAU 833)](https://klmhyeonwooo.tistory.com/177)<br>
 - [Webpack과 Vite의 차이점은 무엇일까?](https://klmhyeonwooo.tistory.com/176)<br>
 - [word-break의 auto-phrase 속성은 어떤 역할을 할까?](https://klmhyeonwooo.tistory.com/175)<br>
 - [React와 Vue의 이벤트 바인딩 방식은 왜 다를까?](https://klmhyeonwooo.tistory.com/174)<br>
-- [여러 프로덕트를 마주하며 느꼈던 프로덕트에 대한 고찰](https://klmhyeonwooo.tistory.com/172)<br>
 
 ### 경험
 - 이력 · http://bit.ly/3GBXpKD <br/>

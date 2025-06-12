@@ -17,6 +17,12 @@
 		"date": "Jun 09, 2025",
 		"writer": "타락한스벨트전도사"
 	},
+	"feed-95": {
+		"title": "[번역] React와 Next.js를 위한 완벽한 Cursor AI 설정",
+		"link": "https://velog.io/@eunbinn/cursor-ai-tips-react-nextjs",
+		"date": "Jun 09, 2025",
+		"writer": "eunbinn"
+	},
 	"feed-6": {
 		"title": "번역) SwiftUI 간단한 뷰 레이아웃 구성하기",
 		"link": "https://youngkdevlog.tistory.com/124",
@@ -95,7 +101,7 @@
 		"date": "May 19, 2025",
 		"writer": "YoungKyu"
 	},
-	"feed-95": {
+	"feed-96": {
 		"title": "[번역] 풀스택 앱을 \"바이브 코딩\"하기 위한 구조화된 워크플로우",
 		"link": "https://velog.io/@eunbinn/a-structured-workflow-for-vibe-coding-full-stack-apps",
 		"date": "May 18, 2025",
@@ -137,7 +143,7 @@
 		"date": "Apr 17, 2025",
 		"writer": "YoungKyu"
 	},
-	"feed-96": {
+	"feed-97": {
 		"title": "[번역] 자바스크립트 Temporal 기능이 곧 도입됩니다",
 		"link": "https://velog.io/@eunbinn/javascript-temporal-is-coming",
 		"date": "Apr 03, 2025",
@@ -149,7 +155,7 @@
 		"date": "Mar 31, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-97": {
+	"feed-98": {
 		"title": "[번역] 리액트에서의 단일 책임 원칙: 컴포넌트 집중의 기술",
 		"link": "https://velog.io/@eunbinn/single-responsibility-principle-in-react",
 		"date": "Mar 09, 2025",
@@ -167,7 +173,7 @@
 		"date": "Feb 22, 2025",
 		"writer": "endmoseung"
 	},
-	"feed-98": {
+	"feed-99": {
 		"title": "[번역] 모든 프런트엔드 개발자가 알아야 할 접근성 필수 사항",
 		"link": "https://velog.io/@eunbinn/accessibility-essentials-every-front-end-developer-should-know",
 		"date": "Feb 17, 2025",
@@ -269,7 +275,7 @@
 		"date": "Dec 28, 2024",
 		"writer": "우혁"
 	},
-	"feed-99": {
+	"feed-100": {
 		"title": "[번역] 리액트 19 업그레이드 가이드",
 		"link": "https://velog.io/@eunbinn/react-19-upgrade-guide",
 		"date": "Dec 23, 2024",
@@ -437,7 +443,7 @@
 		"date": "Oct 27, 2024",
 		"writer": "endmoseung"
 	},
-	"feed-100": {
+	"feed-101": {
 		"title": "[번역] 영국의 조약이 .io 도메인의 종말을 의미할 수 있는 이유",
 		"link": "https://velog.io/@eunbinn/uk-treaty-end-io-domain-chagos-islands",
 		"date": "Oct 25, 2024",
@@ -497,7 +503,7 @@
 		"date": "Oct 10, 2024",
 		"writer": "endmoseung"
 	},
-	"feed-101": {
+	"feed-102": {
 		"title": "[번역] TanStack Router를 소개합니다",
 		"link": "https://velog.io/@eunbinn/introducing-tanstack-router",
 		"date": "Oct 09, 2024",
@@ -551,7 +557,7 @@
 		"date": "Sep 10, 2024",
 		"writer": "개발자 성열"
 	},
-	"feed-102": {
+	"feed-103": {
 		"title": "[번역] 자바스크립트의 Date가 곧 수정됩니다",
 		"link": "https://velog.io/@eunbinn/js-dates-finally-fixed",
 		"date": "Sep 08, 2024",
@@ -623,7 +629,7 @@
 		"date": "Aug 12, 2024",
 		"writer": "송규빈"
 	},
-	"feed-103": {
+	"feed-104": {
 		"title": "[번역] DRY - 잘못된 추상화의 일반적인 원인",
 		"link": "https://velog.io/@eunbinn/dry-the-common-source-of-bad-abstractions",
 		"date": "Aug 05, 2024",
@@ -653,13 +659,13 @@
 		"date": "Jul 20, 2024",
 		"writer": "endmoseung"
 	},
-	"feed-104": {
+	"feed-105": {
 		"title": "[번역] 자바스크립트에서 프로미스를 취소하는 방법",
 		"link": "https://velog.io/@eunbinn/cancel-promises-javascript",
 		"date": "Jul 18, 2024",
 		"writer": "eunbinn"
 	},
-	"feed-105": {
+	"feed-106": {
 		"title": "[번역] 당신의 DOM은 얼마나 깊은가요",
 		"link": "https://velog.io/@eunbinn/how-deep-is-your-dom",
 		"date": "Jul 08, 2024",
@@ -701,7 +707,7 @@
 		"date": "Jun 06, 2024",
 		"writer": "endmoseung"
 	},
-	"feed-106": {
+	"feed-107": {
 		"title": "[번역] 리액트 컴파일러",
 		"link": "https://velog.io/@eunbinn/react-compiler",
 		"date": "Jun 03, 2024",
@@ -743,13 +749,13 @@
 		"date": "Apr 27, 2024",
 		"writer": "endmoseung"
 	},
-	"feed-107": {
+	"feed-108": {
 		"title": "[번역] DALL-E와 Next.js로 이미지 편집기 만들기",
 		"link": "https://velog.io/@eunbinn/image-editor-dall-e-next",
 		"date": "Apr 22, 2024",
 		"writer": "eunbinn"
 	},
-	"feed-108": {
+	"feed-109": {
 		"title": "[번역] 리액트 컴파일러와 리액트 19 - 이제 메모이제이션을 신경쓰지 않아도 되나요?",
 		"link": "https://velog.io/@eunbinn/react-compiler-soon",
 		"date": "Apr 03, 2024",
@@ -773,7 +779,7 @@
 		"date": "Mar 17, 2024",
 		"writer": "junhyeong"
 	},
-	"feed-109": {
+	"feed-110": {
 		"title": "[번역] 팀 쿡에게 보내는 공개 서한, 웹 앱 방해 행위는 용납할 수 없습니다",
 		"link": "https://velog.io/@eunbinn/open-letter-to-tim-cook",
 		"date": "Mar 14, 2024",
@@ -845,7 +851,7 @@
 		"date": "Feb 15, 2024",
 		"writer": "송규빈"
 	},
-	"feed-110": {
+	"feed-111": {
 		"title": "[번역] merge vs rebase vs squash",
 		"link": "https://velog.io/@eunbinn/merge-vs-rebase-vs-squash",
 		"date": "Feb 15, 2024",
@@ -875,7 +881,7 @@
 		"date": "Jan 19, 2024",
 		"writer": "junhyeong"
 	},
-	"feed-111": {
+	"feed-112": {
 		"title": "[번역] 그것을 위해 자바스크립트를 사용할 필요는 없습니다",
 		"link": "https://velog.io/@eunbinn/You-dont-need-JavaScript-for-that",
 		"date": "Jan 11, 2024",
@@ -917,7 +923,7 @@
 		"date": "Dec 07, 2023",
 		"writer": "junhyeong"
 	},
-	"feed-112": {
+	"feed-113": {
 		"title": "[번역] 새로운 리액트 문서에서 제시하는 9가지 권장 사항",
 		"link": "https://velog.io/@eunbinn/react-docs-recommendations",
 		"date": "Dec 03, 2023",
@@ -935,16 +941,10 @@
 		"date": "Nov 07, 2023",
 		"writer": "junhyeong"
 	},
-	"feed-113": {
+	"feed-114": {
 		"title": "[번역] 웹 푸시는 이제 iOS 17에서 사용할만합니다",
 		"link": "https://velog.io/@eunbinn/web-push-ios17",
 		"date": "Oct 23, 2023",
-		"writer": "eunbinn"
-	},
-	"feed-114": {
-		"title": "[번역] 번(Bun)과 리액트로 서버사이드 렌더링(SSR) 구현하기",
-		"link": "https://velog.io/@eunbinn/server-side-rendering-ssr-with-bun-and-react",
-		"date": "Sep 24, 2023",
 		"writer": "eunbinn"
 	},
 	"feed-133": {

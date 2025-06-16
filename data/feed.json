@@ -1,4 +1,10 @@
 {
+	"feed-5": {
+		"title": "의존성 역전을 통한 독립적인 네트워크 모듈 설계하기",
+		"link": "https://youngkdevlog.tistory.com/126",
+		"date": "Jun 15, 2025",
+		"writer": "YoungKyu"
+	},
 	"feed-15": {
 		"title": "프론트엔드 개발자도 디자인패턴 알아야할까요? - 상태패턴편",
 		"link": "https://velog.io/@k-svelte-master/frontend-designpattern-xstate",
@@ -11,7 +17,7 @@
 		"date": "Jun 10, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-5": {
+	"feed-6": {
 		"title": "Demystify SwiftUI - Identify: SwiftUI는 뷰를 어떻게 구분할까?",
 		"link": "https://youngkdevlog.tistory.com/125",
 		"date": "Jun 09, 2025",
@@ -29,13 +35,13 @@
 		"date": "Jun 09, 2025",
 		"writer": "eunbinn"
 	},
-	"feed-6": {
+	"feed-7": {
 		"title": "번역) SwiftUI 간단한 뷰 레이아웃 구성하기",
 		"link": "https://youngkdevlog.tistory.com/124",
 		"date": "Jun 06, 2025",
 		"writer": "YoungKyu"
 	},
-	"feed-7": {
+	"feed-8": {
 		"title": "번역) SwiftUI 커스텀 뷰 선언하기",
 		"link": "https://youngkdevlog.tistory.com/123",
 		"date": "Jun 06, 2025",
@@ -53,13 +59,13 @@
 		"date": "Jun 03, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-8": {
+	"feed-9": {
 		"title": "Socket vs WebSocket",
 		"link": "https://youngkdevlog.tistory.com/122",
 		"date": "Jun 03, 2025",
 		"writer": "YoungKyu"
 	},
-	"feed-9": {
+	"feed-10": {
 		"title": "HTTP 개요 및 HTTP 버전별 차이",
 		"link": "https://youngkdevlog.tistory.com/121",
 		"date": "Jun 03, 2025",
@@ -89,19 +95,19 @@
 		"date": "May 22, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-10": {
+	"feed-11": {
 		"title": "애플 로그인 서버부터 클라이언트까지(Swift + Nest.js + TypeScript)",
 		"link": "https://youngkdevlog.tistory.com/120",
 		"date": "May 22, 2025",
 		"writer": "YoungKyu"
 	},
-	"feed-11": {
+	"feed-12": {
 		"title": "CoreData 개요 및 동시성",
 		"link": "https://youngkdevlog.tistory.com/119",
 		"date": "May 21, 2025",
 		"writer": "YoungKyu"
 	},
-	"feed-12": {
+	"feed-13": {
 		"title": "AWS EC2 npm run build 시 멈추는 문제",
 		"link": "https://youngkdevlog.tistory.com/118",
 		"date": "May 19, 2025",
@@ -113,7 +119,7 @@
 		"date": "May 18, 2025",
 		"writer": "eunbinn"
 	},
-	"feed-13": {
+	"feed-14": {
 		"title": "Alamofire 기능 정리",
 		"link": "https://youngkdevlog.tistory.com/117",
 		"date": "May 12, 2025",
@@ -142,12 +148,6 @@
 		"link": "https://velog.io/@endmoseung/cloud-newbie-to-aws-cb",
 		"date": "Apr 21, 2025",
 		"writer": "endmoseung"
-	},
-	"feed-14": {
-		"title": "테스트 가능한 오디오 관리 객체 설계하기",
-		"link": "https://youngkdevlog.tistory.com/116",
-		"date": "Apr 17, 2025",
-		"writer": "YoungKyu"
 	},
 	"feed-97": {
 		"title": "[번역] 자바스크립트 Temporal 기능이 곧 도입됩니다",

@@ -1,5 +1,11 @@
 {
 	"feed-5": {
+		"title": "iOS Hang, Hitch 그리고 Render Loop",
+		"link": "https://youngkdevlog.tistory.com/127",
+		"date": "Jun 16, 2025",
+		"writer": "YoungKyu"
+	},
+	"feed-6": {
 		"title": "의존성 역전을 통한 독립적인 네트워크 모듈 설계하기",
 		"link": "https://youngkdevlog.tistory.com/126",
 		"date": "Jun 15, 2025",
@@ -17,7 +23,7 @@
 		"date": "Jun 10, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-6": {
+	"feed-7": {
 		"title": "Demystify SwiftUI - Identify: SwiftUI는 뷰를 어떻게 구분할까?",
 		"link": "https://youngkdevlog.tistory.com/125",
 		"date": "Jun 09, 2025",
@@ -35,13 +41,13 @@
 		"date": "Jun 09, 2025",
 		"writer": "eunbinn"
 	},
-	"feed-7": {
+	"feed-8": {
 		"title": "번역) SwiftUI 간단한 뷰 레이아웃 구성하기",
 		"link": "https://youngkdevlog.tistory.com/124",
 		"date": "Jun 06, 2025",
 		"writer": "YoungKyu"
 	},
-	"feed-8": {
+	"feed-9": {
 		"title": "번역) SwiftUI 커스텀 뷰 선언하기",
 		"link": "https://youngkdevlog.tistory.com/123",
 		"date": "Jun 06, 2025",
@@ -59,13 +65,13 @@
 		"date": "Jun 03, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-9": {
+	"feed-10": {
 		"title": "Socket vs WebSocket",
 		"link": "https://youngkdevlog.tistory.com/122",
 		"date": "Jun 03, 2025",
 		"writer": "YoungKyu"
 	},
-	"feed-10": {
+	"feed-11": {
 		"title": "HTTP 개요 및 HTTP 버전별 차이",
 		"link": "https://youngkdevlog.tistory.com/121",
 		"date": "Jun 03, 2025",
@@ -95,19 +101,19 @@
 		"date": "May 22, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-11": {
+	"feed-12": {
 		"title": "애플 로그인 서버부터 클라이언트까지(Swift + Nest.js + TypeScript)",
 		"link": "https://youngkdevlog.tistory.com/120",
 		"date": "May 22, 2025",
 		"writer": "YoungKyu"
 	},
-	"feed-12": {
+	"feed-13": {
 		"title": "CoreData 개요 및 동시성",
 		"link": "https://youngkdevlog.tistory.com/119",
 		"date": "May 21, 2025",
 		"writer": "YoungKyu"
 	},
-	"feed-13": {
+	"feed-14": {
 		"title": "AWS EC2 npm run build 시 멈추는 문제",
 		"link": "https://youngkdevlog.tistory.com/118",
 		"date": "May 19, 2025",
@@ -118,12 +124,6 @@
 		"link": "https://velog.io/@eunbinn/a-structured-workflow-for-vibe-coding-full-stack-apps",
 		"date": "May 18, 2025",
 		"writer": "eunbinn"
-	},
-	"feed-14": {
-		"title": "Alamofire 기능 정리",
-		"link": "https://youngkdevlog.tistory.com/117",
-		"date": "May 12, 2025",
-		"writer": "YoungKyu"
 	},
 	"feed-18": {
 		"title": "벨로그 트렌드 1위 5번 경력자가 이력서용 글쓰기 팁 알려드립니다",

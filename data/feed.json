@@ -551,7 +551,7 @@
 		"date": "Sep 13, 2024",
 		"writer": "koomin"
 	},
-	"feed-158": {
+	"feed-161": {
 		"title": "2024 카카오 겨울 인턴십 전환 후기",
 		"link": "https://velog.io/@yeolyi1310/2024-kakao-internship",
 		"date": "Sep 10, 2024",
@@ -563,11 +563,17 @@
 		"date": "Sep 08, 2024",
 		"writer": "eunbinn"
 	},
-	"feed-159": {
+	"feed-162": {
 		"title": "Next.js는 싫은데 SSR은 쓰고 싶었던 블로그 개발기",
 		"link": "https://velog.io/@yeolyi1310/Next.js%EB%8A%94-%EC%8B%AB%EC%9D%80%EB%8D%B0-SSR%EC%9D%80-%EC%93%B0%EA%B3%A0-%EC%8B%B6%EC%97%88%EB%8D%98-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EA%B0%9C%EB%B0%9C%EA%B8%B0",
 		"date": "Sep 07, 2024",
 		"writer": "개발자 성열"
+	},
+	"feed-158": {
+		"title": "컴공, 디자인 취준생 분들에게 하고 싶은 말",
+		"link": "https://velog.io/@kwonhl0211/%EC%BB%B4%EA%B3%B5-%EB%94%94%EC%9E%90%EC%9D%B8-%EC%B7%A8%EC%A4%80%EC%83%9D-%EB%B6%84%EB%93%A4%EC%97%90%EA%B2%8C-%ED%95%98%EA%B3%A0-%EC%8B%B6%EC%9D%80-%EB%A7%90",
+		"date": "Sep 05, 2024",
+		"writer": "Doeon Kwon 권도언"
 	},
 	"feed-48": {
 		"title": "페이징 처리를 안하면 어떻게 될까?",
@@ -629,6 +635,12 @@
 		"date": "Aug 05, 2024",
 		"writer": "eunbinn"
 	},
+	"feed-159": {
+		"title": "Claude로 코드리뷰 경험 개선하기",
+		"link": "https://velog.io/@kwonhl0211/Claude%EB%A1%9C-%EC%BD%94%EB%93%9C%EB%A6%AC%EB%B7%B0-%EA%B2%BD%ED%97%98-%EA%B0%9C%EC%84%A0%ED%95%98%EA%B8%B0",
+		"date": "Jul 29, 2024",
+		"writer": "Doeon Kwon 권도언"
+	},
 	"feed-81": {
 		"title": "Compose navigation route는 왜 직렬화가 가능해야 할까?",
 		"link": "https://velog.io/@thd0427/Route%EB%8A%94-%EC%99%9C-%EC%A7%81%EB%A0%AC%ED%99%94%EA%B0%80-%EA%B0%80%EB%8A%A5%ED%95%B4%EC%95%BC-%ED%95%A0%EA%B9%8C",
@@ -670,6 +682,12 @@
 		"link": "https://velog.io/@thd0427/Compose-%EB%B6%80%EC%88%98-%ED%9A%A8%EA%B3%BC-%EC%B4%9D%EC%A0%95%EB%A6%AC",
 		"date": "Jul 04, 2024",
 		"writer": "송규빈"
+	},
+	"feed-160": {
+		"title": "앞으로 제품 디자인은 어떻게 바뀔까? 멀티모달 프로덕트와 생성형 UI에 대한 생각 정리",
+		"link": "https://velog.io/@kwonhl0211/%EC%95%9E%EC%9C%BC%EB%A1%9C-%EC%A0%9C%ED%92%88-%EB%94%94%EC%9E%90%EC%9D%B8%EC%9D%80-%EC%96%B4%EB%96%BB%EA%B2%8C-%EB%B0%94%EB%80%94%EA%B9%8C-%EB%A9%80%ED%8B%B0%EB%AA%A8%EB%8B%AC-%ED%94%84%EB%A1%9C%EB%8D%95%ED%8A%B8%EC%99%80-%EC%83%9D%EC%84%B1%ED%98%95-UI%EC%97%90-%EB%8C%80%ED%95%9C-%EC%83%9D%EA%B0%81-%EC%A0%95%EB%A6%AC",
+		"date": "Jul 04, 2024",
+		"writer": "Doeon Kwon 권도언"
 	},
 	"feed-84": {
 		"title": "안드로이드 카카오/네이버 로그인 처리 (Feat. ViewModel)",

@@ -20,10 +20,9 @@ feed_list = ["https://klmhyeonwooo.tistory.com?느릿느릿 프론트엔드",
             ]
 
 markdown_text = """
-<div align="left">
-  
-![마인크래프트](https://github.com/user-attachments/assets/fb05570c-cfe5-4fd7-9d86-56ff2cec345f)
-
+<div style="display: flex;">
+  <img width="45%" src="https://raw.githubusercontent.com/klmhyeonwoo/Asset-Archieve./main/tumblr_426fdb2151ac09bc808e93d689a5e432_f7593a40_1280.gif" />
+  <img width="45%" src="https://raw.githubusercontent.com/klmhyeonwoo/Asset-Archieve./main/%E1%84%86%E1%85%A1%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%8F%E1%85%B3%E1%84%85%E1%85%A2%E1%84%91%E1%85%B3%E1%84%90%E1%85%B3.gif" />
 </div>
 
 ## Hola ! Hej !

@@ -1,4 +1,10 @@
 {
+	"feed-5": {
+		"title": "WWDC25 - FoundationModels로 엿본 애플이 꿈꾸는 개인화 AI의 미래",
+		"link": "https://youngkdevlog.tistory.com/128",
+		"date": "Jun 24, 2025",
+		"writer": "YoungKyu"
+	},
 	"feed-0": {
 		"title": "Vue에서도 React { ...props } 처럼 하위 컴포넌트로의 속성 전달하기",
 		"link": "https://klmhyeonwooo.tistory.com/180",
@@ -23,13 +29,13 @@
 		"date": "Jun 17, 2025",
 		"writer": "우혁"
 	},
-	"feed-5": {
+	"feed-6": {
 		"title": "iOS Hang, Hitch 그리고 Render Loop",
 		"link": "https://youngkdevlog.tistory.com/127",
 		"date": "Jun 16, 2025",
 		"writer": "YoungKyu"
 	},
-	"feed-6": {
+	"feed-7": {
 		"title": "의존성 역전을 통한 독립적인 네트워크 모듈 설계하기",
 		"link": "https://youngkdevlog.tistory.com/126",
 		"date": "Jun 15, 2025",
@@ -47,7 +53,7 @@
 		"date": "Jun 10, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-7": {
+	"feed-8": {
 		"title": "Demystify SwiftUI - Identify: SwiftUI는 뷰를 어떻게 구분할까?",
 		"link": "https://youngkdevlog.tistory.com/125",
 		"date": "Jun 09, 2025",
@@ -65,13 +71,13 @@
 		"date": "Jun 09, 2025",
 		"writer": "eunbinn"
 	},
-	"feed-8": {
+	"feed-9": {
 		"title": "번역) SwiftUI 간단한 뷰 레이아웃 구성하기",
 		"link": "https://youngkdevlog.tistory.com/124",
 		"date": "Jun 06, 2025",
 		"writer": "YoungKyu"
 	},
-	"feed-9": {
+	"feed-10": {
 		"title": "번역) SwiftUI 커스텀 뷰 선언하기",
 		"link": "https://youngkdevlog.tistory.com/123",
 		"date": "Jun 06, 2025",
@@ -89,13 +95,13 @@
 		"date": "Jun 03, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-10": {
+	"feed-11": {
 		"title": "Socket vs WebSocket",
 		"link": "https://youngkdevlog.tistory.com/122",
 		"date": "Jun 03, 2025",
 		"writer": "YoungKyu"
 	},
-	"feed-11": {
+	"feed-12": {
 		"title": "HTTP 개요 및 HTTP 버전별 차이",
 		"link": "https://youngkdevlog.tistory.com/121",
 		"date": "Jun 03, 2025",
@@ -113,22 +119,16 @@
 		"date": "Jun 01, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-12": {
+	"feed-13": {
 		"title": "애플 로그인 서버부터 클라이언트까지(Swift + Nest.js + TypeScript)",
 		"link": "https://youngkdevlog.tistory.com/120",
 		"date": "May 22, 2025",
 		"writer": "YoungKyu"
 	},
-	"feed-13": {
+	"feed-14": {
 		"title": "CoreData 개요 및 동시성",
 		"link": "https://youngkdevlog.tistory.com/119",
 		"date": "May 21, 2025",
-		"writer": "YoungKyu"
-	},
-	"feed-14": {
-		"title": "AWS EC2 npm run build 시 멈추는 문제",
-		"link": "https://youngkdevlog.tistory.com/118",
-		"date": "May 19, 2025",
 		"writer": "YoungKyu"
 	},
 	"feed-96": {

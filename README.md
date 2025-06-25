@@ -21,6 +21,22 @@
 - [내가, 그리고 누군가 필요로 하는 프로덕트 만들기 (feat. MAU 833)](https://klmhyeonwooo.tistory.com/177)<br>
 - [Webpack과 Vite의 차이점은 무엇일까?](https://klmhyeonwooo.tistory.com/176)<br>
 
+
+### 활동
+- **노션(notion) 코리아 서울** (2024.12 ~ Currently active)
+- **데브챗** (2024.01 ~ Currently active)
+- **디프만 16th 리더** (2024.10 ~ 2025.06)
+- **디프만 15th** (2024.06 ~ 2024.10)
+- **디프만 14th** (2023.11 ~ 2024.02)
+- **멋쟁이사자처럼 11st 운영진** (2023.03 ~ 2024.10)
+- **솝트(sopt) 21st** (2018.05 ~ 2018.12)
+- **멋쟁이사자처럼 6th 리더** (2018.04 ~ 2018.12)
+- **멋쟁이사자처럼 5th** (2017.06 ~ 2018.02)
+
+### 커리어
+- **AhnLab** — Frontend Developer (2024.01 ~ Currently employed)
+- **JiranFamily** — Frontend / Editor Developer (2023.04 ~ 2024.01)
+
 ### 제 경험들이 궁금하시다면
 - 이력 · http://bit.ly/3GBXpKD <br/>
 - 포트폴리오 · http://bit.ly/4cPxTO7

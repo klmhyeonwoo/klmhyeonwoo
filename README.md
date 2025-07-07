@@ -15,11 +15,11 @@
 - [4월이 되서야 하는 프론트엔드 회고](https://klmhyeonwooo.tistory.com/167)<br>
 
 ### 블로그에서 다양한 내용들을 포스팅해요
+- [마이그레이션을 진행하며 느꼈던 주니어 개발자의 팀을 위한 소소한 팁](https://klmhyeonwooo.tistory.com/183)<br>
+- [폼 안에서 필수 입력 값과 Optional 레이아웃을 컴포넌트로 말고 스타일로 해보자](https://klmhyeonwooo.tistory.com/182)<br>
+- [vue-cli 에서는 발생하지 않고, vite 번들러에서만 발생하는 ssl 환경 문제](https://klmhyeonwooo.tistory.com/181)<br>
 - [Vue에서도 React { ...props } 처럼 하위 컴포넌트로의 속성 전달하기](https://klmhyeonwooo.tistory.com/180)<br>
 - [아직도 input type에 number을 넣고 계신가요?](https://klmhyeonwooo.tistory.com/179)<br>
-- [웹 페이지의 애니메이션을 최적화하는 여러 방안들은 무엇일까?](https://klmhyeonwooo.tistory.com/178)<br>
-- [내가, 그리고 누군가 필요로 하는 프로덕트 만들기 (feat. MAU 833)](https://klmhyeonwooo.tistory.com/177)<br>
-- [Webpack과 Vite의 차이점은 무엇일까?](https://klmhyeonwooo.tistory.com/176)<br>
 
 
 ### 활동

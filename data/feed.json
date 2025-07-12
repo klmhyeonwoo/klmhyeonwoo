@@ -1,4 +1,16 @@
 {
+	"feed-15": {
+		"title": "비전공자도 개발지식은 언제나 중요합니다",
+		"link": "https://velog.io/@k-svelte-master/tcp-slow-qwik-jjang",
+		"date": "Jul 11, 2025",
+		"writer": "타락한스벨트전도사"
+	},
+	"feed-16": {
+		"title": "백엔드에 명령하는 프론트엔드가 되어보자",
+		"link": "https://velog.io/@k-svelte-master/frontend-win-backend",
+		"date": "Jul 11, 2025",
+		"writer": "타락한스벨트전도사"
+	},
 	"feed-5": {
 		"title": "KingFisher 대신 Nuke",
 		"link": "https://youngkdevlog.tistory.com/129",
@@ -23,19 +35,19 @@
 		"date": "Jul 06, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-15": {
+	"feed-17": {
 		"title": "[면접준비!] React19에서 useRef는 뭐가 달라졌을까?",
 		"link": "https://velog.io/@k-svelte-master/react19-useref",
 		"date": "Jul 03, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-16": {
+	"feed-18": {
 		"title": "스벨트전도사, FeConf에서 스벨트 전도합니다!",
 		"link": "https://velog.io/@k-svelte-master/feconf-svelte-jeondosa",
 		"date": "Jul 01, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-17": {
+	"feed-19": {
 		"title": "100달러 충전했는데 3일만에 5만원 긁힌 이력서 AI 서비스 개발기",
 		"link": "https://velog.io/@k-svelte-master/snu-ai-resume",
 		"date": "Jun 27, 2025",
@@ -83,13 +95,13 @@
 		"date": "Jun 15, 2025",
 		"writer": "YoungKyu"
 	},
-	"feed-18": {
+	"feed-20": {
 		"title": "프론트엔드 개발자도 디자인패턴 알아야할까요? - 상태패턴편",
 		"link": "https://velog.io/@k-svelte-master/frontend-designpattern-xstate",
 		"date": "Jun 12, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-19": {
+	"feed-21": {
 		"title": "프론트엔드 성능최적화를 위한 코드 스플릿 알아보기",
 		"link": "https://velog.io/@k-svelte-master/codesplit-qwik-over-nextjs",
 		"date": "Jun 10, 2025",
@@ -101,7 +113,7 @@
 		"date": "Jun 09, 2025",
 		"writer": "YoungKyu"
 	},
-	"feed-20": {
+	"feed-22": {
 		"title": "가상스크롤의 원리 알고 계신가요?",
 		"link": "https://velog.io/@k-svelte-master/virtual-scroll-principle",
 		"date": "Jun 09, 2025",
@@ -155,19 +167,19 @@
 		"date": "May 18, 2025",
 		"writer": "eunbinn"
 	},
-	"feed-21": {
+	"feed-23": {
 		"title": "벨로그 트렌드 1위 5번 경력자가 이력서용 글쓰기 팁 알려드립니다",
 		"link": "https://velog.io/@k-svelte-master/resume-posting-tips",
 		"date": "May 12, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-22": {
+	"feed-24": {
 		"title": "개발자 이력서에 \"이것\" 빠뜨리진 않으셨나요?",
 		"link": "https://velog.io/@k-svelte-master/resume-tips",
 		"date": "Apr 29, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-23": {
+	"feed-25": {
 		"title": "글을 잘쓰고 싶나요? 제 시스템 프롬프트 써보세요",
 		"link": "https://velog.io/@k-svelte-master/claude-writing-special-prompt",
 		"date": "Apr 26, 2025",
@@ -185,7 +197,7 @@
 		"date": "Apr 03, 2025",
 		"writer": "eunbinn"
 	},
-	"feed-24": {
+	"feed-26": {
 		"title": "MCP의 모든 것을 알아봅시다.",
 		"link": "https://velog.io/@k-svelte-master/what-is-mcp",
 		"date": "Mar 31, 2025",
@@ -215,7 +227,7 @@
 		"date": "Feb 17, 2025",
 		"writer": "eunbinn"
 	},
-	"feed-25": {
+	"feed-27": {
 		"title": "LLM 서비스에서 프론트엔드 살아남기",
 		"link": "https://velog.io/@k-svelte-master/llm-frontend-tips",
 		"date": "Feb 11, 2025",
@@ -257,19 +269,19 @@
 		"date": "Jan 15, 2025",
 		"writer": "koomin"
 	},
-	"feed-26": {
+	"feed-28": {
 		"title": "라미레포트로 IT컬럼 글쓰기 - 3",
 		"link": "https://velog.io/@k-svelte-master/llami-report-3",
 		"date": "Jan 11, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-27": {
+	"feed-29": {
 		"title": "라미레포트로 IT 컬럼쓰기 2",
 		"link": "https://velog.io/@k-svelte-master/%EB%9D%BC%EB%AF%B8%EB%A0%88%ED%8F%AC%ED%8A%B8%EB%A1%9C-IT-%EC%BB%AC%EB%9F%BC%EC%93%B0%EA%B8%B0-2",
 		"date": "Jan 11, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-28": {
+	"feed-30": {
 		"title": "라미레포트로, IT컬럼 원고뽑기 - 1",
 		"link": "https://velog.io/@k-svelte-master/llami-report-posting-1",
 		"date": "Jan 11, 2025",
@@ -287,7 +299,7 @@
 		"date": "Jan 05, 2025",
 		"writer": "junhyeong"
 	},
-	"feed-29": {
+	"feed-31": {
 		"title": "requestAnimationFrame의 성능이슈를 알고 있나요? - 자바스크립트 런타임 이해하기",
 		"link": "https://velog.io/@k-svelte-master/optimize-request-animation-frame-frontend",
 		"date": "Dec 29, 2024",
@@ -329,13 +341,13 @@
 		"date": "Dec 16, 2024",
 		"writer": "koomin"
 	},
-	"feed-30": {
+	"feed-32": {
 		"title": "제발 cursor말고 windsurf 쓰세요!!",
 		"link": "https://velog.io/@k-svelte-master/windsurf-flitter-cursor",
 		"date": "Dec 10, 2024",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-31": {
+	"feed-33": {
 		"title": "GPT에게 질문을 못한다고요? 축하드립니다.",
 		"link": "https://velog.io/@k-svelte-master/can-not-ask-to-gpt",
 		"date": "Dec 10, 2024",
@@ -347,7 +359,7 @@
 		"date": "Dec 10, 2024",
 		"writer": "우혁"
 	},
-	"feed-32": {
+	"feed-34": {
 		"title": "'use client'가 CSR이라고 알고 있는 거 아니죠? Next.js 면접질문 정복",
 		"link": "https://velog.io/@k-svelte-master/nextjs-rsc-csr-ssr",
 		"date": "Dec 06, 2024",
@@ -377,12 +389,6 @@
 		"date": "Nov 26, 2024",
 		"writer": "우혁"
 	},
-	"feed-33": {
-		"title": "Symbol이 뭔지는 들어봤는데... 면접에서는 이렇게 답하세요",
-		"link": "https://velog.io/@k-svelte-master/js-symbol-guide",
-		"date": "Nov 24, 2024",
-		"writer": "타락한스벨트전도사"
-	},
 	"feed-118": {
 		"title": "신입 개발자가 경력 공고에 합격하기까지: 면접 준비와 공부 방법",
 		"link": "https://velog.io/@jhbae0420/%EC%8B%A0%EC%9E%85-%EA%B0%9C%EB%B0%9C%EC%9E%90%EA%B0%80-%EA%B2%BD%EB%A0%A5-%EA%B3%B5%EA%B3%A0%EC%97%90-%ED%95%A9%EA%B2%A9%ED%95%98%EA%B8%B0%EA%B9%8C%EC%A7%80-%EB%A9%B4%EC%A0%91-%EC%A4%80%EB%B9%84%EC%99%80-%EA%B3%B5%EB%B6%80-%EB%B0%A9%EB%B2%95",
@@ -400,12 +406,6 @@
 		"link": "https://velog.io/@woogur29/React-Server-Components%EA%B0%80-%EC%83%9D%EC%84%B1%EB%90%98%EB%8A%94-%EB%82%B4%EB%B6%80-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC2-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8",
 		"date": "Nov 22, 2024",
 		"writer": "우혁"
-	},
-	"feed-34": {
-		"title": "내 글이 요즘IT에 올라갔다?! - 오픈소스로 배운 것들",
-		"link": "https://velog.io/@k-svelte-master/notionpresso-opensource-guide",
-		"date": "Nov 21, 2024",
-		"writer": "타락한스벨트전도사"
 	},
 	"feed-151": {
 		"title": "서버 컴포넌트가 생성되는 과정(1 - 서버)",

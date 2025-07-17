@@ -1,4 +1,16 @@
 {
+	"feed-5": {
+		"title": "EC2 인스턴스 스토리지 용량 확장하기",
+		"link": "https://youngkdevlog.tistory.com/130",
+		"date": "Jul 16, 2025",
+		"writer": "YoungKyu"
+	},
+	"feed-55": {
+		"title": "첫번째 레슨: 프론트엔드에서 선언하기",
+		"link": "https://velog.io/@endmoseung/declaritive-component",
+		"date": "Jul 16, 2025",
+		"writer": "endmoseung"
+	},
 	"feed-15": {
 		"title": "비전공자도 개발지식은 언제나 중요합니다",
 		"link": "https://velog.io/@k-svelte-master/tcp-slow-qwik-jjang",
@@ -11,7 +23,7 @@
 		"date": "Jul 11, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-5": {
+	"feed-6": {
 		"title": "KingFisher 대신 Nuke",
 		"link": "https://youngkdevlog.tistory.com/129",
 		"date": "Jul 10, 2025",
@@ -53,7 +65,7 @@
 		"date": "Jun 27, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-6": {
+	"feed-7": {
 		"title": "WWDC25 - FoundationModels로 엿본 애플이 꿈꾸는 개인화 AI의 미래",
 		"link": "https://youngkdevlog.tistory.com/128",
 		"date": "Jun 24, 2025",
@@ -83,13 +95,13 @@
 		"date": "Jun 17, 2025",
 		"writer": "우혁"
 	},
-	"feed-7": {
+	"feed-8": {
 		"title": "iOS Hang, Hitch 그리고 Render Loop",
 		"link": "https://youngkdevlog.tistory.com/127",
 		"date": "Jun 16, 2025",
 		"writer": "YoungKyu"
 	},
-	"feed-8": {
+	"feed-9": {
 		"title": "의존성 역전을 통한 독립적인 네트워크 모듈 설계하기",
 		"link": "https://youngkdevlog.tistory.com/126",
 		"date": "Jun 15, 2025",
@@ -107,7 +119,7 @@
 		"date": "Jun 10, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-9": {
+	"feed-10": {
 		"title": "Demystify SwiftUI - Identify: SwiftUI는 뷰를 어떻게 구분할까?",
 		"link": "https://youngkdevlog.tistory.com/125",
 		"date": "Jun 09, 2025",
@@ -125,13 +137,13 @@
 		"date": "Jun 09, 2025",
 		"writer": "eunbinn"
 	},
-	"feed-10": {
+	"feed-11": {
 		"title": "번역) SwiftUI 간단한 뷰 레이아웃 구성하기",
 		"link": "https://youngkdevlog.tistory.com/124",
 		"date": "Jun 06, 2025",
 		"writer": "YoungKyu"
 	},
-	"feed-11": {
+	"feed-12": {
 		"title": "번역) SwiftUI 커스텀 뷰 선언하기",
 		"link": "https://youngkdevlog.tistory.com/123",
 		"date": "Jun 06, 2025",
@@ -143,22 +155,16 @@
 		"date": "Jun 05, 2025",
 		"writer": "송규빈"
 	},
-	"feed-12": {
+	"feed-13": {
 		"title": "Socket vs WebSocket",
 		"link": "https://youngkdevlog.tistory.com/122",
 		"date": "Jun 03, 2025",
 		"writer": "YoungKyu"
 	},
-	"feed-13": {
+	"feed-14": {
 		"title": "HTTP 개요 및 HTTP 버전별 차이",
 		"link": "https://youngkdevlog.tistory.com/121",
 		"date": "Jun 03, 2025",
-		"writer": "YoungKyu"
-	},
-	"feed-14": {
-		"title": "애플 로그인 서버부터 클라이언트까지(Swift + Nest.js + TypeScript)",
-		"link": "https://youngkdevlog.tistory.com/120",
-		"date": "May 22, 2025",
 		"writer": "YoungKyu"
 	},
 	"feed-96": {
@@ -185,7 +191,7 @@
 		"date": "Apr 26, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-55": {
+	"feed-56": {
 		"title": "클라우드 문외한에서 AWS 자격증까지,\n프론트엔드의 AWS 적응기",
 		"link": "https://velog.io/@endmoseung/cloud-newbie-to-aws-cb",
 		"date": "Apr 21, 2025",
@@ -215,7 +221,7 @@
 		"date": "Mar 02, 2025",
 		"writer": "우혁"
 	},
-	"feed-56": {
+	"feed-57": {
 		"title": "최신 모듈 번들러의 진화(NextJS, React)",
 		"link": "https://velog.io/@endmoseung/modulebundlerevolution",
 		"date": "Feb 22, 2025",
@@ -287,7 +293,7 @@
 		"date": "Jan 11, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-57": {
+	"feed-58": {
 		"title": "스타트업에서 디자인시스템이란",
 		"link": "https://velog.io/@endmoseung/%EC%8A%A4%ED%83%80%ED%8A%B8%EC%97%85%EC%97%90%EC%84%9C-%EB%94%94%EC%9E%90%EC%9D%B8%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%B4%EB%9E%80",
 		"date": "Jan 11, 2025",
@@ -395,7 +401,7 @@
 		"date": "Nov 24, 2024",
 		"writer": "junhyeong"
 	},
-	"feed-58": {
+	"feed-59": {
 		"title": "혐오를 혐오하고 나를 사랑하자",
 		"link": "https://velog.io/@endmoseung/%ED%98%90%EC%98%A4%EB%A5%BC-%ED%98%90%EC%98%A4%ED%95%98%EB%8A%94",
 		"date": "Nov 23, 2024",
@@ -449,7 +455,7 @@
 		"date": "Oct 28, 2024",
 		"writer": "우혁"
 	},
-	"feed-59": {
+	"feed-60": {
 		"title": "Suspense 근데 Next를 곁들인",
 		"link": "https://velog.io/@endmoseung/Suspense-%EA%B7%BC%EB%8D%B0-Next%EB%A5%BC-%EA%B3%81%EB%93%A4%EC%9D%B8",
 		"date": "Oct 27, 2024",
@@ -509,7 +515,7 @@
 		"date": "Oct 12, 2024",
 		"writer": "imikehttps://v2.velog.io/rss/teo"
 	},
-	"feed-60": {
+	"feed-61": {
 		"title": "NextJS 우아하게 사용하기",
 		"link": "https://velog.io/@endmoseung/nextjs-use-gracefully",
 		"date": "Oct 10, 2024",
@@ -653,7 +659,7 @@
 		"date": "Jul 23, 2024",
 		"writer": "junhyeong"
 	},
-	"feed-61": {
+	"feed-62": {
 		"title": "상반기 회고 (feat: Maker)",
 		"link": "https://velog.io/@endmoseung/%EC%83%81%EB%B0%98%EA%B8%B0-%ED%9A%8C%EA%B3%A0-feat-Maker",
 		"date": "Jul 20, 2024",
@@ -701,7 +707,7 @@
 		"date": "Jun 12, 2024",
 		"writer": "송규빈"
 	},
-	"feed-62": {
+	"feed-63": {
 		"title": "개발자가 클라우드를 공부하는 이유",
 		"link": "https://velog.io/@endmoseung/why-developers-study-the-cloud",
 		"date": "Jun 06, 2024",
@@ -713,7 +719,7 @@
 		"date": "Jun 03, 2024",
 		"writer": "eunbinn"
 	},
-	"feed-63": {
+	"feed-64": {
 		"title": "[길벗 개발자 리뷰어] 읽고 나면 진짜 쉬워지는 자료 구조",
 		"link": "https://velog.io/@endmoseung/%EA%B8%B8%EB%B2%97-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EB%A6%AC%EB%B7%B0%EC%96%B4-%EC%9D%BD%EA%B3%A0-%EB%82%98%EB%A9%B4-%EC%A7%84%EC%A7%9C-%EC%89%AC%EC%9B%8C%EC%A7%80%EB%8A%94-%EC%9E%90%EB%A3%8C-%EA%B5%AC%EC%A1%B0",
 		"date": "May 16, 2024",
@@ -725,13 +731,13 @@
 		"date": "May 12, 2024",
 		"writer": "junhyeong"
 	},
-	"feed-64": {
+	"feed-65": {
 		"title": "주도적인 사람",
 		"link": "https://velog.io/@endmoseung/%EC%A3%BC%EB%8F%84%EC%A0%81%EC%9D%B8-%EC%82%AC%EB%9E%8C",
 		"date": "May 07, 2024",
 		"writer": "endmoseung"
 	},
-	"feed-65": {
+	"feed-66": {
 		"title": "Submodule CI/CD 통합하기",
 		"link": "https://velog.io/@endmoseung/Submodule-CICD-%ED%86%B5%ED%95%A9%ED%95%98%EA%B8%B0",
 		"date": "May 05, 2024",
@@ -743,7 +749,7 @@
 		"date": "Apr 28, 2024",
 		"writer": "junhyeong"
 	},
-	"feed-66": {
+	"feed-67": {
 		"title": "저는 개발자입니다",
 		"link": "https://velog.io/@endmoseung/%EC%A0%80%EB%8A%94-%EA%B0%9C%EB%B0%9C%EC%9E%90%EC%9E%85%EB%8B%88%EB%8B%A4",
 		"date": "Apr 27, 2024",
@@ -761,7 +767,7 @@
 		"date": "Apr 03, 2024",
 		"writer": "eunbinn"
 	},
-	"feed-67": {
+	"feed-68": {
 		"title": "꾸준함과 당연하다는것",
 		"link": "https://velog.io/@endmoseung/%EA%BE%B8%EC%A4%80%ED%95%A8%EA%B3%BC-%EB%8B%B9%EC%97%B0%ED%95%98%EB%8B%A4%EB%8A%94%EA%B2%83",
 		"date": "Apr 01, 2024",
@@ -785,13 +791,13 @@
 		"date": "Mar 14, 2024",
 		"writer": "eunbinn"
 	},
-	"feed-68": {
+	"feed-69": {
 		"title": "NextJS Middleware와 CDN으로 이런것도 가능해요.",
 		"link": "https://velog.io/@endmoseung/nextJS-middleware-cloudfront",
 		"date": "Mar 11, 2024",
 		"writer": "endmoseung"
 	},
-	"feed-69": {
+	"feed-70": {
 		"title": "2023, 2024년에 프론트엔드 하는것",
 		"link": "https://velog.io/@endmoseung/2023-2024%EB%85%84%EC%97%90-%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%EB%A5%BC-%EB%B0%B0%EC%9A%B0%EB%8A%94%EA%B2%83",
 		"date": "Mar 09, 2024",
@@ -869,7 +875,7 @@
 		"date": "Feb 04, 2024",
 		"writer": "junhyeong"
 	},
-	"feed-70": {
+	"feed-71": {
 		"title": "NextJS 실무에 적용하기",
 		"link": "https://velog.io/@endmoseung/NextJS-%EC%8B%A4%EB%AC%B4%EC%97%90-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0",
 		"date": "Jan 26, 2024",
@@ -887,7 +893,7 @@
 		"date": "Jan 11, 2024",
 		"writer": "eunbinn"
 	},
-	"feed-71": {
+	"feed-72": {
 		"title": "React와 Hooks에 대해서 알아보기",
 		"link": "https://velog.io/@endmoseung/React-CustomHook-%EC%96%B4%EB%A0%B5%EC%A7%80-%EC%95%8A%EC%95%84%EC%9A%94",
 		"date": "Jan 06, 2024",
@@ -899,13 +905,13 @@
 		"date": "Jan 05, 2024",
 		"writer": "junhyeong"
 	},
-	"feed-72": {
+	"feed-73": {
 		"title": "회고라고 쓰고 실패라고 부른다. (feat 1년차 개발자)",
 		"link": "https://velog.io/@endmoseung/%ED%9A%8C%EA%B3%A0%EB%9D%BC%EA%B3%A0-%EC%93%B0%EA%B3%A0-%EC%8B%A4%ED%8C%A8%EB%9D%BC%EA%B3%A0-%EB%B6%80%EB%A5%B8%EB%8B%A4.-feat-1%EB%85%84%EC%B0%A8-%EA%B0%9C%EB%B0%9C%EC%9E%90",
 		"date": "Dec 28, 2023",
 		"writer": "endmoseung"
 	},
-	"feed-73": {
+	"feed-74": {
 		"title": "이미지 최적화 근데 AWS와 NextJs를 곁들인",
 		"link": "https://velog.io/@endmoseung/image-optimization-aws-nextjs",
 		"date": "Dec 23, 2023",
@@ -928,12 +934,6 @@
 		"link": "https://velog.io/@eunbinn/react-docs-recommendations",
 		"date": "Dec 03, 2023",
 		"writer": "eunbinn"
-	},
-	"feed-74": {
-		"title": "html css 배워보기",
-		"link": "https://velog.io/@endmoseung/html-css-%EB%B0%B0%EC%9B%8C%EB%B3%B4%EA%B8%B0",
-		"date": "Nov 24, 2023",
-		"writer": "endmoseung"
 	},
 	"feed-132": {
 		"title": "나의 삶 : 과거부터 현재까지",

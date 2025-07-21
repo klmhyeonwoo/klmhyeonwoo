@@ -1,5 +1,23 @@
 {
+	"feed-0": {
+		"title": "자바스크립트 V8 엔진 공부하기 - 첫 번째",
+		"link": "https://klmhyeonwooo.tistory.com/185",
+		"date": "Jul 20, 2025",
+		"writer": "느릿느릿 프론트엔드"
+	},
 	"feed-5": {
+		"title": "Shorts UI 구현하기 (SwiftUI+UIViewRepresentable+UICollectionView)",
+		"link": "https://youngkdevlog.tistory.com/131",
+		"date": "Jul 20, 2025",
+		"writer": "YoungKyu"
+	},
+	"feed-95": {
+		"title": "[번역] `useOptimistic`으로 즉각 반응하는 앱 만들기",
+		"link": "https://velog.io/@eunbinn/use-optimistic-to-make-your-app-feel-instant",
+		"date": "Jul 19, 2025",
+		"writer": "eunbinn"
+	},
+	"feed-6": {
 		"title": "EC2 인스턴스 스토리지 용량 확장하기",
 		"link": "https://youngkdevlog.tistory.com/130",
 		"date": "Jul 16, 2025",
@@ -23,25 +41,25 @@
 		"date": "Jul 11, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-6": {
+	"feed-7": {
 		"title": "KingFisher 대신 Nuke",
 		"link": "https://youngkdevlog.tistory.com/129",
 		"date": "Jul 10, 2025",
 		"writer": "YoungKyu"
 	},
-	"feed-0": {
+	"feed-1": {
 		"title": "마이그레이션을 진행하며 느꼈던 주니어 개발자의 팀을 위한 소소한 팁",
 		"link": "https://klmhyeonwooo.tistory.com/183",
 		"date": "Jul 06, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "폼 안에서 필수 입력 값과 Optional 레이아웃을 컴포넌트로 말고 스타일로 해보자",
 		"link": "https://klmhyeonwooo.tistory.com/182",
 		"date": "Jul 06, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "vue-cli 에서는 발생하지 않고, vite 번들러에서만 발생하는 ssl 환경 문제",
 		"link": "https://klmhyeonwooo.tistory.com/181",
 		"date": "Jul 06, 2025",
@@ -65,22 +83,16 @@
 		"date": "Jun 27, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-7": {
+	"feed-8": {
 		"title": "WWDC25 - FoundationModels로 엿본 애플이 꿈꾸는 개인화 AI의 미래",
 		"link": "https://youngkdevlog.tistory.com/128",
 		"date": "Jun 24, 2025",
 		"writer": "YoungKyu"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "Vue에서도 React { ...props } 처럼 하위 컴포넌트로의 속성 전달하기",
 		"link": "https://klmhyeonwooo.tistory.com/180",
 		"date": "Jun 23, 2025",
-		"writer": "느릿느릿 프론트엔드"
-	},
-	"feed-4": {
-		"title": "아직도 input type에 number을 넣고 계신가요?",
-		"link": "https://klmhyeonwooo.tistory.com/179",
-		"date": "Jun 19, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
 	"feed-137": {
@@ -95,13 +107,13 @@
 		"date": "Jun 17, 2025",
 		"writer": "우혁"
 	},
-	"feed-8": {
+	"feed-9": {
 		"title": "iOS Hang, Hitch 그리고 Render Loop",
 		"link": "https://youngkdevlog.tistory.com/127",
 		"date": "Jun 16, 2025",
 		"writer": "YoungKyu"
 	},
-	"feed-9": {
+	"feed-10": {
 		"title": "의존성 역전을 통한 독립적인 네트워크 모듈 설계하기",
 		"link": "https://youngkdevlog.tistory.com/126",
 		"date": "Jun 15, 2025",
@@ -119,7 +131,7 @@
 		"date": "Jun 10, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-10": {
+	"feed-11": {
 		"title": "Demystify SwiftUI - Identify: SwiftUI는 뷰를 어떻게 구분할까?",
 		"link": "https://youngkdevlog.tistory.com/125",
 		"date": "Jun 09, 2025",
@@ -131,19 +143,19 @@
 		"date": "Jun 09, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-95": {
+	"feed-96": {
 		"title": "[번역] React와 Next.js를 위한 완벽한 Cursor AI 설정",
 		"link": "https://velog.io/@eunbinn/cursor-ai-tips-react-nextjs",
 		"date": "Jun 09, 2025",
 		"writer": "eunbinn"
 	},
-	"feed-11": {
+	"feed-12": {
 		"title": "번역) SwiftUI 간단한 뷰 레이아웃 구성하기",
 		"link": "https://youngkdevlog.tistory.com/124",
 		"date": "Jun 06, 2025",
 		"writer": "YoungKyu"
 	},
-	"feed-12": {
+	"feed-13": {
 		"title": "번역) SwiftUI 커스텀 뷰 선언하기",
 		"link": "https://youngkdevlog.tistory.com/123",
 		"date": "Jun 06, 2025",
@@ -155,19 +167,13 @@
 		"date": "Jun 05, 2025",
 		"writer": "송규빈"
 	},
-	"feed-13": {
+	"feed-14": {
 		"title": "Socket vs WebSocket",
 		"link": "https://youngkdevlog.tistory.com/122",
 		"date": "Jun 03, 2025",
 		"writer": "YoungKyu"
 	},
-	"feed-14": {
-		"title": "HTTP 개요 및 HTTP 버전별 차이",
-		"link": "https://youngkdevlog.tistory.com/121",
-		"date": "Jun 03, 2025",
-		"writer": "YoungKyu"
-	},
-	"feed-96": {
+	"feed-97": {
 		"title": "[번역] 풀스택 앱을 \"바이브 코딩\"하기 위한 구조화된 워크플로우",
 		"link": "https://velog.io/@eunbinn/a-structured-workflow-for-vibe-coding-full-stack-apps",
 		"date": "May 18, 2025",
@@ -197,7 +203,7 @@
 		"date": "Apr 21, 2025",
 		"writer": "endmoseung"
 	},
-	"feed-97": {
+	"feed-98": {
 		"title": "[번역] 자바스크립트 Temporal 기능이 곧 도입됩니다",
 		"link": "https://velog.io/@eunbinn/javascript-temporal-is-coming",
 		"date": "Apr 03, 2025",
@@ -209,7 +215,7 @@
 		"date": "Mar 31, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-98": {
+	"feed-99": {
 		"title": "[번역] 리액트에서의 단일 책임 원칙: 컴포넌트 집중의 기술",
 		"link": "https://velog.io/@eunbinn/single-responsibility-principle-in-react",
 		"date": "Mar 09, 2025",
@@ -227,7 +233,7 @@
 		"date": "Feb 22, 2025",
 		"writer": "endmoseung"
 	},
-	"feed-99": {
+	"feed-100": {
 		"title": "[번역] 모든 프런트엔드 개발자가 알아야 할 접근성 필수 사항",
 		"link": "https://velog.io/@eunbinn/accessibility-essentials-every-front-end-developer-should-know",
 		"date": "Feb 17, 2025",
@@ -329,7 +335,7 @@
 		"date": "Dec 28, 2024",
 		"writer": "우혁"
 	},
-	"feed-100": {
+	"feed-101": {
 		"title": "[번역] 리액트 19 업그레이드 가이드",
 		"link": "https://velog.io/@eunbinn/react-19-upgrade-guide",
 		"date": "Dec 23, 2024",
@@ -461,7 +467,7 @@
 		"date": "Oct 27, 2024",
 		"writer": "endmoseung"
 	},
-	"feed-101": {
+	"feed-102": {
 		"title": "[번역] 영국의 조약이 .io 도메인의 종말을 의미할 수 있는 이유",
 		"link": "https://velog.io/@eunbinn/uk-treaty-end-io-domain-chagos-islands",
 		"date": "Oct 25, 2024",
@@ -521,7 +527,7 @@
 		"date": "Oct 10, 2024",
 		"writer": "endmoseung"
 	},
-	"feed-102": {
+	"feed-103": {
 		"title": "[번역] TanStack Router를 소개합니다",
 		"link": "https://velog.io/@eunbinn/introducing-tanstack-router",
 		"date": "Oct 09, 2024",
@@ -563,7 +569,7 @@
 		"date": "Sep 10, 2024",
 		"writer": "개발자 성열"
 	},
-	"feed-103": {
+	"feed-104": {
 		"title": "[번역] 자바스크립트의 Date가 곧 수정됩니다",
 		"link": "https://velog.io/@eunbinn/js-dates-finally-fixed",
 		"date": "Sep 08, 2024",
@@ -635,7 +641,7 @@
 		"date": "Aug 12, 2024",
 		"writer": "송규빈"
 	},
-	"feed-104": {
+	"feed-105": {
 		"title": "[번역] DRY - 잘못된 추상화의 일반적인 원인",
 		"link": "https://velog.io/@eunbinn/dry-the-common-source-of-bad-abstractions",
 		"date": "Aug 05, 2024",
@@ -665,13 +671,13 @@
 		"date": "Jul 20, 2024",
 		"writer": "endmoseung"
 	},
-	"feed-105": {
+	"feed-106": {
 		"title": "[번역] 자바스크립트에서 프로미스를 취소하는 방법",
 		"link": "https://velog.io/@eunbinn/cancel-promises-javascript",
 		"date": "Jul 18, 2024",
 		"writer": "eunbinn"
 	},
-	"feed-106": {
+	"feed-107": {
 		"title": "[번역] 당신의 DOM은 얼마나 깊은가요",
 		"link": "https://velog.io/@eunbinn/how-deep-is-your-dom",
 		"date": "Jul 08, 2024",
@@ -713,7 +719,7 @@
 		"date": "Jun 06, 2024",
 		"writer": "endmoseung"
 	},
-	"feed-107": {
+	"feed-108": {
 		"title": "[번역] 리액트 컴파일러",
 		"link": "https://velog.io/@eunbinn/react-compiler",
 		"date": "Jun 03, 2024",
@@ -755,13 +761,13 @@
 		"date": "Apr 27, 2024",
 		"writer": "endmoseung"
 	},
-	"feed-108": {
+	"feed-109": {
 		"title": "[번역] DALL-E와 Next.js로 이미지 편집기 만들기",
 		"link": "https://velog.io/@eunbinn/image-editor-dall-e-next",
 		"date": "Apr 22, 2024",
 		"writer": "eunbinn"
 	},
-	"feed-109": {
+	"feed-110": {
 		"title": "[번역] 리액트 컴파일러와 리액트 19 - 이제 메모이제이션을 신경쓰지 않아도 되나요?",
 		"link": "https://velog.io/@eunbinn/react-compiler-soon",
 		"date": "Apr 03, 2024",
@@ -785,7 +791,7 @@
 		"date": "Mar 17, 2024",
 		"writer": "junhyeong"
 	},
-	"feed-110": {
+	"feed-111": {
 		"title": "[번역] 팀 쿡에게 보내는 공개 서한, 웹 앱 방해 행위는 용납할 수 없습니다",
 		"link": "https://velog.io/@eunbinn/open-letter-to-tim-cook",
 		"date": "Mar 14, 2024",
@@ -857,7 +863,7 @@
 		"date": "Feb 15, 2024",
 		"writer": "송규빈"
 	},
-	"feed-111": {
+	"feed-112": {
 		"title": "[번역] merge vs rebase vs squash",
 		"link": "https://velog.io/@eunbinn/merge-vs-rebase-vs-squash",
 		"date": "Feb 15, 2024",
@@ -887,7 +893,7 @@
 		"date": "Jan 19, 2024",
 		"writer": "junhyeong"
 	},
-	"feed-112": {
+	"feed-113": {
 		"title": "[번역] 그것을 위해 자바스크립트를 사용할 필요는 없습니다",
 		"link": "https://velog.io/@eunbinn/You-dont-need-JavaScript-for-that",
 		"date": "Jan 11, 2024",
@@ -929,7 +935,7 @@
 		"date": "Dec 07, 2023",
 		"writer": "junhyeong"
 	},
-	"feed-113": {
+	"feed-114": {
 		"title": "[번역] 새로운 리액트 문서에서 제시하는 9가지 권장 사항",
 		"link": "https://velog.io/@eunbinn/react-docs-recommendations",
 		"date": "Dec 03, 2023",
@@ -940,12 +946,6 @@
 		"link": "https://velog.io/@jhbae0420/%EB%82%98%EC%9D%98-%EC%82%B6-%EA%B3%BC%EA%B1%B0%EB%B6%80%ED%84%B0-%ED%98%84%EC%9E%AC%EA%B9%8C%EC%A7%80",
 		"date": "Nov 07, 2023",
 		"writer": "junhyeong"
-	},
-	"feed-114": {
-		"title": "[번역] 웹 푸시는 이제 iOS 17에서 사용할만합니다",
-		"link": "https://velog.io/@eunbinn/web-push-ios17",
-		"date": "Oct 23, 2023",
-		"writer": "eunbinn"
 	},
 	"feed-133": {
 		"title": "SSE를 활용한 채팅방 목록 업데이트 기능에서 발생한 에러 해결(OSIV)",

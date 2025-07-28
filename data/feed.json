@@ -1,11 +1,17 @@
 {
+	"feed-0": {
+		"title": "SDUI (Server Driven UI)에 대해서",
+		"link": "https://klmhyeonwooo.tistory.com/186",
+		"date": "Jul 27, 2025",
+		"writer": "느릿느릿 프론트엔드"
+	},
 	"feed-15": {
 		"title": "웹에서 화면이 전환될 때 벌어지는 일을 아시나요? 🤯",
 		"link": "https://velog.io/@k-svelte-master/do-you-know-web-view-transition",
 		"date": "Jul 26, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-0": {
+	"feed-1": {
 		"title": "자바스크립트 V8 엔진 공부하기 - 첫 번째",
 		"link": "https://klmhyeonwooo.tistory.com/185",
 		"date": "Jul 20, 2025",
@@ -53,19 +59,19 @@
 		"date": "Jul 10, 2025",
 		"writer": "YoungKyu"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "마이그레이션을 진행하며 느꼈던 주니어 개발자의 팀을 위한 소소한 팁",
 		"link": "https://klmhyeonwooo.tistory.com/183",
 		"date": "Jul 06, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "폼 안에서 필수 입력 값과 Optional 레이아웃을 컴포넌트로 말고 스타일로 해보자",
 		"link": "https://klmhyeonwooo.tistory.com/182",
 		"date": "Jul 06, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "vue-cli 에서는 발생하지 않고, vite 번들러에서만 발생하는 ssl 환경 문제",
 		"link": "https://klmhyeonwooo.tistory.com/181",
 		"date": "Jul 06, 2025",
@@ -94,12 +100,6 @@
 		"link": "https://youngkdevlog.tistory.com/128",
 		"date": "Jun 24, 2025",
 		"writer": "YoungKyu"
-	},
-	"feed-4": {
-		"title": "Vue에서도 React { ...props } 처럼 하위 컴포넌트로의 속성 전달하기",
-		"link": "https://klmhyeonwooo.tistory.com/180",
-		"date": "Jun 23, 2025",
-		"writer": "느릿느릿 프론트엔드"
 	},
 	"feed-137": {
 		"title": "CommonJS(CJS), ECMAScript Modules(ESM)",

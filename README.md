@@ -15,11 +15,11 @@
 - [4월이 되서야 하는 프론트엔드 회고](https://klmhyeonwooo.tistory.com/167)<br>
 
 ### 블로그에서 다양한 내용들을 포스팅해요
+- [SPA에서 라이트 박스(Light Box) 만들어보기](https://klmhyeonwooo.tistory.com/187)<br>
 - [SDUI (Server Driven UI)에 대해서](https://klmhyeonwooo.tistory.com/186)<br>
 - [자바스크립트 V8 엔진 공부하기 - 첫 번째](https://klmhyeonwooo.tistory.com/185)<br>
 - [마이그레이션을 진행하며 느꼈던 주니어 개발자의 팀을 위한 소소한 팁](https://klmhyeonwooo.tistory.com/183)<br>
 - [폼 안에서 필수 입력 값과 Optional 레이아웃을 컴포넌트로 말고 스타일로 해보자](https://klmhyeonwooo.tistory.com/182)<br>
-- [vue-cli 에서는 발생하지 않고, vite 번들러에서만 발생하는 ssl 환경 문제](https://klmhyeonwooo.tistory.com/181)<br>
 
 
 ### 활동

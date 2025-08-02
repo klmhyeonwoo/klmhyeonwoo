@@ -1,11 +1,23 @@
 {
 	"feed-0": {
+		"title": "V8 엔진과 관련있는 히든 클래스란?",
+		"link": "https://klmhyeonwooo.tistory.com/189",
+		"date": "Aug 01, 2025",
+		"writer": "느릿느릿 프론트엔드"
+	},
+	"feed-1": {
+		"title": "V8 엔진의 인라이닝 최적화란?",
+		"link": "https://klmhyeonwooo.tistory.com/188",
+		"date": "Aug 01, 2025",
+		"writer": "느릿느릿 프론트엔드"
+	},
+	"feed-2": {
 		"title": "SPA에서 라이트 박스(Light Box) 만들어보기",
 		"link": "https://klmhyeonwooo.tistory.com/187",
 		"date": "Jul 29, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-1": {
+	"feed-3": {
 		"title": "SDUI (Server Driven UI)에 대해서",
 		"link": "https://klmhyeonwooo.tistory.com/186",
 		"date": "Jul 27, 2025",
@@ -17,7 +29,7 @@
 		"date": "Jul 26, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-2": {
+	"feed-4": {
 		"title": "자바스크립트 V8 엔진 공부하기 - 첫 번째",
 		"link": "https://klmhyeonwooo.tistory.com/185",
 		"date": "Jul 20, 2025",
@@ -64,18 +76,6 @@
 		"link": "https://youngkdevlog.tistory.com/129",
 		"date": "Jul 10, 2025",
 		"writer": "YoungKyu"
-	},
-	"feed-3": {
-		"title": "마이그레이션을 진행하며 느꼈던 주니어 개발자의 팀을 위한 소소한 팁",
-		"link": "https://klmhyeonwooo.tistory.com/183",
-		"date": "Jul 06, 2025",
-		"writer": "느릿느릿 프론트엔드"
-	},
-	"feed-4": {
-		"title": "폼 안에서 필수 입력 값과 Optional 레이아웃을 컴포넌트로 말고 스타일로 해보자",
-		"link": "https://klmhyeonwooo.tistory.com/182",
-		"date": "Jul 06, 2025",
-		"writer": "느릿느릿 프론트엔드"
 	},
 	"feed-18": {
 		"title": "[면접준비!] React19에서 useRef는 뭐가 달라졌을까?",

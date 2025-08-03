@@ -101,10 +101,6 @@ markdown_text += """
 ### 커리어
 - **AhnLab** — Frontend Developer (2024.01 ~ Currently employed)
 - **JiranFamily** — Frontend / Editor Developer (2023.04 ~ 2024.01)
-
-### 제 경험들이 궁금하시다면
-- 이력 · http://bit.ly/3GBXpKD <br/>
-- 포트폴리오 · http://bit.ly/4cPxTO7
 """
 
 f = open("README.md", mode="w", encoding="utf-8")

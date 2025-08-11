@@ -1,23 +1,29 @@
 {
 	"feed-0": {
+		"title": "깃허브 체리픽이란?",
+		"link": "https://klmhyeonwooo.tistory.com/190",
+		"date": "Aug 10, 2025",
+		"writer": "느릿느릿 프론트엔드"
+	},
+	"feed-1": {
 		"title": "V8 엔진과 관련있는 히든 클래스란?",
 		"link": "https://klmhyeonwooo.tistory.com/189",
 		"date": "Aug 01, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "V8 엔진의 인라이닝 최적화란?",
 		"link": "https://klmhyeonwooo.tistory.com/188",
 		"date": "Aug 01, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "SPA에서 라이트 박스(Light Box) 만들어보기",
 		"link": "https://klmhyeonwooo.tistory.com/187",
 		"date": "Jul 29, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "SDUI (Server Driven UI)에 대해서",
 		"link": "https://klmhyeonwooo.tistory.com/186",
 		"date": "Jul 27, 2025",
@@ -28,12 +34,6 @@
 		"link": "https://velog.io/@k-svelte-master/do-you-know-web-view-transition",
 		"date": "Jul 26, 2025",
 		"writer": "타락한스벨트전도사"
-	},
-	"feed-4": {
-		"title": "자바스크립트 V8 엔진 공부하기 - 첫 번째",
-		"link": "https://klmhyeonwooo.tistory.com/185",
-		"date": "Jul 20, 2025",
-		"writer": "느릿느릿 프론트엔드"
 	},
 	"feed-5": {
 		"title": "Shorts UI 구현하기 (SwiftUI+UIViewRepresentable+UICollectionView)",

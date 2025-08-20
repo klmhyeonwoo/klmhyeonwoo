@@ -15,11 +15,11 @@
 - [4월이 되서야 하는 프론트엔드 회고](https://klmhyeonwooo.tistory.com/167)<br>
 
 ### 블로그에서 다양한 내용들을 포스팅해요
+- [폼 데이터의 크기를 측정해 예외 처리를 어떻게 해줄 수 있을까?](https://klmhyeonwooo.tistory.com/192)<br>
 - [깃허브 체리픽이란?](https://klmhyeonwooo.tistory.com/190)<br>
 - [V8 엔진과 관련있는 히든 클래스란?](https://klmhyeonwooo.tistory.com/189)<br>
 - [V8 엔진의 인라이닝 최적화란?](https://klmhyeonwooo.tistory.com/188)<br>
 - [SPA에서 라이트 박스(Light Box) 만들어보기](https://klmhyeonwooo.tistory.com/187)<br>
-- [SDUI (Server Driven UI)에 대해서](https://klmhyeonwooo.tistory.com/186)<br>
 
 
 ### 활동

@@ -1,32 +1,32 @@
 {
 	"feed-0": {
+		"title": "폼 데이터의 크기를 측정해 예외 처리를 어떻게 해줄 수 있을까?",
+		"link": "https://klmhyeonwooo.tistory.com/192",
+		"date": "Aug 19, 2025",
+		"writer": "느릿느릿 프론트엔드"
+	},
+	"feed-1": {
 		"title": "깃허브 체리픽이란?",
 		"link": "https://klmhyeonwooo.tistory.com/190",
 		"date": "Aug 10, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "V8 엔진과 관련있는 히든 클래스란?",
 		"link": "https://klmhyeonwooo.tistory.com/189",
 		"date": "Aug 01, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "V8 엔진의 인라이닝 최적화란?",
 		"link": "https://klmhyeonwooo.tistory.com/188",
 		"date": "Aug 01, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "SPA에서 라이트 박스(Light Box) 만들어보기",
 		"link": "https://klmhyeonwooo.tistory.com/187",
 		"date": "Jul 29, 2025",
-		"writer": "느릿느릿 프론트엔드"
-	},
-	"feed-4": {
-		"title": "SDUI (Server Driven UI)에 대해서",
-		"link": "https://klmhyeonwooo.tistory.com/186",
-		"date": "Jul 27, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
 	"feed-15": {

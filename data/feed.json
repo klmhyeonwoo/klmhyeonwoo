@@ -1,38 +1,38 @@
 {
+	"feed-0": {
+		"title": "Object.freeze 만으로는 객체 동결이 불가하다?",
+		"link": "https://klmhyeonwooo.tistory.com/193",
+		"date": "Aug 31, 2025",
+		"writer": "느릿느릿 프론트엔드"
+	},
 	"feed-137": {
 		"title": "React에서 unmount 애니메이션 적용하기",
 		"link": "https://velog.io/@woogur29/React%EC%97%90%EC%84%9C-unmount-%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%EC%85%98-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0",
 		"date": "Aug 27, 2025",
 		"writer": "우혁"
 	},
-	"feed-0": {
+	"feed-1": {
 		"title": "폼 데이터의 크기를 측정해 예외 처리를 어떻게 해줄 수 있을까?",
 		"link": "https://klmhyeonwooo.tistory.com/192",
 		"date": "Aug 19, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "깃허브 체리픽이란?",
 		"link": "https://klmhyeonwooo.tistory.com/190",
 		"date": "Aug 10, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "V8 엔진과 관련있는 히든 클래스란?",
 		"link": "https://klmhyeonwooo.tistory.com/189",
 		"date": "Aug 01, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "V8 엔진의 인라이닝 최적화란?",
 		"link": "https://klmhyeonwooo.tistory.com/188",
 		"date": "Aug 01, 2025",
-		"writer": "느릿느릿 프론트엔드"
-	},
-	"feed-4": {
-		"title": "SPA에서 라이트 박스(Light Box) 만들어보기",
-		"link": "https://klmhyeonwooo.tistory.com/187",
-		"date": "Jul 29, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
 	"feed-15": {

@@ -1,11 +1,17 @@
 {
 	"feed-0": {
+		"title": "Promise.all 말고 Promise.allSettled는 어떤가요?",
+		"link": "https://klmhyeonwooo.tistory.com/197",
+		"date": "Sep 11, 2025",
+		"writer": "느릿느릿 프론트엔드"
+	},
+	"feed-1": {
 		"title": "선언적 프로그래밍에 대한 착각과 오해를 읽고",
 		"link": "https://klmhyeonwooo.tistory.com/195",
 		"date": "Sep 08, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "&quot;왜 이 변수의 값이 그대로지?&quot; 자바스크립트 모듈의 싱글톤 이야기",
 		"link": "https://klmhyeonwooo.tistory.com/194",
 		"date": "Sep 08, 2025",
@@ -17,7 +23,7 @@
 		"date": "Sep 07, 2025",
 		"writer": "endmoseung"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "Object.freeze 만으로는 객체 동결이 불가하다?",
 		"link": "https://klmhyeonwooo.tistory.com/193",
 		"date": "Aug 31, 2025",
@@ -29,16 +35,10 @@
 		"date": "Aug 27, 2025",
 		"writer": "우혁"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "폼 데이터의 크기를 측정해 예외 처리를 어떻게 해줄 수 있을까?",
 		"link": "https://klmhyeonwooo.tistory.com/192",
 		"date": "Aug 19, 2025",
-		"writer": "느릿느릿 프론트엔드"
-	},
-	"feed-4": {
-		"title": "토스 언더커버 사일로 판정단에 참여하고",
-		"link": "https://klmhyeonwooo.tistory.com/191",
-		"date": "Aug 10, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
 	"feed-15": {

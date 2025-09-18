@@ -1,17 +1,23 @@
 {
 	"feed-0": {
+		"title": "자바스크립트로 스타일을 변경한다면 rAF(requestAnimationFrame)를 사용해보세요!",
+		"link": "https://klmhyeonwooo.tistory.com/198",
+		"date": "Sep 17, 2025",
+		"writer": "느릿느릿 프론트엔드"
+	},
+	"feed-1": {
 		"title": "Promise.all 말고 Promise.allSettled는 어떤가요?",
 		"link": "https://klmhyeonwooo.tistory.com/197",
 		"date": "Sep 11, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "선언적 프로그래밍에 대한 착각과 오해를 읽고",
 		"link": "https://klmhyeonwooo.tistory.com/195",
 		"date": "Sep 08, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "&quot;왜 이 변수의 값이 그대로지?&quot; 자바스크립트 모듈의 싱글톤 이야기",
 		"link": "https://klmhyeonwooo.tistory.com/194",
 		"date": "Sep 08, 2025",
@@ -23,7 +29,7 @@
 		"date": "Sep 07, 2025",
 		"writer": "endmoseung"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "Object.freeze 만으로는 객체 동결이 불가하다?",
 		"link": "https://klmhyeonwooo.tistory.com/193",
 		"date": "Aug 31, 2025",
@@ -34,12 +40,6 @@
 		"link": "https://velog.io/@woogur29/React%EC%97%90%EC%84%9C-unmount-%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%EC%85%98-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0",
 		"date": "Aug 27, 2025",
 		"writer": "우혁"
-	},
-	"feed-4": {
-		"title": "폼 데이터의 크기를 측정해 예외 처리를 어떻게 해줄 수 있을까?",
-		"link": "https://klmhyeonwooo.tistory.com/192",
-		"date": "Aug 19, 2025",
-		"writer": "느릿느릿 프론트엔드"
 	},
 	"feed-15": {
 		"title": "웹에서 화면이 전환될 때 벌어지는 일을 아시나요? 🤯",

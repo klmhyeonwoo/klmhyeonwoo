@@ -22,13 +22,13 @@ feed_list = ["https://klmhyeonwooo.tistory.com?느릿느릿 프론트엔드",
 markdown_text = """
 <span style="color:#4E5968; font-size:10px;">
 
-### 회고를 주기적으로 진행해요
+#### 개발자 회고
 - [여러 프로덕트를 마주하며 느꼈던 프로덕트에 대한 고찰](https://klmhyeonwooo.tistory.com/172)<br>
 - [프로젝트를 진행하면서 오너쉽을 가져야하는 이유들](https://klmhyeonwooo.tistory.com/149)<br>
 - [개발자는 내가 만드는 제품에 대한 애정을 가져야한다](https://klmhyeonwooo.tistory.com/122)<br>
 - [4월이 되서야 하는 프론트엔드 회고](https://klmhyeonwooo.tistory.com/167)<br>
 
-### 블로그에서 다양한 내용들을 포스팅해요
+#### 테크 블로그
 """
 
 lst = []
@@ -80,20 +80,24 @@ print(parsing_data)
 
 markdown_text += """
 
-### 활동
-- **노션(notion) 코리아 서울** (2024.12 ~ Currently active)
-- **데브챗** (2024.01 ~ Currently active)
-- **디프만 16th 리더** (2024.10 ~ 2025.06)
-- **디프만 15th** (2024.06 ~ 2024.10)
-- **디프만 14th** (2023.11 ~ 2024.02)
-- **멋쟁이사자처럼 11st 운영진** (2023.03 ~ 2024.10)
-- **솝트(sopt) 21st** (2018.05 ~ 2018.12)
-- **멋쟁이사자처럼 6th 리더** (2018.04 ~ 2018.12)
-- **멋쟁이사자처럼 5th** (2017.06 ~ 2018.02)
-
-### 커리어
-- **AhnLab** — Frontend Developer (2024.01 ~ Currently employed)
-- **JiranFamily** — Frontend / Editor Developer (2023.04 ~ 2024.01)
+#### 패키지
+<ul style="list-style: none; padding: 0; margin: 0; font-family: sans-serif; line-height: 1.8;">
+  <li style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+    <img width="17" height="auto" alt="icon" src="https://github.com/user-attachments/assets/69ee1f1e-b92d-45b8-b534-941ee871efd4" />
+    <a href="" style="text-decoration: none; color: #0366d6; font-weight: 600;">react-crosseditor</a>
+    <span style="color: #6a737d; font-size: 14px;"> · React wrapper for WYSIWYG editor</span>
+  </li>
+  <li style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+    <img width="17" height="auto" alt="icon" src="https://github.com/user-attachments/assets/69ee1f1e-b92d-45b8-b534-941ee871efd4" />
+    <a href="" style="text-decoration: none; color: #0366d6; font-weight: 600;">jsdoc-builder</a>
+    <span style="color: #6a737d; font-size: 14px;"> · CLI tool for automated JSDoc generation</span>
+  </li>
+  <li style="display: flex; align-items: center; gap: 8px;">
+    <img width="17" height="auto" alt="icon" src="https://github.com/user-attachments/assets/69ee1f1e-b92d-45b8-b534-941ee871efd4" />
+    <a href="" style="text-decoration: none; color: #0366d6; font-weight: 600;">kr-corekit</a>
+    <span style="color: #6a737d; font-size: 14px;"> · Utility functions library</span>
+  </li>
+</ul>
 """
 
 f = open("README.md", mode="w", encoding="utf-8")

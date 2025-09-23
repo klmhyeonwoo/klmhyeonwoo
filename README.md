@@ -20,17 +20,17 @@
 <ul style="list-style: none; padding: 0; margin: 0; font-family: sans-serif; line-height: 1.8;">
   <li style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
     <img width="17" height="auto" alt="icon" src="https://github.com/user-attachments/assets/69ee1f1e-b92d-45b8-b534-941ee871efd4" />
-    <a href="" style="text-decoration: none; color: #0366d6; font-weight: 600;">react-crosseditor</a>
+    <a href="https://www.npmjs.com/package/crosseditor-react" style="text-decoration: none; color: #0366d6; font-weight: 600;">react-crosseditor</a>
     <span style="color: #6a737d; font-size: 14px;"> · React wrapper for WYSIWYG editor</span>
   </li>
   <li style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
     <img width="17" height="auto" alt="icon" src="https://github.com/user-attachments/assets/69ee1f1e-b92d-45b8-b534-941ee871efd4" />
-    <a href="" style="text-decoration: none; color: #0366d6; font-weight: 600;">jsdoc-builder</a>
+    <a href="https://www.npmjs.com/package/jsdoc-builder" style="text-decoration: none; color: #0366d6; font-weight: 600;">jsdoc-builder</a>
     <span style="color: #6a737d; font-size: 14px;"> · CLI tool for automated JSDoc generation</span>
   </li>
   <li style="display: flex; align-items: center; gap: 8px;">
     <img width="17" height="auto" alt="icon" src="https://github.com/user-attachments/assets/69ee1f1e-b92d-45b8-b534-941ee871efd4" />
-    <a href="" style="text-decoration: none; color: #0366d6; font-weight: 600;">kr-corekit</a>
+    <a href="https://www.npmjs.com/package/kr-corekit" style="text-decoration: none; color: #0366d6; font-weight: 600;">kr-corekit</a>
     <span style="color: #6a737d; font-size: 14px;"> · Utility functions library</span>
   </li>
 </ul>

@@ -34,3 +34,12 @@
     <span style="color: #6a737d; font-size: 14px;"> · Utility functions library</span>
   </li>
 </ul>
+
+#### 익스텐션
+<ul style="list-style: none; padding: 0; margin: 0; font-family: sans-serif; line-height: 1.8;">
+  <li style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+    <img width="17" height="auto" alt="icon" src="https://lh3.googleusercontent.com/eTtZ8knd4vZNHki7EAPmjtpFYwGETSrP3fh6iGnX4tQy4-1Zb11ArU2zphDMZq1AU29smycrkv8ReS_vDMDdvGOZ=s120" />
+    <a href="https://chromewebstore.google.com/detail/rework/mibhdihagebcbcmifindjenkaoikajim?hl=ko" style="text-decoration: none; color: #0366d6; font-weight: 600;">rework</a>
+    <span style="color: #6a737d; font-size: 14px;"> · A Google extension that lets you easily manage your day's tasks.</span>
+  </li>
+</ul>

@@ -9,11 +9,11 @@
 - [2년차 프론트엔드 회고](https://klmhyeonwooo.tistory.com/167)<br>
 
 #### 테크 블로그
+- [가이드 문서를 위한 MDX 라이브러리](https://klmhyeonwooo.tistory.com/199)<br>
 - [자바스크립트로 스타일을 변경한다면 rAF(requestAnimationFrame)를 사용해보세요!](https://klmhyeonwooo.tistory.com/198)<br>
 - [Promise.all 말고 Promise.allSettled는 어떤가요?](https://klmhyeonwooo.tistory.com/197)<br>
 - [선언적 프로그래밍에 대한 착각과 오해를 읽고](https://klmhyeonwooo.tistory.com/195)<br>
 - [&quot;왜 이 변수의 값이 그대로지?&quot; 자바스크립트 모듈의 싱글톤 이야기](https://klmhyeonwooo.tistory.com/194)<br>
-- [Object.freeze 만으로는 객체 동결이 불가하다?](https://klmhyeonwooo.tistory.com/193)<br>
 
 
 #### 패키지

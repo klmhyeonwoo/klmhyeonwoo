@@ -1,29 +1,35 @@
 {
+	"feed-0": {
+		"title": "가이드 문서를 위한 MDX 라이브러리",
+		"link": "https://klmhyeonwooo.tistory.com/199",
+		"date": "Sep 26, 2025",
+		"writer": "느릿느릿 프론트엔드"
+	},
 	"feed-15": {
 		"title": "당신의 수준 파악완료: 하지말아야 할 애니메이션 실수들",
 		"link": "https://velog.io/@k-svelte-master/ux-pattern-transition",
 		"date": "Sep 21, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-0": {
+	"feed-1": {
 		"title": "자바스크립트로 스타일을 변경한다면 rAF(requestAnimationFrame)를 사용해보세요!",
 		"link": "https://klmhyeonwooo.tistory.com/198",
 		"date": "Sep 17, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "Promise.all 말고 Promise.allSettled는 어떤가요?",
 		"link": "https://klmhyeonwooo.tistory.com/197",
 		"date": "Sep 11, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "선언적 프로그래밍에 대한 착각과 오해를 읽고",
 		"link": "https://klmhyeonwooo.tistory.com/195",
 		"date": "Sep 08, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "&quot;왜 이 변수의 값이 그대로지?&quot; 자바스크립트 모듈의 싱글톤 이야기",
 		"link": "https://klmhyeonwooo.tistory.com/194",
 		"date": "Sep 08, 2025",
@@ -34,12 +40,6 @@
 		"link": "https://velog.io/@endmoseung/retrospect",
 		"date": "Sep 07, 2025",
 		"writer": "endmoseung"
-	},
-	"feed-4": {
-		"title": "Object.freeze 만으로는 객체 동결이 불가하다?",
-		"link": "https://klmhyeonwooo.tistory.com/193",
-		"date": "Aug 31, 2025",
-		"writer": "느릿느릿 프론트엔드"
 	},
 	"feed-137": {
 		"title": "React에서 unmount 애니메이션 적용하기",

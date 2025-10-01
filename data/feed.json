@@ -1,5 +1,11 @@
 {
 	"feed-0": {
+		"title": "같이 회고를 할 사람을 찾고 있어요",
+		"link": "https://klmhyeonwooo.tistory.com/200",
+		"date": "Oct 01, 2025",
+		"writer": "느릿느릿 프론트엔드"
+	},
+	"feed-1": {
 		"title": "가이드 문서를 위한 MDX 라이브러리",
 		"link": "https://klmhyeonwooo.tistory.com/199",
 		"date": "Sep 26, 2025",
@@ -11,27 +17,21 @@
 		"date": "Sep 21, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "자바스크립트로 스타일을 변경한다면 rAF(requestAnimationFrame)를 사용해보세요!",
 		"link": "https://klmhyeonwooo.tistory.com/198",
 		"date": "Sep 17, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "Promise.all 말고 Promise.allSettled는 어떤가요?",
 		"link": "https://klmhyeonwooo.tistory.com/197",
 		"date": "Sep 11, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "선언적 프로그래밍에 대한 착각과 오해를 읽고",
 		"link": "https://klmhyeonwooo.tistory.com/195",
-		"date": "Sep 08, 2025",
-		"writer": "느릿느릿 프론트엔드"
-	},
-	"feed-4": {
-		"title": "&quot;왜 이 변수의 값이 그대로지?&quot; 자바스크립트 모듈의 싱글톤 이야기",
-		"link": "https://klmhyeonwooo.tistory.com/194",
 		"date": "Sep 08, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},

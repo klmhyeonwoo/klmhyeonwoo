@@ -1,5 +1,11 @@
 {
 	"feed-0": {
+		"title": "Object.entries와 Object.fromEntries의 차이",
+		"link": "https://klmhyeonwooo.tistory.com/203",
+		"date": "Oct 23, 2025",
+		"writer": "느릿느릿 프론트엔드"
+	},
+	"feed-1": {
 		"title": "가변 폰트를 조금 더 효율적으로 사용하기",
 		"link": "https://klmhyeonwooo.tistory.com/202",
 		"date": "Oct 20, 2025",
@@ -11,19 +17,19 @@
 		"date": "Oct 17, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "사내 백오피스 디자인 시스템 만들기",
 		"link": "https://klmhyeonwooo.tistory.com/201",
 		"date": "Oct 05, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "같이 회고를 할 사람을 찾고 있어요",
 		"link": "https://klmhyeonwooo.tistory.com/200",
 		"date": "Oct 01, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "가이드 문서를 위한 MDX 라이브러리",
 		"link": "https://klmhyeonwooo.tistory.com/199",
 		"date": "Sep 26, 2025",
@@ -34,12 +40,6 @@
 		"link": "https://velog.io/@k-svelte-master/ux-pattern-transition",
 		"date": "Sep 21, 2025",
 		"writer": "타락한스벨트전도사"
-	},
-	"feed-4": {
-		"title": "자바스크립트로 스타일을 변경한다면 rAF(requestAnimationFrame)를 사용해보세요!",
-		"link": "https://klmhyeonwooo.tistory.com/198",
-		"date": "Sep 17, 2025",
-		"writer": "느릿느릿 프론트엔드"
 	},
 	"feed-55": {
 		"title": "회고",

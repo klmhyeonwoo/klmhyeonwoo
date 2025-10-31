@@ -1,11 +1,23 @@
 {
 	"feed-0": {
+		"title": "TPM (Technical Program Manager)이란?",
+		"link": "https://klmhyeonwooo.tistory.com/205",
+		"date": "Oct 30, 2025",
+		"writer": "느릿느릿 프론트엔드"
+	},
+	"feed-1": {
+		"title": "Copliot Context를 잘 사용하기 위한 방법들",
+		"link": "https://klmhyeonwooo.tistory.com/204",
+		"date": "Oct 30, 2025",
+		"writer": "느릿느릿 프론트엔드"
+	},
+	"feed-2": {
 		"title": "Object.entries와 Object.fromEntries의 차이",
 		"link": "https://klmhyeonwooo.tistory.com/203",
 		"date": "Oct 23, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-1": {
+	"feed-3": {
 		"title": "가변 폰트를 조금 더 효율적으로 사용하기",
 		"link": "https://klmhyeonwooo.tistory.com/202",
 		"date": "Oct 20, 2025",
@@ -17,22 +29,10 @@
 		"date": "Oct 17, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-2": {
+	"feed-4": {
 		"title": "사내 백오피스 디자인 시스템 만들기",
 		"link": "https://klmhyeonwooo.tistory.com/201",
 		"date": "Oct 05, 2025",
-		"writer": "느릿느릿 프론트엔드"
-	},
-	"feed-3": {
-		"title": "같이 회고를 할 사람을 찾고 있어요",
-		"link": "https://klmhyeonwooo.tistory.com/200",
-		"date": "Oct 01, 2025",
-		"writer": "느릿느릿 프론트엔드"
-	},
-	"feed-4": {
-		"title": "가이드 문서를 위한 MDX 라이브러리",
-		"link": "https://klmhyeonwooo.tistory.com/199",
-		"date": "Sep 26, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
 	"feed-16": {

@@ -402,7 +402,7 @@
 		"writer": "koomin"
 	},
 	"feed-149": {
-		"title": "React lazy의 내부 동작 원리",
+		"title": "React.lazy는 어떻게 필요한 시점에 컴포넌트를 불러올까?",
 		"link": "https://velog.io/@woogur29/lazy%EC%9D%98-%EB%82%B4%EB%B6%80-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC",
 		"date": "Dec 02, 2024",
 		"writer": "우혁"
@@ -414,7 +414,7 @@
 		"writer": "우혁"
 	},
 	"feed-151": {
-		"title": "use Hook의 내부 동작 원리",
+		"title": "use Hook이 thenable 객체와 Context 객체를 처리하는 방법",
 		"link": "https://velog.io/@woogur29/use-Hook%EC%9D%98-%EB%82%B4%EB%B6%80-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC",
 		"date": "Nov 26, 2024",
 		"writer": "우혁"

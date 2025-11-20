@@ -1,4 +1,16 @@
 {
+	"feed-0": {
+		"title": "tanstack query &middot; 비즈니스 로직",
+		"link": "https://klmhyeonwooo.tistory.com/208",
+		"date": "Nov 19, 2025",
+		"writer": "느릿느릿 프론트엔드"
+	},
+	"feed-1": {
+		"title": "당장 타입 시스템을 도입해야된다면 @ts-check를 사용해보세요",
+		"link": "https://klmhyeonwooo.tistory.com/207",
+		"date": "Nov 19, 2025",
+		"writer": "느릿느릿 프론트엔드"
+	},
 	"feed-137": {
 		"title": "CSR 환경에서 네트워크 변수를 최소화하여 누구에게나 평등한 웹 경험 제공하기",
 		"link": "https://velog.io/@woogur29/CSR-%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%B3%80%EC%88%98%EB%A5%BC-%EC%B5%9C%EC%86%8C%ED%99%94%ED%95%98%EC%97%AC-%EB%88%84%EA%B5%AC%EC%97%90%EA%B2%8C%EB%82%98-%ED%8F%89%EB%93%B1%ED%95%9C-%EC%9B%B9-%EA%B2%BD%ED%97%98-%EC%A0%9C%EA%B3%B5%ED%95%98%EA%B8%B0",
@@ -11,28 +23,22 @@
 		"date": "Nov 07, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-0": {
+	"feed-2": {
 		"title": "TPM (Technical Program Manager)이란?",
 		"link": "https://klmhyeonwooo.tistory.com/205",
 		"date": "Oct 30, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-1": {
+	"feed-3": {
 		"title": "Copliot Context를 잘 사용하기 위한 방법들",
 		"link": "https://klmhyeonwooo.tistory.com/204",
 		"date": "Oct 30, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-2": {
+	"feed-4": {
 		"title": "Object.entries와 Object.fromEntries의 차이",
 		"link": "https://klmhyeonwooo.tistory.com/203",
 		"date": "Oct 23, 2025",
-		"writer": "느릿느릿 프론트엔드"
-	},
-	"feed-3": {
-		"title": "가변 폰트를 조금 더 효율적으로 사용하기",
-		"link": "https://klmhyeonwooo.tistory.com/202",
-		"date": "Oct 20, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
 	"feed-16": {
@@ -40,12 +46,6 @@
 		"link": "https://velog.io/@k-svelte-master/frontend-domain-architecture",
 		"date": "Oct 17, 2025",
 		"writer": "타락한스벨트전도사"
-	},
-	"feed-4": {
-		"title": "사내 백오피스 디자인 시스템 만들기",
-		"link": "https://klmhyeonwooo.tistory.com/201",
-		"date": "Oct 05, 2025",
-		"writer": "느릿느릿 프론트엔드"
 	},
 	"feed-17": {
 		"title": "당신의 수준 파악완료: 하지말아야 할 애니메이션 실수들",

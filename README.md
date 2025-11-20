@@ -9,11 +9,11 @@
 - [2년차 프론트엔드 회고](https://klmhyeonwooo.tistory.com/167)<br>
 
 #### 테크 블로그
+- [tanstack query &middot; 비즈니스 로직](https://klmhyeonwooo.tistory.com/208)<br>
+- [당장 타입 시스템을 도입해야된다면 @ts-check를 사용해보세요](https://klmhyeonwooo.tistory.com/207)<br>
 - [TPM (Technical Program Manager)이란?](https://klmhyeonwooo.tistory.com/205)<br>
 - [Copliot Context를 잘 사용하기 위한 방법들](https://klmhyeonwooo.tistory.com/204)<br>
 - [Object.entries와 Object.fromEntries의 차이](https://klmhyeonwooo.tistory.com/203)<br>
-- [가변 폰트를 조금 더 효율적으로 사용하기](https://klmhyeonwooo.tistory.com/202)<br>
-- [사내 백오피스 디자인 시스템 만들기](https://klmhyeonwooo.tistory.com/201)<br>
 
 
 #### 패키지

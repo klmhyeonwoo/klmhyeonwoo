@@ -1,17 +1,23 @@
 {
+	"feed-0": {
+		"title": "웹 (xxx.example.com) 아키텍쳐",
+		"link": "https://klmhyeonwooo.tistory.com/209",
+		"date": "Nov 26, 2025",
+		"writer": "느릿느릿 프론트엔드"
+	},
 	"feed-137": {
 		"title": "Toss Frontend Fundamentals 모의고사 후기",
 		"link": "https://velog.io/@woogur29/Toss-Frontend-Fundamentals-%EB%AA%A8%EC%9D%98%EA%B3%A0%EC%82%AC-%ED%9B%84%EA%B8%B0",
 		"date": "Nov 25, 2025",
 		"writer": "우혁"
 	},
-	"feed-0": {
+	"feed-1": {
 		"title": "tanstack query &middot; 비즈니스 로직",
 		"link": "https://klmhyeonwooo.tistory.com/208",
 		"date": "Nov 19, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-1": {
+	"feed-2": {
 		"title": "당장 타입 시스템을 도입해야된다면 @ts-check를 사용해보세요",
 		"link": "https://klmhyeonwooo.tistory.com/207",
 		"date": "Nov 19, 2025",
@@ -29,22 +35,16 @@
 		"date": "Nov 07, 2025",
 		"writer": "타락한스벨트전도사"
 	},
-	"feed-2": {
+	"feed-3": {
 		"title": "TPM (Technical Program Manager)이란?",
 		"link": "https://klmhyeonwooo.tistory.com/205",
 		"date": "Oct 30, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
-	"feed-3": {
+	"feed-4": {
 		"title": "Copliot Context를 잘 사용하기 위한 방법들",
 		"link": "https://klmhyeonwooo.tistory.com/204",
 		"date": "Oct 30, 2025",
-		"writer": "느릿느릿 프론트엔드"
-	},
-	"feed-4": {
-		"title": "Object.entries와 Object.fromEntries의 차이",
-		"link": "https://klmhyeonwooo.tistory.com/203",
-		"date": "Oct 23, 2025",
 		"writer": "느릿느릿 프론트엔드"
 	},
 	"feed-16": {

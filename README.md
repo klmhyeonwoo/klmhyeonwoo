@@ -9,7 +9,7 @@
 - [2년차 프론트엔드 회고](https://klmhyeonwooo.tistory.com/167)<br>
 
 #### 테크 블로그
-- [웹 (xxx.example.com) 아키텍쳐](https://klmhyeonwooo.tistory.com/209)<br>
+- [웹 아키텍쳐는 어떻게 구성되어있을까?](https://klmhyeonwooo.tistory.com/209)<br>
 - [tanstack query &middot; 비즈니스 로직](https://klmhyeonwooo.tistory.com/208)<br>
 - [당장 타입 시스템을 도입해야된다면 @ts-check를 사용해보세요](https://klmhyeonwooo.tistory.com/207)<br>
 - [TPM (Technical Program Manager)이란?](https://klmhyeonwooo.tistory.com/205)<br>

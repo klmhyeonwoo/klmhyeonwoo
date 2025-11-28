@@ -120,7 +120,7 @@ markdown_text += """
 <ul style="list-style: none; padding: 0; margin: 0; font-family: sans-serif; line-height: 1.8;">
   <li style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
     <img width="17" height="auto" alt="icon" src="https://raw.githubusercontent.com/klmhyeonwoo/Asset-Archieve./2bbd60dd4a0fe38d69ee454a33adecb0538a539c/nklcb.svg" />
-    <a href="https://nklcb.io" style="text-decoration: none; color: #0366d6; font-weight: 600;">nklcb</a>
+    <a href="https://nklcb.kr" style="text-decoration: none; color: #0366d6; font-weight: 600;">nklcb</a>
     <span style="color: #6a737d; font-size: 14px;"> · A community service focused on big tech recruitment and employment.</span>
   </li>
   <li style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">

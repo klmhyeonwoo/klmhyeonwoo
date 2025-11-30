@@ -24,8 +24,9 @@ markdown_text = """
 #### 사람들에게 도움을 주는 서비스들을 만들고, 그로스하는 과정을 좋아해요
 
 [![Resume Badge](https://img.shields.io/badge/Resume-e5e5e5?logo=notion&logoColor=1a1a1a)](https://bit.ly/485bjRb)
-[![Blog Badge](https://img.shields.io/badge/Blog-f4702e?logo=bloglovin&logoColor=white)](https://klmhyeonwooo.tistory.com/)
-[![Linkdin Badge](https://img.shields.io/badge/LinkdIn-398af3?logo=logmein&logoColor=white)](www.linkedin.com/in/hyeonwoo-klm)
+[![Linkdin Badge](https://img.shields.io/badge/LinkdIn-398af3?logo=logmein&logoColor=white)](https://www.linkedin.com/in/hyeonwoo-klm)
+[![Blog Badge](https://img.shields.io/badge/Blog-f4702e)](https://klmhyeonwooo.tistory.com/)
+[![Blog Badge](https://img.shields.io/badge/Slash-black)](https://slashpage.com/timmy)
 
 <span style="color:#4E5968; font-size:10px;">
 

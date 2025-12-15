@@ -14,15 +14,12 @@
 - [여러 프로덕트를 마주하며 느꼈던 프로덕트에 대한 고찰](https://klmhyeonwooo.tistory.com/172)<br>
 - [프로젝트를 진행하면서 오너쉽을 가져야하는 이유들](https://klmhyeonwooo.tistory.com/149)<br>
 - [개발자는 내가 만드는 제품에 대한 애정을 가져야한다](https://klmhyeonwooo.tistory.com/122)<br>
-- [2년차 프론트엔드 회고](https://klmhyeonwooo.tistory.com/167)<br>
 
-##### 테크 블로그
-- [블로그를 이전하고 있어요](https://klmhyeonwooo.tistory.com/210)<br>
-- [웹 아키텍쳐는 어떻게 구성되어있을까?](https://klmhyeonwooo.tistory.com/209)<br>
-- [tanstack query &middot; 비즈니스 로직](https://klmhyeonwooo.tistory.com/208)<br>
-- [당장 타입 시스템을 도입해야된다면 @ts-check를 사용해보세요](https://klmhyeonwooo.tistory.com/207)<br>
-- [TPM (Technical Program Manager)이란?](https://klmhyeonwooo.tistory.com/205)<br>
-
+### 테크 블로그
+- [좋은 프로젝트 구조는 어떤 방식으로 구성해야할까?](https://slashpage.com/timmy/7916x82rn8r6n24kpyg3)<br>
+- [Vue에서 Tanstack Query 사용 시에 Persistent 하게 유지하기](https://slashpage.com/timmy/y9e1xp2x5yyj7m7k35vz)<br>
+- [Vue에서만 확인할 수 있는 Tanstack Query의 독특한 패턴](https://slashpage.com/timmy/n5w9812gk918n24kpgze)<br>
+- [당장 타입 시스템을 도입해야된다면 @ts-check를 사용해보세요](https://slashpage.com/timmy/qrx6zk258z1qqmv314y5)<br>
 
 ##### 패키지
 <ul style="list-style: none; padding: 0; margin: 0; font-family: sans-serif; line-height: 1.8;">
@@ -49,19 +46,5 @@
     <img width="17" height="auto" alt="icon" src="https://lh3.googleusercontent.com/eTtZ8knd4vZNHki7EAPmjtpFYwGETSrP3fh6iGnX4tQy4-1Zb11ArU2zphDMZq1AU29smycrkv8ReS_vDMDdvGOZ=s120" />
     <a href="https://chromewebstore.google.com/detail/rework/mibhdihagebcbcmifindjenkaoikajim?hl=ko" style="text-decoration: none; color: #0366d6; font-weight: 600;">rework</a>
     <span style="color: #6a737d; font-size: 14px;"> · A Google extension that lets you easily manage your day's tasks.</span>
-  </li>
-</ul>
-
-##### 유저들과 운영중인 서비스
-<ul style="list-style: none; padding: 0; margin: 0; font-family: sans-serif; line-height: 1.8;">
-  <li style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-    <img width="17" height="auto" alt="icon" src="https://raw.githubusercontent.com/klmhyeonwoo/Asset-Archieve./2bbd60dd4a0fe38d69ee454a33adecb0538a539c/nklcb.svg" />
-    <a href="https://nklcb.kr" style="text-decoration: none; color: #0366d6; font-weight: 600;">nklcb</a>
-    <span style="color: #6a737d; font-size: 14px;"> · A community service focused on big tech recruitment and employment.</span>
-  </li>
-  <li style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-    <img width="17" height="auto" alt="icon" src="https://raw.githubusercontent.com/klmhyeonwoo/Asset-Archieve./2bbd60dd4a0fe38d69ee454a33adecb0538a539c/white_layer.svg" />
-    <a href="https://layerapp.io" style="text-decoration: none; color: #0366d6; font-weight: 600;">layer</a>
-    <span style="color: #6a737d; font-size: 14px;"> · A service that provides easy retrospective writing and AI analysis.</span>
   </li>
 </ul>

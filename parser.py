@@ -35,59 +35,12 @@ markdown_text = """
 - [여러 프로덕트를 마주하며 느꼈던 프로덕트에 대한 고찰](https://klmhyeonwooo.tistory.com/172)<br>
 - [프로젝트를 진행하면서 오너쉽을 가져야하는 이유들](https://klmhyeonwooo.tistory.com/149)<br>
 - [개발자는 내가 만드는 제품에 대한 애정을 가져야한다](https://klmhyeonwooo.tistory.com/122)<br>
-- [2년차 프론트엔드 회고](https://klmhyeonwooo.tistory.com/167)<br>
 
-##### 테크 블로그
-"""
-
-lst = []
-parsing_data = {}
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-BASE_DIR += "/data"
-print(BASE_DIR)
-uniqueKey = 0
-
-for BLOG_URL in feed_list:
-    if (BLOG_URL.find("velog.io") != -1):
-        feed = feedparser.parse(BLOG_URL.split("?")[0])
-    elif (BLOG_URL.find("medium") != -1):
-        feed = feedparser.parse(BLOG_URL.split("?")[0]+"/feed")
-    else:
-        feed = feedparser.parse(BLOG_URL.split("?")[0]+"/rss")
-      
-    writer = BLOG_URL.split("?")[1]
-    for i in feed['entries']:
-        # print(i)
-        if (BLOG_URL.find("velog.io") != -1 or BLOG_URL.find("medium") != -1):
-          parsing_data["feed-" + str(uniqueKey)] = { 
-              "title" : i['title'],
-              "link" : i['link'],
-              "date" : datetime.datetime.strptime(i['published'], '%a, %d %b %Y %H:%M:%S %Z').strftime("%b %d, %Y"),
-              "writer" : writer,
-          }
-        else:
-            parsing_data["feed-" + str(uniqueKey)] = { 
-              "title" : i['title'],
-              "link" : i['link'],
-              "date" : datetime.datetime.strptime(i['published'], "%a, %d %b %Y %H:%M:%S %z").strftime("%b %d, %Y"),
-              "writer" : writer,
-            }
-        print("-", i['link'], i['title'])
-        uniqueKey += 1
-
-parsing_data = dict(sorted(parsing_data.items(), key=lambda item: datetime.datetime.strptime(item[1]['date'], '%b %d, %Y'), reverse=True))
-
-feed = feedparser.parse(feed_list[0].split("?")[0]+"/rss")
-for i in feed['entries']:
-    # print(i)
-    markdown_text += f"- [{i['title']}]({i['link']})<br>\n"
-  
-with open(os.path.join(BASE_DIR, 'feed.json'), 'w+',encoding='utf-8') as json_file:
-    json.dump(parsing_data, json_file, ensure_ascii = False, indent='\t')
-
-print(parsing_data)
-
-markdown_text += """
+### 테크 블로그
+- [좋은 프로젝트 구조는 어떤 방식으로 구성해야할까?](https://slashpage.com/timmy/7916x82rn8r6n24kpyg3)<br>
+- [Vue에서 Tanstack Query 사용 시에 Persistent 하게 유지하기](https://slashpage.com/timmy/y9e1xp2x5yyj7m7k35vz)<br>
+- [Vue에서만 확인할 수 있는 Tanstack Query의 독특한 패턴](https://slashpage.com/timmy/n5w9812gk918n24kpgze)<br>
+- [당장 타입 시스템을 도입해야된다면 @ts-check를 사용해보세요](https://slashpage.com/timmy/qrx6zk258z1qqmv314y5)<br>
 
 ##### 패키지
 <ul style="list-style: none; padding: 0; margin: 0; font-family: sans-serif; line-height: 1.8;">
@@ -114,20 +67,6 @@ markdown_text += """
     <img width="17" height="auto" alt="icon" src="https://lh3.googleusercontent.com/eTtZ8knd4vZNHki7EAPmjtpFYwGETSrP3fh6iGnX4tQy4-1Zb11ArU2zphDMZq1AU29smycrkv8ReS_vDMDdvGOZ=s120" />
     <a href="https://chromewebstore.google.com/detail/rework/mibhdihagebcbcmifindjenkaoikajim?hl=ko" style="text-decoration: none; color: #0366d6; font-weight: 600;">rework</a>
     <span style="color: #6a737d; font-size: 14px;"> · A Google extension that lets you easily manage your day's tasks.</span>
-  </li>
-</ul>
-
-##### 유저들과 운영중인 서비스
-<ul style="list-style: none; padding: 0; margin: 0; font-family: sans-serif; line-height: 1.8;">
-  <li style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-    <img width="17" height="auto" alt="icon" src="https://raw.githubusercontent.com/klmhyeonwoo/Asset-Archieve./2bbd60dd4a0fe38d69ee454a33adecb0538a539c/nklcb.svg" />
-    <a href="https://nklcb.kr" style="text-decoration: none; color: #0366d6; font-weight: 600;">nklcb</a>
-    <span style="color: #6a737d; font-size: 14px;"> · A community service focused on big tech recruitment and employment.</span>
-  </li>
-  <li style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-    <img width="17" height="auto" alt="icon" src="https://raw.githubusercontent.com/klmhyeonwoo/Asset-Archieve./2bbd60dd4a0fe38d69ee454a33adecb0538a539c/white_layer.svg" />
-    <a href="https://layerapp.io" style="text-decoration: none; color: #0366d6; font-weight: 600;">layer</a>
-    <span style="color: #6a737d; font-size: 14px;"> · A service that provides easy retrospective writing and AI analysis.</span>
   </li>
 </ul>
 """

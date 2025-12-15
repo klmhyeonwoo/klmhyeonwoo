@@ -36,7 +36,7 @@ markdown_text = """
 - [프로젝트를 진행하면서 오너쉽을 가져야하는 이유들](https://klmhyeonwooo.tistory.com/149)<br>
 - [개발자는 내가 만드는 제품에 대한 애정을 가져야한다](https://klmhyeonwooo.tistory.com/122)<br>
 
-### 테크 블로그
+##### 테크 블로그
 - [좋은 프로젝트 구조는 어떤 방식으로 구성해야할까?](https://slashpage.com/timmy/7916x82rn8r6n24kpyg3)<br>
 - [Vue에서 Tanstack Query 사용 시에 Persistent 하게 유지하기](https://slashpage.com/timmy/y9e1xp2x5yyj7m7k35vz)<br>
 - [Vue에서만 확인할 수 있는 Tanstack Query의 독특한 패턴](https://slashpage.com/timmy/n5w9812gk918n24kpgze)<br>

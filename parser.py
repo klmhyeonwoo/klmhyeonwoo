@@ -37,10 +37,11 @@ markdown_text = """
 - [개발자는 내가 만드는 제품에 대한 애정을 가져야한다](https://klmhyeonwooo.tistory.com/122)<br>
 
 ##### 테크 블로그
+- [NPM 패키지 취약점 조치하기](https://slashpage.com/timmy/5r398nmnxjepzmvwje7y)<br>
+- [Vite 환경에서 Vuetify 컴포넌트를 로드할 때 계속 리로딩하는 현상](https://slashpage.com/timmy/qrx6zk2588pq6mv314y5)<br>
 - [좋은 프로젝트 구조는 어떤 방식으로 구성해야할까?](https://slashpage.com/timmy/7916x82rn8r6n24kpyg3)<br>
 - [Vue에서 Tanstack Query 사용 시에 Persistent 하게 유지하기](https://slashpage.com/timmy/y9e1xp2x5yyj7m7k35vz)<br>
 - [Vue에서만 확인할 수 있는 Tanstack Query의 독특한 패턴](https://slashpage.com/timmy/n5w9812gk918n24kpgze)<br>
-- [당장 타입 시스템을 도입해야된다면 @ts-check를 사용해보세요](https://slashpage.com/timmy/qrx6zk258z1qqmv314y5)<br>
 
 ##### 패키지
 <ul style="list-style: none; padding: 0; margin: 0; font-family: sans-serif; line-height: 1.8;">

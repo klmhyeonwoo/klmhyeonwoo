@@ -16,7 +16,7 @@
 - [개발자는 내가 만드는 제품에 대한 애정을 가져야한다](https://klmhyeonwooo.tistory.com/122)<br>
 
 ##### 테크 블로그
-- [IndexedDB로 컨텐츠 자동 저장 구현해보기](https://slashpage.com/timmy/5r398nmnxjepzmvwje7y)<br>
+- [IndexedDB로 컨텐츠 자동 저장 구현해보기](https://slashpage.com/timmy/1q3vdn2pxr5x42xy49pr)<br>
 - [NPM 패키지 취약점 조치하기](https://slashpage.com/timmy/5r398nmnxjepzmvwje7y)<br>
 - [Vite 환경에서 Vuetify 컴포넌트를 로드할 때 계속 리로딩하는 현상](https://slashpage.com/timmy/qrx6zk2588pq6mv314y5)<br>
 - [좋은 프로젝트 구조는 어떤 방식으로 구성해야할까?](https://slashpage.com/timmy/7916x82rn8r6n24kpyg3)<br>

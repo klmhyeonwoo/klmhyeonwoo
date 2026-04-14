@@ -42,7 +42,7 @@ def post_url(item_id: str) -> str:
 
 def fmt_date(iso_str: str) -> str:
     dt = datetime.fromisoformat(iso_str.replace("Z", "+00:00"))
-    return dt.strftime("%Y.%m.%d")
+    return dt.strftime("%y.%m.%d")
 
 
 def replace_section(content: str, marker: str, inner_html: str) -> str:
@@ -60,7 +60,7 @@ def build_links(items: list[dict], limit: int) -> str:
         title = item.get("title", "(제목 없음)")
         url = post_url(item["id"])
         date = fmt_date(item["createdAt"])
-        lines.append(f'    <a href="{url}">{title} ({date})</a>')
+        lines.append(f'    <a href="{url}">{title}</a> <sub>{date}</sub>')
     return "\n    <br>\n".join(lines)
 
 

@@ -84,12 +84,47 @@ def main():
     all_notes.sort(key=lambda x: x["createdAt"], reverse=True)
     notes_html = build_links(all_notes, limit=5)
 
-    # Update README
-    with open("README.md", encoding="utf-8") as f:
-        readme = f.read()
+    # Update README (create if not exists)
+    try:
+        with open("README.md", encoding="utf-8") as f:
+            readme = f.read()
+        readme = replace_section(readme, "INSIGHT", insight_html)
+        readme = replace_section(readme, "NOTES", notes_html)
+    except FileNotFoundError:
+        readme = f"""<div>
+  <samp>
+    <br>
+    김현우 ﹒ Hyeonwoo Kim
+    <br>
+    Frontend Engineer at AhnLab.
+    <br><br>
+    <a href="https://slashpage.com/timmy">Blog</a>
+    /
+    <a href="https://www.linkedin.com/in/hyeonwoo-klm">LinkedIn</a>
+    <br>
+  </samp>
+</div>
 
-    readme = replace_section(readme, "INSIGHT", insight_html)
-    readme = replace_section(readme, "NOTES", notes_html)
+<br><br>
+<div>
+  <samp>
+    <p>Recent Insight</p>
+    <!-- INSIGHT_START -->
+{insight_html}
+    <!-- INSIGHT_END -->
+  </samp>
+</div>
+
+<br><br>
+<div>
+  <samp>
+    <p>Recent Note</p>
+    <!-- NOTES_START -->
+{notes_html}
+    <!-- NOTES_END -->
+  </samp>
+</div>
+"""
 
     with open("README.md", "w", encoding="utf-8") as f:
         f.write(readme)

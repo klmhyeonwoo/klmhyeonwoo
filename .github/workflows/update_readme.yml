@@ -1,0 +1,33 @@
+name: Update README
+
+on:
+  schedule:
+    - cron: '0 1 * * *'   # 매일 UTC 01:00 (KST 10:00)
+  workflow_dispatch:       # 수동 실행도 가능
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Fetch posts and update README
+        run: python scripts/update_readme.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git diff --quiet && git diff --staged --quiet \
+            && echo "No changes to commit" \
+            || (git add README.md && git commit -m "chore: update README posts" && git push)

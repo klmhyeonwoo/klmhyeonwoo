@@ -29,15 +29,15 @@
   <samp>
     <p>Recent Note</p>
     <!-- NOTES_START -->
+    <a href="https://slashpage.com/timmy/1q3vdn2pxwv412xy49pr">객체 또는 배열에서 타입 추출하기</a> <sub>26.04.14</sub>
+    <br>
+    <a href="https://slashpage.com/timmy/93nzyxmdv31ygmwk6r45">"Ref" 가 화면에 전달되기까지의 과정들</a> <sub>26.04.14</sub>
+    <br>
     <a href="https://slashpage.com/timmy/4z7pvx2kerv752ek8653">내가 읽으려고 만든 Nuxt 입문하기</a> <sub>26.04.13</sub>
     <br>
     <a href="https://slashpage.com/timmy/qrx6zk258dgxjmv314y5">... 스타일을 처리해야할 때 </a> <sub>26.04.10</sub>
     <br>
     <a href="https://slashpage.com/timmy/ndvwx72879z9em3z6jpg">선언적 프로그래밍과 절차적 프로그래밍</a> <sub>26.04.09</sub>
-    <br>
-    <a href="https://slashpage.com/timmy/ywk9j7297933x2gpqvnd">SCSS를 사용하다가 알게된 BEM (Block Element Modifier)</a> <sub>26.04.03</sub>
-    <br>
-    <a href="https://slashpage.com/timmy/ndvwx7287zk3gm3z6jpg">실행 컨텍스트 · 호이스팅 · 클로저의 상관관계</a> <sub>26.03.31</sub>
     <!-- NOTES_END -->
   </samp>
 </div>

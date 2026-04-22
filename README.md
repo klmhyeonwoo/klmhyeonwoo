@@ -29,6 +29,8 @@
   <samp>
     <p>Recent Note</p>
     <!-- NOTES_START -->
+    <a href="https://slashpage.com/timmy/943zqpmqxj7j72wnvy87">Nuxt4의 useFetch · useAsyncData · $fetch</a> <sub>26.04.21</sub>
+    <br>
     <a href="https://slashpage.com/timmy/93nzyxmdv78z8mwk6r45">Nuxt4에서 라우터 에러 처리 방법들</a> <sub>26.04.19</sub>
     <br>
     <a href="https://slashpage.com/timmy/ywk9j729747752gpqvnd">깃 서브모듈과 NPM 라이브러리 비교하기</a> <sub>26.04.17</sub>
@@ -36,8 +38,6 @@
     <a href="https://slashpage.com/timmy/dk58wg2eg7j7z2nqevxz">Nuxt 2와 Nuxt 3, 무엇이 달라진걸까?</a> <sub>26.04.16</sub>
     <br>
     <a href="https://slashpage.com/timmy/1q3vdn2pxwv412xy49pr">객체 또는 배열에서 타입 추출하기</a> <sub>26.04.14</sub>
-    <br>
-    <a href="https://slashpage.com/timmy/93nzyxmdv31ygmwk6r45">"Ref" 가 화면에 전달되기까지의 과정들</a> <sub>26.04.14</sub>
     <!-- NOTES_END -->
   </samp>
 </div>

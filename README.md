@@ -29,7 +29,7 @@
   <samp>
     <p>Recent Note</p>
     <!-- NOTES_START -->
-    <a href="https://slashpage.com/timmy/7vgjr4m1q4337mdwpy86">시맨틱 태그, 도대체 왜 사용하는지 잘 몰랐다.</a> <sub>26.04.28</sub>
+    <a href="https://slashpage.com/timmy/7vgjr4m1q4337mdwpy86">시맨틱 태그 파헤쳐보기</a> <sub>26.04.28</sub>
     <br>
     <a href="https://slashpage.com/timmy/dwy5rvmjp7yz5mp46zn9">Nuxt4의 네비게이션 이동</a> <sub>26.04.25</sub>
     <br>

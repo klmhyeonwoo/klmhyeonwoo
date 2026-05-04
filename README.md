@@ -29,6 +29,8 @@
   <samp>
     <p>Recent Note</p>
     <!-- NOTES_START -->
+    <a href="https://slashpage.com/timmy/91kwev2687qp82y46jpg">Stale While Revaildate (SWR), Prerender(ISR) 사용하면서..</a> <sub>26.05.03</sub>
+    <br>
     <a href="https://slashpage.com/timmy/7vgjr4m1q4337mdwpy86">시맨틱 태그 파헤쳐보기</a> <sub>26.04.28</sub>
     <br>
     <a href="https://slashpage.com/timmy/dwy5rvmjp7yz5mp46zn9">Nuxt4의 네비게이션 이동</a> <sub>26.04.25</sub>
@@ -36,8 +38,6 @@
     <a href="https://slashpage.com/timmy/943zqpmqxj7j72wnvy87">Nuxt4의 useFetch · useAsyncData · $fetch</a> <sub>26.04.21</sub>
     <br>
     <a href="https://slashpage.com/timmy/93nzyxmdv78z8mwk6r45">Nuxt4에서 라우터 에러 처리 방법들</a> <sub>26.04.19</sub>
-    <br>
-    <a href="https://slashpage.com/timmy/ywk9j729747752gpqvnd">깃 서브모듈과 NPM 라이브러리 비교하기</a> <sub>26.04.17</sub>
     <!-- NOTES_END -->
   </samp>
 </div>

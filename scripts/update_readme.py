@@ -71,7 +71,7 @@ def main():
         key=lambda x: x["createdAt"],
         reverse=True,
     )
-    insight_html = build_links(insight_items, limit=3)
+    insight_html = build_links(insight_items, limit=5)
 
     # Notes: merge all categories, sort by date, top 5
     all_notes: list[dict] = []

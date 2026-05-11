@@ -35,7 +35,7 @@
   <samp>
     <p>Recent Note</p>
     <!-- NOTES_START -->
-    <a href="https://slashpage.com/timmy/qpv5x427745e42kyn3dw">Vue2 watch에서는 감시하지만, Vue3의 watch에서는 감시하지 못하는 이유</a> <sub>26.05.11</sub>
+    <a href="https://slashpage.com/timmy/7vgjr4m1qw1wymdwpy86">Vue2의 watch에서는 감시하지만, Vue3의 watch에서는 감시하지 못하는 이유</a> <sub>26.05.11</sub>
     <br>
     <a href="https://slashpage.com/timmy/943zqpmqxjd6d2wnvy87">시맨틱 태그 파헤쳐보기 (2)</a> <sub>26.05.05</sub>
     <br>

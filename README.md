@@ -35,6 +35,8 @@
   <samp>
     <p>Recent Note</p>
     <!-- NOTES_START -->
+    <a href="https://slashpage.com/timmy/7916x82rn6w6v24kpyg3">콘텐츠 시그마 위협 룰 관리 기능 개발기</a> <sub>26.05.14</sub>
+    <br>
     <a href="https://slashpage.com/timmy/5r398nmnxd4w3mvwje7y">Vue에서 slot 여부 판단하기</a> <sub>26.05.12</sub>
     <br>
     <a href="https://slashpage.com/timmy/7vgjr4m1qw1wymdwpy86">Vue2의 watch에서는 감시하지만, Vue3의 watch에서는 감시하지 못하는 이유</a> <sub>26.05.11</sub>
@@ -42,8 +44,6 @@
     <a href="https://slashpage.com/timmy/943zqpmqxjd6d2wnvy87">시맨틱 태그 파헤쳐보기 (2)</a> <sub>26.05.05</sub>
     <br>
     <a href="https://slashpage.com/timmy/91kwev2687qp82y46jpg">Stale While Revaildate (SWR), Prerender(ISR) 사용하면서..</a> <sub>26.05.03</sub>
-    <br>
-    <a href="https://slashpage.com/timmy/7vgjr4m1q4337mdwpy86">시맨틱 태그 파헤쳐보기 (1)</a> <sub>26.04.28</sub>
     <!-- NOTES_END -->
   </samp>
 </div>

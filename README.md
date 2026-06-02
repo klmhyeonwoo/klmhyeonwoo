@@ -35,15 +35,15 @@
   <samp>
     <p>Recent Note</p>
     <!-- NOTES_START -->
+    <a href="https://slashpage.com/timmy/7916x82rn47gd24kpyg3">파비콘의 색상이 배경 색상과 동일할 때 캔버스로 대응하기</a> <sub>26.06.01</sub>
+    <br>
+    <a href="https://slashpage.com/timmy/d367nxm38djyn2j98pv1">EventSource vs Fetch + ReadableStream (SSE)</a> <sub>26.06.01</sub>
+    <br>
     <a href="https://slashpage.com/timmy/4z7pvx2kedxd62ek8653">Vercel 서버리스 함수란?</a> <sub>26.05.27</sub>
     <br>
     <a href="https://slashpage.com/timmy/91kwev268jvzg2y46jpg">위협 탐지룰 연관 콘텐츠 개발기</a> <sub>26.05.19</sub>
     <br>
     <a href="https://slashpage.com/timmy/7916x82rn6w6v24kpyg3">콘텐츠 시그마 위협 룰 관리 기능 개발기</a> <sub>26.05.14</sub>
-    <br>
-    <a href="https://slashpage.com/timmy/5r398nmnxd4w3mvwje7y">Vue에서 slot 여부 판단하기</a> <sub>26.05.12</sub>
-    <br>
-    <a href="https://slashpage.com/timmy/7vgjr4m1qw1wymdwpy86">Vue2의 watch에서는 감시하지만, Vue3의 watch에서는 감시하지 못하는 이유</a> <sub>26.05.11</sub>
     <!-- NOTES_END -->
   </samp>
 </div>

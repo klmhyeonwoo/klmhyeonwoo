@@ -35,6 +35,8 @@
   <samp>
     <p>Recent Note</p>
     <!-- NOTES_START -->
+    <a href="https://slashpage.com/timmy/7vgjr4m1qgr4kmdwpy86">Axios 배열 파라미터에 [] 형태가 붙는 경우 어떻게 해결할까?</a> <sub>26.06.05</sub>
+    <br>
     <a href="https://slashpage.com/timmy/7916x82rn47gd24kpyg3">파비콘의 색상이 배경 색상과 동일할 때 캔버스로 대응하기</a> <sub>26.06.01</sub>
     <br>
     <a href="https://slashpage.com/timmy/d367nxm38djyn2j98pv1">EventSource vs Fetch + ReadableStream (SSE)</a> <sub>26.06.01</sub>
@@ -42,8 +44,6 @@
     <a href="https://slashpage.com/timmy/4z7pvx2kedxd62ek8653">Vercel 서버리스 함수란?</a> <sub>26.05.27</sub>
     <br>
     <a href="https://slashpage.com/timmy/91kwev268jvzg2y46jpg">위협 탐지룰 연관 콘텐츠 개발기</a> <sub>26.05.19</sub>
-    <br>
-    <a href="https://slashpage.com/timmy/7916x82rn6w6v24kpyg3">콘텐츠 시그마 위협 룰 관리 기능 개발기</a> <sub>26.05.14</sub>
     <!-- NOTES_END -->
   </samp>
 </div>

@@ -35,15 +35,15 @@
   <samp>
     <p>Recent Note</p>
     <!-- NOTES_START -->
+    <a href="https://slashpage.com/timmy/5r398nmnxwqk6mvwje7y">Tanstack Query ㅡ staleTime, gcTime 한 눈에 복기하기</a> <sub>26.06.10</sub>
+    <br>
+    <a href="https://slashpage.com/timmy/4z7pvx2kejn6p2ek8653">Tanstack Query ㅡ placeholderData : 이전 데이터를 미리 보여주고싶을 때</a> <sub>26.06.10</sub>
+    <br>
     <a href="https://slashpage.com/timmy/4z7pvx2kej3yv2ek8653">SCSS에서 Flex 스타일을 반복적으로 사용하고 있을 때, 어떻게 추상화할 수 있을까?</a> <sub>26.06.08</sub>
     <br>
     <a href="https://slashpage.com/timmy/7vgjr4m1qgr4kmdwpy86">Axios 배열 파라미터에 [] 형태가 붙는 경우 어떻게 해결할까?</a> <sub>26.06.05</sub>
     <br>
     <a href="https://slashpage.com/timmy/7916x82rn47gd24kpyg3">파비콘의 색상이 배경 색상과 동일할 때 캔버스로 대응하기</a> <sub>26.06.01</sub>
-    <br>
-    <a href="https://slashpage.com/timmy/d367nxm38djyn2j98pv1">EventSource vs Fetch + ReadableStream (SSE)</a> <sub>26.06.01</sub>
-    <br>
-    <a href="https://slashpage.com/timmy/4z7pvx2kedxd62ek8653">Vercel 서버리스 함수란?</a> <sub>26.05.27</sub>
     <!-- NOTES_END -->
   </samp>
 </div>

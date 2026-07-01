@@ -124,6 +124,22 @@ def main():
     <!-- NOTES_END -->
   </samp>
 </div>
+
+<br><br>
+<div>
+  <samp>
+    <p>Experience</p>
+    <span>Notion Korea Seoul Community</span> <sub>24.01 ~ 2025.12</sub>
+    <br>
+    <span>DevChat ㅡ Developer Relation Community</span> <sub>24.01 ~ 25.12</sub>
+    <br>
+    <span>Depromeet 14th(Team Lead), 15th(Team Lead), 16th(Organization Lead)</span> <sub>23.11 ~ 2025.06</sub>
+    <br>
+    <span>SOPT 21st</a> <sub>18.05 ~ 18.12</sub>
+    <br>
+    <span>LikeLion 5th, 6th(Organization Lead), 11st(Operator) </span> <sub>17.06 ~ 24.10</sub>
+  </samp>
+</div>
 """
 
     with open("README.md", "w", encoding="utf-8") as f:

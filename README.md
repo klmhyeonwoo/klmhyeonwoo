@@ -17,7 +17,7 @@
   <samp>
     <p>Recent Insight</p>
     <!-- INSIGHT_START -->
-    <a href="https://slashpage.com/timmy/d367nxm3r4jg32j98pv1">내가 성장을 하고자할 때 중요하게 생각하는 것들</a> <sub>26.06.29</sub>
+    <a href="https://slashpage.com/timmy/d367nxm3r4jg32j98pv1">내가 성장에서 중요하게 생각하는 것들</a> <sub>26.06.29</sub>
     <br>
     <a href="https://slashpage.com/timmy/ywk9j729wnzek2gpqvnd">프론트엔드 개발자로 읽어볼만한 글</a> <sub>26.06.23</sub>
     <br>

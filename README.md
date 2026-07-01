@@ -52,11 +52,11 @@
 <div>
   <samp>
     <p>Experience</p>
-    <span>Notion Korea ㅡ Seoul Community</span> <sub>24.01 ~ 2025.12</sub>
+    <span>Notion Korea ㅡ Seoul Community</span> <sub>24.01 ~ 25.12</sub>
     <br>
     <span>DevChat ㅡ Developer Relation Community</span> <sub>24.01 ~ 25.12</sub>
     <br>
-    <span>Depromeet 14th(Team Lead), 15th(Team Lead), 16th(Organization Lead)</span> <sub>23.11 ~ 2025.06</sub>
+    <span>Depromeet 14th(Team Lead), 15th(Team Lead), 16th(Organization Lead)</span> <sub>23.11 ~ 25.06</sub>
     <br>
     <span>SOPT 21st</a> <sub>18.05 ~ 18.12</sub>
     <br>

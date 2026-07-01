@@ -129,7 +129,7 @@ def main():
 <div>
   <samp>
     <p>Experience</p>
-    <span>Notion Korea Seoul Community</span> <sub>24.01 ~ 2025.12</sub>
+    <span>Notion Korea ㅡ Seoul Community</span> <sub>24.01 ~ 2025.12</sub>
     <br>
     <span>DevChat ㅡ Developer Relation Community</span> <sub>24.01 ~ 25.12</sub>
     <br>

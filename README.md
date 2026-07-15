@@ -17,8 +17,6 @@
   <samp>
     <p>Recent Insight</p>
     <!-- INSIGHT_START -->
-    <a href="https://slashpage.com/timmy/qrx6zk25vrxw9mv314y5"></a> <sub>26.07.07</sub>
-    <br>
     <a href="https://slashpage.com/timmy/d367nxm3r4jg32j98pv1">내가 성장을 위해 중요하게 생각하는 것들</a> <sub>26.06.29</sub>
     <br>
     <a href="https://slashpage.com/timmy/ywk9j729wnzek2gpqvnd">프론트엔드 개발자로 읽어볼만한 글</a> <sub>26.06.23</sub>
@@ -26,6 +24,8 @@
     <a href="https://slashpage.com/timmy/ndvwx7287e865m3z6jpg">빠르게 크고 빠르게 지는 사이드 프로젝트가 너무 많다.</a> <sub>26.05.06</sub>
     <br>
     <a href="https://slashpage.com/timmy/dk58wg2eg73r72nqevxz">매번 .env 를 팀원들에게 알려줘야할까?</a> <sub>26.05.04</sub>
+    <br>
+    <a href="https://slashpage.com/timmy/7vgjr4m1q71yjmdwpy86">PRD와 WRD를 이용해 AI 에이전트 잘 활용하기</a> <sub>26.04.13</sub>
     <!-- INSIGHT_END -->
   </samp>
 </div>

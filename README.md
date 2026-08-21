@@ -35,6 +35,8 @@
   <samp>
     <p>Recent Note</p>
     <!-- NOTES_START -->
+    <a href="https://slashpage.com/timmy/3p4kj92y67dqzm57q1x8">탭 간의 데이터 공유하는 방법, Broadcast Channel API</a> <sub>26.08.21</sub>
+    <br>
     <a href="https://slashpage.com/timmy/7916x82r3vrgdm4kpyg3">템플릿 리터럴의 이스케이프 문자 자동 처리 방지하고 싶을 때, String.raw() 메서드</a> <sub>26.08.13</sub>
     <br>
     <a href="https://slashpage.com/timmy/4w67rj24yxrz4m5yq8ep">A2UI : Agent To User Interface</a> <sub>26.08.12</sub>
@@ -42,8 +44,6 @@
     <a href="https://slashpage.com/timmy/qrx6zk25vvpp3mv314y5">AI 에이전트 스킬 확인해보기</a> <sub>26.07.28</sub>
     <br>
     <a href="https://slashpage.com/timmy/1q3vdn2pd93pg2xy49pr">디자인시스템으로 백오피스 환골탈태시키기</a> <sub>26.07.07</sub>
-    <br>
-    <a href="https://slashpage.com/timmy/5r398nmnxwqk6mvwje7y">Tanstack Query ㅡ staleTime, gcTime 한 눈에 복기하기</a> <sub>26.06.10</sub>
     <!-- NOTES_END -->
   </samp>
 </div>

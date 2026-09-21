@@ -35,15 +35,15 @@
   <samp>
     <p>Recent Note</p>
     <!-- NOTES_START -->
+    <a href="https://slashpage.com/timmy/93nzyxmdjv74zmwk6r45">병렬 실행이 await을 기다려주지 않는 이유</a> <sub>26.09.21</sub>
+    <br>
+    <a href="https://slashpage.com/timmy/dwy5rvmj6p4j1mp46zn9">모노레포의 실행, 버전, 배포 관리를 쉽게하고싶다면 Lerna를 사용해보자</a> <sub>26.09.21</sub>
+    <br>
     <a href="https://slashpage.com/timmy/qpv5x427v7xq5mkyn3dw">사내 NPM 저장소에 공통 모듈 배포하기</a> <sub>26.09.19</sub>
     <br>
     <a href="https://slashpage.com/timmy/4z7pvx2k3zdw62ek8653">Monaco Editor에 Shiki 하이라이팅 적용하기</a> <sub>26.09.17</sub>
     <br>
     <a href="https://slashpage.com/timmy/93nzyxmdj91w5mwk6r45">위협 탐지 시그니처 (Yara, Sigma, Snort)</a> <sub>26.09.13</sub>
-    <br>
-    <a href="https://slashpage.com/timmy/dk58wg2e3wnj72nqevxz">AI 리터러시란?</a> <sub>26.09.04</sub>
-    <br>
-    <a href="https://slashpage.com/timmy/91kwev26w5z5xmy46jpg">나는 업무에서 에이전트를 어떻게 활용하고 있을까?</a> <sub>26.08.28</sub>
     <!-- NOTES_END -->
   </samp>
 </div>

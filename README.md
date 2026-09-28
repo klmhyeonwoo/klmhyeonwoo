@@ -17,6 +17,8 @@
   <samp>
     <p>Recent Insight</p>
     <!-- INSIGHT_START -->
+    <a href="https://slashpage.com/timmy/xjqy1g2vp8p7v26vd54z">2026년 AhnLab ISF 후기</a> <sub>26.09.28</sub>
+    <br>
     <a href="https://slashpage.com/timmy/y9e1xp2x6y4g327k35vz">2026년 당근 프로덕트 테크 밋업 </a> <sub>26.09.17</sub>
     <br>
     <a href="https://slashpage.com/timmy/4z7pvx2kp3qdxmek8653">상반기를 회고하면서 ..</a> <sub>26.07.28</sub>
@@ -24,8 +26,6 @@
     <a href="https://slashpage.com/timmy/qrx6zk25v8jxxmv314y5">작가가 글을 사랑하듯, 개발자는 코드를 사랑하기</a> <sub>26.07.15</sub>
     <br>
     <a href="https://slashpage.com/timmy/d367nxm3r4jg32j98pv1">내가 성장을 위해 중요하게 생각하는 것들</a> <sub>26.06.29</sub>
-    <br>
-    <a href="https://slashpage.com/timmy/ywk9j729wnzek2gpqvnd">프론트엔드 개발자로 읽어볼만한 글</a> <sub>26.06.23</sub>
     <!-- INSIGHT_END -->
   </samp>
 </div>

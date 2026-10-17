@@ -8,15 +8,20 @@ import { BlockNoteSchema } from "@blocknote/core/blocks";
 import { getDefaultReactSlashMenuItems, SuggestionMenuController, useCreateBlockNote } from "@blocknote/react";
 import { useCallback, useEffect, useState } from "react";
 import { ToastMessage } from "./toast-message";
+import { Bookmark } from "./bookmark-block";
 import { Callout } from "./callout-block";
+
+export type EditorMention = { title: string; href: string; description: string };
+const noMentions: EditorMention[] = [];
 
 type Props = {
   initialBlocks?: unknown[];
+  mentions?: EditorMention[];
   onChange: (blocks: unknown[], markdown: string) => void;
 };
 
 const schema = BlockNoteSchema.create().extend({
-  blockSpecs: { callout: Callout() },
+  blockSpecs: { bookmark: Bookmark(), callout: Callout() },
 });
 
 function errorMessage(error: unknown) {
@@ -27,7 +32,21 @@ function copyBlocks(blocks: unknown[]) {
   return structuredClone(blocks);
 }
 
-export default function Editor({ initialBlocks, onChange }: Props) {
+function normalizedHttpUrl(value: string) {
+  try {
+    const url = new URL(value.trim());
+    return url.protocol === "https:" || url.protocol === "http:" ? url.href : null;
+  } catch {
+    return null;
+  }
+}
+
+function bookmarkTitle(url: string) {
+  return new URL(url).hostname.replace(/^www\./, "");
+}
+
+export default function Editor({ initialBlocks, mentions, onChange }: Props) {
+  const mentionItems = mentions ?? noMentions;
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [uploadError, setUploadError] = useState("");
   const uploadFile = useCallback(async (file: File) => {
@@ -55,6 +74,15 @@ export default function Editor({ initialBlocks, onChange }: Props) {
   const getSlashMenuItems = useCallback(async (query: string) => [
     ...getDefaultReactSlashMenuItems(editor),
     {
+      key: "bookmark" as never,
+      title: "링크 미리보기",
+      subtext: "주소를 카드 형태로 보여줍니다",
+      aliases: ["bookmark", "링크", "미리보기", "주소"],
+      group: "기본",
+      icon: <span aria-hidden="true">↗</span>,
+      onItemClick: () => insertOrUpdateBlockForSlashMenu(editor, { type: "bookmark", props: { url: "" } } as never),
+    },
+    {
       key: "callout" as never,
       title: "콜아웃",
       subtext: "이모지로 중요한 내용을 강조합니다",
@@ -64,6 +92,19 @@ export default function Editor({ initialBlocks, onChange }: Props) {
       onItemClick: () => insertOrUpdateBlockForSlashMenu(editor, { type: "callout", props: { emoji: "💡" } } as never),
     },
   ].filter((item) => [item.title, item.subtext, ...(item.aliases ?? [])].some((value) => value?.toLocaleLowerCase().includes(query.toLocaleLowerCase()))), [editor]);
+
+  const getMentionItems = useCallback(async (query: string) => mentionItems
+    .filter((mention) => `${mention.title} ${mention.description}`.toLocaleLowerCase().includes(query.toLocaleLowerCase()))
+    .slice(0, 8)
+    .map((mention) => ({
+      key: `mention-${mention.href}` as never,
+      title: mention.title,
+      subtext: mention.description,
+      aliases: [mention.href],
+      group: "멘션",
+      icon: <span aria-hidden="true">@</span>,
+      onItemClick: () => editor.insertInlineContent([{ type: "link", href: mention.href, content: `@${mention.title}` }]),
+    })), [editor, mentionItems]);
 
   const syncContent = useCallback(() => {
     const document = editor.document;
@@ -112,6 +153,30 @@ export default function Editor({ initialBlocks, onChange }: Props) {
   }, [editor]);
 
   useEffect(() => {
+    const root = editor.domElement;
+    if (!root) return;
+
+    const insertBookmarkFromPaste = (event: ClipboardEvent) => {
+      const url = normalizedHttpUrl(event.clipboardData?.getData("text/plain") ?? "");
+      if (!url) return;
+
+      event.preventDefault();
+      const currentBlock = editor.getTextCursorPosition().block;
+      const bookmark = {
+        type: "bookmark",
+        props: { url },
+        content: [{ type: "text", text: bookmarkTitle(url), styles: {} }],
+      };
+      const isEmptyParagraph = currentBlock.type === "paragraph" && Array.isArray(currentBlock.content) && currentBlock.content.length === 0;
+      if (isEmptyParagraph) editor.updateBlock(currentBlock, bookmark as never);
+      else editor.insertBlocks([bookmark as never], currentBlock, "after");
+    };
+
+    root.addEventListener("paste", insertBookmarkFromPaste);
+    return () => root.removeEventListener("paste", insertBookmarkFromPaste);
+  }, [editor]);
+
+  useEffect(() => {
     const syncTheme = () => setTheme(document.documentElement.dataset.theme === "dark" ? "dark" : "light");
     syncTheme();
 
@@ -127,7 +192,7 @@ export default function Editor({ initialBlocks, onChange }: Props) {
         slashMenu={false}
         theme={theme}
         onChange={syncContent}
-      ><SuggestionMenuController triggerCharacter="/" getItems={getSlashMenuItems} /></BlockNoteView>
+      ><SuggestionMenuController triggerCharacter="/" getItems={getSlashMenuItems} /><SuggestionMenuController triggerCharacter="@" getItems={getMentionItems} /></BlockNoteView>
       <ToastMessage message={uploadError} tone="error" />
     </section>
   );

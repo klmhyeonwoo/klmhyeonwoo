@@ -1,9 +1,8 @@
 import { randomUUID } from "crypto";
 import { NextResponse } from "next/server";
 import { isAdmin } from "@/lib/auth";
+import { isContentReferenceId } from "@/lib/content-reference";
 import { saveDraft } from "@/lib/github";
-import { getCategories } from "@/lib/posts";
-import { getSeries } from "@/lib/series";
 
 const validPostId = /^[a-z0-9]+(?:[a-z0-9-]*[a-z0-9])?$/;
 
@@ -19,10 +18,10 @@ export async function POST(request: Request) {
     typeof isPrivate !== "boolean" || !Array.isArray(blocks)
   ) return NextResponse.json({ error: "임시 저장할 내용을 확인해 주세요." }, { status: 400 });
 
-  const category = getCategories().find((item) => item.id === categoryId || item.name === categoryId);
-  const series = seriesId ? getSeries().find((item) => item.id === seriesId || item.name === seriesId) : undefined;
-  if (!category || (seriesId && !series)) {
-    return NextResponse.json({ error: "선택한 카테고리 또는 시리즈를 찾을 수 없습니다. 다시 선택해 주세요." }, { status: 400 });
+  const category = categoryId.trim();
+  const series = seriesId.trim();
+  if (!isContentReferenceId(category) || (series && !isContentReferenceId(series))) {
+    return NextResponse.json({ error: "카테고리 또는 시리즈 선택값을 확인해 주세요." }, { status: 400 });
   }
 
   if (markdown.length > 1_000_000 || JSON.stringify(blocks).length > 1_000_000) {
@@ -31,7 +30,7 @@ export async function POST(request: Request) {
 
   const draftId = id ?? randomUUID();
   try {
-    await saveDraft({ id: draftId, title: title.trim(), description: description.trim(), categoryId: category.id, seriesId: series?.id ?? "", markdown, blocks, isPrivate, updatedAt: new Date().toISOString() });
+    await saveDraft({ id: draftId, title: title.trim(), description: description.trim(), categoryId: category, seriesId: series, markdown, blocks, isPrivate, updatedAt: new Date().toISOString() });
     return NextResponse.json({ ok: true, id: draftId });
   } catch (error) {
     console.error(error);

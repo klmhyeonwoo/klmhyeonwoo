@@ -10,6 +10,7 @@ import type { PostMeta } from "@/lib/posts";
 import type { Category } from "@/lib/posts";
 import type { Series } from "@/lib/series";
 import { NotionSelect, type SelectOption } from "./notion-select";
+import type { EditorMention } from "./editor";
 import { waitForDeployment } from "./deployment-waiter";
 import { ToastMessage } from "./toast-message";
 
@@ -314,7 +315,12 @@ export function AdminClient({ authenticated: initiallyAuthenticated, showAlready
         <label className="private-toggle"><input type="checkbox" checked={isPrivate} onChange={(event) => setIsPrivate(event.target.checked)} />비밀번호 보호 글</label>
         {isPrivate && <Input type="password" value={postPassword} onValueChange={setPostPassword} placeholder={initialEntry?.isPrivate ? "새 비밀번호 입력 (변경할 때만)" : "글 비밀번호 (4자 이상)"} aria-label="글 비밀번호" />}
       </div>
-      {draftReady ? <Editor initialBlocks={initialBlocks} onChange={updateContent} /> : <section className="editor-loading">임시 저장본을 불러오는 중…</section>}
+      {draftReady ? <Editor initialBlocks={initialBlocks} mentions={[
+        { title: "프로필", href: "/profile", description: "블로그 운영자" },
+        { title: "아티클 시리즈", href: "/series", description: "시리즈 모음" },
+        ...series.map((item): EditorMention => ({ title: item.name, href: `/series/${item.id}`, description: "아티클 시리즈" })),
+        ...posts.map((item): EditorMention => ({ title: item.title, href: `/posts/${item.id}`, description: "게시글" })),
+      ]} onChange={updateContent} /> : <section className="editor-loading">임시 저장본을 불러오는 중…</section>}
       <ToastMessage message={message} tone={messageTone(message)} />
       {publishedPostId && <Link className="published-link" href={`/posts/${publishedPostId}`}>발행된 글 보기</Link>}
       <section className="draft-list">

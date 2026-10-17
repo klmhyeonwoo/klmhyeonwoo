@@ -1,5 +1,6 @@
 import { compileMDX } from "next-mdx-remote/rsc";
 import matter from "gray-matter";
+import remarkGfm from "remark-gfm";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/site-header";
@@ -78,7 +79,7 @@ export default async function PostPage({ params }: { params: Params }) {
     return <><SiteHeader /><main className="article-shell"><PostUnlockForm id={id} /></main></>;
   }
 
-  const { content, frontmatter } = await compileMDX<{ title: string; date: string; description?: string }>({ source, options: { parseFrontmatter: true } });
+  const { content, frontmatter } = await compileMDX<{ title: string; date: string; description?: string }>({ source, options: { mdxOptions: { remarkPlugins: [remarkGfm] }, parseFrontmatter: true } });
   return (
     <><SiteHeader /><main className="article-shell"><article className="article">
       <div className="author-byline">{profile.image ? <img src={profile.image} alt="" /> : <span>{profile.name.slice(0, 1)}</span>}<p><strong>{profile.name}</strong><small>{formatPostDate(frontmatter.date)}</small></p></div><h1>{frontmatter.title}</h1>

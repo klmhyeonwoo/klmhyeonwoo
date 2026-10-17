@@ -18,7 +18,8 @@
     "next": "^16.1.0",
     "next-mdx-remote": "^6.0.0",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@types/node": "^24.10.1",

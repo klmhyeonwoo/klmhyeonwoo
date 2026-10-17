@@ -167,7 +167,7 @@ export default function Editor({ initialBlocks, mentions, onChange }: Props) {
         const delta = activeResize.handleUsed === "left"
           ? activeResize.initialClientX - endClientX
           : endClientX - activeResize.initialClientX;
-        const multiplier = block?.props.textAlignment === "center" ? 2 : 1;
+        const multiplier = block && "textAlignment" in block.props && block.props.textAlignment === "center" ? 2 : 1;
         const editorWidth = editor.domElement?.firstElementChild?.clientWidth ?? Number.MAX_VALUE;
         const previewWidth = Math.round(Math.min(Math.max(activeResize.initialWidth + delta * multiplier, 64), editorWidth));
         editor.updateBlock(activeResize.id, { props: { previewWidth } } as never);

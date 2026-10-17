@@ -3,73 +3,113 @@
 import "@blocknote/core/fonts/inter.css";
 import "@blocknote/ariakit/style.css";
 import { BlockNoteView } from "@blocknote/ariakit";
-import { useCreateBlockNote } from "@blocknote/react";
-import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
+import { insertOrUpdateBlockForSlashMenu } from "@blocknote/core";
+import { BlockNoteSchema } from "@blocknote/core/blocks";
+import { getDefaultReactSlashMenuItems, SuggestionMenuController, useCreateBlockNote } from "@blocknote/react";
+import { useCallback, useEffect, useState } from "react";
 import { ToastMessage } from "./toast-message";
+import { Callout } from "./callout-block";
 
 type Props = {
   initialBlocks?: unknown[];
   onChange: (blocks: unknown[], markdown: string) => void;
 };
 
+const schema = BlockNoteSchema.create().extend({
+  blockSpecs: { callout: Callout() },
+});
+
 function errorMessage(error: unknown) {
   return error instanceof Error ? error.message : "이미지 업로드에 실패했습니다.";
+}
+
+function copyBlocks(blocks: unknown[]) {
+  return structuredClone(blocks);
 }
 
 export default function Editor({ initialBlocks, onChange }: Props) {
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [uploadError, setUploadError] = useState("");
-  const [uploading, setUploading] = useState(false);
-  const imageInputRef = useRef<HTMLInputElement>(null);
   const uploadFile = useCallback(async (file: File) => {
-    if (!file.type.startsWith("image/")) throw new Error("이미지 파일만 올릴 수 있습니다.");
-    if (file.size > 5 * 1024 * 1024) throw new Error("이미지는 5MB 이하여야 합니다.");
-
-    const form = new FormData();
-    form.append("file", file);
-
-    let response: Response;
-    let body: { url?: string; error?: string } = {};
     try {
-      response = await fetch("/api/upload", { method: "POST", body: form });
-      body = await response.json() as { url?: string; error?: string };
-    } catch {
-      throw new Error("이미지 업로드 서버에 연결하지 못했습니다.");
-    }
+      if (!file.type.startsWith("image/")) throw new Error("이미지 파일만 올릴 수 있습니다.");
+      if (file.size > 5 * 1024 * 1024) throw new Error("이미지는 5MB 이하여야 합니다.");
 
-    if (!response.ok || !body.url) throw new Error(body.error ?? "이미지 업로드에 실패했습니다.");
-    return body.url;
+      const form = new FormData();
+      form.append("file", file);
+      const response = await fetch("/api/upload", { method: "POST", body: form });
+      const body = await response.json() as { url?: string; error?: string };
+      if (!response.ok || !body.url) throw new Error(body.error ?? "이미지 업로드에 실패했습니다.");
+      return body.url;
+    } catch (error) {
+      setUploadError(errorMessage(error));
+      throw error;
+    }
   }, []);
   const editor = useCreateBlockNote({
     initialContent: initialBlocks && initialBlocks.length > 0 ? initialBlocks as never : undefined,
     uploadFile,
+    schema,
   }, [uploadFile]);
 
-  async function insertImage(event: ChangeEvent<HTMLInputElement>) {
-    const input = event.currentTarget;
-    const file = input.files?.[0];
-    input.value = "";
-    if (!file) return;
+  const getSlashMenuItems = useCallback(async (query: string) => [
+    ...getDefaultReactSlashMenuItems(editor),
+    {
+      key: "callout" as never,
+      title: "콜아웃",
+      subtext: "이모지로 중요한 내용을 강조합니다",
+      aliases: ["callout", "콜아웃", "강조", "알림"],
+      group: "기본",
+      icon: <span aria-hidden="true">💡</span>,
+      onItemClick: () => insertOrUpdateBlockForSlashMenu(editor, { type: "callout", props: { emoji: "💡" } } as never),
+    },
+  ].filter((item) => [item.title, item.subtext, ...(item.aliases ?? [])].some((value) => value?.toLocaleLowerCase().includes(query.toLocaleLowerCase()))), [editor]);
 
-    setUploadError("");
-    setUploading(true);
-    try {
-      const url = await uploadFile(file);
-      editor.insertBlocks([{ type: "image", props: { url } }], editor.getTextCursorPosition().block, "after");
-    } catch (error) {
-      setUploadError(errorMessage(error));
-    } finally {
-      setUploading(false);
-    }
-  }
-
-  function turnCurrentBlockIntoCallout() {
-    editor.updateBlock(editor.getTextCursorPosition().block, { type: "quote" });
-  }
+  const syncContent = useCallback(() => {
+    const document = editor.document;
+    onChange(copyBlocks(document), editor.blocksToMarkdownLossy(document));
+  }, [editor, onChange]);
 
   useEffect(() => {
-    onChange(editor.document, editor.blocksToMarkdownLossy(editor.document));
-  }, [editor, onChange]);
+    syncContent();
+  }, [syncContent]);
+
+  useEffect(() => {
+    const root = editor.domElement;
+    if (!root) return;
+
+    let resized: { id: string; wrapper: HTMLElement } | null = null;
+    const startResize = (event: Event) => {
+      const target = event.target;
+      if (!(target instanceof Element) || !target.closest(".bn-resize-handle")) return;
+
+      const id = target.closest<HTMLElement>("[data-id]")?.dataset.id;
+      const wrapper = target.closest<HTMLElement>(".bn-file-block-content-wrapper");
+      resized = id && wrapper ? { id, wrapper } : null;
+    };
+    const finishResize = () => {
+      const activeResize = resized;
+      resized = null;
+      if (!activeResize) return;
+
+      window.requestAnimationFrame(() => {
+        const previewWidth = Math.round(activeResize.wrapper.getBoundingClientRect().width);
+        if (previewWidth < 64) return;
+        editor.updateBlock(activeResize.id, { props: { previewWidth } } as never);
+      });
+    };
+
+    root.addEventListener("mousedown", startResize);
+    root.addEventListener("touchstart", startResize, { passive: true });
+    window.addEventListener("mouseup", finishResize);
+    window.addEventListener("touchend", finishResize);
+    return () => {
+      root.removeEventListener("mousedown", startResize);
+      root.removeEventListener("touchstart", startResize);
+      window.removeEventListener("mouseup", finishResize);
+      window.removeEventListener("touchend", finishResize);
+    };
+  }, [editor]);
 
   useEffect(() => {
     const syncTheme = () => setTheme(document.documentElement.dataset.theme === "dark" ? "dark" : "light");
@@ -82,17 +122,12 @@ export default function Editor({ initialBlocks, onChange }: Props) {
 
   return (
     <section className="editor" aria-label="본문 편집기">
-      <div className="editor-actions">
-        <input ref={imageInputRef} type="file" accept="image/*" onChange={insertImage} aria-label="이미지 파일 선택" tabIndex={-1} />
-        <button type="button" className="editor-image-button" onClick={() => imageInputRef.current?.click()} disabled={uploading}>{uploading ? "이미지 업로드 중…" : "이미지 추가"}</button>
-        <button type="button" className="editor-image-button" onClick={turnCurrentBlockIntoCallout}>콜아웃</button>
-        <span className="editor-image-hint">이미지는 양쪽 핸들로 크기를 조절할 수 있어요.</span>
-      </div>
       <BlockNoteView
         editor={editor}
+        slashMenu={false}
         theme={theme}
-        onChange={() => onChange(editor.document, editor.blocksToMarkdownLossy(editor.document))}
-      />
+        onChange={syncContent}
+      ><SuggestionMenuController triggerCharacter="/" getItems={getSlashMenuItems} /></BlockNoteView>
       <ToastMessage message={uploadError} tone="error" />
     </section>
   );

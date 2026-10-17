@@ -1,7 +1,7 @@
 {
   "name": "현우",
   "image": "https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/main/blog/public/uploads/1792216650443-e3ea43e2.png",
-  "markdown": "안녕하세요, 프론트엔드 엔지니어 김현우입니다. 2023년부터 소프트웨어를 개발해왔고, 현재도 프론트엔드 엔지니어로 일하고 있습니다. 웹 에디터를 비롯해 보안 서비스를 거치며 사용자 화면부터 배포 환경까지 다뤘습니다. 현재는 서버에 관심이 많아 노드 기반의 백엔드를 학습하고 있습니다.\n\n\n\n단순히 스펙 문서만을 보고 개발하는 사람이 아닌, 팀원들과  항상 더 나은 방향성을 위해 고민하는 것을 좋아합니다. 또, 다양한 개발문화를 팀에 도입하며 변화시킨 것처럼 소속감과 선한 영향력을 공유하는 것을 좋아합니다. 최근에는 업무에서 에이전트의 도입을 적극적으로 하고 있으며 AI*(V0, Copilot, Claude, etc)*를 통해 효율적으로 생산성을 올리는데 관심이 많습니다.\n\n\n\n\n\n\n\n\n",
+  "markdown": "안녕하세요, **프론트엔드 엔지니어 김현우**입니다. 2023년부터 소프트웨어를 개발해왔고, 현재도 프론트엔드 엔지니어로 일하고 있습니다. 웹 에디터를 비롯해 보안 서비스를 거치며 사용자 화면부터 배포 환경까지 다뤘습니다. 현재는 서버에 관심이 많아 노드 기반의 백엔드를 학습하고 있습니다.\n\n\n\n단순히 스펙 문서만을 보고 개발하는 사람이 아닌, 팀원들과 함께 항상 더 나은 방향성을 위해 고민하는 것을 좋아합니다. 다양한 개발문화를 팀에 도입하며 변화시킨 것처럼 소속감과 선한 영향력을 공유하는 것을 좋아합니다. 최근에는 업무에서 에이전트의 도입을 적극적으로 하고 있으며 AI*(V0, Copilot, Claude, etc)*를 통해 효율적으로 생산성을 올리는데 관심이 많습니다.\n\n[깃허브](https://github.com/klmhyeonwoo)\n\n[포트폴리오](https://ripe-launch-04b.notion.site/Kim-Hyeonwoo-a92f74b56d11400587da628990426723?pvs=74)\n",
   "blocks": [
     {
       "id": "ee00f4ac-3465-40da-b8b8-f9e7ee66da4b",
@@ -14,7 +14,19 @@
       "content": [
         {
           "type": "text",
-          "text": "안녕하세요, 프론트엔드 엔지니어 김현우입니다. 2023년부터 소프트웨어를 개발해왔고, 현재도 프론트엔드 엔지니어로 일하고 있습니다. 웹 에디터를 비롯해 보안 서비스를 거치며 사용자 화면부터 배포 환경까지 다뤘습니다. 현재는 서버에 관심이 많아 노드 기반의 백엔드를 학습하고 있습니다.",
+          "text": "안녕하세요, ",
+          "styles": {}
+        },
+        {
+          "type": "text",
+          "text": "프론트엔드 엔지니어 김현우",
+          "styles": {
+            "bold": true
+          }
+        },
+        {
+          "type": "text",
+          "text": "입니다. 2023년부터 소프트웨어를 개발해왔고, 현재도 프론트엔드 엔지니어로 일하고 있습니다. 웹 에디터를 비롯해 보안 서비스를 거치며 사용자 화면부터 배포 환경까지 다뤘습니다. 현재는 서버에 관심이 많아 노드 기반의 백엔드를 학습하고 있습니다.",
           "styles": {}
         }
       ],
@@ -42,7 +54,7 @@
       "content": [
         {
           "type": "text",
-          "text": "단순히 스펙 문서만을 보고 개발하는 사람이 아닌, 팀원들과  항상 더 나은 방향성을 위해 고민하는 것을 좋아합니다. 또, 다양한 개발문화를 팀에 도입하며 변화시킨 것처럼 소속감과 선한 영향력을 공유하는 것을 좋아합니다. 최근에는 업무에서 에이전트의 도입을 적극적으로 하고 있으며 AI",
+          "text": "단순히 스펙 문서만을 보고 개발하는 사람이 아닌, 팀원들과 함께 항상 더 나은 방향성을 위해 고민하는 것을 좋아합니다. 다양한 개발문화를 팀에 도입하며 변화시킨 것처럼 소속감과 선한 영향력을 공유하는 것을 좋아합니다. 최근에는 업무에서 에이전트의 도입을 적극적으로 하고 있으며 AI",
           "styles": {}
         },
         {
@@ -61,47 +73,33 @@
       "children": []
     },
     {
-      "id": "ee750a5b-cc5b-4852-b917-f5c253150c7a",
-      "type": "paragraph",
+      "id": "70fd12ad-d6d6-4967-bf4e-84b8263b29e3",
+      "type": "bookmark",
       "props": {
-        "backgroundColor": "default",
-        "textColor": "default",
-        "textAlignment": "left"
+        "url": "https://github.com/klmhyeonwoo"
       },
-      "content": [],
+      "content": [
+        {
+          "type": "text",
+          "text": "깃허브",
+          "styles": {}
+        }
+      ],
       "children": []
     },
     {
-      "id": "8665ec82-b28e-42e8-9908-ed0ba0500994",
-      "type": "paragraph",
+      "id": "986939db-8759-4112-a02f-a1f6b85fd854",
+      "type": "bookmark",
       "props": {
-        "backgroundColor": "default",
-        "textColor": "default",
-        "textAlignment": "left"
+        "url": "https://ripe-launch-04b.notion.site/Kim-Hyeonwoo-a92f74b56d11400587da628990426723?pvs=74"
       },
-      "content": [],
-      "children": []
-    },
-    {
-      "id": "aa665f7a-143c-4b05-8eb5-24c11f216b7a",
-      "type": "paragraph",
-      "props": {
-        "backgroundColor": "default",
-        "textColor": "default",
-        "textAlignment": "left"
-      },
-      "content": [],
-      "children": []
-    },
-    {
-      "id": "91c2ca00-8e2f-4b8f-af9c-696016cbe25d",
-      "type": "paragraph",
-      "props": {
-        "backgroundColor": "default",
-        "textColor": "default",
-        "textAlignment": "left"
-      },
-      "content": [],
+      "content": [
+        {
+          "type": "text",
+          "text": "포트폴리오",
+          "styles": {}
+        }
+      ],
       "children": []
     }
   ]

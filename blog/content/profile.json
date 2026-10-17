@@ -1,11 +1,24 @@
 {
   "name": "현우",
-  "image": "",
-  "markdown": "개발하며 배우는 내용을 기록합니다.",
+  "image": "https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/main/blog/public/uploads/1792216650443-e3ea43e2.png",
+  "markdown": "안녕하세요, 4년차 프론트엔드 개발자 김현우입니다.\n",
   "blocks": [
     {
+      "id": "ee00f4ac-3465-40da-b8b8-f9e7ee66da4b",
       "type": "paragraph",
-      "content": "개발하며 배우는 내용을 기록합니다."
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "안녕하세요, 4년차 프론트엔드 개발자 김현우입니다.",
+          "styles": {}
+        }
+      ],
+      "children": []
     }
   ]
 }

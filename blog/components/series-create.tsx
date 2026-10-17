@@ -7,7 +7,7 @@ import { Input } from "@base-ui/react/input";
 import type { Series } from "@/lib/series";
 
 function seriesId(name: string) {
-  const normalized = name.trim().toLowerCase().replace(/[^a-z0-9가-힣]+/g, "-").replace(/^-+|-+$/g, "").replace(/[가-힣]/g, "");
+  const normalized = name.trim().toLowerCase().replace(/[가-힣]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
   return normalized || `series-${crypto.randomUUID().slice(0, 8)}`;
 }
 

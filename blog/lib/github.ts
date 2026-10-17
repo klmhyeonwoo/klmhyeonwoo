@@ -1,5 +1,6 @@
 import { randomUUID } from "crypto";
 import type { SiteSettings } from "./site-settings";
+import { postSourceVersion } from "./posts";
 
 type Post = {
   title: string;
@@ -91,6 +92,7 @@ export async function savePost(post: Post) {
   const mdx = `---\ntitle: ${yaml(post.title)}\ndate: ${date}\ndescription: ${yaml(post.description)}\ncategory: ${yaml(post.categoryId)}\n${series}${protection}---\n\n${post.markdown}\n`;
   await writeFile(`blog/editor-data/${post.id}.json`, JSON.stringify(post.blocks, null, 2), `Save editor data: ${post.title}`);
   await writeFile(`blog/content/posts/${post.id}.mdx`, mdx, `Publish: ${post.title}`);
+  return postSourceVersion(mdx);
 }
 
 export async function saveDraft(draft: Draft) {

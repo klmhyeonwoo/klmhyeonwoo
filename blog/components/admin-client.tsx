@@ -10,6 +10,7 @@ import type { PostMeta } from "@/lib/posts";
 import type { Category } from "@/lib/posts";
 import type { Series } from "@/lib/series";
 import { NotionSelect, type SelectOption } from "./notion-select";
+import { waitForDeployment } from "./deployment-waiter";
 
 const Editor = dynamic(() => import("./editor"), { ssr: false });
 
@@ -38,7 +39,7 @@ type Draft = {
 };
 
 function optionId(name: string, prefix: string) {
-  const normalized = name.trim().toLowerCase().replace(/[^a-z0-9가-힣]+/g, "-").replace(/^-+|-+$/g, "").replace(/[가-힣]/g, "");
+  const normalized = name.trim().toLowerCase().replace(/[가-힣]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
   return normalized || `${prefix}-${crypto.randomUUID().slice(0, 8)}`;
 }
 
@@ -65,6 +66,7 @@ export function AdminClient({ authenticated: initiallyAuthenticated, showAlready
   const [draftReady, setDraftReady] = useState(false);
   const [draftStatus, setDraftStatus] = useState("");
   const [publishedPostId, setPublishedPostId] = useState<string | null>(null);
+  const [deployment, setDeployment] = useState<{ id: string; version: string; shouldRedirect: boolean } | null>(null);
   const [showAlreadyLoggedIn, setShowAlreadyLoggedIn] = useState(shouldShowAlreadyLoggedIn);
   const draftKey = `blog-draft:${postId ?? "new"}`;
 
@@ -97,6 +99,25 @@ export function AdminClient({ authenticated: initiallyAuthenticated, showAlready
     const timer = window.setTimeout(() => setShowAlreadyLoggedIn(false), 3200);
     return () => window.clearTimeout(timer);
   }, [showAlreadyLoggedIn]);
+
+  useEffect(() => {
+    if (!deployment) return;
+    const controller = new AbortController();
+
+    void waitForDeployment({ ...deployment, signal: controller.signal }).then((ready) => {
+      if (controller.signal.aborted) return;
+      if (!ready) {
+        setMessage("배포 확인에 시간이 걸리고 있습니다. 잠시 후 공개 글에서 확인해 주세요.");
+        return;
+      }
+      setDeployment(null);
+      setPublishedPostId(deployment.id);
+      setMessage("배포가 완료되었습니다.");
+      if (deployment.shouldRedirect) window.location.assign(`/posts/${deployment.id}`);
+    });
+
+    return () => controller.abort();
+  }, [deployment]);
 
   useEffect(() => {
     if (!draftReady) return;
@@ -138,15 +159,20 @@ export function AdminClient({ authenticated: initiallyAuthenticated, showAlready
       });
 
       if (response.ok) {
-        const { id } = await response.json() as { id: string };
+        const { id, version } = await response.json() as { id: string; version: string };
         window.localStorage.removeItem(draftKey);
         setDraftStatus("발행됨");
         setPostId(id);
         isDraftRef.current = false;
         setPostPassword("");
         const localPreview = ["localhost", "127.0.0.1"].includes(window.location.hostname);
-        setPublishedPostId(localPreview ? null : id);
-        setMessage(localPreview ? "GitHub에 저장했습니다. 로컬에서 보려면 최신 변경을 받아오세요." : "GitHub에 저장했습니다. 배포가 끝나면 아래에서 글을 열 수 있습니다.");
+        if (localPreview) {
+          setMessage("GitHub에 저장했습니다. 로컬에서 보려면 최신 변경을 받아오세요.");
+        } else {
+          const isNewPost = postId === null;
+          setDeployment({ id, version, shouldRedirect: isNewPost });
+          setMessage(isNewPost ? "GitHub에 저장했습니다. 배포가 끝나면 글로 이동합니다." : "GitHub에 저장했습니다. 배포 완료를 확인하고 있습니다.");
+        }
       } else {
         setMessage((await response.json()).error);
       }

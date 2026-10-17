@@ -3,7 +3,8 @@ import { NextResponse } from "next/server";
 import { isAdmin } from "@/lib/auth";
 import { deleteDraft, savePost } from "@/lib/github";
 import { hashPostPassword } from "@/lib/post-access";
-import { getPostPasswordHash } from "@/lib/posts";
+import { getCategories, getPostPasswordHash } from "@/lib/posts";
+import { getSeries } from "@/lib/series";
 
 const validPostId = /^[a-z0-9]+(?:[a-z0-9-]*[a-z0-9])?$/;
 
@@ -16,13 +17,19 @@ export async function POST(request: Request) {
     typeof title !== "string" || !title.trim() ||
     (id !== undefined && (typeof id !== "string" || !validPostId.test(id))) ||
     typeof description !== "string" ||
-    typeof categoryId !== "string" || !/^[a-z0-9-]{1,64}$/.test(categoryId) ||
-    typeof seriesId !== "string" || (seriesId.length > 0 && !/^[a-z0-9-]{1,64}$/.test(seriesId)) ||
+    typeof categoryId !== "string" ||
+    typeof seriesId !== "string" ||
     typeof markdown !== "string" ||
     typeof isPrivate !== "boolean" || typeof fromDraft !== "boolean" || typeof password !== "string" ||
     !Array.isArray(blocks)
   ) {
-    return NextResponse.json({ error: "제목과 본문을 확인해 주세요." }, { status: 400 });
+    return NextResponse.json({ error: "제목, 본문, 카테고리 입력값을 확인해 주세요." }, { status: 400 });
+  }
+
+  const category = getCategories().find((item) => item.id === categoryId || item.name === categoryId);
+  const series = seriesId ? getSeries().find((item) => item.id === seriesId || item.name === seriesId) : undefined;
+  if (!category || (seriesId && !series)) {
+    return NextResponse.json({ error: "선택한 카테고리 또는 시리즈를 찾을 수 없습니다. 다시 선택해 주세요." }, { status: 400 });
   }
 
   if (markdown.length > 1_000_000 || JSON.stringify(blocks).length > 1_000_000) {
@@ -40,19 +47,19 @@ export async function POST(request: Request) {
   const passwordHash = isPrivate ? (password ? hashPostPassword(password) : existingPasswordHash ?? undefined) : undefined;
 
   try {
-    await savePost({
+    const version = await savePost({
       title: title.trim(),
       id: postId,
       description: description.trim(),
-      categoryId,
-      seriesId,
+      categoryId: category.id,
+      seriesId: series?.id ?? "",
       markdown,
       blocks,
       isPrivate,
       passwordHash,
     });
     if (fromDraft) await deleteDraft(postId, title.trim());
-    return NextResponse.json({ ok: true, id: postId });
+    return NextResponse.json({ ok: true, id: postId, version });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ error: "GitHub에 저장하지 못했습니다. 환경변수를 확인해 주세요." }, { status: 502 });

@@ -16,6 +16,8 @@
 
 `GITHUB_TOKEN`에는 대상 저장소에 **Contents: Read and write** 권한이 있는 fine-grained personal access token을 넣으세요. 이 토큰은 `NEXT_PUBLIC_` 접두사 없이 서버 환경변수로만 설정해야 합니다.
 
+공유 미리보기(OG)를 실제 배포 도메인으로 만들려면 `NEXT_PUBLIC_SITE_URL=https://example.com`을 배포 환경변수에 설정하세요. 설정하지 않으면 Vercel 배포 주소를 자동으로 사용합니다.
+
 ## 배포
 
 이 저장소를 Vercel에 연결하고 `.env.local`의 환경변수를 Vercel 프로젝트 설정에도 등록하세요. GitHub에 새 글이 커밋되면 Vercel이 자동으로 다시 배포합니다.

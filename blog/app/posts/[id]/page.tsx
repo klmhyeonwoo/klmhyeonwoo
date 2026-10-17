@@ -1,5 +1,6 @@
 import { compileMDX } from "next-mdx-remote/rsc";
 import matter from "gray-matter";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/site-header";
 import { PostAdminActions } from "@/components/post-admin-actions";
@@ -14,6 +15,51 @@ import { getProfile } from "@/lib/profile";
 export const dynamic = "force-dynamic";
 
 type Params = Promise<{ id: string }>;
+
+function postDescription(source: string, data: Record<string, unknown>) {
+  if (typeof data.description === "string" && data.description.trim()) return data.description.trim();
+  const text = source
+    .replace(/^---[\s\S]*?---/, "")
+    .replace(/```[\s\S]*?```/g, " ")
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, " ")
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+    .replace(/[#>*_`~-]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  return text.length > 180 ? `${text.slice(0, 180).trimEnd()}…` : text;
+}
+
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const { id } = await params;
+  const source = getPost(id);
+  if (!source) return {};
+
+  const { data } = matter(source);
+  const title = typeof data.title === "string" && data.title.trim() ? data.title.trim() : "글";
+  const isPrivate = data.private === true;
+  const description = isPrivate
+    ? "비공개 글입니다. bloging.에서 확인해 주세요."
+    : postDescription(source, data);
+  const image = `/posts/${id}/opengraph-image`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      type: "article",
+      locale: "ko_KR",
+      title,
+      description,
+      images: [{ url: image, width: 1200, height: 630, alt: title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
+    },
+  };
+}
 
 export function generateStaticParams() {
   return getPosts().map(({ id }) => ({ id }));

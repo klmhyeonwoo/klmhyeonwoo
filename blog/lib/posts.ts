@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { createHash } from "crypto";
 import matter from "gray-matter";
 import { postDateValue } from "./post-date";
 import { getSeries } from "./series";
@@ -108,6 +109,10 @@ export function getPost(id: string) {
   if (safeId !== id) return null;
   const file = path.join(postsDirectory, `${safeId}.mdx`);
   return fs.existsSync(file) ? fs.readFileSync(file, "utf8") : null;
+}
+
+export function postSourceVersion(source: string) {
+  return createHash("sha256").update(source).digest("hex");
 }
 
 export function getPostPasswordHash(id: string) {

@@ -1,4 +1,14 @@
 [
-  { "id": "build-log", "name": "Build Log" },
-  { "id": "essay", "name": "Essay" }
+  {
+    "id": "build-log",
+    "name": "Build Log"
+  },
+  {
+    "id": "essay",
+    "name": "Essay"
+  },
+  {
+    "id": "category-77da63fc",
+    "name": "안녕"
+  }
 ]

@@ -13,6 +13,7 @@ export async function SiteHeader() {
           <nav aria-label="주요 메뉴">
             <Link href="/#all">모든 글</Link>
             <Link href="/#topics">주제별 보기</Link>
+            <Link href="/profile">프로필</Link>
             {authenticated && <Link href="/ykk">글쓰기</Link>}
           </nav>
           <ThemeToggle />

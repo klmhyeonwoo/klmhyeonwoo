@@ -5,13 +5,34 @@ import { postDateValue } from "./post-date";
 
 const postsDirectory = path.join(process.cwd(), "content", "posts");
 const draftsDirectory = path.join(process.cwd(), "drafts");
+const categoriesFile = path.join(process.cwd(), "content", "categories.json");
+
+export type Category = { id: string; name: string };
+
+export function getCategories(): Category[] {
+  if (!fs.existsSync(categoriesFile)) return [];
+  try {
+    const categories = JSON.parse(fs.readFileSync(categoriesFile, "utf8")) as unknown;
+    if (!Array.isArray(categories)) return [];
+    return categories.flatMap((category) => (
+      typeof category === "object" && category !== null &&
+      typeof (category as Category).id === "string" && typeof (category as Category).name === "string"
+        ? [{ id: (category as Category).id, name: (category as Category).name }]
+        : []
+    ));
+  } catch {
+    return [];
+  }
+}
 
 export type PostMeta = {
   id: string;
   title: string;
   date: string;
   description?: string;
+  categoryId: string;
   category: string;
+  excerpt?: string;
   featured: boolean;
   isPrivate: boolean;
   thumbnail?: string;
@@ -21,27 +42,45 @@ export type EditablePost = {
   id: string;
   title: string;
   description: string;
+  categoryId: string;
   isPrivate: boolean;
   blocks: unknown[];
 };
 
 export type DraftMeta = EditablePost & { updatedAt: string };
 
+function excerptFromMarkdown(markdown: string) {
+  const text = markdown
+    .replace(/```[\s\S]*?```/g, " ")
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, " ")
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+    .replace(/[#>*_`~-]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (!text) return undefined;
+  return text.length > 180 ? `${text.slice(0, 180).trimEnd()}…` : text;
+}
+
 export function getPosts(includePrivate = false): PostMeta[] {
   if (!fs.existsSync(postsDirectory)) return [];
+  const categories = getCategories();
   return fs.readdirSync(postsDirectory)
     .filter((file) => file.endsWith(".mdx"))
     .map((file) => {
       const id = file.replace(/\.mdx$/, "");
       const source = fs.readFileSync(path.join(postsDirectory, file), "utf8");
-      const { data } = matter(source);
+      const { data, content } = matter(source);
       const image = source.match(/!\[[^\]]*\]\(([^\s)]+)(?:\s+[^)]*)?\)/)?.[1];
+      const categoryValue = String(data.category ?? "essay");
+      const category = categories.find((item) => item.id === categoryValue || item.name === categoryValue);
       return {
         id,
         title: String(data.title ?? id),
         date: postDateValue(data.date),
         description: data.description ? String(data.description) : undefined,
-        category: String(data.category ?? "Essay"),
+        excerpt: data.description ? String(data.description) : data.private === true ? undefined : excerptFromMarkdown(content),
+        categoryId: category?.id ?? categoryValue,
+        category: category?.name ?? "미분류",
         featured: data.featured === true,
         isPrivate: data.private === true,
         thumbnail: data.coverImage ? String(data.coverImage) : image,
@@ -78,7 +117,7 @@ export function getEditablePost(id: string): EditablePost | null {
   try {
     const blocks: unknown = JSON.parse(fs.readFileSync(editorFile, "utf8"));
     if (!Array.isArray(blocks)) return null;
-    return { id: safeId, title: meta.title, description: meta.description ?? "", isPrivate: meta.isPrivate, blocks };
+    return { id: safeId, title: meta.title, description: meta.description ?? "", categoryId: meta.categoryId, isPrivate: meta.isPrivate, blocks };
   } catch {
     return null;
   }
@@ -94,7 +133,7 @@ export function getDrafts(): DraftMeta[] {
       try {
         const draft = JSON.parse(fs.readFileSync(path.join(draftsDirectory, file), "utf8")) as Partial<DraftMeta>;
         if (!Array.isArray(draft.blocks) || typeof draft.title !== "string" || typeof draft.description !== "string") return [];
-        return [{ id, title: draft.title, description: draft.description, isPrivate: draft.isPrivate === true, blocks: draft.blocks, updatedAt: typeof draft.updatedAt === "string" ? draft.updatedAt : "" }];
+        return [{ id, title: draft.title, description: draft.description, categoryId: typeof draft.categoryId === "string" ? draft.categoryId : "essay", isPrivate: draft.isPrivate === true, blocks: draft.blocks, updatedAt: typeof draft.updatedAt === "string" ? draft.updatedAt : "" }];
       } catch {
         return [];
       }

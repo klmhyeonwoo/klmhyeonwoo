@@ -4,6 +4,7 @@ type Post = {
   title: string;
   id: string;
   description: string;
+  categoryId: string;
   markdown: string;
   blocks: unknown[];
   isPrivate: boolean;
@@ -84,7 +85,7 @@ function yaml(value: string) {
 export async function savePost(post: Post) {
   const date = new Date().toISOString().slice(0, 10);
   const protection = post.isPrivate && post.passwordHash ? `private: true\npasswordHash: ${yaml(post.passwordHash)}\n` : "private: false\n";
-  const mdx = `---\ntitle: ${yaml(post.title)}\ndate: ${date}\ndescription: ${yaml(post.description)}\n${protection}---\n\n${post.markdown}\n`;
+  const mdx = `---\ntitle: ${yaml(post.title)}\ndate: ${date}\ndescription: ${yaml(post.description)}\ncategory: ${yaml(post.categoryId)}\n${protection}---\n\n${post.markdown}\n`;
   await writeFile(`blog/editor-data/${post.id}.json`, JSON.stringify(post.blocks, null, 2), `Save editor data: ${post.title}`);
   await writeFile(`blog/content/posts/${post.id}.mdx`, mdx, `Publish: ${post.title}`);
 }
@@ -100,4 +101,12 @@ export async function deleteDraft(id: string, title: string) {
 export async function deletePost(id: string, title: string) {
   await deleteFile(`blog/content/posts/${id}.mdx`, `Delete post: ${title}`);
   await deleteFile(`blog/editor-data/${id}.json`, `Delete editor data: ${title}`);
+}
+
+export async function saveCategories(categories: { id: string; name: string }[]) {
+  await writeFile("blog/content/categories.json", JSON.stringify(categories, null, 2), "Update categories");
+}
+
+export async function saveProfile(profile: { name: string; image: string; markdown: string; blocks: unknown[] }) {
+  await writeFile("blog/content/profile.json", JSON.stringify(profile, null, 2), "Update profile");
 }

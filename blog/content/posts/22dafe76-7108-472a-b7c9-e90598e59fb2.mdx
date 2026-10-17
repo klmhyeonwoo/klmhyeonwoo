@@ -1,0 +1,160 @@
+---
+title: "[번역] Vite vs. Turbopack vs. Rspack"
+date: 2026-10-17
+description: ""
+category: "category-1f4a4fd0"
+private: false
+---
+
+*원본의 글은 DEV CommunityVite vs. Turbopack vs. Rspack: Which Build Tool Wins the Modern Frontend Race 에서 확인할 수 있습니다.*
+
+***
+
+> *프런트엔드 툴링 지형은 '워프 속도'로 변하고 있습니다. 한때 부동의 왕이었던 Webpack은 이제 즉각적인 피드백, 더 간결한 설정, 그리고 최신 자바스크립트 생태계와의 더 촘촘한 통합을 약속하는 신세대 번들러들의 도전을 받고 있습니다.*
+
+## 소개(Introduction)
+
+오늘날 React, Vue, Svelte 프로젝트를 새로 시작할 때 가장 먼저 내리는 결정은 **어떤 빌드 툴을 믿고 갈 것인가**입니다. 이 선택은 개발자 경험, CI 시간, 그리고 사용자의 브라우저로 전달되는 최종 번들 크기까지 영향을 줍니다. Webpack이 여전히 많은 레거시 코드베이스를 떠받치고 있긴 하지만, 2023–2024년에 가장 많은 화제를 모은 신흥 강자는 다음 세 가지입니다.
+
+* **Vite** – Rollup 위에 구축된, "개발 서버 우선(dev server first)" 철학의 원조 도구
+* **Turbopack** – Webpack의 후속으로 홍보되는 Rust 기반 도구로, "웹을 위한 가장 빠른 번들러"를 표방
+* **Rspack** – Turbopack의 성능 이점을 더 넓은 커뮤니티에 제공하려는, 오픈소스 Webpack 호환(compatible) Turbopack 클론
+
+이 글에서는 **속도, 성숙도, 생태계 적합성**을 비교해 여러분의 프로젝트 목표에 맞는 도구를 고를 수 있도록 돕겠습니다.
+
+## 이 글에서 배우는 것(What You Will Learn)
+
+* **핵심 성능 지표**: 콜드 스타트, 점진적(incremental) 리빌드, 프로덕션 빌드
+* 문서의 깊이, 플러그인 생태계, 커뮤니티 채택 등 **성숙도 지표**
+* 일반적인 React + TypeScript 프로젝트를 위한 **실용적인 설정 예시**
+* 워크플로에 맞는 도구를 고르기 위한 **의사결정 매트릭스(Decision Matrix)**
+
+## 딥 다이브(Deep Dive)
+
+### 1. 아키텍처 개요(Architecture Overview)
+
+| 도구         | 코어 언어                 | 주요 컴파일러                      | 개발 서버 모델                           | 프로덕션 번들러                         |
+| ---------- | --------------------- | ---------------------------- | ---------------------------------- | -------------------------------- |
+| Vite       | JavaScript/TypeScript | esbuild(개발) + Rollup(프로덕션)   | 네이티브 ESM 개발 서버, 필요 시(on-demand) 변환 | Rollup(트리 셰이킹, 코드 스플리팅)          |
+| Turbopack  | Rust                  | Rust 기반 증분(incremental) 컴파일러 | Rust에서의 영속 워커 풀, 파일 워칭             | Rust 기반 번들러, Webpack의 모듈 그래프와 유사 |
+| Rspack     | Rust                  | Rust 기반(Turbopack 포크)        | Turbopack과 동일하되 Webpack 호환 API 제공  | Turbopack과 유사, Webpack 플러그인 지원   |
+
+**언어가 왜 중요한가**
+
+Rust는 Turbopack과 Rspack에 원초적인 CPU 성능 측면에서 이점을 주는 반면, Vite는 개발 단계에서 초고속 JavaScript 엔진 기반의 esbuild를 활용합니다.
+
+### 2. 시작 속도 & 증분 빌드 속도(Startup & Incremental Build Speed)
+
+| 시나리오                     | Vite (ms)  | Turbopack (ms) | Rspack (ms) |
+| ------------------------ | ---------- | -------------- | ----------- |
+| 콜드 dev 서버 시작(React + TS) | ~350       | ~120           | ~130        |
+| 작은 변경 후 HMR(핫 모듈 교체)     | ~30        | ~8             | ~9          |
+| 전체 프로덕션 빌드(최적화)          | ~1,800     | ~720           | ~750        |
+
+> **인사이트:** Turbopack과 Rspack은 특히 대규모 코드베이스에서(러스트 컴파일러가 코어를 활용해 병렬화할 수 있어) 전반적으로 Vite보다 더 좋은 순수 성능 수치를 보여줍니다.
+
+### 3. 성숙도 & 생태계(Maturity & Ecosystem)
+
+| 항목                 | Vite                      | Turbopack                | Rspack                           |
+| ------------------ | ------------------------- | ------------------------ | -------------------------------- |
+| 첫 안정 릴리스           | 2020                      | 2023 (베타)                | 2023 (베타)                        |
+| 공식 문서 깊이           | ★★★★★                     | ★★★★☆                    | ★★★★☆                            |
+| 플러그인 생태계 규모        | 1,200개 이상                 | 50개 미만(공식)               | ~200개(Webpack 호환)                |
+| 커뮤니티 채택(GitHub 스타) | 73k                       | 12k                      | 9k                               |
+| 프로덕션 사용(주요 앱)      | Vercel, VuePress, 다수 스타트업 | Meta 내부 도구, Next.js(실험적) | Alibaba, ByteDance, 일부 오픈소스 프로젝트 |
+
+Vite는 **가장 넓은 플러그인 생태계**와 가장 긴 안정 릴리스의 트랙 레코드를 갖고 있습니다. Turbopack은 아직 초기 도입 단계이지만, 성능 주장에는 Meta의 내부 벤치마크가 뒷받침된다고 소개됩니다. Rspack은 Webpack 호환성을 제공하면서도 Turbopack의 속도를 일부 계승해 그 간극을 메우려 합니다.
+
+### 4. 설정 워크스루(Configuration Walkthrough)
+
+아래는 **React + TypeScript** 프로젝트를 위한 최소 설정 예시인 `vite.config.ts`, `turbo.config.ts`, `rspack.config.js` 입니다.
+
+### Vite (`vite.config.ts`)
+
+```javascript
+import {defineConfig }from'vite';
+importreactfrom'@vitejs/plugin-react';
+
+exportdefaultdefineConfig({
+  plugins: [react()],
+  server: {
+    port:3000,
+    open:true,
+  },
+  build: {
+    target:'esnext',
+    sourcemap:true,
+  },
+});
+```
+
+### Turbopack (`turbo.config.ts`)
+
+```javascript
+import {defineConfig }from'@turbopack/dev-server';
+importreactRefreshfrom'@turbopack/react-refresh';
+
+exportdefaultdefineConfig({
+  entry:'./src/index.tsx',
+  plugins: [reactRefresh()],
+  devServer: {
+    port:3000,
+    hot:true,
+  },
+  optimization: {
+    minify:true,
+    target:'es2022',
+  },
+});
+```
+
+### Rspack (`rspack.config.js`)
+
+```javascript
+constReactRefreshWebpackPlugin=require('@pmmmwh/react-refresh-webpack-plugin');
+
+module.exports= {
+  entry:'./src/index.tsx',
+  mode:'development',
+  devServer: {
+    hot:true,
+    port:3000,
+    open:true,
+  },
+  module: {
+    rules: [
+      {
+        test:/\.(ts|tsx)$/,
+        use:'babel-loader',
+        exclude:/node_modules/,
+      },
+    ],
+  },
+  plugins: [newReactRefreshWebpackPlugin()],
+  resolve: {
+    extensions: ['.tsx','.ts','.js'],
+  },
+};
+```
+
+> **팁:** 이미 Webpack 설정이 있다면, Rspack으로의 전환은 종종 **몇 가지 의존성만 교체**하면 되는 수준이라 마이그레이션 마찰이 낮습니다.
+
+### 5. 실전 관점의 고려사항(Real‑World Considerations)
+
+1. **팀 친숙도(Team Familiarity)**
+   1. Vite의 API는 Rollup과 유사해, 최신 번들러를 써본 개발자에게 익숙하게 느껴집니다. 반면 Turbopack의 Rust 중심 툴링은 네이티브 바이너리에 익숙하지 않은 팀에겐 학습 곡선이 생길 수 있습니다.
+2. **CI/CD 통합(CI/CD Integration)**
+   1. 세 도구 모두 CI에서 실행 가능하지만, Turbopack의 바이너리 크기(~30MB)는 컨테이너 레이어를 더 무겁게 만들 수 있습니다. Vite는 Node 기반 접근이라 서버리스 환경에서 더 가볍게 느껴질 수 있습니다.
+3. **미래 대비(Future‑Proofing)**
+   1. 웹은 점점 **ESM-only** 전달 방식으로 이동 중입니다. Vite의 네이티브 ESM 개발 서버는 이 흐름과 매우 잘 맞고, Turbopack/Rspack도 ESM 출력 지원을 적극적으로 추가하는 중이라고 설명합니다.
+
+## 결론(Conclusion)
+
+**승자는 단 하나의 도구가 아니라**, 여러분 프로젝트의 제약과 목표에 가장 잘 맞는 도구입니다.
+
+* **Vite**를 선택하세요: **성숙한 생태계**, 빠른 온보딩, Vue/React/Svelte에서 검증된 트랙 레코드를 원한다면
+* **Turbopack**을 고려하세요: 초대형 모노레포에서의 순수 성능이 최우선이고, 더 새로운 Rust 기반 워크플로 도입에 거부감이 없다면
+* **Rspack**을 고르세요: **Webpack 호환성**이 필요하지만 Turbopack급 속도 개선도 원한다면(특히 레거시 Webpack 설정을 옮기는 팀에게)
+
+> **콜 투 액션:** 여러분 레포의 작은 브랜치에서 각 도구를 직접 돌려 보고, 콜드 스타트와 리빌드 시간을 측정한 뒤 데이터로 결정하세요. 프런트엔드 세계는 실험에 보상합니다—하나를 골라 반복 개선하고, 빌드를 계속 빠르게 유지하세요.
+

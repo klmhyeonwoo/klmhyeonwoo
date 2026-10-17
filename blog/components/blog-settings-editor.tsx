@@ -5,6 +5,7 @@ import type { ChangeEvent } from "react";
 import type { SiteSettings } from "@/lib/site-settings";
 import { AnnouncementIcon } from "./announcement-icon";
 import { IconXmarkLine } from "@karrotmarket/react-monochrome-icon";
+import { ToastMessage } from "./toast-message";
 
 type ActionKey = "action" | "primaryAction" | "secondaryAction";
 
@@ -92,6 +93,6 @@ export function BlogSettingsEditor({ initialSettings }: { initialSettings: SiteS
         <div className="settings-preview popup-preview-area"><div className="popup-preview"><button aria-label="미리보기 닫기" type="button"><IconXmarkLine size={18} /></button>{popupPreview ? <img src={popupPreview} alt="" /> : <div className="popup-preview-placeholder"><AnnouncementIcon /></div>}<div><h3>{settings.popup.title || "팝업 제목"}</h3><p>{settings.popup.description || "팝업 설명"}</p>{settings.popup.primaryAction.label && <b>{settings.popup.primaryAction.label}</b>}</div></div></div>
       </div>
     </section>
-    {message && <p className="settings-message">{message}</p>}
+    <ToastMessage message={message} tone={message.includes("선택했습니다") || message.includes("저장했습니다") ? "success" : "error"} />
   </main>;
 }

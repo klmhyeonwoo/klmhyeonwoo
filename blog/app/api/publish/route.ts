@@ -12,7 +12,8 @@ export async function POST(request: Request) {
   if (!(await isAdmin())) return NextResponse.json({ error: "로그인이 필요합니다." }, { status: 401 });
 
   const body = await request.json().catch(() => null);
-  const { title, id, description, categoryId = "essay", seriesId = "", markdown, blocks, isPrivate = false, fromDraft = false, password = "" } = body ?? {};
+  const { title, id: rawId, description, categoryId = "essay", seriesId = "", markdown, blocks, isPrivate = false, fromDraft = false, password = "" } = body ?? {};
+  const id = rawId ?? undefined;
   if (
     typeof title !== "string" || !title.trim() ||
     (id !== undefined && (typeof id !== "string" || !validPostId.test(id))) ||

@@ -11,6 +11,7 @@ import type { Category } from "@/lib/posts";
 import type { Series } from "@/lib/series";
 import { NotionSelect, type SelectOption } from "./notion-select";
 import { waitForDeployment } from "./deployment-waiter";
+import { ToastMessage } from "./toast-message";
 
 const Editor = dynamic(() => import("./editor"), { ssr: false });
 
@@ -37,6 +38,11 @@ type Draft = {
   markdown: string;
   blocks: unknown[];
 };
+
+function messageTone(message: string) {
+  if (message.includes("배포") && !message.includes("완료")) return "info" as const;
+  return /저장했|저장됨|발행됨|완료되었|로그인되어/.test(message) ? "success" as const : "error" as const;
+}
 
 function optionId(name: string, prefix: string) {
   const normalized = name.trim().toLowerCase().replace(/[가-힣]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
@@ -285,14 +291,14 @@ export function AdminClient({ authenticated: initiallyAuthenticated, showAlready
           <Input id="password" type="password" value={adminPassword} onValueChange={setAdminPassword} autoFocus required />
           <Button type="submit">계속하기</Button>
         </form>
-        {message && <p className="notice error">{message}</p>}
+        <ToastMessage message={message} tone="error" />
       </main>
     );
   }
 
   return (
     <main className="admin-shell">
-      {showAlreadyLoggedIn && <p className="toast success" role="status">이미 로그인되어 있습니다.</p>}
+      <ToastMessage message={showAlreadyLoggedIn ? "이미 로그인되어 있습니다." : ""} tone="info" />
       <header className="admin-header">
         <div className="admin-actions">
           {draftStatus && <span className="draft-status">{draftStatus}</span>}
@@ -309,7 +315,8 @@ export function AdminClient({ authenticated: initiallyAuthenticated, showAlready
         {isPrivate && <Input type="password" value={postPassword} onValueChange={setPostPassword} placeholder={initialEntry?.isPrivate ? "새 비밀번호 입력 (변경할 때만)" : "글 비밀번호 (4자 이상)"} aria-label="글 비밀번호" />}
       </div>
       {draftReady ? <Editor initialBlocks={initialBlocks} onChange={updateContent} /> : <section className="editor-loading">임시 저장본을 불러오는 중…</section>}
-      {message && <div className={`notice ${message.startsWith("GitHub") ? "success" : "error"}`}><p>{message}</p>{publishedPostId && <Link className="published-link" href={`/posts/${publishedPostId}`}>발행된 글 보기 →</Link>}</div>}
+      <ToastMessage message={message} tone={messageTone(message)} />
+      {publishedPostId && <Link className="published-link" href={`/posts/${publishedPostId}`}>발행된 글 보기</Link>}
       <section className="draft-list">
         <h2>임시글</h2>
         {drafts.length > 0 ? drafts.map((draft) => <Link key={draft.id} href={`/ykk?draft=${draft.id}`}>{draft.title || "제목 없는 임시글"}<span>{formatPostDate(draft.updatedAt)}</span></Link>) : <p className="empty-list">저장된 임시글이 없습니다.</p>}

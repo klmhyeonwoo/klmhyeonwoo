@@ -5,6 +5,7 @@ import "@blocknote/ariakit/style.css";
 import { BlockNoteView } from "@blocknote/ariakit";
 import { useCreateBlockNote } from "@blocknote/react";
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
+import { ToastMessage } from "./toast-message";
 
 type Props = {
   initialBlocks?: unknown[];
@@ -92,7 +93,7 @@ export default function Editor({ initialBlocks, onChange }: Props) {
         theme={theme}
         onChange={() => onChange(editor.document, editor.blocksToMarkdownLossy(editor.document))}
       />
-      {uploadError && <p className="notice error" role="alert">{uploadError}</p>}
+      <ToastMessage message={uploadError} tone="error" />
     </section>
   );
 }

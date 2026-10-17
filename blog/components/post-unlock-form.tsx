@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@base-ui/react/button";
+import { ToastMessage } from "./toast-message";
 import { Input } from "@base-ui/react/input";
 
 export function PostUnlockForm({ id }: { id: string }) {
@@ -32,7 +33,7 @@ export function PostUnlockForm({ id }: { id: string }) {
         <Input type="password" value={password} onValueChange={setPassword} placeholder="비밀번호" aria-label="글 비밀번호" required />
         <Button type="submit" disabled={unlocking}>{unlocking ? "확인 중…" : "글 열기"}</Button>
       </form>
-      {message && <p className="notice error">{message}</p>}
+      <ToastMessage message={message} tone="error" />
     </section>
   );
 }

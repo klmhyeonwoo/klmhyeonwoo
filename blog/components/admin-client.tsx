@@ -296,7 +296,7 @@ export function AdminClient({ authenticated: initiallyAuthenticated, showAlready
       <header className="admin-header">
         <div className="admin-actions">
           {draftStatus && <span className="draft-status">{draftStatus}</span>}
-          <Link href="/ykk">새 글</Link>
+          <Link className="new-post-button" href="/ykk">새 글</Link>
           <Button className="draft-button" onClick={saveDraft} disabled={saving || savingDraft}>{savingDraft ? "임시 저장 중…" : "임시 저장"}</Button>
           <Button onClick={publish} disabled={saving || savingDraft}>{saving ? "저장 중…" : "발행하기"}</Button>
         </div>

@@ -119,34 +119,72 @@ export default function Editor({ initialBlocks, mentions, onChange }: Props) {
     const root = editor.domElement;
     if (!root) return;
 
-    let resized: { id: string; wrapper: HTMLElement } | null = null;
+    type ResizeState = {
+      handleUsed: "left" | "right";
+      id: string;
+      initialClientX: number;
+      initialWidth: number;
+      lastClientX: number;
+    };
+    let resized: ResizeState | null = null;
+    const clientX = (event: Event) => {
+      if (event instanceof MouseEvent) return event.clientX;
+      if (event instanceof TouchEvent) return event.changedTouches[0]?.clientX ?? event.touches[0]?.clientX;
+      return undefined;
+    };
     const startResize = (event: Event) => {
       const target = event.target;
       if (!(target instanceof Element) || !target.closest(".bn-resize-handle")) return;
 
       const id = target.closest<HTMLElement>("[data-id]")?.dataset.id;
       const wrapper = target.closest<HTMLElement>(".bn-file-block-content-wrapper");
-      resized = id && wrapper ? { id, wrapper } : null;
+      const handle = target.closest<HTMLElement>(".bn-resize-handle");
+      const startX = clientX(event);
+      if (!id || !wrapper || !handle || startX === undefined) {
+        resized = null;
+        return;
+      }
+      resized = {
+        handleUsed: handle.style.left ? "left" : "right",
+        id,
+        initialClientX: startX,
+        initialWidth: wrapper.clientWidth,
+        lastClientX: startX,
+      };
     };
-    const finishResize = () => {
+    const trackResize = (event: Event) => {
+      const nextClientX = clientX(event);
+      if (resized && nextClientX !== undefined) resized.lastClientX = nextClientX;
+    };
+    const finishResize = (event: Event) => {
       const activeResize = resized;
       resized = null;
       if (!activeResize) return;
 
       window.requestAnimationFrame(() => {
-        const previewWidth = Math.round(activeResize.wrapper.getBoundingClientRect().width);
-        if (previewWidth < 64) return;
+        const block = editor.getBlock(activeResize.id);
+        const endClientX = clientX(event) ?? activeResize.lastClientX;
+        const delta = activeResize.handleUsed === "left"
+          ? activeResize.initialClientX - endClientX
+          : endClientX - activeResize.initialClientX;
+        const multiplier = block?.props.textAlignment === "center" ? 2 : 1;
+        const editorWidth = editor.domElement?.firstElementChild?.clientWidth ?? Number.MAX_VALUE;
+        const previewWidth = Math.round(Math.min(Math.max(activeResize.initialWidth + delta * multiplier, 64), editorWidth));
         editor.updateBlock(activeResize.id, { props: { previewWidth } } as never);
       });
     };
 
     root.addEventListener("mousedown", startResize);
     root.addEventListener("touchstart", startResize, { passive: true });
+    window.addEventListener("mousemove", trackResize);
+    window.addEventListener("touchmove", trackResize, { passive: true });
     window.addEventListener("mouseup", finishResize);
     window.addEventListener("touchend", finishResize);
     return () => {
       root.removeEventListener("mousedown", startResize);
       root.removeEventListener("touchstart", startResize);
+      window.removeEventListener("mousemove", trackResize);
+      window.removeEventListener("touchmove", trackResize);
       window.removeEventListener("mouseup", finishResize);
       window.removeEventListener("touchend", finishResize);
     };

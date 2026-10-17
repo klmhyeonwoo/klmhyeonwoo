@@ -54,14 +54,20 @@ function CalloutBlock({ block, editor, contentRef }: ReactCustomBlockRenderProps
         aria-haspopup="dialog"
         aria-label="콜아웃 이모지 선택"
         className="editor-callout-emoji"
-        onClick={() => setPickerOpen((open) => !open)}
-        onMouseDown={(event) => event.preventDefault()}
+        onClick={(event) => {
+          event.stopPropagation();
+          setPickerOpen((open) => !open);
+        }}
+        onMouseDown={(event) => {
+          event.preventDefault();
+          event.stopPropagation();
+        }}
         type="button"
       >{block.props.emoji}</button>
-      {pickerOpen && <div aria-label="콜아웃 이모지 선택" className="editor-callout-emoji-menu" role="region">
+      {pickerOpen && <div aria-label="콜아웃 이모지 선택" className="editor-callout-emoji-menu" onClick={(event) => event.stopPropagation()} onMouseDown={(event) => event.stopPropagation()} role="region">
         <div className="editor-callout-emoji-controls">
           <input aria-label="이모지 검색" autoFocus onChange={(event) => setQuery(event.target.value)} onMouseDown={(event) => event.stopPropagation()} placeholder="이모지 검색" value={query} />
-          <button aria-label="이모지 선택 닫기" className="editor-callout-emoji-close" onClick={() => setPickerOpen(false)} onMouseDown={(event) => event.preventDefault()} type="button">×</button>
+          <button aria-label="이모지 선택 닫기" className="editor-callout-emoji-close" onClick={(event) => { event.stopPropagation(); setPickerOpen(false); }} onMouseDown={(event) => { event.preventDefault(); event.stopPropagation(); }} type="button">×</button>
         </div>
         <div className="editor-callout-emoji-custom">
           <input aria-label="직접 이모지 입력" onChange={(event) => setCustomEmoji(event.target.value)} onKeyDown={(event) => {
@@ -70,7 +76,7 @@ function CalloutBlock({ block, editor, contentRef }: ReactCustomBlockRenderProps
               chooseEmoji(customEmoji.trim());
             }
           }} placeholder="직접 입력하거나 붙여넣기" value={customEmoji} />
-          <button disabled={!customEmoji.trim()} onClick={() => chooseEmoji(customEmoji.trim())} onMouseDown={(event) => event.preventDefault()} type="button">적용</button>
+          <button disabled={!customEmoji.trim()} onClick={(event) => { event.stopPropagation(); chooseEmoji(customEmoji.trim()); }} onMouseDown={(event) => { event.preventDefault(); event.stopPropagation(); }} type="button">적용</button>
         </div>
         <p className="editor-callout-emoji-hint">시스템 이모지 패널에서 고르거나 이모지를 붙여넣을 수 있어요.</p>
         <div className="editor-callout-emoji-results">
@@ -81,8 +87,8 @@ function CalloutBlock({ block, editor, contentRef }: ReactCustomBlockRenderProps
               aria-pressed={emoji === block.props.emoji}
               className={emoji === block.props.emoji ? "is-selected" : undefined}
               key={emoji}
-              onClick={() => chooseEmoji(emoji)}
-              onMouseDown={(event) => event.preventDefault()}
+              onClick={(event) => { event.stopPropagation(); chooseEmoji(emoji); }}
+              onMouseDown={(event) => { event.preventDefault(); event.stopPropagation(); }}
               type="button"
             >{emoji}</button>)}</div>
           </section>)}

@@ -6,7 +6,7 @@ import { BlockNoteView } from "@blocknote/ariakit";
 import { insertOrUpdateBlockForSlashMenu } from "@blocknote/core";
 import { BlockNoteSchema } from "@blocknote/core/blocks";
 import { getDefaultReactSlashMenuItems, SuggestionMenuController, useCreateBlockNote } from "@blocknote/react";
-import { useCallback, useEffect, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { ToastMessage } from "./toast-message";
 import { Bookmark } from "./bookmark-block";
 import { Callout } from "./callout-block";
@@ -57,6 +57,8 @@ export default function Editor({ initialBlocks, mentions, onChange }: Props) {
   const mentionItems = mentions ?? noMentions;
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [uploadError, setUploadError] = useState("");
+  const [selectedImageId, setSelectedImageId] = useState<string | null>(null);
+  const [selectedImageUrl, setSelectedImageUrl] = useState("");
   const uploadFile = useCallback(async (file: File) => {
     try {
       if (!file.type.startsWith("image/")) throw new Error("이미지 파일만 올릴 수 있습니다.");
@@ -208,6 +210,49 @@ export default function Editor({ initialBlocks, mentions, onChange }: Props) {
     const root = editor.domElement;
     if (!root) return;
 
+    const openImageProperties = (event: MouseEvent) => {
+      const target = event.target;
+      if (!(target instanceof Element) || !target.closest(".bn-visual-media")) return;
+
+      const blockElement = target.closest<HTMLElement>("[data-id]");
+      const id = blockElement?.dataset.id;
+      if (!id) return;
+
+      const block = editor.getBlock(id);
+      const url = block && "url" in block.props && typeof block.props.url === "string" ? block.props.url : "";
+      if (!url) return;
+
+      // BlockNote closes its floating file panel whenever the editor selection
+      // changes. Keep this editor-owned panel independent from that selection
+      // so an image click does not make the controls disappear immediately.
+      setSelectedImageId(id);
+      setSelectedImageUrl(url);
+    };
+
+    root.addEventListener("click", openImageProperties);
+    return () => root.removeEventListener("click", openImageProperties);
+  }, [editor]);
+
+  const updateSelectedImageUrl = useCallback((url: string) => {
+    if (!selectedImageId || !normalizedHttpUrl(url)) return;
+    editor.updateBlock(selectedImageId, { props: { url } } as never);
+    setSelectedImageUrl(url);
+  }, [editor, selectedImageId]);
+
+  const replaceSelectedImage = useCallback(async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file || !selectedImageId) return;
+
+    const url = await uploadFile(file);
+    editor.updateBlock(selectedImageId, { props: { url, name: file.name } } as never);
+    setSelectedImageUrl(url);
+    event.target.value = "";
+  }, [editor, selectedImageId, uploadFile]);
+
+  useEffect(() => {
+    const root = editor.domElement;
+    if (!root) return;
+
     const insertBookmarkFromPaste = (event: ClipboardEvent) => {
       const url = normalizedHttpUrl(event.clipboardData?.getData("text/plain") ?? "");
       if (!url) return;
@@ -245,6 +290,22 @@ export default function Editor({ initialBlocks, mentions, onChange }: Props) {
         theme={theme}
         onChange={syncContent}
       ><SuggestionMenuController triggerCharacter="/" getItems={getSlashMenuItems} /><SuggestionMenuController triggerCharacter="@" getItems={getMentionItems} /></BlockNoteView>
+      {selectedImageId && <aside className="image-properties" aria-label="이미지 속성" style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "0.5rem", marginTop: "0.75rem", padding: "0.75rem", border: "1px solid var(--border)", borderRadius: "0.75rem", background: "var(--surface)" }}>
+        <label style={{ display: "flex", alignItems: "center", gap: "0.5rem", flex: "1 1 20rem" }}>
+          <span>이미지 주소</span>
+          <input style={{ minWidth: 0, flex: 1 }} value={selectedImageUrl} onChange={(event) => setSelectedImageUrl(event.target.value)} onBlur={() => updateSelectedImageUrl(selectedImageUrl)} onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              event.preventDefault();
+              updateSelectedImageUrl(selectedImageUrl);
+            }
+          }} />
+        </label>
+        <label className="image-properties-upload" style={{ cursor: "pointer" }}>
+          이미지 바꾸기
+          <input type="file" accept="image/*" onChange={replaceSelectedImage} />
+        </label>
+        <button type="button" onClick={() => setSelectedImageId(null)}>닫기</button>
+      </aside>}
       <ToastMessage message={uploadError} tone="error" />
     </section>
   );

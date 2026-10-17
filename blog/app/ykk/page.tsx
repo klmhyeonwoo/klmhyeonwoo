@@ -11,5 +11,5 @@ export default async function YkkPage({ searchParams }: { searchParams: Promise<
   const initialPost = id ? getEditablePost(id) : null;
   const initialDraft = draft ? getEditableDraft(draft) : null;
   const authenticated = await isAdmin();
-  return <><SiteHeader /><AdminClient key={initialPost?.id ?? initialDraft?.id ?? series ?? "new"} authenticated={authenticated} showAlreadyLoggedIn={authenticated && !id && !draft && !series} initialPost={initialPost} initialDraft={initialDraft} defaultSeriesId={series} posts={getPosts(true)} drafts={getDrafts()} categories={getCategories()} series={getSeries()} /></>;
+  return <><SiteHeader /><AdminClient key={initialPost?.id ?? initialDraft?.id ?? series ?? "new"} authenticated={authenticated} initialPost={initialPost} initialDraft={initialDraft} defaultSeriesId={series} posts={getPosts(true)} drafts={getDrafts()} categories={getCategories()} series={getSeries()} /></>;
 }

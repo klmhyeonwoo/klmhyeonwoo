@@ -28,7 +28,7 @@ type InitialPost = {
 
 type DraftMeta = InitialPost & { updatedAt: string };
 
-type Props = { authenticated: boolean; showAlreadyLoggedIn: boolean; initialPost: InitialPost | null; initialDraft: DraftMeta | null; defaultSeriesId?: string; posts: PostMeta[]; drafts: DraftMeta[]; categories: Category[]; series: Series[] };
+type Props = { authenticated: boolean; initialPost: InitialPost | null; initialDraft: DraftMeta | null; defaultSeriesId?: string; posts: PostMeta[]; drafts: DraftMeta[]; categories: Category[]; series: Series[] };
 
 type Draft = {
   title: string;
@@ -50,7 +50,7 @@ function optionId(name: string, prefix: string) {
   return normalized || `${prefix}-${crypto.randomUUID().slice(0, 8)}`;
 }
 
-export function AdminClient({ authenticated: initiallyAuthenticated, showAlreadyLoggedIn: shouldShowAlreadyLoggedIn, initialPost, initialDraft, defaultSeriesId, posts, drafts, categories: initialCategories, series: initialSeries }: Props) {
+export function AdminClient({ authenticated: initiallyAuthenticated, initialPost, initialDraft, defaultSeriesId, posts, drafts, categories: initialCategories, series: initialSeries }: Props) {
   const initialEntry = initialPost ?? initialDraft;
   const [authenticated, setAuthenticated] = useState(initiallyAuthenticated);
   const [adminPassword, setAdminPassword] = useState("");
@@ -74,7 +74,6 @@ export function AdminClient({ authenticated: initiallyAuthenticated, showAlready
   const [draftStatus, setDraftStatus] = useState("");
   const [publishedPostId, setPublishedPostId] = useState<string | null>(null);
   const [deployment, setDeployment] = useState<{ id: string; version: string; shouldRedirect: boolean } | null>(null);
-  const [showAlreadyLoggedIn, setShowAlreadyLoggedIn] = useState(shouldShowAlreadyLoggedIn);
   const draftKey = `blog-draft:${postId ?? "new"}`;
 
   useEffect(() => {
@@ -100,12 +99,6 @@ export function AdminClient({ authenticated: initiallyAuthenticated, showAlready
       setDraftReady(true);
     }
   }, [draftKey]);
-
-  useEffect(() => {
-    if (!showAlreadyLoggedIn) return;
-    const timer = window.setTimeout(() => setShowAlreadyLoggedIn(false), 3200);
-    return () => window.clearTimeout(timer);
-  }, [showAlreadyLoggedIn]);
 
   useEffect(() => {
     if (!deployment) return;
@@ -299,7 +292,6 @@ export function AdminClient({ authenticated: initiallyAuthenticated, showAlready
 
   return (
     <main className="admin-shell">
-      <ToastMessage message={showAlreadyLoggedIn ? "이미 로그인되어 있습니다." : ""} tone="info" />
       <header className="admin-header">
         <div className="admin-actions">
           {draftStatus && <span className="draft-status">{draftStatus}</span>}

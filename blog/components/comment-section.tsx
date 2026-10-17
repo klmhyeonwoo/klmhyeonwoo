@@ -33,9 +33,6 @@ export function CommentSection() {
   }, []);
 
   return (
-    <section className="comments" aria-label="댓글">
-      <p className="eyebrow">COMMENTS</p>
-      <div ref={container} />
-    </section>
+    <section className="comments" aria-label="댓글"><div ref={container} /></section>
   );
 }

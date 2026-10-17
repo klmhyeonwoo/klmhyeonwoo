@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { useCallback, useEffect, useState } from "react";
 import { Button } from "@base-ui/react/button";
 import { Input } from "@base-ui/react/input";
+import { IconCameraLine, IconXmarkLine } from "@karrotmarket/react-monochrome-icon";
 import type { Profile } from "@/lib/profile";
 
 const Editor = dynamic(() => import("./editor"), { ssr: false });
@@ -71,5 +72,8 @@ export function ProfileEditor({ profile }: { profile: Profile }) {
     }
   }
 
-  return <main className="profile-editor-shell"><header><div><p className="eyebrow">PROFILE</p><h1>프로필 관리</h1></div><Button onClick={save} disabled={saving}>{saving ? "저장 중…" : "저장하기"}</Button></header><div className="profile-fields"><Input value={name} onValueChange={setName} placeholder="이름" aria-label="이름" /><label className="profile-image-upload">프로필 이미지<input type="file" accept="image/*" onChange={(event) => selectProfileImage(event.currentTarget.files?.[0])} disabled={saving} /><span>{pendingImage ? "새 이미지 선택됨" : "이미지 선택"}</span></label>{imagePreview && <div className="profile-image-preview"><img src={imagePreview} alt="프로필 미리보기" /><Button onClick={() => { setPendingImage(null); setImage(""); }}>이미지 제거</Button></div>}</div><section className="profile-editor-intro"><p className="eyebrow">ABOUT</p><p>경력, 작업 방식, 관심사처럼 방문자에게 소개할 내용을 블록으로 자유롭게 작성하세요.</p></section><Editor initialBlocks={profile.blocks} onChange={updateContent} />{message && <p className="notice success">{message}</p>}</main>;
+  return <main className="profile-page profile-editor-page"><section className="profile-card">
+    <div className="profile-edit-avatar">{imagePreview ? <img src={imagePreview} alt="프로필 미리보기" /> : <div className="profile-placeholder">{name.slice(0, 1)}</div>}<label className="profile-image-upload" aria-label="프로필 이미지 변경"><input type="file" accept="image/*" onChange={(event) => selectProfileImage(event.currentTarget.files?.[0])} disabled={saving} /><IconCameraLine size={15} /><span>{pendingImage ? "변경됨" : "변경"}</span></label>{imagePreview && <Button className="profile-image-remove" aria-label="프로필 이미지 제거" onClick={() => { setPendingImage(null); setImage(""); }}><IconXmarkLine size={14} /></Button>}</div>
+    <div className="profile-edit-content"><header><Input className="profile-name-input" value={name} onValueChange={setName} placeholder="이름" aria-label="이름" /><Button onClick={save} disabled={saving}>{saving ? "저장 중…" : "저장하기"}</Button></header><Input className="profile-image-url" type="url" value={pendingImage ? "" : image} onValueChange={(value) => { setPendingImage(null); setImage(value); }} placeholder="프로필 이미지 URL" aria-label="프로필 이미지 URL" /><Editor initialBlocks={profile.blocks} onChange={updateContent} />{message && <p className="notice success">{message}</p>}</div>
+  </section></main>;
 }

@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
+import type { Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "My technical notes",
-  description: "A technical blog written with a block editor.",
+  title: "bloging.",
+  description: "Personal notes and articles.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  interactiveWidget: "resizes-content",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

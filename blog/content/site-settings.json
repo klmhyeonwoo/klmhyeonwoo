@@ -1,0 +1,17 @@
+{
+  "banner": {
+    "enabled": false,
+    "title": "",
+    "action": { "label": "", "href": "" },
+    "backgroundColor": "#171717",
+    "textColor": "#ffffff"
+  },
+  "popup": {
+    "enabled": false,
+    "image": "",
+    "title": "",
+    "description": "",
+    "primaryAction": { "label": "", "href": "" },
+    "secondaryAction": { "label": "", "href": "" }
+  }
+}

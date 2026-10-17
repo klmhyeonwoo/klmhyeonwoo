@@ -26,7 +26,6 @@ export function PostUnlockForm({ id }: { id: string }) {
 
   return (
     <section className="post-lock" aria-labelledby="locked-post-title">
-      <p className="eyebrow">LOCKED POST</p>
       <h1 id="locked-post-title">비밀번호가 필요한 글입니다.</h1>
       <p>글을 작성한 사람에게 받은 비밀번호를 입력해 주세요.</p>
       <form onSubmit={unlock}>

@@ -11,12 +11,13 @@ export async function POST(request: Request) {
   if (!(await isAdmin())) return NextResponse.json({ error: "로그인이 필요합니다." }, { status: 401 });
 
   const body = await request.json().catch(() => null);
-  const { title, id, description, categoryId = "essay", markdown, blocks, isPrivate = false, fromDraft = false, password = "" } = body ?? {};
+  const { title, id, description, categoryId = "essay", seriesId = "", markdown, blocks, isPrivate = false, fromDraft = false, password = "" } = body ?? {};
   if (
     typeof title !== "string" || !title.trim() ||
     (id !== undefined && (typeof id !== "string" || !validPostId.test(id))) ||
     typeof description !== "string" ||
     typeof categoryId !== "string" || !/^[a-z0-9-]{1,64}$/.test(categoryId) ||
+    typeof seriesId !== "string" || (seriesId.length > 0 && !/^[a-z0-9-]{1,64}$/.test(seriesId)) ||
     typeof markdown !== "string" ||
     typeof isPrivate !== "boolean" || typeof fromDraft !== "boolean" || typeof password !== "string" ||
     !Array.isArray(blocks)
@@ -44,6 +45,7 @@ export async function POST(request: Request) {
       id: postId,
       description: description.trim(),
       categoryId,
+      seriesId,
       markdown,
       blocks,
       isPrivate,

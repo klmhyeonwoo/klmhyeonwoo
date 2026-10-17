@@ -2,6 +2,7 @@
 
 import { Button } from "@base-ui/react/button";
 import { useEffect, useState } from "react";
+import { IconMoonLine, IconSunLine } from "@karrotmarket/react-monochrome-icon";
 
 type Theme = "light" | "dark";
 
@@ -28,5 +29,5 @@ export function ThemeToggle() {
     setTheme(nextTheme);
   }
 
-  return <Button type="button" className="theme-toggle" onClick={toggleTheme} aria-label={theme === "dark" ? "라이트 모드로 전환" : "다크 모드로 전환"}>{theme === "dark" ? "☀︎" : "◐"}</Button>;
+  return <Button type="button" className="theme-toggle" onClick={toggleTheme} aria-label={theme === "dark" ? "라이트 모드로 전환" : "다크 모드로 전환"}>{theme === "dark" ? <IconSunLine size={18} /> : <IconMoonLine size={18} />}</Button>;
 }

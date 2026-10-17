@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { postDateValue } from "./post-date";
+import { getSeries } from "./series";
 
 const postsDirectory = path.join(process.cwd(), "content", "posts");
 const draftsDirectory = path.join(process.cwd(), "drafts");
@@ -32,6 +33,8 @@ export type PostMeta = {
   description?: string;
   categoryId: string;
   category: string;
+  seriesId?: string;
+  series?: string;
   excerpt?: string;
   featured: boolean;
   isPrivate: boolean;
@@ -43,6 +46,7 @@ export type EditablePost = {
   title: string;
   description: string;
   categoryId: string;
+  seriesId: string;
   isPrivate: boolean;
   blocks: unknown[];
 };
@@ -64,6 +68,7 @@ function excerptFromMarkdown(markdown: string) {
 export function getPosts(includePrivate = false): PostMeta[] {
   if (!fs.existsSync(postsDirectory)) return [];
   const categories = getCategories();
+  const seriesList = getSeries();
   return fs.readdirSync(postsDirectory)
     .filter((file) => file.endsWith(".mdx"))
     .map((file) => {
@@ -73,6 +78,8 @@ export function getPosts(includePrivate = false): PostMeta[] {
       const image = source.match(/!\[[^\]]*\]\(([^\s)]+)(?:\s+[^)]*)?\)/)?.[1];
       const categoryValue = String(data.category ?? "essay");
       const category = categories.find((item) => item.id === categoryValue || item.name === categoryValue);
+      const seriesValue = typeof data.series === "string" ? data.series : "";
+      const series = seriesList.find((item) => item.id === seriesValue || item.name === seriesValue);
       return {
         id,
         title: String(data.title ?? id),
@@ -81,6 +88,8 @@ export function getPosts(includePrivate = false): PostMeta[] {
         excerpt: data.description ? String(data.description) : data.private === true ? undefined : excerptFromMarkdown(content),
         categoryId: category?.id ?? categoryValue,
         category: category?.name ?? "미분류",
+        seriesId: series?.id,
+        series: series?.name,
         featured: data.featured === true,
         isPrivate: data.private === true,
         thumbnail: data.coverImage ? String(data.coverImage) : image,
@@ -117,7 +126,7 @@ export function getEditablePost(id: string): EditablePost | null {
   try {
     const blocks: unknown = JSON.parse(fs.readFileSync(editorFile, "utf8"));
     if (!Array.isArray(blocks)) return null;
-    return { id: safeId, title: meta.title, description: meta.description ?? "", categoryId: meta.categoryId, isPrivate: meta.isPrivate, blocks };
+    return { id: safeId, title: meta.title, description: meta.description ?? "", categoryId: meta.categoryId, seriesId: meta.seriesId ?? "", isPrivate: meta.isPrivate, blocks };
   } catch {
     return null;
   }
@@ -133,7 +142,7 @@ export function getDrafts(): DraftMeta[] {
       try {
         const draft = JSON.parse(fs.readFileSync(path.join(draftsDirectory, file), "utf8")) as Partial<DraftMeta>;
         if (!Array.isArray(draft.blocks) || typeof draft.title !== "string" || typeof draft.description !== "string") return [];
-        return [{ id, title: draft.title, description: draft.description, categoryId: typeof draft.categoryId === "string" ? draft.categoryId : "essay", isPrivate: draft.isPrivate === true, blocks: draft.blocks, updatedAt: typeof draft.updatedAt === "string" ? draft.updatedAt : "" }];
+        return [{ id, title: draft.title, description: draft.description, categoryId: typeof draft.categoryId === "string" ? draft.categoryId : "essay", seriesId: typeof draft.seriesId === "string" ? draft.seriesId : "", isPrivate: draft.isPrivate === true, blocks: draft.blocks, updatedAt: typeof draft.updatedAt === "string" ? draft.updatedAt : "" }];
       } catch {
         return [];
       }

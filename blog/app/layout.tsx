@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { Viewport } from "next";
 import "./globals.css";
+import "./image-containment.css";
 import { ToastProvider } from "@/components/toast-provider";
 
 function getSiteUrl() {

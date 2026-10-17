@@ -1,0 +1,39 @@
+/* Uploaded media must never make the page wider than its reading column. */
+.prose img {
+  display: block;
+  height: auto;
+  max-inline-size: 100%;
+}
+
+.editor [data-file-block] {
+  max-inline-size: 100%;
+}
+
+.editor [data-file-block] .bn-file-block-content-wrapper {
+  box-sizing: border-box;
+  max-inline-size: 100% !important;
+}
+
+.editor [data-file-block] .bn-visual-media {
+  block-size: auto;
+  max-inline-size: 100% !important;
+}
+
+/* BlockNote adds its own quote border. Style that inner element rather than
+   the outer block so the editor matches the single line on published posts. */
+.editor [data-content-type="quote"] {
+  background: transparent;
+  border-inline-start: 0;
+  border-radius: 0;
+  margin: 0 0 24px;
+  padding: 0;
+}
+
+.editor [data-content-type="quote"] blockquote {
+  background: var(--interactive-subtle);
+  border-inline-start: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  color: var(--ink);
+  margin: 0;
+  padding: 14px 18px;
+}

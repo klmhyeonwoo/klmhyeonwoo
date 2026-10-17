@@ -1,7 +1,10 @@
 import Link from "next/link";
+import { isAdmin } from "@/lib/auth";
 import { ThemeToggle } from "./theme-toggle";
 
-export function SiteHeader() {
+export async function SiteHeader() {
+  const authenticated = await isAdmin();
+
   return (
     <header className="shared-header">
       <div className="shared-header-inner">
@@ -10,7 +13,7 @@ export function SiteHeader() {
           <nav aria-label="주요 메뉴">
             <Link href="/#all">모든 글</Link>
             <Link href="/#topics">주제별 보기</Link>
-            <Link href="/admin">글쓰기</Link>
+            {authenticated && <Link href="/ykk">글쓰기</Link>}
           </nav>
           <ThemeToggle />
         </div>

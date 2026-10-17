@@ -2,28 +2,20 @@ import { randomUUID } from "crypto";
 
 type Post = {
   title: string;
-  slug: string;
+  id: string;
   description: string;
   markdown: string;
   blocks: unknown[];
+  isPrivate: boolean;
+  passwordHash?: string;
 };
 
-type GitHubConfig = {
-  owner: string;
-  repo: string;
-  branch: string;
-  token: string;
-};
+type Draft = Omit<Post, "passwordHash"> & { updatedAt: string };
+type GitHubConfig = { owner: string; repo: string; branch: string; token: string };
 
 function config(): GitHubConfig {
-  const {
-    GITHUB_OWNER: owner,
-    GITHUB_REPO: repo,
-    GITHUB_BRANCH: branch = "main",
-    GITHUB_TOKEN: token,
-  } = process.env;
-  if (!owner || !repo || !token)
-    throw new Error("GitHub environment variables are missing");
+  const { GITHUB_OWNER: owner, GITHUB_REPO: repo, GITHUB_BRANCH: branch = "main", GITHUB_TOKEN: token } = process.env;
+  if (!owner || !repo || !token) throw new Error("GitHub environment variables are missing");
   return { owner, repo, branch, token };
 }
 
@@ -34,41 +26,24 @@ function apiPath(path: string) {
 
 async function existingSha(path: string) {
   const { branch, token } = config();
-  const response = await fetch(
-    `${apiPath(path)}?ref=${encodeURIComponent(branch)}`,
-    {
-      headers: {
-        Accept: "application/vnd.github+json",
-        Authorization: `Bearer ${token}`,
-      },
-      cache: "no-store",
-    },
-  );
+  const response = await fetch(`${apiPath(path)}?ref=${encodeURIComponent(branch)}`, {
+    headers: { Accept: "application/vnd.github+json", Authorization: `Bearer ${token}` },
+    cache: "no-store",
+  });
   if (response.status === 404) return undefined;
   if (!response.ok) throw new Error(`GitHub read failed: ${response.status}`);
   return ((await response.json()) as { sha: string }).sha;
 }
 
-async function writeFile(
-  path: string,
-  content: string | Buffer,
-  message: string,
-) {
+async function writeFile(path: string, content: string | Buffer, message: string) {
   const { branch, token } = config();
   const sha = await existingSha(path);
   const response = await fetch(apiPath(path), {
     method: "PUT",
-    headers: {
-      Accept: "application/vnd.github+json",
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
+    headers: { Accept: "application/vnd.github+json", Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
     body: JSON.stringify({
       message,
-      content:
-        typeof content === "string"
-          ? Buffer.from(content).toString("base64")
-          : content.toString("base64"),
+      content: typeof content === "string" ? Buffer.from(content).toString("base64") : content.toString("base64"),
       branch,
       ...(sha ? { sha } : {}),
     }),
@@ -76,31 +51,28 @@ async function writeFile(
   if (!response.ok) throw new Error(`GitHub write failed: ${response.status}`);
 }
 
+async function deleteFile(path: string, message: string) {
+  const { branch, token } = config();
+  const sha = await existingSha(path);
+  if (!sha) return;
+  const response = await fetch(apiPath(path), {
+    method: "DELETE",
+    headers: { Accept: "application/vnd.github+json", Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ message, sha, branch }),
+  });
+  if (!response.ok) throw new Error(`GitHub delete failed: ${response.status}`);
+}
+
 function imageExtension(name: string, type: string) {
   const fromName = name.split(".").pop()?.toLowerCase();
   if (fromName && /^[a-z0-9]{1,8}$/.test(fromName)) return fromName;
-  return (
-    (
-      {
-        "image/jpeg": "jpg",
-        "image/png": "png",
-        "image/gif": "gif",
-        "image/webp": "webp",
-        "image/svg+xml": "svg",
-      } as Record<string, string>
-    )[type] ?? "bin"
-  );
+  return ({ "image/jpeg": "jpg", "image/png": "png", "image/gif": "gif", "image/webp": "webp", "image/svg+xml": "svg" } as Record<string, string>)[type] ?? "bin";
 }
 
-export async function saveImage(image: {
-  name: string;
-  type: string;
-  bytes: Buffer;
-}) {
+export async function saveImage(image: { name: string; type: string; bytes: Buffer }) {
   const { owner, repo, branch } = config();
-  const suffix = randomUUID().slice(0, 8);
-  const filename = `${Date.now()}-${suffix}.${imageExtension(image.name, image.type)}`;
-  const path = `public/uploads/${filename}`;
+  const filename = `${Date.now()}-${randomUUID().slice(0, 8)}.${imageExtension(image.name, image.type)}`;
+  const path = `blog/public/uploads/${filename}`;
   await writeFile(path, image.bytes, `Upload image: ${filename}`);
   return `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
 }
@@ -111,17 +83,21 @@ function yaml(value: string) {
 
 export async function savePost(post: Post) {
   const date = new Date().toISOString().slice(0, 10);
-  const mdx = `---\ntitle: ${yaml(post.title)}\ndate: ${date}\ndescription: ${yaml(post.description)}\n---\n\n${post.markdown}\n`;
+  const protection = post.isPrivate && post.passwordHash ? `private: true\npasswordHash: ${yaml(post.passwordHash)}\n` : "private: false\n";
+  const mdx = `---\ntitle: ${yaml(post.title)}\ndate: ${date}\ndescription: ${yaml(post.description)}\n${protection}---\n\n${post.markdown}\n`;
+  await writeFile(`blog/editor-data/${post.id}.json`, JSON.stringify(post.blocks, null, 2), `Save editor data: ${post.title}`);
+  await writeFile(`blog/content/posts/${post.id}.mdx`, mdx, `Publish: ${post.title}`);
+}
 
-  // ponytail: files are committed separately; use Git Data API for an atomic multi-file commit if that ever matters.
-  await writeFile(
-    `editor-data/${post.slug}.json`,
-    JSON.stringify(post.blocks, null, 2),
-    `Save editor data: ${post.title}`,
-  );
-  await writeFile(
-    `blog/content/posts/${post.slug}.mdx`,
-    mdx,
-    `🎉 New Post, ${post.title}`,
-  );
+export async function saveDraft(draft: Draft) {
+  await writeFile(`blog/drafts/${draft.id}.json`, JSON.stringify(draft, null, 2), `Save draft: ${draft.title || "Untitled"}`);
+}
+
+export async function deleteDraft(id: string, title: string) {
+  await deleteFile(`blog/drafts/${id}.json`, `Delete draft: ${title || "Untitled"}`);
+}
+
+export async function deletePost(id: string, title: string) {
+  await deleteFile(`blog/content/posts/${id}.mdx`, `Delete post: ${title}`);
+  await deleteFile(`blog/editor-data/${id}.json`, `Delete editor data: ${title}`);
 }

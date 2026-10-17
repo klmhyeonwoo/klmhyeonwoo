@@ -4,7 +4,7 @@ import "@blocknote/core/fonts/inter.css";
 import "@blocknote/ariakit/style.css";
 import { BlockNoteView } from "@blocknote/ariakit";
 import { useCreateBlockNote } from "@blocknote/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 type Props = {
   initialBlocks?: unknown[];
@@ -12,6 +12,7 @@ type Props = {
 };
 
 export default function Editor({ initialBlocks, onChange }: Props) {
+  const [theme, setTheme] = useState<"light" | "dark">("light");
   const editor = useCreateBlockNote({
     initialContent: initialBlocks && initialBlocks.length > 0 ? initialBlocks as never : undefined,
     uploadFile: async (file) => {
@@ -28,10 +29,20 @@ export default function Editor({ initialBlocks, onChange }: Props) {
     onChange(editor.document, editor.blocksToMarkdownLossy(editor.document));
   }, [editor, onChange]);
 
+  useEffect(() => {
+    const syncTheme = () => setTheme(document.documentElement.dataset.theme === "dark" ? "dark" : "light");
+    syncTheme();
+
+    const observer = new MutationObserver(syncTheme);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="editor" aria-label="본문 편집기">
       <BlockNoteView
         editor={editor}
+        theme={theme}
         onChange={() => onChange(editor.document, editor.blocksToMarkdownLossy(editor.document))}
       />
     </section>

@@ -1,0 +1,379 @@
+[
+  {
+    "id": "0473ed44-f12d-4aa6-900c-00bc47fb44c0",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "글을 시작하며",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "0d4c090f-07c0-4ac6-9405-5fad577c4610",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "사내 일부 프로젝트에서는 타입스크립트를 사용하고 있지만, 위협 인텔리전스 플랫폼의 서비스는 자바스크립트로 이루어져있다. 자바스크립트에서 점점 프로젝트가 커지면 커질수록 코드 추적이나, 함수의 매개변수가 어떤 것들이 있는지 파악하기 어려워진다는 특징이 있는데 이 때문에 타입 정의에 대한 중요성이 상당히 크게 느껴졌다. 아마 이 포스팅은 기존 자바스크립트의 JSDOC을 활발하게 사용하고 있는 조직이나, 타입스크립트를 점진적으로 도입하고 있는 조직들에게 도움이 될만한 포스팅이라고 생각이 든다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ffe92f12-3122-4358-9966-5ccc844613fb",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "자바스크립트의 타입 체킹에 대한 중요성이 왜 커지고 있을까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5f14bc5a-436f-49d8-842b-ae1d24309a2c",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "서비스가 성장하면 성장할수록 코드는 방대해지고, 또 기능이 많아질수록 의존되는 코드 또한 많아지기 마련이다. 이때 한 개발자가 여러 기능의 코드를 모두 기억할 수는 없기 때문에 어떠한 함수가 있다고 가정했을 때, 해당 함수가 어떤 역할과 목적을 가지고 있는지 파악하기 힘들다는 단점이 있다. 코드를 추적하고 추적한 끝에 함수의 파라미터들의 타입과 리턴 등의 여러 요소들을 파악하면 정말 좋겠지만, 의존성이 정말 강한 함수의 경우에는 추적하는데 많은 시간이 소요될 뿐만 아니라, 휴먼 에러로 인해 잘못된 타입을 기재한다거나 잘못 이해한 리턴 값으로 서비스에 장애를 초래할 수 있다. 자바스크립트는 타입에 대한 선언이 정말 자유롭기 때문이다. 대규모 서비스일수록 타입 시스템의 필요성이 정말 중요하다고 생각했고, 휴먼 에러를 줄이고 더 빠르게 타입을 추적하기 위해 중요성이 커지고 있다. 아마 요 근래 프론트엔드 서비스들을 보면 타입스크립트를 도입한 이유 중 주된 이유가 이 이유가 아닐까 싶다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1735dbd8-7106-465f-a4a2-b898910dffc7",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "타입스크립트를 도입하기에는 리소스가 부족하고, 당장 자바스크립트를 이용해야할 때",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ce403ab8-8af6-4c6c-96ec-032c3f506779",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "타입스크립트 세팅을 하기에는 당장 비즈니스 환경에서 무언가 사이드 이펙트가 발생할 수 있고, 리소스가 부족해 타입스크립트를 도입하지 못하는 조직이 있을 수 있다. ~물론 초과 근무로 조금 더 시간을 투자해서 프로젝트의 전반적인 부분을 교체하는 것도 좋지만, 업무 내의 시간을 효율적으로 사용하는 것도 정말 중요하다고 생각하기 때문에~ 그럴 경우에는 점진적으로 타입스크립트를 도입하는 방법 밖에 없다. 타입스크립트를 프로젝트 전반적으로 모두 교체하는 것이 아닌 JSDOC으로 타입에 대한 인터페이스들을 정의하고, 타입스크립트를 도입하는 방법이 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6c49ce9e-69f7-4fc0-bf6d-8395e335c6e6",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "타입스크립트 2.3부터 유형 주석이 존재하는 기존 자바스크립트 코드를 분석할 수 있도록 지원하기 시작했다. 자바스크립트에서 타입스크립트 분석을 실행하기 위해서는 VSCode 에디터 상에서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "@ts-check",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 라는 텍스트가 있는 주석을 파일 제일 시작 부분에 추가만 하면 된다. 그런 다음 파일의 아무 곳에서 타입스크립트의 JSDOC 유형의 주석을 추가하면 된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c4eb14c3-3f63-4a7c-abc0-2e5c76f55620",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// @ts-check",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e641aa0a-0cd2-4381-b50e-a0448f41834a",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "타입스크립트가 내장된 VSCode 에서는 이러한 주석을 자동으로 감지하여 사용자가 기대하는대로 수행할 수 있다. 아쉽게도 웹스톰이나 인텔리제이와 같은 다른 IDE에서는 안되는 것 같은데.. 혹여나 되시는 분들은 댓글에 공유해주세요 : )",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7f2b923b-8c8a-4d36-9d90-e66445c45bd4",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// @ts-check\n\n/**\n* @typedef { Object } PersonType\n* @property { string } name\n* @property { string } hobby\n*/\n \n/**\n* @type {{ person : PersonType }}\n*/\nconst person = { name: 'hyeonwoo', hobby: 'running' };",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ff4c0a31-c48e-419b-9760-8a398439a583",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "유용하고 자주 사용하는 JSDOC 문법",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "03e99523-64f3-47ec-ae6b-d87d370b5d8a",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "· ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "@ts-check",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " : 자바스크립트 파일에서도 타입스크립트 타입 체크를 켤 수 있는 지시문이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c951560e-4999-4349-af01-0cb07fc56dd9",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "· ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "@typedef",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " : 새로운 \"타입 이름\"을 만드는 선언이다 (타입스크립트의 interface, type 과 같은 타입 선언같은 친구같다)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "095d2c79-9707-432b-bf05-82d914331b96",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "· ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "@property",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " : @typedef 안에 들어가는 각 파라미터들의 \"필드 정의\" 선언이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ef15dfb2-6bd0-483b-8eaf-4e56394a2852",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "· ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "@type",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " : 특정 변수 · 상수 · 리턴 값에 타입을 붙이는 문법이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b3b3e354-ad6e-4580-b79c-49093e258f1c",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "· ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "@param",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " : 함수의 파라미터 타입 지정한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "62745eb4-fc01-42d1-817c-9a59b3734c61",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "· ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "@returns",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " : 함수의 리턴 타입을 결정한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  }
+]

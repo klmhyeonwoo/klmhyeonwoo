@@ -2,16 +2,25 @@
   "banner": {
     "enabled": false,
     "title": "",
-    "action": { "label": "", "href": "" },
+    "action": {
+      "label": "",
+      "href": ""
+    },
     "backgroundColor": "#171717",
     "textColor": "#ffffff"
   },
   "popup": {
-    "enabled": false,
-    "image": "",
-    "title": "",
-    "description": "",
-    "primaryAction": { "label": "", "href": "" },
-    "secondaryAction": { "label": "", "href": "" }
+    "enabled": true,
+    "image": "https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/main/blog/public/uploads/1792233318142-886be640.jpg",
+    "title": "새로운 블로그 시작하기",
+    "description": "어서오세요 반갑습니당~",
+    "primaryAction": {
+      "label": "",
+      "href": ""
+    },
+    "secondaryAction": {
+      "label": "",
+      "href": ""
+    }
   }
 }

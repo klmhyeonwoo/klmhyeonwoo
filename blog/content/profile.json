@@ -1,7 +1,7 @@
 {
   "name": "현우",
   "image": "https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/main/blog/public/uploads/1792216650443-e3ea43e2.png",
-  "markdown": "안녕하세요, 4년차 프론트엔드 개발자 김현우입니다.\n",
+  "markdown": "안녕하세요, 프론트엔드 엔지니어 김현우입니다.\n\n\n",
   "blocks": [
     {
       "id": "ee00f4ac-3465-40da-b8b8-f9e7ee66da4b",
@@ -14,10 +14,21 @@
       "content": [
         {
           "type": "text",
-          "text": "안녕하세요, 4년차 프론트엔드 개발자 김현우입니다.",
+          "text": "안녕하세요, 프론트엔드 엔지니어 김현우입니다.",
           "styles": {}
         }
       ],
+      "children": []
+    },
+    {
+      "id": "0e4191cb-73a2-4448-bdbe-6b0574c20c44",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [],
       "children": []
     }
   ]

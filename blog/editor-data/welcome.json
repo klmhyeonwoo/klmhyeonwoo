@@ -1,8 +1,0 @@
-[
-  {
-    "id": "welcome",
-    "type": "paragraph",
-    "props": { "textColor": "default", "backgroundColor": "default", "textAlignment": "left" },
-    "content": "이 파일은 블록 편집기 원본 데이터를 보관하는 자리입니다."
-  }
-]

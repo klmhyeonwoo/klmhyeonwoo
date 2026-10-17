@@ -1,7 +1,7 @@
 {
   "name": "현우",
   "image": "https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/main/blog/public/uploads/1792216650443-e3ea43e2.png",
-  "markdown": "안녕하세요, 프론트엔드 엔지니어 김현우입니다.\n\n\n",
+  "markdown": "안녕하세요, 프론트엔드 엔지니어 김현우입니다. 2023년부터 소프트웨어를 개발해왔고, 현재도 프론트엔드 엔지니어로 일하고 있습니다. 웹 에디터를 비롯해 보안 서비스를 거치며 사용자 화면부터 배포 환경까지 다뤘습니다. 현재는 서버에 관심이 많아 노드 기반의 백엔드를 학습하고 있습니다.\n\n\n\n단순히 스펙 문서만을 보고 개발하는 사람이 아닌, 팀원들과  항상 더 나은 방향성을 위해 고민하는 것을 좋아합니다. 또, 다양한 개발문화를 팀에 도입하며 변화시킨 것처럼 소속감과 선한 영향력을 공유하는 것을 좋아합니다. 최근에는 업무에서 에이전트의 도입을 적극적으로 하고 있으며 AI*(V0, Copilot, Claude, etc)*를 통해 효율적으로 생산성을 올리는데 관심이 많습니다.\n\n\n\n\n\n\n\n\n",
   "blocks": [
     {
       "id": "ee00f4ac-3465-40da-b8b8-f9e7ee66da4b",
@@ -14,10 +14,83 @@
       "content": [
         {
           "type": "text",
-          "text": "안녕하세요, 프론트엔드 엔지니어 김현우입니다.",
+          "text": "안녕하세요, 프론트엔드 엔지니어 김현우입니다. 2023년부터 소프트웨어를 개발해왔고, 현재도 프론트엔드 엔지니어로 일하고 있습니다. 웹 에디터를 비롯해 보안 서비스를 거치며 사용자 화면부터 배포 환경까지 다뤘습니다. 현재는 서버에 관심이 많아 노드 기반의 백엔드를 학습하고 있습니다.",
           "styles": {}
         }
       ],
+      "children": []
+    },
+    {
+      "id": "09105a28-d0b0-447f-a708-ea902dac3961",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [],
+      "children": []
+    },
+    {
+      "id": "d9228d84-f786-4b61-b9d6-0803c1fbc527",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "단순히 스펙 문서만을 보고 개발하는 사람이 아닌, 팀원들과  항상 더 나은 방향성을 위해 고민하는 것을 좋아합니다. 또, 다양한 개발문화를 팀에 도입하며 변화시킨 것처럼 소속감과 선한 영향력을 공유하는 것을 좋아합니다. 최근에는 업무에서 에이전트의 도입을 적극적으로 하고 있으며 AI",
+          "styles": {}
+        },
+        {
+          "type": "text",
+          "text": "(V0, Copilot, Claude, etc)",
+          "styles": {
+            "italic": true
+          }
+        },
+        {
+          "type": "text",
+          "text": "를 통해 효율적으로 생산성을 올리는데 관심이 많습니다.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "ee750a5b-cc5b-4852-b917-f5c253150c7a",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [],
+      "children": []
+    },
+    {
+      "id": "8665ec82-b28e-42e8-9908-ed0ba0500994",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [],
+      "children": []
+    },
+    {
+      "id": "aa665f7a-143c-4b05-8eb5-24c11f216b7a",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [],
       "children": []
     },
     {

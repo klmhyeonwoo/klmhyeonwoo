@@ -1,0 +1,112 @@
+---
+title: "좋은 프로젝트 구조는 어떤 방식으로 구성해야할까?"
+date: 2026-10-17
+description: ""
+category: "category-e331519f"
+series: "-"
+private: false
+---
+
+## 글을 시작하며
+
+사내에서 백오피스 프론트엔드 프로젝트에 타입스크립트가 적용되면서 내부 컨벤션이 정의되며, 구조에 대해 한번 더 생각할 기회가 있었다. 이 과정에서 초기 사내 백오피스 프론트엔드 프로젝트의 폴더 구조는 아래와 같이 도메인 별 1:1 매핑되는 구조로 가져고 있었다. 프로젝트를 진행하다보니 이 구조가 기능 도메인이 점차 커질수록 많은 문제점을 야기한다는 것을 알게되었다.
+
+```javascript
+src
+    api
+        - common
+            - requestInterceptor.js
+        - lookAlike.js
+        - intelligence.js
+        ...
+    views
+        - intelligence
+            - intelligenceView.js
+            - intelligenceList.js
+            ...
+        - lookAlike
+            - lookAlikeView.js
+            - intelligenceList.js
+            ...
+        ...
+    components
+        - intelligence
+            - MetaInfo.vue
+            - ThreatActorBadges.vue
+            ...
+        - lookAlike
+            - similarDomainSlide.vue
+            - similarDomainGrid.vue
+            ...
+    composable
+        - useLookAlike.vue
+        - useIntelligence.vue
+        ...
+    ...
+```
+
+위에 코드는 실제 프로젝트로 기존에 구성되어있던 구조이다. 초기에는 프로젝트 도메인 별로 구분이 되어있다는 느낌을 받으면서 직관적이고 모든 API는 `api/` 폴더 안에, 그리고 모든 페이지를 구성하는 뷰(페이지)는 `views/` 폴더 안으로 구성하면되니 일관성을 확보할 수 있었다. 다만 점차 프로젝트의 기능 별 도메인이 많아지면서 백오피스에서 관리해야하는 영역들이 많아지고 있음을 느꼈다. 그리고 이런 문제점들이 발생했다.
+
+* 기능 별 도메인이 추가될 때마다 `views` 폴더 안에 관련 폴더를 만들어주고, `api` , `components` , `composable` 과 관련된 폴더들에서도 동일한 이름으로 만들어줘야한다.
+  * 이 과정에서 네이밍 규칙이나, `lookAlike` 라는 기능 도메인을 `lookAlikeDomain` 과 같이 자유분방한 이름으로 통일성이 지켜지지 않는 경우가 있다. `components` , `util` 과 같은 우리가 평소 쓸만한 폴더 명이 아니기도 하면서, 익숙하지 않기 때문이다.
+  * 기능이 2~30개 정도가 되면 한 `views` 폴더 안에서 해당 컴포넌트를 찾기 위해서 여러 파일들을 탐색해야하는 경우가 생기는데, 이 과정이 점점 오래 걸리기 시작한다.
+  * 기능을 수정할 때도 동일하다. `views` 폴더에서 컴포넌트로 이동을 했다가 또 `views` 파일로 이동을 하는 반복적인 과정들이 생긴다.
+
+레이어(기술 중심) 폴더로 설계를 하다보니, 각 폴더를 "무엇을 하는가" 에 따라 분류하면서 낮은 응집도와 확장성, 그리고 네이밍 중복에 대한 문제가 발생한다.
+
+## 어떻게 해결할 수 있을까?
+
+처음 백오피스 구조를 살펴보면 여러 컴포넌트들과 컴포저블들은 궁극적으로 `views` 폴더 안에 존재하는 기능 도메인 파일을 위해 구성되는 여러 요소들이다. 이 목적성에 따라 `views` 를 기점으로, 그러니까 각 기능 별 도메인을 기준으로 폴더를 구성한다.
+
+`Intelligence` 기능 도메인을 구현하기 위해 `api` , `components` , `composable` 폴더 및 파일들이 존재하게 되는 것이다. 이런 구조로 개발을 진행하게 되면 초기 폴더 구성 및 체계를 구조화하는데 시간이 조금은 걸릴 수 있겠지만, 기능 별 도메인 단위가 커지더라도 `Intelligence` 기능 도메인을 구현하기 위해 다른 트리들의 폴더들을 일일히 보지 않아도 되는 장점을 얻을 수 있다. `Intelligence` 기능 도메인의 `views` 폴더만 펼치면 이를 구성하기 위한 관련 요소들이 모두 노출되기 때문이다.
+
+```javascript
+src
+    common
+        - api
+            - requestInterceptor.ts
+        - components
+            - Button.vue
+            ...
+        - types
+            ...
+        - utils
+            ...
+    views
+        - intelligence
+            - pages
+                - IntelligeceView.ts
+                - IntelligeceList.ts
+            - api
+                - intelligence.ts
+            - components
+                - MetaInfo.vue
+                - ThreatActorBadges.vue
+            - composable
+                - useLookAlike.vue
+            - types
+                - dto.ts
+                - model.ts
+            utils.ts
+            constants.ts
+            ...
+        - lookAlike
+            - pages
+                - lookAlikeView.js
+            - api
+                - lookAlike.ts
+            - components
+                - similarDomainSlide.vue
+                - similarDomainGrid.vue
+            - composable
+                - useLookAlike.vue
+```
+
+위의 코드처럼 이렇게 Featured-based(기능 중심)로 폴더 구조를 설계하게 되면 관련 코드가 한 곳에 모여있어 기능 수정 시에 탐색 시간을 단축할 수 있고, 각 기능 도메인의 범위가 명확하게 정의되어있어서 협업 시에도 충돌을 최소화 할 수 있다. 또 새로운 기능이 추가될 때 독립적인 폴더만을 구성하면 되기 때문에 편리하게 사용할 수 있다고 생각했다.
+
+## 글을 마치며
+
+좋은 폴더 구조를 구성하기 위해 현재 백오피스 프론트엔드 프로젝트의 구조를 신규 체계와 같이 변경을 진행하고 있다. 더 좋은 방법이 생각난다면 적용을 해보겠지만, 실제 개발을 진행하면서 여러 폴더를 움직이는 것이 아닌 하나의 폴더에서 구성된 트리들만을 보니 개발 피로도가 확실히 줄어들었다.
+
+프로젝트를 진행하면서 정말 여러 변천사들을 겪는다. 이 구조가 좋은 구조라고 생각이 들었지만, 또 몇 년 후에는 더 좋은 구조라고 생각이 드는 것들이 또 새롭게 등장한다. 물론 많은 테크 기업들이 공감하는 구조도 물론 좋은 구조라고 할 수 있겠지만, **당장 내가 속한 조직에서 정말 적합한 구조를 채택하고 도입하는 것이 정말 좋은 구조**가 아닐까라는 생각을 한번 더 하게 되었던 순간이었다.
+

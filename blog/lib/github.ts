@@ -9,6 +9,7 @@ type Post = {
   categoryId: string;
   seriesId: string;
   publishedAt: string;
+  updatedAt: string;
   markdown: string;
   blocks: unknown[];
   isPrivate: boolean;
@@ -90,7 +91,7 @@ export async function savePost(post: Post) {
   const date = post.publishedAt.slice(0, 10);
   const protection = post.isPrivate && post.passwordHash ? `private: true\npasswordHash: ${yaml(post.passwordHash)}\n` : "private: false\n";
   const series = post.seriesId ? `series: ${yaml(post.seriesId)}\n` : "";
-  const mdx = `---\ntitle: ${yaml(post.title)}\ndate: ${date}\npublishedAt: ${yaml(post.publishedAt)}\ndescription: ${yaml(post.description)}\ncategory: ${yaml(post.categoryId)}\n${series}${protection}---\n\n${post.markdown}\n`;
+  const mdx = `---\ntitle: ${yaml(post.title)}\ndate: ${date}\npublishedAt: ${yaml(post.publishedAt)}\nupdatedAt: ${yaml(post.updatedAt)}\ndescription: ${yaml(post.description)}\ncategory: ${yaml(post.categoryId)}\n${series}${protection}---\n\n${post.markdown}\n`;
   await writeFile(`blog/editor-data/${post.id}.json`, JSON.stringify(post.blocks, null, 2), `Save editor data: ${post.title}`);
   await writeFile(`blog/content/posts/${post.id}.mdx`, mdx, `Publish: ${post.title}`);
   return postSourceVersion(mdx);

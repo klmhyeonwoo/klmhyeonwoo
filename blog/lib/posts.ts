@@ -32,6 +32,7 @@ export type PostMeta = {
   title: string;
   date: string;
   publishedAt: string;
+  updatedAt?: string;
   description?: string;
   categoryId: string;
   category: string;
@@ -87,6 +88,7 @@ export function getPosts(includePrivate = false): PostMeta[] {
         title: String(data.title ?? id),
         date: postDateValue(data.date),
         publishedAt: postPublishedAtValue(data.publishedAt ?? data.date) ?? "",
+        updatedAt: postPublishedAtValue(data.updatedAt),
         description: data.description ? String(data.description) : undefined,
         excerpt: data.description ? String(data.description) : data.private === true ? undefined : excerptFromMarkdown(content),
         categoryId: category?.id ?? categoryValue,
@@ -111,6 +113,19 @@ export function getPost(id: string) {
   if (safeId !== id) return null;
   const file = path.join(postsDirectory, `${safeId}.mdx`);
   return fs.existsSync(file) ? fs.readFileSync(file, "utf8") : null;
+}
+
+export function getPostBlocks(id: string): unknown[] {
+  const safeId = safePostId(id);
+  if (safeId !== id) return [];
+  const editorFile = path.join(process.cwd(), "editor-data", `${safeId}.json`);
+  if (!fs.existsSync(editorFile)) return [];
+  try {
+    const blocks: unknown = JSON.parse(fs.readFileSync(editorFile, "utf8"));
+    return Array.isArray(blocks) ? blocks : [];
+  } catch {
+    return [];
+  }
 }
 
 export function getPostPublishedAt(id: string) {

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { isAdmin } from "@/lib/auth";
-import { formatPostDate } from "@/lib/post-date";
+import { formatPostDate, formatPostUpdatedLabel, postWasUpdated } from "@/lib/post-date";
 import { getPosts } from "@/lib/posts";
 import { getCategories } from "@/lib/posts";
 import { getProfile } from "@/lib/profile";
@@ -31,7 +31,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                   {profile.image ? <img src={profile.image} alt="" /> : <span className="kb-post-avatar">{profile.name.slice(0, 1)}</span>}
                   <div>
                     <strong>{profile.name}</strong>
-                    <p>{formatPostDate(post.date)}{post.series && <><span>·</span> {post.series}</>}{post.isPrivate && " 🔒"}</p>
+                    <p>{formatPostDate(post.date)}{postWasUpdated(post.publishedAt, post.updatedAt) && <><span>·</span> {formatPostUpdatedLabel(post.updatedAt)}</>}{post.series && <><span>·</span> {post.series}</>}{post.isPrivate && " 🔒"}</p>
                   </div>
                 </div>
                 <h2>{post.title}</h2>

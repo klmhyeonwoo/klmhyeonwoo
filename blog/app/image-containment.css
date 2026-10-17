@@ -37,3 +37,434 @@
   margin: 0;
   padding: 14px 18px;
 }
+
+/* Public MDX callouts mirror the editor block instead of inheriting quote UI. */
+.prose .post-callout {
+  align-items: flex-start;
+  background: var(--interactive-subtle);
+  border: 0;
+  border-radius: 12px;
+  color: var(--ink);
+  display: flex;
+  gap: 10px;
+  margin: 24px 0;
+  padding: 13px 15px;
+}
+
+.prose .post-callout-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-size: 20px;
+  line-height: 1.35;
+  margin-top: 1px;
+}
+
+.prose .post-callout-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.prose .post-callout-content > :first-child {
+  margin-top: 0;
+}
+
+.prose .post-callout-content > :last-child {
+  margin-bottom: 0;
+}
+
+/* Article identity follows the title; author details remain available without
+   competing with it. */
+.article-header {
+  margin-bottom: 2.5rem;
+}
+
+.article-header > h1 {
+  margin: 0 0 1.5rem;
+}
+
+.article-meta-row {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.article-meta-row .author-byline {
+  margin: 0;
+}
+
+.article-header .lede {
+  margin: 1.5rem 0 0;
+}
+
+.post-link-copy {
+  align-items: center;
+  background: var(--interactive-subtle);
+  border: 0;
+  border-radius: 999px;
+  color: var(--muted);
+  cursor: pointer;
+  display: inline-flex;
+  flex: 0 0 auto;
+  height: 2.5rem;
+  justify-content: center;
+  transition: background 160ms ease, color 160ms ease, transform 100ms ease-out;
+  width: 2.5rem;
+}
+
+.post-link-copy:hover {
+  background: var(--ink);
+  color: var(--surface);
+}
+
+.post-link-copy:active {
+  transform: scale(0.94);
+}
+
+.post-link-copy span {
+  display: none;
+}
+
+.prose a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent) 46%, transparent);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.16em;
+}
+
+.prose a:hover {
+  text-decoration-color: currentColor;
+}
+
+.external-link-backdrop {
+  align-items: center;
+  background: color-mix(in srgb, var(--ink) 42%, transparent);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: 1.25rem;
+  position: fixed;
+  z-index: 80;
+}
+
+.external-link-dialog {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  box-shadow: 0 1.5rem 4rem color-mix(in srgb, var(--ink) 24%, transparent);
+  max-width: 23rem;
+  padding: 1.5rem;
+  width: 100%;
+}
+
+.external-link-dialog h2 {
+  font-size: 1.125rem;
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.external-link-dialog > p:not(.external-link-kicker) {
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  margin: 0.5rem 0 1.25rem;
+  overflow-wrap: anywhere;
+}
+
+.external-link-kicker {
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 650;
+  margin: 0 0 0.5rem;
+}
+
+.external-link-dialog > div {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.external-link-dialog :is(button, a) {
+  align-items: center;
+  border: 0;
+  border-radius: 0.65rem;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 0.875rem;
+  font-weight: 600;
+  justify-content: center;
+  min-height: 2.5rem;
+  padding: 0 0.875rem;
+  text-decoration: none;
+}
+
+.external-link-dialog button {
+  background: var(--interactive-subtle);
+  color: var(--ink);
+}
+
+.external-link-dialog a {
+  background: var(--ink);
+  color: var(--surface);
+}
+
+/* Markdown creates paragraphs inside a loose list. Keep those paragraphs from
+   carrying the normal document spacing so a list reads as one compact unit. */
+.prose :is(ul, ol) {
+  margin-bottom: 1rem;
+}
+
+.prose :is(ul, ol) > li {
+  margin-block: 0.35rem;
+  padding-inline-start: 0.15rem;
+}
+
+.prose :is(ul, ol) > li > p {
+  margin-block: 0;
+}
+
+.prose p:has(+ :is(ul, ol)) {
+  margin-bottom: 0.625rem;
+}
+
+/* Match the published rhythm while writing in BlockNote. */
+.editor :is([data-content-type="bulletListItem"], [data-content-type="numberedListItem"]) {
+  margin-block: 0.35rem;
+}
+
+.editor :is([data-content-type="bulletListItem"], [data-content-type="numberedListItem"]) :is(p, .bn-inline-content) {
+  margin-block: 0;
+}
+
+.editor .bn-block-outer:has([data-content-type="paragraph"]):has(+ .bn-block-outer [data-content-type="bulletListItem"]),
+.editor .bn-block-outer:has([data-content-type="paragraph"]):has(+ .bn-block-outer [data-content-type="numberedListItem"]) {
+  margin-bottom: 0.625rem;
+}
+
+/* A mobile announcement is an at-a-glance status, not a second header. */
+.site-banner-dismiss-short {
+  display: none;
+}
+
+.site-banner-title-track > span[aria-hidden="true"] {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .site-banner-inner {
+    align-items: center;
+    min-height: 48px;
+    padding: 8px 16px;
+  }
+
+  .site-banner-copy {
+    flex: 1;
+    gap: 8px;
+    margin: 0;
+    min-width: 0;
+  }
+
+  .site-banner-copy p {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .site-banner-copy p.is-marquee {
+    display: block;
+    text-overflow: clip;
+  }
+
+  .site-banner-title-track {
+    display: block;
+  }
+
+  .site-banner-copy p.is-marquee .site-banner-title-track {
+    animation: site-banner-marquee 11s linear infinite;
+    display: flex;
+    gap: 2.5rem;
+    width: max-content;
+  }
+
+  .site-banner-copy p.is-marquee .site-banner-title-track > span {
+    display: block;
+    flex: 0 0 auto;
+  }
+
+  .site-banner-copy a {
+    max-width: 6.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .site-banner-actions {
+    gap: 4px;
+  }
+
+  .site-banner-dismiss {
+    padding: 6px 2px;
+  }
+
+  .site-banner-dismiss-long {
+    display: none;
+  }
+
+  .site-banner-dismiss-short {
+    display: inline;
+  }
+
+  .site-banner-dismiss {
+    display: none;
+  }
+}
+
+@keyframes site-banner-marquee {
+  0%,
+  12% {
+    transform: translateX(0);
+  }
+
+  88%,
+  100% {
+    transform: translateX(calc(-50% - 1.25rem));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-banner-copy p.is-marquee .site-banner-title-track {
+    animation: none;
+  }
+}
+
+/* A compact editorial scale. Values stay relative to the user's font setting. */
+:root {
+  --site-content-max: 80rem;
+  --type-label: 0.75rem;
+  --type-meta: 0.9375rem;
+  --type-body: 1rem;
+  --type-summary: clamp(1rem, 1.25vw, 1.1875rem);
+  --type-list-title: clamp(1.5rem, 2.1vw, 2.05rem);
+  --type-page-title: clamp(1.6875rem, 2.45vw, 2.25rem);
+}
+
+/* The header establishes the widest content boundary for every page. */
+.shared-header-inner,
+.kb-list-page,
+.series-page,
+.settings-page {
+  max-width: var(--site-content-max);
+}
+
+.shared-logo {
+  font-size: 1.5rem;
+}
+
+.shared-header nav a,
+.kb-category-nav a {
+  font-size: 0.875rem;
+}
+
+.kb-post-author strong {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.kb-post-author img,
+.kb-post-avatar {
+  height: 3.25rem;
+  width: 3.25rem;
+}
+
+.kb-post-tags span {
+  font-size: 0.8125rem;
+}
+
+.lede {
+  font-size: 1.125rem;
+}
+
+.prose h1 {
+  font-size: clamp(1.4375rem, 2.1vw, 1.7rem);
+  font-weight: 650;
+}
+
+.prose h2 {
+  font-size: clamp(1.25rem, 1.7vw, 1.45rem);
+  font-weight: 650;
+}
+
+.prose h3 {
+  font-size: 1.0625rem;
+  font-weight: 600;
+}
+
+.series-card h2 {
+  font-size: 1.4375rem;
+  font-weight: 650;
+}
+
+.series-card > p,
+.series-post-list p {
+  font-size: 0.9375rem;
+}
+
+.kb-post h2,
+.article h1,
+.series-page-header h1,
+.settings-page-header h1,
+.profile-card h1,
+.series-post-list h2 {
+  font-weight: 650;
+}
+
+.author-byline strong {
+  font-weight: 600;
+}
+
+@media (min-width: 1100px) {
+  .kb-content-layout:has(.recent-comments) {
+    grid-template-columns: minmax(0, 760px) minmax(260px, 310px);
+    justify-content: center;
+  }
+}
+
+@media (max-width: 760px) {
+  .shared-logo {
+    font-size: 1.3125rem;
+  }
+
+  .kb-post h2 {
+    font-size: clamp(1.5rem, 6.4vw, 1.75rem);
+  }
+
+  .kb-post-author img,
+  .kb-post-avatar {
+    height: 2.375rem;
+    width: 2.375rem;
+  }
+
+  .article h1,
+  .series-page-header h1,
+  .settings-page-header h1 {
+    font-size: clamp(1.5625rem, 6vw, 1.875rem);
+  }
+
+  .lede {
+    font-size: 1.0625rem;
+  }
+
+  .prose {
+    font-size: 1rem;
+  }
+
+  .profile-name-input {
+    font-size: 1.5rem;
+  }
+}

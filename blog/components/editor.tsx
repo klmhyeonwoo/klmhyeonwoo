@@ -6,7 +6,7 @@ import { BlockNoteView } from "@blocknote/ariakit";
 import { insertOrUpdateBlockForSlashMenu } from "@blocknote/core";
 import { BlockNoteSchema } from "@blocknote/core/blocks";
 import { getDefaultReactSlashMenuItems, SuggestionMenuController, useCreateBlockNote } from "@blocknote/react";
-import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useEffectEvent, useRef, useState } from "react";
 import { ToastMessage } from "./toast-message";
 import { Bookmark } from "./bookmark-block";
 import { Callout } from "./callout-block";
@@ -59,6 +59,7 @@ export default function Editor({ initialBlocks, mentions, onChange }: Props) {
   const [uploadError, setUploadError] = useState("");
   const [selectedImageId, setSelectedImageId] = useState<string | null>(null);
   const [selectedImageUrl, setSelectedImageUrl] = useState("");
+  const isComposingRef = useRef(false);
   const uploadFile = useCallback(async (file: File) => {
     try {
       if (!file.type.startsWith("image/")) throw new Error("이미지 파일만 올릴 수 있습니다.");
@@ -117,6 +118,10 @@ export default function Editor({ initialBlocks, mentions, onChange }: Props) {
     })), [editor, mentionItems]);
 
   const syncContent = useCallback(() => {
+    // Do not force the parent to render while a Korean/Japanese/Chinese IME is
+    // still composing a character. Interrupting that native composition causes
+    // partially composed syllables to be committed more than once.
+    if (isComposingRef.current) return;
     const document = editor.document;
     const markdown = document.map((block) => {
       const serialized = editor.blocksToMarkdownLossy([block]);
@@ -127,9 +132,35 @@ export default function Editor({ initialBlocks, mentions, onChange }: Props) {
     onChange(copyBlocks(document), markdown);
   }, [editor, onChange]);
 
+  const syncAfterComposition = useEffectEvent(() => {
+    window.requestAnimationFrame(syncContent);
+  });
+
   useEffect(() => {
     syncContent();
   }, [syncContent]);
+
+  useEffect(() => {
+    const root = editor.domElement;
+    if (!root) return;
+
+    const startComposition = () => {
+      isComposingRef.current = true;
+    };
+    const endComposition = () => {
+      isComposingRef.current = false;
+      // BlockNote applies its final transaction after compositionend in some
+      // browsers, so wait for the frame that contains the committed syllable.
+      syncAfterComposition();
+    };
+
+    root.addEventListener("compositionstart", startComposition);
+    root.addEventListener("compositionend", endComposition);
+    return () => {
+      root.removeEventListener("compositionstart", startComposition);
+      root.removeEventListener("compositionend", endComposition);
+    };
+  }, [editor]);
 
   useEffect(() => {
     const root = editor.domElement;

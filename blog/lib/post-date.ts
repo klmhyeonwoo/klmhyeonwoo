@@ -1,3 +1,17 @@
+const koreaCalendarFormatter = new Intl.DateTimeFormat("en", {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  timeZone: "Asia/Seoul",
+});
+
+const koreanPostDateFormatter = new Intl.DateTimeFormat("ko-KR", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  timeZone: "Asia/Seoul",
+});
+
 function normalizedDate(value: unknown) {
   if (value instanceof Date && !Number.isNaN(value.getTime())) {
     return value.toISOString().slice(0, 10);
@@ -27,14 +41,34 @@ export function postPublishedAtValue(value: unknown) {
   return dateOnly ? `${dateOnly}T00:00:00.000Z` : undefined;
 }
 
+export function postWasUpdated(publishedAt: unknown, updatedAt: unknown) {
+  const published = postPublishedAtValue(publishedAt);
+  const updated = postPublishedAtValue(updatedAt);
+  if (!published || !updated) return false;
+  return new Date(updated).getTime() - new Date(published).getTime() > 1_000;
+}
+
+function koreaCalendarDay(value: Date) {
+  const parts = koreaCalendarFormatter.formatToParts(value);
+  const number = (type: Intl.DateTimeFormatPartTypes) => Number(parts.find((part) => part.type === type)?.value);
+  return Date.UTC(number("year"), number("month") - 1, number("day"));
+}
+
+export function formatPostUpdatedLabel(value: unknown, now = new Date()) {
+  const normalized = postPublishedAtValue(value);
+  if (!normalized) return "최근 수정";
+
+  const updated = new Date(normalized);
+  if (Number.isNaN(updated.getTime())) return "최근 수정";
+
+  const days = Math.max(0, Math.round((koreaCalendarDay(now) - koreaCalendarDay(updated)) / 86_400_000));
+  if (days === 0) return "오늘 수정";
+  return `${days}일 전 수정`;
+}
+
 export function formatPostDate(value: unknown) {
   const date = normalizedDate(value);
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return date;
 
-  return new Intl.DateTimeFormat("ko-KR", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    timeZone: "Asia/Seoul",
-  }).format(new Date(`${date}T00:00:00+09:00`));
+  return koreanPostDateFormatter.format(new Date(`${date}T00:00:00+09:00`));
 }

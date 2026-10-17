@@ -11,8 +11,8 @@
 
 발행하면 GitHub 저장소에 다음 두 파일이 커밋됩니다.
 
-- `editor-data/<slug>.json`: BlockNote 편집 원본
-- `content/posts/<slug>.mdx`: 공개 페이지에서 렌더링하는 MDX
+- `contents/blog/editor-data/<slug>.json`: BlockNote 편집 원본
+- `contents/blog/content/posts/<slug>.mdx`: 공개 페이지에서 렌더링하는 MDX
 
 `GITHUB_TOKEN`에는 대상 저장소에 **Contents: Read and write** 권한이 있는 fine-grained personal access token을 넣으세요. 이 토큰은 `NEXT_PUBLIC_` 접두사 없이 서버 환경변수로만 설정해야 합니다. 이미지 URL은 GitHub raw URL을 사용하므로 저장소는 public이어야 합니다.
 
@@ -22,4 +22,4 @@
 
 ## 편집 기능
 
-편집기에서 `/image`를 입력하면 이미지를 넣을 수 있고, 업로드된 파일은 `public/uploads`에 GitHub 커밋으로 저장됩니다. `/admin` 하단의 글 목록에서 기존 글을 열면 블록 원본 JSON을 다시 불러와 수정할 수 있습니다.
+편집기에서 `/image`를 입력하면 이미지를 넣을 수 있고, 업로드된 파일은 `contents/blog/public/uploads`에 GitHub 커밋으로 저장됩니다. `/admin` 하단의 글 목록에서 기존 글을 열면 블록 원본 JSON을 다시 불러와 수정할 수 있습니다.

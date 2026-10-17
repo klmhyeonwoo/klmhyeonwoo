@@ -58,7 +58,7 @@ export async function saveImage(image: { name: string; type: string; bytes: Buff
   const { owner, repo, branch } = config();
   const suffix = randomUUID().slice(0, 8);
   const filename = `${Date.now()}-${suffix}.${imageExtension(image.name, image.type)}`;
-  const path = `public/uploads/${filename}`;
+  const path = `contents/blog/public/uploads/${filename}`;
   await writeFile(path, image.bytes, `Upload image: ${filename}`);
   return `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
 }
@@ -72,6 +72,6 @@ export async function savePost(post: Post) {
   const mdx = `---\ntitle: ${yaml(post.title)}\ndate: ${date}\ndescription: ${yaml(post.description)}\n---\n\n${post.markdown}\n`;
 
   // ponytail: files are committed separately; use Git Data API for an atomic multi-file commit if that ever matters.
-  await writeFile(`editor-data/${post.slug}.json`, JSON.stringify(post.blocks, null, 2), `Save editor data: ${post.title}`);
-  await writeFile(`content/posts/${post.slug}.mdx`, mdx, `Publish: ${post.title}`);
+  await writeFile(`contents/blog/editor-data/${post.slug}.json`, JSON.stringify(post.blocks, null, 2), `Save editor data: ${post.title}`);
+  await writeFile(`contents/blog/content/posts/${post.slug}.mdx`, mdx, `Publish: ${post.title}`);
 }

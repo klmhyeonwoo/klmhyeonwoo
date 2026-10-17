@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# Environment variables (keep the shareable template)
+.env*
+!.env.example
+
+# Logs
+*.log
+
+# Local tooling and OS files
+.DS_Store
+.vercel/
+
+# TypeScript build cache
+*.tsbuildinfo

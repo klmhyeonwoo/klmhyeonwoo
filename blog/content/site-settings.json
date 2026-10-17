@@ -3,7 +3,7 @@
     "enabled": true,
     "title": "같이 매일 5분 동안 회고하실 분을 모집하고 있어요-!",
     "action": {
-      "label": "회고하러가기",
+      "label": "바로가기",
       "href": "https://open.kakao.com/o/s8SjtnRi"
     },
     "backgroundColor": "#000222",
@@ -12,7 +12,7 @@
   "popup": {
     "enabled": true,
     "image": "https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/main/blog/public/uploads/1792233318142-886be640.jpg",
-    "title": "새로운 블로그 시작하기",
+    "title": "블로그를 새롭게 이전했어요",
     "description": "어서오세요 반갑습니당~",
     "primaryAction": {
       "label": "",

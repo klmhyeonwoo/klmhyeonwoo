@@ -1,12 +1,12 @@
 {
   "banner": {
-    "enabled": false,
-    "title": "",
+    "enabled": true,
+    "title": "같이 매일 5분 동안 회고하실 분을 모집하고 있어요-!",
     "action": {
-      "label": "",
-      "href": ""
+      "label": "회고하러가기",
+      "href": "https://open.kakao.com/o/s8SjtnRi"
     },
-    "backgroundColor": "#171717",
+    "backgroundColor": "#000222",
     "textColor": "#ffffff"
   },
   "popup": {

@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
-const postsDirectory = path.join(process.cwd(), "blog", "content", "posts");
+const postsDirectory = path.join(process.cwd(), "content", "posts");
 
 export type PostMeta = {
   slug: string;
@@ -47,7 +47,7 @@ export function getEditablePost(slug: string) {
   const safeSlug = slug.replace(/[^a-z0-9-]/g, "");
   if (safeSlug !== slug) return null;
   const meta = getPosts().find((post) => post.slug === safeSlug);
-  const editorFile = path.join(process.cwd(), "blog", "editor-data", `${safeSlug}.json`);
+  const editorFile = path.join(process.cwd(), "editor-data", `${safeSlug}.json`);
   if (!meta || !fs.existsSync(editorFile)) return null;
 
   try {

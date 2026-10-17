@@ -2,7 +2,8 @@
 
 import { createBlockConfig } from "@blocknote/core";
 import { createReactBlockSpec, type ReactCustomBlockRenderProps } from "@blocknote/react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { FluentEmoji, fluentEmojiOptions } from "./fluent-emoji";
 
 const emojiGroups = [
   { label: "자주 사용", emojis: "💡📌✨✅⚠️🔍🧩📎💬🚀❤️👍👋🎉🔥💯" },
@@ -20,13 +21,13 @@ const searchAliases: Record<string, string> = {
 };
 
 function characters(value: string) {
-  return Array.from(value);
+  return value.match(/\p{Extended_Pictographic}(?:\uFE0F|\p{Emoji_Modifier}|\u200D\p{Extended_Pictographic})*/gu) ?? [];
 }
 
 const createCalloutBlockConfig = createBlockConfig(
   () => ({
     type: "callout" as const,
-    propSchema: { emoji: { default: "💡" } },
+    propSchema: { emoji: { default: "💡" }, fluent: { default: "" } },
     content: "inline" as const,
   }),
 );
@@ -35,20 +36,44 @@ function CalloutBlock({ block, editor, contentRef }: ReactCustomBlockRenderProps
   const [pickerOpen, setPickerOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [customEmoji, setCustomEmoji] = useState("");
+  const pickerRef = useRef<HTMLDivElement>(null);
   const normalizedQuery = query.trim().toLocaleLowerCase();
   const groups = useMemo(() => emojiGroups.map((group) => ({
     ...group,
     emojis: characters(group.emojis).filter((emoji) => !normalizedQuery || `${emoji} ${searchAliases[emoji] ?? ""} ${group.label}`.toLocaleLowerCase().includes(normalizedQuery)),
   })).filter((group) => group.emojis.length > 0), [normalizedQuery]);
   const chooseEmoji = (emoji: string) => {
-    editor.updateBlock(block, { props: { emoji } });
+    editor.updateBlock(block, { props: { emoji, fluent: "" } });
+    setPickerOpen(false);
+    setQuery("");
+    setCustomEmoji("");
+  };
+  const chooseFluentEmoji = (fluent: string) => {
+    editor.updateBlock(block, { props: { fluent } });
     setPickerOpen(false);
     setQuery("");
     setCustomEmoji("");
   };
 
+  useEffect(() => {
+    if (!pickerOpen) return;
+
+    const closeOutside = (event: PointerEvent) => {
+      if (!pickerRef.current?.contains(event.target as Node)) setPickerOpen(false);
+    };
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setPickerOpen(false);
+    };
+    window.addEventListener("pointerdown", closeOutside);
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      window.removeEventListener("pointerdown", closeOutside);
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [pickerOpen]);
+
   return <div className="editor-callout">
-    <div className="editor-callout-emoji-picker" contentEditable={false}>
+    <div className="editor-callout-emoji-picker" contentEditable={false} ref={pickerRef}>
       <button
         aria-expanded={pickerOpen}
         aria-haspopup="dialog"
@@ -63,7 +88,7 @@ function CalloutBlock({ block, editor, contentRef }: ReactCustomBlockRenderProps
           event.stopPropagation();
         }}
         type="button"
-      >{block.props.emoji}</button>
+      >{block.props.fluent ? <FluentEmoji name={block.props.fluent} /> : block.props.emoji}</button>
       {pickerOpen && <div aria-label="콜아웃 이모지 선택" className="editor-callout-emoji-menu" onClick={(event) => event.stopPropagation()} onMouseDown={(event) => event.stopPropagation()} role="region">
         <div className="editor-callout-emoji-controls">
           <input aria-label="이모지 검색" autoFocus onChange={(event) => setQuery(event.target.value)} onMouseDown={(event) => event.stopPropagation()} placeholder="이모지 검색" value={query} />
@@ -80,6 +105,19 @@ function CalloutBlock({ block, editor, contentRef }: ReactCustomBlockRenderProps
         </div>
         <p className="editor-callout-emoji-hint">시스템 이모지 패널에서 고르거나 이모지를 붙여넣을 수 있어요.</p>
         <div className="editor-callout-emoji-results">
+          <section>
+            <strong>Microsoft Fluent Emoji</strong>
+            <div>{fluentEmojiOptions.filter((option) => !normalizedQuery || `${option.label} ${option.id}`.toLocaleLowerCase().includes(normalizedQuery)).map((option) => <button
+              aria-label={`${option.label} 선택`}
+              aria-pressed={option.id === block.props.fluent}
+              className={option.id === block.props.fluent ? "is-selected" : undefined}
+              key={option.id}
+              onClick={(event) => { event.stopPropagation(); chooseFluentEmoji(option.id); }}
+              onMouseDown={(event) => { event.preventDefault(); event.stopPropagation(); }}
+              title={option.label}
+              type="button"
+            ><FluentEmoji name={option.id} /></button>)}</div>
+          </section>
           {groups.map((group) => <section key={group.label}>
             <strong>{group.label}</strong>
             <div>{group.emojis.map((emoji) => <button

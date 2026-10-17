@@ -17,6 +17,9 @@ dependencies:
   '@blocknote/react':
     specifier: ^0.56.0
     version: 0.56.0(@floating-ui/dom@1.8.0)(@types/react-dom@19.3.0)(@types/react@19.3.0)(react-dom@19.3.1)(react@19.3.1)
+  '@fluentui-emoji/react':
+    specifier: ^2.2.0
+    version: 2.2.0(react@19.3.1)
   '@karrotmarket/react-monochrome-icon':
     specifier: ^1.30.0
     version: 1.30.0(@types/react@19.3.0)(react@19.3.1)
@@ -595,6 +598,15 @@ packages:
 
   /@floating-ui/utils@0.2.12:
     resolution: {integrity: sha512-HpCo8tmWzLVad5s2d19EhAz5zqrrQ6s69qd6moPMQvkOuSwDT1YgRfWSVuc4ennqrgv3OHppiOGMQ7oC13yIww==}
+    dev: false
+
+  /@fluentui-emoji/react@2.2.0(react@19.3.1):
+    resolution: {integrity: sha512-8EAHl++Xs3tv9t7+ksbIP9MD+BkA6D81/eAPEcDv1mDGF21Pb1h5gpIYPyFEQlKLw/2pJGopjWdURndgM7pslQ==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      react: '>=17'
+    dependencies:
+      react: 19.3.1
     dev: false
 
   /@handlewithcare/prosemirror-inputrules@0.1.4(prosemirror-model@1.25.12)(prosemirror-state@1.4.4)(prosemirror-view@1.42.6):

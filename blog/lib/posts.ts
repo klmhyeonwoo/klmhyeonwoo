@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { createHash } from "crypto";
 import matter from "gray-matter";
-import { postDateValue } from "./post-date";
+import { postDateValue, postPublishedAtValue } from "./post-date";
 import { getSeries } from "./series";
 
 const postsDirectory = path.join(process.cwd(), "content", "posts");
@@ -31,6 +31,7 @@ export type PostMeta = {
   id: string;
   title: string;
   date: string;
+  publishedAt: string;
   description?: string;
   categoryId: string;
   category: string;
@@ -85,6 +86,7 @@ export function getPosts(includePrivate = false): PostMeta[] {
         id,
         title: String(data.title ?? id),
         date: postDateValue(data.date),
+        publishedAt: postPublishedAtValue(data.publishedAt ?? data.date) ?? "",
         description: data.description ? String(data.description) : undefined,
         excerpt: data.description ? String(data.description) : data.private === true ? undefined : excerptFromMarkdown(content),
         categoryId: category?.id ?? categoryValue,
@@ -97,7 +99,7 @@ export function getPosts(includePrivate = false): PostMeta[] {
       };
     })
     .filter((post) => includePrivate || !post.isPrivate)
-    .sort((a, b) => b.date.localeCompare(a.date));
+    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt) || b.date.localeCompare(a.date));
 }
 
 function safePostId(id: string) {
@@ -109,6 +111,13 @@ export function getPost(id: string) {
   if (safeId !== id) return null;
   const file = path.join(postsDirectory, `${safeId}.mdx`);
   return fs.existsSync(file) ? fs.readFileSync(file, "utf8") : null;
+}
+
+export function getPostPublishedAt(id: string) {
+  const source = getPost(id);
+  if (!source) return undefined;
+  const { data } = matter(source);
+  return postPublishedAtValue(data.publishedAt ?? data.date);
 }
 
 export function postSourceVersion(source: string) {

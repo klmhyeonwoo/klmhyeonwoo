@@ -7,6 +7,7 @@ import { SiteHeader } from "@/components/site-header";
 import { PostAdminActions } from "@/components/post-admin-actions";
 import { PostUnlockForm } from "@/components/post-unlock-form";
 import { CommentSection } from "@/components/comment-section";
+import { PostCallout } from "@/components/post-callout";
 import { isAdmin } from "@/lib/auth";
 import { hasPostAccess } from "@/lib/post-access";
 import { formatPostDate } from "@/lib/post-date";
@@ -79,7 +80,7 @@ export default async function PostPage({ params }: { params: Params }) {
     return <><SiteHeader /><main className="article-shell"><PostUnlockForm id={id} /></main></>;
   }
 
-  const { content, frontmatter } = await compileMDX<{ title: string; date: string; description?: string }>({ source, options: { mdxOptions: { remarkPlugins: [remarkGfm] }, parseFrontmatter: true } });
+  const { content, frontmatter } = await compileMDX<{ title: string; date: string; description?: string }>({ components: { Callout: PostCallout }, source, options: { mdxOptions: { remarkPlugins: [remarkGfm] }, parseFrontmatter: true } });
   return (
     <><SiteHeader /><main className="article-shell"><article className="article">
       <div className="author-byline">{profile.image ? <img src={profile.image} alt="" /> : <span>{profile.name.slice(0, 1)}</span>}<p><strong>{profile.name}</strong><small>{formatPostDate(frontmatter.date)}</small></p></div><h1>{frontmatter.title}</h1>

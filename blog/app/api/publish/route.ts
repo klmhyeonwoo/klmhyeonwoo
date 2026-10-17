@@ -4,7 +4,7 @@ import { isAdmin } from "@/lib/auth";
 import { isContentReferenceId } from "@/lib/content-reference";
 import { deleteDraft, savePost } from "@/lib/github";
 import { hashPostPassword } from "@/lib/post-access";
-import { getPostPasswordHash } from "@/lib/posts";
+import { getPostPasswordHash, getPostPublishedAt } from "@/lib/posts";
 
 const validPostId = /^[a-z0-9]+(?:[a-z0-9-]*[a-z0-9])?$/;
 
@@ -38,6 +38,7 @@ export async function POST(request: Request) {
   }
 
   const postId = id ?? randomUUID();
+  const publishedAt = id ? getPostPublishedAt(id) ?? new Date().toISOString() : new Date().toISOString();
   const existingPasswordHash = id ? getPostPasswordHash(id) : null;
   if (isPrivate && password.length === 0 && !existingPasswordHash) {
     return NextResponse.json({ error: "비밀번호 보호 글에는 비밀번호를 입력해 주세요." }, { status: 400 });
@@ -54,6 +55,7 @@ export async function POST(request: Request) {
       description: description.trim(),
       categoryId: category,
       seriesId: series,
+      publishedAt,
       markdown,
       blocks,
       isPrivate,

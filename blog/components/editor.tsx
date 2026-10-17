@@ -45,6 +45,14 @@ function bookmarkTitle(url: string) {
   return new URL(url).hostname.replace(/^www\./, "");
 }
 
+function calloutMarkdown(markdown: string, props: { emoji?: unknown; fluent?: unknown }) {
+  const emoji = typeof props.emoji === "string" ? props.emoji : "💡";
+  const fluent = typeof props.fluent === "string" ? props.fluent : "";
+  const body = markdown.trim().split("\n").map((line) => line.replace(/^>\s?/, "")).join("\n").replace(`${emoji} `, "").trim();
+  const attributes = fluent ? ` icon="${fluent}"` : ` emoji="${emoji.replace(/&/g, "&amp;").replace(/"/g, "&quot;")}"`;
+  return `<Callout${attributes}>\n${body || " "}\n</Callout>\n`;
+}
+
 export default function Editor({ initialBlocks, mentions, onChange }: Props) {
   const mentionItems = mentions ?? noMentions;
   const [theme, setTheme] = useState<"light" | "dark">("light");
@@ -89,7 +97,7 @@ export default function Editor({ initialBlocks, mentions, onChange }: Props) {
       aliases: ["callout", "콜아웃", "강조", "알림"],
       group: "기본",
       icon: <span aria-hidden="true">💡</span>,
-      onItemClick: () => insertOrUpdateBlockForSlashMenu(editor, { type: "callout", props: { emoji: "💡" } } as never),
+      onItemClick: () => insertOrUpdateBlockForSlashMenu(editor, { type: "callout", props: { emoji: "💡", fluent: "LightBulb" } } as never),
     },
   ].filter((item) => [item.title, item.subtext, ...(item.aliases ?? [])].some((value) => value?.toLocaleLowerCase().includes(query.toLocaleLowerCase()))), [editor]);
 
@@ -108,7 +116,13 @@ export default function Editor({ initialBlocks, mentions, onChange }: Props) {
 
   const syncContent = useCallback(() => {
     const document = editor.document;
-    onChange(copyBlocks(document), editor.blocksToMarkdownLossy(document));
+    const markdown = document.map((block) => {
+      const serialized = editor.blocksToMarkdownLossy([block]);
+      return block.type === "callout"
+        ? calloutMarkdown(serialized, block.props as { emoji?: unknown; fluent?: unknown })
+        : serialized;
+    }).join("\n");
+    onChange(copyBlocks(document), markdown);
   }, [editor, onChange]);
 
   useEffect(() => {

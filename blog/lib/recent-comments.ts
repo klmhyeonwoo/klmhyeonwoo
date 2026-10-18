@@ -7,19 +7,27 @@ type GiscusResponse = { data?: { repository?: { discussions?: { nodes?: GiscusDi
 
 export type RecentComment = { body: string; createdAt: string; href: string; postTitle: string; author: string; avatar: string };
 
+// A short server cache keeps the GitHub API within rate limits while ensuring
+// a new comment becomes visible on the home page without needing to visit the
+// article that owns the discussion.
+const recentCommentsRevalidateSeconds = 60;
+
 function repository() {
   return process.env.NEXT_PUBLIC_UTTERANCES_REPO ?? `${process.env.GITHUB_OWNER ?? "klmhyeonwoo"}/${process.env.GITHUB_REPO ?? "klmhyeonwoo"}`;
 }
 
-function giscusRepository() {
+function giscusConfiguration() {
   const value = process.env.NEXT_PUBLIC_GISCUS_REPO;
+  const categoryId = process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID;
   const configured = [
     value,
     process.env.NEXT_PUBLIC_GISCUS_REPO_ID,
     process.env.NEXT_PUBLIC_GISCUS_CATEGORY,
-    process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID,
+    categoryId,
   ].every(Boolean);
-  return configured && value && /^[^/\s]+\/[^/\s]+$/.test(value) ? value : null;
+  return configured && value && categoryId && /^[^/\s]+\/[^/\s]+$/.test(value)
+    ? { repository: value, categoryId }
+    : null;
 }
 
 function headers() {
@@ -32,7 +40,7 @@ function plainText(value: string) {
 }
 
 async function issue(url: string) {
-  const response = await fetch(url, { headers: headers(), next: { revalidate: 120 } });
+  const response = await fetch(url, { headers: headers(), next: { revalidate: recentCommentsRevalidateSeconds } });
   if (!response.ok) return null;
   return await response.json() as GitHubIssue;
 }
@@ -49,17 +57,18 @@ function toRecentComment(comment: GiscusComment, postTitle: string): RecentComme
   };
 }
 
-async function getGiscusRecentComments(repositoryName: string): Promise<RecentComment[] | null> {
+async function getGiscusRecentComments(configuration: { repository: string; categoryId: string }): Promise<RecentComment[] | null> {
+  const { repository: repositoryName, categoryId } = configuration;
   const [owner, name] = repositoryName.split("/");
-  const query = `query RecentGiscusComments($owner: String!, $name: String!) {
+  const query = `query RecentGiscusComments($owner: String!, $name: String!, $categoryId: ID!) {
     repository(owner: $owner, name: $name) {
-      discussions(first: 40, orderBy: { field: UPDATED_AT, direction: DESC }) {
+      discussions(first: 30, categoryId: $categoryId, orderBy: { field: UPDATED_AT, direction: DESC }) {
         nodes {
           title
-          comments(first: 20) {
+          comments(last: 10) {
             nodes {
               body createdAt url author { login avatarUrl }
-              replies(first: 20) {
+              replies(last: 10) {
                 nodes { body createdAt url author { login avatarUrl } }
               }
             }
@@ -71,8 +80,8 @@ async function getGiscusRecentComments(repositoryName: string): Promise<RecentCo
   const response = await fetch("https://api.github.com/graphql", {
     method: "POST",
     headers: { ...headers(), "Content-Type": "application/json" },
-    body: JSON.stringify({ query, variables: { owner, name } }),
-    next: { revalidate: 120 },
+    body: JSON.stringify({ query, variables: { owner, name, categoryId } }),
+    next: { revalidate: recentCommentsRevalidateSeconds },
   });
   if (!response.ok) return null;
   const payload = await response.json() as GiscusResponse;
@@ -88,9 +97,9 @@ async function getGiscusRecentComments(repositoryName: string): Promise<RecentCo
 }
 
 export async function getRecentComments(): Promise<RecentComment[]> {
-  const giscusRepo = giscusRepository();
-  if (giscusRepo) return (await getGiscusRecentComments(giscusRepo)) ?? [];
-  const response = await fetch(`https://api.github.com/repos/${repository()}/issues/comments?per_page=4&sort=created&direction=desc`, { headers: headers(), next: { revalidate: 120 } });
+  const giscus = giscusConfiguration();
+  if (giscus) return (await getGiscusRecentComments(giscus)) ?? [];
+  const response = await fetch(`https://api.github.com/repos/${repository()}/issues/comments?per_page=4&sort=created&direction=desc`, { headers: headers(), next: { revalidate: recentCommentsRevalidateSeconds } });
   if (!response.ok) return [];
   const comments = await response.json() as GitHubComment[];
   const results = await Promise.all(comments.filter((comment) => comment.html_url && comment.issue_url && comment.created_at).map(async (comment) => {

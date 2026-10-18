@@ -14,11 +14,12 @@ import { PostLinkCopy } from "@/components/post-link-copy";
 import { ArticleTableOfContents } from "@/components/article-table-of-contents";
 import { isAdmin } from "@/lib/auth";
 import { hasPostAccess } from "@/lib/post-access";
-import { formatPostDate, formatPostUpdatedLabel, postWasUpdated } from "@/lib/post-date";
+import { formatPostDate, formatPostUpdatedLabel, postPublishedAtValue, postWasUpdated } from "@/lib/post-date";
 import { getPost, getPostBlocks, getPosts } from "@/lib/posts";
 import { getProfile } from "@/lib/profile";
 import { restoreCallouts } from "@/lib/callout-markdown";
 import { getTableOfContents, rehypeHeadingIds } from "@/lib/table-of-contents";
+import { absoluteUrl } from "@/lib/site-url";
 
 export const dynamic = "force-dynamic";
 
@@ -43,22 +44,50 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   if (!source) return {};
 
   const { data } = matter(source);
-  const title = typeof data.title === "string" && data.title.trim() ? data.title.trim() : "글";
+  const post = getPosts(true).find((item) => item.id === id);
+  const profile = getProfile();
+  const postTitle = typeof data.title === "string" && data.title.trim() ? data.title.trim() : "글";
   const isPrivate = data.private === true;
-  const description = isPrivate
-    ? "비공개 글입니다. bloging.에서 확인해 주세요."
-    : postDescription(source, data);
-  const image = `/posts/${id}/opengraph-image`;
+  if (isPrivate) {
+    return {
+      title: "비공개 글",
+      description: "비공개 글입니다.",
+      robots: { index: false, follow: false, nocache: true, noarchive: true, nosnippet: true },
+    };
+  }
+
+  const title = `${postTitle} | bloging.`;
+  const description = postDescription(source, data) || `${postTitle}에 관한 글입니다.`;
+  const canonical = `/posts/${id}`;
+  const image = `${canonical}/opengraph-image`;
+  const publishedTime = postPublishedAtValue(data.publishedAt ?? data.date);
+  const modifiedTime = postPublishedAtValue(data.updatedAt) ?? publishedTime;
+  const keywords = [post?.category, post?.series].filter((value): value is string => Boolean(value));
 
   return {
     title,
     description,
+    keywords,
+    authors: [{ name: profile.name, url: absoluteUrl("/profile") }],
+    alternates: { canonical },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+    },
     openGraph: {
       type: "article",
       locale: "ko_KR",
       title,
       description,
-      images: [{ url: image, width: 1200, height: 630, alt: title }],
+      url: canonical,
+      siteName: "bloging.",
+      publishedTime,
+      modifiedTime,
+      authors: [profile.name],
+      section: post?.category,
+      tags: keywords,
+      images: [{ url: image, width: 1200, height: 630, alt: postTitle }],
     },
     twitter: {
       card: "summary_large_image",
@@ -89,13 +118,36 @@ export default async function PostPage({ params }: { params: Params }) {
   const renderSource = restoreCallouts(source, getPostBlocks(id));
   const tableOfContents = getTableOfContents(renderSource);
   const { content, frontmatter } = await compileMDX<{ title: string; date: string; description?: string; publishedAt?: string; updatedAt?: string }>({ components: { Callout: PostCallout }, source: renderSource, options: { mdxOptions: { remarkPlugins: [remarkGfm], rehypePlugins: [[rehypeShiki, { themes: { light: "github-light", dark: "github-dark" } }], rehypeHeadingIds(tableOfContents)] }, parseFrontmatter: true } });
+  const post = getPosts(true).find((item) => item.id === id);
+  const description = postDescription(source, data) || `${frontmatter.title}에 관한 글입니다.`;
+  const canonicalUrl = absoluteUrl(`/posts/${id}`);
+  const publishedAt = postPublishedAtValue(frontmatter.publishedAt ?? frontmatter.date);
+  const updatedAt = postPublishedAtValue(frontmatter.updatedAt) ?? publishedAt;
+  const schemaKeywords = [post?.category, post?.series].filter((value): value is string => Boolean(value));
+  const articleSchema = data.private === true ? null : {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: frontmatter.title,
+    description,
+    url: canonicalUrl,
+    mainEntityOfPage: canonicalUrl,
+    inLanguage: "ko-KR",
+    ...(publishedAt ? { datePublished: publishedAt } : {}),
+    ...(updatedAt ? { dateModified: updatedAt } : {}),
+    ...(post?.category ? { articleSection: post.category } : {}),
+    ...(schemaKeywords.length > 0 ? { keywords: schemaKeywords.join(", ") } : {}),
+    author: { "@type": "Person", name: profile.name, url: absoluteUrl("/profile"), ...(profile.image ? { image: absoluteUrl(profile.image) } : {}) },
+    publisher: { "@type": "Organization", name: "bloging.", url: absoluteUrl("/") },
+    image: [absoluteUrl(`/posts/${id}/opengraph-image`)],
+  };
   return (
     <><SiteHeader /><main className="article-shell"><article className={`article${tableOfContents.length > 0 ? " article-with-toc" : ""}`}>
+      {articleSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema).replace(/</g, "\\u003c") }} />}
       <header className="article-header"><h1>{frontmatter.title}</h1>
         <div className="article-meta-row"><div className="author-byline">{profile.image ? <img src={profile.image} alt="" /> : <span>{profile.name.slice(0, 1)}</span>}<p><strong>{profile.name}</strong><small>{formatPostDate(frontmatter.date)}{postWasUpdated(frontmatter.publishedAt ?? frontmatter.date, frontmatter.updatedAt) && <> · {formatPostUpdatedLabel(frontmatter.updatedAt)}</>}</small></p></div><PostLinkCopy /></div>
         {frontmatter.description && <p className="lede">{frontmatter.description}</p>}
       </header>
-      <div className="article-content-layout"><PostContent>{content}</PostContent>{tableOfContents.length > 0 && <ArticleTableOfContents items={tableOfContents} />}</div>
+      <div className="article-content-layout">{tableOfContents.length > 0 && <ArticleTableOfContents items={tableOfContents} />}<PostContent>{content}</PostContent></div>
       {authenticated && <PostAdminActions id={id} title={frontmatter.title} />}
       <CommentSection />
     </article></main></>

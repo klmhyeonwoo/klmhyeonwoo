@@ -119,6 +119,49 @@
   display: none;
 }
 
+@media (max-width: 1099px) {
+  .article-with-toc .article-toc {
+    border-block: 1px solid var(--line);
+    display: block;
+    margin: 0 0 1.75rem;
+    padding: 0.875rem 0;
+  }
+
+  .article-toc p {
+    color: var(--ink);
+    font-size: 0.8125rem;
+    font-weight: 650;
+    margin: 0 0 0.5rem;
+  }
+
+  .article-toc ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .article-toc li {
+    margin: 0;
+  }
+
+  .article-toc li.level-3 {
+    padding-inline-start: 0.75rem;
+  }
+
+  .article-toc a {
+    color: var(--muted);
+    display: block;
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    padding: 0.25rem 0;
+    text-decoration: none;
+  }
+
+  .article-toc a[aria-current="location"] {
+    color: var(--ink);
+  }
+}
+
 @media (min-width: 1100px) {
   .article-shell:has(.article-with-toc) {
     max-width: 68rem;
@@ -141,9 +184,16 @@
     grid-template-columns: minmax(0, 43.75rem) minmax(9rem, 12rem);
   }
 
+  .article-content-layout > .prose {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
   .article-toc {
     align-self: start;
     display: block;
+    grid-column: 2;
+    grid-row: 1;
     position: sticky;
     top: 2rem;
   }
@@ -571,6 +621,8 @@ html[data-theme="dark"] .prose pre.shiki span {
   border: 1px solid color-mix(in srgb, var(--line) 90%, transparent);
   border-radius: 0.875rem;
   box-shadow: 0 1.25rem 3rem color-mix(in srgb, var(--ink) 18%, transparent);
+  isolation: isolate;
+  overflow: hidden;
   padding: 0;
   transform-origin: top left;
   width: min(25rem, calc(100vw - 3rem));
@@ -635,9 +687,14 @@ html[data-theme="dark"] .prose pre.shiki span {
   border: 0;
   color: var(--muted);
   cursor: pointer;
+  display: inline-flex;
   font: inherit;
   font-size: 0.75rem;
+  font-weight: 550;
+  height: auto;
+  line-height: 1;
   padding: 0.375rem;
+  width: auto;
 }
 
 .editor-callout-emoji-close:hover {
@@ -662,6 +719,8 @@ html[data-theme="dark"] .prose pre.shiki span {
   background: transparent !important;
   border-radius: 0 !important;
   box-shadow: none !important;
+  color: var(--ink);
+  font-family: inherit;
   width: 100% !important;
 }
 
@@ -670,11 +729,21 @@ html[data-theme="dark"] .prose pre.shiki span {
 }
 
 .editor-callout-microsoft-picker [aria-label="Picker"] > nav > div {
+  align-items: center;
+  column-gap: 0.25rem;
   padding: 0.625rem 0.75rem !important;
 }
 
 .editor-callout-microsoft-picker [aria-label="Picker"] > nav button {
+  align-items: center;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0.375rem !important;
   color: var(--muted) !important;
+  display: inline-flex;
+  justify-content: center;
+  margin: 0 !important;
+  padding: 0.3125rem !important;
 }
 
 .editor-callout-microsoft-picker [aria-label="Picker"] > nav button[class*="active"] {
@@ -687,7 +756,9 @@ html[data-theme="dark"] .prose pre.shiki span {
 }
 
 .editor-callout-microsoft-picker [aria-label="Picker"] > section > div {
+  background: transparent !important;
   height: 19rem !important;
+  padding-inline-end: 0.375rem;
   scrollbar-color: var(--line) transparent;
 }
 
@@ -701,7 +772,15 @@ html[data-theme="dark"] .prose pre.shiki span {
 }
 
 .editor-callout-microsoft-picker [aria-label="Picker"] button[class*="Category-module_button"] {
+  align-items: center;
+  background: transparent !important;
+  border: 0 !important;
   border-radius: 0.5rem !important;
+  display: inline-flex;
+  justify-content: center;
+  margin: 0 !important;
+  min-height: 2.5rem;
+  padding: 0.25rem !important;
 }
 
 .editor-callout-microsoft-picker [aria-label="Picker"] button[class*="Category-module_button"]:hover {
@@ -711,6 +790,29 @@ html[data-theme="dark"] .prose pre.shiki span {
 .editor-callout-microsoft-picker [aria-label="Picker"] img {
   block-size: 1.875rem !important;
   inline-size: 1.875rem !important;
+}
+
+.editor-callout-microsoft-picker [class*="Skeleton-module_skeleton"] {
+  background: var(--interactive-subtle) !important;
+  border-radius: 0.5rem !important;
+}
+
+.editor-callout-microsoft-picker [class*="Category-module_gridContainer"] {
+  gap: 0.125rem;
+}
+
+.editor-callout-microsoft-picker [class*="EmojiSection-module_container"]::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.editor-callout-microsoft-picker [class*="EmojiSection-module_container"]::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.editor-callout-microsoft-picker [class*="EmojiSection-module_container"]::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border: 0;
+  border-radius: 999px;
 }
 
 @media (prefers-reduced-transparency: reduce) {

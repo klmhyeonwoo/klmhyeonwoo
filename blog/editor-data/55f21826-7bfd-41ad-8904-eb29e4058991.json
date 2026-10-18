@@ -1,0 +1,1068 @@
+[
+  {
+    "id": "63fd7433-a3df-42ee-8b22-021e28b060c7",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "글을 시작하며",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c874e0a6-cfc3-45fb-8baa-6f1830f0ec2a",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "현재 ",
+        "styles": {}
+      },
+      {
+        "type": "link",
+        "href": "https://Vue.js",
+        "content": [
+          {
+            "type": "text",
+            "text": "Vue.js",
+            "styles": {}
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": " 의 Tanstack Query를 API 관련 컴포저블 (React.js로 따지면 커스텀 훅) 형태로 필요한 곳에서 useQuery나 mutation으로 사용하고 있다. 단순 단일 데이터의 조회라면 상관이 없겠지만, 사용자에 의해 유동적으로 값이 바뀌면서 동적인 패칭을 계속해야할 때 리패칭을 해야하는 경우가 많은데 React.js와 달리 ",
+        "styles": {}
+      },
+      {
+        "type": "link",
+        "href": "https://Vue.js",
+        "content": [
+          {
+            "type": "text",
+            "text": "Vue.js",
+            "styles": {}
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": " 프록시 객체를 사용하면 조금 더 리패칭 과정들을 단순화 할 수 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "8406ecc4-255f-44d4-acfa-33a1c85ab431",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "일반적인 Composable 예제",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "dc3bb209-efb2-4650-bc09-209b6a621609",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "기본 코드",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1c49b524-a4ee-4684-9097-00253d927e14",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "아래는 컴포저블과 컴포넌트 단의 간략한 예제를 담은 코드이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ddd3639b-6153-49dd-925c-7d8df98c81f9",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// useGetAnyInformation.js\nconst useGetAnyInformation = ({ boardId } ) => {\n    const get = () => {\n        const response = api.get(`...?id=${boardId}`);\n        return response?.data;\n    }\n \n    return useQuery({\n        queryKey: ['anyInformation', boardId];\n        queryFn: get\n    })l\n}\n \n// component.vue\n<template>\n    <span> this is information component </span>\n    <button @click=\"() => boardId = boardId += 1;\">\n</template>\n  \n<script setup>\n    import { ref, watch } from 'vue';\n \n    const boardId = ref(0);\n    const { data } = useGetAnyInformation({ boardId: boardId.value });\n</script>",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c6eb7230-ae73-499d-bcb5-55ace68815c3",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "위의 코드를 보면 문제점이 하나 발생하는데 사용자는 동적인 데이터를 계속해서 호출하고 싶지만, ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "boardId",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 는 정적인 상태로 존재하기 때문에 컴포넌트가 리렌더링 되지 않는 이상 단일 데이터를 계속해서 호출하게 되는 문제점이 발생한다. 이 문제를 해결하게 위해서는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "boardId",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 가 변경될 때를 감지하여 리패칭을 해줘야한다. 하지만 내부적으로 캐싱 처리를 진행해야하는 경우에는 리패칭을 하는 것은 캐싱 처리에 아무 의미 없기 때문에 (",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "refetch",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 메서드는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "staleTime",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 과 상관없이 데이터를 다시 리패치하기 때문이다) 다른 방법을 모색해야한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "056f8353-9168-4a85-aa5b-c42d35afe6a8",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "refetch",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 이용한 변경안",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "3461f418-8e63-49e0-b224-f64811e39884",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "위에서 이야기한 것처럼 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "boardId",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 가 변경될 때를 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "watch",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 로 감지하여 매번 리패칭을 해줄 수는 있지만, 캐싱 처리 등 부가적인 요소들을 많이 고려해야한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b23c630a-3225-4f4b-aa8c-a9bf448d4f84",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// useGetAnyInformation.js\nconst useGetAnyInformation = (getParams) => {\n    const get = () => {\n        const { boardId } = getParams();\n        const response = api.get(`...?id=${boardId}`);\n        return response?.data;\n    }\n \n    return useQuery({\n        queryKey: ['anyInformation', boardId];\n        queryFn: get\n    })l\n}\n \n// component.vue\n<template>\n    <span> this is information component </span>\n    <button @click=\"() => boardId = boardId += 1;\">\n</template>\n<script setup>\n    import { ref, watch } from 'vue';\n \n    const boardId = ref(0);\n    // 매번 함수로 넘겨주면서 리패칭을 하게 되면 boardId를 최신화\n    const { data, refetch } = useGetAnyInformation(() => { boardId: boardId.value });\n \n    // boardId를 감지하기 위해 추가된 부분\n    watch(boardId, () => {\n        refetch();\n    });\n</script>",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "700bf566-6a24-4ada-b67e-bcca60368494",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Proxy",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 객체를 이용한 변경안",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4027700d-cf4e-452b-9129-876b8c6dced0",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "더 좋은 방법은 없을까? ",
+        "styles": {}
+      },
+      {
+        "type": "link",
+        "href": "https://Vue.js",
+        "content": [
+          {
+            "type": "text",
+            "text": "Vue.js",
+            "styles": {}
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": "의 경우 ",
+        "styles": {}
+      },
+      {
+        "type": "link",
+        "href": "https://React.js",
+        "content": [
+          {
+            "type": "text",
+            "text": "React.js",
+            "styles": {}
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": "와 달리 Proxy 객체로 구성된 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "ref",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 를 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "queryKey",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 에 넣어주면, Tanstack Query에서는 Reactive한 쿼리 키(",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "queryKey",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": ")를 지원해주기 때문에 내부에서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "ref",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 를 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "watch",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "하여 자동으로 쿼리를 다시 실행해준다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e743b729-1b8c-4e5b-ba2c-0c2f18e1757d",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// useGetAnyInformation.js\nconst useGetAnyInformation = (boardIdRef) => {\n    const get = () => {\n        const response = api.get(`...?id=${boardIdRef.value}`);\n        return response?.data;\n    }\n \n    return useQuery({\n        queryKey: ['anyInformation', boardIdRef];\n        queryFn: get\n    })l\n}\n \n// component.vue\n<template>\n    <span> this is information component </span>\n    <button @click=\"() => boardId = boardId += 1;\">\n</template>\n<script setup>\n    import { ref, watch } from 'vue';\n \n    const boardIdRef = ref(0);\n    // 매번 함수로 넘겨주면서 리패칭을 하게 되면 boardId를 최신화\n    const { data, refetch } = useGetAnyInformation(boardIdRef);\n</script>",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ab1b4548-2f24-49a4-a5ec-c4599dc43c5b",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "위의 코드를 보면 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "watch",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 로 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "boardId",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 를 감싸주지 않아도 되고, 또 매번 리패칭을 명시적으로 넣어주는 로직 자체가 사라진 것을 확인할 수 있다. 이러한 차이가 발생하는 이유는 초기 값의 스냅샷이나, 아니면 반응형 참조에 따라 다르다는 것을 의미한다. 정적인 문자열로 선언할 경우에는 초기 시점에서의 문자열을 계속해서 가지고 서버에 호출하게 되지만, ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "ref",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 그 자체를 넘기게 되면 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "proxy",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 객체 자체를 넘기는 과정이기 때문에 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": ".value",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 를 계속 읽으며 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Reactive",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 하게 동작시킬 수 있다는 것이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ade6fe0b-7933-4f95-9197-4adb632b89b7",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이벤트 자체에서 호출하는 방법을 이용한 변경안",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b501c550-e3da-4961-9a5a-da0f4bfedc7a",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "queryClient",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 의 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "fetchQuery",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 를 사용해 직접적으로 필요할 때마다 호출하는 방법이 있다. 다만 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "fetchQuery",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "useQuery",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 처럼 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "ref",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 와 같이 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "proxy",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 객체로 감싸지 않고, 순수 데이터가 들어온다는 것을 주의해야한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f8460707-7832-4d41-a921-93e083555925",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "...\nconst queryClient = new QueryClient();\nconst data = await queryClient,fetchQuery({\n        queryKey: ['anyInformation', boardId];\n        queryFn: async () => {\n            const response = api.get(`...?id=${boardIdRef.value}`);\n            return response?.data;\n        }\n});\n \nconsole.log(data) // data.value로 접근을 하는 것이 아니라, 직접 data에 접근하면 된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "afee918e-3db6-4a93-9e99-1d51ff1e9838",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "link",
+        "href": "https://React.js",
+        "content": [
+          {
+            "type": "text",
+            "text": "React.js",
+            "styles": {}
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": "와 ",
+        "styles": {}
+      },
+      {
+        "type": "link",
+        "href": "https://Vue.js",
+        "content": [
+          {
+            "type": "text",
+            "text": "Vue.js",
+            "styles": {}
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": "에서 사용방법이 어떻게 다를까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e18e126a-3a15-43c6-8032-fec7652b7c90",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "link",
+        "href": "https://Vue.js",
+        "content": [
+          {
+            "type": "text",
+            "text": "Vue.js",
+            "styles": {}
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": " : ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "proxy",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " (전역 Reactivity 시스템 위에 존재)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "2140fff5-b296-448c-8e35-e00d864917d3",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "link",
+        "href": "https://React.js",
+        "content": [
+          {
+            "type": "text",
+            "text": "React.js",
+            "styles": {}
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": " : Virtual DOM + Diffing + setState 기반 수동 업데이트 (명시적 상태 업데이트, VDOM 재구성)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7e347fc1-2738-486a-a5c6-190181128301",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "아래는 ",
+        "styles": {}
+      },
+      {
+        "type": "link",
+        "href": "https://React.js",
+        "content": [
+          {
+            "type": "text",
+            "text": "React.js",
+            "styles": {}
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": "와 ",
+        "styles": {}
+      },
+      {
+        "type": "link",
+        "href": "https://Vue.js",
+        "content": [
+          {
+            "type": "text",
+            "text": "Vue.js",
+            "styles": {}
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": "의 예제이다. ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "useState",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 와 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "ref",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 를 비교해보면 재밌는 상황이 발생한다. ",
+        "styles": {}
+      },
+      {
+        "type": "link",
+        "href": "https://React.js",
+        "content": [
+          {
+            "type": "text",
+            "text": "React.js",
+            "styles": {}
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": "에서는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "useState",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 를 사용하는데 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "getter",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 와 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "setter",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 형태를 제공해주어 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "queryKey",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 에 들어가는 타입은 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "string",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 이 된다. ",
+        "styles": {}
+      },
+      {
+        "type": "link",
+        "href": "https://Vue.js",
+        "content": [
+          {
+            "type": "text",
+            "text": "Vue.js",
+            "styles": {}
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": "는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "proxy",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 기반 자동 반응형 전역 시스템을 사용하기 때문에 객체 · 값을 감싸고 객체 프로퍼티 접근을 자동으로 추적해 값이 바뀌면 알아서 재실행 및 렌더링을 시켜준다. ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Reactive",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 라는 개념이 ",
+        "styles": {}
+      },
+      {
+        "type": "link",
+        "href": "https://Vue.js",
+        "content": [
+          {
+            "type": "text",
+            "text": "Vue.js",
+            "styles": {}
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": "에서 특화된 개념이기 때문에, ",
+        "styles": {}
+      },
+      {
+        "type": "link",
+        "href": "https://Vue.js",
+        "content": [
+          {
+            "type": "text",
+            "text": "Vue.js",
+            "styles": {}
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": " 에서만 가능한 패턴이기도 하다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "9ea7d57f-d0e1-4bae-a000-f5aeeed3b371",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// react\nconst [boardId, setBoardId] = useState('');\n \nuseQuery({\n    queryKey: ['board', boardId], // 일반 문자열로 인식\n    queryFn: ...\n});\n \n// vue\nconst boardId = ref('');\n \nuseQuery({\n    queryKey: ['board', boardId], // `ref` 반응형 감지\n    queryFn: ...\n});",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "32a2327a-d57e-4f4d-92df-9e26e430d089",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "글을 마치며",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "239746a3-595e-4dab-a0a9-e8dacb872b91",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "link",
+        "href": "https://Vue.js",
+        "content": [
+          {
+            "type": "text",
+            "text": "Vue.js",
+            "styles": {}
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": "를 처음 공부할 때 ",
+        "styles": {}
+      },
+      {
+        "type": "link",
+        "href": "https://React.js",
+        "content": [
+          {
+            "type": "text",
+            "text": "React.js",
+            "styles": {}
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": "에서 작성했던 코드들과 함께 비교해서 학습을 하고 적용을 하다보니, 정말 다방면에서 차이점을 몸소 체감할 수 있고 이로 인해 성장을 할 수 있는 것 같다. 아직 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "proxy",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 객체에 대해서 많은 지식을 가지고 있지 않아, 계속해서 학습을 진행해보려고한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  }
+]

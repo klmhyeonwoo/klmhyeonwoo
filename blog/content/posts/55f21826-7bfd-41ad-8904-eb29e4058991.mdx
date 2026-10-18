@@ -1,0 +1,171 @@
+---
+title: "Vue에서만 확인할 수 있는 Tanstack Query의 독특한 패턴"
+date: 2026-10-18
+publishedAt: "2026-10-18T03:55:32.090Z"
+updatedAt: "2026-10-18T03:55:32.090Z"
+description: ""
+category: "category-9606d629"
+series: "-"
+private: false
+---
+
+## 글을 시작하며
+
+현재 [Vue.js](https://Vue.js) 의 Tanstack Query를 API 관련 컴포저블 (React.js로 따지면 커스텀 훅) 형태로 필요한 곳에서 useQuery나 mutation으로 사용하고 있다. 단순 단일 데이터의 조회라면 상관이 없겠지만, 사용자에 의해 유동적으로 값이 바뀌면서 동적인 패칭을 계속해야할 때 리패칭을 해야하는 경우가 많은데 React.js와 달리 [Vue.js](https://Vue.js) 프록시 객체를 사용하면 조금 더 리패칭 과정들을 단순화 할 수 있다.
+
+## 일반적인 Composable 예제
+
+### 기본 코드
+
+아래는 컴포저블과 컴포넌트 단의 간략한 예제를 담은 코드이다.
+
+```javascript
+// useGetAnyInformation.js
+const useGetAnyInformation = ({ boardId } ) => {
+    const get = () => {
+        const response = api.get(`...?id=${boardId}`);
+        return response?.data;
+    }
+ 
+    return useQuery({
+        queryKey: ['anyInformation', boardId];
+        queryFn: get
+    })l
+}
+ 
+// component.vue
+<template>
+    <span> this is information component </span>
+    <button @click="() => boardId = boardId += 1;">
+</template>
+  
+<script setup>
+    import { ref, watch } from 'vue';
+ 
+    const boardId = ref(0);
+    const { data } = useGetAnyInformation({ boardId: boardId.value });
+</script>
+```
+
+위의 코드를 보면 문제점이 하나 발생하는데 사용자는 동적인 데이터를 계속해서 호출하고 싶지만, `boardId` 는 정적인 상태로 존재하기 때문에 컴포넌트가 리렌더링 되지 않는 이상 단일 데이터를 계속해서 호출하게 되는 문제점이 발생한다. 이 문제를 해결하게 위해서는 `boardId` 가 변경될 때를 감지하여 리패칭을 해줘야한다. 하지만 내부적으로 캐싱 처리를 진행해야하는 경우에는 리패칭을 하는 것은 캐싱 처리에 아무 의미 없기 때문에 (`refetch` 메서드는 `staleTime` 과 상관없이 데이터를 다시 리패치하기 때문이다) 다른 방법을 모색해야한다.
+
+### `refetch`를 이용한 변경안
+
+위에서 이야기한 것처럼 `boardId` 가 변경될 때를 `watch` 로 감지하여 매번 리패칭을 해줄 수는 있지만, 캐싱 처리 등 부가적인 요소들을 많이 고려해야한다.
+
+```javascript
+// useGetAnyInformation.js
+const useGetAnyInformation = (getParams) => {
+    const get = () => {
+        const { boardId } = getParams();
+        const response = api.get(`...?id=${boardId}`);
+        return response?.data;
+    }
+ 
+    return useQuery({
+        queryKey: ['anyInformation', boardId];
+        queryFn: get
+    })l
+}
+ 
+// component.vue
+<template>
+    <span> this is information component </span>
+    <button @click="() => boardId = boardId += 1;">
+</template>
+<script setup>
+    import { ref, watch } from 'vue';
+ 
+    const boardId = ref(0);
+    // 매번 함수로 넘겨주면서 리패칭을 하게 되면 boardId를 최신화
+    const { data, refetch } = useGetAnyInformation(() => { boardId: boardId.value });
+ 
+    // boardId를 감지하기 위해 추가된 부분
+    watch(boardId, () => {
+        refetch();
+    });
+</script>
+```
+
+### `Proxy` 객체를 이용한 변경안
+
+더 좋은 방법은 없을까? [Vue.js](https://Vue.js)의 경우 [React.js](https://React.js)와 달리 Proxy 객체로 구성된 `ref` 를 `queryKey` 에 넣어주면, Tanstack Query에서는 Reactive한 쿼리 키(`queryKey`)를 지원해주기 때문에 내부에서 `ref` 를 `watch`하여 자동으로 쿼리를 다시 실행해준다.
+
+```javascript
+// useGetAnyInformation.js
+const useGetAnyInformation = (boardIdRef) => {
+    const get = () => {
+        const response = api.get(`...?id=${boardIdRef.value}`);
+        return response?.data;
+    }
+ 
+    return useQuery({
+        queryKey: ['anyInformation', boardIdRef];
+        queryFn: get
+    })l
+}
+ 
+// component.vue
+<template>
+    <span> this is information component </span>
+    <button @click="() => boardId = boardId += 1;">
+</template>
+<script setup>
+    import { ref, watch } from 'vue';
+ 
+    const boardIdRef = ref(0);
+    // 매번 함수로 넘겨주면서 리패칭을 하게 되면 boardId를 최신화
+    const { data, refetch } = useGetAnyInformation(boardIdRef);
+</script>
+```
+
+위의 코드를 보면 `watch` 로 `boardId` 를 감싸주지 않아도 되고, 또 매번 리패칭을 명시적으로 넣어주는 로직 자체가 사라진 것을 확인할 수 있다. 이러한 차이가 발생하는 이유는 초기 값의 스냅샷이나, 아니면 반응형 참조에 따라 다르다는 것을 의미한다. 정적인 문자열로 선언할 경우에는 초기 시점에서의 문자열을 계속해서 가지고 서버에 호출하게 되지만, `ref` 그 자체를 넘기게 되면 `proxy` 객체 자체를 넘기는 과정이기 때문에 `.value` 를 계속 읽으며 `Reactive` 하게 동작시킬 수 있다는 것이다.
+
+### 이벤트 자체에서 호출하는 방법을 이용한 변경안
+
+`queryClient` 의 `fetchQuery` 를 사용해 직접적으로 필요할 때마다 호출하는 방법이 있다. 다만 `fetchQuery` 는 `useQuery` 처럼 `ref` 와 같이 `proxy` 객체로 감싸지 않고, 순수 데이터가 들어온다는 것을 주의해야한다.
+
+```javascript
+...
+const queryClient = new QueryClient();
+const data = await queryClient,fetchQuery({
+        queryKey: ['anyInformation', boardId];
+        queryFn: async () => {
+            const response = api.get(`...?id=${boardIdRef.value}`);
+            return response?.data;
+        }
+});
+ 
+console.log(data) // data.value로 접근을 하는 것이 아니라, 직접 data에 접근하면 된다.
+```
+
+## [React.js](https://React.js)와 [Vue.js](https://Vue.js)에서 사용방법이 어떻게 다를까?
+
+> [Vue.js](https://Vue.js) : `proxy` (전역 Reactivity 시스템 위에 존재)
+
+[React.js](https://React.js) : Virtual DOM + Diffing + setState 기반 수동 업데이트 (명시적 상태 업데이트, VDOM 재구성)
+
+아래는 [React.js](https://React.js)와 [Vue.js](https://Vue.js)의 예제이다. `useState` 와 `ref` 를 비교해보면 재밌는 상황이 발생한다. [React.js](https://React.js)에서는 `useState` 를 사용하는데 `getter` 와 `setter` 형태를 제공해주어 `queryKey` 에 들어가는 타입은 `string` 이 된다. [Vue.js](https://Vue.js)는 `proxy` 기반 자동 반응형 전역 시스템을 사용하기 때문에 객체 · 값을 감싸고 객체 프로퍼티 접근을 자동으로 추적해 값이 바뀌면 알아서 재실행 및 렌더링을 시켜준다. `Reactive` 라는 개념이 [Vue.js](https://Vue.js)에서 특화된 개념이기 때문에, [Vue.js](https://Vue.js) 에서만 가능한 패턴이기도 하다.
+
+```javascript
+// react
+const [boardId, setBoardId] = useState('');
+ 
+useQuery({
+    queryKey: ['board', boardId], // 일반 문자열로 인식
+    queryFn: ...
+});
+ 
+// vue
+const boardId = ref('');
+ 
+useQuery({
+    queryKey: ['board', boardId], // `ref` 반응형 감지
+    queryFn: ...
+});
+```
+
+## 글을 마치며
+
+[Vue.js](https://Vue.js)를 처음 공부할 때 [React.js](https://React.js)에서 작성했던 코드들과 함께 비교해서 학습을 하고 적용을 하다보니, 정말 다방면에서 차이점을 몸소 체감할 수 있고 이로 인해 성장을 할 수 있는 것 같다. 아직 `proxy` 객체에 대해서 많은 지식을 가지고 있지 않아, 계속해서 학습을 진행해보려고한다.
+

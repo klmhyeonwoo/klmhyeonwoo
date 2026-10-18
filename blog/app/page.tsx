@@ -6,6 +6,7 @@ import { getPosts } from "@/lib/posts";
 import { getCategories } from "@/lib/posts";
 import { getProfile } from "@/lib/profile";
 import { RecentComments } from "@/components/recent-comments";
+import { PrefetchLink } from "@/components/prefetch-link";
 
 export const dynamic = "force-dynamic";
 
@@ -43,7 +44,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
         <section className="kb-feed" id="all" aria-label={selectedCategory ? categories.find((item) => item.id === selectedCategory)?.name ?? "미분류" : "전체 글"}>
           {filteredPosts.length > 0 ? pagedPosts.map((post) => (
             <article className="kb-post" key={post.id}>
-              <Link href={`/posts/${post.id}`}>
+              <PrefetchLink href={`/posts/${post.id}`}>
                 <div className="kb-post-author">
                   {profile.image ? <img src={profile.image} alt="" /> : <span className="kb-post-avatar">{profile.name.slice(0, 1)}</span>}
                   <div>
@@ -56,7 +57,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 <div className="kb-post-tags" aria-label="글 카테고리">
                   <span>{post.category}</span>
                 </div>
-              </Link>
+              </PrefetchLink>
             </article>
           )) : <p className="kb-empty">아직 이 카테고리에 글이 없습니다.{authenticated && <Link href="/ykk"> 글 작성하기</Link>}</p>}
           {totalPages > 1 && <nav className="kb-pagination" aria-label="글 목록 페이지"><Link aria-disabled={currentPage === 1} className={currentPage === 1 ? "is-disabled" : ""} href={pageHref(Math.max(1, currentPage - 1))}>이전</Link>{Array.from({ length: totalPages }, (_, index) => index + 1).map((number) => <Link aria-current={number === currentPage ? "page" : undefined} className={number === currentPage ? "active" : ""} href={pageHref(number)} key={number}>{number}</Link>)}<Link aria-disabled={currentPage === totalPages} className={currentPage === totalPages ? "is-disabled" : ""} href={pageHref(Math.min(totalPages, currentPage + 1))}>다음</Link></nav>}

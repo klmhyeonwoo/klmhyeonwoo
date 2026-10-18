@@ -1,11 +1,10 @@
 [
   {
-    "id": "a82c40c4-8cf5-43b8-a3b0-f221e4bde5f1",
-    "type": "paragraph",
+    "id": "b01a8b32-9d87-454f-9cbc-388bd3562ab1",
+    "type": "callout",
     "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
+      "emoji": "💡",
+      "fluent": "LightBulb"
     },
     "content": [
       {

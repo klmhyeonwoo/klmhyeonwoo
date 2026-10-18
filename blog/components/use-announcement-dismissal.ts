@@ -6,7 +6,7 @@ type StoredDismissal = { signature: string; expiresAt: number };
 
 export function useAnnouncementDismissal(kind: "banner" | "popup", settings: object) {
   const signature = JSON.stringify(settings);
-  const key = `bloging:announcement-dismissal:${kind}`;
+  const key = `wavy:announcement-dismissal:${kind}`;
   const [ready, setReady] = useState(false);
   const [open, setOpen] = useState(false);
 

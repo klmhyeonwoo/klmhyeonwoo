@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { isAdmin } from "@/lib/auth";
-import { formatPostDate, formatPostUpdatedLabel, postWasUpdated } from "@/lib/post-date";
+import { formatPostDate, formatPostUpdatedLabel, postPublishedToday, postWasUpdated } from "@/lib/post-date";
 import { getPosts } from "@/lib/posts";
 import { getCategories } from "@/lib/posts";
 import { getProfile } from "@/lib/profile";
@@ -22,6 +22,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
   const categories = getCategories();
   const { category: selectedCategory, page } = await searchParams;
   const filteredPosts = selectedCategory ? posts.filter((post) => post.categoryId === selectedCategory) : posts;
+  const categoryCounts = posts.reduce((counts, post) => counts.set(post.categoryId, (counts.get(post.categoryId) ?? 0) + 1), new Map<string, number>());
   const totalPages = Math.max(1, Math.ceil(filteredPosts.length / postsPerPage));
   const currentPage = Math.min(pageNumber(page), totalPages);
   const pagedPosts = filteredPosts.slice((currentPage - 1) * postsPerPage, currentPage * postsPerPage);
@@ -39,7 +40,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
     <>
       <SiteHeader />
       <main className="kb-list-page" id="top">
-        <nav className="kb-category-nav" id="topics" aria-label="글 카테고리"><Link className={!selectedCategory ? "active" : ""} href="/">전체 <span>{posts.length}</span></Link>{categories.map((category) => <Link key={category.id} className={selectedCategory === category.id ? "active" : ""} href={`/?category=${category.id}`}>{category.name}</Link>)}</nav>
+        <nav className="kb-category-nav" id="topics" aria-label="글 카테고리"><Link className={!selectedCategory ? "active" : ""} href="/">전체 <span>{posts.length}</span></Link>{categories.map((category) => <Link key={category.id} className={selectedCategory === category.id ? "active" : ""} href={`/?category=${category.id}`}>{category.name} <span>{categoryCounts.get(category.id) ?? 0}</span></Link>)}</nav>
         <div className="kb-content-layout">
         <section className="kb-feed" id="all" aria-label={selectedCategory ? categories.find((item) => item.id === selectedCategory)?.name ?? "미분류" : "전체 글"}>
           {filteredPosts.length > 0 ? pagedPosts.map((post) => (
@@ -52,7 +53,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                     <p>{formatPostDate(post.date)}{postWasUpdated(post.publishedAt, post.updatedAt) && <><span>·</span> {formatPostUpdatedLabel(post.updatedAt)}</>}{post.series && <><span>·</span> {post.series}</>}{post.isPrivate && " 🔒"}</p>
                   </div>
                 </div>
-                <h2>{post.title}</h2>
+                <h2>{post.title}{postPublishedToday(post.publishedAt) && <span className="kb-post-new" aria-label="오늘 게시됨">NEW</span>}</h2>
                 {post.excerpt && <p className="kb-post-description">{post.excerpt}</p>}
                 <div className="kb-post-tags" aria-label="글 카테고리">
                   <span>{post.category}</span>
@@ -64,7 +65,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
         </section>
         <RecentComments />
         </div>
-        <footer className="kb-footer"><p>© 2026 bloging.</p><a href="#top">맨 위로 ↑</a></footer>
+        <footer className="kb-footer"><p>© 2026 wavy.</p><a href="#top">맨 위로 ↑</a></footer>
       </main>
     </>
   );

@@ -422,7 +422,14 @@
 }
 
 .editor [data-content-type="codeBlock"] pre {
+  background: transparent;
+  color: inherit;
   margin: 0;
+}
+
+.editor [data-content-type="codeBlock"] code {
+  background: transparent;
+  color: inherit;
 }
 
 .editor [data-content-type="codeBlock"] select {
@@ -430,6 +437,7 @@
   border: 0;
   border-radius: 0.5rem;
   color: var(--ink);
+  color-scheme: light;
   font: inherit;
 }
 
@@ -451,14 +459,55 @@
 /* Light mode needs a stronger edge than the page paper so code reads as one
    deliberate technical surface rather than a faded paragraph. */
 html:not([data-theme="dark"]) .editor [data-content-type="codeBlock"] {
-  background: #f2f4f3;
-  border-color: #c8cfca;
+  background: #f7f8f7;
+  border-color: #b9c1bb;
+  color: #202522;
   box-shadow: inset 0 1px rgba(255, 255, 255, 0.7);
 }
 
 html:not([data-theme="dark"]) .editor [data-content-type="codeBlock"] select {
   background: #ffffff;
-  border: 1px solid #d4dad6;
+  border: 1px solid #aeb8b0;
+  color: #202522;
+  color-scheme: light;
+}
+
+html:not([data-theme="dark"]) .editor [data-content-type="codeBlock"] select option,
+html:not([data-theme="dark"]) .editor [data-content-type="codeBlock"] select optgroup {
+  background: #ffffff;
+  color: #202522;
+}
+
+html:not([data-theme="dark"]) .editor [data-content-type="codeBlock"] select:hover {
+  background: #f1f3f1;
+  border-color: #737d75;
+}
+
+.editor [data-content-type="codeBlock"] select:focus-visible {
+  outline: 2px solid #222;
+  outline-offset: 2px;
+}
+
+html[data-theme="dark"] .editor [data-content-type="codeBlock"] {
+  background: #171a18;
+  border-color: #424a45;
+  color: #edf1ee;
+}
+
+html[data-theme="dark"] .editor [data-content-type="codeBlock"] select {
+  background: #252b27;
+  border: 1px solid #58625b;
+  color: #f3f6f3;
+  color-scheme: dark;
+}
+
+html[data-theme="dark"] .editor [data-content-type="codeBlock"] select option {
+  background: #252b27;
+  color: #f3f6f3;
+}
+
+html[data-theme="dark"] .editor [data-content-type="codeBlock"] select:focus-visible {
+  outline-color: #f3f6f3;
 }
 
 html:not([data-theme="dark"]) .prose pre.shiki,
@@ -490,53 +539,215 @@ html[data-theme="dark"] .prose pre.shiki span {
    the choice reversible. */
 .editor-link-choice {
   animation: editor-link-choice-in 160ms ease-out;
-  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  background: color-mix(in srgb, var(--surface-raised) 96%, transparent);
+  backdrop-filter: blur(18px) saturate(150%);
   border: 1px solid var(--line);
-  border-radius: 0.875rem;
-  box-shadow: 0 0.8rem 2.25rem color-mix(in srgb, var(--ink) 14%, transparent);
-  margin-top: 0.75rem;
-  padding: 0.75rem;
+  border-radius: 1rem;
+  box-shadow: 0 1rem 2.75rem color-mix(in srgb, var(--ink) 18%, transparent);
+  padding: 0.625rem;
+  position: fixed;
+  width: min(20rem, calc(100vw - 2rem));
+  z-index: 70;
 }
 
 .editor-link-choice p {
   color: var(--muted);
   font-size: 0.8125rem;
+  font-weight: 620;
   margin: 0 0 0.625rem;
+  padding-inline: 0.25rem;
 }
 
 .editor-link-choice > div {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.375rem;
+  display: grid;
+  gap: 0.1875rem;
 }
 
 .editor-link-choice button {
-  background: var(--ink);
+  align-items: start;
+  background: transparent;
   border: 0;
-  border-radius: 0.55rem;
-  color: var(--surface);
+  border-radius: 0.625rem;
+  color: var(--ink);
   cursor: pointer;
+  display: grid;
   font: inherit;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  min-height: 2.25rem;
-  padding: 0.35rem 0.7rem;
+  gap: 0.125rem;
+  min-height: 3.25rem;
+  padding: 0.5rem 0.625rem;
+  text-align: start;
   transition:
-    transform 100ms ease-out,
-    opacity 160ms ease;
+    background 120ms ease,
+    transform 100ms ease-out;
 }
 
 .editor-link-choice button:hover {
-  opacity: 0.84;
+  background: var(--interactive-subtle);
 }
 
 .editor-link-choice button:active {
   transform: scale(0.97);
 }
 
+.editor-link-choice button > span {
+  font-size: 0.9375rem;
+  font-weight: 620;
+  line-height: 1.25;
+}
+
+.editor-link-choice button > small {
+  color: var(--muted);
+  font-size: 0.75rem;
+  line-height: 1.25;
+}
+
 .editor-link-choice .editor-link-choice-cancel {
   background: var(--interactive-subtle);
+  display: block;
+  font-size: 0.8125rem;
+  margin-top: 0.3125rem;
+  min-height: 2.25rem;
+  text-align: center;
   color: var(--ink);
+}
+
+/* Link cards intentionally do not scrape third-party pages in the editor.
+   They remain reliable offline and still provide a clear, editing-friendly
+   preview that is identical to the card published with the article. */
+.editor .editor-bookmark {
+  align-items: stretch;
+  background: var(--surface-raised);
+  border-color: var(--line);
+  border-radius: 1rem;
+  display: grid;
+  gap: 0;
+  grid-template-columns: minmax(0, 1fr) auto;
+  margin-block: 1rem;
+  max-width: 40rem;
+  min-height: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+.editor .editor-bookmark-visual,
+.post-bookmark-visual {
+  align-items: center;
+  background:
+    radial-gradient(circle at 78% 22%, color-mix(in srgb, var(--accent) 26%, transparent), transparent 28%),
+    linear-gradient(125deg, color-mix(in srgb, #d6f1ff 76%, var(--surface)), color-mix(in srgb, #fbe5f4 72%, var(--surface)));
+  color: color-mix(in srgb, var(--ink) 74%, transparent);
+  display: flex;
+  font-size: 1.5rem;
+  font-weight: 700;
+  justify-content: center;
+}
+
+.editor .editor-bookmark-visual {
+  grid-column: 1 / -1;
+  min-height: 9.75rem;
+  overflow: hidden;
+}
+
+.editor .editor-bookmark-visual > span,
+.post-bookmark-visual > span {
+  align-items: center;
+  background: color-mix(in srgb, var(--surface-raised) 72%, transparent);
+  border: 1px solid color-mix(in srgb, var(--line) 74%, transparent);
+  border-radius: 999px;
+  display: inline-flex;
+  height: 2.5rem;
+  justify-content: center;
+  width: 2.5rem;
+}
+
+.editor .editor-bookmark-visual > img,
+.post-bookmark-visual > img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.editor .editor-bookmark-copy {
+  gap: 0.3125rem;
+  padding: 1rem 1rem 1.0625rem;
+}
+
+.editor .editor-bookmark-copy small,
+.post-bookmark-copy > small {
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 650;
+}
+
+.editor .editor-bookmark-title {
+  font-size: 1rem;
+  font-weight: 650;
+  line-height: 1.42;
+  white-space: normal;
+}
+
+.editor .editor-bookmark-url,
+.post-bookmark-copy > span {
+  color: var(--muted);
+  display: block;
+  font-size: 0.75rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.editor .editor-bookmark-description,
+.post-bookmark-copy > em {
+  -webkit-box-orient: vertical;
+  color: var(--muted);
+  display: -webkit-box;
+  font-size: 0.8125rem;
+  font-style: normal;
+  line-height: 1.45;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+}
+
+.editor .editor-bookmark-edit {
+  align-self: end;
+  margin: 0 0.75rem 1rem 0;
+}
+
+.prose .post-bookmark {
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  color: var(--ink);
+  display: block;
+  margin-block: 1.25rem;
+  max-width: 40rem;
+  overflow: hidden;
+  text-decoration: none;
+  transition: border-color 140ms ease, transform 140ms ease;
+}
+
+.prose .post-bookmark:hover {
+  border-color: color-mix(in srgb, var(--ink) 34%, var(--line));
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.post-bookmark-visual {
+  min-height: 10.5rem;
+  overflow: hidden;
+}
+
+.post-bookmark-copy {
+  display: grid;
+  gap: 0.375rem;
+  padding: 1rem 1.125rem 1.125rem;
+}
+
+.post-bookmark-copy > strong {
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 650;
+  line-height: 1.42;
 }
 
 /* The title is a writing surface rather than a single-line form control. */
@@ -616,25 +827,26 @@ html[data-theme="dark"] .prose pre.shiki span {
 
 /* The picker stays close to the block: a compact utility panel, not a modal. */
 .editor-callout-emoji-menu {
-  background: color-mix(in srgb, var(--surface-raised) 94%, transparent);
-  backdrop-filter: blur(18px) saturate(160%);
-  border: 1px solid color-mix(in srgb, var(--line) 90%, transparent);
-  border-radius: 0.875rem;
-  box-shadow: 0 1.25rem 3rem color-mix(in srgb, var(--ink) 18%, transparent);
+  animation: callout-picker-enter 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  background: color-mix(in srgb, var(--surface-raised) 92%, transparent);
+  backdrop-filter: blur(24px) saturate(175%);
+  border: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
+  border-radius: 1.125rem;
+  box-shadow: 0 1.25rem 3.5rem color-mix(in srgb, var(--ink) 20%, transparent), inset 0 1px color-mix(in srgb, var(--surface) 72%, transparent);
   isolation: isolate;
   overflow: hidden;
   padding: 0;
   transform-origin: top left;
-  width: min(25rem, calc(100vw - 3rem));
+  width: min(25rem, calc(100vw - 2rem));
 }
 
 .editor-callout-emoji-menu-header {
   align-items: center;
   border-bottom: 1px solid var(--line);
   display: flex;
-  gap: 1rem;
+  gap: 0.75rem;
   justify-content: space-between;
-  padding: 0.75rem 0.875rem 0.625rem;
+  padding: 0.875rem 0.875rem 0.75rem;
 }
 
 .editor-callout-emoji-menu-header > div {
@@ -651,40 +863,43 @@ html[data-theme="dark"] .prose pre.shiki span {
 }
 
 .editor-callout-emoji-tabs {
-  border-bottom: 1px solid var(--line);
-  display: inline-flex;
-  gap: 0.875rem;
-  padding: 0;
+  background: var(--interactive-subtle);
+  border: 0;
+  border-radius: 0.625rem;
+  display: inline-grid;
+  gap: 0.125rem;
+  grid-template-columns: 1fr 1fr;
+  padding: 0.1875rem;
 }
 
 .editor-callout-emoji-tabs button {
   background: transparent;
   border: 0;
+  border-radius: 0.4375rem;
   color: var(--muted);
   cursor: pointer;
   font: inherit;
   font-size: 0.75rem;
   font-weight: 550;
-  padding: 0 0 0.375rem;
+  min-height: 1.75rem;
+  padding: 0.25rem 0.5rem;
   position: relative;
 }
 
 .editor-callout-emoji-tabs button.is-selected {
+  background: var(--surface-raised);
+  box-shadow: 0 1px 0.25rem color-mix(in srgb, var(--ink) 12%, transparent);
   color: var(--ink);
 }
 
 .editor-callout-emoji-tabs button.is-selected::after {
-  background: var(--ink);
-  bottom: -1px;
-  content: "";
-  height: 1px;
-  inset-inline: 0;
-  position: absolute;
+  content: none;
 }
 
 .editor-callout-emoji-close {
-  background: transparent;
+  background: var(--interactive-subtle);
   border: 0;
+  border-radius: 999px;
   color: var(--muted);
   cursor: pointer;
   display: inline-flex;
@@ -693,24 +908,87 @@ html[data-theme="dark"] .prose pre.shiki span {
   font-weight: 550;
   height: auto;
   line-height: 1;
-  padding: 0.375rem;
+  min-height: 1.75rem;
+  padding: 0.375rem 0.625rem;
   width: auto;
 }
 
 .editor-callout-emoji-close:hover {
+  background: color-mix(in srgb, var(--ink) 11%, var(--interactive-subtle));
   color: var(--ink);
 }
 
 .editor-callout-emoji-menu .EmojiPickerReact {
-  --epr-bg-color: var(--surface-raised);
-  --epr-category-label-bg-color: var(--surface-raised);
+  --epr-bg-color: transparent;
+  --epr-category-label-bg-color: color-mix(in srgb, var(--surface-raised) 92%, transparent);
+  --epr-category-navigation-button-active-background-color: var(--surface-raised);
+  --epr-category-navigation-button-active-color: var(--ink);
+  --epr-category-navigation-button-color: var(--muted);
+  --epr-category-navigation-button-hover-background-color: var(--interactive-subtle);
+  --epr-emoji-size: 1.45rem;
+  --epr-emoji-padding: 0.375rem;
+  --epr-focus-bg-color: var(--interactive-subtle);
+  --epr-highlight-color: var(--interactive-subtle);
   --epr-picker-border-color: transparent;
   --epr-search-border-color: var(--line);
   --epr-search-input-bg-color: var(--surface);
   --epr-search-input-text-color: var(--ink);
   --epr-text-color: var(--ink);
   border: 0;
-  border-radius: 0 0 0.875rem 0.875rem;
+  border-radius: 0 0 1.125rem 1.125rem;
+  font-family: inherit;
+}
+
+.editor-callout-emoji-menu .EmojiPickerReact .epr-search-container {
+  margin: 0;
+  padding: 0.75rem 0.875rem 0.5rem;
+}
+
+.editor-callout-emoji-menu .EmojiPickerReact .epr-search {
+  border-radius: 0.625rem;
+  box-shadow: inset 0 1px color-mix(in srgb, var(--ink) 5%, transparent);
+  font: inherit;
+  font-size: 0.8125rem;
+  min-height: 2.25rem;
+}
+
+.editor-callout-emoji-menu .EmojiPickerReact .epr-emoji-category-label {
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 0.6875rem;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  padding: 0.625rem 0.875rem 0.375rem;
+}
+
+.editor-callout-emoji-menu .EmojiPickerReact .epr-emoji-category-content {
+  padding-inline: 0.5rem;
+}
+
+.editor-callout-emoji-menu .EmojiPickerReact button.epr-emoji {
+  border-radius: 0.625rem;
+  transition: background 120ms ease-out, transform 100ms ease-out;
+}
+
+.editor-callout-emoji-menu .EmojiPickerReact button.epr-emoji:hover {
+  background: var(--interactive-subtle);
+  transform: scale(1.08);
+}
+
+.editor-callout-emoji-menu .EmojiPickerReact button.epr-emoji:active {
+  transform: scale(0.94);
+}
+
+.editor-callout-emoji-menu .EmojiPickerReact .epr-category-nav {
+  background: color-mix(in srgb, var(--surface-raised) 86%, transparent);
+  border-top: 1px solid var(--line);
+  padding: 0.375rem 0.5rem calc(0.375rem + env(safe-area-inset-bottom));
+}
+
+.editor-callout-emoji-menu .EmojiPickerReact .epr-category-nav button {
+  border-radius: 0.5rem;
+  height: 2rem;
+  width: 2rem;
 }
 
 /* ms-3d-emoji-picker injects a small standalone sheet. These overrides make
@@ -731,33 +1009,36 @@ html[data-theme="dark"] .prose pre.shiki span {
 .editor-callout-microsoft-picker [aria-label="Picker"] > nav > div {
   align-items: center;
   column-gap: 0.25rem;
-  padding: 0.625rem 0.75rem !important;
+  padding: 0.75rem 0.875rem 0.625rem !important;
 }
 
 .editor-callout-microsoft-picker [aria-label="Picker"] > nav button {
   align-items: center;
   background: transparent !important;
   border: 0 !important;
-  border-radius: 0.375rem !important;
+  border-radius: 0.625rem !important;
   color: var(--muted) !important;
   display: inline-flex;
   justify-content: center;
   margin: 0 !important;
-  padding: 0.3125rem !important;
+  min-height: 2rem;
+  padding: 0.375rem !important;
 }
 
 .editor-callout-microsoft-picker [aria-label="Picker"] > nav button[class*="active"] {
+  background: var(--surface-raised) !important;
+  box-shadow: 0 1px 0.25rem color-mix(in srgb, var(--ink) 12%, transparent);
   color: var(--ink) !important;
   text-decoration-color: var(--ink) !important;
 }
 
 .editor-callout-microsoft-picker [aria-label="Picker"] > section {
-  padding: 0.625rem 0.5rem 0.5rem !important;
+  padding: 0.75rem 0.625rem 0.625rem !important;
 }
 
 .editor-callout-microsoft-picker [aria-label="Picker"] > section > div {
   background: transparent !important;
-  height: 19rem !important;
+  height: 18rem !important;
   padding-inline-end: 0.375rem;
   scrollbar-color: var(--line) transparent;
 }
@@ -775,11 +1056,11 @@ html[data-theme="dark"] .prose pre.shiki span {
   align-items: center;
   background: transparent !important;
   border: 0 !important;
-  border-radius: 0.5rem !important;
+  border-radius: 0.625rem !important;
   display: inline-flex;
   justify-content: center;
   margin: 0 !important;
-  min-height: 2.5rem;
+  min-height: 2.625rem;
   padding: 0.25rem !important;
 }
 
@@ -798,7 +1079,7 @@ html[data-theme="dark"] .prose pre.shiki span {
 }
 
 .editor-callout-microsoft-picker [class*="Category-module_gridContainer"] {
-  gap: 0.125rem;
+  gap: 0.25rem;
 }
 
 .editor-callout-microsoft-picker [class*="EmojiSection-module_container"]::-webkit-scrollbar {
@@ -815,10 +1096,44 @@ html[data-theme="dark"] .prose pre.shiki span {
   border-radius: 999px;
 }
 
+@keyframes callout-picker-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-0.25rem) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 760px) {
+  .editor-callout-emoji-menu {
+    max-height: min(32rem, calc(100dvh - 4rem));
+  }
+
+  .editor-callout-emoji-menu .EmojiPickerReact {
+    --epr-emoji-size: 1.35rem;
+    --epr-emoji-padding: 0.3125rem;
+  }
+
+  .editor-callout-microsoft-picker [aria-label="Picker"] > section > div {
+    height: min(16rem, calc(100dvh - 15rem)) !important;
+  }
+}
+
 @media (prefers-reduced-transparency: reduce) {
   .editor-callout-emoji-menu {
     background: var(--surface-raised);
     backdrop-filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .editor-callout-emoji-menu,
+  .editor-callout-emoji-menu .EmojiPickerReact button.epr-emoji {
+    animation: none;
+    transition: none;
   }
 }
 
@@ -1197,6 +1512,18 @@ html[data-theme="dark"] .prose pre.shiki span {
 
 .kb-post-tags span {
   font-size: 0.8125rem;
+}
+
+/* A same-day marker adds recency without competing with the article title. */
+.kb-post-new {
+  color: var(--accent);
+  display: inline-block;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.5em;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-inline-start: 0.5rem;
+  vertical-align: 0.16em;
 }
 
 .lede {

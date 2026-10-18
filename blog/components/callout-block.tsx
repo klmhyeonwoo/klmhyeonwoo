@@ -34,6 +34,13 @@ function CalloutBlock({ block, editor, contentRef }: ReactCustomBlockRenderProps
     editor.updateBlock(block, { props: { fluent: "", fluentUrl: emoji.url } });
     setPickerOpen(false);
   };
+  const preservePickerInteraction = (event: React.MouseEvent | React.PointerEvent) => {
+    const target = event.target as HTMLElement;
+    // Keep text inputs focusable, but don't let a picker click move the
+    // BlockNote selection back into the writing surface.
+    if (!target.closest("input, textarea, select")) event.preventDefault();
+    event.stopPropagation();
+  };
 
   useEffect(() => {
     if (!pickerOpen) return;
@@ -69,13 +76,13 @@ function CalloutBlock({ block, editor, contentRef }: ReactCustomBlockRenderProps
         }}
         type="button"
       >{block.props.fluentUrl ? <img alt="" className="editor-callout-fluent-image" src={block.props.fluentUrl} /> : block.props.fluent ? <FluentEmoji name={block.props.fluent} /> : block.props.emoji}</button>
-      {pickerOpen && <div aria-label="콜아웃 이모지 선택" className="editor-callout-emoji-menu" onClick={(event) => event.stopPropagation()} onMouseDown={(event) => event.stopPropagation()} onPointerDown={(event) => event.stopPropagation()} role="region">
+      {pickerOpen && <div aria-label="콜아웃 이모지 선택" className="editor-callout-emoji-menu" onClick={(event) => event.stopPropagation()} onMouseDownCapture={preservePickerInteraction} onPointerDownCapture={preservePickerInteraction} role="region">
         <div className="editor-callout-emoji-menu-header">
           <div>
             <p>콜아웃 아이콘</p>
             <div aria-label="이모지 종류" className="editor-callout-emoji-tabs" role="tablist">
-              <button aria-selected={pickerMode === "emoji"} className={pickerMode === "emoji" ? "is-selected" : undefined} onClick={() => setPickerMode("emoji")} role="tab" type="button">기본 이모지</button>
-              <button aria-selected={pickerMode === "fluent"} className={pickerMode === "fluent" ? "is-selected" : undefined} onClick={() => setPickerMode("fluent")} role="tab" type="button">Microsoft 3D</button>
+              <button aria-selected={pickerMode === "emoji"} className={pickerMode === "emoji" ? "is-selected" : undefined} onClick={(event) => { event.stopPropagation(); setPickerMode("emoji"); }} role="tab" type="button">기본 이모지</button>
+              <button aria-selected={pickerMode === "fluent"} className={pickerMode === "fluent" ? "is-selected" : undefined} onClick={(event) => { event.stopPropagation(); setPickerMode("fluent"); }} role="tab" type="button">Microsoft 3D</button>
             </div>
           </div>
           <button aria-label="이모지 선택 닫기" className="editor-callout-emoji-close" onClick={(event) => { event.stopPropagation(); setPickerOpen(false); }} onMouseDown={(event) => { event.preventDefault(); event.stopPropagation(); }} type="button">닫기</button>

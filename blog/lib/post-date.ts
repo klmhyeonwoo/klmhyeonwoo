@@ -54,6 +54,14 @@ function koreaCalendarDay(value: Date) {
   return Date.UTC(number("year"), number("month") - 1, number("day"));
 }
 
+/** Whether a post was first published today in the Korea time zone. */
+export function postPublishedToday(value: unknown, now = new Date()) {
+  const publishedAt = postPublishedAtValue(value);
+  if (!publishedAt) return false;
+  const published = new Date(publishedAt);
+  return !Number.isNaN(published.getTime()) && koreaCalendarDay(published) === koreaCalendarDay(now);
+}
+
 export function formatPostUpdatedLabel(value: unknown, now = new Date()) {
   const normalized = postPublishedAtValue(value);
   if (!normalized) return "최근 수정";

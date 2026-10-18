@@ -24,6 +24,7 @@ import { ChangeEvent, memo, useCallback, useEffect, useEffectEvent, useRef, useS
 import { ToastMessage } from "./toast-message";
 import { Bookmark } from "./bookmark-block";
 import { Callout } from "./callout-block";
+import { bookmarkMarkdown, bookmarkTitle as savedBookmarkTitle } from "@/lib/bookmark-markdown";
 
 export type EditorMention = { title: string; href: string; description: string };
 const noMentions: EditorMention[] = [];
@@ -37,6 +38,8 @@ type Props = {
 type PendingLink = {
   url: string;
   blockId: string;
+  left: number;
+  top: number;
 };
 
 type BlockTransform = {
@@ -153,7 +156,7 @@ function normalizedHttpUrl(value: string) {
   }
 }
 
-function bookmarkTitle(url: string) {
+function defaultBookmarkTitle(url: string) {
   return new URL(url).hostname.replace(/^www\./, "");
 }
 
@@ -262,6 +265,17 @@ function Editor({ initialBlocks, mentions, onChange }: Props) {
     const document = editor.document;
     const markdown = document.map((block) => {
       const serialized = editor.blocksToMarkdownLossy([block]);
+      if (block.type === "bookmark") {
+        const props = block.props as { url?: unknown; description?: unknown; image?: unknown };
+        if (typeof props.url === "string" && normalizedHttpUrl(props.url)) {
+          return bookmarkMarkdown(
+            props.url,
+            savedBookmarkTitle(block.content) || defaultBookmarkTitle(props.url),
+            typeof props.description === "string" ? props.description : "",
+            typeof props.image === "string" ? props.image : "",
+          );
+        }
+      }
       return block.type === "callout"
         ? calloutMarkdown(serialized, block.props as { emoji?: unknown; fluent?: unknown; fluentUrl?: unknown })
         : serialized;
@@ -378,9 +392,10 @@ function Editor({ initialBlocks, mentions, onChange }: Props) {
     const root = editor.domElement;
     if (!root) return;
 
-    const openImageProperties = (event: MouseEvent) => {
+    const openImageProperties = (event: PointerEvent) => {
       const target = event.target;
       if (!(target instanceof Element) || !target.closest(".bn-visual-media")) return;
+      if (target.closest(".bn-resize-handle")) return;
 
       const blockElement = target.closest<HTMLElement>("[data-id]");
       const id = blockElement?.dataset.id;
@@ -390,15 +405,38 @@ function Editor({ initialBlocks, mentions, onChange }: Props) {
       const url = block && "url" in block.props && typeof block.props.url === "string" ? block.props.url : "";
       if (!url) return;
 
-      // BlockNote closes its floating file panel whenever the editor selection
-      // changes. Keep this editor-owned panel independent from that selection
-      // so an image click does not make the controls disappear immediately.
+      // BlockNote's image selection moves focus back to the editor and can
+      // dismiss a panel in the same interaction. Own a plain image tap before
+      // its selection handler runs; resize handles keep their native behavior.
+      event.preventDefault();
+      event.stopPropagation();
       setSelectedImageId(id);
       setSelectedImageUrl(url);
     };
 
-    root.addEventListener("click", openImageProperties);
-    return () => root.removeEventListener("click", openImageProperties);
+    root.addEventListener("pointerdown", openImageProperties, true);
+    return () => root.removeEventListener("pointerdown", openImageProperties, true);
+  }, [editor]);
+
+  useEffect(() => {
+    const root = editor.domElement;
+    if (!root) return;
+
+    const keepCodeLanguageMenuOpen = (event: Event) => {
+      const target = event.target;
+      if (!(target instanceof Element) || !target.closest('[data-content-type="codeBlock"] select')) return;
+      // Native select menus need their browser default, but BlockNote should
+      // not interpret the same pointer event as a request to restore editor
+      // focus and close the language menu.
+      event.stopPropagation();
+    };
+
+    root.addEventListener("pointerdown", keepCodeLanguageMenuOpen, true);
+    root.addEventListener("mousedown", keepCodeLanguageMenuOpen, true);
+    return () => {
+      root.removeEventListener("pointerdown", keepCodeLanguageMenuOpen, true);
+      root.removeEventListener("mousedown", keepCodeLanguageMenuOpen, true);
+    };
   }, [editor]);
 
   const updateSelectedImageUrl = useCallback((url: string) => {
@@ -417,20 +455,44 @@ function Editor({ initialBlocks, mentions, onChange }: Props) {
     event.target.value = "";
   }, [editor, selectedImageId, uploadFile]);
 
+  const hydrateBookmark = useCallback(async (blockId: string, url: string) => {
+    try {
+      const response = await fetch(`/api/link-preview?url=${encodeURIComponent(url)}`);
+      if (!response.ok) return;
+      const preview = await response.json() as { title?: string; description?: string; image?: string };
+      const block = editor.getBlock(blockId);
+      if (!block || block.type !== "bookmark") return;
+
+      const currentTitle = savedBookmarkTitle(block.content);
+      const defaultTitle = defaultBookmarkTitle(url);
+      editor.updateBlock(blockId, {
+        props: { description: preview.description ?? "", image: preview.image ?? "" },
+        // A title typed by the author wins over a delayed metadata response.
+        ...(preview.title && (!currentTitle || currentTitle === defaultTitle)
+          ? { content: [{ type: "text", text: preview.title, styles: {} }] }
+          : {}),
+      } as never);
+    } catch {
+      // The local card fallback remains useful when a site blocks metadata requests.
+    }
+  }, [editor]);
+
   const insertLinkPreview = useCallback(() => {
     if (!pendingLink) return;
     const currentBlock = editor.getBlock(pendingLink.blockId);
     if (!currentBlock) return setPendingLink(null);
     const bookmark = {
       type: "bookmark",
-      props: { url: pendingLink.url },
-      content: [{ type: "text", text: bookmarkTitle(pendingLink.url), styles: {} }],
+      props: { url: pendingLink.url, description: "", image: "" },
+      content: [{ type: "text", text: defaultBookmarkTitle(pendingLink.url), styles: {} }],
     };
     const isEmptyParagraph = currentBlock.type === "paragraph" && Array.isArray(currentBlock.content) && currentBlock.content.length === 0;
-    if (isEmptyParagraph) editor.updateBlock(currentBlock, bookmark as never);
-    else editor.insertBlocks([bookmark as never], currentBlock, "after");
+    const bookmarkId = isEmptyParagraph
+      ? editor.updateBlock(currentBlock, bookmark as never).id
+      : editor.insertBlocks([bookmark as never], currentBlock, "after")[0]?.id;
     setPendingLink(null);
-  }, [editor, pendingLink]);
+    if (bookmarkId) void hydrateBookmark(bookmarkId, pendingLink.url);
+  }, [editor, hydrateBookmark, pendingLink]);
 
   const insertTextLink = useCallback(() => {
     if (!pendingLink) return;
@@ -455,7 +517,13 @@ function Editor({ initialBlocks, mentions, onChange }: Props) {
 
       event.preventDefault();
       const currentBlock = editor.getTextCursorPosition().block;
-      setPendingLink({ url, blockId: currentBlock.id });
+      const range = window.getSelection()?.rangeCount ? window.getSelection()?.getRangeAt(0) : null;
+      const rect = range?.getBoundingClientRect();
+      const fallback = root.getBoundingClientRect();
+      const maxLeft = Math.max(16, window.innerWidth - 336);
+      const left = Math.min(Math.max(16, rect?.left ?? fallback.left), maxLeft);
+      const top = Math.min((rect?.bottom ?? fallback.top) + 10, window.innerHeight - 248);
+      setPendingLink({ url, blockId: currentBlock.id, left, top });
     };
 
     root.addEventListener("paste", insertBookmarkFromPaste);
@@ -480,16 +548,16 @@ function Editor({ initialBlocks, mentions, onChange }: Props) {
         theme={theme}
         onChange={syncContent}
       ><SideMenuController sideMenu={EditorSideMenu} /><SuggestionMenuController triggerCharacter="/" getItems={getSlashMenuItems} /><SuggestionMenuController triggerCharacter="@" getItems={getMentionItems} /></BlockNoteView>
-      {pendingLink && <aside className="editor-link-choice" aria-label="링크 삽입 방식" onPointerDown={(event) => event.stopPropagation()}>
-        <p>붙여넣은 주소를 어떻게 넣을까요?</p>
+      {pendingLink && <aside className="editor-link-choice" aria-label="링크 삽입 방식" onPointerDown={(event) => event.stopPropagation()} style={{ left: pendingLink.left, top: pendingLink.top }}>
+        <p>붙여넣기 형식</p>
         <div>
-          <button type="button" onClick={insertLinkPreview} onMouseDown={(event) => { event.preventDefault(); event.stopPropagation(); }}>링크 미리보기</button>
-          <button type="button" onClick={insertTextLink} onMouseDown={(event) => { event.preventDefault(); event.stopPropagation(); }}>텍스트 링크</button>
-          {mentionForUrl(pendingLink.url, mentionItems) && <button type="button" onClick={insertMentionLink} onMouseDown={(event) => { event.preventDefault(); event.stopPropagation(); }}>글 멘션</button>}
+          {mentionForUrl(pendingLink.url, mentionItems) && <button type="button" onClick={insertMentionLink} onMouseDown={(event) => { event.preventDefault(); event.stopPropagation(); }}><span>멘션</span><small>블로그 글을 참조합니다</small></button>}
+          <button type="button" onClick={insertLinkPreview} onMouseDown={(event) => { event.preventDefault(); event.stopPropagation(); }}><span>북마크</span><small>미리보기 카드로 표시합니다</small></button>
+          <button type="button" onClick={insertTextLink} onMouseDown={(event) => { event.preventDefault(); event.stopPropagation(); }}><span>URL</span><small>일반 텍스트 링크로 표시합니다</small></button>
           <button className="editor-link-choice-cancel" type="button" onClick={() => setPendingLink(null)} onMouseDown={(event) => { event.preventDefault(); event.stopPropagation(); }}>취소</button>
         </div>
       </aside>}
-      {selectedImageId && <aside className="image-properties" aria-label="이미지 속성" style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "0.5rem", marginTop: "0.75rem", padding: "0.75rem", border: "1px solid var(--border)", borderRadius: "0.75rem", background: "var(--surface)" }}>
+      {selectedImageId && <aside className="image-properties" aria-label="이미지 속성" onMouseDown={(event) => event.stopPropagation()} onPointerDown={(event) => event.stopPropagation()} style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "0.5rem", marginTop: "0.75rem", padding: "0.75rem", border: "1px solid var(--border)", borderRadius: "0.75rem", background: "var(--surface)" }}>
         <label style={{ display: "flex", alignItems: "center", gap: "0.5rem", flex: "1 1 20rem" }}>
           <span>이미지 주소</span>
           <input style={{ minWidth: 0, flex: 1 }} value={selectedImageUrl} onChange={(event) => setSelectedImageUrl(event.target.value)} onBlur={() => updateSelectedImageUrl(selectedImageUrl)} onKeyDown={(event) => {

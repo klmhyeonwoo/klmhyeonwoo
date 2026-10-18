@@ -18,6 +18,8 @@ import { formatPostDate, formatPostUpdatedLabel, postPublishedAtValue, postWasUp
 import { getPost, getPostBlocks, getPosts } from "@/lib/posts";
 import { getProfile } from "@/lib/profile";
 import { restoreCallouts } from "@/lib/callout-markdown";
+import { restoreBookmarks } from "@/lib/bookmark-markdown";
+import { PostBookmark } from "@/components/post-bookmark";
 import { getTableOfContents, rehypeHeadingIds } from "@/lib/table-of-contents";
 import { absoluteUrl } from "@/lib/site-url";
 
@@ -56,7 +58,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     };
   }
 
-  const title = `${postTitle} | bloging.`;
+  const title = `${postTitle} | wavy.`;
   const description = postDescription(source, data) || `${postTitle}에 관한 글입니다.`;
   const canonical = `/posts/${id}`;
   const image = `${canonical}/opengraph-image`;
@@ -81,7 +83,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
       title,
       description,
       url: canonical,
-      siteName: "bloging.",
+      siteName: "wavy.",
       publishedTime,
       modifiedTime,
       authors: [profile.name],
@@ -115,9 +117,10 @@ export default async function PostPage({ params }: { params: Params }) {
     return <><SiteHeader /><main className="article-shell"><PostUnlockForm id={id} /></main></>;
   }
 
-  const renderSource = restoreCallouts(source, getPostBlocks(id));
+  const blocks = getPostBlocks(id);
+  const renderSource = restoreBookmarks(restoreCallouts(source, blocks), blocks);
   const tableOfContents = getTableOfContents(renderSource);
-  const { content, frontmatter } = await compileMDX<{ title: string; date: string; description?: string; publishedAt?: string; updatedAt?: string }>({ components: { Callout: PostCallout }, source: renderSource, options: { mdxOptions: { remarkPlugins: [remarkGfm], rehypePlugins: [[rehypeShiki, { themes: { light: "github-light", dark: "github-dark" } }], rehypeHeadingIds(tableOfContents)] }, parseFrontmatter: true } });
+  const { content, frontmatter } = await compileMDX<{ title: string; date: string; description?: string; publishedAt?: string; updatedAt?: string }>({ components: { Callout: PostCallout, Bookmark: PostBookmark }, source: renderSource, options: { mdxOptions: { remarkPlugins: [remarkGfm], rehypePlugins: [[rehypeShiki, { themes: { light: "github-light", dark: "github-dark" } }], rehypeHeadingIds(tableOfContents)] }, parseFrontmatter: true } });
   const post = getPosts(true).find((item) => item.id === id);
   const description = postDescription(source, data) || `${frontmatter.title}에 관한 글입니다.`;
   const canonicalUrl = absoluteUrl(`/posts/${id}`);
@@ -137,7 +140,7 @@ export default async function PostPage({ params }: { params: Params }) {
     ...(post?.category ? { articleSection: post.category } : {}),
     ...(schemaKeywords.length > 0 ? { keywords: schemaKeywords.join(", ") } : {}),
     author: { "@type": "Person", name: profile.name, url: absoluteUrl("/profile"), ...(profile.image ? { image: absoluteUrl(profile.image) } : {}) },
-    publisher: { "@type": "Organization", name: "bloging.", url: absoluteUrl("/") },
+    publisher: { "@type": "Organization", name: "wavy.", url: absoluteUrl("/") },
     image: [absoluteUrl(`/posts/${id}/opengraph-image`)],
   };
   return (

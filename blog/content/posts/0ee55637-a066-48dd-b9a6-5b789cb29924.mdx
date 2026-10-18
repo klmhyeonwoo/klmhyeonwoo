@@ -1,0 +1,122 @@
+---
+title: "Vue에서 Tanstack Query 사용 시에 Persistent 하게 유지하기"
+date: 2026-10-18
+publishedAt: "2026-10-18T03:56:24.560Z"
+updatedAt: "2026-10-18T03:56:24.561Z"
+description: ""
+category: "category-9606d629"
+series: "-"
+private: false
+---
+
+## 글을 시작하며
+
+Tanstack Query는 기본적으로 인메모리 캐시를 사용하기 때문에, 브라우저 새로고침 시에 자바스크립트 런타임이 초기화되면서 모든 캐시 처리가 사라진다. staleTime이 남아있더라도 캐시 자체가 메모리에서 사라지기 때문에 다시 패칭되는 현상이 발생한다.
+
+```javascript
+// 브라우저 새로고침 전, 내부적으로 이런 형태로 캐싱 처리를 진행한다.
+QueryCache: Map {
+  "['todo']" => Query { data: [...], dataUpdateAt: 1234567890 }
+}
+
+// 하지만 인메모리 캐시를 사용하면서 새로고침 시에 런타임이 초기화되고, 모든 캐시는 손실된다.
+QueryCache: Map {} // (비어있음)
+```
+
+## Query Cache의 구조
+
+Tanstack Query는 `Map<string, Query>` 형태로 쿼리 키를 해시화해서 저장을 한다. 이때 각 쿼리는 `queryKey` 를 기반으로 고유하게 식별된다. 그래서 `queryKey` 에는 캐싱 개념에서 정말 중요한 유니크한 값이 들어가야한다.
+
+각 Query 들은 아래와 같은 정보들을 포함한다.
+
+* queryKey : 쿼리 식별자 (배열 형태)
+
+* state : 현재 쿼리 상태
+  * data : 실제 응답 데이터
+  * dataUpdatedAt : 데이터 업데이트 시각
+  * error : 에러 정보
+  * status : `pending`|`error`|`success`
+  * fetchStats : `fetching` |`paused`|`idle`
+  * ...
+
+* observers : 해당 쿼리를 구독 중인 컴포넌트들
+
+* gcTime : 가비지 컬렉션 시간 (구 cacheTime)
+
+* staleTime : 데이터 신선도 기준 시간
+
+## 캐시 라이프사이클과 메모리 상태
+
+### Tanstack Query의 내부 캐시 라이프 사이클
+
+```javascript
+// 1. 쿼리 생성 시
+const query = queryCache.build(client, {
+  queryKey: ['todos'],
+  queryFn: fetchTodos
+});
+
+// 2. TanStack Query가 내부적으로 queryFn을 실행
+const result = await query.options.queryFn();
+
+// 3. 데이터 저장
+query.state = {
+  data: result,
+  dataUpdatedAt: Date.now();
+  status: 'success'
+}
+
+// 4. staleTime 경과 확인
+const isStale = Date.now() - query.state.dataUpdatedAt > query.options.staleTime
+
+// 5. gcTime 경과 시에 제거
+if (query.observers.length === 0) {
+  setTimeout(() => {
+    queryCache.remove(query);
+  }, query.options.gcTime)
+}
+```
+
+### Tanstack Query의 메모리 상태
+
+```javascript
+QueryClient
+  └─ QueryCache (Map)
+       ├─ Query['todos']
+       │    ├─ state: { data, dataUpdatedAt, status }
+       │    ├─ observers: [Observer1, Observer2]
+       │    └─ options: { staleTime, gcTime }
+       │
+       └─ Query['user', 1]
+            ├─ state: { data, dataUpdatedAt, status }
+            ├─ observers: []
+            └─ options: { staleTime, gcTime }
+```
+
+## persistQueryClient로 localStorage에 직렬화하여 저장하기
+
+```javascript
+import { QueryClient, VueQueryPlugin } from '@tanstack/vue-query';
+import { persistQueryClient } from '@tanstack/query-persist-client-core';
+import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
+
+// main.js
+const queryClient = new QueryClient({
+  defaultOptions: {
+      queries: {
+          staleTime: 1000 * 30 // 30sec
+          gcTime: 1000 * 60 // 60sec
+      }
+  }
+});
+
+persistQueryClient({
+  queryClient,
+  persister: createSyncStoragePersister({ storage: window.localStorage }),
+});
+
+...
+
+app.use(VueQueryPlugin, { queryClient });
+```
+

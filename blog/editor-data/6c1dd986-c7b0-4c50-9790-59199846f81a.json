@@ -4,7 +4,8 @@
     "type": "callout",
     "props": {
       "emoji": "💡",
-      "fluent": "LightBulb"
+      "fluent": "",
+      "fluentUrl": ""
     },
     "content": [
       {

@@ -46,7 +46,7 @@ export async function GET(request: NextRequest) {
   const value = request.nextUrl.searchParams.get("url") ?? "";
   try {
     const url = await publicHttpUrl(value);
-    const response = await fetch(url, { headers: { Accept: "text/html", "User-Agent": "wavy-link-preview/1.0" }, redirect: "manual", signal: AbortSignal.timeout(5_000) });
+    const response = await fetch(url, { headers: { Accept: "text/html", "User-Agent": "wavy-studio-link-preview/1.0" }, redirect: "manual", signal: AbortSignal.timeout(5_000) });
     if (!response.ok || !response.headers.get("content-type")?.includes("text/html")) throw new Error("unavailable preview");
     const preview = metadata((await response.text()).slice(0, 500_000), url);
     return NextResponse.json(preview, { headers: { "Cache-Control": "public, max-age=3600, s-maxage=86400" } });

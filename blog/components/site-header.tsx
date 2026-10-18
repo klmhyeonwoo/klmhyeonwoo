@@ -14,7 +14,7 @@ export async function SiteHeader() {
     <>
       <header className="shared-header">
         <div className="shared-header-inner">
-          <Link href="/" className="shared-logo">wavy<span>.</span></Link>
+          <Link href="/" className="shared-logo">wavy studio</Link>
           <div className="header-actions">
             <nav aria-label="주요 메뉴" className="desktop-nav">
               <Link href="/#all">모든 글</Link>

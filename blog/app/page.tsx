@@ -65,7 +65,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
         </section>
         <RecentComments />
         </div>
-        <footer className="kb-footer"><p>© 2026 wavy.</p><a href="#top">맨 위로 ↑</a></footer>
+        <footer className="kb-footer"><p>© 2026 wavy studio</p><a href="#top">맨 위로 ↑</a></footer>
       </main>
     </>
   );

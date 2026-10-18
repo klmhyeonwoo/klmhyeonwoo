@@ -15,21 +15,21 @@ function getSiteUrl() {
 }
 
 export const metadata: Metadata = {
-  title: "wavy.",
-  description: "기록을 쌓아가는 개인 블로그, wavy.",
+  title: "wavy studio",
+  description: "기록을 쌓아가는 개인 블로그, wavy studio",
   metadataBase: getSiteUrl(),
   openGraph: {
     type: "website",
     locale: "ko_KR",
-    siteName: "wavy.",
-    title: "wavy.",
-    description: "기록을 쌓아가는 개인 블로그, wavy.",
-    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "wavy." }],
+    siteName: "wavy studio",
+    title: "wavy studio",
+    description: "기록을 쌓아가는 개인 블로그, wavy studio",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "wavy studio" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "wavy.",
-    description: "기록을 쌓아가는 개인 블로그, wavy.",
+    title: "wavy studio",
+    description: "기록을 쌓아가는 개인 블로그, wavy studio",
     images: ["/opengraph-image"],
   },
 };

@@ -23,7 +23,7 @@ export default function Icon() {
           width: "100%",
         }}
       >
-        b<span style={{ color: "#f4c542" }}>.</span>
+        w<span style={{ color: "#f4c542" }}>.</span>
       </div>
     ),
     size,

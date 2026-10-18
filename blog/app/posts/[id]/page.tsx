@@ -58,7 +58,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     };
   }
 
-  const title = `${postTitle} | wavy.`;
+  const title = `${postTitle} | wavy studio`;
   const description = postDescription(source, data) || `${postTitle}에 관한 글입니다.`;
   const canonical = `/posts/${id}`;
   const image = `${canonical}/opengraph-image`;
@@ -83,7 +83,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
       title,
       description,
       url: canonical,
-      siteName: "wavy.",
+      siteName: "wavy studio",
       publishedTime,
       modifiedTime,
       authors: [profile.name],
@@ -140,7 +140,7 @@ export default async function PostPage({ params }: { params: Params }) {
     ...(post?.category ? { articleSection: post.category } : {}),
     ...(schemaKeywords.length > 0 ? { keywords: schemaKeywords.join(", ") } : {}),
     author: { "@type": "Person", name: profile.name, url: absoluteUrl("/profile"), ...(profile.image ? { image: absoluteUrl(profile.image) } : {}) },
-    publisher: { "@type": "Organization", name: "wavy.", url: absoluteUrl("/") },
+    publisher: { "@type": "Organization", name: "wavy studio", url: absoluteUrl("/") },
     image: [absoluteUrl(`/posts/${id}/opengraph-image`)],
   };
   return (

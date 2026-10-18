@@ -26,6 +26,15 @@
 
 관리자 로그인 후 글을 수정·삭제하거나 임시 저장할 수 있습니다. 비밀번호 보호 글은 홈 목록에는 보이지만 사이트에서 본문을 열기 전에 비밀번호를 받습니다. 저장소가 public이면 GitHub 원문은 별도로 읽을 수 있으므로, 실제 비밀글이 필요하다면 저장소를 private로 유지하세요.
 
-## 댓글
+## 댓글과 반응
 
-글별 댓글은 GitHub Issues 기반 Utterances를 사용합니다. 댓글을 활성화하려면 GitHub 저장소에서 **Issues**를 켠 뒤 [Utterances GitHub App](https://github.com/apps/utterances)을 설치하고 이 저장소 접근을 허용하세요. 기본 저장소는 `klmhyeonwoo/klmhyeonwoo`이며, 다른 저장소를 사용할 경우 배포 환경변수 `NEXT_PUBLIC_UTTERANCES_REPO=owner/repo`를 설정하면 됩니다.
+기본 댓글은 기존 GitHub Issues 기반 Utterances를 유지합니다. GitHub 반응까지 사용하려면 [giscus](https://giscus.app/ko)를 설정한 뒤, GitHub Discussions를 켜고 giscus GitHub App에 저장소 접근을 허용하세요. giscus에서 발급한 값을 로컬과 Vercel 환경변수에 모두 등록하면 자동으로 전환됩니다.
+
+```env
+NEXT_PUBLIC_GISCUS_REPO=owner/repo
+NEXT_PUBLIC_GISCUS_REPO_ID=R_...
+NEXT_PUBLIC_GISCUS_CATEGORY=General
+NEXT_PUBLIC_GISCUS_CATEGORY_ID=DIC_...
+```
+
+위 네 값이 모두 없으면 Utterances가 계속 사용됩니다. 다른 저장소로 Utterances를 유지하려면 `NEXT_PUBLIC_UTTERANCES_REPO=owner/repo`를 설정하세요.

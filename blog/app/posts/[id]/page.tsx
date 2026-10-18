@@ -1,6 +1,7 @@
 import { compileMDX } from "next-mdx-remote/rsc";
 import matter from "gray-matter";
 import remarkGfm from "remark-gfm";
+import rehypeShiki from "@shikijs/rehype";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/site-header";
@@ -84,7 +85,7 @@ export default async function PostPage({ params }: { params: Params }) {
   }
 
   const renderSource = restoreCallouts(source, getPostBlocks(id));
-  const { content, frontmatter } = await compileMDX<{ title: string; date: string; description?: string; publishedAt?: string; updatedAt?: string }>({ components: { Callout: PostCallout }, source: renderSource, options: { mdxOptions: { remarkPlugins: [remarkGfm] }, parseFrontmatter: true } });
+  const { content, frontmatter } = await compileMDX<{ title: string; date: string; description?: string; publishedAt?: string; updatedAt?: string }>({ components: { Callout: PostCallout }, source: renderSource, options: { mdxOptions: { remarkPlugins: [remarkGfm], rehypePlugins: [[rehypeShiki, { themes: { light: "github-light", dark: "github-dark" } }]] }, parseFrontmatter: true } });
   return (
     <><SiteHeader /><main className="article-shell"><article className="article">
       <header className="article-header"><h1>{frontmatter.title}</h1>

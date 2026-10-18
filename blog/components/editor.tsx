@@ -4,7 +4,8 @@ import "@blocknote/core/fonts/inter.css";
 import "@blocknote/ariakit/style.css";
 import { BlockNoteView } from "@blocknote/ariakit";
 import { insertOrUpdateBlockForSlashMenu } from "@blocknote/core";
-import { BlockNoteSchema } from "@blocknote/core/blocks";
+import { BlockNoteSchema, createCodeBlockSpec } from "@blocknote/core/blocks";
+import { codeBlockOptions, syntaxHighlighter } from "@blocknote/code-block";
 import { getDefaultReactSlashMenuItems, SuggestionMenuController, useCreateBlockNote } from "@blocknote/react";
 import { ChangeEvent, useCallback, useEffect, useEffectEvent, useRef, useState } from "react";
 import { ToastMessage } from "./toast-message";
@@ -20,8 +21,16 @@ type Props = {
   onChange: (blocks: unknown[], markdown: string) => void;
 };
 
+type PendingLink = {
+  url: string;
+  blockId: string;
+};
+
 const schema = BlockNoteSchema.create().extend({
-  blockSpecs: { bookmark: Bookmark(), callout: Callout() },
+  // Keep BlockNote's code-block model as the editing source of truth. It
+  // serializes to fenced Markdown, which is then highlighted by Shiki on the
+  // server-rendered page.
+  blockSpecs: { codeBlock: createCodeBlockSpec(codeBlockOptions), bookmark: Bookmark(), callout: Callout() },
 });
 
 function errorMessage(error: unknown) {
@@ -45,6 +54,18 @@ function bookmarkTitle(url: string) {
   return new URL(url).hostname.replace(/^www\./, "");
 }
 
+function mentionForUrl(url: string, mentions: EditorMention[]) {
+  try {
+    const target = new URL(url, window.location.origin);
+    return mentions.find((mention) => {
+      const candidate = new URL(mention.href, window.location.origin);
+      return candidate.origin === target.origin && candidate.pathname === target.pathname;
+    });
+  } catch {
+    return undefined;
+  }
+}
+
 function calloutMarkdown(markdown: string, props: { emoji?: unknown; fluent?: unknown }) {
   const emoji = typeof props.emoji === "string" ? props.emoji : "💡";
   const fluent = typeof props.fluent === "string" ? props.fluent : "";
@@ -59,6 +80,7 @@ export default function Editor({ initialBlocks, mentions, onChange }: Props) {
   const [uploadError, setUploadError] = useState("");
   const [selectedImageId, setSelectedImageId] = useState<string | null>(null);
   const [selectedImageUrl, setSelectedImageUrl] = useState("");
+  const [pendingLink, setPendingLink] = useState<PendingLink | null>(null);
   const isComposingRef = useRef(false);
   const uploadFile = useCallback(async (file: File) => {
     try {
@@ -80,10 +102,13 @@ export default function Editor({ initialBlocks, mentions, onChange }: Props) {
     initialContent: initialBlocks && initialBlocks.length > 0 ? initialBlocks as never : undefined,
     uploadFile,
     schema,
+    extensions: [syntaxHighlighter],
   }, [uploadFile]);
 
   const getSlashMenuItems = useCallback(async (query: string) => [
-    ...getDefaultReactSlashMenuItems(editor),
+    ...getDefaultReactSlashMenuItems(editor).map((item) => item.title === "Code Block"
+      ? { ...item, title: "코드 블록", subtext: "언어를 선택해 코드를 작성합니다", aliases: [...(item.aliases ?? []), "코드", "code"] }
+      : item),
     {
       key: "bookmark" as never,
       title: "링크 미리보기",
@@ -280,6 +305,34 @@ export default function Editor({ initialBlocks, mentions, onChange }: Props) {
     event.target.value = "";
   }, [editor, selectedImageId, uploadFile]);
 
+  const insertLinkPreview = useCallback(() => {
+    if (!pendingLink) return;
+    const currentBlock = editor.getBlock(pendingLink.blockId);
+    if (!currentBlock) return setPendingLink(null);
+    const bookmark = {
+      type: "bookmark",
+      props: { url: pendingLink.url },
+      content: [{ type: "text", text: bookmarkTitle(pendingLink.url), styles: {} }],
+    };
+    const isEmptyParagraph = currentBlock.type === "paragraph" && Array.isArray(currentBlock.content) && currentBlock.content.length === 0;
+    if (isEmptyParagraph) editor.updateBlock(currentBlock, bookmark as never);
+    else editor.insertBlocks([bookmark as never], currentBlock, "after");
+    setPendingLink(null);
+  }, [editor, pendingLink]);
+
+  const insertTextLink = useCallback(() => {
+    if (!pendingLink) return;
+    editor.insertInlineContent([{ type: "link", href: pendingLink.url, content: pendingLink.url }]);
+    setPendingLink(null);
+  }, [editor, pendingLink]);
+
+  const insertMentionLink = useCallback(() => {
+    if (!pendingLink) return;
+    const mention = mentionForUrl(pendingLink.url, mentionItems);
+    if (mention) editor.insertInlineContent([{ type: "link", href: mention.href, content: `@${mention.title}` }]);
+    setPendingLink(null);
+  }, [editor, mentionItems, pendingLink]);
+
   useEffect(() => {
     const root = editor.domElement;
     if (!root) return;
@@ -290,14 +343,7 @@ export default function Editor({ initialBlocks, mentions, onChange }: Props) {
 
       event.preventDefault();
       const currentBlock = editor.getTextCursorPosition().block;
-      const bookmark = {
-        type: "bookmark",
-        props: { url },
-        content: [{ type: "text", text: bookmarkTitle(url), styles: {} }],
-      };
-      const isEmptyParagraph = currentBlock.type === "paragraph" && Array.isArray(currentBlock.content) && currentBlock.content.length === 0;
-      if (isEmptyParagraph) editor.updateBlock(currentBlock, bookmark as never);
-      else editor.insertBlocks([bookmark as never], currentBlock, "after");
+      setPendingLink({ url, blockId: currentBlock.id });
     };
 
     root.addEventListener("paste", insertBookmarkFromPaste);
@@ -321,6 +367,15 @@ export default function Editor({ initialBlocks, mentions, onChange }: Props) {
         theme={theme}
         onChange={syncContent}
       ><SuggestionMenuController triggerCharacter="/" getItems={getSlashMenuItems} /><SuggestionMenuController triggerCharacter="@" getItems={getMentionItems} /></BlockNoteView>
+      {pendingLink && <aside className="editor-link-choice" aria-label="링크 삽입 방식">
+        <p>붙여넣은 주소를 어떻게 넣을까요?</p>
+        <div>
+          <button type="button" onClick={insertLinkPreview} onMouseDown={(event) => event.preventDefault()}>링크 미리보기</button>
+          <button type="button" onClick={insertTextLink} onMouseDown={(event) => event.preventDefault()}>텍스트 링크</button>
+          {mentionForUrl(pendingLink.url, mentionItems) && <button type="button" onClick={insertMentionLink} onMouseDown={(event) => event.preventDefault()}>글 멘션</button>}
+          <button className="editor-link-choice-cancel" type="button" onClick={() => setPendingLink(null)} onMouseDown={(event) => event.preventDefault()}>취소</button>
+        </div>
+      </aside>}
       {selectedImageId && <aside className="image-properties" aria-label="이미지 속성" style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "0.5rem", marginTop: "0.75rem", padding: "0.75rem", border: "1px solid var(--border)", borderRadius: "0.75rem", background: "var(--surface)" }}>
         <label style={{ display: "flex", alignItems: "center", gap: "0.5rem", flex: "1 1 20rem" }}>
           <span>이미지 주소</span>

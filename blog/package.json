@@ -11,10 +11,12 @@
   "dependencies": {
     "@base-ui/react": "^1.8.0",
     "@blocknote/ariakit": "^0.56.0",
+    "@blocknote/code-block": "^0.56.0",
     "@blocknote/core": "^0.56.0",
     "@blocknote/react": "^0.56.0",
     "@fluentui-emoji/react": "^2.2.0",
     "@karrotmarket/react-monochrome-icon": "^1.30.0",
+    "@shikijs/rehype": "^4.5.0",
     "gray-matter": "^4.0.3",
     "next": "^16.1.0",
     "next-mdx-remote": "^6.0.0",

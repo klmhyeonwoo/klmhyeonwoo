@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
+import { FormEvent, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@base-ui/react/button";
 import { Input } from "@base-ui/react/input";
 import { formatPostDate } from "@/lib/post-date";
@@ -50,6 +50,30 @@ function optionId(name: string, prefix: string) {
   return normalized || `${prefix}-${crypto.randomUUID().slice(0, 8)}`;
 }
 
+function TitleField({ value, onValueChange }: { value: string; onValueChange: (value: string) => void }) {
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+
+  const resize = useCallback(() => {
+    const input = inputRef.current;
+    if (!input) return;
+    input.style.height = "0px";
+    input.style.height = `${Math.max(input.scrollHeight, 56)}px`;
+  }, []);
+
+  useLayoutEffect(resize, [resize, value]);
+
+  return <textarea
+    aria-label="글 제목"
+    className="title-input"
+    onChange={(event) => onValueChange(event.target.value)}
+    onInput={resize}
+    placeholder="글 제목"
+    ref={inputRef}
+    rows={1}
+    value={value}
+  />;
+}
+
 export function AdminClient({ authenticated: initiallyAuthenticated, initialPost, initialDraft, defaultSeriesId, posts, drafts, categories: initialCategories, series: initialSeries }: Props) {
   const initialEntry = initialPost ?? initialDraft;
   const [authenticated, setAuthenticated] = useState(initiallyAuthenticated);
@@ -75,6 +99,12 @@ export function AdminClient({ authenticated: initiallyAuthenticated, initialPost
   const [publishedPostId, setPublishedPostId] = useState<string | null>(null);
   const [deployment, setDeployment] = useState<{ id: string; version: string; shouldRedirect: boolean } | null>(null);
   const draftKey = `blog-draft:${postId ?? "new"}`;
+  const editorMentions = useMemo<EditorMention[]>(() => [
+    { title: "프로필", href: "/profile", description: "블로그 운영자" },
+    { title: "아티클 시리즈", href: "/series", description: "시리즈 모음" },
+    ...series.map((item) => ({ title: item.name, href: `/series/${item.id}`, description: "아티클 시리즈" })),
+    ...posts.map((item) => ({ title: item.title, href: `/posts/${item.id}`, description: "게시글" })),
+  ], [posts, series]);
 
   useEffect(() => {
     try {
@@ -300,19 +330,16 @@ export function AdminClient({ authenticated: initiallyAuthenticated, initialPost
           <Button onClick={publish} disabled={saving || savingDraft}>{saving ? "저장 중…" : "발행하기"}</Button>
         </div>
       </header>
-      <Input className="title-input" value={title} onValueChange={setTitle} placeholder="글 제목" aria-label="글 제목" />
+      <TitleField value={title} onValueChange={setTitle} />
       <div className="metadata">
         <Input value={description} onValueChange={setDescription} placeholder="짧은 소개 (선택)" aria-label="짧은 소개" />
         <div className="metadata-selects"><NotionSelect label="카테고리" value={categoryId} options={categories} placeholder="카테고리 선택" onValueChange={setCategoryId} onCreate={createCategory} onDelete={deleteCategory} /><NotionSelect label="아티클 시리즈" value={seriesId} options={series} placeholder="시리즈 없음" allowEmpty onValueChange={setSeriesId} onCreate={createSeries} onDelete={deleteSeries} /></div>
-        <label className="private-toggle"><input type="checkbox" checked={isPrivate} onChange={(event) => setIsPrivate(event.target.checked)} />비밀번호 보호 글</label>
-        {isPrivate && <Input type="password" value={postPassword} onValueChange={setPostPassword} placeholder={initialEntry?.isPrivate ? "새 비밀번호 입력 (변경할 때만)" : "글 비밀번호 (4자 이상)"} aria-label="글 비밀번호" />}
+        <div className="private-post-controls">
+          <label className="private-toggle"><input type="checkbox" checked={isPrivate} onChange={(event) => setIsPrivate(event.target.checked)} />비밀번호 보호 글</label>
+          {isPrivate && <Input className="private-password-input" type="password" value={postPassword} onValueChange={setPostPassword} placeholder={initialEntry?.isPrivate ? "새 비밀번호 입력 (변경할 때만)" : "글 비밀번호 (4자 이상)"} aria-label="글 비밀번호" />}
+        </div>
       </div>
-      {draftReady ? <Editor initialBlocks={initialBlocks} mentions={[
-        { title: "프로필", href: "/profile", description: "블로그 운영자" },
-        { title: "아티클 시리즈", href: "/series", description: "시리즈 모음" },
-        ...series.map((item): EditorMention => ({ title: item.name, href: `/series/${item.id}`, description: "아티클 시리즈" })),
-        ...posts.map((item): EditorMention => ({ title: item.title, href: `/posts/${item.id}`, description: "게시글" })),
-      ]} onChange={updateContent} /> : <section className="editor-loading">임시 저장본을 불러오는 중…</section>}
+      {draftReady ? <Editor initialBlocks={initialBlocks} mentions={editorMentions} onChange={updateContent} /> : <section className="editor-loading">임시 저장본을 불러오는 중…</section>}
       <ToastMessage message={message} tone={messageTone(message)} />
       {publishedPostId && <Link className="published-link" href={`/posts/${publishedPostId}`}>발행된 글 보기</Link>}
       <section className="draft-list">

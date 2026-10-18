@@ -5,9 +5,22 @@ import "@blocknote/ariakit/style.css";
 import { BlockNoteView } from "@blocknote/ariakit";
 import { insertOrUpdateBlockForSlashMenu } from "@blocknote/core";
 import { BlockNoteSchema, createCodeBlockSpec } from "@blocknote/core/blocks";
+import { SideMenuExtension } from "@blocknote/core/extensions";
 import { codeBlockOptions, syntaxHighlighter } from "@blocknote/code-block";
-import { getDefaultReactSlashMenuItems, SuggestionMenuController, useCreateBlockNote } from "@blocknote/react";
-import { ChangeEvent, useCallback, useEffect, useEffectEvent, useRef, useState } from "react";
+import {
+  BlockColorsItem,
+  DragHandleMenu,
+  RemoveBlockItem,
+  SideMenu,
+  SideMenuController,
+  getDefaultReactSlashMenuItems,
+  useBlockNoteEditor,
+  useComponentsContext,
+  usePortalElement,
+  SuggestionMenuController,
+  useCreateBlockNote,
+} from "@blocknote/react";
+import { ChangeEvent, memo, useCallback, useEffect, useEffectEvent, useRef, useState, useSyncExternalStore } from "react";
 import { ToastMessage } from "./toast-message";
 import { Bookmark } from "./bookmark-block";
 import { Callout } from "./callout-block";
@@ -25,6 +38,96 @@ type PendingLink = {
   url: string;
   blockId: string;
 };
+
+type BlockTransform = {
+  key: string;
+  label: string;
+  update: { type: string; props?: Record<string, string | number | boolean> };
+};
+
+const blockTransforms: BlockTransform[] = [
+  { key: "paragraph", label: "문단", update: { type: "paragraph" } },
+  { key: "heading-1", label: "제목 1", update: { type: "heading", props: { level: 1 } } },
+  { key: "heading-2", label: "제목 2", update: { type: "heading", props: { level: 2 } } },
+  { key: "heading-3", label: "제목 3", update: { type: "heading", props: { level: 3 } } },
+  { key: "bulletListItem", label: "글머리 기호", update: { type: "bulletListItem" } },
+  { key: "numberedListItem", label: "번호 목록", update: { type: "numberedListItem" } },
+  { key: "checkListItem", label: "할 일", update: { type: "checkListItem" } },
+  { key: "quote", label: "인용", update: { type: "quote" } },
+  { key: "codeBlock", label: "코드 블록", update: { type: "codeBlock" } },
+  { key: "callout", label: "콜아웃", update: { type: "callout", props: { emoji: "💡", fluent: "", fluentUrl: "" } } },
+];
+
+function blockTransformKey(block: { type: string; props: Record<string, unknown> }) {
+  if (block.type === "heading") return `heading-${block.props.level ?? 1}`;
+  return blockTransforms.some((transform) => transform.key === block.type) ? block.type : "other";
+}
+
+/**
+ * BlockNote exposes the hovered block through the side-menu extension rather
+ * than the text cursor. Listening to that store keeps the transform action
+ * anchored to the block whose handle the author actually opened.
+ */
+function BlockTransformMenuItem() {
+  const editor = useBlockNoteEditor();
+  const Components = useComponentsContext()!;
+  const portalElement = usePortalElement();
+  const sideMenu = editor.getExtension(SideMenuExtension) as {
+    store?: {
+      state?: { block?: { type: string; props: Record<string, unknown> } };
+      subscribe: (listener: () => void) => () => void;
+    };
+  } | undefined;
+
+  const block = useSyncExternalStore(
+    (notify) => sideMenu?.store?.subscribe(notify) ?? (() => undefined),
+    () => sideMenu?.store?.state?.block,
+    () => undefined,
+  );
+
+  if (!block) return null;
+
+  const currentKey = blockTransformKey(block);
+
+  return (
+    <Components.Generic.Menu.Root portalElement={portalElement} position="right" sub>
+      <Components.Generic.Menu.Trigger sub>
+        <Components.Generic.Menu.Item className="bn-menu-item" subTrigger>
+          블록 전환
+        </Components.Generic.Menu.Item>
+      </Components.Generic.Menu.Trigger>
+      <Components.Generic.Menu.Dropdown className="bn-menu-dropdown" sub>
+        {blockTransforms.map((transform) => (
+          <Components.Generic.Menu.Item
+            checked={currentKey === transform.key}
+            className="bn-menu-item"
+            key={transform.key}
+            onClick={() => {
+              editor.updateBlock(block as never, transform.update as never);
+              window.requestAnimationFrame(() => editor.focus());
+            }}
+          >
+            {transform.label}
+          </Components.Generic.Menu.Item>
+        ))}
+      </Components.Generic.Menu.Dropdown>
+    </Components.Generic.Menu.Root>
+  );
+}
+
+function EditorDragHandleMenu() {
+  return (
+    <DragHandleMenu>
+      <BlockTransformMenuItem />
+      <BlockColorsItem>색상</BlockColorsItem>
+      <RemoveBlockItem>삭제</RemoveBlockItem>
+    </DragHandleMenu>
+  );
+}
+
+function EditorSideMenu() {
+  return <SideMenu dragHandleMenu={EditorDragHandleMenu} />;
+}
 
 const schema = BlockNoteSchema.create().extend({
   // Keep BlockNote's code-block model as the editing source of truth. It
@@ -66,15 +169,18 @@ function mentionForUrl(url: string, mentions: EditorMention[]) {
   }
 }
 
-function calloutMarkdown(markdown: string, props: { emoji?: unknown; fluent?: unknown }) {
+function calloutMarkdown(markdown: string, props: { emoji?: unknown; fluent?: unknown; fluentUrl?: unknown }) {
   const emoji = typeof props.emoji === "string" ? props.emoji : "💡";
   const fluent = typeof props.fluent === "string" ? props.fluent : "";
+  const fluentUrl = typeof props.fluentUrl === "string" ? props.fluentUrl : "";
   const body = markdown.trim().split("\n").map((line) => line.replace(/^>\s?/, "")).join("\n").replace(`${emoji} `, "").trim();
-  const attributes = fluent ? ` icon="${fluent}"` : ` emoji="${emoji.replace(/&/g, "&amp;").replace(/"/g, "&quot;")}"`;
+  const attributes = fluentUrl
+    ? ` image="${fluentUrl.replace(/&/g, "&amp;").replace(/"/g, "&quot;")}"`
+    : fluent ? ` icon="${fluent}"` : ` emoji="${emoji.replace(/&/g, "&amp;").replace(/"/g, "&quot;")}"`;
   return `<Callout${attributes}>\n${body || " "}\n</Callout>\n`;
 }
 
-export default function Editor({ initialBlocks, mentions, onChange }: Props) {
+function Editor({ initialBlocks, mentions, onChange }: Props) {
   const mentionItems = mentions ?? noMentions;
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [uploadError, setUploadError] = useState("");
@@ -116,7 +222,13 @@ export default function Editor({ initialBlocks, mentions, onChange }: Props) {
       aliases: ["bookmark", "링크", "미리보기", "주소"],
       group: "기본",
       icon: <span aria-hidden="true">↗</span>,
-      onItemClick: () => insertOrUpdateBlockForSlashMenu(editor, { type: "bookmark", props: { url: "" } } as never),
+      onItemClick: () => {
+        insertOrUpdateBlockForSlashMenu(editor, { type: "bookmark", props: { url: "" } } as never);
+        // BlockNote returns focus to its contenteditable surface after a slash
+        // selection. Hand it back to the new URL field on the next frame so the
+        // link card remains open and ready to type into.
+        window.requestAnimationFrame(() => editor.domElement?.querySelector<HTMLInputElement>(".editor-bookmark-empty input")?.focus());
+      },
     },
     {
       key: "callout" as never,
@@ -125,7 +237,7 @@ export default function Editor({ initialBlocks, mentions, onChange }: Props) {
       aliases: ["callout", "콜아웃", "강조", "알림"],
       group: "기본",
       icon: <span aria-hidden="true">💡</span>,
-      onItemClick: () => insertOrUpdateBlockForSlashMenu(editor, { type: "callout", props: { emoji: "💡", fluent: "LightBulb" } } as never),
+      onItemClick: () => insertOrUpdateBlockForSlashMenu(editor, { type: "callout", props: { emoji: "💡", fluent: "", fluentUrl: "" } } as never),
     },
   ].filter((item) => [item.title, item.subtext, ...(item.aliases ?? [])].some((value) => value?.toLocaleLowerCase().includes(query.toLocaleLowerCase()))), [editor]);
 
@@ -151,7 +263,7 @@ export default function Editor({ initialBlocks, mentions, onChange }: Props) {
     const markdown = document.map((block) => {
       const serialized = editor.blocksToMarkdownLossy([block]);
       return block.type === "callout"
-        ? calloutMarkdown(serialized, block.props as { emoji?: unknown; fluent?: unknown })
+        ? calloutMarkdown(serialized, block.props as { emoji?: unknown; fluent?: unknown; fluentUrl?: unknown })
         : serialized;
     }).join("\n");
     onChange(copyBlocks(document), markdown);
@@ -364,16 +476,17 @@ export default function Editor({ initialBlocks, mentions, onChange }: Props) {
       <BlockNoteView
         editor={editor}
         slashMenu={false}
+        sideMenu={false}
         theme={theme}
         onChange={syncContent}
-      ><SuggestionMenuController triggerCharacter="/" getItems={getSlashMenuItems} /><SuggestionMenuController triggerCharacter="@" getItems={getMentionItems} /></BlockNoteView>
-      {pendingLink && <aside className="editor-link-choice" aria-label="링크 삽입 방식">
+      ><SideMenuController sideMenu={EditorSideMenu} /><SuggestionMenuController triggerCharacter="/" getItems={getSlashMenuItems} /><SuggestionMenuController triggerCharacter="@" getItems={getMentionItems} /></BlockNoteView>
+      {pendingLink && <aside className="editor-link-choice" aria-label="링크 삽입 방식" onPointerDown={(event) => event.stopPropagation()}>
         <p>붙여넣은 주소를 어떻게 넣을까요?</p>
         <div>
-          <button type="button" onClick={insertLinkPreview} onMouseDown={(event) => event.preventDefault()}>링크 미리보기</button>
-          <button type="button" onClick={insertTextLink} onMouseDown={(event) => event.preventDefault()}>텍스트 링크</button>
-          {mentionForUrl(pendingLink.url, mentionItems) && <button type="button" onClick={insertMentionLink} onMouseDown={(event) => event.preventDefault()}>글 멘션</button>}
-          <button className="editor-link-choice-cancel" type="button" onClick={() => setPendingLink(null)} onMouseDown={(event) => event.preventDefault()}>취소</button>
+          <button type="button" onClick={insertLinkPreview} onMouseDown={(event) => { event.preventDefault(); event.stopPropagation(); }}>링크 미리보기</button>
+          <button type="button" onClick={insertTextLink} onMouseDown={(event) => { event.preventDefault(); event.stopPropagation(); }}>텍스트 링크</button>
+          {mentionForUrl(pendingLink.url, mentionItems) && <button type="button" onClick={insertMentionLink} onMouseDown={(event) => { event.preventDefault(); event.stopPropagation(); }}>글 멘션</button>}
+          <button className="editor-link-choice-cancel" type="button" onClick={() => setPendingLink(null)} onMouseDown={(event) => { event.preventDefault(); event.stopPropagation(); }}>취소</button>
         </div>
       </aside>}
       {selectedImageId && <aside className="image-properties" aria-label="이미지 속성" style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "0.5rem", marginTop: "0.75rem", padding: "0.75rem", border: "1px solid var(--border)", borderRadius: "0.75rem", background: "var(--surface)" }}>
@@ -396,3 +509,5 @@ export default function Editor({ initialBlocks, mentions, onChange }: Props) {
     </section>
   );
 }
+
+export default memo(Editor);

@@ -17,17 +17,23 @@ export function SiteBanner({ settings }: { settings: BannerSettings }) {
     const text = titleTextRef.current;
     if (!title || !text) return;
 
-    const measure = () => setTitleOverflows(text.getBoundingClientRect().width > title.clientWidth + 1);
-    measure();
+    // The visible paragraph clips overflowing text. Measure the unbroken text
+    // node itself instead of its clipped bounding box so a mobile resize can
+    // reliably enable the marquee.
+    const measure = () => setTitleOverflows(text.scrollWidth > title.clientWidth + 1);
+    const frame = window.requestAnimationFrame(measure);
     const observer = new ResizeObserver(measure);
     observer.observe(title);
-    return () => observer.disconnect();
+    return () => {
+      window.cancelAnimationFrame(frame);
+      observer.disconnect();
+    };
   }, [settings.title]);
 
   if (!settings.enabled || !settings.title.trim() || !open) return null;
   const hasAction = settings.action.label.trim() && settings.action.href.trim();
 
   return <aside className="site-banner" style={{ "--banner-background": settings.backgroundColor, "--banner-text": settings.textColor } as CSSProperties}>
-    <div className="site-banner-inner"><div className="site-banner-copy"><p className={titleOverflows ? "is-marquee" : undefined} ref={titleRef} title={settings.title}><span className="site-banner-title-track"><span ref={titleTextRef}>{settings.title}</span>{titleOverflows && <span aria-hidden="true">{settings.title}</span>}</span></p>{hasAction && <a href={settings.action.href}>{settings.action.label}</a>}</div><div className="site-banner-actions"><button className="site-banner-dismiss" type="button" onClick={() => dismissFor(7)}><span className="site-banner-dismiss-long">일주일간 보지 않기</span><span className="site-banner-dismiss-short" aria-hidden="true">7일</span></button><button className="site-banner-close" type="button" onClick={() => dismissFor(1)} aria-label="하루 동안 배너 닫기"><IconXmarkLine size={20} /></button></div></div>
+    <div className="site-banner-inner"><div className="site-banner-copy"><p className={titleOverflows ? "is-marquee" : undefined} ref={titleRef} title={settings.title}><span className="site-banner-title-track"><span className="site-banner-title-measure" ref={titleTextRef}>{settings.title}</span>{titleOverflows && <span aria-hidden="true">{settings.title}</span>}</span></p>{hasAction && <a href={settings.action.href}>{settings.action.label}</a>}</div><div className="site-banner-actions"><button className="site-banner-dismiss" type="button" onClick={() => dismissFor(7)}><span className="site-banner-dismiss-long">일주일간 보지 않기</span><span className="site-banner-dismiss-short" aria-hidden="true">7일</span></button><button className="site-banner-close" type="button" onClick={() => dismissFor(1)} aria-label="하루 동안 배너 닫기"><IconXmarkLine size={20} /></button></div></div>
   </aside>;
 }

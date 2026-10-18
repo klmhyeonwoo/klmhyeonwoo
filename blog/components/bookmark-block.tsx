@@ -27,22 +27,22 @@ function BookmarkBlock({ block, editor, contentRef }: ReactCustomBlockRenderProp
   const updateUrl = (value: string) => editor.updateBlock(block, { props: { url: value.trim() } });
 
   if (!href) {
-    return <div className="editor-bookmark editor-bookmark-empty" contentEditable={false}>
+    return <div className="editor-bookmark editor-bookmark-empty" contentEditable={false} onPointerDown={(event) => event.stopPropagation()}>
       <span aria-hidden="true">↗</span>
-      <input aria-label="미리보기 링크 주소" onChange={(event) => updateUrl(event.currentTarget.value)} placeholder="https://…" value={block.props.url} />
+      <input aria-label="미리보기 링크 주소" onChange={(event) => updateUrl(event.currentTarget.value)} onMouseDown={(event) => event.stopPropagation()} placeholder="https://…" value={block.props.url} />
       <div className="editor-bookmark-title" ref={contentRef} />
     </div>;
   }
 
-  return <div className="editor-bookmark">
+  return <div className="editor-bookmark" onPointerDown={(event) => event.stopPropagation()}>
     <a aria-label={`${hostname} 열기`} className="editor-bookmark-mark" contentEditable={false} href={href} rel="noreferrer" target="_blank">↗</a>
     <div className="editor-bookmark-copy">
       <small>{hostname}</small>
       <div className="editor-bookmark-title" ref={contentRef} />
     </div>
     {editingUrl
-      ? <input aria-label="미리보기 링크 주소" autoFocus className="editor-bookmark-url-input" onBlur={() => setEditingUrl(false)} onChange={(event) => updateUrl(event.currentTarget.value)} onKeyDown={(event) => { if (event.key === "Enter") setEditingUrl(false); }} value={block.props.url} />
-      : <button aria-label="링크 주소 수정" className="editor-bookmark-edit" contentEditable={false} onClick={() => setEditingUrl(true)} onMouseDown={(event) => event.preventDefault()} type="button">⋯</button>}
+      ? <input aria-label="미리보기 링크 주소" autoFocus className="editor-bookmark-url-input" onBlur={() => setEditingUrl(false)} onChange={(event) => updateUrl(event.currentTarget.value)} onKeyDown={(event) => { if (event.key === "Enter") setEditingUrl(false); }} onMouseDown={(event) => event.stopPropagation()} value={block.props.url} />
+      : <button aria-label="링크 주소 수정" className="editor-bookmark-edit" contentEditable={false} onClick={() => setEditingUrl(true)} onMouseDown={(event) => { event.preventDefault(); event.stopPropagation(); }} type="button">⋯</button>}
   </div>;
 }
 

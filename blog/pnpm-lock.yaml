@@ -29,9 +29,15 @@ dependencies:
   '@shikijs/rehype':
     specifier: ^4.5.0
     version: 4.5.0
+  emoji-picker-react:
+    specifier: ^5.0.0
+    version: 5.0.0(react@19.3.1)
   gray-matter:
     specifier: ^4.0.3
     version: 4.0.3
+  ms-3d-emoji-picker:
+    specifier: ^1.4.1
+    version: 1.4.1(react-dom@19.3.1)(react@19.3.1)
   next:
     specifier: ^16.1.0
     version: 16.4.2(@babel/core@7.29.7)(@types/node@24.19.2)(react-dom@19.3.1)(react@19.3.1)
@@ -1223,6 +1229,24 @@ packages:
       tslib: 2.8.1
     dev: false
 
+  /@tanstack/query-core@5.104.4:
+    resolution: {integrity: sha512-nU4Yrb8Sjn0DeVb7PKG9uiepNavys3yoxy1FX0hViY4/P6Ng/mBje2SMl7i9812rtyHKtHyqiaC/td6GkI8StA==}
+    dev: false
+
+  /@tanstack/react-query@5.104.4(@types/react@18.3.31)(react@19.3.1):
+    resolution: {integrity: sha512-YD5QkvUNy8Ey3LbOy2vwL97JjoYycwDv++cWAibTe+9BLYvl3c09XpYp5dZ2VcxcguwoDhGF+utYJYb79RB36w==}
+    peerDependencies:
+      '@types/react': ^18 || ^19
+      react: ^18 || ^19
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@tanstack/query-core': 5.104.4
+      '@types/react': 18.3.31
+      react: 19.3.1
+    dev: false
+
   /@tiptap/core@3.32.0(@tiptap/pm@3.32.0):
     resolution: {integrity: sha512-Ghh2h02GKSqzytQGcLV4espYOG4EHxjj0MsrUB2Vnr47xmlZYRf6r7k2J09H+JpBdaGrWwrTkyBEi5i3c3yy2Q==}
     peerDependencies:
@@ -1416,12 +1440,23 @@ packages:
     dependencies:
       undici-types: 7.24.6
 
+  /@types/prop-types@15.7.15:
+    resolution: {integrity: sha512-F6bEyamV9jKGAFBEmlQnesRPGOQqS2+Uwi0Em15xenOxHaf2hv6L8YCVn3rPdPJOiJfPiCnLIRyvwVaqMY3MIw==}
+    dev: false
+
   /@types/react-dom@19.3.0(@types/react@19.3.0):
     resolution: {integrity: sha512-ZI7bU42mZXXKHn/qNLEw2IrbiINU7X5+vfgdixBHkCNpYWXjKgfQ/P+uyGb5CjOLB9UcnTeg3rylQtV2hym44Q==}
     peerDependencies:
       '@types/react': ^19.3.0
     dependencies:
       '@types/react': 19.3.0
+
+  /@types/react@18.3.31:
+    resolution: {integrity: sha512-vfEqpXTvwT91yhmwdfouStN2hSKwTvyRs8qpLfADyrq/kxDw0hZM7Wk9Ug1FELj8hIby+S/+kQCSRFF32nv2Qw==}
+    dependencies:
+      '@types/prop-types': 15.7.15
+      csstype: 3.2.3
+    dev: false
 
   /@types/react@19.3.0:
     resolution: {integrity: sha512-N0rFCuH9YoxG9/m61l9MfpJKfmLOVU0em7ipIz6TRgSSkvReLB9vL85GB+yr8Bs5leqpvg96JSwF4ZS1s4viQg==}
@@ -2051,6 +2086,11 @@ packages:
     resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}
     dev: false
 
+  /clsx@2.1.1:
+    resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
+    engines: {node: '>=6'}
+    dev: false
+
   /collapse-white-space@2.1.0:
     resolution: {integrity: sha512-loKTxY1zCOuG4j9f6EPnuyyYkf58RnhhWTvRoZEokgB+WbdXehfjFviyOVYkqzEWz1Q5kRiZdBYS5SwxbQYwzw==}
     dev: false
@@ -2209,6 +2249,16 @@ packages:
 
   /emoji-mart@5.6.0:
     resolution: {integrity: sha512-eJp3QRe79pjwa+duv+n7+5YsNhRcMl812EcFVwrnRvYKoNPoQb5qxU8DG6Bgwji0akHdp6D4Ln6tYLG58MFSow==}
+    dev: false
+
+  /emoji-picker-react@5.0.0(react@19.3.1):
+    resolution: {integrity: sha512-TiWM6Fbhi42SyfdVx20jJuqOOszY/sO/XyiBcTlIgMEkgN7LOxIk2pXJybfvC0qDD/ld9iT0feM3qg9tH1C/Pg==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      react: '>=16.8'
+    dependencies:
+      react: 19.3.1
+      shipstyles: 1.0.0
     dev: false
 
   /emoji-regex@9.2.2:
@@ -4068,6 +4118,19 @@ packages:
     resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
     dev: true
 
+  /ms-3d-emoji-picker@1.4.1(react-dom@19.3.1)(react@19.3.1):
+    resolution: {integrity: sha512-lZJ+tFut6ZuJK/cQCIdLNNlj7PlDFxYTqY53oCDc2n+A/1ugNuUgZmnjlAUFQdTnIx8qfxfqrj8lId8Lzgyi/A==}
+    peerDependencies:
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@tanstack/react-query': 5.104.4(@types/react@18.3.31)(react@19.3.1)
+      '@types/react': 18.3.31
+      clsx: 2.1.1
+      react: 19.3.1
+      react-dom: 19.3.1(react@19.3.1)
+    dev: false
+
   /ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
 
@@ -4865,6 +4928,10 @@ packages:
       '@shikijs/types': 4.5.0
       '@shikijs/vscode-textmate': 10.0.2
       '@types/hast': 3.0.5
+    dev: false
+
+  /shipstyles@1.0.0:
+    resolution: {integrity: sha512-1AcihfXo/mSxqeOdoKqq/5TNv+vSH0dBYPFq88PUX5FBkK5pRmY5TP9SuMNio85PQ+euUI67+KpSVk1cUVDCgA==}
     dev: false
 
   /side-channel-list@1.0.1:

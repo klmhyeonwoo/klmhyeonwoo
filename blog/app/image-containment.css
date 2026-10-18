@@ -59,6 +59,14 @@
   margin-top: 1px;
 }
 
+.post-callout-fluent-image,
+.editor-callout-fluent-image {
+  block-size: 1.25em;
+  display: block;
+  inline-size: 1.25em;
+  object-fit: contain;
+}
+
 .prose .post-callout-content {
   flex: 1;
   min-width: 0;
@@ -97,6 +105,96 @@
   margin: 1.5rem 0 0;
 }
 
+/* Keep the reading column calm while offering desktop readers a persistent
+   orientation cue for longer documents. */
+.article-content-layout {
+  min-width: 0;
+}
+
+.prose :is(h2, h3) {
+  scroll-margin-top: 2rem;
+}
+
+.article-toc {
+  display: none;
+}
+
+@media (min-width: 1100px) {
+  .article-shell:has(.article-with-toc) {
+    max-width: 68rem;
+    width: min(calc(100% - 5rem), 68rem);
+  }
+
+  .article-with-toc {
+    max-width: none;
+  }
+
+  .article-with-toc > .article-header,
+  .article-with-toc > :is(.post-admin-actions, .comments) {
+    max-width: 43.75rem;
+  }
+
+  .article-content-layout {
+    align-items: start;
+    display: grid;
+    gap: clamp(2.5rem, 5vw, 5rem);
+    grid-template-columns: minmax(0, 43.75rem) minmax(9rem, 12rem);
+  }
+
+  .article-toc {
+    align-self: start;
+    display: block;
+    position: sticky;
+    top: 2rem;
+  }
+
+  .article-toc p {
+    color: var(--ink);
+    font-size: 0.8125rem;
+    font-weight: 650;
+    margin: 0 0 0.625rem;
+  }
+
+  .article-toc ol {
+    border-inline-start: 1px solid var(--line);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .article-toc li {
+    margin: 0;
+  }
+
+  .article-toc li.level-3 {
+    padding-inline-start: 0.625rem;
+  }
+
+  .article-toc a {
+    color: var(--muted);
+    display: block;
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    overflow: hidden;
+    padding: 0.3125rem 0.625rem;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    transition: color 140ms ease;
+    white-space: nowrap;
+  }
+
+  .article-toc a:hover,
+  .article-toc a[aria-current="location"] {
+    color: var(--ink);
+  }
+
+  .article-toc a[aria-current="location"] {
+    border-inline-start: 2px solid var(--ink);
+    margin-inline-start: -1px;
+    padding-inline-start: calc(0.625rem - 1px);
+  }
+}
+
 .post-link-copy {
   align-items: center;
   background: var(--interactive-subtle);
@@ -108,7 +206,10 @@
   flex: 0 0 auto;
   height: 2.5rem;
   justify-content: center;
-  transition: background 160ms ease, color 160ms ease, transform 100ms ease-out;
+  transition:
+    background 160ms ease,
+    color 160ms ease,
+    transform 100ms ease-out;
   width: 2.5rem;
 }
 
@@ -232,16 +333,31 @@
 }
 
 /* Match the published rhythm while writing in BlockNote. */
-.editor :is([data-content-type="bulletListItem"], [data-content-type="numberedListItem"]) {
+.editor
+  :is(
+    [data-content-type="bulletListItem"],
+    [data-content-type="numberedListItem"]
+  ) {
   margin-block: 0.35rem;
 }
 
-.editor :is([data-content-type="bulletListItem"], [data-content-type="numberedListItem"]) :is(p, .bn-inline-content) {
+.editor
+  :is(
+    [data-content-type="bulletListItem"],
+    [data-content-type="numberedListItem"]
+  )
+  :is(p, .bn-inline-content) {
   margin-block: 0;
 }
 
-.editor .bn-block-outer:has([data-content-type="paragraph"]):has(+ .bn-block-outer [data-content-type="bulletListItem"]),
-.editor .bn-block-outer:has([data-content-type="paragraph"]):has(+ .bn-block-outer [data-content-type="numberedListItem"]) {
+.editor
+  .bn-block-outer:has([data-content-type="paragraph"]):has(
+    + .bn-block-outer [data-content-type="bulletListItem"]
+  ),
+.editor
+  .bn-block-outer:has([data-content-type="paragraph"]):has(
+    + .bn-block-outer [data-content-type="numberedListItem"]
+  ) {
   margin-bottom: 0.625rem;
 }
 
@@ -280,6 +396,29 @@
   line-height: 1.65;
   overflow-x: auto;
   padding: 1rem 1.125rem;
+}
+
+/* Light mode needs a stronger edge than the page paper so code reads as one
+   deliberate technical surface rather than a faded paragraph. */
+html:not([data-theme="dark"]) .editor [data-content-type="codeBlock"] {
+  background: #f2f4f3;
+  border-color: #c8cfca;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.7);
+}
+
+html:not([data-theme="dark"]) .editor [data-content-type="codeBlock"] select {
+  background: #ffffff;
+  border: 1px solid #d4dad6;
+}
+
+html:not([data-theme="dark"]) .prose pre.shiki,
+html:not([data-theme="dark"]) .prose pre.shiki code {
+  background-color: #f2f4f3 !important;
+}
+
+html:not([data-theme="dark"]) .prose pre.shiki {
+  border-color: #c8cfca;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.7);
 }
 
 .prose pre.shiki span {
@@ -332,7 +471,9 @@ html[data-theme="dark"] .prose pre.shiki span {
   font-weight: 600;
   min-height: 2.25rem;
   padding: 0.35rem 0.7rem;
-  transition: transform 100ms ease-out, opacity 160ms ease;
+  transition:
+    transform 100ms ease-out,
+    opacity 160ms ease;
 }
 
 .editor-link-choice button:hover {
@@ -348,14 +489,304 @@ html[data-theme="dark"] .prose pre.shiki span {
   color: var(--ink);
 }
 
+/* The title is a writing surface rather than a single-line form control. */
+.admin-shell .title-input {
+  display: block;
+  min-height: 3.5rem;
+  overflow: hidden;
+  padding: 0;
+  resize: none;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: keep-all;
+}
+
+/* A writer is a focused surface: actions sit in one quiet toolbar, while the
+   title and document retain the visual priority. */
+.admin-shell {
+  padding-bottom: 7rem;
+}
+
+.admin-shell .admin-header {
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  border: 1px solid color-mix(in srgb, var(--line) 88%, transparent);
+  border-radius: 1rem;
+  margin-bottom: 1.75rem;
+  padding: 0.625rem;
+}
+
+.admin-shell .admin-actions {
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.admin-shell .admin-actions .draft-status {
+  margin-right: auto;
+}
+
+.admin-shell .title-input:focus {
+  text-shadow: 0 0 0.01px currentColor;
+}
+
+.admin-shell .metadata-selects {
+  gap: 0.625rem;
+}
+
+.admin-shell .notion-select-trigger,
+.admin-shell .metadata input {
+  min-height: 2.75rem;
+}
+
+.admin-shell .notion-select-trigger:hover {
+  border-color: color-mix(in srgb, var(--ink) 24%, var(--line));
+}
+
+.admin-shell > .editor {
+  min-height: 34rem;
+  padding-top: 1.75rem;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .admin-shell .admin-header {
+    background: var(--surface);
+  }
+}
+
+@media (max-width: 760px) {
+  .admin-shell .admin-header {
+    border-radius: 0.875rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .admin-shell .admin-actions .draft-status {
+    order: 3;
+    width: 100%;
+  }
+}
+
+/* The picker stays close to the block: a compact utility panel, not a modal. */
+.editor-callout-emoji-menu {
+  background: color-mix(in srgb, var(--surface-raised) 94%, transparent);
+  backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid color-mix(in srgb, var(--line) 90%, transparent);
+  border-radius: 0.875rem;
+  box-shadow: 0 1.25rem 3rem color-mix(in srgb, var(--ink) 18%, transparent);
+  padding: 0;
+  transform-origin: top left;
+  width: min(25rem, calc(100vw - 3rem));
+}
+
+.editor-callout-emoji-menu-header {
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 0.75rem 0.875rem 0.625rem;
+}
+
+.editor-callout-emoji-menu-header > div {
+  min-width: 0;
+}
+
+.editor-callout-emoji-menu-header p {
+  color: var(--ink);
+  font-size: 0.8125rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin: 0 0 0.375rem;
+}
+
+.editor-callout-emoji-tabs {
+  border-bottom: 1px solid var(--line);
+  display: inline-flex;
+  gap: 0.875rem;
+  padding: 0;
+}
+
+.editor-callout-emoji-tabs button {
+  background: transparent;
+  border: 0;
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 550;
+  padding: 0 0 0.375rem;
+  position: relative;
+}
+
+.editor-callout-emoji-tabs button.is-selected {
+  color: var(--ink);
+}
+
+.editor-callout-emoji-tabs button.is-selected::after {
+  background: var(--ink);
+  bottom: -1px;
+  content: "";
+  height: 1px;
+  inset-inline: 0;
+  position: absolute;
+}
+
+.editor-callout-emoji-close {
+  background: transparent;
+  border: 0;
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.75rem;
+  padding: 0.375rem;
+}
+
+.editor-callout-emoji-close:hover {
+  color: var(--ink);
+}
+
+.editor-callout-emoji-menu .EmojiPickerReact {
+  --epr-bg-color: var(--surface-raised);
+  --epr-category-label-bg-color: var(--surface-raised);
+  --epr-picker-border-color: transparent;
+  --epr-search-border-color: var(--line);
+  --epr-search-input-bg-color: var(--surface);
+  --epr-search-input-text-color: var(--ink);
+  --epr-text-color: var(--ink);
+  border: 0;
+  border-radius: 0 0 0.875rem 0.875rem;
+}
+
+/* ms-3d-emoji-picker injects a small standalone sheet. These overrides make
+   it use this editor's material, typography and compact navigation. */
+.editor-callout-microsoft-picker [aria-label="Picker"] {
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  width: 100% !important;
+}
+
+.editor-callout-microsoft-picker [aria-label="Picker"] > nav {
+  border-bottom: 1px solid var(--line) !important;
+}
+
+.editor-callout-microsoft-picker [aria-label="Picker"] > nav > div {
+  padding: 0.625rem 0.75rem !important;
+}
+
+.editor-callout-microsoft-picker [aria-label="Picker"] > nav button {
+  color: var(--muted) !important;
+}
+
+.editor-callout-microsoft-picker [aria-label="Picker"] > nav button[class*="active"] {
+  color: var(--ink) !important;
+  text-decoration-color: var(--ink) !important;
+}
+
+.editor-callout-microsoft-picker [aria-label="Picker"] > section {
+  padding: 0.625rem 0.5rem 0.5rem !important;
+}
+
+.editor-callout-microsoft-picker [aria-label="Picker"] > section > div {
+  height: 19rem !important;
+  scrollbar-color: var(--line) transparent;
+}
+
+.editor-callout-microsoft-picker [aria-label="Picker"] h2 {
+  background: color-mix(in srgb, var(--surface-raised) 92%, transparent) !important;
+  color: var(--muted) !important;
+  font-size: 0.6875rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em;
+  padding: 0.625rem 0.25rem 0.375rem !important;
+}
+
+.editor-callout-microsoft-picker [aria-label="Picker"] button[class*="Category-module_button"] {
+  border-radius: 0.5rem !important;
+}
+
+.editor-callout-microsoft-picker [aria-label="Picker"] button[class*="Category-module_button"]:hover {
+  background: var(--interactive-subtle) !important;
+}
+
+.editor-callout-microsoft-picker [aria-label="Picker"] img {
+  block-size: 1.875rem !important;
+  inline-size: 1.875rem !important;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .editor-callout-emoji-menu {
+    background: var(--surface-raised);
+    backdrop-filter: none;
+  }
+}
+
+.admin-shell .metadata {
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+  padding: 0 0 1.5rem;
+}
+
+.private-post-controls {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem 1rem;
+}
+
+.admin-shell .private-toggle {
+  color: var(--ink);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.admin-shell .private-toggle input {
+  accent-color: var(--ink);
+}
+
+.admin-shell .metadata input.private-password-input {
+  border-radius: 0.375rem;
+  min-height: 2.5rem;
+  padding: 0.5rem 0.625rem;
+  width: min(100%, 22rem);
+}
+
+@media (max-width: 760px) {
+  .private-post-controls {
+    align-items: stretch;
+    display: grid;
+  }
+
+  .admin-shell .metadata input.private-password-input {
+    width: 100%;
+  }
+}
+
+.admin-header button,
+.admin-actions .new-post-button {
+  transition:
+    transform 100ms ease-out,
+    background 160ms ease,
+    border-color 160ms ease;
+}
+
+.admin-header :is(button, .new-post-button):active {
+  transform: scale(0.97);
+}
+
 .comments :is(.giscus, .utterances) {
   max-width: 100%;
   width: 100%;
 }
 
 @keyframes editor-link-choice-in {
-  from { opacity: 0; transform: translateY(-0.25rem) scale(0.985); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(-0.25rem) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -366,6 +797,50 @@ html[data-theme="dark"] .prose pre.shiki span {
   .editor-link-choice button {
     transition: none;
   }
+
+  .admin-header button,
+  .admin-actions .new-post-button {
+    transition: none;
+  }
+}
+
+.kb-pagination {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  justify-content: center;
+  margin: 2.25rem 0 0;
+}
+
+.kb-pagination a {
+  align-items: center;
+  background: var(--interactive-subtle);
+  border-radius: 0.55rem;
+  color: var(--ink);
+  display: inline-flex;
+  font-size: 0.875rem;
+  justify-content: center;
+  min-height: 2.25rem;
+  min-width: 2.25rem;
+  padding: 0 0.65rem;
+  text-decoration: none;
+}
+
+.kb-pagination a.active {
+  background: var(--ink);
+  color: var(--surface);
+}
+
+.kb-pagination a.is-disabled {
+  opacity: 0.42;
+  pointer-events: none;
+}
+
+/* Keep the post title in a recent-comment card readable on hover in both
+   themes without changing the card surface itself. */
+.kb-content-layout .recent-comments li:hover small {
+  color: var(--ink);
 }
 
 /* A mobile announcement is an at-a-glance status, not a second header. */
@@ -375,6 +850,11 @@ html[data-theme="dark"] .prose pre.shiki span {
 
 .site-banner-title-track > span[aria-hidden="true"] {
   display: none;
+}
+
+.site-banner-title-measure {
+  display: inline-block;
+  white-space: nowrap;
 }
 
 @media (max-width: 760px) {
@@ -412,11 +892,12 @@ html[data-theme="dark"] .prose pre.shiki span {
     animation: site-banner-marquee 11s linear infinite;
     display: flex;
     gap: 2.5rem;
+    will-change: transform;
     width: max-content;
   }
 
   .site-banner-copy p.is-marquee .site-banner-title-track > span {
-    display: block;
+    display: inline-block;
     flex: 0 0 auto;
   }
 
@@ -566,7 +1047,7 @@ html[data-theme="dark"] .prose pre.shiki span {
 
 @media (min-width: 1100px) {
   .kb-content-layout:has(.recent-comments) {
-    grid-template-columns: minmax(0, 760px) minmax(260px, 310px);
+    grid-template-columns: minmax(0, 760px) minmax(260px, 370px);
     justify-content: center;
   }
 }

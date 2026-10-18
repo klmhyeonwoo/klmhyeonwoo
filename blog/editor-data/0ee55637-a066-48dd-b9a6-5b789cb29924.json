@@ -1,0 +1,513 @@
+[
+  {
+    "id": "3fabaea9-b887-4561-b14a-dc2c891a2b64",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "글을 시작하며",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "044db371-a63b-4166-9123-c8db61e898f4",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Tanstack Query는 기본적으로 인메모리 캐시를 사용하기 때문에, 브라우저 새로고침 시에 자바스크립트 런타임이 초기화되면서 모든 캐시 처리가 사라진다. staleTime이 남아있더라도 캐시 자체가 메모리에서 사라지기 때문에 다시 패칭되는 현상이 발생한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "324a5333-c894-4d4f-a902-2407dc0ffb64",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// 브라우저 새로고침 전, 내부적으로 이런 형태로 캐싱 처리를 진행한다.\nQueryCache: Map {\n  \"['todo']\" => Query { data: [...], dataUpdateAt: 1234567890 }\n}\n\n// 하지만 인메모리 캐시를 사용하면서 새로고침 시에 런타임이 초기화되고, 모든 캐시는 손실된다.\nQueryCache: Map {} // (비어있음)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "126a2158-fc1f-469c-a3c8-29486cc139a7",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Query Cache의 구조",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c77e6420-8e16-4c7d-b7b3-3b8e6aff9c68",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Tanstack Query는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Map<string, Query>",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 형태로 쿼리 키를 해시화해서 저장을 한다. 이때 각 쿼리는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "queryKey",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 를 기반으로 고유하게 식별된다. 그래서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "queryKey",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 에는 캐싱 개념에서 정말 중요한 유니크한 값이 들어가야한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "8d3c8098-243b-4684-8e74-f78b3ce33004",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "각 Query 들은 아래와 같은 정보들을 포함한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c6fd4675-39cd-4140-9f40-c6edb626b885",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "queryKey : 쿼리 식별자 (배열 형태)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "47340e98-073d-4ee8-b311-916ad739efd5",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "state : 현재 쿼리 상태",
+        "styles": {}
+      }
+    ],
+    "children": [
+      {
+        "id": "6ed4ce89-da70-4cef-80a3-df775a026b60",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "data : 실제 응답 데이터",
+            "styles": {}
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "fe7d9291-3aa7-4735-bb1e-5509ca8acaee",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "dataUpdatedAt : 데이터 업데이트 시각",
+            "styles": {}
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "9cbd6058-a84f-485c-a995-50115e946f50",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "error : 에러 정보",
+            "styles": {}
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "9a82d521-6035-4296-9a63-7ce3ace2b630",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "status : ",
+            "styles": {}
+          },
+          {
+            "type": "text",
+            "text": "pending",
+            "styles": {
+              "code": true
+            }
+          },
+          {
+            "type": "text",
+            "text": "|",
+            "styles": {}
+          },
+          {
+            "type": "text",
+            "text": "error",
+            "styles": {
+              "code": true
+            }
+          },
+          {
+            "type": "text",
+            "text": "|",
+            "styles": {}
+          },
+          {
+            "type": "text",
+            "text": "success",
+            "styles": {
+              "code": true
+            }
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "d4ea3651-893b-42b2-b28e-081fb3addb5e",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "fetchStats : ",
+            "styles": {}
+          },
+          {
+            "type": "text",
+            "text": "fetching",
+            "styles": {
+              "code": true
+            }
+          },
+          {
+            "type": "text",
+            "text": " |",
+            "styles": {}
+          },
+          {
+            "type": "text",
+            "text": "paused",
+            "styles": {
+              "code": true
+            }
+          },
+          {
+            "type": "text",
+            "text": "|",
+            "styles": {}
+          },
+          {
+            "type": "text",
+            "text": "idle",
+            "styles": {
+              "code": true
+            }
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "5cfb74df-3f67-44b9-bbc2-662182db7f53",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "...",
+            "styles": {}
+          }
+        ],
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "abd17e29-081a-419a-89fe-9b11b0a7a0db",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "observers : 해당 쿼리를 구독 중인 컴포넌트들",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "04c25ffa-a556-4ac4-89df-aa88872796f7",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "gcTime : 가비지 컬렉션 시간 (구 cacheTime)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "11ad850e-cc03-4970-bc53-98f7f4703c58",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "staleTime : 데이터 신선도 기준 시간",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "dbf1bd39-a1fe-4c8b-8ef5-fa94a0653317",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "캐시 라이프사이클과 메모리 상태",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ef1588bd-321e-4f1a-b029-412ea412491b",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Tanstack Query의 내부 캐시 라이프 사이클",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6d1042f0-d2a2-434b-9a74-aef5d23762ff",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// 1. 쿼리 생성 시\nconst query = queryCache.build(client, {\n  queryKey: ['todos'],\n  queryFn: fetchTodos\n});\n\n// 2. TanStack Query가 내부적으로 queryFn을 실행\nconst result = await query.options.queryFn();\n\n// 3. 데이터 저장\nquery.state = {\n  data: result,\n  dataUpdatedAt: Date.now();\n  status: 'success'\n}\n\n// 4. staleTime 경과 확인\nconst isStale = Date.now() - query.state.dataUpdatedAt > query.options.staleTime\n\n// 5. gcTime 경과 시에 제거\nif (query.observers.length === 0) {\n  setTimeout(() => {\n    queryCache.remove(query);\n  }, query.options.gcTime)\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "406171a1-2fd8-4bbe-9113-d564fb9c1185",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Tanstack Query의 메모리 상태",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ca6f8eb8-6edc-4ed2-9644-58e169e24665",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "QueryClient\n  └─ QueryCache (Map)\n       ├─ Query['todos']\n       │    ├─ state: { data, dataUpdatedAt, status }\n       │    ├─ observers: [Observer1, Observer2]\n       │    └─ options: { staleTime, gcTime }\n       │\n       └─ Query['user', 1]\n            ├─ state: { data, dataUpdatedAt, status }\n            ├─ observers: []\n            └─ options: { staleTime, gcTime }",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "858b8b5e-cc79-4194-a796-67685f6c88b7",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "persistQueryClient로 localStorage에 직렬화하여 저장하기",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "2829933c-35a7-4ec7-be25-c097f3553e5c",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "import { QueryClient, VueQueryPlugin } from '@tanstack/vue-query';\nimport { persistQueryClient } from '@tanstack/query-persist-client-core';\nimport { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';\n\n// main.js\nconst queryClient = new QueryClient({\n  defaultOptions: {\n      queries: {\n          staleTime: 1000 * 30 // 30sec\n          gcTime: 1000 * 60 // 60sec\n      }\n  }\n});\n\npersistQueryClient({\n  queryClient,\n  persister: createSyncStoragePersister({ storage: window.localStorage }),\n});\n\n...\n\napp.use(VueQueryPlugin, { queryClient });",
+        "styles": {}
+      }
+    ],
+    "children": []
+  }
+]

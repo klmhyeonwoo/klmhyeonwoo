@@ -1,0 +1,132 @@
+---
+title: "A2UI (Agent To User Interface)"
+date: 2026-10-19
+publishedAt: "2026-10-19T14:38:33.777Z"
+updatedAt: "2026-10-19T14:38:33.777Z"
+description: ""
+category: "category-9606d629"
+series: "-"
+private: false
+---
+
+A2UI (Agent-to(2)-User Interface)는 AI 에이전트가 사용자에게 풍부하고 인터렉티브한 UI를 생성하여 제공할 수 있도록 돕는 구글의 오픈소스 프로토콜이자, 표준입니다. 생성형 AI가 텍스트, 이미지, 코드를 생성하는 데는 탁월하지만, 복잡한 사용자 인터페이스를 구성하여 전달하는데는 여전히 어려움을 겪고 있습니다.
+
+A2UI는 에이전트가 단순히 텍스트로만 응답하는 것을 넘어서, 현재 대화 맥락에 가장 적합한 UI를 직접 생성하고 이를 프론트엔드 어플리케이션으로 전송할 수 있는 표준 형식을 제공합니다. (이전에 에이전트로부터 유저 인터페이스를 구축했던 조직들의 경우, 그 조직 별 규칙을 세우고 진행했을 확률이 높습니다)
+
+오늘날 AI 에이전트는 점점 더 복잡한 작업을 수행하고 있습니다. 예를 들어 예약을 해야할 때, 에이전트로부터 텍스트로 날짜와 시간을 묻고 답하는 것은 어쩌면 비효율적일 것입니다. 에이전트가 Date Picker 컴포넌트나, 슬라이더와 같은 UI 요소를 노출시키며 사용자에게 선택지를 제공한다면 사용자 경험은 훨씬 향상될 것입니다. 하지만 보안 문제와, 플랫폼 호환성 문제로 인해 원격 에이전트가 로컬 어플리케이션의 화면을 직접 제어하거나 임의의 코드를 실행하게 하는 것은 위험합니다.
+
+A2UI는 이러한 문제를 해결하기 위해 "에이전트가 유저 인터페이스라는 언어를 말하게 하자 ㅡ Speak UI" 라는 철학 아래 개발되었습니다. 에이전트는 화면을 어떻게 그릴지 구체적으로 명령하는 코드가 아니라, 선언적인 데이터 형태(JSON)로 의도를 전달합니다. 클라이언트는 이 데이터를 받아 자신의 플랫폼(Web, Mobile, Desktop)에 맞는 네이티브 컴포넌트로 렌더링을 합니다.
+
+이 방식은 보안을 유지하면서도 에이전트가 주도하는 동적인 인터페이스 구성이 가능해지는 보안성, 속도, 그리고 사용자 경험을 모두 만족시키는 새로운 접근법이 됩니다.
+
+구글이 제안하는 A2UI를 기존 사용자와 에이전트 사이의 인터페이스들과 비교해보면 아래와 같습니다.
+
+* A2UI vs. 텍스트 기반 상호작용 (Text-only Interaction) : 기존의 텍스트 기반 에이전트는 정보를 전달하기 위해 여러번의 대화(Turn-taking)이 필요했습니다. 반면 A2UI를 사용하게되면 에이전트가 적절한 시점에 폼(Form), 버튼, 차트 등의 UI를 제시하여 사용자의 입력을 한 번에 효율적으로 받을 수 있습니다.
+
+* A2UI vs. 원격 HTML/JS 전송 (Remote Rendering) : 기존에는 원격서버에서 사용자 인터페이스를 그리려면 HTML이나 JavaScript를 클라이언트로 보내 iframe 내에서 실행해야했습니다. 하지만 이와 같은 방법은 보안 상 위험할 뿐만 아니라 호스트 어플리케이션의 스타일과 이질감이 느껴지는 문제가 있었습니다. A2UI는 UI 구조만 데이터로 전송하고 실제 렌더링은 클라이언트가 담당하기 때문에 앱의 네이티브 스타일과 완벽하게 일치하며 보안적으로도 안전합니다.
+
+* A2UI vs. MCP (Model Context Protocal) : 최근 등장한 MCP Apps는 ui:// 리소스를 통해 샌드박스된 HTML 콘텐츠를 반환하는 방식을 사용하고 있습니다. A2UI는 이와 달리 네이티브 우선 접근 방식을 취합니다. 불투명한 페이로드를 가져와 보여주는 대신, 네이티브 컴포넌트의 청사진을 전송하여 호스트 앱의 스타일링과 접근성 기능을 그대로 상속받습니다.
+
+### 기존 텍스트 기반 상호작용의 한계 (The Clunky Back-and-Forth)
+
+텍스트로만 이루어지는 대화는 사용자와 에이전트 간에 불필요하게 만든 턴을 소모하게 만듭니다. 사용자가 필요한 정보를 한번에 주지 않으면 에이전트는 계속해서 되물어야하기 때문입니다.
+
+> User : '2명 예약을 좀 해줄래?'\
+> Agent : '알겠습니다, 날짜는 어떻게 할까요? (1차 되묻기)'\
+> User : '내일로 예약해줘'\
+> Agent : '시간은 어떻게 예약할까요? (2차 되묻기)'\
+> User : '오후 2시 정도로 예약해줘'\
+> Agent : '해당 시간은 브레이크 타임이에요, 다른 시간은 어떠신가요? (3차 되묻기 ㅡ 예약 실패 및 재질문)'\
+> User : '그러면 가능한 시간이 언제인데?'\
+> Agent : '16:00, 16:40, 17:20' 가능합니다, 이 중에 괜찮은 시각이 있나요? (4차 되묻기 ㅡ 가독성이 떨어지는 텍스트 나열)'
+
+이러한 텍스트 기반의 상호작용은 단순히 예약을 위해 수많은 타이핑이 오고 가기(Ping-pong)가 필요하여 효율성이 떨어집니다.
+
+또한, 사용가능한 시간대가 텍스트로 나열되면 사용자는 이를 읽고, 자신의 일정과 비교하는데 피로감을 느낄 수 있습니다.
+
+전체적으로 이러한 스무고개 같은 대화 흐름은 사용자 경험을 크게 저하시켜 사용자에게 부정적인 인식을 심어줄 수 있습니다.
+
+### A2UI를 통한 해결책 : 맞춤형 사용자 인터페이스 생성 (Bespoke UIs)
+
+A2UI는 에이전트가 상황에 맞는 사용자 인터페이스 컴포넌트를 직접 선택하고, 직접 구성하여 제안할 수 있게 합니다.
+
+에이전트는 더 이상 텍스트로 질문하지 않고, 필요한 도구(사용자 인터페이스)를 건네줍니다.
+
+에이전트는 사용자의 의도를 파악하자마자 Date Picker, Time Selector, 인원수 조절 버튼 등이 포함된 폼을 동적으로 생성하여 보여줍니다.
+
+이때, A2UI는 추상적인 UI 구조만을 전달하기 때문에 실제 화면에 그려지는 디자인은 호스트 앱 (Front-end Host App)이 제어합니다.
+
+* 호스트 앱 : A2UI를 사용하고있는 해당 서비스 사용자 인터페이스 컨테이너
+
+따라서 채팅창 안에서도 앱 전체 테마와 어울리는 아름다운 디자인으로 렌더링됩니다. 이러한 사용자 인터페이스를 통해 사용자는 텍스트를 여러 번 타이핑할 필요 없이, 클릭 몇 번만으로 원하는 옵션을 선택하고, "폼 제출" 버튼을 누르면 됩니다.
+
+이러한 사용자 인터페이스를 통해 사용자는 텍스트를 여러 번 타이핑할 필요 없이, 클릭 몇 번만으로 원하는 옵션을 선택하고, "폼 제출" 버튼을 누르면 됩니다. 즉, A2UI는 LLM이 미리 정의된 위젯 카탈로그를 조합하여, 현재 작업에 가장 적합한 맞춤형 사용자 인터페이스 (Bespoke UI)를 즉석에서 만들어낼 수 있도록 지원합니다. 이 말이 곧 즉슨 "에이전트가 UI를 말한다" 는 것의 핵심 의미를 가지게 되는 것입니다.
+
+### A2UI의 주요 특징
+
+* 보안 우선 (Security First)
+
+A2UI의 가장 큰 특징은 실행 코드가 아닌 데이터(Declarative JSON)이라는 점입니다. 클라이언트 애플리케이션은 신뢰할 수 있는 UI 컴포넌트 (ex. Card, Button, TextField) 목록인 '카탈로그'를 유지 관리합니다.
+
+에이전트는 오직 이 카탈로그에 있는 컴포넌트의 렌더링만을 요청할 수 있어, UI Injection과 같은 보안 취약점을 원천적으로 차단합니다.
+
+* LLM 친화적 구조
+
+유저 인터페이스는 ID 참조를 포함한 Flat List 형태로 표현이 됩니다. 거대한 트리 구조보다 LLM이 생성하기에 훨씬 효율적이며, 점진적인 업데이트를 용이하게 해줍니다.
+
+대화가 진행됨에 따라 에이전트는 UI의 특정 부분만 변경하는 데이터를 보낼 수 있어 반응성이 높은 사용자 경험을 제공할 수 있습니다.
+
+* 프레임워크 불가지론(중립)
+
+A2UI의 사용자 인터페이스의 '구조'와 '구현'을 분리하며, 에이전트는 컴포넌트 트리와 데이터 모델에 대한 설명만 전송합니다.
+
+실제 화면에 그리는 것은 웹 컴포넌트, Flutter, React, Vue, SwiftUI 등 각 클라이언트의 몫이 됩니다.
+
+따라서 하나의 A2UI JSON 응답이 웹, 모바일 등 다양한 플랫폼에서 각기 다른 프레임워크로 렌더링될 수 있습니다.
+
+### A2UI의 동작 흐름
+
+A2UI의 전체적인 데이터 흐름은 아래와 같습니다.
+
+![Image](https://upload.cafenono.com/image/slashpagePost/20260812/171756_8ksxV6NThaCKk3Qn9l?q=80&s=1280x180&t=outside&f=webp)
+
+1. 생성 (Generation) : 에이전트가 유저 인터페이스 구성을 설명하는 A2UI JSON 페이로드를 생성합니다.
+
+1. 전송 (Transport) : 생성된 메세지는 A2A (Agent to Agent) 프로토콜이나, AGUI 등을 통해 클라이언트로 전송됩니다.
+
+1. 해석 (Resolution) : 클라이언트의 A2UI 렌더러(A2UI 구조체를 파싱을 하는 웹 컴포넌트)가 JSON을 파싱합니다.
+
+1. 렌더링 (Rendering) : 렌더러는 추상적인 컴포넌트 타입 (ex. text-field)를 클라이언트 코드베이스의 구체적인 구현체(위젯)으로 매핑하여 화면에 그립니다.
+
+### A2UI 활용 사례
+
+실제로 에이전트가 A2UI를 통해 상황에 따라 어마나 유연하게 UI를 생성하고 제어하는지를 확인할 수 있습니다. 아래에는 제가 실제로 실무에서 A2UI를 접하며 마주한 내용들이며, 실제로 프로젝트 형태로 체험을 하고 싶다면 아래 주소에서 체험을 할 수 있습니다.
+
+[Quickstart - A2UI](https://a2ui.org/quickstart)
+
+* AI Agentic UI
+
+사내 보안 모델을 통해 Agentic UI를 구성하기 위한 A2UI 응답 값이며, 여기서 중점적으로 봐야할 부분들은 component에 관련된 부분입니다. 사실 쉽게 생각하면 SDUI (Server Driven UI) 처럼 동적으로 컴포넌트들을 렌더링하기 위한 키 값들이 존재하고, 이 키 값들을 통해 동적 대응을 할 수 있습니다.
+
+```javascript
+ x-tinymce/html {"type":"ACTIVITY_SNAPSHOT","timestamp":1786325881,"messageId":"8c924bad-da2f-4c46-aa7d-2b90e9eaedeb","activityType":"a2ui_surface","content":{"node_id":2,"status":"completed","operations":[{"surfaceUpdate":{"surfaceId":"iocInputSurface","components":[{"id":"root_column","component":{"Column":{"children":{"explicitList":["title_text","prompt_text","ioc_value_input","ioc_type_label","ioc_type_selector","submit_ioc"]},"alignment":"stretch"}}},{"id":"title_text","component":{"Text":{"text":{"literalString":"IOC 조회"},"usageHint":"h2"}}},{"id":"prompt_text","component":{"Text":{"text":{"literalString":"아래에 IOC 값을 입력하고 종류를 선택한 뒤 조회 버튼을 눌러 주세요."},"usageHint":"body"}}},{"id":"ioc_value_input","component":{"TextField":{"label":{"literalString":"IOC 값"},"text":{"path":"/iocValue"},"textFieldType":"shortText"}}},{"id":"ioc_type_label","component":{"Text":{"text":{"literalString":"IOC 종류 선택"},"usageHint":"body"}}},{"id":"ioc_type_selector","component":{"MultipleChoice":{"selections":{"path":"/iocType"},"options":[{"label":{"literalString":"Domain"},"value":"domain"},{"label":{"literalString":"IP"},"value":"ip"},{"label":{"literalString":"File"},"value":"file"},{"label":{"literalString":"URL"},"value":"url"}],"maxAllowedSelections":1}}},{"id":"submit_label","component":{"Text":{"text":{"literalString":"조회"},"usageHint":"body"}}},{"id":"submit_ioc","component":{"Button":{"child":"submit_label","action":{"name":"submitIOC","context":[{"key":"iocValue","value":{"path":"/iocValue"}},{"key":"iocType","value":{"path":"/iocType"}}]},"primary":true}}}]}},{"dataModelUpdate":{"surfaceId":"iocInputSurface","contents":[{"key":"iocValue","valueString":""},{"key":"iocType","valueString":""}]}},{"beginRendering":{"surfaceId":"iocInputSurface","root":"root_column"}}]},"replace":true}
+```
+
+![Image](https://upload.cafenono.com/image/slashpagePost/20260812/171923_uPqkGoDaBW5ApEAhmM?q=80&s=1280x180&t=outside&f=webp)
+
+위 A2UI의 응답값을 기반으로 컴포넌트들을 각각 파싱하여 추출하여 호스트 앱에 노출을 시키게 되면 아래와 같은 결과 값이 도출되는 것을 확인할 수 있습니다.
+
+![Image](https://upload.cafenono.com/image/slashpagePost/20260812/171948_DbAx3mn3etZ2Whdlke?q=80&s=1280x180&t=outside&f=webp)
+
+위 예시는 "IOC 분석 요청을 하고싶어" 라고 요청 보냈을 때, 에이전트가 생각 모드를 통해 사고하는 과정을 진행하며, 사용자에게는 IOC 분석을 위한 요청과 추가로 값을 요청하는 행위를 확인할 수 있습니다. 사용자는 텍스트로 일일히 설명할 필요가 없어, 이에전트가 만들어준 사용자 인터페이스 규격을 통해 쉽고 정확하게 틀 안에서 정보를 입력할 수 있게 됩니다.
+
+* A2UI Composer
+
+이 외에도 [A2UI Composer](https://go.copilotkit.ai/A2UI-widget-builder)이라는 서비스를 통해 다양한 컴포넌트들을 확인할 수 있습니다.
+
+![Image](https://upload.cafenono.com/image/slashpagePost/20260812/172130_yXjnEGQg11Lj7gZLY1?q=80&s=1280x180&t=outside&f=webp)
+
+CopilotKit 팀에서 제공하는 공개형 위젯 빌더로, 개발자들은 복잡한 백엔드 설정없이 이 도구를 통해 A2UI가 제공하는 다양한 위젯들을 웹 상에서 즉시 생성하고 테스트해볼 수 있습니다. 작동 방식을 쉽게 이해할 수 있을 뿐만아니라, 앞으로 만들어지는 다양한 A2UI 프로젝트가 구글 내부 뿐만 아니라 오픈소스 생태계와 협력하여 개발자 도구 생태계를 확장하고 있음을 알 수 있습니다.
+
+A2UI는 완성된 프로젝트가 아니며, 현재도 계속해서 다양한 컴포넌트 구조체와 변화하는 속성 값들을 확인할 수 있습니다. 만약 A2UI를 연동해야하는 순간이 온다면 이전 스펙을 통해 컴포넌트들을 구현할 수 있기 때문에 꼭 A2UI의 스펙 문서를 확인하여 구현을 시도하는 것이 정말 좋습니다.
+

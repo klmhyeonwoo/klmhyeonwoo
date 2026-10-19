@@ -1,0 +1,456 @@
+---
+title: "Vue가 채택한 Proxy 상태, React는 왜 사용하지 않을까?"
+date: 2026-10-19
+publishedAt: "2026-10-19T12:47:57.759Z"
+updatedAt: "2026-10-19T12:47:57.760Z"
+description: ""
+category: "category-9606d629"
+series: "-"
+private: false
+---
+
+**Proxy**는 JavaScript 객체에 대한 접근을 가로채서 중간에서 원하는 동작을 끼워 넣을 수 있는 기능이다. Vue 3의 반응형 시스템이 이 위에서 동작하고, MobX도 같은 방식을 쓴다.
+
+Vue 3를 공부하다가 `reactive()`로 감싼 객체의 프로퍼티를 직접 수정했는데 화면이 자동으로 업데이트되는 걸 보고 신기했다. React에서는 반드시 `setState`를 호출해야 하는데, Vue는 그냥 `obj.count++`만 해도 자동으로 반응성을 유지하는데, 내부에서 어떤 일이 일어나고 있을까?
+
+***
+
+### Proxy 이전에 라이브러리는 어떻게 만들어졌을까?
+
+전에는 `SPA` 라는 개념 자체가 생소했고, `MPA` 개념으로 웹을 주로 사용해왔다. `Proxy` 라는 강력한 기능이 나오기 전에는 `SPA` 라이브러리는 어떻게 구성이 되었는지 너무 궁금했다.
+
+현재는 React와 Vue를 섞어쓰다보니 메이저 버젼이 바뀌면서 아예 내부 패러다임이 변경된 Vue를 기준으로 알아보자면 Vue 3 이전, Vue 2는 `Object.defineProperty()`로 반응형을 구현했다.
+
+```javascript
+// Vue 2 방식 (단순화)
+function defineReactive(obj, key, value) {
+  Object.defineProperty(obj, key, {
+    get() {
+      // 의존성 추적
+      track(key)
+      return value
+    },
+    set(newValue) {
+      value = newValue
+      // 변경 알림
+      trigger(key)
+    }
+  })
+}
+```
+
+`Object.defineProperty`는 이미 존재하는 프로퍼티의 getter/setter만 가로챌 수 있다. 그래서 Vue 2에는 구조적인 한계가 있었다.
+
+```javascript
+// Vue 2에서 반응형이 동작하지 않는 경우
+const state = Vue.observable({ items: [] })
+
+state.items.push('new item')    // ← 배열 변경 미감지 (일부 메서드만 패치됨)
+state.newProp = 'hello'         // ← 새로운 프로퍼티 추가 미감지
+delete state.items              // ← 삭제 미감지
+```
+
+이 문제를 해결하려고 Vue 2는 배열 메서드를 직접 패치하고, `Vue.set()`이라는 특별한 API를 만들었다. 근본적인 해결이 아니라 우회였다.
+
+2015년 ES6에 Proxy가 추가됐다. Vue 3는 2020년에 이 Proxy를 기반으로 반응형 시스템을 완전히 재설계했다.
+
+### Proxy의 내부 동작
+
+`new Proxy(target, handler)`는 `target` 객체를 감싸는 래퍼를 만든다. 이 래퍼에 대한 모든 작업(읽기, 쓰기, 삭제 등)이 `handler`의 **트랩(trap)** 을 통해 가로채진다.
+
+```javascript
+const target = { count: 0 }
+
+const proxy = new Proxy(target, {
+  get(target, key, receiver) {           // ← 프로퍼티 읽기 시 호출
+    console.log(`get: ${key}`)
+    return Reflect.get(target, key, receiver)  // ← 원래 동작 수행
+  },
+  set(target, key, value, receiver) {    // ← 프로퍼티 쓰기 시 호출
+    console.log(`set: ${key} = ${value}`)
+    return Reflect.set(target, key, value, receiver)
+  }
+})
+
+proxy.count        // 출력: "get: count"
+proxy.count = 5    // 출력: "set: count = 5"
+proxy.newProp = 1  // 출력: "set: newProp = 1" ← 새 프로퍼티도 감지됨
+```
+
+`Reflect`는 Proxy 트랩과 1:1로 대응하는 API다. 트랩 안에서 원래 동작을 수행할 때 사용한다. `target[key]`로 직접 접근하는 것과 결과는 같지만, `receiver`(프록시 자신)를 올바르게 처리하기 위해 `Reflect`를 쓰는 것이 안전하다.
+
+**트랩의 종류**
+
+Proxy가 가로챌 수 있는 작업은 13가지다.
+
+```javascript
+const handler = {
+  get(target, key, receiver) {},          // obj.key
+  set(target, key, value, receiver) {},   // obj.key = value
+  has(target, key) {},                    // key in obj
+  deleteProperty(target, key) {},         // delete obj.key
+  apply(target, thisArg, args) {},        // fn()     ← 함수에 적용
+  construct(target, args) {},             // new Fn() ← 생성자에 적용
+  ownKeys(target) {},                     // Object.keys(obj)
+  getOwnPropertyDescriptor(target, key) {},
+  defineProperty(target, key, desc) {},
+  getPrototypeOf(target) {},
+  setPrototypeOf(target, proto) {},
+  isExtensible(target) {},
+  preventExtensions(target) {},
+}
+```
+
+`Object.defineProperty`는 `get`/`set`만 가로챌 수 있었다. Proxy는 객체에 대한 거의 모든 작업을 가로챌 수 있다. 이게 Vue 3가 Vue 2의 한계를 전부 해결한 이유다.
+
+### Vue 3가 Proxy로 반응형을 구현하는 방법
+
+> **의존성 저장 구조**
+
+Vue 3는 아래 구조로 의존성을 추적한다.
+
+```javascript
+targetMap (WeakMap)
+  target 객체 → depsMap (Map)
+    프로퍼티 key → dep (Set<effect>)
+```
+
+`WeakMap`을 쓰는 이유는 target 객체가 가비지 컬렉션될 때 자동으로 정리되기 때문이다.
+
+> **get 트랩 — 의존성 수집**
+
+```javascript
+// Vue 3 내부 (단순화)
+let activeEffect = null   // ← 현재 실행 중인 effect
+
+function get(target, key, receiver) {
+  const result = Reflect.get(target, key, receiver)
+
+  // activeEffect가 있으면 이 키를 의존성으로 등록
+  track(target, key)
+  //  targetMap[target][key].add(activeEffect)
+
+  return result
+}
+```
+
+> **set 트랩 — 변경 알림**
+
+```javascript
+function set(target, key, value, receiver) {
+  const result = Reflect.set(target, key, value, receiver)
+
+  // 이 키에 등록된 모든 effect를 실행
+  trigger(target, key)
+  //  targetMap[target][key].forEach(effect => effect())
+
+  return result
+}
+```
+
+> **전체 흐름**
+
+```javascript
+import { reactive, effect } from '@vue/reactivity'
+
+const state = reactive({ count: 0 })   // ← Proxy 생성
+
+effect(() => {
+  // 1. activeEffect = 이 함수로 설정
+  // 2. state.count 읽기 → get 트랩 → track() 호출
+  //    → targetMap[state]["count"].add(현재 effect)
+  console.log(state.count)
+  // 3. activeEffect = null
+})
+
+state.count = 1
+// → set 트랩 → trigger() 호출
+// → targetMap[state]["count"]에 등록된 effect 실행
+// → 콘솔에 1 출력
+```
+
+실제 실행 순서를 단계별로 보면 이렇다.
+
+```javascript
+1. reactive({ count: 0 }) 호출
+   → new Proxy(target, handler) 생성
+
+2. effect(fn) 호출
+   → activeEffect = fn
+   → fn() 실행
+     → state.count 읽기
+     → get 트랩 발동
+     → track(state, "count")
+       → targetMap.get(state).get("count").add(fn)
+     → 0 반환
+   → activeEffect = null
+
+3. state.count = 1 실행
+   → set 트랩 발동
+   → Reflect.set으로 원본 업데이트
+   → trigger(state, "count")
+     → targetMap.get(state).get("count")
+       → [fn] 실행
+       → 콘솔에 1 출력
+```
+
+`reactive()`로 감싼 객체의 프로퍼티를 직접 수정해도 화면이 업데이트되는 이유가 이것이다. 할당 연산자(`=`)가 set 트랩을 발동시키고, 그게 등록된 effect들을 실행한다.
+
+**중첩 객체는 어떻게 처리할까**
+
+`reactive({ user: { name: 'Kim' } })`처럼 중첩된 객체에서 `state.user.name`을 읽으면 어떻게 될까.
+
+get 트랩이 `user`를 반환할 때, 반환값이 객체이면 **그 객체도 Proxy로 감싸서** 반환한다. 중첩 깊이에 상관없이 반응형이 동작하는 이유다.
+
+```javascript
+get(target, key, receiver) {
+  const result = Reflect.get(target, key, receiver)
+
+  track(target, key)
+
+  // 반환값이 객체이면 재귀적으로 reactive 적용
+  if (typeof result === 'object' && result !== null) {
+    return reactive(result)   // ← 이미 Proxy면 캐시에서 반환
+  }
+
+  return result
+}
+```
+
+> **Vue 3의 반응형 시스템 핵심은 세 가지(reactive, track, trigger)다.**
+
+* effect() 는 세 가지를 사용하는 부수 효과와 같은 소비자 역할이라 직접적인 영향을 주지는 않는다.
+
+이 effect() 는 ref나 reactive가 내부 로직에서만 쓰인다면 활성화되지 않지만, 해당 반응형 값이 템플릿 문법에 쓰이게 되면 Vue가 컴포넌트를 마운트할 때 렌더 함수 자체를 effect로 등록해준다.
+
+```javascript
+reactive()  — 객체를 Proxy로 감싸서 반응형으로 만든다
+effect()    — 반응형 데이터를 읽는 함수를 등록한다
+track()     — get 트랩에서 현재 effect를 의존성으로 기록한다
+trigger()   — set 트랩에서 의존성에 등록된 effect를 실행한다
+```
+
+> ** reactive() — Proxy로 감싸기**
+
+```javascript
+ const state = reactive({ count: 0 })
+```
+
+state.count를 읽을 때, 쓸 때 중간에 끼어들 수 있게 Proxy로 감싼다.
+
+* get 트랩 → track() 호출
+
+* set 트랩 → trigger() 호출
+
+> **effect() — "이 함수를 반응형으로 만들겠다" 선언**
+
+```javascript
+effect(() => {
+    console.log(state.count) // 이 줄이 실행될 때 track()이 호출됨
+})
+```
+
+effect 안의 함수를 즉시 한 번 실행한다. \
+실행되는 동안 "**지금 실행 중인 effect = 나야**" 라고 전역에 표시하는 작업이다.
+
+> **track() — 의존성 기록**
+
+get 트랩에서 호출되며, 지금 실행 중인 effect가 있다면 state.count ↔ 이 effect 연결을 저장한다.
+
+이 연결 정보가 Map에 쌓이게 된다 : state.count → [effect1, effect2, ...]
+
+> **trigger() — 의존성 실행**
+
+```javascript
+state.count = 1 // 여기서 trigger()
+```
+
+`set` 트랩에서 실행이되며, `[state.count](https://state.count)`에 연결된 `effect`를 모두 꺼내서 다시 실행한다.
+
+> 실제로 템플릿에 `ref` , `reactive` 가 포함될 때는 아래와 같은 일이 발생한다.
+
+```javascript
+컴포넌트 마운트
+    → Vue 내부에서 effect(렌더 함수) 등록
+    → 렌더 함수 실행
+        → 템플릿에서 count.value 읽힘
+        → track() → "렌더 effect ↔ count.value" 연결
+
+// <template><div>{{ count }}</div></template>
+// 컴파일 결과
+function render() {
+  return h('div', count.value) // 가상 DOM 생성
+}
+
+// 아래 effect에 등록이 된다.
+// count.value가 변경되면 trigger → 아래 렌더 함수 재실행 → DOM 업데이트 진행
+effect(() => {
+  const vnode = render()       // 가상 DOM 생성
+  patch(prevVnode, vnode)      // 실제 DOM 업데이트
+})
+```
+
+### React는 왜 Proxy를 채택하지 않을까?
+
+Vue를 사용하게 되면 자연스럽게 비교하게 되는 대상인데,
+
+React도 Proxy를 쓰면 `setState` 없이 그냥 `state.count++`만 해도 될 텐데 왜 쓰지 않을까?
+
+이건 React의 설계 철학과 아키텍처 전체와 연결된 문제이기도 하다.
+
+> **이유 1 — React의 상태 업데이트는 의도적으로 명시적이다**
+
+React의 핵심 원칙 중 하나는 `UI = f(state)`다.
+
+상태가 바뀌면 그 결과로 UI가 결정된다. 여기서 중요한 건 상태 변경이 **추적 가능하고 예측 가능**해야 한다는 것이다.
+
+```javascript
+// React의 방식 — 명시적
+setCount(prev => prev + 1)
+// 누가, 언제, 어디서 상태를 바꿨는지 명확히 알 수 있다
+
+// Proxy 방식이었다면
+count++
+// 어디서 변경이 일어났는지 추적하기 어려움
+```
+
+Proxy는 변경을 암묵적으로 가로챈다. 코드 어디서든 객체 프로퍼티를 수정하면 트랩이 발동한다. (Vue가 양방향인 이유이라고 하는 이유이다, 내부적으로 상태를 개발자가 어떻게 변하는지 명시적으로 알 필요가 없다) 이건 편리하지만, 큰 앱에서 상태가 어디서 바뀌는지 추적하기 어렵게 만든다.
+
+> **이유 2 — Fiber 스케줄러와 동시성 기능**
+
+React 18의 Concurrent Mode, `startTransition`, Suspense는 모두 업데이트를 **지연하거나 중단하거나 우선순위를 조정**하는 기능이다.
+
+```javascript
+// React가 업데이트를 스케줄링하는 방식
+startTransition(() => {
+  setItems(heavyComputation())   // ← 우선순위 낮게 처리
+})
+
+// 사용자 입력 업데이트는 즉시 처리
+setInputValue(e.target.value)
+```
+
+`setState`를 통해 업데이트가 들어오면 React는 이를 큐에 쌓고 스케줄러가 적절한 타이밍에 처리한다. 업데이트를 일시 중지하거나 취소하거나 재시도할 수 있다.
+
+Proxy 방식에서는 `set` 트랩이 동기적으로 즉시 발동한다. React 스케줄러가 개입할 여지가 없다. 시간 분할(time-slicing)이나 업데이트 우선순위 조정이 불가능해진다.
+
+> **이유 3 — 불변성 기반 최적화**
+
+React의 메모이제이션은 참조 비교(`===`)를 기반으로 한다.
+
+```javascript
+// React.memo, useMemo, useCallback의 동작 원리
+const prev = { count: 0 }
+const next = { count: 0 }
+
+prev === next  // false → 다른 객체이므로 리렌더링
+
+// 불변 업데이트
+const updated = { ...prev, count: 1 }
+prev === updated  // false → 명확히 다름
+```
+
+Proxy 방식으로 객체를 직접 수정하면 참조가 바뀌지 않는다.
+
+```javascript
+const state = reactive({ count: 0 })
+
+const before = state
+state.count++
+const after = state
+
+before === after  // true ← 같은 Proxy 객체
+```
+
+React가 `before === after`를 비교해서 변경을 감지하는 구조라면, Proxy 기반 뮤테이션은 변경을 감지하지 못한다. React의 최적화 전략 전체가 불변성 위에 구축되어 있다.
+
+> **이유 4 — 타임트래블 디버깅과 직렬화**
+
+Redux DevTools의 타임트래블 기능은 각 시점의 상태 스냅샷을 저장해서 되감는 방식이다. 불변 상태는 각 업데이트마다 새 객체가 만들어지기 때문에 스냅샷 저장이 자연스럽다.
+
+Proxy 기반 뮤테이션은 상태를 직렬화하기 어렵고, 이전 상태로 되돌아가는 기능도 구현하기 복잡하다.
+
+***
+
+### Vue와 React의 반응형 모델 비교
+
+| 항목         | Vue 3 (Proxy)             | React (불변성)         |
+| ---------- | ------------------------- | ------------------- |
+| 상태 변경 방식   | 직접 수정 (`obj.key = value`) | setState / useState |
+| 변경 감지      | Proxy set 트랩 (암묵적)        | 참조 비교 (명시적)         |
+| 업데이트 스케줄링  | 동기적, 즉시 트리거               | 비동기, 스케줄러 관리        |
+| 메모이제이션 기반  | 의존성 추적                    | 참조 동일성 (===)        |
+| 중첩 객체 반응형  | 자동 (재귀 Proxy)             | 직접 불변 업데이트 필요       |
+| 디버깅 추적     | 암묵적 변경 추적 어려움             | setState 호출 지점 명확   |
+| 동시성 지원     | 어려움                       | Concurrent Mode 지원  |
+| 학습 곡선      | 낮음 (직관적)                  | 불변성 개념 학습 필요        |
+
+### Proxy를 실제로 쓸 만한 상황이 언제일까?
+
+Vue나 MobX 같은 라이브러리를 쓰지 않고 Proxy를 직접 활용하면 유용한 경우들이 있다.
+
+> **유효성 검사가 필요한 객체**
+
+```javascript
+function createValidatedUser(initial) {
+  return new Proxy(initial, {
+    set(target, key, value) {
+      if (key === 'age' && typeof value !== 'number') {
+        throw new TypeError('age는 숫자여야 합니다')  // ← 쓰기 시점에 검증
+      }
+      if (key === 'email' && !value.includes('@')) {
+        throw new Error('올바른 이메일 형식이 아닙니다')
+      }
+      return Reflect.set(target, key, value)
+    }
+  })
+}
+
+const user = createValidatedUser({ name: 'Kim', age: 20 })
+user.age = 'abc'   // ← TypeError 발생
+user.email = 'invalid'  // ← Error 발생
+```
+
+> **접근 로그가 필요한 객체**
+
+```javascript
+function withLogging(target, label) {
+  return new Proxy(target, {
+    get(target, key, receiver) {
+      console.log(`[${label}] get: ${String(key)}`)
+      return Reflect.get(target, key, receiver)
+    },
+    set(target, key, value, receiver) {
+      console.log(`[${label}] set: ${String(key)} = ${JSON.stringify(value)}`)
+      return Reflect.set(target, key, value, receiver)
+    }
+  })
+}
+
+const config = withLogging({ timeout: 3000 }, 'Config')
+config.timeout       // 출력: [Config] get: timeout
+config.timeout = 5000  // 출력: [Config] set: timeout = 5000
+```
+
+> **존재하지 않는 프로퍼티에 기본값 제공**
+
+```javascript
+const withDefault = (target, defaultValue) =>
+  new Proxy(target, {
+    get(target, key) {
+      return key in target
+        ? Reflect.get(target, key)
+        : defaultValue   // ← 없는 키 접근 시 기본값 반환
+    }
+  })
+
+const scores = withDefault({}, 0)
+scores.math = 90
+console.log(scores.math)     // 90
+console.log(scores.english)  // 0 ← 기본값
+```
+
+Proxy는 객체 동작을 커스터마이징하는 강력한 도구라고 생각이 든다. Vue의 `reactive()`가 내부적으로 어떻게 동작하는지 알고 나면 프레임워크 코드를 작성할 때마다 내부 동작이 너무 신기하게 느껴지는 것 같다.
+
+전에 `Proxy` 가 무엇이냐 질문이 들어왔을 때, `Proxy` 객체로 객체를 래핑하면 자동으로 감지한다고만 얼렁뚱땅 넘어가서 가물가물해서 정리를 해보았다 ^,^ ..
+

@@ -1,0 +1,60 @@
+---
+title: "Vite 환경에서 Vuetify 컴포넌트를 로드할 때 계속 리로딩하는 현상"
+date: 2026-10-19
+publishedAt: "2026-10-19T12:38:41.333Z"
+updatedAt: "2026-10-19T12:38:41.334Z"
+description: ""
+category: "category-9606d629"
+series: "-"
+private: false
+---
+
+## Vuetify 컴포넌트를 로드하면 브라우저가 새로고침된다?
+
+`Webpack` 에서 `Vite` 환경으로 전환을 진행하면서 프론트엔드 인터페이스 라이브러리의 설정 값도 같이 마이그레이션을 진행을 해줘야했는데, 초기에는 `vite.config.js`의 `optimizeDeps.include `옵션을 통해 사전 번들링으로 최적화를 진행하려고 했으나 이때 계속해서 페이지 이동마다 `Vuetify` 컴포넌트를 로드하다가 리로딩되는 현상이 발생한다. 이를 해결하기 위해 `Vuetify` 의 스캐폴딩 프로젝트를 들여다보았고, 이 과정에서 해결책을 기록하고자 한다.
+
+`vue-cli` 나 `vite` 기반 `vue` 프로젝트에서 `vuetify` 를 사용할 때, `vite.config.js`의 `optimizeDeps.exclude `옵션은 `Vite` 의 사전 번들링(pre-bundling) 과정에서 `vuetify` 자체의 내부 라이브러리( `vue-demi` , `vuetify/lib/` , `etc`) 를 제외하여 개발 서버 시작 속도를 높이거나 특정 충돌 문제를 해결하는데 사용된다.
+
+`vuetify` 가 `commonJS` 방식이거나, 복잡한 내부 의존성을 가질 때 `Vite` 번들링 최적화와 충돌할 수 있어, 해당 모듈을 제외시켜 느린 로딩, 스타일 깨짐 등의 문제 등을 방지할 수 있다.
+
+```javascript
+import { defineConfig } from 'vite';
+import Vue from '@vitejs/plugin-vue';
+import Vuetify from 'vite-plugin-vuetify';
+ 
+export default defineConfig({
+    plugins: [
+        Vue(),
+        Vuetify(), // vite-plugin-vuetify 사용 시에
+    ]
+    optimizeDeps: {
+        // Vuetify 관련 모듈을 제외목록에 추가
+        exclude: [
+            'vuetify
+        ]
+        // 경우에 따라 특정 모듈을 강제로 포함할 수도 있다.
+        // include: ['vue']
+    }
+});
+```
+
+## `vuetify` 를 exclude 처리하는 이유
+
+해당 해결책은 임시방편의 해결책이 아닌, **공식 ****`vuetify` 스캐폴딩 프로젝트에서도 기본적으로 설정**되어있다.
+
+### 개발 서버 시작 속도가 개선된다.
+
+`vuetify`처럼 크고 복잡한 라이브러리를 사전 번들링하는 대신에 개발 시에는 브라우저가 직접 로드하도록 하여 개발 서버(`Vite`)의 시작 속도를 높일 수 있다.
+
+### CommonJS 문제를 해결한다.
+
+`vuetify` 내부 일부가 `commonJS`포맷을 사용하는데, `Vite`는 `ESM(ECMAScript Modules)`에 최적화되어있어 번들링 시 문제가 발생할 수 있다. exclude를 통해 번들링 과정을 건너뛰게한다.
+
+### 특정 버그를 회피한다.
+
+`Vite`와 `vuetify` 간의 호환성 문제로 인해 스타일이 깨지거나 컴포넌트 로딩에 문제가 발생할 때, 이 옵션으로 문제를 우회할 수 있다.
+
+### vite-plugin-vuetify를 사용하는 이유
+
+`vuetify`의 auto-import 및 tree-shaking 기능이 활성화되어 효율적인 개발이 가능하며, `optimizeDeps.exclude `설정은 `Vite` 환경에서 `vuetify`를 원활하게 사용할 수 있게 하기 위한 중요한 설정 중 하나이다.
+

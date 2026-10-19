@@ -1,0 +1,484 @@
+---
+title: "실행 컨텍스트 · 호이스팅 · 클로저의 상관관계"
+date: 2026-10-19
+publishedAt: "2026-10-19T12:49:05.655Z"
+updatedAt: "2026-10-19T12:49:05.656Z"
+description: ""
+category: "category-9606d629"
+series: "-"
+private: false
+---
+
+자바스크립트가 동적언어라서 런타임 시점에 타입을 지정해주고, 이것저것 마법같은 동작들이 많아 마법같은 언어라고 칭하기도 하지만, 자바스크립트 내부 엔진이 코드를 실행하는 방식은 생각보다 구조적이다.
+
+"왜 선언 전에 함수를 호출할 수 있지?", "왜 클로저는 외부 변수를 기억하고 있지?" 와 같은 질문들이 전부 하나의 개념으로 연결된다. 바로 실행 컨텍스트(Execution Context)로 부터 시작된다.
+
+***
+
+## 실행 컨텍스트는 무엇일까?
+
+자바스크립트 엔진은 코드를 실행하기 전에 실행에 필요한 정보들을 하나의 구조체로 묶는다. 이게 **실행 컨텍스트**다. 변수가 어디에 있는지, `this`가 무엇을 가리키는지, 외부 스코프는 어디인지에 대한 모든 정보가 실행 컨텍스트 안에 들어있다. 실행 컨텍스트는 주로 세 가지 상황에서 생성된다.
+
+> 실행 컨텍스트가 생성되는 시점
+
+1. 전역 코드 실행 시 → 전역 실행 컨텍스트 (Global Execution Context)
+
+1. 함수 호출 시 → 함수 실행 컨텍스트 (Function Execution Context)
+
+1. eval() 실행 시 → eval 실행 컨텍스트 (거의 사용 안 함)
+
+실행 컨텍스트들은 콜 스택(Call Stack)이라는 구조에 쌓인다.
+
+```javascript
+// * 콜 스택 동작 예시
+function greet(name) {
+  return `안녕, ${name}`
+}
+function main() {
+  const result = greet('현우')
+  console.log(result)
+}
+main()
+──────────────────────────────────
+
+실행 흐름:
+
+[ 전역 EC (Execution Context) 생성 ]
+
+main() 호출
+┌─────────────────────────────────────────┐
+│  main EC (main 함수의 Execution Context)  │  ← 콜 스택에 push
+├─────────────────────────────────────────┤
+│  전역 EC (Global Execution Context)      │
+└─────────────────────────────────────────┘
+
+greet() 호출
+┌──────────────────────────────────────────┐
+│  greet EC (greet 함수의 Execution Context) │  ← 콜 스택에 push
+├──────────────────────────────────────────┤
+│  main EC (main 함수의 Execution Context)   │
+├──────────────────────────────────────────┤
+│  전역 EC (Global Execution Context)       │
+└──────────────────────────────────────────┘
+
+greet 반환
+┌─────────────────┐
+│  main EC        │  ← greet EC가 pop됨
+├─────────────────┤
+│  전역 EC         │
+└─────────────────┘
+
+main 반환
+┌─────────────────┐
+│  전역 EC         │  ← main EC가 pop됨
+└─────────────────┘
+```
+
+## 실행 컨텍스트의 내부 구조
+
+실행 컨텍스트는 크게 세 가지로 구성된다.
+
+```javascript
+실행 컨텍스트 내부
+
+ExecutionContext {
+  LexicalEnvironment   ← 식별자(변수, 함수) 바인딩 + 외부 스코프 참조
+  VariableEnvironment  ← var 선언 전용 (초기에는 LexicalEnvironment와 동일)
+  ThisBinding          ← this가 무엇인지
+}
+```
+
+핵심은 **LexicalEnvironment**다. 이것 역시 두 부분으로 나뉜다.
+
+```javascript
+LexicalEnvironment {
+  EnvironmentRecord   ← 이 컨텍스트에서 선언된 식별자들의 실제 저장소
+  outer               ← 바깥 LexicalEnvironment를 가리키는 참조
+}
+```
+
+`outer` 참조가 **스코프 체인(Scope Chain)**을 만든다.
+
+변수를 찾을 때 현재 EnvironmentRecord에 없으면 `outer`를 타고 올라가게된다.
+
+```javascript
+스코프 체인
+
+const x = 1   // 전역
+
+function outer() {
+  const y = 2
+
+  function inner() {
+    const z = 3
+    console.log(x, y, z)  // 1, 2, 3
+  }
+
+  inner()
+}
+
+──────────────────────────────
+
+inner EC
+  EnvironmentRecord: { z: 3 }
+  outer: ──────────────────────→ outer EC
+                                   EnvironmentRecord: { y: 2, inner: fn }
+                                   outer: ─────────────────────────────→ 전역 EC
+                                                                           EnvironmentRecord: { x: 1, outer: fn }
+                                                                           outer: null
+```
+
+`inner`에서 `x`를 참조하면: inner EC → outer EC → 전역 EC 순으로 탐색한다.
+
+전역 EC에서 `x: 1`을 발견하고 반환한다.
+
+## 실행 컨텍스트는 두 단계로 동작한다
+
+실행 컨텍스트가 생성될 때 바로 코드를 실행하지 않는다.
+
+먼저 **생성 단계(Creation Phase)**가 있고, 그 다음 **실행 단계(Execution Phase)**가 진행된다.
+
+```javascript
+생성 단계 (Creation Phase)
+─────────────────────────
+1. EnvironmentRecord에 식별자를 등록한다
+   - var    → undefined로 초기화
+   - let/const → 등록만 하고 초기화하지 않음 (TDZ 상태)
+   - 함수 선언문 → 함수 객체 전체를 등록
+
+2. outer 참조를 설정한다 (스코프 체인 형성)
+
+3. this 바인딩을 결정한다
+
+실행 단계 (Execution Phase)
+──────────────────────────
+코드를 위에서 아래로 순서대로 실행한다
+변수에 실제 값을 대입한다
+```
+
+이 두 단계가 **호이스팅(hoisting)**의 실제 이유다.
+
+## 호이스팅은 어떻게 동작할까?
+
+호이스팅은 "선언이 위로 끌어올려진다"는 표현으로 설명되는데, 정확한 표현은 아니라고 한다.
+
+나도 호이스팅을 설명할 때, 위로 끌어 올려진다라는 표현을 많이 사용했다 ^,^..
+
+정확한 표현은 아니지만, 그렇다고 전혀 아니라고 할 수도 없다.
+
+실제로는 **생성 단계에서 식별자가 먼저 메모리에 등록되기 때문**에 선언보다 앞서 참조할 수 있는 것이다.
+
+### var의 hoisting
+
+```javascript
+console.log(name)  // undefined — 에러가 아님
+var name = '현우'
+console.log(name)  // '현우'
+```
+
+엔진이 이 코드를 처리하는 순서:
+
+```javascript
+생성 단계:
+  EnvironmentRecord: { name: undefined }  ← var는 undefined로 초기화됨
+
+실행 단계:
+  console.log(name)  → EnvironmentRecord에서 name을 찾음 → undefined 반환
+  name = '현우'      → EnvironmentRecord의 name에 '현우' 할당
+  console.log(name)  → '현우' 반환
+```
+
+코드가 위로 이동한 게 아니다.
+
+생성 단계에서 이미 `name: undefined`가 등록되어 있기 때문에 참조할 수 있는 것이다.
+
+### 함수 선언문의 hoisting
+
+```javascript
+greet('현우')  // '안녕, 현우' — 선언 전에 호출해도 동작함
+
+function greet(name) {
+  return `안녕, ${name}`
+}
+```
+
+```javascript
+생성 단계:
+  EnvironmentRecord: { greet: function greet(name) { ... } }
+  ← 함수 선언문은 함수 객체 전체가 등록됨
+
+실행 단계:
+  greet('현우')  → EnvironmentRecord에서 greet 찾음 → 함수 객체 반환 → 호출
+```
+
+함수 선언문은 `undefined`가 아니라 **함수 객체 전체**가 생성 단계에서 등록된다.
+
+그래서 선언 전에 호출해도 정상 동작한다.
+
+### let / const의 TDZ
+
+```javascript
+console.log(name)  // ReferenceError: Cannot access 'name' before initialization
+let name = '현우'
+```
+
+```javascript
+생성 단계:
+  EnvironmentRecord: { name: <uninitialized> }
+  ← let/const는 등록은 되지만 초기화되지 않은 상태
+
+실행 단계:
+  console.log(name)
+    → EnvironmentRecord에서 name을 찾음
+    → 존재하지만 uninitialized 상태
+    → ReferenceError 발생
+
+  let name = '현우'
+    → 이 시점에서 name이 '현우'로 초기화됨
+```
+
+선언 라인에 도달하기 전까지의 구간을 **TDZ(Temporal Dead Zone)**라고 한다.
+
+`let/const`는 hoisting이 안 되는 게 아니라, hoisting은 되지만 초기화가 안 된 상태로 있는 것이다.
+
+```javascript
+var / let / const hoisting 비교
+
+         생성 단계        실행 단계(선언 전)    실행 단계(선언 후)
+var      undefined       undefined          할당값
+let      uninitialized   ReferenceError     할당값
+const    uninitialized   ReferenceError     할당값 (재할당 불가)
+함수선언   함수 객체 전체      함수 객체 전체        함수 객체 전체
+함수표현식  undefined       undefined          함수 객체
+```
+
+### 함수 선언문 vs 함수 표현식의 차이
+
+```javascript
+// 함수 선언문 — 어디서든 호출 가능
+greet()  // ✅ 동작
+
+function greet() {
+  console.log('hello')
+}
+
+// 함수 표현식 — 할당 전에 호출 불가
+greet()  // ❌ TypeError: greet is not a function
+
+var greet = function() {
+  console.log('hello')
+}
+```
+
+함수 표현식에서 `greet`는 `var`로 선언된 변수다.
+
+생성 단계에서 `greet: undefined`로 등록되고, 실행 단계에서 함수 표현식이 평가될 때 비로소 함수 객체가 할당된다.
+
+그래서 선언 전에 호출하면 `undefined()`가 실행되어 `TypeError`가 발생한다.
+
+## 클로저는 어떻게 동작할까?
+
+**클로저(Closure)**는 함수가 자신이 생성될 때의 LexicalEnvironment를 기억하는 현상이다.
+
+```javascript
+function makeCounter() {
+  let count = 0            // ← makeCounter의 LexicalEnvironment에 존재
+
+  return function increment() {
+    count++
+    return count
+  }
+}
+
+const counter = makeCounter()
+counter()  // 1
+counter()  // 2
+counter()  // 3
+```
+
+`makeCounter()`가 반환되면 `makeCounter`의 실행 컨텍스트는 콜 스택에서 제거된다.
+
+하지만 `count`는 여전히 살아있다. 이 이유는 클로저 떄문이다.
+
+### 클로저의 내부 동작
+
+함수 객체가 생성될 때 내부 슬롯 `[[Environment]]`에 **현재 LexicalEnvironment의 참조**를 저장한다.
+
+`increment` 함수가 생성되는 시점의 LexicalEnvironment는 `makeCounter`의 것이다.
+
+```javascript
+makeCounter() 호출 시점
+
+makeCounter EC
+  LexicalEnvironment:
+    EnvironmentRecord: { count: 0, increment: fn }
+    outer: → 전역 EC
+
+  increment 함수 객체 생성
+    [[Environment]]: → makeCounter의 LexicalEnvironment  ← 이 참조가 저장됨
+```
+
+`makeCounter()`가 반환되고 EC가 콜 스택에서 빠지더라도, `increment` 함수 객체가 `[[Environment]]`를 통해 `makeCounter`의 LexicalEnvironment를 참조하고 있다. GC는 참조가 살아있는 객체를 수거하지 않는다. 그래서 `count`가 메모리에 남아있다.
+
+```javascript
+makeCounter EC가 콜 스택에서 제거된 후
+
+counter (increment 함수 객체)
+  [[Environment]]: ─────────→ makeCounter의 LexicalEnvironment (메모리에 유지)
+                                 EnvironmentRecord: { count: 0 }
+                                 outer: → 전역 EC
+
+counter() 호출 시
+
+increment EC
+  EnvironmentRecord: {}        ← increment 자체 변수 없음
+  outer: ─────────────────────→ makeCounter의 LexicalEnvironment  ← [[Environment]]에서 설정됨
+                                   EnvironmentRecord: { count: 0 }
+
+count++ → outer를 타고 count를 찾음 → count: 0 → 1로 증가
+```
+
+`increment`가 실행될 때마다 `outer` 참조를 통해 `makeCounter`의 EnvironmentRecord에 접근해서 `count`를 읽고 수정한다.
+
+### 클로저의 스코프 공유
+
+같은 LexicalEnvironment를 `[[Environment]]`에 저장한 함수들은 같은 변수를 공유한다.
+
+```javascript
+function makeCounter() {
+  let count = 0
+
+  return {
+    increment() { count++ },        // ← 같은 LexicalEnvironment 참조
+    decrement() { count-- },        // ← 같은 LexicalEnvironment 참조
+    getCount()  { return count },   // ← 같은 LexicalEnvironment 참조
+  }
+}
+
+const counter = makeCounter()
+counter.increment()
+counter.increment()
+counter.decrement()
+counter.getCount()  // 1 — 세 함수가 count를 공유함
+```
+
+세 함수 모두 `makeCounter` 호출 시점의 LexicalEnvironment를 `[[Environment]]`에 저장하기 때문에 동일한 `count`를 바라본다.
+
+### 루프에서 클로저가 예상과 다르게 동작하는 경우
+
+```javascript
+for (var i = 0; i < 3; i++) {
+  setTimeout(function() {
+    console.log(i)   // 3, 3, 3 — 0, 1, 2가 아님
+  }, 100)
+}
+```
+
+위에 코드에서 `i` 가 3으로 세 번 출력이 되는 이유는 무엇일까?
+
+`var`는 블록 스코프가 없다. 루프 전체에서 `i`는 전역 EnvironmentRecord에 하나만 존재한다.
+
+setTimeout 콜백이 실행될 때는 이미 루프가 끝나서 `i`가 3이 된 상태다. 세 콜백 모두 같은 `i`를 참조한다.
+
+```javascript
+전역 EnvironmentRecord: { i: 3 }  ← 루프 끝나면 3
+
+setTimeout 콜백 1  [[Environment]] → 전역 EC  (i를 찾으면 3)
+setTimeout 콜백 2  [[Environment]] → 전역 EC  (i를 찾으면 3)
+setTimeout 콜백 3  [[Environment]] → 전역 EC  (i를 찾으면 3)
+```
+
+`let`으로 바꾸면 해결된다.
+
+```javascript
+for (let i = 0; i < 3; i++) {
+  setTimeout(function() {
+    console.log(i)   // 0, 1, 2
+  }, 100)
+}
+```
+
+`let`은 블록 스코프다. 루프 반복마다 **새로운 LexicalEnvironment**가 생성되고, 각 반복의 `i`는 독립적인 EnvironmentRecord에 저장된다.
+
+```javascript
+반복 1: LexicalEnvironment { i: 0 }  ← 콜백 1의 [[Environment]]
+반복 2: LexicalEnvironment { i: 1 }  ← 콜백 2의 [[Environment]]
+반복 3: LexicalEnvironment { i: 2 }  ← 콜백 3의 [[Environment]]
+```
+
+세 콜백이 서로 다른 LexicalEnvironment를 참조하기 때문에 각자 독립적인 `i`를 갖는다.
+
+***
+
+## 실행 컨텍스트 전체 흐름 정리
+
+```javascript
+const x = 'global'
+
+function outer() {
+  const y = 'outer'
+
+  function inner() {
+    const z = 'inner'
+    console.log(x, y, z)
+  }
+
+  inner()
+}
+
+outer()
+```
+
+```javascript
+── 생성 단계 ────────────────────────────────────────────────
+
+전역 EC 생성
+  EnvironmentRecord: { x: undefined, outer: fn }  ← var 방식과 유사하게, const도 TDZ
+  outer: null
+  this: window (브라우저) / global (Node.js)
+
+── 실행 단계 ────────────────────────────────────────────────
+
+x = 'global'  → 전역 EnvironmentRecord: { x: 'global', outer: fn }
+
+outer() 호출
+  outer EC 생성
+    EnvironmentRecord: { y: undefined, inner: fn }  ← 생성 단계
+    outer: → 전역 EC의 LexicalEnvironment
+
+  y = 'outer'  → outer EnvironmentRecord: { y: 'outer', inner: fn }
+
+  inner() 호출
+    inner EC 생성
+      EnvironmentRecord: { z: undefined }  ← 생성 단계
+      outer: → outer EC의 LexicalEnvironment  ← inner 함수의 [[Environment]]
+
+    z = 'inner'
+
+    console.log(x, y, z)
+      z → inner EnvironmentRecord에서 발견 → 'inner'
+      y → 없음 → outer 타고 이동 → outer EnvironmentRecord에서 발견 → 'outer'
+      x → 없음 → outer 타고 이동 → outer EnvironmentRecord에서 없음 → 전역으로 이동 → 'global'
+
+    inner EC 종료 → 콜 스택에서 pop
+
+  outer EC 종료 → 콜 스택에서 pop
+
+전역 EC 종료
+```
+
+## 실행 컨텍스트 · 호이스팅 · 클로저의 관계
+
+| 개념         | 어느 단계에서 발생하는가 | 핵심 메커니즘                                       |
+| ---------- | ------------- | --------------------------------------------- |
+| 호이스팅       | 생성 단계         | EnvironmentRecord에 식별자가 먼저 등록됨                |
+| 스코프 체인     | 생성 단계         | outer 참조가 설정됨 (`[[Environment]]` 기반)          |
+| 클로저        | 함수 객체 생성 시    | `[[Environment]]`에 LexicalEnvironment 참조가 저장됨 |
+| TDZ        | 생성 단계 ~ 실행 단계 | let/const가 uninitialized 상태로 등록됨              |
+
+처음에는 호이스팅 · 스코프 체인 · 클로저는 별개의 기능이자, 개념이라고 생각을 했지만 모두 자바스크립트가 실행되는 과정에서 자연스럽게 일어나고 파생되는 개념들이다. 조금 더 쉽게 말하면 전부 **실행 컨텍스트의 생성 단계에서 LexicalEnvironment가 어떻게 구성되는가**의 결과물이다.
+
+현대의 자바스크립트는 과거에 비해 너무나도 접근하기 쉬워졌고, 또 다양한 기능들을 제공하면서 자연스럽게 내부 동작에 대한 의문을 가지지 않아도 되는 환경이 되었다. 하지만 내부 동작을 알아야 "왜 이 변수는 여기서 보이는데, 다른 곳에서는 보이지 않을까?", "왜 클로저 내부 스코프의 값이 바뀌지?", "왜 루프에서 이상하게 동작하는 걸까?" 에 대한 질문들에 자연스럽게 답을 할 수 있게 된다.
+
+사실 실행 컨텍스트 · 호이스팅 · 클로저는 우리가 은연중에 사용하고 있는 개념들이지만, 계속 의식하고 사용하지 않는다면 가물가물해지는 개념들이다. 가물가물해질때마다 다시 들어와서 정독하고 가야겠다 ^,^ ..
+

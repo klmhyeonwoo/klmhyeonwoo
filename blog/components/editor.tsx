@@ -422,20 +422,25 @@ function Editor({ initialBlocks, mentions, onChange }: Props) {
     const root = editor.domElement;
     if (!root) return;
 
-    const keepCodeLanguageMenuOpen = (event: Event) => {
-      const target = event.target;
-      if (!(target instanceof Element) || !target.closest('[data-content-type="codeBlock"] select')) return;
-      // Native select menus need their browser default, but BlockNote should
-      // not interpret the same pointer event as a request to restore editor
-      // focus and close the language menu.
-      event.stopPropagation();
+    // The language selector is created by BlockNote as a native DOM control,
+    // outside React's event boundary. Stopping the event on the editor root
+    // can also stop the select's own open behaviour; attach the guard to each
+    // select instead, so it opens normally but never reaches ProseMirror's
+    // focus-restoration handler.
+    const protectedControls = new Set<HTMLSelectElement>();
+    const stopEditorFocus = (event: MouseEvent) => event.stopPropagation();
+    const protect = (element: HTMLSelectElement) => {
+      if (protectedControls.has(element)) return;
+      protectedControls.add(element);
+      element.addEventListener("mousedown", stopEditorFocus);
     };
-
-    root.addEventListener("pointerdown", keepCodeLanguageMenuOpen, true);
-    root.addEventListener("mousedown", keepCodeLanguageMenuOpen, true);
+    const protectAll = () => root.querySelectorAll<HTMLSelectElement>('[data-content-type="codeBlock"] select').forEach(protect);
+    protectAll();
+    const observer = new MutationObserver(protectAll);
+    observer.observe(root, { childList: true, subtree: true });
     return () => {
-      root.removeEventListener("pointerdown", keepCodeLanguageMenuOpen, true);
-      root.removeEventListener("mousedown", keepCodeLanguageMenuOpen, true);
+      observer.disconnect();
+      protectedControls.forEach((element) => element.removeEventListener("mousedown", stopEditorFocus));
     };
   }, [editor]);
 
@@ -548,7 +553,7 @@ function Editor({ initialBlocks, mentions, onChange }: Props) {
         theme={theme}
         onChange={syncContent}
       ><SideMenuController sideMenu={EditorSideMenu} /><SuggestionMenuController triggerCharacter="/" getItems={getSlashMenuItems} /><SuggestionMenuController triggerCharacter="@" getItems={getMentionItems} /></BlockNoteView>
-      {pendingLink && <aside className="editor-link-choice" aria-label="링크 삽입 방식" onPointerDown={(event) => event.stopPropagation()} style={{ left: pendingLink.left, top: pendingLink.top }}>
+      {pendingLink && <aside className="editor-link-choice" aria-label="링크 삽입 방식" onMouseDown={(event) => event.stopPropagation()} onPointerDown={(event) => event.stopPropagation()} style={{ left: pendingLink.left, top: pendingLink.top }}>
         <p>붙여넣기 형식</p>
         <div>
           {mentionForUrl(pendingLink.url, mentionItems) && <button type="button" onClick={insertMentionLink} onMouseDown={(event) => { event.preventDefault(); event.stopPropagation(); }}><span>멘션</span><small>블로그 글을 참조합니다</small></button>}
@@ -560,18 +565,18 @@ function Editor({ initialBlocks, mentions, onChange }: Props) {
       {selectedImageId && <aside className="image-properties" aria-label="이미지 속성" onMouseDown={(event) => event.stopPropagation()} onPointerDown={(event) => event.stopPropagation()} style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "0.5rem", marginTop: "0.75rem", padding: "0.75rem", border: "1px solid var(--border)", borderRadius: "0.75rem", background: "var(--surface)" }}>
         <label style={{ display: "flex", alignItems: "center", gap: "0.5rem", flex: "1 1 20rem" }}>
           <span>이미지 주소</span>
-          <input style={{ minWidth: 0, flex: 1 }} value={selectedImageUrl} onChange={(event) => setSelectedImageUrl(event.target.value)} onBlur={() => updateSelectedImageUrl(selectedImageUrl)} onKeyDown={(event) => {
+          <input style={{ minWidth: 0, flex: 1 }} value={selectedImageUrl} onChange={(event) => setSelectedImageUrl(event.target.value)} onMouseDown={(event) => event.stopPropagation()} onPointerDown={(event) => event.stopPropagation()} onBlur={() => updateSelectedImageUrl(selectedImageUrl)} onKeyDown={(event) => {
             if (event.key === "Enter") {
               event.preventDefault();
               updateSelectedImageUrl(selectedImageUrl);
             }
           }} />
         </label>
-        <label className="image-properties-upload" style={{ cursor: "pointer" }}>
+        <label className="image-properties-upload" onMouseDown={(event) => event.stopPropagation()} onPointerDown={(event) => event.stopPropagation()} style={{ cursor: "pointer" }}>
           이미지 바꾸기
           <input type="file" accept="image/*" onChange={replaceSelectedImage} />
         </label>
-        <button type="button" onClick={() => setSelectedImageId(null)}>닫기</button>
+        <button type="button" onClick={() => setSelectedImageId(null)} onMouseDown={(event) => { event.preventDefault(); event.stopPropagation(); }} onPointerDown={(event) => { event.preventDefault(); event.stopPropagation(); }}>닫기</button>
       </aside>}
       <ToastMessage message={uploadError} tone="error" />
     </section>

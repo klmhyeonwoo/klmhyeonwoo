@@ -642,6 +642,7 @@ html[data-theme="dark"] .editor [data-content-type="codeBlock"] .shiki {
 .editor .editor-bookmark-visual,
 .post-bookmark-visual {
   align-items: center;
+  aspect-ratio: 16 / 7;
   background:
     radial-gradient(circle at 78% 22%, color-mix(in srgb, var(--accent) 26%, transparent), transparent 28%),
     linear-gradient(125deg, color-mix(in srgb, #d6f1ff 76%, var(--surface)), color-mix(in srgb, #fbe5f4 72%, var(--surface)));
@@ -650,6 +651,8 @@ html[data-theme="dark"] .editor [data-content-type="codeBlock"] .shiki {
   font-size: 1.5rem;
   font-weight: 700;
   justify-content: center;
+  position: relative;
+  width: 100%;
 }
 
 .editor .editor-bookmark-visual {
@@ -672,8 +675,11 @@ html[data-theme="dark"] .editor [data-content-type="codeBlock"] .shiki {
 
 .editor .editor-bookmark-visual > img,
 .post-bookmark-visual > img {
+  display: block;
   height: 100%;
+  inset: 0;
   object-fit: cover;
+  position: absolute;
   width: 100%;
 }
 
@@ -721,6 +727,32 @@ html[data-theme="dark"] .editor [data-content-type="codeBlock"] .shiki {
 .editor .editor-bookmark-edit {
   align-self: end;
   margin: 0 0.75rem 1rem 0;
+}
+
+.editor .editor-bookmark.is-editing .editor-bookmark-url-input {
+  grid-column: 1 / -1;
+  margin: 0 1rem 1rem;
+  width: calc(100% - 2rem);
+}
+
+.editor .editor-bookmark-empty {
+  align-items: center;
+  grid-template-columns: auto minmax(0, 1fr);
+  min-height: 4rem;
+  padding: 0 1rem;
+}
+
+.editor .editor-bookmark-empty.is-editing input {
+  grid-column: auto;
+  margin: 0;
+  min-height: 2.75rem;
+  width: 100%;
+}
+
+.editor .editor-bookmark-url-input:focus,
+.editor .editor-bookmark-empty input:focus {
+  border-color: color-mix(in srgb, var(--accent) 62%, var(--line));
+  box-shadow: 0 0 0 0.1875rem color-mix(in srgb, var(--accent) 14%, transparent);
 }
 
 .prose .post-bookmark {

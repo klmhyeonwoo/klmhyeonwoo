@@ -1,0 +1,2583 @@
+[
+  {
+    "id": "a20aa393-b41a-4ed6-aa8a-45b8e7a23cf2",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Proxy",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 JavaScript 객체에 대한 접근을 가로채서 중간에서 원하는 동작을 끼워 넣을 수 있는 기능이다. Vue 3의 반응형 시스템이 이 위에서 동작하고, MobX도 같은 방식을 쓴다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7538a089-5e61-4f0f-af91-c5964dd47a9b",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Vue 3를 공부하다가 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "reactive()",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "로 감싼 객체의 프로퍼티를 직접 수정했는데 화면이 자동으로 업데이트되는 걸 보고 신기했다. React에서는 반드시 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "setState",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 호출해야 하는데, Vue는 그냥 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "obj.count++",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "만 해도 자동으로 반응성을 유지하는데, 내부에서 어떤 일이 일어나고 있을까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "69e5f049-2925-4f6a-923b-5e7ccea16f5a",
+    "type": "divider",
+    "props": {},
+    "children": []
+  },
+  {
+    "id": "ad20699a-d4e6-4f1c-8c07-394785d0a496",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Proxy 이전에 라이브러리는 어떻게 만들어졌을까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e486c235-4df8-4534-8768-98446bc4b793",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "전에는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "SPA",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 라는 개념 자체가 생소했고, ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "MPA",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 개념으로 웹을 주로 사용해왔다. ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Proxy",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 라는 강력한 기능이 나오기 전에는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "SPA",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 라이브러리는 어떻게 구성이 되었는지 너무 궁금했다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "53e90425-0123-4bcb-9f09-4a6bd34493c1",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "현재는 React와 Vue를 섞어쓰다보니 메이저 버젼이 바뀌면서 아예 내부 패러다임이 변경된 Vue를 기준으로 알아보자면 Vue 3 이전, Vue 2는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Object.defineProperty()",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "로 반응형을 구현했다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "11abf1ed-918f-4ae5-9437-13e536be6746",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// Vue 2 방식 (단순화)\nfunction defineReactive(obj, key, value) {\n  Object.defineProperty(obj, key, {\n    get() {\n      // 의존성 추적\n      track(key)\n      return value\n    },\n    set(newValue) {\n      value = newValue\n      // 변경 알림\n      trigger(key)\n    }\n  })\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f21c5390-7ac0-4176-806b-27bd3df38b96",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Object.defineProperty",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 이미 존재하는 프로퍼티의 getter/setter만 가로챌 수 있다. 그래서 Vue 2에는 구조적인 한계가 있었다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "32469d26-6df5-41fa-a75b-81abc7ca0677",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// Vue 2에서 반응형이 동작하지 않는 경우\nconst state = Vue.observable({ items: [] })\n\nstate.items.push('new item')    // ← 배열 변경 미감지 (일부 메서드만 패치됨)\nstate.newProp = 'hello'         // ← 새로운 프로퍼티 추가 미감지\ndelete state.items              // ← 삭제 미감지",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "71812377-e206-4b62-a49a-103a85a43aba",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이 문제를 해결하려고 Vue 2는 배열 메서드를 직접 패치하고, ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Vue.set()",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "이라는 특별한 API를 만들었다. 근본적인 해결이 아니라 우회였다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "0ba07975-99dc-4b51-8bba-9ef104001376",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "2015년 ES6에 Proxy가 추가됐다. Vue 3는 2020년에 이 Proxy를 기반으로 반응형 시스템을 완전히 재설계했다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e8ab0f03-2252-4ea4-a1ec-aa9432926bf9",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Proxy의 내부 동작",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "59bbc0d8-95ad-473b-96cb-d6393493acdb",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "new Proxy(target, handler)",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "target",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 객체를 감싸는 래퍼를 만든다. 이 래퍼에 대한 모든 작업(읽기, 쓰기, 삭제 등)이 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "handler",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "의 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "트랩(trap)",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 을 통해 가로채진다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "27f343a4-b366-4faa-b6af-217dd5e27428",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "const target = { count: 0 }\n\nconst proxy = new Proxy(target, {\n  get(target, key, receiver) {           // ← 프로퍼티 읽기 시 호출\n    console.log(`get: ${key}`)\n    return Reflect.get(target, key, receiver)  // ← 원래 동작 수행\n  },\n  set(target, key, value, receiver) {    // ← 프로퍼티 쓰기 시 호출\n    console.log(`set: ${key} = ${value}`)\n    return Reflect.set(target, key, value, receiver)\n  }\n})\n\nproxy.count        // 출력: \"get: count\"\nproxy.count = 5    // 출력: \"set: count = 5\"\nproxy.newProp = 1  // 출력: \"set: newProp = 1\" ← 새 프로퍼티도 감지됨",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "9da47cf1-925c-4737-8937-efecc3346e39",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Reflect",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 Proxy 트랩과 1:1로 대응하는 API다. 트랩 안에서 원래 동작을 수행할 때 사용한다. ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "target[key]",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "로 직접 접근하는 것과 결과는 같지만, ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "receiver",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "(프록시 자신)를 올바르게 처리하기 위해 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Reflect",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 쓰는 것이 안전하다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c5437443-9ce7-4c98-8eeb-640b4bcf99c9",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "트랩의 종류",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "77e11086-b139-46a7-8e4d-3ddc4accd51f",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Proxy가 가로챌 수 있는 작업은 13가지다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "68f063cd-f4ca-4a87-bd18-8fbe9828a5f5",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "const handler = {\n  get(target, key, receiver) {},          // obj.key\n  set(target, key, value, receiver) {},   // obj.key = value\n  has(target, key) {},                    // key in obj\n  deleteProperty(target, key) {},         // delete obj.key\n  apply(target, thisArg, args) {},        // fn()     ← 함수에 적용\n  construct(target, args) {},             // new Fn() ← 생성자에 적용\n  ownKeys(target) {},                     // Object.keys(obj)\n  getOwnPropertyDescriptor(target, key) {},\n  defineProperty(target, key, desc) {},\n  getPrototypeOf(target) {},\n  setPrototypeOf(target, proto) {},\n  isExtensible(target) {},\n  preventExtensions(target) {},\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "fc611e62-6d4e-4499-930a-05e552c8527e",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Object.defineProperty",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "get",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "/",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "set",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "만 가로챌 수 있었다. Proxy는 객체에 대한 거의 모든 작업을 가로챌 수 있다. 이게 Vue 3가 Vue 2의 한계를 전부 해결한 이유다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "92ccff2a-36c8-4e21-aca4-daa12a31234d",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Vue 3가 Proxy로 반응형을 구현하는 방법",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "45fca5bf-d772-4b2d-aa7a-cebb8c1ffd3f",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "의존성 저장 구조",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "399255f2-1bd0-4b64-b022-e98c1b82ccd8",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Vue 3는 아래 구조로 의존성을 추적한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "154acfdc-a86c-4c2b-853d-2659ff336001",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "targetMap (WeakMap)\n  target 객체 → depsMap (Map)\n    프로퍼티 key → dep (Set<effect>)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "453cad4f-333b-43d4-a6b4-4b92f88cd993",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "WeakMap",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "을 쓰는 이유는 target 객체가 가비지 컬렉션될 때 자동으로 정리되기 때문이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "0711a48b-c6e6-43a8-baa6-35dd951e3ea7",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "get 트랩 — 의존성 수집",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "085416eb-5ab3-4759-a39a-17a3216ad6aa",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// Vue 3 내부 (단순화)\nlet activeEffect = null   // ← 현재 실행 중인 effect\n\nfunction get(target, key, receiver) {\n  const result = Reflect.get(target, key, receiver)\n\n  // activeEffect가 있으면 이 키를 의존성으로 등록\n  track(target, key)\n  //  targetMap[target][key].add(activeEffect)\n\n  return result\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "fb77d04f-3ab9-4bda-8810-eca0d1ef4eb2",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "set 트랩 — 변경 알림",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f69204c0-fff1-4a5e-ba7e-38ed4e29123d",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "function set(target, key, value, receiver) {\n  const result = Reflect.set(target, key, value, receiver)\n\n  // 이 키에 등록된 모든 effect를 실행\n  trigger(target, key)\n  //  targetMap[target][key].forEach(effect => effect())\n\n  return result\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "8985b8fe-f86f-4b0b-987d-70a00ced0ac4",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "전체 흐름",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1532c6af-c5f0-4749-b7e8-606df3a5571e",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "import { reactive, effect } from '@vue/reactivity'\n\nconst state = reactive({ count: 0 })   // ← Proxy 생성\n\neffect(() => {\n  // 1. activeEffect = 이 함수로 설정\n  // 2. state.count 읽기 → get 트랩 → track() 호출\n  //    → targetMap[state][\"count\"].add(현재 effect)\n  console.log(state.count)\n  // 3. activeEffect = null\n})\n\nstate.count = 1\n// → set 트랩 → trigger() 호출\n// → targetMap[state][\"count\"]에 등록된 effect 실행\n// → 콘솔에 1 출력",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "a309e65b-b787-467a-ae16-34997bb8525a",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "실제 실행 순서를 단계별로 보면 이렇다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5af2253f-274e-4d5e-bb9f-06aba4ea2f92",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "1. reactive({ count: 0 }) 호출\n   → new Proxy(target, handler) 생성\n\n2. effect(fn) 호출\n   → activeEffect = fn\n   → fn() 실행\n     → state.count 읽기\n     → get 트랩 발동\n     → track(state, \"count\")\n       → targetMap.get(state).get(\"count\").add(fn)\n     → 0 반환\n   → activeEffect = null\n\n3. state.count = 1 실행\n   → set 트랩 발동\n   → Reflect.set으로 원본 업데이트\n   → trigger(state, \"count\")\n     → targetMap.get(state).get(\"count\")\n       → [fn] 실행\n       → 콘솔에 1 출력",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "bde6854f-1f37-4938-b88e-ca4a04970d86",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "reactive()",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "로 감싼 객체의 프로퍼티를 직접 수정해도 화면이 업데이트되는 이유가 이것이다. 할당 연산자(",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "=",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": ")가 set 트랩을 발동시키고, 그게 등록된 effect들을 실행한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "61eb33c6-488c-458b-9cd9-6acc694fe98f",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "중첩 객체는 어떻게 처리할까",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b61c7616-258f-4c5b-beaf-0f353651f26b",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "reactive({ user: { name: 'Kim' } })",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "처럼 중첩된 객체에서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "state.user.name",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "을 읽으면 어떻게 될까.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "0666732c-7385-4914-b5ad-e51ea5ef321c",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "get 트랩이 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "user",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 반환할 때, 반환값이 객체이면 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "그 객체도 Proxy로 감싸서",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 반환한다. 중첩 깊이에 상관없이 반응형이 동작하는 이유다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5f275431-e60f-4eb6-a990-ecd5d491fbe9",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "get(target, key, receiver) {\n  const result = Reflect.get(target, key, receiver)\n\n  track(target, key)\n\n  // 반환값이 객체이면 재귀적으로 reactive 적용\n  if (typeof result === 'object' && result !== null) {\n    return reactive(result)   // ← 이미 Proxy면 캐시에서 반환\n  }\n\n  return result\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "604751ac-9d1e-4fe8-8274-67d97da15330",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Vue 3의 반응형 시스템 핵심은 세 가지(reactive, track, trigger)다.",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7ebbba10-f2c4-4500-b9ea-73e202a1533f",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "effect() 는 세 가지를 사용하는 부수 효과와 같은 소비자 역할이라 직접적인 영향을 주지는 않는다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d5cbff30-81f0-4ec9-b239-d0c9572b64a3",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이 effect() 는 ref나 reactive가 내부 로직에서만 쓰인다면 활성화되지 않지만, 해당 반응형 값이 템플릿 문법에 쓰이게 되면 Vue가 컴포넌트를 마운트할 때 렌더 함수 자체를 effect로 등록해준다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "51a16ed3-4969-4635-a2b9-861b0f032fe7",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "reactive()  — 객체를 Proxy로 감싸서 반응형으로 만든다\neffect()    — 반응형 데이터를 읽는 함수를 등록한다\ntrack()     — get 트랩에서 현재 effect를 의존성으로 기록한다\ntrigger()   — set 트랩에서 의존성에 등록된 effect를 실행한다",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c240cbcd-85f3-4c0c-99c2-c848cf47137b",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": " reactive() — Proxy로 감싸기",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "75777602-52b2-48ae-8e72-032b23f09178",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": " const state = reactive({ count: 0 })",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b280f4b9-0316-4c2d-ae64-e59567fc6d64",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "state.count를 읽을 때, 쓸 때 중간에 끼어들 수 있게 Proxy로 감싼다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "933787c1-3ca0-4a97-8952-0bc550197ca7",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "get 트랩 → track() 호출",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "273f68a3-f067-40ad-b29b-010839316122",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "set 트랩 → trigger() 호출",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "93746532-57d4-4987-b7cf-9895ba7f15ce",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "effect() — \"이 함수를 반응형으로 만들겠다\" 선언",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "74d96bdd-44ef-4f49-bec5-aada0505cee7",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "effect(() => {\n    console.log(state.count) // 이 줄이 실행될 때 track()이 호출됨\n})",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "91f31a75-b8c5-4dff-87d3-8aab99b1e643",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "effect 안의 함수를 즉시 한 번 실행한다. \n실행되는 동안 \"",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "지금 실행 중인 effect = 나야",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "\" 라고 전역에 표시하는 작업이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c9295d56-d462-4b21-933d-53b033a49ef9",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "track() — 의존성 기록",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "0bbf6020-1a9a-4ec3-ad84-f9cccb7cd532",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "get 트랩에서 호출되며, 지금 실행 중인 effect가 있다면 state.count ↔ 이 effect 연결을 저장한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b110f68d-dbf3-4d09-8653-9f1bad7a2916",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이 연결 정보가 Map에 쌓이게 된다 : state.count → [effect1, effect2, ...]",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "a9524be0-2e67-4a69-bb2d-1375a27ccaee",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "trigger() — 의존성 실행",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "33987c16-76ae-478e-b415-f46e044ac9b6",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "state.count = 1 // 여기서 trigger()",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5a6ddb1d-40d5-49b8-921c-d38c0d71dbdb",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "set",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 트랩에서 실행이되며, ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "[state.count](https://state.count)",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "에 연결된 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "effect",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 모두 꺼내서 다시 실행한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "fcb903e3-ea4b-437d-ad6f-86d7b2a1d83f",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "실제로 템플릿에 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "ref",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " , ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "reactive",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 가 포함될 때는 아래와 같은 일이 발생한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4a0fc1f1-1411-4958-ae35-a766e853ffa3",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "컴포넌트 마운트\n    → Vue 내부에서 effect(렌더 함수) 등록\n    → 렌더 함수 실행\n        → 템플릿에서 count.value 읽힘\n        → track() → \"렌더 effect ↔ count.value\" 연결\n\n// <template><div>{{ count }}</div></template>\n// 컴파일 결과\nfunction render() {\n  return h('div', count.value) // 가상 DOM 생성\n}\n\n// 아래 effect에 등록이 된다.\n// count.value가 변경되면 trigger → 아래 렌더 함수 재실행 → DOM 업데이트 진행\neffect(() => {\n  const vnode = render()       // 가상 DOM 생성\n  patch(prevVnode, vnode)      // 실제 DOM 업데이트\n})",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d449d5d7-4d78-411e-a87e-75e2a76d20f9",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "React는 왜 Proxy를 채택하지 않을까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e0db86e7-61d0-446f-9c98-85b3176910fa",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Vue를 사용하게 되면 자연스럽게 비교하게 되는 대상인데,",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e09a555a-1445-4531-89c3-19d5e1bd8823",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "React도 Proxy를 쓰면 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "setState",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 없이 그냥 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "state.count++",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "만 해도 될 텐데 왜 쓰지 않을까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "aa7f4cc7-ce94-470f-b57a-33ecc2d7235a",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이건 React의 설계 철학과 아키텍처 전체와 연결된 문제이기도 하다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "8748d19d-b096-4799-b919-d85c59a565a0",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이유 1 — React의 상태 업데이트는 의도적으로 명시적이다",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7d75b037-9212-46e0-bc79-a8fb34375122",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "React의 핵심 원칙 중 하나는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "UI = f(state)",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e068698c-7e98-4bf6-9117-7eca7a2e1cdd",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "상태가 바뀌면 그 결과로 UI가 결정된다. 여기서 중요한 건 상태 변경이 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "추적 가능하고 예측 가능",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "해야 한다는 것이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7e1efb57-8e7f-4619-9523-5978d51890ed",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// React의 방식 — 명시적\nsetCount(prev => prev + 1)\n// 누가, 언제, 어디서 상태를 바꿨는지 명확히 알 수 있다\n\n// Proxy 방식이었다면\ncount++\n// 어디서 변경이 일어났는지 추적하기 어려움",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "80fff7db-2b68-4d80-bf00-a82fc6ef0de1",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Proxy는 변경을 암묵적으로 가로챈다. 코드 어디서든 객체 프로퍼티를 수정하면 트랩이 발동한다. (Vue가 양방향인 이유이라고 하는 이유이다, 내부적으로 상태를 개발자가 어떻게 변하는지 명시적으로 알 필요가 없다) 이건 편리하지만, 큰 앱에서 상태가 어디서 바뀌는지 추적하기 어렵게 만든다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "9b15d426-f872-48c1-b237-a90777943e70",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이유 2 — Fiber 스케줄러와 동시성 기능",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d671d03b-1230-4092-820a-1dda5024f4dd",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "React 18의 Concurrent Mode, ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "startTransition",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": ", Suspense는 모두 업데이트를 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "지연하거나 중단하거나 우선순위를 조정",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "하는 기능이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b2b25884-c6db-464b-bcb2-cba708dbdbc2",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// React가 업데이트를 스케줄링하는 방식\nstartTransition(() => {\n  setItems(heavyComputation())   // ← 우선순위 낮게 처리\n})\n\n// 사용자 입력 업데이트는 즉시 처리\nsetInputValue(e.target.value)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "580afcd4-f011-48b9-896f-fe5ba0023b7b",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "setState",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 통해 업데이트가 들어오면 React는 이를 큐에 쌓고 스케줄러가 적절한 타이밍에 처리한다. 업데이트를 일시 중지하거나 취소하거나 재시도할 수 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "374534c3-65aa-4125-83bc-c577e21ff701",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Proxy 방식에서는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "set",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 트랩이 동기적으로 즉시 발동한다. React 스케줄러가 개입할 여지가 없다. 시간 분할(time-slicing)이나 업데이트 우선순위 조정이 불가능해진다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "529c59b4-a994-4954-a4e8-8ea8fffee47f",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이유 3 — 불변성 기반 최적화",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6a98469b-3c4b-4685-9b89-c3db330beb00",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "React의 메모이제이션은 참조 비교(",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "===",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": ")를 기반으로 한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "102d09fc-cad9-4c50-a157-fe6410854a21",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// React.memo, useMemo, useCallback의 동작 원리\nconst prev = { count: 0 }\nconst next = { count: 0 }\n\nprev === next  // false → 다른 객체이므로 리렌더링\n\n// 불변 업데이트\nconst updated = { ...prev, count: 1 }\nprev === updated  // false → 명확히 다름",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e3555fd3-e54e-4653-8c3a-1467eda5fa4b",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Proxy 방식으로 객체를 직접 수정하면 참조가 바뀌지 않는다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "79646fe3-4398-438d-9d27-831fa4ffa963",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "const state = reactive({ count: 0 })\n\nconst before = state\nstate.count++\nconst after = state\n\nbefore === after  // true ← 같은 Proxy 객체",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "0ba669cc-be9f-4f02-9c39-0bb90252f138",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "React가 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "before === after",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 비교해서 변경을 감지하는 구조라면, Proxy 기반 뮤테이션은 변경을 감지하지 못한다. React의 최적화 전략 전체가 불변성 위에 구축되어 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "606d3ace-06c5-4118-9ca4-619aba03d870",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이유 4 — 타임트래블 디버깅과 직렬화",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "290db21d-9405-40b1-b153-5d130681b4a7",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Redux DevTools의 타임트래블 기능은 각 시점의 상태 스냅샷을 저장해서 되감는 방식이다. 불변 상태는 각 업데이트마다 새 객체가 만들어지기 때문에 스냅샷 저장이 자연스럽다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d5be7e45-39d7-4e78-86a7-21b1894d10d3",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Proxy 기반 뮤테이션은 상태를 직렬화하기 어렵고, 이전 상태로 되돌아가는 기능도 구현하기 복잡하다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "0dc49315-de8c-49cf-bac5-404be5a10b81",
+    "type": "divider",
+    "props": {},
+    "children": []
+  },
+  {
+    "id": "089c89cf-cd5b-40f4-b349-cf3e3be671a1",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Vue와 React의 반응형 모델 비교",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "792d7aa1-5c2d-48fc-84b5-081f46650c6a",
+    "type": "table",
+    "props": {
+      "textColor": "default"
+    },
+    "content": {
+      "type": "tableContent",
+      "columnWidths": [
+        null,
+        null,
+        null
+      ],
+      "headerRows": 1,
+      "rows": [
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "항목",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Vue 3 (Proxy)",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "React (불변성)",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "상태 변경 방식",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "직접 수정 (",
+                  "styles": {}
+                },
+                {
+                  "type": "text",
+                  "text": "obj.key = value",
+                  "styles": {
+                    "code": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": ")",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "setState / useState",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "변경 감지",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Proxy set 트랩 (암묵적)",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "참조 비교 (명시적)",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "업데이트 스케줄링",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "동기적, 즉시 트리거",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "비동기, 스케줄러 관리",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "메모이제이션 기반",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "의존성 추적",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "참조 동일성 (===)",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "중첩 객체 반응형",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "자동 (재귀 Proxy)",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "직접 불변 업데이트 필요",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "디버깅 추적",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "암묵적 변경 추적 어려움",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "setState 호출 지점 명확",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "동시성 지원",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "어려움",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Concurrent Mode 지원",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "학습 곡선",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "낮음 (직관적)",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "불변성 개념 학습 필요",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "children": []
+  },
+  {
+    "id": "5fd5561c-30d7-4165-b8c7-4a862e0ed8dc",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Proxy를 실제로 쓸 만한 상황이 언제일까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6e40d73b-d25c-439e-92c3-79e635a17405",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Vue나 MobX 같은 라이브러리를 쓰지 않고 Proxy를 직접 활용하면 유용한 경우들이 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "aa55a971-ec66-4b58-9b02-f634c9f0272a",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "유효성 검사가 필요한 객체",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e1abd09a-45d9-4394-a801-84c14f7a0509",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "function createValidatedUser(initial) {\n  return new Proxy(initial, {\n    set(target, key, value) {\n      if (key === 'age' && typeof value !== 'number') {\n        throw new TypeError('age는 숫자여야 합니다')  // ← 쓰기 시점에 검증\n      }\n      if (key === 'email' && !value.includes('@')) {\n        throw new Error('올바른 이메일 형식이 아닙니다')\n      }\n      return Reflect.set(target, key, value)\n    }\n  })\n}\n\nconst user = createValidatedUser({ name: 'Kim', age: 20 })\nuser.age = 'abc'   // ← TypeError 발생\nuser.email = 'invalid'  // ← Error 발생",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "761825cf-957b-41cb-903b-9f7d30496baa",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "접근 로그가 필요한 객체",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "2a7b84a3-9b30-42c3-a8e6-004b742d9c8d",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "function withLogging(target, label) {\n  return new Proxy(target, {\n    get(target, key, receiver) {\n      console.log(`[${label}] get: ${String(key)}`)\n      return Reflect.get(target, key, receiver)\n    },\n    set(target, key, value, receiver) {\n      console.log(`[${label}] set: ${String(key)} = ${JSON.stringify(value)}`)\n      return Reflect.set(target, key, value, receiver)\n    }\n  })\n}\n\nconst config = withLogging({ timeout: 3000 }, 'Config')\nconfig.timeout       // 출력: [Config] get: timeout\nconfig.timeout = 5000  // 출력: [Config] set: timeout = 5000",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "83a0921b-14e6-4dc7-a32d-3d8c24ac63a5",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "존재하지 않는 프로퍼티에 기본값 제공",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b6ea03df-b3f0-4c9e-aa27-91c4c32817c5",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "const withDefault = (target, defaultValue) =>\n  new Proxy(target, {\n    get(target, key) {\n      return key in target\n        ? Reflect.get(target, key)\n        : defaultValue   // ← 없는 키 접근 시 기본값 반환\n    }\n  })\n\nconst scores = withDefault({}, 0)\nscores.math = 90\nconsole.log(scores.math)     // 90\nconsole.log(scores.english)  // 0 ← 기본값",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "9cc208b2-f14f-4c34-8ab8-6dfbeb59be49",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Proxy는 객체 동작을 커스터마이징하는 강력한 도구라고 생각이 든다. Vue의 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "reactive()",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 내부적으로 어떻게 동작하는지 알고 나면 프레임워크 코드를 작성할 때마다 내부 동작이 너무 신기하게 느껴지는 것 같다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "17d89b57-338e-478e-8a14-7148e6277ab9",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "전에 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Proxy",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 가 무엇이냐 질문이 들어왔을 때, ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Proxy",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 객체로 객체를 래핑하면 자동으로 감지한다고만 얼렁뚱땅 넘어가서 가물가물해서 정리를 해보았다 ^,^ ..",
+        "styles": {}
+      }
+    ],
+    "children": []
+  }
+]

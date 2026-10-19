@@ -1,0 +1,392 @@
+---
+title: "팀원들에게 업데이트 될 때마다 .env 값을 전달해줘야할까?"
+date: 2026-10-19
+publishedAt: "2026-10-19T12:52:01.736Z"
+updatedAt: "2026-10-19T12:52:01.737Z"
+description: ""
+category: "category-9606d629"
+series: "-"
+private: false
+---
+
+사내에서 각 프로젝트 별로 유틸 함수들이 따로 관리되다보니 동기화 과정 자체가 너무 힘들었다. 그래서 모노레포로 프로젝트를 만들기에는 빌드 설정과 리소스가 부족하다보니 유틸 함수 라이브러리를 만들어서 배포하자는 생각을 했다. 그 당시 당연하게만 생각헀던 NPM 라이브러리였다.
+
+그러다 우연히 면접 과정에서 "서브 모듈로도 고려해보시지 않은 이유가 무엇인가요?" 라는 질문이 나왔고, "왜 서브모듈이어야할까?" 라는 생각이 문득 들었다. 사실 NPM이 아니라 서브모듈이라는게 많이 낯설었다. "그게 뭐가 다른 거지?" 라는 의문이 생겼고, 막상 찾아보니 둘의 동작 방식이 생각보다 근본적으로 달랐다.
+
+그냥 나한테 익숙하다고 빠른 선택을 하는 것이 아닌, 어떤 것들이 존재하고 무엇이 최선의 선택인지를 항상 생각해야한다는 것을 다시 한번 일깨워주었다. 그래서 GIt 서브 모듈로 했을 때의 경험들은 어떠할까에 대한 내용을 배워보고자 포스팅을 진행한다.
+
+## 두 방식이 각각 왜 생겼을까?
+
+### 코드를 공유하는 방법의 역사
+
+소프트웨어에서 코드를 공유하는 방법은 크게 두 방향으로 발전해왔다. 하나는 **소스 코드를 직접 참조**하는 방식이고, 다른 하나는 **배포된 패키지를 의존성으로 선언**하는 방식이다.
+
+Git 서브모듈은 전자의 계보에 있다. 2008년 Git 1.5.3에 처음 도입됐다. 당시에는 모노레포 도구도 없었고, 하나의 저장소에 여러 프로젝트를 담는 표준적인 방법이 없었다. "다른 저장소를 내 저장소 안에 포함시키는" 서브모듈은 그 공백을 채우는 자연스러운 해결책이었다. 내부 공유 라이브러리, 서드파티 코드, 플러그인 시스템 등에 쓰였다.
+
+NPM은 후자의 계보다. 2010년 Node.js 생태계와 함께 등장했다. 소스 코드가 아니라 **빌드되고 버전이 붙은 패키지**를 중앙 레지스트리*에서 내려받는 방식이다. 버전 범위를 선언하면 npm이 알아서 호환되는 버전을 찾아주고, `node_modules`에 설치해준다.
+
+> **레지스트리**
+
+패키지를 저장하고 배포하는 중앙 서버. 기본값은 npmjs.com이며, 사설 레지스트리(GitHub Packages, Verdaccio 등)를 직접 운영할 수도 있다.
+
+두 방식의 설계 목적부터 다르다. 서브모듈은 "소스 코드를 버전 고정해서 함께 관리"하는 것이고, npm은 "빌드된 패키지를 버전 범위로 가져와서 쓰는 것"이다.
+
+## Git 서브모듈은 내부에서 어떻게 동작할까?
+
+### 저장소 안에 저장소를 넣는 구조
+
+서브모듈을 추가하면 부모 저장소에 두 가지가 생긴다.
+
+```javascript
+git submodule add https://github.com/example/shared-ui.git packages/shared-ui
+```
+
+```javascript
+my-project/
+  .gitmodules          ← 서브모듈 URL과 경로 매핑 파일
+  packages/
+    shared-ui/         ← 서브모듈 디렉토리 (독립된 git 저장소)
+      .git             ← 실제로는 ../.git/modules/shared-ui를 가리키는 파일
+      src/
+      package.json
+```
+
+`.gitmodules` 파일은 이렇게 생겼다:
+
+```javascript
+[submodule "packages/shared-ui"]
+    path = packages/shared-ui       ← 로컬 경로
+    url = https://github.com/example/shared-ui.git  ← 원격 URL
+```
+
+여기까지는 직관적이다. 핵심은 다음이다.
+
+### 부모 저장소가 서브모듈의 "어떤 상태"를 기록하는가?
+
+부모 저장소는 서브모듈 디렉토리를 일반 파일처럼 추적하지 않는다. 대신 **특정 커밋 SHA 하나**를 기록한다. Git 용어로는 **gitlink**라고 한다.
+
+```javascript
+# 부모 저장소에서 git ls-tree로 확인
+git ls-tree HEAD packages/
+
+160000 commit a3f9c2d1b4e8...  packages/shared-ui
+   ↑               ↑
+ gitlink 모드    서브모듈이 가리키는 커밋 SHA
+```
+
+`160000`은 일반 파일(`100644`)이나 디렉토리가 아닌, 서브모듈을 나타내는 특수 모드다. 부모 저장소의 git 히스토리에는 "이 시점에 shared-ui의 `a3f9c2d` 커밋을 쓴다"는 정보만 남는다. 서브모듈의 파일 내용은 부모 저장소에 들어오지 않는다.
+
+### clone 후 서브모듈 디렉토리가 비어 있는 이유
+
+```javascript
+git clone https://github.com/example/my-project.git
+cd my-project
+ls packages/shared-ui/   # → 비어 있음
+```
+
+`git clone`은 기본적으로 서브모듈을 내려받지 않는다. `.gitmodules`가 있다는 건 알지만, 서브모듈 저장소를 실제로 클론하지는 않는다.
+
+```javascript
+git submodule init      # ← .gitmodules를 읽어서 .git/config에 URL 등록
+git submodule update    # ← 각 서브모듈을 클론하고 기록된 커밋으로 체크아웃
+```
+
+또는 한 번에:
+
+```javascript
+git clone --recurse-submodules https://github.com/example/my-project.git
+```
+
+이 과정이 끝나면 서브모듈 디렉토리는 부모가 기록한 커밋 SHA 상태로 **Detached HEAD**가 된다.
+
+> **Detached HEAD **
+
+특정 브랜치가 아닌 커밋을 직접 체크아웃한 상태. `HEAD`가 브랜치 이름이 아닌 커밋 SHA를 가리킨다. 이 상태에서 커밋하면 어느 브랜치에도 속하지 않는 커밋이 생긴다.
+
+```javascript
+cd packages/shared-ui
+git status
+# HEAD detached at a3f9c2d    ← 브랜치가 없는 상태
+```
+
+### 서브모듈을 업데이트하는 두 가지 흐름
+
+서브모듈이 업데이트됐을 때 부모 저장소에서 반영하려면 두 단계가 필요하다.
+
+```javascript
+[서브모듈에 변경이 생겼을 때]
+
+1. 서브모듈 안에서 최신 커밋으로 이동
+   cd packages/shared-ui
+   git pull origin main            ← 서브모듈 저장소에서 직접 pull
+   cd ../..
+
+2. 부모 저장소에 "이 커밋으로 바뀐다"고 기록
+   git add packages/shared-ui      ← gitlink 포인터 업데이트
+   git commit -m "chore: update shared-ui to v2.3"
+   git push
+```
+
+팀원이 이 커밋을 받아서 반영하려면:
+
+```javascript
+git pull
+git submodule update               ← 바뀐 포인터가 가리키는 커밋으로 이동
+```
+
+`git pull`만 하고 `submodule update`를 빠뜨리면 서브모듈은 이전 커밋 상태 그대로다. 팀 내에서 가장 자주 겪는 혼란이 이 지점이다.
+
+## NPM 라이브러리는 내부에서 어떻게 동작할까?
+
+### package.json과 버전 범위 선언
+
+```javascript
+{
+  "dependencies": {
+    "react":   "^18.2.0",   ← ^ : 마이너/패치 버전 자동 업데이트
+    "lodash":  "~4.17.21",  ← ~ : 패치 버전만 자동 업데이트
+    "axios":   "1.4.0"      ←   : 정확한 버전 고정
+  }
+}
+```
+
+`npm install`을 실행하면 npm은 다음 순서로 동작한다:
+
+```javascript
+[npm install 실행 흐름]
+
+1. package.json의 버전 범위 읽기
+   "react": "^18.2.0"
+       ↓
+2. npm 레지스트리(npmjs.com)에 쿼리
+   GET https://registry.npmjs.org/react
+   → 사용 가능한 버전 목록 + 각 버전의 메타데이터 반환
+       ↓
+3. 버전 범위에 맞는 최신 버전 결정
+   ^18.2.0 → 18.x.x 중 최신 = 18.3.1 (가정)
+       ↓
+4. package-lock.json에 정확한 버전 기록
+   "react": { "version": "18.3.1", "resolved": "...", "integrity": "sha512-..." }
+       ↓
+5. tarball 다운로드 및 node_modules에 압축 해제
+   node_modules/react/       ← 소스 코드가 아닌 빌드된 배포 파일
+```
+
+`package-lock.json`은 "이 시점에 어떤 버전이 설치됐는지"를 기록한다. 다음번 `npm install`은 레지스트리 조회 없이 이 파일을 기준으로 동일한 버전을 설치한다.
+
+### node_modules의 flat 구조
+
+npm v3 이전에는 `node_modules`가 중첩 구조였다. A가 [C@1.0](mailto:C@1.0)을 쓰고 B도 [C@1.0](mailto:C@1.0)을 쓰면, C가 두 곳에 중복 설치됐다.
+
+```javascript
+[npm v2 — 중첩 구조]
+node_modules/
+  package-a/
+    node_modules/
+      package-c@1.0/   ← A의 C
+  package-b/
+    node_modules/
+      package-c@1.0/   ← B의 C (중복)
+```
+
+npm v3부터는 **호이스팅(hoisting)**을 적용해 flat 구조로 바꿨다.
+
+*호이스팅: npm이 중첩된 의존성을 최대한 최상위 `node_modules`로 끌어올리는 최적화. 중복 설치를 줄이는 대신, 의존성 선언 없이 최상위 패키지를 require할 수 있는 "유령 의존성" 문제가 생긴다.
+
+```javascript
+[npm v3+ — flat 구조]
+node_modules/
+  package-a/           ← 최상위로 끌어올림
+  package-b/
+  package-c@1.0/       ← 공유 (단일 설치)
+```
+
+버전이 충돌할 때만 중첩이 허용된다:
+
+```javascript
+[버전 충돌 시]
+node_modules/
+  package-a/
+    node_modules/
+      package-c@2.0/   ← A는 2.0이 필요 (별도 설치)
+  package-b/
+  package-c@1.0/       ← B는 1.0 사용 (최상위)
+```
+
+### 설치된 패키지는 소스가 아니라 빌드 결과물
+
+서브모듈과 가장 다른 점이 여기에 있다. `node_modules/react`를 열어보면 TypeScript 소스 파일이 아니라 이미 빌드된 JS 파일들이 들어 있다.
+
+```javascript
+node_modules/react/
+  index.js             ← CJS 빌드
+  cjs/
+    react.development.js
+    react.production.min.js
+  package.json         ← 진입점, exports 필드
+  LICENSE
+  README.md
+  # .ts 파일 없음       ← 소스 코드는 포함되지 않음
+```
+
+npm 패키지 제작자가 `npm publish`로 올린 파일들만 설치된다. 내부 구현을 바꾸려면 패키지를 fork하거나 patch-package 같은 도구를 써야 한다.
+
+## 메인 프로젝트를 빌드할 때, 서브 모듈은 어떻게 될까?
+
+두 가지 시나리오로 나뉜다.
+
+서브모듈을 **소스 그대로** 쓰느냐, **빌드 결과물(dist)** 로 쓰느냐에 따라 동작이 완전히 달라진다.
+
+### 시나리오 A — 소스 파일 직접 참조
+
+```javascript
+my-react-app/
+  packages/
+    ui-components/       ← 서브모듈 (소스 .tsx 파일 그대로)
+      src/
+        Button.tsx
+        index.ts
+      package.json       ← 여기 dependencies도 있음
+  src/
+    App.tsx
+```
+
+```javascript
+// App.tsx
+import { Button } from '../packages/ui-components/src'
+```
+
+이 경우 Vite/Webpack이 `[Button.tsx](https://Button.tsx)`를 **직접 트랜스파일**한다.
+
+부모 프로젝트의 빌드 파이프라인이 서브모듈 소스를 자기 소스처럼 처리하는 것이다. 별도 빌드 단계가 없어도 된다.
+
+**단, 두 가지 함정이 있다.**
+
+1. **서브모듈의 ****`node_modules`는 자동으로 설치되지 않는다.**
+
+1. 부모에서 `npm install`을 해도 서브모듈 디렉토리의 의존성은 별개다.
+
+```javascript
+# 서브모듈 안에서 따로 설치해야 함
+cd packages/ui-components
+npm install
+
+# 또는 부모 프로젝트에서 수동으로 같이 설치
+# (package.json에 서브모듈 의존성을 중복 선언)
+```
+
+1. **TypeScript를 쓴다면 ****`tsconfig.json`의 경로 설정이 필요하다.**
+
+```javascript
+// tsconfig.json (부모)
+{
+  "compilerOptions": {
+    "paths": {
+      "@ui/*": ["./packages/ui-components/src/*"]
+    }
+  },
+  "include": [
+    "src",
+    "packages/ui-components/src"   // ← 명시적으로 포함
+  ]
+}
+```
+
+### 시나리오 B — 서브모듈을 먼저 빌드하고 dist 참조
+
+```javascript
+packages/ui-components/
+  src/
+    Button.tsx
+  dist/                  ← 빌드 결과물
+    index.js
+    index.d.ts
+  package.json
+    "main": "dist/index.js"
+    "types": "dist/index.d.ts"
+```
+
+이 경우 부모 프로젝트는 `dist/`를 참조하고, 서브모듈 소스는 건드리지 않는다.
+
+npm 패키지처럼 동작하는 구조다. 이 경우에는 빌드 결과물이 사전에 나와야하기 때문에 빌드 순서가 강제된다.
+
+```javascript
+# CI에서 빌드 순서
+cd packages/ui-components && npm install && npm run build  # ← 먼저
+cd ../../ && npm run build                                  # ← 그 다음
+```
+
+서브모듈 빌드가 끝나지 않으면 부모 빌드가 실패한다. 로컬 개발 중에 서브모듈 소스를 수정하면 `dist`가 갱신되지 않아서 변경이 반영 안 되는 상황도 생긴다.
+
+실무에서 서브모듈을 UI 컴포넌트에 쓴다면 **A 방식이 개발 편의성은 높지만**, 의존성 이중 관리 문제 때문에 팀 규모가 커지면 점점 관리 비용이 올라간다.
+
+## 서브모듈과 라이브리러 비교하기
+
+| 항목          | Git 서브모듈                          | NPM 라이브러리                     |
+| ----------- | --------------------------------- | ----------------------------- |
+| 참조 대상       | 소스 코드 (특정 커밋 SHA)                 | 빌드된 패키지 (버전 번호)               |
+| 버전 고정 방식    | 커밋 SHA 고정                         | package-lock.json으로 고정        |
+| 버전 업데이트     | 수동 (pointer commit 변경)            | `npm update` 또는 버전 범위로 자동     |
+| 코드 수정 가능 여부 | 가능 (서브모듈 안에서 직접 편집)               | 불가 (빌드 결과물만 존재)               |
+| 저장소 접근 권한   | 서브모듈 저장소에 접근 권한 필요                | 레지스트리 접근 권한만 필요 (공개 패키지는 무조건) |
+| 클론 후 초기 설정  | `git submodule init && update` 필요 | `npm install`만 실행             |
+| CI/CD 설정    | 서브모듈 토큰/접근 설정 별도 필요               | 추가 설정 거의 없음                   |
+| 히스토리 공유     | 서브모듈의 git 히스토리 전체 포함              | 배포 파일만 포함, 히스토리 없음            |
+| 적합한 팀 규모    | 소수 팀, 내부 공유 코드                    | 제한 없음                         |
+
+## 어떤 상황에 어느 쪽을 쓰면 좋을까?
+
+### 서브모듈이 더 나은 경우
+
+**공유 코드를 메인 프로젝트와 동시에 수정해야 할 때**가 서브모듈이 잘 맞는 전형적인 상황이다. 예를 들어, 공유 디자인 시스템이 있고 메인 서비스와 함께 빠르게 진화 중이라면 — npm 배포 → 버전 업데이트 → 메인 프로젝트 반영 사이클이 개발 속도를 늦춘다. 서브모듈이면 공유 코드를 직접 수정하고, 양쪽에서 커밋할 수 있다.
+
+```javascript
+[서브모듈 적합 시나리오]
+
+my-service/
+  packages/
+    design-system/    ← 서브모듈
+      Button.vue      ← 여기서 직접 수정
+    frontend/
+      App.vue         ← 수정된 Button 바로 반영
+  # 두 저장소를 하나의 작업 단위로 커밋 가능
+```
+
+또는 외부 라이브러리인데 npm에 배포되지 않은 경우, 내부 보안 정책상 npm 레지스트리를 사용할 수 없는 경우에도 서브모듈이 대안이 된다.
+
+### NPM이 더 나은 경우
+
+공유 코드가 **안정적이고 버전 계약(API)이 명확할 때**는 npm이 맞다. 외부 팀이 쓰거나, 수정 없이 가져다 쓰는 유틸리티라면 서브모듈의 복잡한 초기 설정과 업데이트 절차가 오히려 부담이다.
+
+```javascript
+[NPM 적합 시나리오]
+
+# 외부 팀이 소비만 하는 공유 라이브러리
+npm install @company/design-system   ← 한 줄로 설치 완료
+
+# CI에서도 추가 설정 없음
+npm ci                               ← package-lock.json 기준 설치
+```
+
+수십 명 이상이 쓰는 라이브러리, 오픈소스, 버전 계약이 중요한 SDK라면 npm 배포가 훨씬 관리하기 쉽다.
+
+### 절충안 — npm + 사설 레지스트리
+
+**이건 몰랐는데 너무나도 도움이 많이 될 것 같아서 따로 공유해봐야겠다,, ^,^ ..**
+
+서브모듈의 "소스 직접 참조"와 npm의 "간편한 설치" 사이에서 **사설 npm 레지스트리**를 운영하는 방법이 있다. GitHub Packages나 Verdaccio를 사용하면 외부에 공개하지 않고도 npm 워크플로우를 그대로 쓸 수 있다.
+
+```javascript
+# .npmrc에 사설 레지스트리 지정
+@company:registry=https://npm.pkg.github.com
+
+# 일반 npm install과 동일하게 사용
+npm install @company/shared-ui
+```
+
+서브모듈과 비교했을 때 "코드를 직접 수정하는 유연성"은 없지만, 팀 규모가 커지고 소비자가 늘어날수록 이 방식이 유지보수 비용이 낮다.
+
+실제로 파고들어 보니 서브모듈은 "같이 개발하는 저장소를 포함시키는 것"이고, npm은 "완성된 패키지를 가져다 쓰는 것"이었다. 목표가 비슷해 보여도 설계 철학이 달라서, 잘못 선택하면 불필요한 마찰이 계속 생긴다.
+
+서브모듈을 쓰면서 팀원들이 `submodule update`를 빠뜨려 "왜 내 환경에선 안 되지?"를 반복하는 상황, npm을 쓰면서 공유 컴포넌트 수정할 때마다 배포-버전업-재설치 사이클을 도는 상황 — 두 가지 방식 모두 트레이드 오프가 존재한다. 그때마다 "애초에 이 코드를 어떻게 관리할 것인가"를 먼저 결정하는 게 더 중요하다는 걸 느꼈다.
+

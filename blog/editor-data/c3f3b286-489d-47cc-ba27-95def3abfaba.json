@@ -1,0 +1,3211 @@
+[
+  {
+    "id": "54665d98-8d1e-449c-89b5-ece811eb5cbb",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "JavaScript에서 모듈을 불러오는 방법은 두 가지다. Node.js가 오랫동안 사용해온 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "CJS(CommonJS)",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 와, ES2015 표준에 추가된 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "ESM(ES Modules)",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1b62c4ac-f186-44e6-845a-d61bede2ddde",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "라이브러리 문서에서 \"This package is ESM only\"라는 문구를 처음 봤을 때, 단순히 문법이 다른 것 정도로 생각했다. 그런데 파고들수록 두 시스템은 모듈을 불러오는 방식 자체가 근본적으로 달랐다. 단순히 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "require",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 대신 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "import",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 쓰는 게 아니라, 브라우저와 런타임이 코드를 이해하는 방식이 바뀌는 것이었다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "eac151ce-8a9a-44ae-9eaf-41a7ab1a7742",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "JavaScript에는 원래 모듈이 없었다?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "2fc9e4fd-61cf-4b29-8f43-34aef2538619",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "JavaScript가 처음 설계됐을 때 모듈 시스템은 없었다. 브라우저에서 스크립트 파일을 순서대로 나열하는 게 전부였다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d15d5fe5-01e3-4d99-a7ed-ca09e45754c1",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "<script src=\"jquery.js\"></script>     <!-- 전역에 $ 생성 -->\n<script src=\"utils.js\"></script>      <!-- 전역에 utils 생성 -->\n<script src=\"app.js\"></script>        <!-- 전역에서 $, utils 사용 -->",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ec90c757-869a-41d1-bcd2-d4d8b2a0694d",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "모든 변수가 전역 스코프에 쌓였다. 파일이 많아질수록 어떤 파일이 어떤 변수를 만드는지 추적하기 어려워졌고, 이름이 겹치면 나중에 로드된 쪽이 덮어썼다. 의존 순서를 틀리면 런타임에서야 에러가 났다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5d6e36e7-1906-428f-8a1b-220b40a46425",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "CJS — Node.js가 직접 만든 모듈 시스템",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "fb5577bd-c163-4205-bfab-9514470e664f",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "2009년 Node.js가 등장했다. 서버에서 수백 개의 파일을 다루려면 모듈 시스템이 필수였는데, 당시 JavaScript 표준에는 없었다. 그래서 Node.js가 직접 만든 게 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "CommonJS(CJS)",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "15926645-db26-4030-9ead-47fa19d1d243",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// math.js\nfunction add(a, b) { return a + b }\nmodule.exports = { add }             // ← Node.js가 런타임에 주입하는 객체",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "81b63ef5-6238-44ea-b56a-dc95c180cb1e",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// app.js\nconst { add } = require('./math')   // ← Node.js가 런타임에 주입하는 함수",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "88317e06-3ceb-459b-948e-91e60d85d06b",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "CJS의 내부 동작",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "2386c7f7-ed60-4ddc-ae39-f368285f7e57",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "require",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "와 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "module.exports",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 JavaScript 문법이 아니다. Node.js가 파일을 실행하기 직전에 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "모듈 래퍼 함수",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "로 감싸서 인자로 주입하는 것들이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "77edccb4-3a62-44ae-a16c-4d09820f4a21",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// Node.js가 실제로 파일을 실행하는 방식\n(function(exports, require, module, __filename, __dirname) {\n  // 우리가 작성한 코드\n  function add(a, b) { return a + b }\n  module.exports = { add }\n})",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "554e0bc9-0c55-4d55-85e2-5a4ef311f5c1",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "require()",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 그냥 함수다. 그래서 코드 어디서든 호출할 수 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c6bbf483-a844-4887-a0c0-4c71428c52af",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// 전부 유효한 CJS 코드\nif (process.env.NODE_ENV === 'test') {\n  const mock = require('./mock')          // ← 조건부 로드\n}\n\nfunction loadPlugin(name) {\n  return require(`./plugins/${name}`)     // ← 동적 경로\n}\n\nsetTimeout(() => {\n  const config = require('./config')      // ← 나중에 로드\n}, 1000)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "61abc34b-df40-43e0-85a6-65c7006d2fa3",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "require()",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 호출되면 Node.js는 아래 순서로 동작한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "8193ce7c-a197-4662-8123-d0ed9a68400d",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "require('./math') 호출\n  1. 캐시 확인 — 이미 로드된 모듈이면 캐시에서 반환\n  2. 파일 탐색 — ./math.js, ./math/index.js 순으로 탐색\n  3. 파일 읽기 — fs.readFileSync()로 동기적으로 읽음\n  4. 래퍼 함수로 감싸서 실행\n  5. module.exports 반환\n  6. 캐시에 저장",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "8f8a334a-e25b-4845-8c09-913eba535b14",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "핵심은 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "동기적",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "이라는 것이다. ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "require()",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 호출되면 파일을 다 읽고 실행할 때까지 다음 줄로 넘어가지 않는다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5bdcfa15-44e2-452d-bf91-1c89d34557f5",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "CJS의 값 복사 방식",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "9428c57d-3023-47c7-a066-83f97fb2a9bb",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "CJS에서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "module.exports",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "로 내보낸 값은 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "복사본",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "이다. 원본이 바뀌어도 가져간 쪽에서는 모른다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "eaaf7386-c162-4b4e-ad85-0bae45b8c08d",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// counter.js\nlet count = 0\nfunction increment() { count++ }\nmodule.exports = { count, increment }",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1b38681f-cc1e-4e68-b5cc-ff646a5f98c6",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// app.js\nconst { count, increment } = require('./counter')\n\nconsole.log(count)   // 0\nincrement()\nconsole.log(count)   // 0 ← 여전히 0. count는 복사된 값이기 때문",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "825ce0e5-5b9a-49f5-854a-75a41abefb6e",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "count",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 구조분해할 때 그 시점의 값(",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "0",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": ")이 복사됐다. 이후 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "increment()",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "로 원본 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "count",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 바뀌어도, 복사본은 그대로다. 객체를 내보내면 참조가 공유되지만, 원시값은 항상 이 문제가 생긴다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "23812339-4268-4b5b-9aa8-32572dbcd162",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "ESM — 뒤늦게 나온 표준",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c3ff6593-a7bb-4b78-9830-4f7683cd984d",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "2015년, ES6 표준에 드디어 JavaScript 언어 자체의 모듈 시스템이 들어왔다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1f2fa890-1d25-4dbf-a3a7-87072f0b1d30",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// math.js\nexport function add(a, b) { return a + b }",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "34bafd78-ac2f-4f3e-9bdb-2ef983247984",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// app.js\nimport { add } from './math.js'",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "74c9ab49-d342-42da-abbf-1d3d891398b1",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "import",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 함수 호출이 아니라 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "선언",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "이다. 그래서 파일 최상단에만 위치할 수 있고, 조건부로 쓸 수 없다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "507fefc8-65fc-41e1-b7f2-4f86e14d230d",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// 문법 에러\nif (condition) {\n  import { add } from './math.js'   // ← SyntaxError\n}\n\n// 동적으로 불러올 때는 별도 문법을 쓴다\nconst { add } = await import('./math.js')  // ← dynamic import, Promise 반환",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ce39b5af-109e-49de-b17e-7e2a586882a4",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "ESM의 세 단계 로딩",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "bb1463a7-e45a-4dd7-8106-69dbe176ec85",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "ESM이 CJS와 근본적으로 다른 이유는, 모듈 로딩이 세 단계로 분리되기 때문이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "65214fab-3a7e-4a3d-90b4-bb9ef91bef32",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "1단계 — Construction (파싱)",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "91705a7a-452c-4452-b046-3981d709c823",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "코드를 실행하기 전에 모든 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "import",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 선언을 분석해서 의존성 그래프를 만든다. 재귀적으로 모든 모듈 파일을 파싱한다. 이 단계에서는 아직 코드가 실행되지 않는다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e3af79a4-ef52-43a6-bec0-551a3edf418f",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "app.js 파싱\n  → import { add } from './math.js' 발견\n  → math.js 파싱\n    → math.js의 import 확인\n    → 더 이상 없으면 완료\n  → 의존성 그래프 완성",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6f2a027e-e510-42c0-9b94-202d5f504502",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "2단계 — Instantiation (링킹)",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "962acbac-35b8-4081-9a54-18211c9b9d05",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "각 모듈의 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "export",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "에 메모리 공간을 할당한다. 아직 값은 없다. ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "import",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 해당 메모리 공간에 연결(link)한다. 이 연결이 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "라이브 바인딩(live binding)",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d8ac2058-0e46-4d9b-b73d-4505d07a299c",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "math.js의 export add → 메모리 주소 0x001 할당\napp.js의 import add  → 0x001 주소를 참조하도록 연결\n(아직 값은 없음, 주소만 연결됨)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ca3da78a-f535-4aa4-9473-5e51930bbd3b",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "3단계 — Evaluation (평가)",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "048991d4-cdba-455a-8da3-2cfd43aa7284",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "실제로 코드를 실행해서 메모리 공간에 값을 채운다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "76246391-5007-4ce7-a5e2-d03b5384d7ef",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "math.js 실행 → add 함수 생성 → 0x001에 저장\napp.js 실행  → add를 참조할 때 0x001의 값을 읽음",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e694380c-67ba-4522-8f29-eb80d5838e3f",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이 구조 덕분에 ESM은 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "라이브 바인딩",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "을 제공한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "33ad3b24-639d-4ba9-b6d7-f073a7f79404",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "엇, 모듈을 다른 파일에서도 똑같이 호출했는데 값을 공유되는데 왜 그런걸까?",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7936e52c-e327-4234-8429-766b2c723731",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "모듈 자체는 항상 싱글톤 패턴으로 구성되다보니, 모듈은 딱 한번만 평가가 된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c4289d3f-603c-437a-815f-60cfd74924c9",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "그래서 여러 파일이 같은 모듈을 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "import",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 해도 모두 같은 메모리 슬롯을 공유하게 되는 것이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "88d62ec5-c376-4831-90e3-8b6c216997f2",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "그래서 만약 호출 시마다 독립적인 초기 값을 가지고 싶게 하고 싶다면, 팩토리 함수나 클래스 형태로 내보내야한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ea8c308b-fe71-4d3a-a63c-b6f6e5f93cbc",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// counter.mjs\n\nlet globalCount = 0; // 싱글톤\n\nexport function createCounter() {\n  let count = 0\n  return {\n    increment() { count++ },\n    getCount() { return count }\n  }\n}\n\n// file-a.mjs\nimport { createCounter } from './counter.mjs'\nconst counterA = createCounter()  // ← 새 클로저, 독립적인 count\n\n// file-b.mjs\nimport { createCounter } from './counter.mjs'\nconst counterB = createCounter()  // ← 또 다른 클로저, 독립적인 count",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b153c928-b954-4a14-a902-69c74cf23cee",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "ESM의 라이브 바인딩",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "30520b12-2c3d-4fae-860b-748e743d5708",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "CJS와 달리 ESM에서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "import",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "한 값은 복사본이 아니라 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "원본에 대한 살아있는 참조",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "다. 원본이 바뀌면 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "import",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "한 쪽에서도 바뀐 값이 보인다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b6acc403-b997-4bb5-a841-d6856142ba0c",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// counter.mjs\nexport let count = 0\nexport function increment() { count++ }   // ← 원본 count를 직접 변경",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d1cf8f36-258a-41c3-a6a4-16cdae2a95dc",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// app.mjs\nimport { count, increment } from './counter.mjs'\n\nconsole.log(count)   // 0\nincrement()\nconsole.log(count)   // 1 ← 라이브 바인딩이라 원본 변경이 반영됨",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c7b99e02-0d82-404e-af87-17cd9fb5b037",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "CJS는 복사, ESM은 참조. 이 차이가 순환 참조 처리 방식을 바꾸고, 상태 공유 방식도 바꾼다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "0c84431b-27ca-41a1-9177-cb6043c7b4ea",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "순환 참조에서의 차이",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e6c5f3ab-b4e0-4211-8bfb-911538a30942",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "CJS에서 A가 B를 require하고, B가 A를 require하면 문제가 생긴다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "21180c4c-a96f-4bd5-aa30-e5bb040cdf99",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// a.js (CJS)\nconst { valueB } = require('./b')          // ← b.js 로드 시작\nmodule.exports = { valueA: 'A', valueB }\n\n// b.js (CJS)\nconst { valueA } = require('./a')          // ← a.js가 아직 로드 중\n                                           // 미완성 module.exports({}) 반환\nmodule.exports = { valueB: 'B', valueA }   // valueA는 undefined",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7be4dd57-b465-48a3-b8c2-ecdc3ab0669b",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "a.js를 로드하는 도중 b.js가 필요해서 b.js를 로드하는데, b.js가 다시 a.js를 요구한다. a.js는 아직 실행이 끝나지 않았으므로 Node.js는 현재까지 만들어진 불완전한 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "module.exports",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 반환한다. 결과적으로 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "valueA",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "undefined",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7094c7d0-6799-4c0b-819a-84d974f9179d",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "ESM은 다르다. 링킹 단계에서 메모리 주소를 먼저 연결해두기 때문에, 순환이 있어도 주소 연결 자체는 성공한다. 값이 채워지는 건 평가 단계에서 일어나고, 이때는 이미 양쪽이 서로를 참조하는 구조가 완성되어 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "aefbf495-35b1-4c1c-8b20-4558f6f8c15f",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "왜 지금 ESM으로 넘어가는가",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "3d528ba3-b05c-4e31-b15c-422daa2e4b67",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "CJS가 잘 동작했는데도 ESM으로 가려는 이유는 현대 개발의 요구사항과 CJS의 설계 사이의 간극이 점점 커졌기 때문이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7d509d5d-b460-489a-93e5-7a0b1d8bdceb",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Tree Shaking이 가능해진다",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "16820dc6-6652-4aa2-85a0-ac038991e652",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "CJS에서는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "require()",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 런타임에 실행되기 때문에, 빌드 타임에 어떤 코드가 실제로 사용되는지 알 수 없다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d232d5c4-cd57-458e-807c-47516ecf7592",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// CJS — 번들러 입장에서는 결국 _ 전체가 필요\nconst _ = require('lodash')\n_.debounce(fn, 300)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "421d482f-3367-48e7-a3e4-2d8f2b61892f",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "ESM에서는 파싱 타임에 의존성 그래프가 완성되므로, 번들러가 어떤 export가 실제로 사용되는지 정확하게 파악할 수 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "379144d2-6dff-49b4-adc4-99e06a7262d8",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// ESM — 번들러가 debounce만 사용한다는 걸 빌드 타임에 확정\nimport { debounce } from 'lodash-es'\ndebounce(fn, 300)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6d4c0c7d-b36f-4d83-88d0-f28e45734459",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "사용되지 않는 코드는 번들에서 제거된다. 이게 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Tree Shaking",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "9f8f090c-f986-43d3-802a-e54ffab3c415",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "lodash (CJS)    → ~70KB (전체 포함)\nlodash-es (ESM) → ~2KB (debounce만 사용 시)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "21f552c4-bc16-43b2-b662-d395aaa603b8",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "브라우저에서 번들러 없이 동작한다",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "725b05cd-d461-4deb-b9ac-1d1f9a47951b",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "CJS의 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "require()",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 Node.js 런타임이 주입하는 함수다. 브라우저는 이 함수를 모른다. CJS 코드를 브라우저에서 실행하려면 반드시 Webpack 같은 번들러로 변환해야 했다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "bdb918e0-277f-4a07-93ab-523dbd1b8c11",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "ESM은 JavaScript 표준이다. 브라우저가 직접 지원한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "bacefc1a-d92a-4764-aefe-1e3509b9ae65",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "<script type=\"module\" src=\"app.js\"></script>",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "65ff78af-5d40-45d5-b07b-4c7af9e070a0",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "브라우저가 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "[app.js](https://app.js)",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 받으면, ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "import",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 선언을 읽고 필요한 파일들을 직접 네트워크로 요청한다. 번들러 없이 모듈 시스템이 동작한다. 이게 프론트엔드 라이브러리로 대입하자면 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Vite",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 개발 환경에서 번들링 없이 빠르게 동작하는 이유다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "3f57e796-8893-4df3-acac-4d19e6afcd44",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Webpack 개발 서버:\n  코드 변경 → 전체(또는 청크) 다시 번들링 → 번들 파일 전달\n\nVite 개발 서버:\n  코드 변경 → 해당 파일만 다시 변환 → 브라우저가 직접 요청",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "de6ff07b-f650-48c5-ad34-38baf3e73d3b",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Top-level await를 쓸 수 있다",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f217f6f8-bced-4142-a852-6c363e5e9c3b",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "ESM의 모듈 로딩은 비동기다. 그래서 모듈 최상단에서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "await",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 쓸 수 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7a73d7e9-a9ea-4fb7-a6b7-efc19dd3ff97",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// ESM — 모듈 최상단에서 await 사용 가능\nconst config = await fetch('/api/config').then(r => r.json())\nconst db = await connectDatabase()\n\nexport { config, db }",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b8946c66-41ff-4831-86e1-983fd392b93c",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "CJS에서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "require()",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 동기 함수다. 비동기 작업이 완료될 때까지 기다릴 방법이 없다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e1891bbb-a7e7-441b-b38f-254dafebf98e",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// CJS — 최상단 await 불가\n// 비동기 초기화가 필요하면 이런 우회 패턴을 써야 했다\nlet config\n\nasync function init() {\n  config = await fetch('/api/config').then(r => r.json())\n}\n\ninit()  // 언제 완료될지 보장 없음\n\nmodule.exports = {\n  getConfig: () => config   // ← init()이 끝나기 전 호출되면 undefined\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c831fd88-146e-4c9d-9eb3-5ae8ba2976b7",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "정적 분석과 타입 추론이 정확해진다",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ef79ef6b-6790-448f-87b2-b13234bcd069",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "import",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 정적 선언이기 때문에, TypeScript 컴파일러나 IDE가 코드를 실행하지 않고도 의존성 구조를 정확히 파악할 수 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d4e8e2fe-9e5d-4dda-af36-9058b1e1e248",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// CJS — 타입 추론이 어려운 패턴들\nconst moduleName = getModuleName()\nconst mod = require(moduleName)    // ← 어떤 타입인지 알 수 없음\n\nconst { utils } = require('./utils')\nutils.doSomething()                // ← utils의 타입을 런타임 전에 알기 어려움",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "62ed7abf-bd6f-47cb-98cf-6f0e3b5dccf7",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// ESM — 정적으로 타입 추론 가능\nimport { doSomething } from './utils'   // ← IDE가 doSomething의 타입을 즉시 알 수 있음",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "eeac609a-cf42-4052-aff4-89e2b52ee643",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "자동완성이 더 정확해지고, 없는 export를 import하면 빌드 타임에 에러가 난다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5da441dd-25f2-4800-8c56-6030238525d3",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Node.js가 ESM을 늦게 지원한 이유",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "68430cfc-0e87-4990-a422-37f8f2ede1ff",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "ESM 표준이 2015년에 나왔는데, Node.js에서 안정적으로 지원된 건 2019년(Node.js 12)이다. 4년의 공백이 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6cf95dc9-fba9-4c5d-ad08-976fe0e7405a",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "비동기 설계 충돌",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "8ac03fa9-5440-40ad-80af-ea7bb26128b3",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "브라우저에서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "import",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 네트워크를 통해 파일을 가져오므로 비동기로 설계됐다. Node.js의 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "require()",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 파일 시스템에서 동기로 읽는다. ESM을 지원하려면 모듈 로딩 전체를 비동기로 바꿔야 하는데, 이는 기존 CJS 생태계를 전부 깨는 변경이었다. Node.js는 결국 CJS와 ESM을 병행 지원하는 방향으로 타협했다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "0c0806e4-cfb3-4b7e-96fd-0789135ca3ba",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "파일 확장자 문제",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f5d171a6-f272-4b77-8234-8fc5dea0bea6",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "ESM과 CJS는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": ".js",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 확장자를 공유하는데, 파싱 방식이 다르다. 어떤 방식으로 처리해야 하는지 구분하기 위해 Node.js는 새 규칙을 만들었다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "64de3873-bf20-47c3-8f8d-f6a78134006e",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": ".mjs  → 항상 ESM\n.cjs  → 항상 CJS\n.js   → package.json의 \"type\" 필드에 따라 결정\n         \"type\": \"module\"    → ESM\n         \"type\": \"commonjs\"  → CJS (기본값, 생략 시)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4620aef9-4b45-4822-8a83-c4dd04388c23",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "**__dirname**",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": ", **",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "__filename",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 부재**",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "76cc0f22-e7d4-466f-aed8-c447aabb7e31",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "CJS에서 당연하게 쓰던 변수들이 ESM에는 없다. Node.js가 모듈 래퍼로 주입해주던 것들이라서다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "43561c0b-2297-41a3-82f9-1dd3add8c48c",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// CJS — 자동으로 사용 가능\nconsole.log(__dirname)    // /Users/kim/project/src\nconsole.log(__filename)   // /Users/kim/project/src/app.js\n\n// ESM — 직접 만들어야 함\nimport { fileURLToPath } from 'url'\nimport { dirname } from 'path'\n\nconst __filename = fileURLToPath(import.meta.url)\nconst __dirname = dirname(__filename)\n\n// Node.js 22+에서는 기본 제공\nconsole.log(import.meta.dirname)    // /Users/kim/project/src\nconsole.log(import.meta.filename)   // /Users/kim/project/src/app.js",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ea7f98f2-3798-4103-b6d0-971e29fe29f3",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "듀얼 패키지 위험(Dual Package Hazard)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d2ee5be3-5177-4be8-90ae-708e3a825b0e",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "패키지가 CJS와 ESM을 동시에 지원할 때 발생하는 문제다. 과도기 상황에서 많은 라이브러리가 둘 다 지원하려다 이 문제를 만났다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "249ace30-89e7-4761-b234-9d090bbd04a5",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"exports\": {\n    \"import\":  \"./dist/index.mjs\",    // ← ESM 환경에서 로드\n    \"require\": \"./dist/index.cjs\"     // ← CJS 환경에서 로드\n  }\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "2247b077-e406-4d90-ad7d-d01c3ae93166",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "문제는 같은 프로젝트 안에서 ESM과 CJS 환경이 섞이면, 같은 패키지가 두 번 로드될 수 있다는 것이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5e6d98e9-49aa-41a3-af04-1ff43562f72d",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "앱 (ESM)\n  ├── packageA (ESM 버전 로드) → 인스턴스 #1\n  └── packageB (CJS)\n        └── packageA (CJS 버전 로드) → 인스턴스 #2\n                   ↑\n        동일 패키지인데 인스턴스가 두 개",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "61369df4-f993-482c-8b27-bc0c5f8f4ea7",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "싱글톤 패턴이나 React Context처럼 하나의 인스턴스를 공유해야 하는 경우 이 문제가 발생하면 상태가 공유되지 않는 버그로 이어진다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "3af90ef8-9849-4ca5-a0a6-a27530b0be65",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이 때문에 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "chalk v5",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": ", ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "node-fetch v3",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": ", ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "got v12",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 같은 라이브러리들이 CJS 지원을 완전히 끊고 ESM only로 전환했다. 인스턴스를 하나로 보장하기 위한 선택이었다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "db00ccd2-3f2a-43a8-8f79-294303dfaf9c",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "CJS와 ESM 핵심 비교하기",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "bc5559ae-2432-4a46-b669-e5d3b88d2bf1",
+    "type": "table",
+    "props": {
+      "textColor": "default"
+    },
+    "content": {
+      "type": "tableContent",
+      "columnWidths": [
+        null,
+        null,
+        null
+      ],
+      "headerRows": 1,
+      "rows": [
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "항목",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "CJS",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "ESM",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "문법",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "require()",
+                  "styles": {
+                    "code": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": " / ",
+                  "styles": {}
+                },
+                {
+                  "type": "text",
+                  "text": "module.exports",
+                  "styles": {
+                    "code": true
+                  }
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "import",
+                  "styles": {
+                    "code": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": " / ",
+                  "styles": {}
+                },
+                {
+                  "type": "text",
+                  "text": "export",
+                  "styles": {
+                    "code": true
+                  }
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "분석 시점",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "런타임 (동적)",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "파싱 타임 (정적)",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "로딩 방식",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "동기",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "비동기 (세 단계)",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "내보낸 값",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "복사본",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "라이브 바인딩 (참조)",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Tree Shaking",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "불가",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "가능",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "브라우저 지원",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "불가 (번들러 필요)",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "네이티브 지원",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Top-level await",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "불가",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "가능",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "조건부 로드",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "가능",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "dynamic import 사용",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "순환 참조",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "불안정 (복사 시점 문제)",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "안정적 (라이브 바인딩)",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Node.js 기본값",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "O (",
+                  "styles": {}
+                },
+                {
+                  "type": "text",
+                  "text": ".js",
+                  "styles": {
+                    "code": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": ")",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": ".mjs",
+                  "styles": {
+                    "code": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": " 또는 ",
+                  "styles": {}
+                },
+                {
+                  "type": "text",
+                  "text": "\"type\": \"module\"",
+                  "styles": {
+                    "code": true
+                  }
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "children": []
+  },
+  {
+    "id": "525711a3-b945-4d97-b8e2-07e432e95a78",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "현재는 어떤 프로젝트를 구성해야할까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6517b4a3-6385-491b-a066-3f0e242078d1",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "새로 시작하는 프로젝트로 프로덕션 환경을 구동하는 경우",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "fcef8c3e-472b-413a-a89e-3c31d5ffd098",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "package.json",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "에 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "\"type\": \"module\"",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "을 추가하면 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": ".js",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 파일이 모두 ESM으로 처리된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "733a23c7-076c-419e-b1a7-8ef235ae31e7",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"type\": \"module\"\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "fa83e0cc-2f72-4d95-8d8e-719a1d7eae10",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "TypeScript를 쓴다면 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "tsconfig.json",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "도 맞춰준다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "023ee60e-e5ce-4be8-a8e2-a5b13af945b7",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"compilerOptions\": {\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"Bundler\"    // ← Vite, webpack 등 번들러 환경\n    // \"moduleResolution\": \"NodeNext\" ← Node.js ESM 환경 (확장자 명시 필요)\n  }\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "724d4998-694a-4edd-942e-0db1f59d98e2",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "기존 CJS 프로젝트로 프로덕션 환경을 구동하는 경우",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f09e434e-77e7-43c1-bd66-59049ce70000",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "의존하는 패키지 중 ESM only로 전환된 게 있다면 마이그레이션 압박이 생기지만, 그렇지 않다면 서두를 필요는 없다. 점진적으로 전환할 때는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": ".mjs",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 확장자로 파일을 하나씩 바꾸는 방식이 안전하다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b8148c18-d7db-491e-9d4a-3ab141fbac29",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "라이브러리를 배포하는 경우",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7649b449-c5b2-4adf-9a92-785fe0572775",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "듀얼 패키지 지원이 현실적인 선택이다. ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "tsup",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "으로 CJS와 ESM 빌드를 동시에 만들 수 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "9c1fa002-e06f-477d-9bc6-d817d84ef931",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "npx tsup src/index.ts --format cjs,esm\n# dist/index.js   ← CJS\n# dist/index.mjs  ← ESM",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "19132613-d90a-42d3-b364-a781511166d6",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"main\": \"./dist/index.js\",\n  \"module\": \"./dist/index.mjs\",\n  \"exports\": {\n    \".\": {\n      \"import\":  \"./dist/index.mjs\",\n      \"require\": \"./dist/index.js\"\n    }\n  }\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7ff2242c-5d01-4e4d-86d7-e37c7d1910ca",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "CJS에서 ESM으로의 전환은 결국 모듈 시스템의 설계 철학이 바뀌는 것이다. 동기에서 비동기로, 동적에서 정적으로, 복사에서 참조로. 지금 쓰는 주요 패키지들이 어떤 방식으로 동작하는지 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "[package.json](https://package.json)",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "의 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "exports",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 필드를 직접 파악해보는 연습도 필요하다는 생각이 든다 ^,^ ..",
+        "styles": {}
+      }
+    ],
+    "children": []
+  }
+]

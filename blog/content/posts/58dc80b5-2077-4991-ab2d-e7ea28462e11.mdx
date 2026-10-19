@@ -1,0 +1,685 @@
+---
+title: "SPA에서 추구할 수 있는 좋은 코드란 무엇일까?"
+date: 2026-10-19
+publishedAt: "2026-10-19T12:48:36.086Z"
+updatedAt: "2026-10-19T12:48:36.087Z"
+description: ""
+category: "category-9606d629"
+series: "-"
+private: false
+---
+
+React와 Vue를 함께 쓰다 보면 두 프레임워크 모두 지정된 포맷팅이 너무 다르기도 하고, 추상화 방식도 생각보다 달라서 `Vue` 를 쓰다가 `React` 를 사용하게 되면 혼동되는 경우가 많이 생긴다. 예전에 풀던 과제들도 다시 풀면 롤백되어 탈락하기도 하고.. `React` 를 `Vue` 의 `template` 문법처럼 사용하는 경우도 많아서, 천천히 돌아볼겸 두 프레임워크를 동시에 사용하는 사람들을 위해 다시 한번 정리를 하고자한다.
+
+사실 두 프레임워크의 차이를 명확하게 알고있으면 되긴 하지만, `React` 에서는 한 파일에서 여러 모듈들을 임포트할 수 있고, `Vue` 의 경우에는 `SFC (Single File Component)` 이기 때문에 단 하나의 모듈만 임포트할 수 있다. 사실 자바스크립트라는 교집합이 존재하지만 이 과정에서 두 프레임워크의 차이를 명확하게 알고 있고, 어떤 방식에서 차이점을 가지고 있는지 알아야 프레임워크에서 추구하는 추상화가 가능하다는 생각이 들었다.
+
+인터넷에서 여러 문서들을 참고하고, 또 여러 과제들을 진행하면서 느꼈던 부분들을 적은 내용들이라 아마 개발자들마다 코드에 대해 생각하는 부분들이 다를 수 있겠지만 여러 문서들을 읽으며 동의했던 부분들과 내가 생각한 좋은 코드에 대한 기준을 적은 문서이니 지나가시는 분들은 가볍게 보시면 좋을 것 같다 ^,^ ..
+
+## React — 좋은 코드를 작성하는 방법
+
+### 코드는 예측 가능해야 한다
+
+좋은 코드의 기준은 하나라고 생각한다. **다음 줄이 어떻게 생겼을지 읽기 전에 예측할 수 있어야 한다.** 이름, 구조, 인터페이스가 일관된 패턴을 따를수록 읽는 사람의 인지 부하가 줄어든다. 예측이 맞으면 빠르게 읽히고, 빗나가면 흐름이 끊긴다.
+
+```javascript
+예측 가능한 코드
+
+const [isOpen, setIsOpen] = useState(false)
+//  → 어딘가에서 setIsOpen(true/false)가 나올 것이다
+
+const { data: product, isLoading } = useProduct(id)
+//  → product가 null일 수 있고, isLoading 중엔 스켈레톤을 보여줄 것이다
+
+예측 불가한 코드
+
+const [d, setD] = useState(null)
+//  → d가 뭔지, 어떤 타입인지, 언제 바뀌는지 알 수 없다
+```
+
+### 컴포넌트는 하나의 관심사만 가지는 것이 좋다
+
+컴포넌트가 커지는 가장 흔한 이유는 "여기에 추가하면 빠르니까"다. 하지만 한 컴포넌트가 데이터 페칭, 레이아웃, 인터랙션을 모두 담당하면 어느 하나를 바꿀 때 다른 것이 영향을 받는다.
+
+```javascript
+// ❌ 하나의 컴포넌트가 너무 많은 일을 함
+function ProductPage({ id }: { id: number }) {
+  const [product, setProduct] = useState<Product | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const [quantity, setQuantity] = useState(1)
+  const [isWished, setIsWished] = useState(false)
+
+  useEffect(() => {
+    fetch(`/api/products/${id}`)
+      .then(res => res.json())
+      .then(data => {
+        setProduct(data)
+        setIsLoading(false)
+      })
+  }, [id])
+
+  if (isLoading) return <Spinner />
+
+  return (
+    <div>
+      <img src={product?.imageUrl} />
+      <h1>{product?.name}</h1>
+      <p>{product?.price.toLocaleString()}원</p>
+      <div>
+        <button onClick={() => setQuantity(q => q - 1)}>-</button>
+        <span>{quantity}</span>
+        <button onClick={() => setQuantity(q => q + 1)}>+</button>
+      </div>
+      <button onClick={() => setIsWished(w => !w)}>
+        {isWished ? '♥' : '♡'}
+      </button>
+      <button onClick={() => addToCart(product, quantity)}>장바구니</button>
+    </div>
+  )
+}
+```
+
+```javascript
+// ✅ 관심사를 분리
+function ProductPage({ id }: { id: number }) {
+  const { product, isLoading } = useProduct(id)   ← 데이터 페칭 분리
+
+  if (isLoading) return <Spinner />
+  if (!product) return <NotFound />
+
+  return <ProductDetail product={product} />        ← UI 렌더링 분리
+}
+
+function ProductDetail({ product }: { product: Product }) {
+  return (
+    <div>
+      <ProductImage src={product.imageUrl} alt={product.name} />
+      <ProductInfo product={product} />
+      <ProductActions productId={product.id} price={product.price} />
+    </div>
+  )
+}
+
+function ProductActions({ productId, price }: { productId: number; price: number }) {
+  const [quantity, setQuantity] = useState(1)       ← 이 컴포넌트에서만 필요한 상태
+  const [isWished, setIsWished] = useState(false)
+
+  return (
+    <div>
+      <QuantitySelector value={quantity} onChange={setQuantity} />
+      <WishButton isWished={isWished} onToggle={() => setIsWished(w => !w)} />
+      <CartButton productId={productId} quantity={quantity} price={price} />
+    </div>
+  )
+}
+```
+
+`ProductPage`는 데이터를 가져오는 것에만 집중하고, `ProductDetail`은 레이아웃에만 집중하고, `ProductActions`는 인터랙션에만 집중한다. 각 컴포넌트를 독립적으로 테스트하고 교체할 수 있다.
+
+### 컴포넌트 상태 설계 — 어디에 위치 시켜야할까?
+
+상태를 어디에 두느냐는 코드 복잡도에 직접 영향을 준다.
+
+**상태는 그것을 필요로 하는 컴포넌트에 가장 가까운 곳에 둬야한다.**
+
+```javascript
+상태 위치 결정 기준
+
+이 컴포넌트에서만 쓰인다     → 컴포넌트 로컬 useState
+형제/부모가 함께 쓴다         → 공통 부모로 상태 끌어올리기 (lifting state up)
+멀리 떨어진 컴포넌트가 쓴다   → Context 또는 전역 상태
+URL로 관리할 수 있다          → URL searchParams
+```
+
+```javascript
+// ❌ 모든 상태를 최상단에 몰아두는 패턴
+function App() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
+  const [cartCount, setCartCount] = useState(0)
+  const [searchKeyword, setSearchKeyword] = useState('')
+  // ... 스크롤하지 않으면 어떤 상태가 어디서 쓰이는지 알 수 없다
+}
+
+// ✅ 상태는 쓰이는 곳 가장 가까이에
+function ProductList() {
+  const [searchKeyword, setSearchKeyword] = useState('')  ← 이 컴포넌트 트리에서만 필요
+
+  return (
+    <>
+      <SearchInput value={searchKeyword} onChange={setSearchKeyword} />
+      <ProductGrid keyword={searchKeyword} />
+    </>
+  )
+}
+
+function ProductCard({ product }: { product: Product }) {
+  const [isModalOpen, setIsModalOpen] = useState(false)  ← 이 카드에서만 필요
+
+  return (
+    <>
+      <img onClick={() => setIsModalOpen(true)} src={product.imageUrl} />
+      {isModalOpen && <ProductModal product={product} onClose={() => setIsModalOpen(false)} />}
+    </>
+  )
+}
+```
+
+### 상태 설계 — 어떤 형태로 설계해야할까?
+
+상태의 개수가 많아질수록 동기화 문제가 생긴다. 서로 연관된 상태는 하나의 객체로 묶거나, `useReducer`로 전환하는 것이 좋다.
+
+```javascript
+// ❌ 연관된 상태가 분산되어 있음
+const [isLoading, setIsLoading] = useState(false)
+const [data, setData] = useState<User | null>(null)
+const [error, setError] = useState<Error | null>(null)
+// isLoading=true이면서 error가 있는 상태가 생길 수 있다 — 불가능한 상태
+
+// ✅ 상태를 discriminated union으로 설계
+type AsyncState<T> =
+  | { status: 'idle' }
+  | { status: 'loading' }
+  | { status: 'success'; data: T }
+  | { status: 'error'; error: Error }
+
+const [state, setState] = useState<AsyncState<User>>({ status: 'idle' })
+
+// 불가능한 상태 조합 자체가 타입 수준에서 막힌다
+if (state.status === 'success') {
+  console.log(state.data)   ← 타입스크립트가 data를 보장함
+}
+```
+
+```javascript
+// ❌ 복잡한 폼 상태를 useState로 하나씩 관리
+const [name, setName] = useState('')
+const [email, setEmail] = useState('')
+const [phone, setPhone] = useState('')
+const [agree, setAgree] = useState(false)
+
+// ✅ useReducer로 폼 상태를 하나로 관리
+type FormState = {
+  name: string
+  email: string
+  phone: string
+  agree: boolean
+}
+
+type FormAction =
+  | { type: 'SET_FIELD'; field: keyof FormState; value: string | boolean }
+  | { type: 'RESET' }
+
+const initialState: FormState = {
+  name: '',
+  email: '',
+  phone: '',
+  agree: false,
+}
+
+function formReducer(state: FormState, action: FormAction): FormState {
+  switch (action.type) {
+    case 'SET_FIELD':
+      return { ...state, [action.field]: action.value }
+    case 'RESET':
+      return initialState
+  }
+}
+
+const [form, dispatch] = useReducer(formReducer, initialState)
+
+// 사용할 때
+dispatch({ type: 'SET_FIELD', field: 'name', value: '김현우' })
+dispatch({ type: 'RESET' })
+```
+
+### Custom Hook 설계 — 어떤 지점에서 어떤 것들을 캡슐화해야할까?
+
+Custom Hook은 상태와 그 상태를 다루는 로직을 함께 묶는 도구다. 단순히 코드를 줄이기 위해 쪼개는 것은 오히려 코드를 따라가기 어렵게 만든다.
+
+```javascript
+// ❌ 너무 잘게 쪼갠 훅 — 오히려 추적이 어려움
+function useIsOpen() {
+  const [isOpen, setIsOpen] = useState(false)
+  return { isOpen, open: () => setIsOpen(true), close: () => setIsOpen(false) }
+}
+
+// ❌ React와 무관한 계산 로직을 훅으로 만든 경우
+function useFormattedPrice(price: number) {
+  return useMemo(() => price.toLocaleString() + '원', [price])
+  // useMemo가 필요 없는 단순 계산 — 그냥 함수면 충분하다
+}
+
+// ✅ 상태와 관련 로직이 함께 있어야 의미 있는 훅
+function useImageUpload() {
+  const [preview, setPreview] = useState<string | null>(null)
+  const [isUploading, setIsUploading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  function handleFileSelect(file: File) {
+    const reader = new FileReader()
+    reader.onload = (e) => setPreview(e.target?.result as string)
+    reader.readAsDataURL(file)
+  }
+
+  async function upload(file: File): Promise<string> {
+    setIsUploading(true)
+    setError(null)
+    try {
+      const url = await uploadFile(file)
+      return url
+    } catch (e) {
+      setError('업로드에 실패했습니다')
+      throw e
+    } finally {
+      setIsUploading(false)
+    }
+  }
+
+  return { preview, isUploading, error, handleFileSelect, upload }
+}
+```
+
+순수한 계산 로직은 훅이 아닌 함수로 분리하는 것이 좋다.
+
+함수로 만들면 `renderHook` 없이 바로 단위 테스트를 작성할 수 있다.
+
+```javascript
+// 순수 함수 — React와 완전히 분리된 로직
+function formatPrice(price: number): string {
+  return price.toLocaleString() + '원'
+}
+
+function filterByCategory(products: Product[], category: string): Product[] {
+  return category === 'all' ? products : products.filter(p => p.category === category)
+}
+
+function sortByPrice(products: Product[], order: 'asc' | 'desc'): Product[] {
+  return [...products].sort((a, b) =>
+    order === 'asc' ? a.price - b.price : b.price - a.price
+  )
+}
+
+// 컴포넌트에서는 조합해서 사용
+const displayed = useMemo(
+  () => sortByPrice(filterByCategory(products, category), sortOrder),
+  [products, category, sortOrder]
+)
+```
+
+### Props 설계하기 — 인터페이스를 어떻게 만들 수 있을까?
+
+컴포넌트의 Props는 내부 구현을 숨기고 명확한 계약을 드러내야 한다.
+
+Props 이름이 호출하는 쪽의 상태 구조를 반영하면 컴포넌트의 재사용성이 떨어진다.
+
+```javascript
+// ❌ 부모의 상태 구조가 드러남
+interface DatePickerProps {
+  date: string
+  setDate: (v: string) => void   ← "부모가 date라는 useState를 쓴다"가 노출됨
+}
+
+// ✅ 네이티브 input 인터페이스를 따름
+interface DatePickerProps {
+  value?: string
+  defaultValue?: string
+  min?: string
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void
+  onBlur?: (e: FocusEvent<HTMLInputElement>) => void
+  name?: string
+}
+
+export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
+  ({ value, defaultValue, min, onChange, onBlur, name }, ref) => {
+    const inputProps = value !== undefined ? { value } : { defaultValue }
+    return (
+      <input
+        ref={ref}
+        type="date"
+        {...inputProps}
+        min={min}
+        onChange={onChange}
+        onBlur={onBlur}
+        name={name}
+      />
+    )
+  }
+)
+```
+
+관련 있는 Props는 타입으로 묶는 것이 좋다. 항목이 추가되어도 시그니처가 변하지 않는다.
+
+```javascript
+// ❌ 항목이 늘어날수록 시그니처가 폭발
+<SearchFilter
+  keyword={keyword}
+  category={category}
+  startDate={startDate}
+  endDate={endDate}
+  onKeywordChange={setKeyword}
+  onCategoryChange={setCategory}
+  onStartDateChange={setStartDate}
+  onEndDateChange={setEndDate}
+/>
+
+// ✅ 타입으로 묶음
+type SearchFilter = {
+  keyword: string
+  category: string
+  startDate: string
+  endDate: string
+}
+
+<SearchFilter filter={filter} onFilterChange={setFilter} />
+```
+
+## Vue — 좋은 코드를 작성하는 방법
+
+### 컴포넌트는 하나의 관심사만 가지는 것이 좋다
+
+Vue에서도 `<script setup>` 안에 모든 것을 넣으면 컴포넌트가 무거워진다.
+
+```javascript
+<!-- ❌ 하나의 컴포넌트가 너무 많은 일을 함 -->
+<script setup lang="ts">
+const route = useRoute()
+const product = ref<Product | null>(null)
+const isLoading = ref(true)
+const quantity = ref(1)
+const isWished = ref(false)
+
+onMounted(async () => {
+  product.value = await fetchProduct(Number(route.params.id))
+  isLoading.value = false
+})
+</script>
+
+<template>
+  <div v-if="isLoading"><Spinner /></div>
+  <div v-else>
+    <img :src="product?.imageUrl" />
+    <h1>{{ product?.name }}</h1>
+    <!-- 수십 줄의 인터랙션 로직 -->
+  </div>
+</template>
+```
+
+```javascript
+<!-- ✅ 관심사 분리 -->
+<!-- ProductPage.vue -->
+<script setup lang="ts">
+const props = defineProps<{ id: number }>()
+const { product, isLoading } = useProduct(props.id)  ← 데이터 페칭 분리
+</script>
+
+<template>
+  <Spinner v-if="isLoading" />
+  <ProductDetail v-else-if="product" :product="product" />
+  <NotFound v-else />
+</template>
+```
+
+```javascript
+<!-- ProductActions.vue — 인터랙션만 담당 -->
+<script setup lang="ts">
+defineProps<{ productId: number; price: number }>()
+
+const quantity = ref(1)          ← 이 컴포넌트에서만 필요한 상태
+const isWished = ref(false)
+</script>
+
+<template>
+  <QuantitySelector v-model="quantity" />
+  <WishButton v-model="isWished" />
+  <CartButton :product-id="productId" :quantity="quantity" :price="price" />
+</template>
+```
+
+***
+
+### defineModel()로 양방향 바인딩 설계하기
+
+Vue 3.4부터 `defineModel()` 매크로가 안정화되었다고 한다.
+
+기존에는 `defineProps` + `defineEmits`를 조합해야 했던 양방향 바인딩이 한 줄로 줄어든다.
+
+```javascript
+<!-- ❌ Vue 3.3 이하 — 보일러플레이트가 많음 -->
+<script setup lang="ts">
+const props = defineProps<{ modelValue: string }>()
+const emit = defineEmits<{ 'update:modelValue': [value: string] }>()
+
+function handleChange(e: Event) {
+  emit('update:modelValue', (e.target as HTMLInputElement).value)
+}
+</script>
+
+<template>
+  <input :value="props.modelValue" @change="handleChange" />
+</template>
+```
+
+```javascript
+<!-- ✅ Vue 3.4+ — defineModel() -->
+<script setup lang="ts">
+const value = defineModel<string>({ default: '' })
+</script>
+
+<template>
+  <input v-model="value" />
+</template>
+```
+
+여러 개의 v-model이 필요한 경우도 이름을 붙이면 된다.
+
+```javascript
+<!-- DateRangePicker.vue -->
+<script setup lang="ts">
+const startDate = defineModel<string>('start', { default: '' })
+const endDate = defineModel<string>('end', { default: '' })
+</script>
+
+<template>
+  <input type="date" v-model="startDate" />
+  <input type="date" v-model="endDate" :min="startDate" />
+</template>
+
+<!-- 사용하는 쪽 -->
+<DateRangePicker v-model:start="start" v-model:end="end" />
+```
+
+***
+
+### 상태 설계 — ref vs reactive
+
+`ref`와 `reactive` 중 어떤 걸 써야 할지 헷갈리는 경우가 많다.
+
+처음에 `reactive` 는 그냥 사용하지 말자~ 라고 생각했었는데 폼과 같은 복잡한 데이터 구조에서는 유용하기도 하다.
+
+```javascript
+// ref — 원시값, 또는 교체가 일어나는 참조에 적합
+const count = ref(0)
+const user = ref<User | null>(null)
+
+// 나중에 객체 자체를 교체할 수 있다
+user.value = await fetchUser(id)   ← ref는 교체 가능
+
+// reactive — 내부 속성만 바뀌는 객체에 적합
+const filter = reactive({
+  keyword: '',
+  category: 'all',
+  sortOrder: 'asc' as 'asc' | 'desc',
+})
+
+filter.keyword = '나이키'   ← 교체 없이 내부 속성만 변경
+
+// ❌ reactive는 객체 자체를 교체하면 반응성이 끊긴다
+// filter = { keyword: '나이키', category: 'all', sortOrder: 'asc' }  ← 절대 이렇게 쓰면 안 됨
+```
+
+실무에서는 `ref`를 기본으로 쓰고, 폼 상태처럼 여러 속성을 한 덩어리로 다루는 경우에만 `reactive`를 선택하는 방식이 안전하다.
+
+***
+
+### Composable 설계 — 무엇을 묶어야 할까
+
+Composable은 반응형 상태와 관련 로직을 함께 묶는 도구다. Vue 반응형 API(`ref`, `computed`, `watch`, `onMounted`)가 실제로 필요한 경우에만 Composable로 만드는 것이 좋다.
+
+```javascript
+// ❌ Vue 반응형과 무관한 계산 로직을 Composable로 만든 경우
+export function useFilteredProducts(products: Ref<Product[]>, filter: Ref<Filter>) {
+  return computed(() =>
+    products.value
+      .filter(p => p.category === filter.value.category)
+      .sort((a, b) => a.price - b.price)
+  )
+  // computed만 쓴다고 Composable이 될 필요는 없다
+}
+
+// ✅ 순수 함수로 분리 — 테스트가 쉽고 Vue 없이도 동작
+function filterProducts(products: Product[], filter: Filter): Product[] {
+  return products
+    .filter(p => p.category === filter.category)
+    .sort((a, b) =>
+      filter.sortOrder === 'asc' ? a.price - b.price : b.price - a.price
+    )
+}
+
+// 컴포넌트에서는 computed로 감싸서 사용
+const filtered = computed(() => filterProducts(products.value, filter))
+```
+
+반응형 + 라이프사이클이 조합될 때 Composable이 실제로 가치를 발휘한다.
+
+```javascript
+// ✅ 진짜 Composable이 필요한 경우 — 반응형과 라이프사이클이 함께 필요함
+export function useIntersectionObserver(target: Ref<HTMLElement | null>) {
+  const isVisible = ref(false)
+
+  onMounted(() => {
+    if (!target.value) return
+
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible.value = entry.isIntersecting
+    })
+
+    observer.observe(target.value)
+    onUnmounted(() => observer.disconnect())
+  })
+
+  return { isVisible }
+}
+
+// 컴포넌트에서
+const cardRef = ref<HTMLElement | null>(null)
+const { isVisible } = useIntersectionObserver(cardRef)
+```
+
+### Props 설계 — 인터페이스를 어떻게 만들 것인가
+
+Vue의 `defineProps`는 TypeScript 제네릭 문법을 그대로 지원한다.
+
+Props 이름이 부모의 상태 구조를 드러내면 재사용성이 떨어진다.
+
+```javascript
+<!-- ❌ 부모의 상태 구조가 Props로 새어나옴 -->
+<script setup lang="ts">
+defineProps<{
+  date: string
+  setDate: (v: string) => void   ← 부모 구현이 노출됨
+}>()
+</script>
+```
+
+```javascript
+<!-- ✅ 컴포넌트 자신의 역할만 드러내는 인터페이스 -->
+<script setup lang="ts">
+const value = defineModel<string>({ default: '' })
+
+defineProps<{
+  min?: string
+  max?: string
+  disabled?: boolean
+}>()
+</script>
+
+<template>
+  <input
+    type="date"
+    v-model="value"
+    :min="min"
+    :max="max"
+    :disabled="disabled"
+  />
+</template>
+```
+
+관련 있는 Props는 타입으로 묶는 것이 좋다.
+
+```javascript
+<!-- ❌ 항목이 늘어날수록 시그니처가 폭발 -->
+<script setup lang="ts">
+defineProps<{
+  keyword: string
+  category: string
+  startDate: string
+  endDate: string
+}>()
+
+defineEmits<{
+  'update:keyword': [value: string]
+  'update:category': [value: string]
+  'update:startDate': [value: string]
+  'update:endDate': [value: string]
+}>()
+</script>
+
+<!-- ✅ 타입으로 묶어서 인터페이스를 안정적으로 유지 -->
+<script setup lang="ts">
+type SearchFilter = {
+  keyword: string
+  category: string
+  startDate: string
+  endDate: string
+}
+
+const props = defineProps<{ filter: SearchFilter }>()
+
+const emit = defineEmits<{
+  'update:filter': [filter: SearchFilter]
+}>()
+
+function handleChange<K extends keyof SearchFilter>(key: K, value: SearchFilter[K]) {
+  emit('update:filter', { ...props.filter, [key]: value })
+}
+</script>
+```
+
+## React와 Vue 라이브러리 패턴 비교해보기
+
+| 관심사        | React                             | Vue                     |
+| ---------- | --------------------------------- | ----------------------- |
+| 양방향 바인딩    | `value` + `onChange` (controlled) | `defineModel()` (3.4+)  |
+| 로컬 상태      | `useState` / `useReducer`         | `ref` / `reactive`      |
+| 파생 상태      | `useMemo`                         | `computed`              |
+| 사이드 이펙트    | `useEffect`                       | `watch` / `watchEffect` |
+| 로직 캡슐화     | Custom Hook                       | Composable              |
+| 컴포넌트 간 공유  | Context                           | `provide` / `inject`    |
+| DOM 접근     | `useRef`                          | `ref` (template ref)    |
+
+## 추상화는 언제 해야 좋을까?
+
+추상화는 코드를 단순히 숨기는 플로우가 아니라 **반복이 실제로 발생했을 때, 변경 가능성이 있는 경계가 생겼을 때** 의미가 생긴다고 생각한다. 추상화 전에 확인해야할 부분들은 아래와 같다.
+
+* 이 로직이 두 곳 이상에서 실제로 사용되고 있는지?
+
+* 내부 구현이 바뀌어도 인터페이스는 유지될 수 있는지?
+
+* 추상화 후에 코드가 이전보다 더 예측 가능해지는지?
+
+세 질문 중 하나도 해당하지 않으면 추상화는 유지보수 비용만 늘어날 수 있다. React의 Custom Hook이나 Vue의 Composable을 너무 잘게 쪼개면 코드를 따라가기 위해 파일을 여러 개 열어야 하는 상황이 생긴다.
+
+응집도는 파일 수가 아니라 **관련 있는 코드가 얼마나 가까이 있는가**로 판단하는 것이 좋다. 항상 개발을 진행하면서 확장성을 생각하며 개발을 진행하지만 이 확장성이 오히려 현재 구현되지 않는 기능까지 고려하며 개발을 진행하다보니 나만 알 수 있는 코드가 되어버리는 경우가 정말 많다.
+
+코드는 영구적인 것이 아니라, 항상 다듬고 다듬어주는 글과 같은 존재라고 생각이 든다. 현재에서 최선의 코드를 작성하고, 이 코드가 추후에는 어떤 기능이 추가되었을 때 또 어떻게 변화할지는 개발자가 계속해서 신경을 써줘야하는 몫이라고 생각이 든다.
+

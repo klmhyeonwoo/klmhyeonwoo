@@ -1,0 +1,642 @@
+[
+  {
+    "id": "f93dc386-80c1-4aba-b4ec-35dae42797af",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Vuetify 컴포넌트를 로드하면 브라우저가 새로고침된다?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "44eb815a-0cd7-40eb-8884-08867b72158c",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Webpack",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 에서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Vite",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 환경으로 전환을 진행하면서 프론트엔드 인터페이스 라이브러리의 설정 값도 같이 마이그레이션을 진행을 해줘야했는데, 초기에는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "vite.config.js",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "의 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "optimizeDeps.include ",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "옵션을 통해 사전 번들링으로 최적화를 진행하려고 했으나 이때 계속해서 페이지 이동마다 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Vuetify",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 컴포넌트를 로드하다가 리로딩되는 현상이 발생한다. 이를 해결하기 위해 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Vuetify",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 의 스캐폴딩 프로젝트를 들여다보았고, 이 과정에서 해결책을 기록하고자 한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c185e075-ded8-40a2-a6bc-bd9011579f28",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "vue-cli",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 나 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "vite",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 기반 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "vue",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 프로젝트에서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "vuetify",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 를 사용할 때, ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "vite.config.js",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "의 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "optimizeDeps.exclude ",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "옵션은 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Vite",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 의 사전 번들링(pre-bundling) 과정에서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "vuetify",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 자체의 내부 라이브러리( ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "vue-demi",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " , ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "vuetify/lib/",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " , ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "etc",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": ") 를 제외하여 개발 서버 시작 속도를 높이거나 특정 충돌 문제를 해결하는데 사용된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5928a70c-3a0d-4d17-9779-b075d3aba2a7",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "vuetify",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 가 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "commonJS",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 방식이거나, 복잡한 내부 의존성을 가질 때 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Vite",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 번들링 최적화와 충돌할 수 있어, 해당 모듈을 제외시켜 느린 로딩, 스타일 깨짐 등의 문제 등을 방지할 수 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "98d09f6d-a914-4262-9719-2fb5fcdd2294",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "import { defineConfig } from 'vite';\nimport Vue from '@vitejs/plugin-vue';\nimport Vuetify from 'vite-plugin-vuetify';\n \nexport default defineConfig({\n    plugins: [\n        Vue(),\n        Vuetify(), // vite-plugin-vuetify 사용 시에\n    ]\n    optimizeDeps: {\n        // Vuetify 관련 모듈을 제외목록에 추가\n        exclude: [\n            'vuetify\n        ]\n        // 경우에 따라 특정 모듈을 강제로 포함할 수도 있다.\n        // include: ['vue']\n    }\n});",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5ad2f06d-fb31-4fa8-866d-ee674820edb6",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "vuetify",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 를 exclude 처리하는 이유",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1f9d8acd-22bd-49f4-b329-b01f60e21159",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "해당 해결책은 임시방편의 해결책이 아닌, ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "공식 **",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "vuetify",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 스캐폴딩 프로젝트에서도 기본적으로 설정**되어있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5b5b3ed6-5483-4695-89d4-cc88a2216386",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "개발 서버 시작 속도가 개선된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "345b9bb0-64a6-410f-b43a-82e1365e4fe1",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "vuetify",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "처럼 크고 복잡한 라이브러리를 사전 번들링하는 대신에 개발 시에는 브라우저가 직접 로드하도록 하여 개발 서버(",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Vite",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": ")의 시작 속도를 높일 수 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "8a53118e-f2f5-4ec5-ad96-1c6b04c68190",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "CommonJS 문제를 해결한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6052e372-b84c-42cd-9458-edbd1021c85e",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "vuetify",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 내부 일부가 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "commonJS",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "포맷을 사용하는데, ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Vite",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "ESM(ECMAScript Modules)",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "에 최적화되어있어 번들링 시 문제가 발생할 수 있다. exclude를 통해 번들링 과정을 건너뛰게한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "fb423820-5631-4fa6-8b1c-9a4995d0cbac",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "특정 버그를 회피한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "389371a4-f461-4706-bdd4-78ba3a1c71e6",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Vite",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "와 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "vuetify",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 간의 호환성 문제로 인해 스타일이 깨지거나 컴포넌트 로딩에 문제가 발생할 때, 이 옵션으로 문제를 우회할 수 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "9229bc14-9e36-4aec-9ece-05977c7d83ec",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "vite-plugin-vuetify를 사용하는 이유",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "38f5ddb8-4503-4173-830f-f4c935e616ef",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "vuetify",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "의 auto-import 및 tree-shaking 기능이 활성화되어 효율적인 개발이 가능하며, ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "optimizeDeps.exclude ",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "설정은 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Vite",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 환경에서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "vuetify",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 원활하게 사용할 수 있게 하기 위한 중요한 설정 중 하나이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  }
+]

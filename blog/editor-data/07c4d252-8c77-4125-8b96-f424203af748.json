@@ -1,0 +1,2265 @@
+[
+  {
+    "id": "4d4059d0-d965-41e2-8ea2-da51ef0d7173",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "문득 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "ref.value = x",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 가 화면으로 전달되기 까지의 내부 과정들이 궁금해졌다. 상태 값이 바뀌면 컴포넌트가 리렌더링되는 라이프사이클과 빗대어 생각을 하게 되지만, 내부적으로는 어떤 값들이 트리거되어 레이아웃 상에 반영되는지 그 코어의 개념을 모르는 듯한 느낌이 들었다 ^,^ ..",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c9c7e6f0-1961-4b73-8b9c-3de489fbd1e3",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Vue의 반응형이 왜 이런 구조를 갖게 됐을까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "3901d68a-9550-4d79-9b4a-802309d1fe6b",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "초기 프론트엔드 개발에서 상태 변화를 화면에 반영하려면 직접 DOM을 조작해야 했다. ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "[document.getElementById](https://document.getElementById)",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "로 노드를 찾고 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "innerHTML",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "을 바꾸는 방식이었다. 상태가 늘어날수록 \"이 값이 바뀌면 저 DOM을 바꿔야 한다\"는 연결고리를 직접 관리해야 했고, 그 관계가 복잡해지면 추적이 불가능해졌다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "cdbdda52-32c2-4ca7-a6e0-36b536d7c745",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Vue 2에서 이 문제를 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "[Object.defineProperty](https://Object.defineProperty)",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 기반의 반응형 시스템으로 해결하려 했다. 데이터가 바뀌면 연결된 DOM이 자동으로 업데이트되는 구조였다. 근데 배열 변이나 런타임에 추가된 프로퍼티는 감지하지 못하는 한계가 있었다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7386b616-8259-4664-a192-5e16a2adcd60",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Vue 3에서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Proxy",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 기반으로 전면 재설계했다. ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "ref",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 그 반응형 시스템의 가장 기본적인 단위다. 숫자, 문자열 같은 primitive 값은 Proxy로 직접 감쌀 수 없기 때문에, ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "ref",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": ".value",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 프로퍼티 안에 값을 담고 거기에 getter/setter를 붙이는 방식으로 반응형을 구현한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b3b85e35-fbb4-4f90-a458-bb59431e919b",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "왜 Object.defineProperty 는 배열 변이나 추가된 프로퍼티를 감지하지 못할까?",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "3e04dc32-635b-4f7b-85e4-ccafac52ad5a",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "link",
+        "href": "https://Object.defineProperty",
+        "content": [
+          {
+            "type": "text",
+            "text": "Object.defineProperty",
+            "styles": {}
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": " 는 이미 존재하는 속성의 값을 변경할 때 가로채기 위해 사용이 되는데, 동적으로 추가되는 구조 전체를 감시하는 것이 아니라 정의하는 싲머에 존재하는 특정 키들에 대한 게터와 세터를 설정하기 때문에 동적으로 추가되는 프로퍼티에 대해서는 감시가 설정되어있지 않아 감지를 할 수 없다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "59f15896-348f-46ff-b3ff-3f73411e1dfd",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "ref는 내부적으로 어떻게 생겼을까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "92badede-0dd9-4e0f-85ca-2ffd02661384",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "ref(0)",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "을 호출하면 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "RefImpl",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "이라는 클래스의 인스턴스가 만들어진다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f41bf820-0fb3-4785-8cd0-51e5347a76e2",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// ref.ts (단순화)\nclass RefImpl {\n  _value      // ← 실제 값\n  _rawValue   // ← 원본 값 (비교용)\n  dep = undefined  // ← 이 ref를 구독 중인 effect 집합\n\n  constructor(value) {\n    this._rawValue = value\n    this._value = value  // (객체면 reactive()로 감싸지만 일단 생략)\n  }\n\n  get value() {\n    trackRefValue(this)  // ← \"지금 누가 나를 읽고 있으면 dep에 등록해줘\"\n    return this._value\n  }\n\n  set value(newVal) {\n    if (hasChanged(newVal, this._rawValue)) {  // ← 값이 실제로 바뀌었을 때만\n      this._rawValue = newVal\n      this._value = newVal\n      triggerRefValue(this)  // ← \"나를 구독 중인 effect들에게 알려줘\"\n    }\n  }\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5f07d14c-ecaf-43c8-a699-7f8aa282c2a7",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "dep",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "이라는 필드가 지금 현재 바라보고 있는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "ref",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 를 바라보고 있는 이펙트들의 집합이기 때문에 핵심이며, \"지금 나를 읽고 있는 코드\"를 여기에 담아둔다. 값이 바뀌면 이 목록에 있는 코드들에게 알린다. 이 구독/알림 메커니즘이 반응형의 본질이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "8afd1434-a379-43bc-80f2-1eba8e1a3a57",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "trackRefValue",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "와 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "triggerRefValue",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 하는 일",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "0a969c15-511a-4d2c-8468-f9c82f269194",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// ref를 구독중이라면 dep에 등록\nfunction trackRefValue(ref) {\n  // activeEffect: 지금 실행 중인 effect (computed, watch, 렌더 함수 등)\n  if (activeEffect) {\n    ref.dep = ref.dep || new Set()\n    ref.dep.add(activeEffect)  // ← \"현재 effect가 이 ref를 구독 중\"이라고 기록\n  }\n}\n\n// ref를 구독중인 이펙트들에게 전파\nfunction triggerRefValue(ref) {\n  if (ref.dep) {\n    ref.dep.forEach(effect => {\n      if (effect.scheduler) {\n        effect.scheduler()  // ← 렌더 effect는 이 경로 (바로 실행 말고 큐에 넣음)\n      } else {\n        effect.run()        // ← 일반 effect는 바로 실행\n      }\n    })\n  }\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5b23ede2-49da-4327-b9cf-24324e61f752",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "컴포넌트는 어떻게 ref의 변화를 감지할까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "cc1a3fd0-0847-4c8e-b88e-206f65a4254a",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "컴포넌트가 처음 마운트될 때, Vue는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "렌더 함수를 ReactiveEffect로 감싼다.",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 렌더 함수가 실행되면서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "[ref.value](https://ref.value)",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 읽으면, ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "trackRefValue",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 호출되고 렌더 effect가 ref의 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "dep",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "에 등록된다. (해당 부분이 헷갈리면 위의 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "RefImpl",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 구조 부분을 한번 확인해보자)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4232dd15-31bf-40b6-b7e7-b43f47fd957d",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "쉽게 말하면, 화면을 그리는 과정에서 어떤 값을 읽었는지를 자동으로 기록한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d24f1601-24bf-4713-9e82-fd8425292f9f",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// renderer.ts (단순화)\nconst setupRenderEffect = (instance, container) => {\n  const componentUpdateFn = () => {\n    if (!instance.isMounted) {\n      // 최초 마운트: 렌더 함수 실행 → DOM 생성\n      const subTree = renderComponentRoot(instance)\n      patch(null, subTree, container)\n      instance.isMounted = true\n    } else {\n      // 업데이트: 렌더 함수 다시 실행 → 이전 vnode와 비교 → DOM 갱신\n      const nextTree = renderComponentRoot(instance)\n      patch(instance.subTree, nextTree, container)\n      instance.subTree = nextTree\n    }\n  }\n\n  const effect = new ReactiveEffect(\n    componentUpdateFn,\n    () => queueJob(instance.update)  // ← scheduler: 바로 실행 말고 큐에 넣어라\n  )\n\n  effect.run()  // ← 최초 실행 (마운트) + 의존성 수집\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "39c422ec-6eff-463c-a941-6c1787fcc707",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "마운트 시 의존성이 수집되는 흐름",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "deb2c804-a67d-46ae-a86b-21b792240d32",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "effect.run() 호출\n  → activeEffect = 렌더 effect\n  → renderComponentRoot() 실행\n    → template 안에서 count.value 읽기\n      → trackRefValue(count)\n      → count.dep.add(렌더 effect)  ← 이 컴포넌트가 count를 구독 중으로 등록\n  → activeEffect 복원",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e38ade2d-e334-4513-b785-d2fa91d920e5",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "ref 값이 바뀌면 어떤 순서로 화면까지 반영될까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "8b48cbf4-4e78-49b3-9f46-e3e592bac4d6",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이제 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "count.value = 1",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "을 실행하면 무슨 일이 벌어지는지 단계별로 따라가본다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "96612c5c-30ef-42aa-9557-26539ea22997",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "1단계: setter → 구독자에게 알림",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "896ebc64-0fae-49f5-8d7f-95fac2db6a22",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "count.value = 1  (기존: 0)\n  → hasChanged(1, 0) === true\n  → triggerRefValue(count)\n    → count.dep 순회\n    → 렌더 effect 발견\n    → effect.scheduler() 호출\n      → queueJob(instance.update)  ← \"큐에 등록\"",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "491a01f3-8ca0-4526-b888-bc50c7a0976b",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "왜 변경 즉시 렌더링을 하지 않고 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "queueJob",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "이라는 큐에 넣는지에 대한 의문이 드는 과정이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "bd11511c-f7a1-48c3-b5cb-c15fe7f996b0",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "왜 변경되어 반영되는 작업을 즉시 적용하지 않을까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ed2ff2d5-abd2-4661-a5ed-ad5c5ed4c866",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "2단계: 왜 큐에 넣을까? — 스케줄러와 마이크로태스크",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ba7608fa-1101-4d85-9eab-24bd9458b36c",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "한 번의 동작에서 ref를 여러 개 바꾸는 경우를 생각해보면 이유가 명확해진다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f971ac8c-f1f2-491a-890b-de2a020f8e35",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "count.value = 1\nname.value = 'kim'\nflag.value = true",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "fc476c50-04ed-4033-b0fc-37a537c7d307",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "세 줄이 실행될 때마다 즉시 렌더링하면 화면이 세 번 다시 그려진다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "2e7cd0b7-1f85-4c2f-a055-de207d231b18",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "근데 결국 사용자에게는 세 가지가 모두 반영된 최종 상태만 보여주면 된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b8931662-f5f8-4e78-b2c5-d14908e6719d",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "그래서 Vue는 렌더링을 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "마이크로태스크",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "로 미룬다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7766a0fb-f765-48b6-a042-d5548ea7408a",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// scheduler.ts (단순화)\nconst queue = []\n\nfunction queueJob(job) {\n  if (!queue.includes(job)) {\n    queue.push(job)\n  }\n  // 아직 실행 예약 안 됐으면: 마이크로태스크로 예약\n  if (!isFlushPending) {\n    isFlushPending = true\n    Promise.resolve().then(flushJobs)  // ← 동기 코드가 전부 끝난 직후 실행\n  }\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "eb717f87-d574-41ff-be78-5ad2db041d26",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "마이크로태스크",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "란, 현재 실행 중인 동기 코드가 모두 끝난 직후, 다음 렌더 프레임 전에 실행되는 작업이다. ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Promise.resolve().then(...)",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "이 바로 마이크로태스크를 예약하는 방법이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5ea04cb0-59cf-4546-a70e-2038a9532e46",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "[동기 코드 실행]\ncount.value = 1    → 값 즉시 변경 완료 → \"렌더링 job\" 큐에 추가, 마이크로태스크 예약\nname.value = 'kim' → 값 즉시 변경 완료 → \"렌더링 job\" 이미 큐에 있음 → skip\nflag.value = true  → 값 즉시 변경 완료 → \"렌더링 job\" 이미 큐에 있음 → skip\n// 동기 코드 종료: 값은 셋 다 이미 바뀐 상태\n\n[마이크로태스크 실행]\n  → flushJobs()\n  → instance.update() 한 번만 실행\n  → count=1, name='kim', flag=true 를 한 번에 화면에 반영",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "dce56447-1607-477a-a844-63dca131d2b7",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이게 바로 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "nextTick",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "이 필요한 이유다. 내부 값은 바로 변하더라도 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "[ref.value](https://ref.value)",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 바꾸는 코드 바로 다음 줄에서는 DOM이 아직 업데이트되지 않은 상태다. 마이크로태스크가 아직 실행되지 않았기 때문이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "24011e29-82c9-475d-b12b-fa4e9bf75e1d",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "count.value = 1\n\nconsole.log(el.textContent)  // ← 아직 이전 값 (마이크로태스크 실행 전)\n\nawait nextTick()             // ← 마이크로태스크(flushJobs)가 끝날 때까지 기다림\n\nconsole.log(el.textContent)  // ← 새 값 반영됨",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e9e45860-ceef-4dd1-9aac-6d39c16cdc58",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "nextTick",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "의 구현을 보면 왜 이게 동작하는지 명확해진다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "feaf1522-9be1-4954-97ab-8ee55cd31ab5",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "export function nextTick(fn) {\n  const p = currentFlushPromise || Promise.resolve()\n  return fn ? p.then(fn) : p\n  // currentFlushPromise: 현재 진행 중인 flushJobs Promise\n  // → flushJobs가 끝난 뒤에 fn을 실행\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "18b5797e-e34a-45ce-9c3d-4aea1fe64639",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "3단계: 컴포넌트 업데이트 — 새 vnode 생성",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "619578c1-0c40-49c2-95ac-ff8eaa81dd30",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "flushJobs",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 실행되면 큐에 있던 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "instance.update",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 호출된다. 이건 결국 렌더 함수가 다시 실행되면서 새 vnode 트리가 만들어지는 것이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c3174557-c633-4f39-bde5-003b7e5c7a89",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "vnode(가상 DOM)",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "란 실제 DOM의 복사본을 JavaScript 객체로 표현한 것이다. 실제 DOM 조작은 느리기 때문에, 먼저 가벼운 JavaScript 객체끼리 비교해서 꼭 필요한 변경만 실제 DOM에 반영한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1b98988a-4ea3-4024-b5b1-d11371546d7b",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "const componentUpdateFn = () => {\n  const nextTree = renderComponentRoot(instance)  // ← 새 vnode 생성\n  const prevTree = instance.subTree               // ← 이전 vnode\n  instance.subTree = nextTree\n  patch(prevTree, nextTree, container)            // ← 비교 후 DOM 업데이트\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "3d237cb6-912b-4ed3-95cb-2b1beb31d04c",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "4단계: virtual DOM 패치 — 최소한의 DOM 조작",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f2893c2f-1a76-4f87-aa2d-eb34763bc8a3",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "patch",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "*(prevTree, nextTree)에서 이전 vnode와 새 vnode를 비교한다. 달라진 부분만 실제 DOM에 반영한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f87b934f-8ae8-4f75-a56a-e26e5f18db66",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "patch ?",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e49b9268-71dc-4c3f-8efc-4161bd81d520",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이전 vnode와 새 vnode를 비교해 실제 DOM에 최소한의 변경만 가하는 함수. 타입이 같으면 속성과 자식을 재귀적으로 비교하고, 타입이 다르면 기존 DOM을 제거하고 새로 생성한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7f8c9406-811c-4137-a2b0-b6e2beda1513",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "patch는 뿌리(컴포넌트 루트)부터 시작해 자식으로 재귀적으로 내려간다. 바뀐 부분을 만날 때까지 트리를 탐색하고, 바뀐 노드에서만 실제 DOM 조작이 발생한다. 아래 템플릿을 기준으로 세 가지 변화 시나리오를 따라가본다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "a7d76b3d-d39d-4f69-8277-21d7e8b24b10",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "<div>\n  <h1>{{ title }}</h1>\n  <p :class=\"{ active: isActive }\">{{ count }}</p>\n  <ul>\n    <li v-for=\"item in items\" :key=\"item.id\">{{ item.name }}</li>\n  </ul>\n</div>",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5c25c6ee-56ec-46d0-bfd8-9a86c8b5b999",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "시나리오 1: 텍스트만 바뀐 경우 (",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "**count.value++**",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": ")",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e0a7628a-2e43-40d1-a49c-d5dd5972aa95",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "patch(oldRoot, newRoot)\n  └─ div 타입 동일 → patchElement\n       ├─ h1: 텍스트 동일 → 아무것도 안 함\n       ├─ p: 타입 동일 → patchElement\n       │    ├─ patchProps: class 동일 → 아무것도 안 함\n       │    └─ patchChildren: 텍스트 '0' → '1'\n       │         → el.textContent = '1'  ← DOM 조작 1회\n       └─ ul: 자식 동일 → 아무것도 안 함",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "a8b6335b-67af-4fa6-a84a-336d5bed058a",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "h1",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "과 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "ul",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "은 비교는 하지만 달라진 게 없으므로 DOM 조작이 일어나지 않는다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6422d629-1802-44fd-9e38-c096b040bce0",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "시나리오 2: 속성과 텍스트가 함께 바뀐 경우 (",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "**isActive.value = true**",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": ", **",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "count.value++",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": ")**",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f476158b-6f57-4e3d-8e5a-d77c9766334f",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "patch(oldRoot, newRoot)\n  └─ div → patchElement\n       ├─ h1: 동일 → skip\n       ├─ p → patchElement\n       │    ├─ patchProps: class \"\" → \"active\"\n       │    │    → el.classList.add('active')  ← DOM 조작 1회\n       │    └─ patchChildren: '0' → '1'\n       │         → el.textContent = '1'        ← DOM 조작 1회\n       └─ ul: 동일 → skip",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e063cf02-2f41-4d4e-bbbe-c134fccac50f",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "속성과 텍스트 각각 별도의 DOM API를 호출한다. 둘 다 바뀌었으니 총 2회.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "9eec9b66-c92c-44cd-9c92-e21bbae6f2c3",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "시나리오 3: 리스트 중간에 항목이 추가된 경우 (",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "**items.value.splice(1, 0, newItem)**",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": ")",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "77d1189d-f81e-4d28-8e94-dfa564631b21",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "리스트 패치에서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "key",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 있으면 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "key 기반 diff",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 한다. 각 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "key",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 인덱스로 매핑해 이전/새 리스트를 비교하고, 이동/추가/제거가 필요한 노드만 처리한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "145d5821-4587-496b-9dc3-6ca2bc8caae4",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이전 리스트: [A, B, C]  (key: 1, 2, 3)\n새 리스트:  [A, X, B, C]  (key: 1, 4, 2, 3)\n\nkey 비교:\n  A(1): 위치 동일 → DOM 이동 없음\n  X(4): 이전에 없음 → el 새로 생성 후 B 앞에 insertBefore  ← DOM 조작 1회\n  B(2): 위치 뒤로 밀림 → 이미 올바른 위치 (X가 삽입되면서)\n  C(3): 동일 → 변경 없음",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "70917454-d99a-4d70-941e-83e4096c2931",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "key",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 없으면 인덱스 기준으로 비교해서 모든 노드를 순서대로 덮어쓴다. 리스트 중간에 삽입 시 그 이후 노드가 전부 업데이트되기 때문에 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "key",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 쓰는 것이 중요하다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "55618fe1-1bda-414d-8581-120091fd34df",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "타입이 달라진 경우 (",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "**v-if**",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "로 엘리먼트가 교체될 때)",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "77a06f94-d310-430f-bdbe-1ddc6cda8c2e",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "oldVnode: { type: 'p', children: '내용' }\nnewVnode: { type: 'div', children: '내용' }\n\n→ 타입 불일치 → unmount(p 엘리먼트)  ← 기존 DOM 제거\n             → mount(div 엘리먼트)    ← 새 DOM 생성 및 삽입",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1e3001c7-e883-4a3e-b8c6-88cbcae30d55",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "타입이 다르면 자식까지 포함한 전체 서브트리를 교체한다. 자식이 아무리 동일해도 재사용하지 않는다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "398be417-93a7-48b2-82aa-c058ce96e965",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "아래와 같이 판단 기준으로 통해 VDOM의 패치가 진행된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6170f4d0-40ce-44c7-8170-86161de72785",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "patch(oldVnode, newVnode)\n  ├─ 타입이 다르면 → 기존 DOM 제거 + 새 DOM 생성\n  └─ 타입이 같으면\n       ├─ 속성(class, style, 이벤트 등) 비교 → 달라진 것만 업데이트\n       └─ 자식 비교\n            ├─ 텍스트면 → el.textContent = 새 값\n            ├─ 배열(리스트)이면 → key 기반으로 최소 변경 계산\n            └─ 없어진 자식 → DOM에서 제거\n",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f394df2c-94c1-443b-a6e6-8a88d8634df3",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "ref, reactive, computed — 업데이트 경로",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "83118686-00cf-4ab9-9b4a-a85b9111ac0d",
+    "type": "table",
+    "props": {
+      "textColor": "default"
+    },
+    "content": {
+      "type": "tableContent",
+      "columnWidths": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "headerRows": 1,
+      "rows": [
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "ref",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "reactive",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "computed",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "내부 구조",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "RefImpl",
+                  "styles": {
+                    "code": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": " (",
+                  "styles": {}
+                },
+                {
+                  "type": "text",
+                  "text": ".value",
+                  "styles": {
+                    "code": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": " 접근)",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Proxy",
+                  "styles": {
+                    "code": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": " (프로퍼티 직접 접근)",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "ComputedRefImpl",
+                  "styles": {
+                    "code": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": " (",
+                  "styles": {}
+                },
+                {
+                  "type": "text",
+                  "text": "_dirty",
+                  "styles": {
+                    "code": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": " 플래그)",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "의존성 저장",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "ref.dep",
+                  "styles": {
+                    "code": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": " (자체 보유)",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "targetMap[target][key]",
+                  "styles": {
+                    "code": true
+                  }
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "effect.deps",
+                  "styles": {
+                    "code": true
+                  }
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "변경 감지",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": ".value",
+                  "styles": {
+                    "code": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": " setter",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Proxy ",
+                  "styles": {}
+                },
+                {
+                  "type": "text",
+                  "text": "set",
+                  "styles": {
+                    "code": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": " 트랩",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "의존성 변경 시 ",
+                  "styles": {}
+                },
+                {
+                  "type": "text",
+                  "text": "_dirty = true",
+                  "styles": {
+                    "code": true
+                  }
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "렌더링 연결",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "동일: queueJob → flushJobs → patch",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "동일",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "동일",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "children": []
+  },
+  {
+    "id": "9e37d532-6d17-4811-8b7c-61d7f4490645",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "ref든 reactive든 computed든, 렌더링 업데이트 경로(queueJob → flushJobs → patch)는 전부 같다. 차이는 값 변경을 감지하는 방식에 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "9f327c0e-8be4-4222-9057-766bf7f13ed5",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "실제로 어떤 상황에서 이 흐름을 의식해야 할까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d09eb173-75be-4b81-859f-a9a68b76dd43",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "DOM 업데이트 직후 DOM 크기나 위치를 읽어야 할 때",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "a4a8aad5-7479-4775-bc51-5028a7d911a2",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "const isVisible = ref(false)\n\nconst showAndMeasure = async () => {\n  isVisible.value = true    // ← 큐에 등록됨, DOM은 아직 안 바뀜\n\n  const height = el.value?.offsetHeight  // ← 0 또는 이전 값 (DOM 미반영 상태)\n\n  await nextTick()          // ← 마이크로태스크 flush 대기\n\n  const height = el.value?.offsetHeight  // ← 올바른 값\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "fc8b6195-f84b-4692-b093-e5c1a2a7d690",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "여러 ref를 한 번에 바꿀 때",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "bf72242a-6611-4ef4-b31f-284dd32af848",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "const updateAll = () => {\n  userInfo.value.name = 'kim'  // → queueJob\n  userInfo.value.age = 30      // → 이미 큐에 있으니 skip\n  userInfo.value.role = 'admin' // → skip\n}\n// → 렌더링은 1회만 발생",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "cdf264c4-510c-4c98-9824-7ce4a0ec97f2",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "watchEffect는 언제 실행될까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ceb0aaa9-0ebb-44d8-85ec-a55ec108674a",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "watchEffect",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "의 scheduler는 렌더링 큐가 아닌 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "post-flush 큐",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 사용한다. 렌더링이 끝난 이후에 실행된다는 뜻이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "9d7c2b4c-d672-4782-9b87-55be76bedd55",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "ref 변경\n  → 렌더 effect → queueJob (렌더링 큐)\n  → watchEffect → queuePostFlushCb (렌더링 후 큐)\n\nflushJobs 실행\n  → 렌더링 완료\n  → postFlush 실행 → watchEffect 콜백  ← DOM이 이미 업데이트된 상태",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4a97b948-ede5-47a8-9464-884b633b7dc4",
+    "type": "divider",
+    "props": {},
+    "children": []
+  },
+  {
+    "id": "7a093158-ecfb-4125-ae2b-44d78a97311c",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "ref.value = x",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 한 줄이 화면에 반영되기까지 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "setter → dep 알림 → 스케줄러 큐 → 마이크로태스크 → 렌더 함수 재실행 → virtual DOM 비교 → DOM 조작의 경로",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 거친다. 처음에는 그냥 \"값이 바뀌면 화면이 바뀐다\"고만 안일하게 알고 있었다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "555d0bb1-7139-4e22-a685-1f3ee82e8a80",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이 흐름을 알고 나니 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "nextTick",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "이 왜 존재하는지, 여러 ref를 연속으로 바꿔도 렌더링이 한 번만 일어나는 이유가 자연스럽게 이해됐다. 코어 동작을 이해할수록 지식의 난이도가 어려워지는 것은 사실이다. 앞으로 Vue 코드를 볼 때 단순한 반응형 바인딩 뒤에 이 경로가 보이기 시작하면, 예상치 못한 동작의 원인을 찾는 것도 훨씬 수월해질 것 같다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  }
+]

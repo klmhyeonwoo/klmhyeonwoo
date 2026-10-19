@@ -1,0 +1,141 @@
+---
+title: "헷갈리는 Tanstack Query의 gcTime, staleTime"
+date: 2026-10-19
+publishedAt: "2026-10-19T14:31:43.150Z"
+updatedAt: "2026-10-19T14:31:43.150Z"
+description: ""
+category: "category-9606d629"
+series: "-"
+private: false
+---
+
+> **한 눈에 확인해보자면 ..**
+
+<Callout emoji="😆">
+한 눈에 확인해보자면..\
+staleTime : 이 데이터가 신선하다고 보는 시간\
+gcTime : 아무 컴포
+</Callout>
+
+gcTime : 아무 컴포넌트가도 안쓰는 캐시를 메모리에 남겨놓는 시간
+
+
+
+## staleTime은 refetch를 할지 말지 영향을 주는 요소이다.
+
+### Q. 5분이라고 가정했을 때, 흐름은 아래와 같다.
+
+0분 : 데이터 fetch
+
+0 ~ 5분 : 데이터가 fresh한 상태
+
+5분 이후 : stale 상태
+
+* fresh 상태에서는 같은 querykey로 다시 useQuery가 실행되어도 보통 네트워크 요청을 다시하지 않고, 캐시 데이터를 사용한다.
+
+### Q. 만약 5분이 지난 경우라면?
+
+0분 : "/organizations" 진입 → API 요청
+
+7분 : 다른 페이지 갔다가 다시 "/organizations" 진입
+
+→ stale 상태
+
+→ 기존 캐시 데이터 먼저 보여줄 수 있음
+
+→ 백그라운드 refetch 가능
+
+## 2. gcTime은 캐시를 언제 알게할지에 대한 영향을 주는 요소이다.
+
+여기서 중요한 점은 gcTime은 쿼리가 inactive 된 순간부터 돌아간다.
+
+### active와 inactive의 차이점
+
+active : 어떤 컴포넌트가 useQuery로 이 데이터를 사용 중
+
+inactive : 아무 컴포넌트도 이 queryKey를 사용하지 않음
+
+0분 : "/organization" 페이지 진입 → useQuery 사용 중 → active 상태
+
+2분 : 다른 페이지로 이동 → useQuery 사라짐 → inactive 상태
+
+12분 : inactive 된 지 10분이 지났고, 캐시 삭제
+
+* 컴포넌트가 계속 마운트되어있으면 gcTime이 지나도 삭제되지 않으며, gcTime은 사용중인 데이터가 아니라 사용하지 않는 캐시에 대한 삭제 타이머이다.
+
+## 3. staleTime과 gcTime을 같이 비교해보면 이렇게 정의할 수 있다.
+
+먼저 useQuery에 아래와 같이 설정을 했다고 가정을 해보자.
+
+```javascript
+staleTime: 5 * 60 * 1000 // 5분
+gcTime: 10 * 60 * 1000 // 10분
+```
+
+다양한 예제로 확인을 해보면 쉽게 이해할 수 있다.
+
+### **<예제 A> 3분 뒤에 들어옴**
+
+0분 : 목록 조회
+
+1분 : 페이지 이탈 → inactive
+
+3분 : 다시 진입
+
+캐시 있음 → 바로 보여줌
+
+staleTime 5분 안지남 → fresh 상태 → refetch 거의 안함
+
+### **<예제 B> 7분 뒤 다시 들어옴**
+
+0분 : 목록 조회
+
+1분 : 페이지 이탈 → inactive
+
+7분 : 다시 진입
+
+캐시 있음 → 바로 이전 데이터 보여줌
+
+staleTime 지남 → stale 상태 → 백그라운드 refetch 가능
+
+### **<예제 C> 12분 뒤 들어옴**
+
+0분 : 목록 조회
+
+1분 : 페이지 이탈 → inactive
+
+12분 : 다시 진입
+
+inactive 된지 10분 넘음 → gcTime 지남 → 캐시 삭제됨 → 이전 데이터 없음 → 처음 로딩처럼 API 요청
+
+## 4. staleTime만 길고, gcTime이 짧은 경우는 어떻게 될까?
+
+useQuery에 아래와 같이 gcTime을 더 짧게 설정한 경우가 있다고 가정해보자.
+
+```javascript
+staleTime: 30 * 60 * 1000 // 30분
+gcTime: 5 * 60 * 1000 // 5분
+```
+
+6분 뒤 처음 조회했던 페이지에 다시 접근을 하는 상황을 상상해보았을 때 아래와 같다.
+
+0분 : 데이터 목록 조회
+
+1분 : 페이지 이탈 → inactive 상태
+
+6분 : 다시 페이지 재진입
+
+staleTime은 30분이라 아직 fresh였을 데이터지만, inactive 상태로 gcTime은 5분을 넘은 6분이 지났다. 그러면 메모리 상의 캐시는 삭제되고 다시 API를 요청하는 꼴이 된다.
+
+그래서, 보통은 gcTime >= staleTime으로 권장되며 보통 이렇게 사용한다.
+
+* staleTime은 컴포넌트 활성/비활성화와 상관없이 데이터가 fetch된 시점부터 계속 흘러간다. (페이지를 머무르고 있든, 페이지를 벗어났든, 컴포넌트가 언마운트 되었든 상관없이 마지막으로 데이터를 가져온 시간으로 계산이 된다)
+
+## 정리해보기
+
+| staleTime           | gcTime                          |
+| ------------------- | ------------------------------- |
+| 언제까지 fresh로 볼 것인가?  | inactive 캐시를 언제 삭제할 것인가?        |
+| refetch 빈도에 영향을 준다. | 이전 데이터를 다시 보여줄 수 있는 기간에 영향을 준다. |
+| 길수록 API 요청이 줄어든다.   | 길수록 메모리에 남는다.                   |
+

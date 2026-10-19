@@ -1,0 +1,105 @@
+---
+title: "AI를 활용해 레이아웃 자동화 테스트해보기"
+date: 2026-10-19
+publishedAt: "2026-10-19T14:40:14.092Z"
+updatedAt: "2026-10-19T14:40:14.092Z"
+description: ""
+category: "category-9606d629"
+series: "-"
+private: false
+---
+
+레이아웃 테스트 중에 가장 까다로운 부분 중 하나는 코드 로직 상의 부분도 물론 중요하지만, 레이아웃을 클릭하고 원하는 결과 값을 잡아내는 일입니다. 특정 해상도에서는 버튼이 잘리거나, 목록이 겹쳐보이고, 핵심 정보가 노출되지 않는 등의 일반적인 단위 테스트만으로는 발견하기 어려운 경우가 있습니다.
+
+특히 사내에서는 기능 개발 전 SRS(소프트웨어 요구사항 명세서)로 정리되는 요구사항이 많으면 많을수록, 놓치는 구현사항들이 생기기마련인데 이를 Jira DC(Data Center) MCP와 Brower Skill을 함께 사용하여 요구사항 분석부터 실제브라우저에서의 레이아웃 검증까지 연결하여 이를 해결하고자 했습니다.
+
+테스트 하기 전 제약사항으로는 사내의 업무망은 일반적인 회사와 다르게 폐쇄망으로 구성이 되어있어 내부 프록시에서 허용한 URL만 접근이 가능하고, 인터넷이 차단되어 서비스기업처럼 자유롭게 무언가를 이용하지 못한다는 제한점을 가지고 있었습니다.
+
+## 요구사항이 매번 흐려진다.
+
+SRS를 작성하고, 소프트웨어 요구사항들을 개발자가 파악할 때 텍스트가 길어지면 길어질수록 놓치는 요구사항들이 분명히 생깁니다. 예를 들어 아래와 같은 요구사항들이 명시되어있다고 가정해봅시다.
+
+* 관리자 화면의 검색 영역을 개편한다.
+
+* 좁은 화면에서도 필터와 검색 버튼이 깨지지 않아야한다.
+
+* 목록의 주요 컬럼은 가로 스크롤 없이 확인할 수 있어야한다.
+
+* 저장 버튼은 화면 크기와 관계없이 접근 가능하다.
+
+* A 데이터 조건이 왔을 때 B 데이터가 노출되어야하고, C 데이터 조건이 왔을 때는 D 데이터가 노출되는 것과 같이 조건부 렌더링이 성립해야한다.
+
+* … 그 외 N개가 넘는 요구사항들이 존재합니다.
+
+위 요구사항들이 모두 충족되었다고 해도, 수정 이후 기존 기능에 사이드 이펙트가 발생했는지 기존 화면에 대해서도 회귀 검증을 진행해야합니다. TF에서 공식적인 팀으로 변화되기까지 정식적인 QA 절차가 없다보니 점점 늘어나는 메뉴에 핫픽스 빈도는 점점 늘고있기 때문에 이를 해결하고자 했습니다.
+
+## [Browser Skill](https://github.com/Tencent/BrowserSkill)의 채택 이유
+
+기존에는 폐쇄망에서 할 수 있는 것들이 너무나도 제한적이었기 때문에, 테스트한 내용을 또 한번 검증하고자 이슈에 기반한 스펙 문서들을 기반으로 코드 논리 로직을 검증하는 `jira Issua QA` 라는 스킬을 제작하였습니다.
+
+`Jira Issue QA` 스킬 펼쳐보기
+
+```javascript
+Validate the implementation associated with a Jira issue. Produce evidence-backed results, not a generic test plan.
+Input and scope
+Use the Jira key, URL, or pasted issue details. If Jira access is unavailable, ask for the issue description, acceptance criteria, and linked PR/commit, then proceed from those artifacts. Do not invent requirements.
+If the issue does not state a testable expected result, ask the user for any available reference before judging the implementation. Request only relevant items: expected before/after behavior, reproduction steps, related screen/API, example request/response, known edge cases, or a prior bug report. If no reference is available, continue with code evidence and label the resulting criteria as assumptions.
+Identify the implementation from the linked branch, PR, commit, or local diff. Preserve unrelated working-tree changes. Do not modify application code unless the user explicitly asks to fix a discovered defect.
+Workflow
+Extract the issue's purpose, acceptance criteria, affected users, constraints, and out-of-scope items. When the expected behavior is unclear, request the available test reference described above; mark anything still missing as an assumption.
+Inspect the changed files and trace callers, routes, API contracts, state, and UI paths affected by them. Compare the implementation against each criterion.
+Run the smallest relevant existing checks first. Add or run targeted automated checks only when they verify the changed behavior. If tests cannot run, perform source-level checks that trace the changed condition through its callers and API boundary, and state the limitation.
+Do not run browser or UI tests by default. Perform them only when the user explicitly requests them and provides a usable test environment. Never use production data or perform irreversible actions without authorization.
+Report exact evidence: files, commands, test outcomes, and reproducible defect steps. Separate verified facts from risks and unverified items.
+Output
+Respond in Korean unless the user requests another language. Start with a concise verdict: Pass, Pass with risks, Fail, or Blocked.
+Include this checklist, using only applicable rows:
+CheckStatusEvidence / note
+Acceptance criteriaPass / Fail / Risk / Blocked
+Changed-code reviewPass / Fail / Risk / Blocked
+Targeted automated testsPass / Fail / Risk / Blocked
+Input, state, and API boundaryPass / Fail / Risk / Blocked
+Regression riskPass / Fail / Risk / Blocked
+
+Add UI happy-path and state rows only when browser/UI testing was explicitly requested.
+For each defect or risk, state severity, affected behavior, evidence/reproduction, and the smallest recommended next action. List unverified items and their blocker. Do not claim the ticket is verified when a required check was skipped.
+```
+
+티켓의 요구사항을 읽고, 관련 문서들을 추가적으로 컨텍스트화하여 검증해주는 스킬로 내부 로직의 논리 오류가 없는지 확인하는 용도였지만 아직까지 레이아웃 상의 검증 절차가 부족하다는 문제가 있었습니다. 그렇기에 코드 상의 테스트가 통과하더라도 교차 검증을 수행해야했습니다.
+
+이를 해결하고자 레이아웃을 에이전트에게 위임해서 테스트할 수 있는 환경이 구축되면 어떨까 라는 생각을 했습니다. 그래서 다양한 케이스들을 찾고 알아본 결과..
+
+* codex computer use : 사내 컴퓨터에서 권한 접근이 일부 막혀있는 부분들이 많아서, Codex에서 플러그인은 제공하고있으나 정상적으로 사용하기가 힘든 상태였습니다.
+
+* hermes : 프록시 접근이 막혀있어 사용하기가 힘듭니다, 데스크톱 권한을 양도하는 에이전트이기 때문에 위험성이 큽니다.
+
+* aside : 브라우저 자체에 에이전트가 탑재되어있고, 이로인해 세션 제약을 받지 않으며 브라우저 자동화가 가능합니다. aside가 평소 많이 사용하기에 익숙하고 적합하다고 생각했지만 폐쇄망에서는 프록시 접근이 제한되어있어 사용이 불가했습니다
+
+* codex browser : computer use는 컴퓨터 앱을 컨트를한다면, codex에서 browser 스킬로 브라우저의 탭을 제어할 수 있지만 aside와 비교하면 상호작용이 훌륭하지 않고 computer use와 같이 일부 권한 접근이 막혀있는 상태였습니다. 의도한 동작대로 작동하지 않는 경우가 많아서 사용이 불가했습니다.
+
+![Image](https://upload.cafenono.com/image/slashpagePost/20261008/104711_pp3ybHUaqEtX1NEQS6?q=80&s=1280x180&t=outside&f=webp)
+
+## Browser Skill에 Jira Issue QA Skill 조합하기
+
+Browser Skill과 Jira DC(Data Center) MCP가 기본적으로 필요합니다. Browser Skill은 깃허브 README에 설치 절차가 잘 나와있고, Jira DC(Data Center) MCP는 Jira의 이슈나 위키가 정상적으로 조회되고 관련 데이터들이 잘 호출되는지 확인하면 됩니다. Browser Skill을 설체하게 되면 확장 프로그램을 통해 컨네팅되는 방식이며, 아래 방식으로 동작하게 됩니다.
+
+![Image](https://upload.cafenono.com/image/slashpagePost/20261008/104810_XKFMErdX295A1shZm5?q=80&s=1280x180&t=outside&f=webp)
+
+1. codex가 Jira DC(Data Center) MCP로 이슈와 인수 조건을 읽습니다.
+
+1. codex가 Browser Skill에 지침에 따라 `bsk session start, bsk navigate, bsk observe, bsk screen shot` 같은 CLI 명령을 실행합니다.
+
+1. CLI는 Windows의 로컬 IPC로 `bsk demon` 에 요청을 전달합니다.
+
+1. 데몬은 기본적으로 로컬호스트에서만 열려있는 Web Socket을 통해 설치된 확장 프로그램에 요청을 보냅니다.
+
+1. 확장 프로그램은 Chrome DevTools Protocol(CDP)과 확장 API를 사용하여 별도 Agent Window의 탭을 열고, DOM 관찰 · 입력 · 스크린샷을 수행합니다.
+
+1. 결과와 스크린샷이 역방향으로 codex에 돌아오고, Jira 인수 조건별 통과 실패 보고서를 만들게 됩니다. (해당 보고서는 `Jira Issue QA Skill` 에서 사전 정의된 내용이므로 보고서를 생성합니다)
+
+![Image](https://upload.cafenono.com/image/slashpagePost/20261008/105111_4bRxCwWjQtWsmO1VNv?q=80&s=1280x180&t=outside&f=webp)
+
+확장 프로그램은 “AI가 브라우저를 조작할 수 있게 브릿지” 역할을 하게 됩니다. 모든 세션 정보를 에이전트에게 사전에 넘겨주는 것이 아니라 확장 프로그램으로 사용자가 로그인한 브라우저 프로필을 사용하게 되므로 로그인 상태를 새롭게 전달하거나, 쿠키를 복사하는 방식이 아니기 때문애 보안 측면에서도 이점을 누릴 수 있습니다.
+
+Jira DC(Data Center) MCP는 “무엇을 검증할 것인가?”에 대한 정보를 제공하게 되고, Browser Skill 확장 프로그램은 ”로그인된 실제 브라우저에서 어떻게 검증할 것인가?“를 수행하며 에이전트가 두 흐름을 오케스트레이션 하는 형태로 진행이 됩니다.
+

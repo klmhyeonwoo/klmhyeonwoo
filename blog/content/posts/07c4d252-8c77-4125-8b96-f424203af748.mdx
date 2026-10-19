@@ -1,0 +1,386 @@
+---
+title: "Vue의 Ref가 화면에 전달되기까지의 과정들"
+date: 2026-10-19
+publishedAt: "2026-10-19T12:50:47.341Z"
+updatedAt: "2026-10-19T12:50:47.342Z"
+description: ""
+category: "category-9606d629"
+series: "-"
+private: false
+---
+
+문득 `ref.value = x` 가 화면으로 전달되기 까지의 내부 과정들이 궁금해졌다. 상태 값이 바뀌면 컴포넌트가 리렌더링되는 라이프사이클과 빗대어 생각을 하게 되지만, 내부적으로는 어떤 값들이 트리거되어 레이아웃 상에 반영되는지 그 코어의 개념을 모르는 듯한 느낌이 들었다 ^,^ ..
+
+## Vue의 반응형이 왜 이런 구조를 갖게 됐을까?
+
+초기 프론트엔드 개발에서 상태 변화를 화면에 반영하려면 직접 DOM을 조작해야 했다. `[document.getElementById](https://document.getElementById)`로 노드를 찾고 `innerHTML`을 바꾸는 방식이었다. 상태가 늘어날수록 "이 값이 바뀌면 저 DOM을 바꿔야 한다"는 연결고리를 직접 관리해야 했고, 그 관계가 복잡해지면 추적이 불가능해졌다.
+
+Vue 2에서 이 문제를 `[Object.defineProperty](https://Object.defineProperty)` 기반의 반응형 시스템으로 해결하려 했다. 데이터가 바뀌면 연결된 DOM이 자동으로 업데이트되는 구조였다. 근데 배열 변이나 런타임에 추가된 프로퍼티는 감지하지 못하는 한계가 있었다.
+
+Vue 3에서 **Proxy** 기반으로 전면 재설계했다. `ref`는 그 반응형 시스템의 가장 기본적인 단위다. 숫자, 문자열 같은 primitive 값은 Proxy로 직접 감쌀 수 없기 때문에, `ref`는 `.value` 프로퍼티 안에 값을 담고 거기에 getter/setter를 붙이는 방식으로 반응형을 구현한다.
+
+> **왜 Object.defineProperty 는 배열 변이나 추가된 프로퍼티를 감지하지 못할까?**
+
+[Object.defineProperty](https://Object.defineProperty) 는 이미 존재하는 속성의 값을 변경할 때 가로채기 위해 사용이 되는데, 동적으로 추가되는 구조 전체를 감시하는 것이 아니라 정의하는 싲머에 존재하는 특정 키들에 대한 게터와 세터를 설정하기 때문에 동적으로 추가되는 프로퍼티에 대해서는 감시가 설정되어있지 않아 감지를 할 수 없다.
+
+## ref는 내부적으로 어떻게 생겼을까?
+
+`ref(0)`을 호출하면 `RefImpl`이라는 클래스의 인스턴스가 만들어진다.
+
+```javascript
+// ref.ts (단순화)
+class RefImpl {
+  _value      // ← 실제 값
+  _rawValue   // ← 원본 값 (비교용)
+  dep = undefined  // ← 이 ref를 구독 중인 effect 집합
+
+  constructor(value) {
+    this._rawValue = value
+    this._value = value  // (객체면 reactive()로 감싸지만 일단 생략)
+  }
+
+  get value() {
+    trackRefValue(this)  // ← "지금 누가 나를 읽고 있으면 dep에 등록해줘"
+    return this._value
+  }
+
+  set value(newVal) {
+    if (hasChanged(newVal, this._rawValue)) {  // ← 값이 실제로 바뀌었을 때만
+      this._rawValue = newVal
+      this._value = newVal
+      triggerRefValue(this)  // ← "나를 구독 중인 effect들에게 알려줘"
+    }
+  }
+}
+```
+
+`dep`이라는 필드가 지금 현재 바라보고 있는 `ref` 를 바라보고 있는 이펙트들의 집합이기 때문에 핵심이며, "지금 나를 읽고 있는 코드"를 여기에 담아둔다. 값이 바뀌면 이 목록에 있는 코드들에게 알린다. 이 구독/알림 메커니즘이 반응형의 본질이다.
+
+> `trackRefValue`와 `triggerRefValue`가 하는 일
+
+```javascript
+// ref를 구독중이라면 dep에 등록
+function trackRefValue(ref) {
+  // activeEffect: 지금 실행 중인 effect (computed, watch, 렌더 함수 등)
+  if (activeEffect) {
+    ref.dep = ref.dep || new Set()
+    ref.dep.add(activeEffect)  // ← "현재 effect가 이 ref를 구독 중"이라고 기록
+  }
+}
+
+// ref를 구독중인 이펙트들에게 전파
+function triggerRefValue(ref) {
+  if (ref.dep) {
+    ref.dep.forEach(effect => {
+      if (effect.scheduler) {
+        effect.scheduler()  // ← 렌더 effect는 이 경로 (바로 실행 말고 큐에 넣음)
+      } else {
+        effect.run()        // ← 일반 effect는 바로 실행
+      }
+    })
+  }
+}
+```
+
+## 컴포넌트는 어떻게 ref의 변화를 감지할까?
+
+컴포넌트가 처음 마운트될 때, Vue는 **렌더 함수를 ReactiveEffect로 감싼다.** 렌더 함수가 실행되면서 `[ref.value](https://ref.value)`를 읽으면, `trackRefValue`가 호출되고 렌더 effect가 ref의 `dep`에 등록된다. (해당 부분이 헷갈리면 위의 `RefImpl` 구조 부분을 한번 확인해보자)
+
+쉽게 말하면, 화면을 그리는 과정에서 어떤 값을 읽었는지를 자동으로 기록한다.
+
+```javascript
+// renderer.ts (단순화)
+const setupRenderEffect = (instance, container) => {
+  const componentUpdateFn = () => {
+    if (!instance.isMounted) {
+      // 최초 마운트: 렌더 함수 실행 → DOM 생성
+      const subTree = renderComponentRoot(instance)
+      patch(null, subTree, container)
+      instance.isMounted = true
+    } else {
+      // 업데이트: 렌더 함수 다시 실행 → 이전 vnode와 비교 → DOM 갱신
+      const nextTree = renderComponentRoot(instance)
+      patch(instance.subTree, nextTree, container)
+      instance.subTree = nextTree
+    }
+  }
+
+  const effect = new ReactiveEffect(
+    componentUpdateFn,
+    () => queueJob(instance.update)  // ← scheduler: 바로 실행 말고 큐에 넣어라
+  )
+
+  effect.run()  // ← 최초 실행 (마운트) + 의존성 수집
+}
+```
+
+> 마운트 시 의존성이 수집되는 흐름
+
+```javascript
+effect.run() 호출
+  → activeEffect = 렌더 effect
+  → renderComponentRoot() 실행
+    → template 안에서 count.value 읽기
+      → trackRefValue(count)
+      → count.dep.add(렌더 effect)  ← 이 컴포넌트가 count를 구독 중으로 등록
+  → activeEffect 복원
+```
+
+## ref 값이 바뀌면 어떤 순서로 화면까지 반영될까?
+
+이제 `count.value = 1`을 실행하면 무슨 일이 벌어지는지 단계별로 따라가본다.
+
+### 1단계: setter → 구독자에게 알림
+
+```javascript
+count.value = 1  (기존: 0)
+  → hasChanged(1, 0) === true
+  → triggerRefValue(count)
+    → count.dep 순회
+    → 렌더 effect 발견
+    → effect.scheduler() 호출
+      → queueJob(instance.update)  ← "큐에 등록"
+```
+
+왜 변경 즉시 렌더링을 하지 않고 `queueJob`이라는 큐에 넣는지에 대한 의문이 드는 과정이다.
+
+왜 변경되어 반영되는 작업을 즉시 적용하지 않을까?
+
+### 2단계: 왜 큐에 넣을까? — 스케줄러와 마이크로태스크
+
+한 번의 동작에서 ref를 여러 개 바꾸는 경우를 생각해보면 이유가 명확해진다.
+
+```javascript
+count.value = 1
+name.value = 'kim'
+flag.value = true
+```
+
+세 줄이 실행될 때마다 즉시 렌더링하면 화면이 세 번 다시 그려진다.
+
+근데 결국 사용자에게는 세 가지가 모두 반영된 최종 상태만 보여주면 된다.
+
+그래서 Vue는 렌더링을 **마이크로태스크**로 미룬다.
+
+```javascript
+// scheduler.ts (단순화)
+const queue = []
+
+function queueJob(job) {
+  if (!queue.includes(job)) {
+    queue.push(job)
+  }
+  // 아직 실행 예약 안 됐으면: 마이크로태스크로 예약
+  if (!isFlushPending) {
+    isFlushPending = true
+    Promise.resolve().then(flushJobs)  // ← 동기 코드가 전부 끝난 직후 실행
+  }
+}
+```
+
+**마이크로태스크**란, 현재 실행 중인 동기 코드가 모두 끝난 직후, 다음 렌더 프레임 전에 실행되는 작업이다. `Promise.resolve().then(...)`이 바로 마이크로태스크를 예약하는 방법이다.
+
+```javascript
+[동기 코드 실행]
+count.value = 1    → 값 즉시 변경 완료 → "렌더링 job" 큐에 추가, 마이크로태스크 예약
+name.value = 'kim' → 값 즉시 변경 완료 → "렌더링 job" 이미 큐에 있음 → skip
+flag.value = true  → 값 즉시 변경 완료 → "렌더링 job" 이미 큐에 있음 → skip
+// 동기 코드 종료: 값은 셋 다 이미 바뀐 상태
+
+[마이크로태스크 실행]
+  → flushJobs()
+  → instance.update() 한 번만 실행
+  → count=1, name='kim', flag=true 를 한 번에 화면에 반영
+```
+
+이게 바로 `nextTick`이 필요한 이유다. 내부 값은 바로 변하더라도 `[ref.value](https://ref.value)`를 바꾸는 코드 바로 다음 줄에서는 DOM이 아직 업데이트되지 않은 상태다. 마이크로태스크가 아직 실행되지 않았기 때문이다.
+
+```javascript
+count.value = 1
+
+console.log(el.textContent)  // ← 아직 이전 값 (마이크로태스크 실행 전)
+
+await nextTick()             // ← 마이크로태스크(flushJobs)가 끝날 때까지 기다림
+
+console.log(el.textContent)  // ← 새 값 반영됨
+```
+
+`nextTick`의 구현을 보면 왜 이게 동작하는지 명확해진다.
+
+```javascript
+export function nextTick(fn) {
+  const p = currentFlushPromise || Promise.resolve()
+  return fn ? p.then(fn) : p
+  // currentFlushPromise: 현재 진행 중인 flushJobs Promise
+  // → flushJobs가 끝난 뒤에 fn을 실행
+}
+```
+
+### 3단계: 컴포넌트 업데이트 — 새 vnode 생성
+
+`flushJobs`가 실행되면 큐에 있던 `instance.update`가 호출된다. 이건 결국 렌더 함수가 다시 실행되면서 새 vnode 트리가 만들어지는 것이다.
+
+**vnode(가상 DOM)**란 실제 DOM의 복사본을 JavaScript 객체로 표현한 것이다. 실제 DOM 조작은 느리기 때문에, 먼저 가벼운 JavaScript 객체끼리 비교해서 꼭 필요한 변경만 실제 DOM에 반영한다.
+
+```javascript
+const componentUpdateFn = () => {
+  const nextTree = renderComponentRoot(instance)  // ← 새 vnode 생성
+  const prevTree = instance.subTree               // ← 이전 vnode
+  instance.subTree = nextTree
+  patch(prevTree, nextTree, container)            // ← 비교 후 DOM 업데이트
+}
+```
+
+### 4단계: virtual DOM 패치 — 최소한의 DOM 조작
+
+`patch`*(prevTree, nextTree)에서 이전 vnode와 새 vnode를 비교한다. 달라진 부분만 실제 DOM에 반영한다.
+
+> **patch ?**
+
+이전 vnode와 새 vnode를 비교해 실제 DOM에 최소한의 변경만 가하는 함수. 타입이 같으면 속성과 자식을 재귀적으로 비교하고, 타입이 다르면 기존 DOM을 제거하고 새로 생성한다.
+
+patch는 뿌리(컴포넌트 루트)부터 시작해 자식으로 재귀적으로 내려간다. 바뀐 부분을 만날 때까지 트리를 탐색하고, 바뀐 노드에서만 실제 DOM 조작이 발생한다. 아래 템플릿을 기준으로 세 가지 변화 시나리오를 따라가본다.
+
+```javascript
+<div>
+  <h1>{{ title }}</h1>
+  <p :class="{ active: isActive }">{{ count }}</p>
+  <ul>
+    <li v-for="item in items" :key="item.id">{{ item.name }}</li>
+  </ul>
+</div>
+```
+
+> **시나리오 1: 텍스트만 바뀐 경우 (**`**count.value++**`**)**
+
+```javascript
+patch(oldRoot, newRoot)
+  └─ div 타입 동일 → patchElement
+       ├─ h1: 텍스트 동일 → 아무것도 안 함
+       ├─ p: 타입 동일 → patchElement
+       │    ├─ patchProps: class 동일 → 아무것도 안 함
+       │    └─ patchChildren: 텍스트 '0' → '1'
+       │         → el.textContent = '1'  ← DOM 조작 1회
+       └─ ul: 자식 동일 → 아무것도 안 함
+```
+
+`h1`과 `ul`은 비교는 하지만 달라진 게 없으므로 DOM 조작이 일어나지 않는다.
+
+> **시나리오 2: 속성과 텍스트가 함께 바뀐 경우 (**`**isActive.value = true**`**, ****`count.value++`)**
+
+```javascript
+patch(oldRoot, newRoot)
+  └─ div → patchElement
+       ├─ h1: 동일 → skip
+       ├─ p → patchElement
+       │    ├─ patchProps: class "" → "active"
+       │    │    → el.classList.add('active')  ← DOM 조작 1회
+       │    └─ patchChildren: '0' → '1'
+       │         → el.textContent = '1'        ← DOM 조작 1회
+       └─ ul: 동일 → skip
+```
+
+속성과 텍스트 각각 별도의 DOM API를 호출한다. 둘 다 바뀌었으니 총 2회.
+
+> **시나리오 3: 리스트 중간에 항목이 추가된 경우 (**`**items.value.splice(1, 0, newItem)**`**)**
+
+리스트 패치에서 `key`가 있으면 **key 기반 diff**를 한다. 각 `key`를 인덱스로 매핑해 이전/새 리스트를 비교하고, 이동/추가/제거가 필요한 노드만 처리한다.
+
+```javascript
+이전 리스트: [A, B, C]  (key: 1, 2, 3)
+새 리스트:  [A, X, B, C]  (key: 1, 4, 2, 3)
+
+key 비교:
+  A(1): 위치 동일 → DOM 이동 없음
+  X(4): 이전에 없음 → el 새로 생성 후 B 앞에 insertBefore  ← DOM 조작 1회
+  B(2): 위치 뒤로 밀림 → 이미 올바른 위치 (X가 삽입되면서)
+  C(3): 동일 → 변경 없음
+```
+
+`key`가 없으면 인덱스 기준으로 비교해서 모든 노드를 순서대로 덮어쓴다. 리스트 중간에 삽입 시 그 이후 노드가 전부 업데이트되기 때문에 `key`를 쓰는 것이 중요하다.
+
+**타입이 달라진 경우 (**`**v-if**`**로 엘리먼트가 교체될 때)**
+
+```javascript
+oldVnode: { type: 'p', children: '내용' }
+newVnode: { type: 'div', children: '내용' }
+
+→ 타입 불일치 → unmount(p 엘리먼트)  ← 기존 DOM 제거
+             → mount(div 엘리먼트)    ← 새 DOM 생성 및 삽입
+```
+
+타입이 다르면 자식까지 포함한 전체 서브트리를 교체한다. 자식이 아무리 동일해도 재사용하지 않는다.
+
+아래와 같이 판단 기준으로 통해 VDOM의 패치가 진행된다.
+
+```javascript
+patch(oldVnode, newVnode)
+  ├─ 타입이 다르면 → 기존 DOM 제거 + 새 DOM 생성
+  └─ 타입이 같으면
+       ├─ 속성(class, style, 이벤트 등) 비교 → 달라진 것만 업데이트
+       └─ 자식 비교
+            ├─ 텍스트면 → el.textContent = 새 값
+            ├─ 배열(리스트)이면 → key 기반으로 최소 변경 계산
+            └─ 없어진 자식 → DOM에서 제거
+```
+
+## ref, reactive, computed — 업데이트 경로
+
+|            | ref                              | reactive                 | computed                         |
+| ---------- | -------------------------------- | ------------------------ | -------------------------------- |
+| 내부 구조      | `RefImpl` (`.value` 접근)          | `Proxy` (프로퍼티 직접 접근)     | `ComputedRefImpl` (`_dirty` 플래그) |
+| 의존성 저장     | `ref.dep` (자체 보유)                | `targetMap[target][key]` | `effect.deps`                    |
+| 변경 감지      | `.value` setter                  | Proxy `set` 트랩           | 의존성 변경 시 `_dirty = true`         |
+| 렌더링 연결     | 동일: queueJob → flushJobs → patch | 동일                       | 동일                               |
+
+ref든 reactive든 computed든, 렌더링 업데이트 경로(queueJob → flushJobs → patch)는 전부 같다. 차이는 값 변경을 감지하는 방식에 있다.
+
+## 실제로 어떤 상황에서 이 흐름을 의식해야 할까?
+
+### DOM 업데이트 직후 DOM 크기나 위치를 읽어야 할 때
+
+```javascript
+const isVisible = ref(false)
+
+const showAndMeasure = async () => {
+  isVisible.value = true    // ← 큐에 등록됨, DOM은 아직 안 바뀜
+
+  const height = el.value?.offsetHeight  // ← 0 또는 이전 값 (DOM 미반영 상태)
+
+  await nextTick()          // ← 마이크로태스크 flush 대기
+
+  const height = el.value?.offsetHeight  // ← 올바른 값
+}
+```
+
+### 여러 ref를 한 번에 바꿀 때
+
+```javascript
+const updateAll = () => {
+  userInfo.value.name = 'kim'  // → queueJob
+  userInfo.value.age = 30      // → 이미 큐에 있으니 skip
+  userInfo.value.role = 'admin' // → skip
+}
+// → 렌더링은 1회만 발생
+```
+
+### watchEffect는 언제 실행될까?
+
+`watchEffect`의 scheduler는 렌더링 큐가 아닌 **post-flush 큐**를 사용한다. 렌더링이 끝난 이후에 실행된다는 뜻이다.
+
+```javascript
+ref 변경
+  → 렌더 effect → queueJob (렌더링 큐)
+  → watchEffect → queuePostFlushCb (렌더링 후 큐)
+
+flushJobs 실행
+  → 렌더링 완료
+  → postFlush 실행 → watchEffect 콜백  ← DOM이 이미 업데이트된 상태
+```
+
+***
+
+`ref.value = x` 한 줄이 화면에 반영되기까지 **setter → dep 알림 → 스케줄러 큐 → 마이크로태스크 → 렌더 함수 재실행 → virtual DOM 비교 → DOM 조작의 경로**를 거친다. 처음에는 그냥 "값이 바뀌면 화면이 바뀐다"고만 안일하게 알고 있었다.
+
+이 흐름을 알고 나니 `nextTick`이 왜 존재하는지, 여러 ref를 연속으로 바꿔도 렌더링이 한 번만 일어나는 이유가 자연스럽게 이해됐다. 코어 동작을 이해할수록 지식의 난이도가 어려워지는 것은 사실이다. 앞으로 Vue 코드를 볼 때 단순한 반응형 바인딩 뒤에 이 경로가 보이기 시작하면, 예상치 못한 동작의 원인을 찾는 것도 훨씬 수월해질 것 같다.
+

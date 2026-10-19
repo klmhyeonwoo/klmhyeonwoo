@@ -1,0 +1,23 @@
+{
+  "id": "8b737e53-6aa6-4fe4-aa34-fc499191f3b8",
+  "title": "나는 왜 사이드 프로젝트를 할까?",
+  "description": "",
+  "categoryId": "category-e331519f",
+  "seriesId": "-",
+  "markdown": "\n",
+  "blocks": [
+    {
+      "id": "0d831b50-aeb9-4171-b0c6-27bf4bf3b1a0",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [],
+      "children": []
+    }
+  ],
+  "isPrivate": false,
+  "updatedAt": "2026-10-19T02:19:03.466Z"
+}

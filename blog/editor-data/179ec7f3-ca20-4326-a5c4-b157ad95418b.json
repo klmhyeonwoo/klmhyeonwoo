@@ -1,0 +1,726 @@
+[
+  {
+    "id": "56356192-3ab2-4dc7-ade4-4f14b2416f3b",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "공통적으로 사용되는 위협 탐지룰의 텍스트 메이트 문법을 공통적으로 관리하기 위해 공통 모듈을 만들고자 했습니다. NPM 라이브러리의 경우 NPM 저장소에 올라가며 비즈니스 플랜이 아니고서야 오픈되는 경향이 있습니다. 그래서 외부로 노출되지 않고 내부에서만 사용하기 위해 사내 NPM 저장소를 찾아 배포를 진행하며 로컬 저장소에 어떤 방식으로 배포할 수 있는지 포스팅을 하고자 합니다. 아래 예제에서는 사내 NPM 저장소에 배포되는 모나코 에디터에 자체 텍스트 메이트 문법을 적용하기 위해 패키지를 배포하는 과정을 담은 내용입니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "3711f587-2680-457b-8872-ce0d0a0324d2",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "프로젝트 구성하기",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6d6f51a9-a975-4f63-ae8b-2a1c3af4a078",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "각각으로 공통적으로 모듈을 레포지토리로 구성하여 만드려고했으나, 앞으로 많아질 공통 모듈들을 각 레포지토리 별로 관리하기가 어렵다는 생각이 들었습니다. 그래서 공통 모듈을 한 곳에 모아두는 레포지토리를 각각 레포로 구성하기 보다는 한 레포지토리에서 관리할 수 있도록 모노레포 방식으로 구성하기로 했습니다. 모노레포로 구성을 하게 되면 한 레포지토리에서 여러 프로젝트 관리가 용이하기 때문입니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "aa19fd4a-f4f6-46cf-b626-41cab44be5c5",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "company-libs/\n├─ packages/\n│  ├─ utils/          # 날짜, 문자열, 배열, 객체 등 범용 유틸\n│  ├─ api-types/      # 공통 TypeScript 타입\n│  ├─ eslint-config/  # 팀 린트 규칙\n│  └─ tsconfig/       # 공통 TS 설정\n├─ package.json\n└─ pnpm-workspace.yaml",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "62b51fb5-051d-406f-9b24-a8d38ce14173",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "모노레포로 관리하기 위한 패키지들에는 서비스가 들어가지는 않고, 유틸 성격의 코드들이 패키지 형태로 제공이 될 예정입니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1e72e2f4-0016-48da-a343-55549db26fd0",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"name\": \"common_npm_module\",\n  \"version\": \"1.0.0\",\n  \"scripts\": {\n    \"build\": \"pnpm -r run build\",\n    \"publish:beta\": \"pnpm run build && pnpm -r publish --tag beta --no-git-checks\",\n    \"publish:release\": \"pnpm run build && pnpm -r publish --no-git-checks\"\n  },\n  \"packageManager\": \"pnpm@12.4.2\",\n  \"publishConfig\": {\n    \"registry\": \"https://abis.ahnlab.com/artifactory/api/npm/npm-local-repos/\"\n  } \n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "542da784-36ac-44f8-a8f3-3b59dd57944a",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "루트의 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "package.json",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 에서는 아래와 같이 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "pnpm",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 을 통해 모든 패키지들을 순회하며 배포를 진행하게 됩니다. 배포를 진행하며, 버전이 바뀌지 않은 패키지의 경우에는 넘어가고 버전이 바뀐 패키지에 한해서 배포를 진행합니다. 여기서 중요한 점은 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "package.json",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 에 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "registry",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 를 명시해줘야 NPM 공개 저장소에 배포되는 것이 아닌 사설 레포지토리 주소로 배포됩니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e8de733d-a1bd-49af-9ece-a28e67967857",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "packages/detection-signature/\n  index.js\n  language/yara.tmLanguage.json\n  language/snort.tmLanguage.json\n  language/sigma.tmLanguage.json\n  package.json\n  vite.config.js",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "49ac5612-6e94-4913-82f8-0ce92685ac0e",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이제 배포할 패키지를 하나 만들어놓을 차례입니다. 위와 같이 위협 탐지 시그니쳐 룰을 임포트할 수 있는 패키지들을 만들었습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ece13bd6-7e92-4bb7-b849-6487b2a232ee",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "export { default as yara } from \"./language/yara.tmLanguage.json\";\nexport { default as snort } from \"./language/snort.tmLanguage.json\";\nexport { default as sigma } from \"./language/sigma.tmLanguage.json\";",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c36b5249-4ef8-432b-ab0b-f027f5fffdd5",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "메인 엔트리 파일 (index) 에서는 배럴 패턴으로 정의해놓은 텍스트 메이트 언어 파일들을 내보냅니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "07d56c5b-9c38-42d0-8f63-30d97ef96a4f",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n    \"name\": \"detection-signature\",\n    \"version\": \"0.1.0-beta.0\",\n    \"type\": \"module\",\n    \"files\": [\n        \"dist\"\n    ],\n    \"main\": \"./dist/index.cjs\",\n    \"module\": \"./dist/index.js\",\n    \"exports\": {\n        \".\": {\n            \"import\": \"./dist/index.js\",\n            \"require\": \"./dist/index.cjs\"\n        }\n    },\n    \"scripts\": {\n        \"build\": \"vite build\"\n    },\n    \"devDependencies\": {\n        \"vite\": \"^7.0.0\"\n    }\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c93dae75-5d84-4ee2-ad1d-70d20d8922da",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "package.json",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 에서는 위와 같이 구성을 해주며, ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": ".cjs",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 와 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": ".mjs",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 에 대한 호환을 진행합니다. 관련하여 아래 이어지는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "vite.config.js",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 도 같이 참고해주면 좋습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "61b7aa6b-f6f6-46c9-878d-6e2b9e00a137",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "패키지 구성을 위한 각각의 속성 이야기",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d14f128a-fa3e-4a73-8935-c83c7909526c",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "name : npm에 배포될 패키지 이름입니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b78c9438-544e-4d01-812e-4b82c0deec5b",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "version : 배포 배전을 의미합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5f03084c-edb9-4e82-8de9-a32569d9d6ed",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "type : 해당 프로젝트를 어떻게 해석할지 결정합니다, 현재는 ESM으로 해석합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f8b2c799-06ea-4c99-b41d-a0714418cfa4",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "files : 배포 파일에 포함시킬 폴더를 선택합니다. NPM 배포본에는 현재 dist 폴더만을 포함합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "17d820fb-d024-453f-a1e2-4e2f80065cb3",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "main : commonJS 환경의 진입점이며, require() 사용자를 위한 파일입니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "26c7ec25-21c7-4e3e-8127-97df189ed4b1",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "module : ESM 번들러가 참고하는 진입점입니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e5b144b3-49ba-4d0a-9842-71eea7037782",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "types : TypeScript 타입 선언의 파일 위치입니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ada06463-6b0b-4fa4-b373-e7cf9ba772a6",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "exports : 패키지 공개 API를 명시합니다. import에는 ESM, require에는 commonJS를 연결하고, 타입 파일도 지정합니다. 외부에서 허용하지 않은 내부 경로를 import 하는 것도 막습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4ca9c21f-cdf6-4125-8011-73e762ef1dbb",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "import { defineConfig } from \"vite\";\n\nexport default defineConfig({\n    build: {\n        lib: {\n            entry: './index.js',\n            formats: [\"es\", \"cjs\"],\n            fileName: (format) => `index.${format === \"es\" ? \"js\" : \"cjs\"}`\n        }\n    }\n})",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "dd941b88-d78e-4aa9-9d5c-cf71e298c833",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Vite 번들러 설정 파일 (vite.config.js) 에서 빌드 시점에 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "dist",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 파일에 라이브러리 진입점 파일들을 만들어주고, ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "fileName",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 은 선택사항이지만, dist 파일 안에 생성되는 파일들이 패키지 네임 이름을 따라가기 때문에 복잡스러울 수 있어 index 로 파일명을 통일해주는 것이 편합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "672634ee-d294-499a-9a7e-160981372bb9",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "배포하고 사용해보기",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b21eed44-5325-46ba-bef0-5f02ae46aee0",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "npm login --registry=사내 레포지토리 주소",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1bdca7b7-ceac-40ae-b7cc-11a929e5ce7c",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "배포 전 사내 NPM 라이브러리에 접속하여 로그인을 진행합니다. 로그인을 통해 인증정보가 갱신됩니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "72b7b76c-282b-4eb6-bca1-4ed28856f386",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "npm publish",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6b9cb6cb-6d42-4639-81ef-f7c817e74e70",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "위에서 프로젝트를 구성하여 스크립트를 구성해놓았지만, 기본 명령어를 한번 실행해보겠습니다. 위 명령어를 실행하게 되면 자동으로 지정한 사내 레포지토리 주소로 배포를 진행하게 됩니다. ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "—registry",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 플래그를 매번 작성을 해주지 않으면 공개 레포지토리 주소를 바라보게 되어 오류가 발생할 수 있는데 매번 이러한 작업들이 번거로우면 패키지의 설정 파일 (",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "package.json",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": ")에 명시를 해주면 됩니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "676abcae-443f-46c6-aeee-afb9d609de28",
+    "type": "image",
+    "props": {
+      "textAlignment": "left",
+      "backgroundColor": "default",
+      "name": "Image",
+      "url": "https://upload.cafenono.com/image/slashpagePost/20260919/134309_o8Wl1BT5nEQu0SO5fN?q=80&s=1280x180&t=outside&f=webp",
+      "caption": "",
+      "showPreview": true
+    },
+    "children": []
+  },
+  {
+    "id": "4330273c-cc84-4920-9afe-cfe3efc60f14",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "성공적으로 라이브러리가 배포되었고, 설정해놓았던 패키지 이름으로 설치가 가능합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "406ba92a-4f7c-4a8b-813f-32e4f980a9d7",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "npm install detection-signature // 또는 pnpm add detection-signature",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "786da3c8-47e7-482e-b9d3-af9e3cf386ac",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "추가 과제",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7029bff2-1434-470f-ad4e-2dd94b384569",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "프론트엔드에서 공통적인 모듈들을 어떻개 빼서 사용할 수 있을까 계속 고민을 하다가 깃 서브 모듈등의 내용들을 생각했었습니다. 현재는 CLI를 통해 이렇게 배포하는 과정을 진행해보았다면 다음 챕터로는 풀리퀘스트와 동시에 빌드를 진행하며 베타 버전으로 자동으로 배포가 되는 것입니다. 이때는 빌드 환경이 사내 NPM 저장소에 원활하게 접근하고 바라 볼 수 있도록 인증 정보를 위해 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": ".npmrc",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 와 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "package.json",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 에 관련 정보를 남겨놓는 것이 좋습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  }
+]

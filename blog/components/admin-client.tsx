@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { FormEvent, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { FormEvent, useCallback, useEffect, useEffectEvent, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@base-ui/react/button";
 import { Input } from "@base-ui/react/input";
 import { formatPostDate } from "@/lib/post-date";
@@ -240,6 +240,23 @@ export function AdminClient({ authenticated: initiallyAuthenticated, initialPost
     }
   }
 
+  const saveDraftWithShortcut = useEffectEvent(() => {
+    if (!saving && !savingDraft) void saveDraft();
+  });
+
+  useEffect(() => {
+    if (!authenticated) return;
+
+    const saveWithShortcut = (event: KeyboardEvent) => {
+      if (event.key.toLowerCase() !== "s" || (!event.metaKey && !event.ctrlKey)) return;
+      event.preventDefault();
+      saveDraftWithShortcut();
+    };
+
+    window.addEventListener("keydown", saveWithShortcut);
+    return () => window.removeEventListener("keydown", saveWithShortcut);
+  }, [authenticated]);
+
   async function createCategory(name: string): Promise<SelectOption | null> {
     const existing = categories.find((item) => item.name.toLocaleLowerCase() === name.toLocaleLowerCase());
     if (existing) return existing;
@@ -323,10 +340,10 @@ export function AdminClient({ authenticated: initiallyAuthenticated, initialPost
   return (
     <main className="admin-shell">
       <header className="admin-header">
-        <div className="admin-actions">
-          {draftStatus && <span className="draft-status">{draftStatus}</span>}
-          <Link className="new-post-button" href="/ykk">새 글</Link>
-          <Button className="draft-button" onClick={saveDraft} disabled={saving || savingDraft}>{savingDraft ? "임시 저장 중…" : "임시 저장"}</Button>
+        <div aria-label="글 작성 동작" className="admin-actions">
+          {draftStatus && <span aria-live="polite" className="draft-status" role="status">{draftStatus}</span>}
+          {postId && <Link className="new-post-button" href="/ykk">새 글</Link>}
+          <Button aria-keyshortcuts="Meta+S Control+S" className="draft-button" onClick={saveDraft} disabled={saving || savingDraft} title="⌘S 또는 Ctrl+S">{savingDraft ? "임시 저장 중…" : "임시 저장"}</Button>
           <Button onClick={publish} disabled={saving || savingDraft}>{saving ? "저장 중…" : "발행하기"}</Button>
         </div>
       </header>

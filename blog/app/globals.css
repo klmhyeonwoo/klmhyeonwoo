@@ -8,8 +8,10 @@
   --surface: #fff;
   --surface-raised: #fff;
   --interactive-subtle: #eff2ef;
-  --accent: #222;
-  --soft-green: #e7f9ed;
+  /* Keep the editorial text near-black, but give interactive states a
+     recognisable green counterpart to the dark theme. */
+  --accent: #167a4b;
+  --soft-green: #e3f6ea;
   --acid: #dff8b0;
   --blue: #edf5ff;
 }

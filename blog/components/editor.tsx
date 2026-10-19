@@ -24,7 +24,10 @@ import { ChangeEvent, memo, useCallback, useEffect, useEffectEvent, useRef, useS
 import { ToastMessage } from "./toast-message";
 import { Bookmark } from "./bookmark-block";
 import { Callout } from "./callout-block";
+import { Column, ColumnList } from "./columns-block";
+import { Gallery } from "./gallery-block";
 import { bookmarkMarkdown, bookmarkTitle as savedBookmarkTitle } from "@/lib/bookmark-markdown";
+import { galleryImages, galleryMarkdown } from "@/lib/gallery-markdown";
 
 export type EditorMention = { title: string; href: string; description: string };
 const noMentions: EditorMention[] = [];
@@ -41,6 +44,8 @@ type PendingLink = {
   left: number;
   top: number;
 };
+
+type FloatingPosition = { left: number; top: number };
 
 type BlockTransform = {
   key: string;
@@ -59,6 +64,7 @@ const blockTransforms: BlockTransform[] = [
   { key: "quote", label: "인용", update: { type: "quote" } },
   { key: "codeBlock", label: "코드 블록", update: { type: "codeBlock" } },
   { key: "callout", label: "콜아웃", update: { type: "callout", props: { emoji: "💡", fluent: "", fluentUrl: "" } } },
+  { key: "gallery", label: "이미지 갤러리", update: { type: "gallery", props: { images: "[]" } } },
 ];
 
 function blockTransformKey(block: { type: string; props: Record<string, unknown> }) {
@@ -136,7 +142,14 @@ const schema = BlockNoteSchema.create().extend({
   // Keep BlockNote's code-block model as the editing source of truth. It
   // serializes to fenced Markdown, which is then highlighted by Shiki on the
   // server-rendered page.
-  blockSpecs: { codeBlock: createCodeBlockSpec(codeBlockOptions), bookmark: Bookmark(), callout: Callout() },
+  blockSpecs: {
+    codeBlock: createCodeBlockSpec(codeBlockOptions),
+    bookmark: Bookmark(),
+    callout: Callout(),
+    gallery: Gallery(),
+    columnList: ColumnList(),
+    column: Column(),
+  },
 });
 
 function errorMessage(error: unknown) {
@@ -158,6 +171,17 @@ function normalizedHttpUrl(value: string) {
 
 function defaultBookmarkTitle(url: string) {
   return new URL(url).hostname.replace(/^www\./, "");
+}
+
+function columnLayout(columns: number) {
+  return {
+    type: "columnList",
+    props: { columns },
+    children: Array.from({ length: columns }, () => ({
+      type: "column",
+      children: [{ type: "paragraph", content: [] }],
+    })),
+  };
 }
 
 function mentionForUrl(url: string, mentions: EditorMention[]) {
@@ -189,6 +213,7 @@ function Editor({ initialBlocks, mentions, onChange }: Props) {
   const [uploadError, setUploadError] = useState("");
   const [selectedImageId, setSelectedImageId] = useState<string | null>(null);
   const [selectedImageUrl, setSelectedImageUrl] = useState("");
+  const [imagePropertiesPosition, setImagePropertiesPosition] = useState<FloatingPosition | null>(null);
   const [pendingLink, setPendingLink] = useState<PendingLink | null>(null);
   const isComposingRef = useRef(false);
   const uploadFile = useCallback(async (file: File) => {
@@ -242,6 +267,33 @@ function Editor({ initialBlocks, mentions, onChange }: Props) {
       icon: <span aria-hidden="true">💡</span>,
       onItemClick: () => insertOrUpdateBlockForSlashMenu(editor, { type: "callout", props: { emoji: "💡", fluent: "", fluentUrl: "" } } as never),
     },
+    {
+      key: "two-columns" as never,
+      title: "2열 레이아웃",
+      subtext: "블록을 나란히 배치합니다",
+      aliases: ["columns", "column", "2열", "나란히", "레이아웃"],
+      group: "기본",
+      icon: <span aria-hidden="true">▦</span>,
+      onItemClick: () => insertOrUpdateBlockForSlashMenu(editor, columnLayout(2) as never),
+    },
+    {
+      key: "three-columns" as never,
+      title: "3열 레이아웃",
+      subtext: "세 개의 블록을 나란히 배치합니다",
+      aliases: ["3열", "세 칸", "three columns"],
+      group: "기본",
+      icon: <span aria-hidden="true">▦</span>,
+      onItemClick: () => insertOrUpdateBlockForSlashMenu(editor, columnLayout(3) as never),
+    },
+    {
+      key: "gallery" as never,
+      title: "이미지 갤러리",
+      subtext: "여러 이미지를 2열로 배치합니다",
+      aliases: ["gallery", "갤러리", "이미지 모음", "사진"],
+      group: "기본",
+      icon: <span aria-hidden="true">▦</span>,
+      onItemClick: () => insertOrUpdateBlockForSlashMenu(editor, { type: "gallery", props: { images: "[]" } } as never),
+    },
   ].filter((item) => [item.title, item.subtext, ...(item.aliases ?? [])].some((value) => value?.toLocaleLowerCase().includes(query.toLocaleLowerCase()))), [editor]);
 
   const getMentionItems = useCallback(async (query: string) => mentionItems
@@ -263,7 +315,14 @@ function Editor({ initialBlocks, mentions, onChange }: Props) {
     // partially composed syllables to be committed more than once.
     if (isComposingRef.current) return;
     const document = editor.document;
-    const markdown = document.map((block) => {
+    const serializeBlock = (block: (typeof document)[number]): string => {
+      if (block.type === "columnList") {
+        const columns = Number((block.props as { columns?: unknown }).columns);
+        const columnCount = Number.isInteger(columns) && columns > 1 ? columns : block.children.length;
+        const columnBlocks = block.children as Array<{ children: Array<(typeof document)[number]> }>;
+        const contents = columnBlocks.map((column) => `<Column>\n${column.children.map(serializeBlock).filter(Boolean).join("\n\n")}\n</Column>`).join("\n\n");
+        return `<Columns columns={${columnCount}}>\n${contents}\n</Columns>`;
+      }
       const serialized = editor.blocksToMarkdownLossy([block]);
       if (block.type === "bookmark") {
         const props = block.props as { url?: unknown; description?: unknown; image?: unknown };
@@ -276,10 +335,14 @@ function Editor({ initialBlocks, mentions, onChange }: Props) {
           );
         }
       }
+      if (block.type === "gallery") {
+        return galleryMarkdown(galleryImages((block.props as { images?: unknown }).images));
+      }
       return block.type === "callout"
         ? calloutMarkdown(serialized, block.props as { emoji?: unknown; fluent?: unknown; fluentUrl?: unknown })
         : serialized;
-    }).join("\n");
+    };
+    const markdown = document.map(serializeBlock).join("\n");
     onChange(copyBlocks(document), markdown);
   }, [editor, onChange]);
 
@@ -392,6 +455,18 @@ function Editor({ initialBlocks, mentions, onChange }: Props) {
     const root = editor.domElement;
     if (!root) return;
 
+    const positionImageProperties = (id: string) => {
+      const image = root.querySelector<HTMLElement>(`[data-id="${id}"] .bn-visual-media`);
+      const block = root.querySelector<HTMLElement>(`[data-id="${id}"]`);
+      const rect = (image ?? block)?.getBoundingClientRect();
+      if (!rect) return;
+      const panelWidth = Math.min(360, window.innerWidth - 32);
+      const left = Math.min(Math.max(16, rect.left), window.innerWidth - panelWidth - 16);
+      const below = rect.bottom + 10;
+      const top = below + 116 < window.innerHeight ? below : Math.max(16, rect.top - 116);
+      setImagePropertiesPosition({ left, top });
+    };
+
     const openImageProperties = (event: PointerEvent) => {
       const target = event.target;
       if (!(target instanceof Element) || !target.closest(".bn-visual-media")) return;
@@ -412,11 +487,38 @@ function Editor({ initialBlocks, mentions, onChange }: Props) {
       event.stopPropagation();
       setSelectedImageId(id);
       setSelectedImageUrl(url);
+      positionImageProperties(id);
     };
 
     root.addEventListener("pointerdown", openImageProperties, true);
     return () => root.removeEventListener("pointerdown", openImageProperties, true);
   }, [editor]);
+
+  useEffect(() => {
+    if (!selectedImageId) return;
+    const root = editor.domElement;
+    if (!root) return;
+
+    const updatePosition = () => {
+      const image = root.querySelector<HTMLElement>(`[data-id="${selectedImageId}"] .bn-visual-media`);
+      const block = root.querySelector<HTMLElement>(`[data-id="${selectedImageId}"]`);
+      const rect = (image ?? block)?.getBoundingClientRect();
+      if (!rect) return;
+      const panelWidth = Math.min(360, window.innerWidth - 32);
+      const left = Math.min(Math.max(16, rect.left), window.innerWidth - panelWidth - 16);
+      const below = rect.bottom + 10;
+      const top = below + 116 < window.innerHeight ? below : Math.max(16, rect.top - 116);
+      setImagePropertiesPosition({ left, top });
+    };
+
+    updatePosition();
+    window.addEventListener("resize", updatePosition);
+    window.addEventListener("scroll", updatePosition, true);
+    return () => {
+      window.removeEventListener("resize", updatePosition);
+      window.removeEventListener("scroll", updatePosition, true);
+    };
+  }, [editor, selectedImageId]);
 
   useEffect(() => {
     const root = editor.domElement;
@@ -562,7 +664,7 @@ function Editor({ initialBlocks, mentions, onChange }: Props) {
           <button className="editor-link-choice-cancel" type="button" onClick={() => setPendingLink(null)} onMouseDown={(event) => { event.preventDefault(); event.stopPropagation(); }}>취소</button>
         </div>
       </aside>}
-      {selectedImageId && <aside className="image-properties" aria-label="이미지 속성" onMouseDown={(event) => event.stopPropagation()} onPointerDown={(event) => event.stopPropagation()} style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "0.5rem", marginTop: "0.75rem", padding: "0.75rem", border: "1px solid var(--border)", borderRadius: "0.75rem", background: "var(--surface)" }}>
+      {selectedImageId && <aside className="image-properties" aria-label="이미지 속성" onMouseDown={(event) => event.stopPropagation()} onPointerDown={(event) => event.stopPropagation()} style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "0.5rem", padding: "0.75rem", border: "1px solid var(--border)", borderRadius: "0.75rem", background: "var(--surface)", left: imagePropertiesPosition?.left ?? 16, position: "fixed", top: imagePropertiesPosition?.top ?? 16, zIndex: 30 }}>
         <label style={{ display: "flex", alignItems: "center", gap: "0.5rem", flex: "1 1 20rem" }}>
           <span>이미지 주소</span>
           <input style={{ minWidth: 0, flex: 1 }} value={selectedImageUrl} onChange={(event) => setSelectedImageUrl(event.target.value)} onMouseDown={(event) => event.stopPropagation()} onPointerDown={(event) => event.stopPropagation()} onBlur={() => updateSelectedImageUrl(selectedImageUrl)} onKeyDown={(event) => {
@@ -576,7 +678,7 @@ function Editor({ initialBlocks, mentions, onChange }: Props) {
           이미지 바꾸기
           <input type="file" accept="image/*" onChange={replaceSelectedImage} />
         </label>
-        <button type="button" onClick={() => setSelectedImageId(null)} onMouseDown={(event) => { event.preventDefault(); event.stopPropagation(); }} onPointerDown={(event) => { event.preventDefault(); event.stopPropagation(); }}>닫기</button>
+        <button type="button" onClick={() => { setSelectedImageId(null); setImagePropertiesPosition(null); }} onMouseDown={(event) => { event.preventDefault(); event.stopPropagation(); }} onPointerDown={(event) => { event.preventDefault(); event.stopPropagation(); }}>닫기</button>
       </aside>}
       <ToastMessage message={uploadError} tone="error" />
     </section>

@@ -36,8 +36,10 @@ function CalloutBlock({ block, editor, contentRef }: ReactCustomBlockRenderProps
   };
   const preservePickerInteraction = (event: React.MouseEvent | React.PointerEvent) => {
     const target = event.target as HTMLElement;
-    // Keep text inputs focusable, but don't let a picker click move the
-    // BlockNote selection back into the writing surface.
+    // Keep text inputs focusable, but don't let a picker interaction move the
+    // ProseMirror selection back into the writing surface. This needs to run
+    // for both pointer and mouse events: BlockNote listens to mouse events,
+    // while the two emoji pickers use pointer events internally.
     if (!target.closest("input, textarea, select")) event.preventDefault();
     event.stopPropagation();
   };
@@ -74,6 +76,8 @@ function CalloutBlock({ block, editor, contentRef }: ReactCustomBlockRenderProps
           event.preventDefault();
           event.stopPropagation();
         }}
+        onMouseDownCapture={preservePickerInteraction}
+        onPointerDownCapture={preservePickerInteraction}
         type="button"
       >{block.props.fluentUrl ? <img alt="" className="editor-callout-fluent-image" src={block.props.fluentUrl} /> : block.props.fluent ? <FluentEmoji name={block.props.fluent} /> : block.props.emoji}</button>
       {pickerOpen && <div aria-label="콜아웃 이모지 선택" className="editor-callout-emoji-menu" onClick={(event) => event.stopPropagation()} onMouseDownCapture={preservePickerInteraction} onPointerDownCapture={preservePickerInteraction} role="region">
@@ -111,7 +115,10 @@ function CalloutExternalHTML({ block, contentRef }: ReactCustomBlockRenderProps<
 }
 
 export const Callout = createReactBlockSpec(createCalloutBlockConfig, {
-  meta: { isolating: false },
+  // The picker is an interactive surface embedded in a contenteditable node.
+  // Isolation prevents a click in its controls from becoming a ProseMirror
+  // selection transaction, which would remount the block and close the menu.
+  meta: { isolating: true },
   render: CalloutBlock,
   toExternalHTML: CalloutExternalHTML,
 });

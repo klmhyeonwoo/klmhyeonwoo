@@ -443,8 +443,8 @@
 
 .prose pre.shiki,
 .prose pre.shiki code {
-  background-color: var(--shiki-light-bg) !important;
-  color: var(--shiki-light) !important;
+  background-color: var(--shiki-light-bg, #f6f8fa) !important;
+  color: var(--shiki-light, #24292f) !important;
 }
 
 .prose pre.shiki {
@@ -463,6 +463,12 @@ html:not([data-theme="dark"]) .editor [data-content-type="codeBlock"] {
   border-color: #b9c1bb;
   color: #202522;
   box-shadow: inset 0 1px rgba(255, 255, 255, 0.7);
+}
+
+/* BlockNote's base stylesheet assumes a dark code canvas. Once the canvas is
+   light, resolve the same Shiki token variables against the light palette. */
+html:not([data-theme="dark"]) .editor [data-content-type="codeBlock"] .shiki {
+  color: var(--bn-suggestion-token-color, var(--shiki-light, #24292f));
 }
 
 html:not([data-theme="dark"]) .editor [data-content-type="codeBlock"] select {
@@ -520,18 +526,22 @@ html:not([data-theme="dark"]) .prose pre.shiki {
   box-shadow: inset 0 1px rgba(255, 255, 255, 0.7);
 }
 
-.prose pre.shiki span {
-  color: var(--shiki-light);
+html:not([data-theme="dark"]) .prose pre.shiki span {
+  color: var(--shiki-light, #24292f);
 }
 
 html[data-theme="dark"] .prose pre.shiki,
 html[data-theme="dark"] .prose pre.shiki code {
-  background-color: var(--shiki-dark-bg) !important;
-  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg, #0d1117) !important;
+  color: var(--shiki-dark, #e6edf3) !important;
 }
 
 html[data-theme="dark"] .prose pre.shiki span {
-  color: var(--shiki-dark);
+  color: var(--shiki-dark, #e6edf3);
+}
+
+html[data-theme="dark"] .editor [data-content-type="codeBlock"] .shiki {
+  color: var(--bn-suggestion-token-color, var(--shiki-dark, #e6edf3));
 }
 
 /* URL paste is deliberately a small, anchored decision instead of silently

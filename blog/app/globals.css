@@ -4371,6 +4371,36 @@ html[data-theme="dark"] .service-toast {
   color: #7e8995;
   margin: 22px 6px 6px;
 }
+.recent-comments-placeholder {
+  display: grid;
+  gap: 12px;
+  margin-top: 24px;
+}
+.sr-only {
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+.recent-comments-placeholder span {
+  animation: recent-comments-pulse 1.4s ease-in-out infinite;
+  background: linear-gradient(100deg, rgba(130, 142, 154, 0.12) 25%, rgba(130, 142, 154, 0.22) 40%, rgba(130, 142, 154, 0.12) 60%);
+  background-size: 200% 100%;
+  border-radius: 18px;
+  display: block;
+  height: 126px;
+}
+.recent-comments-placeholder span:nth-child(2) {
+  animation-delay: 0.12s;
+}
+@keyframes recent-comments-pulse {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
 html[data-theme="dark"] .kb-content-layout .recent-comments {
   background: #222624;
 }
@@ -4391,6 +4421,9 @@ html[data-theme="dark"] .kb-content-layout .recent-comment-body {
 html[data-theme="dark"] .kb-content-layout .recent-comments a > small,
 html[data-theme="dark"] .kb-content-layout .recent-comments-empty {
   color: #9fa9a1;
+}
+html[data-theme="dark"] .recent-comments-placeholder span {
+  background-color: #171918;
 }
 @media (max-width: 760px) {
   .kb-content-layout .recent-comments {
@@ -4416,6 +4449,9 @@ html[data-theme="dark"] .kb-content-layout .recent-comments-empty {
   }
   .kb-content-layout .recent-comments li:hover {
     transform: none;
+  }
+  .recent-comments-placeholder span {
+    animation: none;
   }
 }
 

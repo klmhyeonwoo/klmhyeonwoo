@@ -1,3 +1,5 @@
+import { unstable_cache } from "next/cache";
+
 type GitHubComment = { body?: string; created_at?: string; html_url?: string; issue_url?: string; user?: { login?: string; avatar_url?: string } };
 type GitHubIssue = { title?: string; labels?: { name?: string }[] };
 type GiscusAuthor = { login?: string; avatarUrl?: string } | null;
@@ -96,7 +98,7 @@ async function getGiscusRecentComments(configuration: { repository: string; cate
     .slice(0, 4);
 }
 
-export async function getRecentComments(): Promise<RecentComment[]> {
+async function loadRecentComments(): Promise<RecentComment[]> {
   const giscus = giscusConfiguration();
   if (giscus) return (await getGiscusRecentComments(giscus)) ?? [];
   const response = await fetch(`https://api.github.com/repos/${repository()}/issues/comments?per_page=4&sort=created&direction=desc`, { headers: headers(), next: { revalidate: recentCommentsRevalidateSeconds } });
@@ -108,4 +110,16 @@ export async function getRecentComments(): Promise<RecentComment[]> {
     return { body: plainText(comment.body ?? "") || "새 댓글", createdAt: comment.created_at!, href: comment.html_url!, postTitle: parent.title ?? "댓글이 달린 글", author: comment.user?.login ?? "GitHub 사용자", avatar: comment.user?.avatar_url ?? "" };
   }));
   return results.filter((comment): comment is RecentComment => comment !== null).slice(0, 4);
+}
+// Home stays dynamic for the admin session, but comments do not need to make
+// every visitor wait on GitHub. Cache this independent, external request for a
+// short period so a fresh comment still appears promptly.
+const getCachedRecentComments = unstable_cache(
+  loadRecentComments,
+  ["recent-comments"],
+  { revalidate: recentCommentsRevalidateSeconds },
+);
+
+export function getRecentComments(): Promise<RecentComment[]> {
+  return getCachedRecentComments();
 }

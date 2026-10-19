@@ -35,7 +35,7 @@ function BookmarkBlock({ block, editor, contentRef }: ReactCustomBlockRenderProp
   }
 
   return <div className="editor-bookmark" onPointerDown={(event) => event.stopPropagation()}>
-    <div aria-hidden="true" className="editor-bookmark-visual">{block.props.image ? <img alt="" src={block.props.image} /> : <span>{label}</span>}</div>
+    <div aria-hidden="true" className="editor-bookmark-visual">{block.props.image ? <img alt="" src={block.props.image} referrerPolicy="no-referrer" /> : <span>{label}</span>}</div>
     <div className="editor-bookmark-copy">
       <small>링크 · {hostname}</small>
       <div className="editor-bookmark-title" ref={contentRef} />

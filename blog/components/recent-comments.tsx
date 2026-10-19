@@ -1,10 +1,19 @@
 import { getRecentComments } from "@/lib/recent-comments";
-import { getPosts } from "@/lib/posts";
+import type { PostMeta } from "@/lib/posts";
 import { PrefetchLink } from "@/components/prefetch-link";
 
-export async function RecentComments() {
+export function RecentCommentsFallback() {
+  return (
+    <aside className="recent-comments recent-comments-loading" aria-busy="true" aria-labelledby="recent-comments-title">
+      <header><h2 id="recent-comments-title">최신 댓글</h2></header>
+      <div className="recent-comments-placeholder" aria-hidden="true"><span /><span /></div>
+      <span className="sr-only">최신 댓글을 불러오는 중입니다.</span>
+    </aside>
+  );
+}
+
+export async function RecentComments({ posts }: { posts: PostMeta[] }) {
   const comments = await getRecentComments();
-  const posts = getPosts(true);
   const postForComment = (value: string) => {
     const id = value.match(/(?:^|\/)posts?\/([^/?#]+)/)?.[1];
     const post = id ? posts.find((item) => item.id === id) : undefined;

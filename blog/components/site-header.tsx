@@ -6,8 +6,8 @@ import { MobileMenu } from "./mobile-menu";
 import { SitePopup } from "./site-popup";
 import { ThemeToggle } from "./theme-toggle";
 
-export async function SiteHeader() {
-  const authenticated = await isAdmin();
+export async function SiteHeader({ authenticated: authenticatedFromPage }: { authenticated?: boolean } = {}) {
+  const authenticated = authenticatedFromPage ?? await isAdmin();
   const settings = getSiteSettings();
 
   return (

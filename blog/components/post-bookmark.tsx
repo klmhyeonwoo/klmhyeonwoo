@@ -14,7 +14,7 @@ export function PostBookmark({ url, title, description, image }: { url: string; 
   if (!href) return null;
 
   return <a className="post-bookmark" href={href} rel="noreferrer">
-    <span aria-hidden="true" className="post-bookmark-visual">{image ? <img alt="" src={image} /> : <span>{label}</span>}</span>
+    <span aria-hidden="true" className="post-bookmark-visual">{image ? <img alt="" src={image} referrerPolicy="no-referrer" /> : <span>{label}</span>}</span>
     <span className="post-bookmark-copy">
       <small>링크 · {hostname}</small>
       <strong>{title?.trim() || hostname}</strong>

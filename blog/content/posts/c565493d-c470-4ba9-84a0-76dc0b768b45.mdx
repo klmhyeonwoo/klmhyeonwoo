@@ -1,0 +1,85 @@
+---
+title: "EventSource vs Fetch + ReadableStream (SSE)"
+date: 2026-10-19
+publishedAt: "2026-10-19T12:53:32.280Z"
+updatedAt: "2026-10-19T12:53:32.281Z"
+description: ""
+category: "category-9606d629"
+series: "-"
+private: false
+---
+
+전사 AX(Artificial Intelligence Transformation) 전환을 하면서 자연스레 서비스에도 Agentic UI를 적용하면서, SSE를 적용하는 과정에서 브라우저에서 제공하는 `new EventSource` 를 POST 메서드에서는 사용하지 못한다는 것을 알게되었고 EventSource 방식과 Fetch + ReadableStream(SSE) 방식의 차이를 공부해보고자 해요.
+
+<Callout emoji="💡">
+**AX(Artificial Intelligence Transformation)이란?**
+</Callout>
+
+'인공지능 전환'을 뜻하는 말로, 기업이나 조직이 인공지능(AI)을 핵심 동력으로 삼아 업무 방식, 의사결정 체계, 비즈니스 모델 전반을 새롭게 재설계하는 혁신 과정을 의미합니다.
+
+## SSE(Server-Sent Events)란?
+
+서버 → 클라이언트 단방향 실시간 스트리밍 프로토콜입니다.
+
+Content-Type: text/event-stream 으로 연결을 유지하면서 서버가 data: ...\n\n 형식으로 계속 데이터를 밀어냅니다.
+
+실제로 호출을 하게 되면 아래와 같은 결과 값을 네트워크 탭에서 확인할 수 있습니다.
+
+![Image](https://upload.cafenono.com/image/slashpagePost/20260601/215431_7PMdVK5C70IQttSMJZ?q=80&s=1280x180&t=outside&f=webp)
+
+## EventSource (브라우저 내장 API)
+
+* 브라우저가 자동으로 재연결 처리를 지원합니다. (retry : 필드 지원)
+
+* 연결이 끊기면 자동으로 재시도를 합니다.
+
+* GET 전용입니다, URL에 파라미터를 쿼리스트링으로만 전달이 가능합니다.
+
+* Authorization 헤더 추가가 불가합니다. 즉, JWT 인증이 불가한 상황이라는 겁니다.
+
+* 쿠기 기반의 인증만 가능합니다. (withcredentials : true)
+
+```javascript
+const es = new EventSource('/api/stream');
+
+es.onmessage = (e) => console.log(e.data);
+es.onerror   = (e) => es.close();
+```
+
+제약 사항으로는 GET 메서드 전용이며, 헤더를 추가하지 못합니다. 보통 주식 시세, 알림, 공개 피드 같은 곳에서 사용을 합니다.
+
+## Fetch + ReadableStream (SSE)
+
+* POST + Request Body → 긴 질문, 복잡한 옵션 전달이 가능합니다.
+
+* Authorization: Bearer ... 헤더가 가능합니다. 즉, JWT 인증이 가능합니다.
+
+* 자동 재연결이 없으며, 직접 구현해야합니다.
+
+* 브라우저 스트리밍 지원 덕분에 청크 단위로 읽기가 가능합니다.
+
+```javascript
+const response = await fetch('/api/stream', {
+    method: 'POST',
+    headers: {
+        'Authorization': 'Bearer ' + token,   // ✅ 가능
+        'Content-Type': 'application/json',
+        'Accept': 'text/event-stream',
+    },
+    body: JSON.stringify({ question: '...' }) // ✅ 가능
+});
+
+const reader = response.body.getReader();
+const decoder = new TextDecoder();
+
+while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    
+    const chunk = decoder.decode(value, { stream: true });
+    // chunk에서 "data: {...}\n\n" 파싱
+}
+```
+
+제약 사항으로는 재열결을 하는 로직을 직접 구현해야하며 AI 채팅, 인증이 필요한 API 같은 곳에서 사용을 합니다.
+

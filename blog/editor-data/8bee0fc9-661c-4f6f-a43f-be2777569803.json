@@ -1,0 +1,1575 @@
+[
+  {
+    "id": "31d09282-5032-4349-9cd9-62cb0d66ec30",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "DOM을 조작하다 보면 분명히 코드는 간단한데, 스크롤 할 때마다 버벅이고, 애니메이션은 뚝뚝 끊긴다. 레이아웃 작업이 수백 밀리초를 잡아먹고 있는데, 이 원인은 바로 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "레이아웃 스레싱(Layout Thrashing)",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "3b83df0d-a29d-4bb3-b629-a14a9b569cb1",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "변경이 생길 때 브라우저가 거치는 단계 (픽셀 파이프라인)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ec23960e-7428-4b03-af63-4c6a92dbffe4",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "초기 로드 이후, JS로 DOM이 변경될 때마다 브라우저는 아래 흐름을 다시 탄다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "aca0acb2-51e7-42ec-af26-74b137c063a1",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "JavaScript → Style → Layout → Paint → Composite\n                        ↑\n                  여기서 문제가 생긴다",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b5b9351b-19e2-42c5-84ac-5d4b09eeb63a",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Style",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": ": 변경된 요소에 어떤 CSS 규칙이 적용되는지 재계산 (DevTools에서는 \"Recalculate Style\"로 표시)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "cf3a8849-af29-4cd2-b07f-ebfe0dfc09bd",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Layout",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": ": 각 요소의 위치와 크기를 계산 (Reflow라고도 부른다)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "53e97cbc-e611-4705-8e40-04215ce73ade",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Paint",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": ": 픽셀을 채우는 단계",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1b9d237e-e927-4ade-8fb6-08bafd8261de",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Composite",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": ": 레이어를 합성",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "3de0e960-e25a-4ce2-9ed6-a43858a795ef",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이 중에서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Layout",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 단계가 제일 비싸다. 요소 하나의 크기가 바뀌면, 연관된 모든 요소의 위치를 다시 계산해야 하기 때문이다. 브라우저는 JavaScript 실행 중에 발생하는 DOM 변경들을 즉시 반영하지 않는다. ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "일괄 처리(batch)",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "해서 한 번에 처리한다. ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "레이아웃 스레싱은 바로 이 배치 처리를 무력화할 때 발생한다.",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4aaa9235-c70b-41d8-9a1f-19f05fe92bb6",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "픽셀 파이프라인이란?",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1730a6d8-048a-4a89-930a-1c3371967a79",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "브라우저 렌더링 파이프라인은 \"페이지를 처음 만드는 과정\" 이라면, 픽셀 파이프라인은 \"만들어진 페이지를 또 다시 갱신하는 과정\"을 의미한다. 픽셀 파이프라인은 무조건 변경될 때마다 전부 다 실행되는 것이 아닌 어떤 것을 변경했냐에 따라 순서가 달라진다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7b9e117e-3964-4da1-947b-9734c395ce23",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "width 변경 → Style → Layout → Paint → Composite\ncolor 변경 → Style → Paint → Composite\ntransform → Style → Composite\n",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": " ",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "(단, opacity, transform은 Style/Layout/Paint를 건너뛰고 Composite만 실행)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "a8a01cb3-859c-414b-bb7f-b1e4a0d4207b",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "레이아웃 스레싱이 무엇일까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5645df39-32a3-4da4-8146-c525ef403649",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "레이아웃 스레싱(Layout Thrashing)",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "은 JavaScript가 DOM의 기하학적 속성을 읽고 쓰는 작업을 번갈아 가면서 반복할 때 발생한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "78670b81-a53e-4428-a0cc-687c911afea4",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// 레이아웃 스레싱 예제\nconst boxes = document.querySelectorAll('.box');\n\nfor (let i = 0; i < boxes.length; i++) {\n  const width = boxes[i].offsetWidth;   // ← 읽기: Layout 강제 실행\n  boxes[i].style.width = width + 10 + 'px'; // ← 쓰기: 레이아웃 무효화\n}\n// 다음 반복에서 다시 읽기 → Layout 또 강제 실행 → 무한 반복",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d87a0a07-f32b-44ca-9deb-7e67a3003f69",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "왜 이게 문제냐면 ^,^ ..",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e5737922-59f6-4037-b4a9-acbe22bd0fe8",
+    "type": "numberedListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "boxes[i].style.width",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 변경하면 브라우저는 레이아웃을 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "무효(dirty)",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "로 표시한다",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f59a861c-35b0-4b31-90ea-30bc01574430",
+    "type": "numberedListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "다음 반복에서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "offsetWidth",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 읽으면, 레이아웃이 무효 상태이므로 브라우저는 정확한 값을 반환하기 위해 강제로 레이아웃을 다시 계산한다",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7f2cf26a-a6a9-4a30-b82b-1cc7d0059a7f",
+    "type": "numberedListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이걸 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Forced Synchronous Layout",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 이라고 부른다",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f6b58433-4081-4e7c-afde-a30d183a9905",
+    "type": "numberedListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "n개의 요소가 있으면 n번 레이아웃이 실행된다",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "153799be-b349-4d05-ac81-7c57468f7450",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "100개 요소면 100번이다. 1000개면 1000번.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e30fe8bb-0ba4-47af-bafd-74ba46447778",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "레이아웃을 강제하는 속성들",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "46b1996c-ce79-4a3f-bcf0-59099fa0fcb4",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "모든 DOM 읽기가 레이아웃을 강제하는 건 아니다. 기하학적 정보를 요구하는 속성들이 문제다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ffccbe76-7f23-46d7-8335-62d8d6642694",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// 이 속성들을 읽으면 레이아웃이 강제 실행된다\n\n// 크기/위치 관련\nelement.offsetWidth, element.offsetHeight\nelement.offsetTop, element.offsetLeft\nelement.offsetParent\nelement.clientWidth, element.clientHeight\nelement.clientTop, element.clientLeft\nelement.scrollWidth, element.scrollHeight\nelement.scrollTop, element.scrollLeft    // ← 읽기만 해도 강제 실행\n\n// 좌표 관련\nelement.getBoundingClientRect()           // ← 자주 쓰이는 범인\nelement.getClientRects()\n\n// 계산된 스타일\nwindow.getComputedStyle(element)          // ← 이것도 해당됨\n\n// 스크롤\nwindow.scrollX, window.scrollY\nwindow.innerWidth, window.innerHeight",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "810e8d07-7709-442d-8106-43566247c3f2",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "반면 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "[element.style.width](https://element.style.width)",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "처럼 설정된 인라인 스타일을 읽는 건 레이아웃을 강제하지 않는다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "0e98e8b0-fca9-41a6-b980-4400cca3bc52",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "실제 계산된 값이 아니라 인라인으로 지정된 문자열을 그대로 반환하기 때문이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "64de3c2a-7cbd-4aed-b823-b91dbcfb887d",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "실제로 얼마나 느려지나",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "8669a93b-60b6-41d4-938c-4256015e7aeb",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "DevTools의 Performance 탭을 열면 레이아웃 스레싱이 일어나는 구간에 경고 삼각형이 찍힌다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "cb1b8b50-0480-4cec-b9da-75412b012026",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Before (레이아웃 스레싱 있음):\n  Frame 1: 280ms  ← 16ms를 훌쩍 넘겨서 프레임 드롭\n  Frame 2: 290ms\n  Frame 3: 270ms\n  → 초당 3~4 프레임 수준\n\nAfter (수정 후):\n  Frame 1: 8ms    ← 여유 있게 16ms 안에 처리\n  Frame 2: 7ms\n  Frame 3: 9ms\n  → 매끄러운 60fps",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d63ac393-aeec-4694-8e0c-aa2bb84ce494",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "60fps를 유지하려면 한 프레임에 16.67ms 안에 모든 처리가 끝나야 한다. 레이아웃 스레싱이 있으면 그 예산을 금방 초과한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "402be334-70c1-4563-bacb-1c23af6a7b22",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "읽기와 쓰기, 어떻게 분리해야 할까",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "071f6727-af84-4703-9c9b-b3240cd21ae4",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "핵심은 간단하다. ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "읽는 작업을 먼저 몰아서 하고, 쓰는 작업을 나중에 몰아서 한다.",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "bbe86270-4b27-4621-8bee-4bc14fdd4308",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// ✅ 읽기 먼저, 쓰기 나중에\nconst boxes = document.querySelectorAll('.box');\nconst widths = [];\n\n// 1단계: 읽기만 한다\nfor (let i = 0; i < boxes.length; i++) {\n  widths.push(boxes[i].offsetWidth);  // ← 레이아웃은 처음 한 번만 실행\n}\n\n// 2단계: 쓰기만 한다\nfor (let i = 0; i < boxes.length; i++) {\n  boxes[i].style.width = widths[i] + 10 + 'px'; // ← 레이아웃 무효화만 함\n}\n// 브라우저가 다음 프레임에 레이아웃을 한 번만 실행",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4ec1ee64-dda8-474b-b18e-b5cbc032fce7",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이렇게 하면 레이아웃 계산은 딱 한 번만 일어난다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4e7b2a9d-e580-4bd4-921f-179c5b871275",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "requestAnimationFrame으로 시점 제어",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "3ef32305-facd-46ba-81e6-9751b5a65789",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "읽기/쓰기 분리가 항상 한 함수 안에서 가능한 건 아니다. 복잡한 UI에서는 서로 다른 컴포넌트가 레이아웃 정보를 읽고 쓰는 경우가 많다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "653bf2e6-573b-4722-8cb0-564fa1ef3102",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이럴 때 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "requestAnimationFrame",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "이 도움이 된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "06c1d931-940b-4766-b78c-82eee6b3471f",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// 쓰기 작업은 rAF로 다음 프레임으로 미룬다\nfunction updateBox(element) {\n  const width = element.offsetWidth; // ← 지금 당장 읽기\n\n  requestAnimationFrame(() => {\n    element.style.width = width + 10 + 'px'; // ← 다음 프레임에 쓰기\n  });\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "2401441f-3fb2-4e03-857a-7d5382cbe1ba",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "브라우저는 rAF 콜백을 실행하기 직전에 레이아웃을 처리한다. 그 시점에 쓰기를 하면 다음 프레임에 한 번만 레이아웃이 실행된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "891ce016-b9a7-4951-a54c-8ebf51bb093f",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "FastDOM — 읽기/쓰기 큐잉 라이브러리",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "43f2e44c-c41b-4e0f-a821-f098796dfd4b",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "규모가 커지면 수동으로 관리하기 힘들다. 이 문제를 체계적으로 해결하는 라이브러리가 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "FastDOM",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e517a4f6-cd49-4b1e-a959-7d1bba7a72dd",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "import fastdom from 'fastdom';\n\n// 읽기는 measure로\nfastdom.measure(() => {\n  const width = element.offsetWidth; // ← 읽기 큐에 쌓임\n\n  // 쓰기는 mutate로\n  fastdom.mutate(() => {\n    element.style.width = width + 10 + 'px'; // ← 쓰기 큐에 쌓임\n  });\n});\n\n// FastDOM이 알아서:\n// 1. measure 콜백들을 모두 실행 (읽기)\n// 2. mutate 콜백들을 모두 실행 (쓰기)\n// 3. 레이아웃은 딱 한 번",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "821bf277-6c08-4aaa-9351-7f2845bdc357",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "내부적으로는 rAF를 사용해서 읽기 → 쓰기 순서를 보장한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1f81120e-6386-4751-bdf6-5a6d5e4f7ef4",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "비교: 상황별 선택 가이드",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "384009df-ccb3-4bc6-a57b-ceedad637916",
+    "type": "table",
+    "props": {
+      "textColor": "default"
+    },
+    "content": {
+      "type": "tableContent",
+      "columnWidths": [
+        null,
+        null
+      ],
+      "headerRows": 1,
+      "rows": [
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "상황",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "추천 방법",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "단순 루프에서 읽기/쓰기 반복",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "읽기 배열로 모아두고 쓰기 분리",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "비동기 컴포넌트 간 DOM 접근",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "requestAnimationFrame",
+                  "styles": {
+                    "code": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": " 사용",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "규모 있는 앱, 여러 곳에서 DOM 접근",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "FastDOM 도입",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "React/Vue 같은 프레임워크 사용 중",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "프레임워크의 상태 관리를 통해 처리, 직접 DOM 접근은 최소화",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "CSS만으로 해결 가능한 애니메이션",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "transform",
+                  "styles": {
+                    "code": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": ", ",
+                  "styles": {}
+                },
+                {
+                  "type": "text",
+                  "text": "opacity",
+                  "styles": {
+                    "code": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": "로 레이아웃 건드리지 않게 처리",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "children": []
+  },
+  {
+    "id": "aa4641d1-5393-4a4d-9e48-8a30c8988a6c",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "사실 React나 Vue를 쓴다면 레이아웃 스레싱을 직접 경험할 일이 많지 않다. Virtual DOM이 배치 처리를 대신해주기 때문이다. 근데 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "useEffect",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 안에서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "getBoundingClientRect()",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 읽고 상태를 업데이트하면 똑같은 문제가 생긴다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5b707d2b-8641-4126-af6b-8c3e2db965f4",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "CSS로 레이아웃 자체를 피하는 방법",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "a319f2c5-d132-4aff-9aad-c47137266876",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "가장 좋은 해결책은 레이아웃을 아예 건드리지 않는 것이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "be872525-b740-4373-8813-1689877796ce",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "/* ❌ 레이아웃을 유발하는 속성 */\n.box {\n  transition: width 0.3s, height 0.3s, top 0.3s, left 0.3s;\n}\n\n/* ✅ Composite 단계만 사용하는 속성 */\n.box {\n  transition: transform 0.3s, opacity 0.3s;\n  /* transform과 opacity는 레이아웃, 페인트를 건너뛴다 */\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1e62d6ac-b500-40c1-93b1-73b11efadc5c",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "transform",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "과 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "opacity",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 GPU가 처리하는 Composite 단계에서만 동작한다. 레이아웃과 페인트를 건너뛰기 때문에 훨씬 빠르고, 레이아웃 스레싱의 영향도 받지 않는다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "732b4d1b-fbe1-4743-ad50-4ab84ae3bf48",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "위치 이동 애니메이션은 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "left/top",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 대신 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "transform: translate()",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 쓰는 게 좋다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "0a8315b8-a789-4cc2-b2cc-e04625ef764b",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// ❌ 레이아웃 유발\nelement.style.left = x + 'px';\nelement.style.top = y + 'px';\n\n// ✅ Composite만 사용\nelement.style.transform = `translate(${x}px, ${y}px)`;",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5e05728e-c052-4116-b514-d9fdb7d1766d",
+    "type": "divider",
+    "props": {},
+    "children": []
+  },
+  {
+    "id": "d92cd312-e241-4062-9061-a4ab9d1e3df6",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "will-change로 레이어 승격시키기",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "8be70b28-9b03-4c08-86a1-f8009580286e",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "자주 애니메이션되는 요소는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "will-change",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "로 GPU 레이어로 미리 승격시킬 수 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "8a604cf7-1299-4aa9-bbf2-961a647daa9a",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": ".animated-box {\n  will-change: transform;   /* ← 이 요소는 transform이 자주 바뀔 거라고 힌트 */\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "49cdbc75-8375-4e05-b55c-def44b73d72d",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "브라우저가 미리 레이어를 생성해두기 때문에 애니메이션 시작 시 레이아웃 계산 없이 바로 처리한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d92bb494-1f99-4d02-8fba-383fc6d98de2",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "근데 남발하면 메모리를 많이 잡아먹는다. 정말 자주 바뀌는 요소에만 쓰는 게 좋다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7c59274d-41d4-42d8-bb42-153fca1f0f90",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "결국 레이아웃 스레싱은 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "브라우저의 최적화 전략을 모르고 방해하는 것",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7b2e205e-ce23-4c5a-9a98-d73170cd407d",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "브라우저는 배치 처리로 레이아웃 횟수를 최소화한다. 읽기/쓰기를 번갈아 반복하면 그 최적화가 매번 무효화된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "41fa4e68-495f-4d51-9ea8-3f0c8373564b",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "해결은 단순하다. 읽기는 읽기끼리, 쓰기는 쓰기끼리 묶는 것이 기본이다. 가능하면 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "transform",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "과 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "opacity",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 사용해서 레이아웃 자체를 건드리지 않는 것이 좋다. 복잡해지면 FastDOM이나 rAF로 시점을 제어하면 된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  }
+]

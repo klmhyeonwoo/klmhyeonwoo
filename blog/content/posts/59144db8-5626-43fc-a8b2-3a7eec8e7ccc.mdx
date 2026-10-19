@@ -1,0 +1,125 @@
+---
+title: "확장성을 결정짓는 컴포넌트 API"
+date: 2026-10-19
+publishedAt: "2026-10-19T12:43:31.136Z"
+updatedAt: "2026-10-19T12:43:31.137Z"
+description: ""
+category: "category-9606d629"
+series: "-"
+private: false
+---
+
+<Bookmark url="https://toss.tech/article/rethinking-design-system" title="디자인 시스템 다시 생각해보기" description="&quot;어떻게 하면 더 많은 팀이 우리 시스템을 잘 사용하게 할 수 있을까?&quot; TDS가 이 질문에 답하기 위해 고민했던 과정을 공유합니다." image="https://static.toss.im/3d-common/tds-kv-no-text-hero.png" />
+
+***
+
+React를 사용하면서 여러 기능들이 추가되며 화면에서 사용되는 컴포넌트들이 존재하는 경우가 많아진다.
+
+이때, 확장성을 위해 고려할 수 있는 2가지 정도의 컴포넌트 설계 패턴에 대해서 알아보자.
+
+## Flat 패턴
+
+Flat 컴포넌트는 내부 구조를 감추고, 대부분의 변형을 `props` 로 제공하는 방식을 의미한다.
+
+```javascript
+type cardProps = {
+  title: string
+  description?: string
+  actionLabel?: string
+  onActionClick: () => void
+}
+
+function Card({ title, description, actionLabel, onActionClick }: CardProps) {
+  return (
+    <section className="card">
+      <header className="cardHeader">
+        <h2> {title} </h2>
+        { actionLabel ? <button onClick={onActionClick}> {actionLabel} </button> : null }
+      </header>
+      { description ? <p className="cardDesc"> {description} </p> : null }
+    </section>
+  )
+}
+```
+
+위의 방식은 사용은 직관적이지만, Flat API 설계의 단점은 분명하다.
+
+시스템이 상정하지 않는 요구사항이 등장하면, `props` 는 끝없이 늘어나게 된다는 한계점을 가지고 있다.
+
+`actionLabel` 을 `hover` 했을 때, `callback` 을 전달하고 싶을 때, `button` 이 아니라 `anchor` 로 그려 `href` 를 전달하고 싶을 때는 이런 `flat` 패턴이 오히려 확장과 유지보수를 어렵게 할 수 있다.
+
+## Compound 패턴
+
+하위 컴포넌트를 제공하고, 제품 팀이 직접 조합하여 사용하도록 제공하는 방식이다.
+
+```javascript
+function Card({ children }: { children: React.ReactNode }) {
+  return <section className="card"> { children } </section>
+}
+
+Card.Header = function CardHeader({ children }: { children: React.ReactNode }) {
+  return <header className="cardHeader"> { children } </header>
+}
+
+Card.Title = function CardTitle({ children }: { children: React.ReactNode }) {
+  return <div className="cardBody"> { children } </div>
+}
+
+Card.Footer = funcdtion CardBody({ children }: { children: React.ReactNode }) {
+  return <footer classsName="cardFooter"> { children } </footer>
+}
+
+export { Card }
+```
+
+사용하는 쪽에서는 아래와 같이 활용할 수 있다.
+
+```javascript
+<Card>
+  <Card.Header>
+    <Card.Title> 월간 리포트 </Card.Title>
+  </Card.Header>
+  <Card.Body>
+    <ReportSummary/>
+  </Card.Body>
+  <Card.Footer>
+    <small> 최근 업데이트 : 30분 전 </small>
+  </Card.Footer>
+</Card>
+```
+
+`Flat` 패턴과 비교했을 때, `Compound` 패턴의 장점은 유연함이다. 시스템이 미리 예측하지 못한 레이아웃도 조합으로 해결이 가능하며, 확장 지점이 코드 레벨에서 자연스럽게 제공되는 것을 확인할 수 있다.
+
+다만, `Compound` 패턴도 만능은 아니며, 사용하는 측에서 구현 난이도와 코드량이 늘어나게 되는 특징을 가지고 있다. 변형 여지가 거의 없는 컴포넌트까지 `Compound` 패턴으로 컴포넌트화 하게 되면 사용하기 오히려 불편해지는 상황이 발생한다.
+
+## 어떤 것을 사용해야 좋은 패턴 구조일까?
+
+두 패턴을 비교해보자, 공통 컴포넌트 틀에서 `title` 만이 다른 상태라고 가정했을 때, `Flat` 패턴과 `Compound` 패턴은 아래와 같이 도출될 수 있다.
+
+```javascript
+// Flat API
+<Card title="월간 리포트">
+  <ReportSummary/>
+</Card>
+```
+
+```javascript
+// Compound API
+<Card>
+  <Card.Header>>
+    월간 리포트
+  </Card.Header>
+  <Card.Body>
+    <ReportSummary/>
+  </Card.Body>
+</Card>
+```
+
+둘의 차이를 확인해보면 조립하는 쪽과, 조립된 상태에서 사용법을 통해 컨트롤하는 것과 같이 둘의 차이는 명확한 것을 확인할 수 있다. `Flat API` 는 사용 방법 또한 간결하고, `Card` 컴포넌트 외에는 알아야할 것들이 그다지 많지 않다.
+
+반면 `Compound API` 는 개발자가 `Card` 구조를 이해하고 있어야하며, `Header` 안에 `Title` 들어가야하는지, `Body` 는 필수인지 등 학습해야할 것들이 많다. `dot operator` 로 하위 컴포넌트들을 탐색할 수 있지만, 올바른 조합 방법을 찾는 것은 또 다른 러닝 커브가 된다. 결과적으로 친절한 도구보다 번거로운 도구로 경험될 수 있다.
+
+요구사항이 어떻게 언제 변할지 모르는 것이 서비스의 이치이다. 그리고 이 서비스에 대한 변화에 대한 대처를 어떻게 할 것인가는 개발자의 판단이 될 수 있다. **요구사항이 잦은 복잡하고 변형이 잦은 케이스라면 ****`Compound API` 를 선제적으로 도입을 하고, 단순하고 자주 사용되는 케이스의 컴포넌트라면 `Flat API` 를 사용**해보자.
+
+소프트웨어 코드는 영구적으로 운용되는 코드는 존재하지 않는다. 그 상황에서 맞는 최선의 코드를 적용해야하며, 현재 판단하기에 `Flat API` 가 가장 적합하다고 판단해도, 추후에는 `Compound API` 로 확장해야하는 경우가 생긴다. 당장 상황에 맞는 컴포넌트 패턴으로 설계를 진행해보자.
+

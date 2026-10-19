@@ -1,0 +1,502 @@
+[
+  {
+    "id": "e77d9865-d353-48b5-b8f2-2135c6e624e0",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "처음 개발자로 발을 들였을 때, 그때의 느낌은 또 새롭지만 온전히 누군가를 만나 프로젝트를 진행하고, 그 안에서 매번 새로움을 배우는 것이 항상 즐거웠다. 4년차 가까이 개발자를 하면서, 오늘날 느끼는 성장에 대한 정의를 기록해보려고 한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "39959486-5d19-4afb-81de-5bc6586d9d49",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "최근에 생각이 조금 많아졌다. 도메인이 점차 익숙해지면서, 배우는 과정보다는 원래 하던 일을 익숙하게 하는 느낌.. 이런 느낌이 나는 잘 맞지 않는 듯한 느낌이 든다. 새로운 것을 알게되고 그 과정에서 넘어지고 일어나는 과정들이 정말 재미있는 법인데, 현재는 그런 과정이 생각보다 많이 없다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b62a8fb5-c133-4365-8614-0153e97d89f8",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "사실 사내에서 해답을 찾고 싶지만, 솔직히 말하면 안에서 이러한 갈증을 어떻게 해결할 수 있는지 잘 모르겠다. 새로운 프로젝트를 만들고싶기도 하지만, 돌아오는 것들은 부족한 리소스라는 대답으로 인해 못한다는 말인데.. 혼자 외롭게 프로덕트를 전반적으로 만드려고하니 사이즈가 너무 커서 업무에 지장을 줄까봐 그것도 걱정이 된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "81966b78-433e-4e02-a626-ca7bfe5884ab",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "그래서 내가 체크리스트를 만들어보았다. \"내가 정말 원하는 것들을 잘 이뤄내고 있는걸까?\", \"내가 원하는 조직의 모습은 무엇일까?\" 와 같이 내가 성장을 하고자 할때 반드시 확인해야하는 것들을 끄적여봤다. 이직을 할 때는 \"탓\" 이라는 것을 하지 말라고 하는게 정답이라고 하는데, \"탓\" 이 없다면 어떻게 다양한 이유들을 만들어낼 수 있겠는가.. 내가 원하는 이상과 결과가 일치하지 않을 때는 반드시 누군가에겐 \"탓\"으로 다가오게 된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1a2ee7c8-a90d-4f3e-a988-ecffc9d27988",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "내가 만든 체크리스트에서 현재의 내 모습은 어떤지 한번 확인을 해보려고한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "09769425-1188-43ff-8e72-49a85c9f3b2f",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "내가 성장을 하고자 할 때 반드시 확인해야하는 것들",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b36cd6b9-0d49-4b3e-b791-6eebe18418c2",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "환경적인 요인",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f63fe868-c03d-45e1-a2b4-6b4f86685b0a",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "얼마나 다양하고 새로운 것들에 대해서 도전을 할 수 있는 환경인가?",
+        "styles": {}
+      }
+    ],
+    "children": [
+      {
+        "id": "0bcf2588-5c43-4258-b89e-fc87e23d779b",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "처음에 우리 조직은 잘 돌아가는 프로덕트에 무언가 새로운 것을 추가하는데 있어 조금은 방어적이었던 것 같다. 아무래도 플랫폼 리뉴얼을 하고나서 얼마지나지 않아 그런 것일지도 모르겠지만.. 매번 새로운 기술과 트렌드 정보들을 공유하면서 신기술을 도입했었는데 현재는 새로운 것들이 존재하면 바로바로 도입을 할 수 있는 구조가 되었다. ",
+            "styles": {
+              "italic": true
+            }
+          }
+        ],
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "37c5a7ea-fdec-4611-8e41-e0d033fce51f",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "기술 의사 결정을 얼마나 자유롭게 드리븐할 수 있는 환경인가?",
+        "styles": {}
+      }
+    ],
+    "children": [
+      {
+        "id": "001d6d41-2235-4b2e-b579-0e82de99f22c",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "기술 의사 결정에 있어 \"이 기술이 얼마나 타당한가?\" 에 대한 내용만 팀원들에게 설득을 할 수 있다면, 자유롭게 드리븐을 할 수 있다. 현재는 백오피스의 메인 개발자를 맡고있는데, 백오피스에는 내가 도입을 해보고싶은 기술들을 \"왜\" 에 대한 질문을 하며 드리븐할 수 있어서 매우 좋다.",
+            "styles": {
+              "italic": true
+            }
+          }
+        ],
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "e9da66a0-499e-4c29-8d27-3066ccfaca17",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "코드 리팩토링에 대한 중요성을 따로 할애할만큼 코드를 위한 시간을 부여할 수 있는 조직인가?",
+        "styles": {}
+      }
+    ],
+    "children": [
+      {
+        "id": "8f4ba1e3-f2c7-4d46-bcb6-11c4ac611892",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "_현재 회사에서 가장 좋은 점은 코드 리뷰를 받을 수 있다는 점이었는데, 정말 배울점이 많은 프론트엔드 사수분이 팀 내 백엔드 개발자로 배치를 받으시면서 전과 같은 질높은 코드리뷰 환경은 아니다. 하지만 코드 리뷰 문화 자체가 내 코드에 대한 객관적인 피드백을 받을 수 있기 때문에 정말 좋다. 현재 조직은 코드 리뷰에 온전한 시간을 할애할 수 있다.",
+            "styles": {}
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "25d4f363-b9b8-4087-82a7-a2807cf3ac14",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "또, 무엇이 실용성있는 코드인지에 대해서 가끔 이야기도 나누기도 한다. 다만 프론트엔드 인력 리소스가 1~2명이다보니 각자 자신이 맡은 리소스를 해결해야하기에 코드리뷰가 빠른 패스로 이뤄진 경우도 생각보다 조금 존재한다. 그 점은 참.. 아쉽다._",
+            "styles": {}
+          }
+        ],
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "5f50de8b-d3af-4cfe-8176-31f053442902",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "기술 부채에 대해 계속해서 고민하고, 이를 적극적으로 해결하려고 실천하는 조직인가?",
+        "styles": {}
+      }
+    ],
+    "children": [
+      {
+        "id": "86202bcd-7dd5-4a06-8195-6e5e5c31c66d",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "가장 신기했던 점은 보안회사다보니, 취약점 대응을 위해 매번 프론트엔드 내부에서 사용하는 패키지 버젼들을 잘 관리하고 있다. 매번 버젼들을 업데이트해주다보니 자연스레 기술 부채는 사라지기에 최근에는 레거시한 코드들이 많이 보이지 않는 편이다.",
+            "styles": {
+              "italic": true
+            }
+          }
+        ],
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "13c176ff-ab33-474e-9644-645ad1337bad",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "동료와의 협업",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b1f6a95b-1e85-4ef8-84a1-9cf4ccd13e70",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "매일 새로운 기술에 대해 탐구하고, 같이 이야기를 나눌 수 있는 동료인가?",
+        "styles": {}
+      }
+    ],
+    "children": [
+      {
+        "id": "02375308-1a65-4f79-be4b-4aa937c5d59e",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "있긴하지만, 잠깐이다.. 1~2명의 프론트엔드 개발자가 빠르게 프로덕트를 디벨롭시켜나가야하기 때문에 기술을 탐구하라고 왈가왈가 할 수가 없는 노릇이다. 있긴하지만 깊게 이야기를 나누지 못한다는 점.. 프론트엔드 개발자로 여러 기술에 대해 다양하게 이야기를 나눠보고 싶었는데 이게 참 아쉽다.",
+            "styles": {
+              "italic": true
+            }
+          }
+        ],
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "73f85ee2-4084-4714-b015-72e3ee88c7ba",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "잘 동작하는 코드에서 멈추는 것이 아닌, 이 코드에 대해 더 좋은 방향은 없는지 고민하는 동료인가?",
+        "styles": {}
+      }
+    ],
+    "children": [
+      {
+        "id": "35428f2b-9e9c-4b40-97e4-6d2b69746fb0",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "조직에 와서 처음으로 코딩 테스트에서만 사용했던 reduce 문법으로 많은 반복 로직들을 가독성을 향상시키며 라인 수를 줄였던 기억이 제일 먼저 난다. 어떤 코드에 대해서 궁금점을 던지면, 해당 코드에 대해서 더 좋은 방향이 없는지 라이브 리뷰를 해주시기도 한다. 현재는 빈도 수가 많이 줄었지만, 초기에 이런 경험들이 너무 도움이 많이 되었다.",
+            "styles": {
+              "italic": true
+            }
+          }
+        ],
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "100d3794-4f63-4846-8e66-5a656bfc5600",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "버그가 발생했을 때, 누군가를 탓하기보다 공동의 목표로서 해결하고자 하는 프로덕트 오너쉽이 강한 동료인가?",
+        "styles": {}
+      }
+    ],
+    "children": [
+      {
+        "id": "af78fe6d-4b70-4ed8-9892-d11a3d38ff34",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "현재 우리 팀의 팀원 별 프로덕트 오너쉽은 정말 강하다고 할 수 있다. \"~점이 불편하시지 않으셨나요?\" 라고 선뜻 말해주는 팀원들, 이게 공동의 목표로서 프로덕트 오너쉽을 가지고 우리 프로덕트를 키워가고자 하는 마음가짐이라고 생각한다. 다만 몇몇은 방어적인 태도이기에.. 조금 적응이 안되는 경우도 있다.",
+            "styles": {
+              "italic": true
+            }
+          }
+        ],
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "8d8a2109-6c6c-46e3-8007-c4c24db2a6da",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "아무리 사소한 부분이라도, 서비스에서 불편함을 느낄만한 요소라면 이를 위해 노력하는 동료인가?",
+        "styles": {}
+      }
+    ],
+    "children": [
+      {
+        "id": "ea12954d-d0a2-4288-9202-7f25f2ed4a62",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "포탈 플랫폼의 경우에는 디자이너와 기획자가 함께하며 불편함 점들을 해결해나가지만, 내가 메인 개발자로 있는 백오피스의 경우에는 사용자가 어떻게 사용할까에 대한 생각을 페르소나로 상상하며 개발을 하곤한다. 기획부터 디자인, 개발을 모두 내가하는 셈인데, 이때 사수님과 대화하며 더 느낌있고, 좋은 UX에 대해 이야기하곤 하는데 정말 재미있다. 서비스에서 불편함을 느낄만한 요소라면.. 같이 의논하고 빠르게 적용하는 편인 것 같다.",
+            "styles": {
+              "italic": true
+            }
+          }
+        ],
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "4a50f733-54fa-401c-8c3d-17b7c2236ef6",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "종합적으로 보니 현재 있는 조직은 개발적으로 좋은 조직은 맞다. 개발 문화도 훌륭하고, 또 사람들도 정말 좋은 편이다. 하지만 생각 끝에 내린 결론은.. 나는 커리어적인 성장을 원하고 있는 것 같다. 누구는 워라벨이 중요하다고 하지만, 나는 업무적으로 다양한 경험을 하면서 동료들과 함께 땀을 흘리며 서비스의 성공을 맛 보는 것. 아직 그것을 온전히 경험하지 못한 것 같다. 그래서 \"프론트엔드 개발 조직이 더 큰 곳으로 가면 어떨까?\" 결론으로 도달했다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "02cecc7b-6a96-48de-9752-c55a2240e7c3",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "현재 자리에서 모든게 좋지만 내부의 프론트엔드 개발자는 나를 포함한 1~2명으로 구성되어져있다. 이 과정에서도 많은 것들을 배우겠지만, 더 빠르게 움직이고 많은 태스크들을 가진 큰 조직에서 더 다양한 것들을 경험하며 팀원들과 나눈다면 많은 팀원의 인사이트도 들으며 더 크게 성장할 수 있다는 생각을 했다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "64a4bfd1-3009-411c-8769-1556d7cf3760",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "최근에 성장이 더딘 느낌이라 끙끙 앓고있었는데, 이렇게 조금이나마 생각을 정리하니까 답답한 마음이 풀렸다. 당장 어느 조직으로 가겠다는 말은 아니지만, 내년이면 현재 회사에서도 대리급의 위치로 올라가게되는데, 좋은 기회를 잡거나, 찾아와줄 때까지 두 손 꼭 모으며 기다려보아야겠다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  }
+]

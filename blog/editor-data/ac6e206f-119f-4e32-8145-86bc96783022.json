@@ -1,0 +1,2375 @@
+[
+  {
+    "id": "0d343dac-cd4f-4c30-9297-154855672028",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "자바스크립트가 동적언어라서 런타임 시점에 타입을 지정해주고, 이것저것 마법같은 동작들이 많아 마법같은 언어라고 칭하기도 하지만, 자바스크립트 내부 엔진이 코드를 실행하는 방식은 생각보다 구조적이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "546f21da-433b-46cf-bb72-8f7328f71385",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "\"왜 선언 전에 함수를 호출할 수 있지?\", \"왜 클로저는 외부 변수를 기억하고 있지?\" 와 같은 질문들이 전부 하나의 개념으로 연결된다. 바로 실행 컨텍스트(Execution Context)로 부터 시작된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "fcf8697f-382b-4a3f-9096-5c2be9f13d51",
+    "type": "divider",
+    "props": {},
+    "children": []
+  },
+  {
+    "id": "209035a4-eed6-40cf-8c85-2f1967314277",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "실행 컨텍스트는 무엇일까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "76642c34-8e84-4a0f-bff9-41d058fd6ab4",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "자바스크립트 엔진은 코드를 실행하기 전에 실행에 필요한 정보들을 하나의 구조체로 묶는다. 이게 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "실행 컨텍스트",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "다. 변수가 어디에 있는지, ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "this",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 무엇을 가리키는지, 외부 스코프는 어디인지에 대한 모든 정보가 실행 컨텍스트 안에 들어있다. 실행 컨텍스트는 주로 세 가지 상황에서 생성된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "55ed9e08-17a6-482f-bf72-1ed543bece38",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "실행 컨텍스트가 생성되는 시점",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "0811bdd7-1d01-4acc-8472-26d087c59acc",
+    "type": "numberedListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "전역 코드 실행 시 → 전역 실행 컨텍스트 (Global Execution Context)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "48b0ba01-ade1-4235-9097-7ca7a8599f6b",
+    "type": "numberedListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "함수 호출 시 → 함수 실행 컨텍스트 (Function Execution Context)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "76b9d25e-a575-4893-8fea-28eb72e3dabe",
+    "type": "numberedListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "eval() 실행 시 → eval 실행 컨텍스트 (거의 사용 안 함)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b36b9829-ebd8-4a46-8b96-011eda9bee32",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "실행 컨텍스트들은 콜 스택(Call Stack)이라는 구조에 쌓인다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "2bcd6206-0a66-4c6d-9e3e-d816e52925a6",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// * 콜 스택 동작 예시\nfunction greet(name) {\n  return `안녕, ${name}`\n}\nfunction main() {\n  const result = greet('현우')\n  console.log(result)\n}\nmain()\n──────────────────────────────────\n\n실행 흐름:\n\n[ 전역 EC (Execution Context) 생성 ]\n\nmain() 호출\n┌─────────────────────────────────────────┐\n│  main EC (main 함수의 Execution Context)  │  ← 콜 스택에 push\n├─────────────────────────────────────────┤\n│  전역 EC (Global Execution Context)      │\n└─────────────────────────────────────────┘\n\ngreet() 호출\n┌──────────────────────────────────────────┐\n│  greet EC (greet 함수의 Execution Context) │  ← 콜 스택에 push\n├──────────────────────────────────────────┤\n│  main EC (main 함수의 Execution Context)   │\n├──────────────────────────────────────────┤\n│  전역 EC (Global Execution Context)       │\n└──────────────────────────────────────────┘\n\ngreet 반환\n┌─────────────────┐\n│  main EC        │  ← greet EC가 pop됨\n├─────────────────┤\n│  전역 EC         │\n└─────────────────┘\n\nmain 반환\n┌─────────────────┐\n│  전역 EC         │  ← main EC가 pop됨\n└─────────────────┘",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "fe6cf852-8dd6-4e4e-ae50-509f643f39d8",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "실행 컨텍스트의 내부 구조",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "85a42f35-2764-4567-ba65-8a720a7b203f",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "실행 컨텍스트는 크게 세 가지로 구성된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "faea95aa-b678-41fb-b00c-fbc6db4aa0ff",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "실행 컨텍스트 내부\n\nExecutionContext {\n  LexicalEnvironment   ← 식별자(변수, 함수) 바인딩 + 외부 스코프 참조\n  VariableEnvironment  ← var 선언 전용 (초기에는 LexicalEnvironment와 동일)\n  ThisBinding          ← this가 무엇인지\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "0a53eb63-5964-4421-bb88-fc56d47a79ea",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "핵심은 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "LexicalEnvironment",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "다. 이것 역시 두 부분으로 나뉜다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b92002d1-4cda-4a16-b27c-c26c69e5bc4b",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "LexicalEnvironment {\n  EnvironmentRecord   ← 이 컨텍스트에서 선언된 식별자들의 실제 저장소\n  outer               ← 바깥 LexicalEnvironment를 가리키는 참조\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6eed7306-71cd-4965-abc2-e336f75d2576",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "outer",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 참조가 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "스코프 체인(Scope Chain)",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "을 만든다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b361175e-9062-4971-afcf-d43b3a557c12",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "변수를 찾을 때 현재 EnvironmentRecord에 없으면 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "outer",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 타고 올라가게된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e028d283-e4de-48a8-87fb-7a508f939279",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "스코프 체인\n\nconst x = 1   // 전역\n\nfunction outer() {\n  const y = 2\n\n  function inner() {\n    const z = 3\n    console.log(x, y, z)  // 1, 2, 3\n  }\n\n  inner()\n}\n\n──────────────────────────────\n\ninner EC\n  EnvironmentRecord: { z: 3 }\n  outer: ──────────────────────→ outer EC\n                                   EnvironmentRecord: { y: 2, inner: fn }\n                                   outer: ─────────────────────────────→ 전역 EC\n                                                                           EnvironmentRecord: { x: 1, outer: fn }\n                                                                           outer: null",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "fec8ae23-671f-4738-b294-46db76f1c5b6",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "inner",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "에서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "x",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 참조하면: inner EC → outer EC → 전역 EC 순으로 탐색한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f225e7d5-7a25-4521-ab46-365e050f36da",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "전역 EC에서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "x: 1",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "을 발견하고 반환한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5210f65b-07dc-4066-a152-5cf89012922a",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "실행 컨텍스트는 두 단계로 동작한다",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "318018a0-fa04-497a-8551-5abc56866588",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "실행 컨텍스트가 생성될 때 바로 코드를 실행하지 않는다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4df650fd-8de7-4331-8472-2e012119b2b6",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "먼저 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "생성 단계(Creation Phase)",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 있고, 그 다음 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "실행 단계(Execution Phase)",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 진행된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1b329cfe-aa8d-4f15-84f7-24354994e60e",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "생성 단계 (Creation Phase)\n─────────────────────────\n1. EnvironmentRecord에 식별자를 등록한다\n   - var    → undefined로 초기화\n   - let/const → 등록만 하고 초기화하지 않음 (TDZ 상태)\n   - 함수 선언문 → 함수 객체 전체를 등록\n\n2. outer 참조를 설정한다 (스코프 체인 형성)\n\n3. this 바인딩을 결정한다\n\n실행 단계 (Execution Phase)\n──────────────────────────\n코드를 위에서 아래로 순서대로 실행한다\n변수에 실제 값을 대입한다",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "2dcc167c-c079-48bf-8a87-879d565b63ae",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이 두 단계가 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "호이스팅(hoisting)",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "의 실제 이유다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b7ff10ea-3034-4428-911c-53d842aff4bc",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "호이스팅은 어떻게 동작할까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "a2f7279f-c1f8-4560-839b-1f4e7432e668",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "호이스팅은 \"선언이 위로 끌어올려진다\"는 표현으로 설명되는데, 정확한 표현은 아니라고 한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4352fd79-3759-43d4-b793-bc74808092e6",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "나도 호이스팅을 설명할 때, 위로 끌어 올려진다라는 표현을 많이 사용했다 ^,^..",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d0bdfe9a-87ed-42d9-a7aa-1019ca8628a5",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "정확한 표현은 아니지만, 그렇다고 전혀 아니라고 할 수도 없다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ae2efdd9-72ce-4dfe-b7c0-3d4767079e2a",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "실제로는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "생성 단계에서 식별자가 먼저 메모리에 등록되기 때문",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "에 선언보다 앞서 참조할 수 있는 것이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "06702a6e-c32b-4d9e-b5f1-3d91c0306bb5",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "var의 hoisting",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b324231f-3518-45dd-a931-ea929b329fc8",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "console.log(name)  // undefined — 에러가 아님\nvar name = '현우'\nconsole.log(name)  // '현우'",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "793c74fb-43f9-4160-9c87-83808b96bb4c",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "엔진이 이 코드를 처리하는 순서:",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "94bf4423-7e56-4681-9344-3095822771ec",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "생성 단계:\n  EnvironmentRecord: { name: undefined }  ← var는 undefined로 초기화됨\n\n실행 단계:\n  console.log(name)  → EnvironmentRecord에서 name을 찾음 → undefined 반환\n  name = '현우'      → EnvironmentRecord의 name에 '현우' 할당\n  console.log(name)  → '현우' 반환",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d796bbab-5f9e-4e4f-8f89-b528e52d128c",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "코드가 위로 이동한 게 아니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "9d2d3371-4c7f-4440-a740-9fab7fa0f711",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "생성 단계에서 이미 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "name: undefined",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 등록되어 있기 때문에 참조할 수 있는 것이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4e64036e-0e0f-45da-8b65-76697dc02263",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "함수 선언문의 hoisting",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "db55b421-f18f-4c19-be1e-c13dced9b7a5",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "greet('현우')  // '안녕, 현우' — 선언 전에 호출해도 동작함\n\nfunction greet(name) {\n  return `안녕, ${name}`\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "a4866e89-80a2-4998-aacd-01fe2e76f074",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "생성 단계:\n  EnvironmentRecord: { greet: function greet(name) { ... } }\n  ← 함수 선언문은 함수 객체 전체가 등록됨\n\n실행 단계:\n  greet('현우')  → EnvironmentRecord에서 greet 찾음 → 함수 객체 반환 → 호출",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "20610dbc-3dd5-42eb-b3bd-9de908c08836",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "함수 선언문은 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "undefined",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 아니라 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "함수 객체 전체",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 생성 단계에서 등록된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6a8896bc-f2e3-438d-9421-a51ed172c306",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "그래서 선언 전에 호출해도 정상 동작한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "cd439718-27b2-4a19-ab50-27bcddb772e5",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "let / const의 TDZ",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b67459a2-e4a0-4d3e-8f07-cf620374036b",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "console.log(name)  // ReferenceError: Cannot access 'name' before initialization\nlet name = '현우'",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "9e0eeb13-7d65-448c-9bd5-01e0fc2aa6f6",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "생성 단계:\n  EnvironmentRecord: { name: <uninitialized> }\n  ← let/const는 등록은 되지만 초기화되지 않은 상태\n\n실행 단계:\n  console.log(name)\n    → EnvironmentRecord에서 name을 찾음\n    → 존재하지만 uninitialized 상태\n    → ReferenceError 발생\n\n  let name = '현우'\n    → 이 시점에서 name이 '현우'로 초기화됨",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1960625f-6ba8-4e08-b295-f833a6921dd1",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "선언 라인에 도달하기 전까지의 구간을 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "TDZ(Temporal Dead Zone)",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "라고 한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "63f0c006-67f2-4112-b43f-eca138f33b47",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "let/const",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 hoisting이 안 되는 게 아니라, hoisting은 되지만 초기화가 안 된 상태로 있는 것이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "54340e9f-8ab6-4e77-aba9-66955082f0fc",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "var / let / const hoisting 비교\n\n         생성 단계        실행 단계(선언 전)    실행 단계(선언 후)\nvar      undefined       undefined          할당값\nlet      uninitialized   ReferenceError     할당값\nconst    uninitialized   ReferenceError     할당값 (재할당 불가)\n함수선언   함수 객체 전체      함수 객체 전체        함수 객체 전체\n함수표현식  undefined       undefined          함수 객체",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "56d4157c-cc19-41f7-9eeb-31fb7b3c6bf9",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "함수 선언문 vs 함수 표현식의 차이",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "3e2faf44-d9d9-4504-961f-23fd268e2eaf",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// 함수 선언문 — 어디서든 호출 가능\ngreet()  // ✅ 동작\n\nfunction greet() {\n  console.log('hello')\n}\n\n// 함수 표현식 — 할당 전에 호출 불가\ngreet()  // ❌ TypeError: greet is not a function\n\nvar greet = function() {\n  console.log('hello')\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1d85a3e2-e40d-4697-8e0d-ca6603eb9fa1",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "함수 표현식에서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "greet",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "var",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "로 선언된 변수다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "be66f323-e4f1-4b03-8f8a-4535e044639d",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "생성 단계에서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "greet: undefined",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "로 등록되고, 실행 단계에서 함수 표현식이 평가될 때 비로소 함수 객체가 할당된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "94f1fac8-4c4c-43b7-80dd-4a1ed3acace4",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "그래서 선언 전에 호출하면 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "undefined()",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 실행되어 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "TypeError",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 발생한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "55001b79-2e39-4bcc-9dd5-4ba055011293",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "클로저는 어떻게 동작할까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "512d0a88-613d-4295-a899-cc2f78f7fa83",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "클로저(Closure)",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 함수가 자신이 생성될 때의 LexicalEnvironment를 기억하는 현상이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b69185fc-d957-4a46-b928-d33fab70c772",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "function makeCounter() {\n  let count = 0            // ← makeCounter의 LexicalEnvironment에 존재\n\n  return function increment() {\n    count++\n    return count\n  }\n}\n\nconst counter = makeCounter()\ncounter()  // 1\ncounter()  // 2\ncounter()  // 3",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "11cc4328-7dd8-4f9b-af2f-52a4085ec0f6",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "makeCounter()",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 반환되면 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "makeCounter",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "의 실행 컨텍스트는 콜 스택에서 제거된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "72eb301c-7a81-48a0-ab57-7b02bfd9f583",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "하지만 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "count",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 여전히 살아있다. 이 이유는 클로저 떄문이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "0eeff6c6-f170-417e-b681-404b4d3fe732",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "클로저의 내부 동작",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "3f07a76f-637e-43a3-958c-cebb828207e7",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "함수 객체가 생성될 때 내부 슬롯 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "[[Environment]]",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "에 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "현재 LexicalEnvironment의 참조",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 저장한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "0d144976-9f4a-41b2-97a9-8750a82cd9ee",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "increment",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 함수가 생성되는 시점의 LexicalEnvironment는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "makeCounter",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "의 것이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "182fc0fd-f3f5-4aad-9bfe-176e031aaffa",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "makeCounter() 호출 시점\n\nmakeCounter EC\n  LexicalEnvironment:\n    EnvironmentRecord: { count: 0, increment: fn }\n    outer: → 전역 EC\n\n  increment 함수 객체 생성\n    [[Environment]]: → makeCounter의 LexicalEnvironment  ← 이 참조가 저장됨",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f86a5af2-e058-4945-b3d8-1672db0a2543",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "makeCounter()",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 반환되고 EC가 콜 스택에서 빠지더라도, ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "increment",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 함수 객체가 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "[[Environment]]",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 통해 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "makeCounter",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "의 LexicalEnvironment를 참조하고 있다. GC는 참조가 살아있는 객체를 수거하지 않는다. 그래서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "count",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 메모리에 남아있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "48a83ab5-1f27-4604-a46a-97f13f3703d3",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "makeCounter EC가 콜 스택에서 제거된 후\n\ncounter (increment 함수 객체)\n  [[Environment]]: ─────────→ makeCounter의 LexicalEnvironment (메모리에 유지)\n                                 EnvironmentRecord: { count: 0 }\n                                 outer: → 전역 EC\n\ncounter() 호출 시\n\nincrement EC\n  EnvironmentRecord: {}        ← increment 자체 변수 없음\n  outer: ─────────────────────→ makeCounter의 LexicalEnvironment  ← [[Environment]]에서 설정됨\n                                   EnvironmentRecord: { count: 0 }\n\ncount++ → outer를 타고 count를 찾음 → count: 0 → 1로 증가",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "8c0afef6-28f1-4488-a7e2-bb2e976ec143",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "increment",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 실행될 때마다 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "outer",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 참조를 통해 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "makeCounter",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "의 EnvironmentRecord에 접근해서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "count",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 읽고 수정한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "a70d4ac2-7e35-410e-b622-e2353d3f0670",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "클로저의 스코프 공유",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "efab4c9d-2c1a-4815-ad88-8a6f3e854ccc",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "같은 LexicalEnvironment를 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "[[Environment]]",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "에 저장한 함수들은 같은 변수를 공유한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1d68773d-b865-40ac-a1c3-c7e83a990623",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "function makeCounter() {\n  let count = 0\n\n  return {\n    increment() { count++ },        // ← 같은 LexicalEnvironment 참조\n    decrement() { count-- },        // ← 같은 LexicalEnvironment 참조\n    getCount()  { return count },   // ← 같은 LexicalEnvironment 참조\n  }\n}\n\nconst counter = makeCounter()\ncounter.increment()\ncounter.increment()\ncounter.decrement()\ncounter.getCount()  // 1 — 세 함수가 count를 공유함",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "50946c01-226f-49e0-ab17-6f82b596cc87",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "세 함수 모두 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "makeCounter",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 호출 시점의 LexicalEnvironment를 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "[[Environment]]",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "에 저장하기 때문에 동일한 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "count",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 바라본다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "68589fd7-5606-42bd-8610-c64e0239186b",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "루프에서 클로저가 예상과 다르게 동작하는 경우",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e421e141-8c4e-436d-a087-55c3d5115c6f",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "for (var i = 0; i < 3; i++) {\n  setTimeout(function() {\n    console.log(i)   // 3, 3, 3 — 0, 1, 2가 아님\n  }, 100)\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "24401c6c-a3c5-4c19-9ea2-b9591ce5d178",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "위에 코드에서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "i",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 가 3으로 세 번 출력이 되는 이유는 무엇일까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "9ad1ffd5-9d30-47bf-8b06-f02c73bef454",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "var",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 블록 스코프가 없다. 루프 전체에서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "i",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 전역 EnvironmentRecord에 하나만 존재한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5793af0f-572f-4bc3-ab83-d589897d951d",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "setTimeout 콜백이 실행될 때는 이미 루프가 끝나서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "i",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 3이 된 상태다. 세 콜백 모두 같은 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "i",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 참조한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "a1a6c898-9441-42db-8daa-2d64c955957a",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "전역 EnvironmentRecord: { i: 3 }  ← 루프 끝나면 3\n\nsetTimeout 콜백 1  [[Environment]] → 전역 EC  (i를 찾으면 3)\nsetTimeout 콜백 2  [[Environment]] → 전역 EC  (i를 찾으면 3)\nsetTimeout 콜백 3  [[Environment]] → 전역 EC  (i를 찾으면 3)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "297e5aed-da4c-466b-b441-a3bb1b241e60",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "let",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "으로 바꾸면 해결된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "47932614-686d-4593-9a4d-b56f54add523",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "for (let i = 0; i < 3; i++) {\n  setTimeout(function() {\n    console.log(i)   // 0, 1, 2\n  }, 100)\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "cb3b290a-3715-4dc2-a480-0525917cb4a7",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "let",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "은 블록 스코프다. 루프 반복마다 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "새로운 LexicalEnvironment",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 생성되고, 각 반복의 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "i",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 독립적인 EnvironmentRecord에 저장된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "24992d1d-c871-4dab-a565-afe88bca64b8",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "반복 1: LexicalEnvironment { i: 0 }  ← 콜백 1의 [[Environment]]\n반복 2: LexicalEnvironment { i: 1 }  ← 콜백 2의 [[Environment]]\n반복 3: LexicalEnvironment { i: 2 }  ← 콜백 3의 [[Environment]]",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ba40c3f6-0062-41fe-89fc-2bc5a5a86c4a",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "세 콜백이 서로 다른 LexicalEnvironment를 참조하기 때문에 각자 독립적인 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "i",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 갖는다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "28b824b4-e6a7-47b0-81e4-53bacca0e772",
+    "type": "divider",
+    "props": {},
+    "children": []
+  },
+  {
+    "id": "26e5bb1c-e2b3-4f64-8cb4-ee7db21d61db",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "실행 컨텍스트 전체 흐름 정리",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "2c083f46-9bbc-47aa-bc0d-393a1e74f6cf",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "const x = 'global'\n\nfunction outer() {\n  const y = 'outer'\n\n  function inner() {\n    const z = 'inner'\n    console.log(x, y, z)\n  }\n\n  inner()\n}\n\nouter()",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5cbd65c9-4852-4944-ad56-b2a1be0fcf4f",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "── 생성 단계 ────────────────────────────────────────────────\n\n전역 EC 생성\n  EnvironmentRecord: { x: undefined, outer: fn }  ← var 방식과 유사하게, const도 TDZ\n  outer: null\n  this: window (브라우저) / global (Node.js)\n\n── 실행 단계 ────────────────────────────────────────────────\n\nx = 'global'  → 전역 EnvironmentRecord: { x: 'global', outer: fn }\n\nouter() 호출\n  outer EC 생성\n    EnvironmentRecord: { y: undefined, inner: fn }  ← 생성 단계\n    outer: → 전역 EC의 LexicalEnvironment\n\n  y = 'outer'  → outer EnvironmentRecord: { y: 'outer', inner: fn }\n\n  inner() 호출\n    inner EC 생성\n      EnvironmentRecord: { z: undefined }  ← 생성 단계\n      outer: → outer EC의 LexicalEnvironment  ← inner 함수의 [[Environment]]\n\n    z = 'inner'\n\n    console.log(x, y, z)\n      z → inner EnvironmentRecord에서 발견 → 'inner'\n      y → 없음 → outer 타고 이동 → outer EnvironmentRecord에서 발견 → 'outer'\n      x → 없음 → outer 타고 이동 → outer EnvironmentRecord에서 없음 → 전역으로 이동 → 'global'\n\n    inner EC 종료 → 콜 스택에서 pop\n\n  outer EC 종료 → 콜 스택에서 pop\n\n전역 EC 종료",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4efb391d-136a-44e7-b2fe-c963036e9f38",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "실행 컨텍스트 · 호이스팅 · 클로저의 관계",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "9ea1a069-0c21-4052-a7dc-26f0fda4266a",
+    "type": "table",
+    "props": {
+      "textColor": "default"
+    },
+    "content": {
+      "type": "tableContent",
+      "columnWidths": [
+        null,
+        null,
+        null
+      ],
+      "headerRows": 1,
+      "rows": [
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "개념",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "어느 단계에서 발생하는가",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "핵심 메커니즘",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "호이스팅",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "생성 단계",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "EnvironmentRecord에 식별자가 먼저 등록됨",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "스코프 체인",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "생성 단계",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "outer 참조가 설정됨 (",
+                  "styles": {}
+                },
+                {
+                  "type": "text",
+                  "text": "[[Environment]]",
+                  "styles": {
+                    "code": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": " 기반)",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "클로저",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "함수 객체 생성 시",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "[[Environment]]",
+                  "styles": {
+                    "code": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": "에 LexicalEnvironment 참조가 저장됨",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "TDZ",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "생성 단계 ~ 실행 단계",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "let/const가 uninitialized 상태로 등록됨",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "children": []
+  },
+  {
+    "id": "17d9088f-e170-4d12-86b8-5fe815d2f2f3",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "처음에는 호이스팅 · 스코프 체인 · 클로저는 별개의 기능이자, 개념이라고 생각을 했지만 모두 자바스크립트가 실행되는 과정에서 자연스럽게 일어나고 파생되는 개념들이다. 조금 더 쉽게 말하면 전부 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "실행 컨텍스트의 생성 단계에서 LexicalEnvironment가 어떻게 구성되는가",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "의 결과물이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "327c2d33-8a85-4517-83f2-563f7d65ba2c",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "현대의 자바스크립트는 과거에 비해 너무나도 접근하기 쉬워졌고, 또 다양한 기능들을 제공하면서 자연스럽게 내부 동작에 대한 의문을 가지지 않아도 되는 환경이 되었다. 하지만 내부 동작을 알아야 \"왜 이 변수는 여기서 보이는데, 다른 곳에서는 보이지 않을까?\", \"왜 클로저 내부 스코프의 값이 바뀌지?\", \"왜 루프에서 이상하게 동작하는 걸까?\" 에 대한 질문들에 자연스럽게 답을 할 수 있게 된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e144fa0f-529e-4056-9a80-98065652c2b1",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "사실 실행 컨텍스트 · 호이스팅 · 클로저는 우리가 은연중에 사용하고 있는 개념들이지만, 계속 의식하고 사용하지 않는다면 가물가물해지는 개념들이다. 가물가물해질때마다 다시 들어와서 정독하고 가야겠다 ^,^ ..",
+        "styles": {}
+      }
+    ],
+    "children": []
+  }
+]

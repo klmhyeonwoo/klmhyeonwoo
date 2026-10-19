@@ -1,22 +1,5 @@
 [
   {
-    "id": "d7a7cfa7-7f7a-49e9-979c-6311fe81584c",
-    "type": "callout",
-    "props": {
-      "emoji": "💡",
-      "fluent": "",
-      "fluentUrl": ""
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "AI 리터러시가 과연 무엇일까요?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
     "id": "cef855ad-d41c-40a7-80fb-5f9ef9d8ed5c",
     "type": "paragraph",
     "props": {

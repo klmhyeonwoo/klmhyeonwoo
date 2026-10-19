@@ -1,0 +1,650 @@
+[
+  {
+    "id": "b5c4732a-b89a-4f34-97f5-e8c8ba2f40ac",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "사용자가 페이지를 떠날 때마다 백엔드에 몇가지 요청을 보내려고 할 때, 두가지 정도의 접근 방식이 존재한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "377fbc36-1007-4286-8259-73aa9da258fb",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "바로 ",
+        "styles": {}
+      },
+      {
+        "type": "link",
+        "href": "https://navigator.sendBeacon",
+        "content": [
+          {
+            "type": "text",
+            "text": "navigator.sendBeacon",
+            "styles": {}
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": " 또는 fetch + keepalive 방식이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "92ae7c9a-cc40-4df1-a31b-3dab7f7952fc",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 1,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "두 방식의 트레이드 오프",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d6e153fd-e718-4ad7-86c2-c3ac18556033",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "link",
+        "href": "https://Navigator.sendBeacon",
+        "content": [
+          {
+            "type": "text",
+            "text": "Navigator.sendBeacon",
+            "styles": {}
+          }
+        ]
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "75fc4d1a-634b-4b24-84e5-445731ae6b1f",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "link",
+        "href": "https://Navigator.sendBeacon",
+        "content": [
+          {
+            "type": "text",
+            "text": "Navigator.sendBeacon",
+            "styles": {}
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": "의 장점",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "30678eed-7e9b-49f8-88a4-2011ba585490",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "페이지가 언로드될 때 데이터를 전송하도록 특별히 설계되었다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "17a38c65-4a70-4fbb-9852-d13e0806c004",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "우선순위가 낮은 비동기식으로 페이지 언로드 프로세스를 차단하지 않는다. (네트워크 탭의 우선순위 참고)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4fc8adb3-ea51-430a-9644-c4a6e9b3468c",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "브라우저는 페이지가 닫힌 후에도 데이터 전송을 완료한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "531aeaac-e869-451a-bb50-de13ce6d2bdd",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "간편한 API 인터페이스로 사용할 수 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "2cf9b3f9-57f0-4e12-8bae-0dd18b27f102",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "POST 메서드를 주로 지원하기 때문에, 자동으로 POST 메서드를 사용한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "3850fc3b-0abe-4286-b4be-13bc4ba28653",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "응답을 처리할 필요없으며, 단방향 데이터에 이상적이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "19e37430-a447-4d41-bbae-6a736883920e",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Navigator.sendBeacon의 제약사항",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f697b921-c1e0-4751-ae69-3feddbf9bb9a",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "POST 요청만을 지원한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b621528b-2e93-460c-b105-1f66482c7845",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "응답 내용을 받을 수 없다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "3a506dae-dd8c-4a52-b442-247702728a5f",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "크기 제한이 있다. (크롬의 경우 약 64KB)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "efde3244-0e86-4338-ac11-f308c57a2775",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "사용자 커스텀 헤더 지원을 하지 않는다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "02a6d35d-0eb1-4501-bf66-4407759af434",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "사용 예시",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ed86be4b-a727-410f-89b0-d320a15e862f",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "javascriptCopywindow.addEventListener('unload', () => {\n  navigator.sendBeacon('/api/log', JSON.stringify({\n    event: 'page_exit',\n    duration: performance.now()\n  }));\n});",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "69cc69ab-0c09-4012-a388-8c737029241b",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Fetch + keepalive",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1b3501d0-638f-417b-aa4e-051d5ff6bf5f",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Fetch + keepalive의 장점",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "98aa060a-95ad-4b57-a6ef-68d0576da1cb",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "모든 HTTP 메서드 (GET, POST, PUT 등)을 지원한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4dfff8ca-533b-491c-9882-ec440a677b38",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "사용자 커스텀 헤더를 허용한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d072cdd0-ef87-4657-8e33-2a1b21fa6130",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "응답 내용에 대한 처리가 가능하다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "10c98367-e8c6-4e0d-9cdb-5ad09a511bf6",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "데이터 크기에 제한이 없다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "61e117f9-b8ab-45d8-a227-372b39e5ea4f",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "더 유연한 에러 핸들링이 가능하다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "8a410898-4569-4dd4-8729-594b3484360c",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Fetch + keepalive의 제약사항",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7dadee7f-9802-4d6b-bfaf-5ffa41126986",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "link",
+        "href": "https://Navigator.sendBeacon",
+        "content": [
+          {
+            "type": "text",
+            "text": "Navigator.sendBeacon",
+            "styles": {}
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": " 보다 조금 더 복잡한 구현 요소를 가진다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f199b332-bf56-43a4-8d8f-8ed2da5e8d5a",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "수동으로 옵션을 활성화 시켜줘야한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "430040f5-2626-4899-9e17-4cb6b8068d2c",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "link",
+        "href": "https://Navigator.sendBeacon",
+        "content": [
+          {
+            "type": "text",
+            "text": "Navigator.sendBeacon",
+            "styles": {}
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": " 에 비해 브라우저 호환성이 약간 낮은 편이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6575a151-746b-4c01-9de9-97eaf254e069",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "사용 예시",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c7e45e6c-1e31-43c4-b1a7-8d0e596ceb5b",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "javascriptCopywindow.addEventListener('unload', () => {\n  fetch('/api/sync', {\n    method: 'POST',\n    keepalive: true,\n    headers: {\n      'Content-Type': 'application/json',\n      'Authorization': 'Bearer token'\n    },\n    body: JSON.stringify({\n      data: 'important_data'\n    })\n  });\n});",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7067d92b-5d17-49a7-86f4-5f291011673d",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "글을 마치며",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6ee1e6a2-4bec-475c-8677-94934d04c466",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "간단한 분석 및 로깅 시나리오를 위해 ",
+        "styles": {}
+      },
+      {
+        "type": "link",
+        "href": "https://navigator.sendBeacon",
+        "content": [
+          {
+            "type": "text",
+            "text": "navigator.sendBeacon",
+            "styles": {}
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": " 을 선택하고, 요청에 대한 더 많은 제어가 필요하거나 응답을 처리해야할 경우에는 Fetch + keepalive 전략이 매우 좋은 선택인 것 같다. 중요한 데이터의 경우 페이지 언로드를 기다리지 않고 사용자 상호작용 중 동기화 하는 로직 (로컬 스토리지를 이용하여 Ack 로직과 로드 로직을 만드는 등) 고려하는 편이 좋을 것 같다는 생각이 든다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  }
+]

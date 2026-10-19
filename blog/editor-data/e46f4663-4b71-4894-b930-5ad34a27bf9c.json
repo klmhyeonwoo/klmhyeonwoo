@@ -1,0 +1,730 @@
+[
+  {
+    "id": "75ff7ca2-7df9-4778-bdb2-a340c9dc0040",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "여러 NPM 패키지를 하나의 저장소에서 함께 관리하는 방식을 모노레포라고 합니다. 예를 들어 디자인 시스템, 공통 유틸리티, API 클라이언트가 서로 다른 패키지지만 함께 개발된다면 하나의 루트에 관리하는 모노레포 구조가 좋은 선택지이기도 합니다. ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Lerna",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 는 이 환경에서 여러 패키지에 명령을 시행하고, 버전을 관리하고, NPM 배포를 편리하게 해주는 도구입니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "98106217-556a-4125-bcef-0d8f53520ee1",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "시작하기",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "2475f0bc-f000-49b3-aec7-fd7211f4ea00",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "아래 명령어를 통해 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Lerna",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 세팅을 손쉽게 할 수 있습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c5ee110c-4f65-4eb6-9914-a411d0a26bdc",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "npx lerna init",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "dcf5e252-ae21-4b71-9da1-218b1453f2db",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Lerna",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 는 기본적으로 패키지 매니저의 workspace 설정을 재사용합니다. NPM 기준 루트 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "package.json",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 은 다음처럼 구성할 수 있습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b0c092a8-62fc-4a3c-b692-1e2b1af44742",
+    "type": "codeBlock",
+    "props": {
+      "language": "json"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"name\": \"my-monorepo\",\n  \"workspaces\": [\"packages/*\"],\n  \"devDependencies\": {\n    \"lerna\": \"^9.0.0\"\n  }\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6dd359b2-f310-4035-82bf-15158fa15d47",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "그리고 자동으로 추가된 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "lerna.json",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 파일에서 아래와 같이 구성을 합니다. 기본적으로는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "version",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 과 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "npmClient",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 정도만 명시를 해주어도 되지만 각 패키지가 개별적으로 관리되어야하고 깃 커밋 메세지를 통해 버전 제어도 해야하기 때문에 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "conventionalCommits",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 를 추가해주었습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "32dcca47-94a8-4a39-96ee-c1ab8b936123",
+    "type": "codeBlock",
+    "props": {
+      "language": "json"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"version\": \"independent\",\n  \"npmClient\": \"pnpm\",\n  \"command\": {\n    \"version\": {\n      \"conventionalCommits\": true\n    }\n  }\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "811b4d50-be34-4522-a2ee-459e1712be84",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "여러 패키지 명령 한번에 실행해보기",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "14a21e99-a867-4631-8c5f-82714ac3ffc4",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "각 패키지에 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "build",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 스크립트가 있다고 가정해보겠습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1b4273b4-5eb9-4668-9e2f-c3528ff61ff0",
+    "type": "codeBlock",
+    "props": {
+      "language": "json"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"scripts\": {\n    \"build\": \"tsc -p tsconfig.json\"\n  }\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "050b6b02-80ad-4d53-8ecb-382facabbfa0",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "루트에서 아래 명령어를 통해 모든 패키지의 빌드를 실행할 수 있습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "cfddb720-5a3c-42aa-afda-6285a38a330f",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "npx lerna run build",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "bd2f3af1-9ed3-401c-b40f-bda63eac95ff",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Lerna",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 는 패키지 간 의존 관계를 고려하여 적절한 순서로 실행되며, 가능한 작업들을 병렬 처리합니다. 대규모 모노레포에서 매번 패키지를 직접 이동하며 빌드할 필요가 없다는 점이 장점이기도 합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1dac2ce8-c2e0-4d04-a4fb-e55f75973ffd",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "특정 패키지를 실행하거나, 변경된 패키지에 한해서도 실행이 가능합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "06c08c52-66da-49c4-be46-028bc289442b",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "npx lerna run test --scope @my-organization/ui // 특정 패키지\nnpx lerna run build --since 브랜치명 // 변경된 패키지만 (브랜치명을 생략하면 가장 최근 Git 태그 기준으로)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "78fa61cb-f108-49dd-8420-83331207a3ea",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "버전 쉽게 관리해보기",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "3d547264-3e8c-49e9-af7b-0bc36c99298a",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "모노레포로 프로젝트나 모듈들을 관리하게 되면 점차 많아지는 경우 버전 관리를 일일히 하는 것도 많은 공수가 발생합니다. ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Lerna",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 의 대표적인 기능은 여러 패키지의 버전을 쉽게 관리하고 배포하는 일입니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e06cc171-c751-47a6-803f-3635ad33158b",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "버전 : Fixed 모드",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7dc36722-0bfc-4613-a3af-034fbf8d92fb",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "모든 패키지가 같은 버전을 공유하게 됩니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "0d846b18-e6f0-4a36-81b8-10f34e50f5eb",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "@my-organization/ui  > 1.4.0\n@my-organization/utils > 1.4.0\n@my-organization/api-client > 1.4.0",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "a0afd235-6b10-4de7-a983-778968d936c1",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "패키지들이 하나의 제품처럼 함께 릴리즈될 때 관리하기가 용이하며, 해당 방식이 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Lerna",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 의 기본 방식이기도 합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c03fd48d-f2ca-47fd-b09b-7ad266749e66",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "버전 : Independent 모드",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "27977735-e97d-4063-b1dd-72198070e97d",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "패키지마다 독립적으로 버전을 가지게 됩니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1b129dbf-89bc-4c8b-87c4-dfe38fad181d",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "@my-organization/ui  > 1.1.0\n@my-organization/utils > 1.2.2\n@my-organization/api-client > 1.4.0",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6942891c-4a56-4505-b9b0-b2b3fe364308",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "패키지별 변경 주기와 배포 주기가 뚜렷하게 다를 때 적합하며, 버전 변경을 시작할 때는 보통 아래 명령어로 시작합니다. 변경된 패키지를 찾아 버전 범위를 선택하게 하고, 필요한 의존성 버전 갱신, 깃 커밋, 태그 생성까지 처리할 수 있습니다. 이후 NPM에 그대로 배포를 진행할 수 있습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "aaf0a0ce-fe28-44cf-a0fd-5727610abc91",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "npx lerna version // 버전 변경 시작\nnpx lerna publish // NPM 라이브러리 배포",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5a63ab1f-21f4-403d-8679-39b45ed6440c",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "빌드스크립트로 명시하기",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7b046bc2-4788-4c39-abc9-3f0477d84809",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "위에서 정리한 내용들은 모두 cli 환경에서 테스트를 진행해보았다면, ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "package.json",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 에 이와 같은 명령어들을 정의해놓는다면 CI/CD 환경에서도 사용할 수 있을 뿐만 아니라 매번 긴 명령어를 입력할 필요가 없습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "010a6c8b-450b-4366-9269-a1c46396d4e3",
+    "type": "codeBlock",
+    "props": {
+      "language": "json"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"scripts\": {\n    \"build\": \"pnpm -r run build\",\n    \"build:changed\": \"lerna run build --since\",\n    \"changed\": \"lerna changed\",\n    \"version:changed\": \"lerna version --conventional-commits\"\n  } \n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "a583c75b-128a-471e-a86e-5db650daad3e",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "build : 모든 워크스페이스 패키지의 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "build",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 스크립트를 실행합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "359ec4d4-3eb5-4aca-919b-53b7ea761241",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "build:changed : 가장 최근 Git 태그 이후 변경된 패키지만 빌드합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "079424ac-5a58-4804-a846-605f373b7b7d",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "changed : 최근 Git 태그 이후 변경된 패키지 목록만 출력합니다. 빌드나 파일 수정은 하지 않습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "8b9473c7-1100-46b2-9097-a08c03f7384d",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "version:changed : 변경된 패키지를 찾고, Conventional Commit 메세지를 기준으로 버전을 올립니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  }
+]

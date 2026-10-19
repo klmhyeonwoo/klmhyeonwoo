@@ -1,0 +1,2110 @@
+[
+  {
+    "id": "4eda4adb-7a03-48dc-b08b-b1b680ec2f90",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "정리",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1cdaae34-98dc-4202-9ea2-9bdb7ca4b0da",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "당근 조직에서는 광고, 모임 등의 기능에서 비즈니스적인 요소들을 어떻게 풀어냈는가에 대한 내용으로 컨퍼런스를 풀어냈습니다. 당근은 기업이 현재 많이 성장했지만, 아직도 기능 단위의 스타트업처럼 발빠르게 움직이고 있었고 기업 자체의 정책이 아니라 그 팀의 정책과 문화를 설립하여 유닛 단위로 움직이는 것처럼 느껴졌습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "2bf1fb18-ef82-4383-8868-f4338d49395d",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "그래서 각자의 팀은 개별 서비스를 스타트업 SEED 단계처럼 A, B, C, D 등의 레벨 (ex. 중고 마켓은 안정적인 단계라고 판단하여 ‘D’) 매기고 기능을 성장시키기 위한 여러 도전들을 하고 있는 것이 보였습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f8f4e968-75ef-428e-885e-0c29a4aa6108",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "조금 인상깊게 보았던 부분은 신규로 구성된 팀이 PM이 없는 경우가 종종 있었습니다. 모두가 ‘빌더‘ 라는 명목하에 프로덕트 엔지니어로 AI를 활용하여 직군 간의 경계를 넘나들며 실제로 각자가 문제 해결을 위해 서비스의 대표처럼 움직이는 듯한 느낌이 들었습니다. (팀원 모두가 가설을 세우고 문제 검증부터, 기획, 디자인, 개발까지 모든 과정을 진행)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "9f13d310-b920-494c-a4e4-09a8c6cf85f3",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "컨퍼런스에 운이 좋게 타 회사에서 아는 사람들이 많이 왔는데, AX를 진행하는 대부분의 기업들은 프로덕트 엔지니와 플랫폼 엔지니어를 기반으로 나눠지고 있었습니다. (프로덕트 엔지니어는 서비스의 전반적인 개발을 진행한다면, 플랫폼 엔지니어는 이를 위한 웹뷰 브릿지, 인프라 환경 기반들을 구축하는 역할을 담당합니다)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "15c4e857-214f-41b4-9f82-22699bbba8b9",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "공감되는 내용들이 정말 많았고, 문제에 직접 직면하며 비로소 문제를 잘 해결할 수 있다는 이야기들이 정말 많이 와닿았습니다. 당근은 신규 기능들을 만들면서도 계속해서 실험하는 조직이었습니다. (오늘의 뉴스처럼, 사이드프로젝트를 진행하며 과감하게 사이드 프로젝트를 서비스 앱 내에 삽입하기도 합니다)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "bc08fc23-4f82-44cb-b7d7-02731aeecf0c",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "실패도 실패가 아니라고 하는 당근의 문화처럼, 발 빠르게 수용하고, 반영되고 움직이는 조직의 수평적 문화도 정말 중요하다는 것을 이번 컨퍼런스를 통해 깨닫게 되었던 좋은 순간이었습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e737f80b-bdb1-41a5-8b8a-4f08bb4f83fa",
+    "type": "divider",
+    "props": {},
+    "children": []
+  },
+  {
+    "id": "aa418e45-5569-4046-aa1f-cc29ccee4989",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "당근 포인트, PM 없이 성장하기",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "55d8d1d9-d899-4589-9cec-f38a80a7c18c",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "당근 페이팀에서 진행한 발표로 당근 페이팀은 PM이 따로 존재하지 않습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "984a90ec-a4aa-4352-bbf1-07516660819c",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "엔지니어 4명과 디자이너 1명이 전부이며 PM이 있었던 적은 단 한번도 없다고 합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "cefacd72-7e2b-49b2-910e-7f87ee187b3b",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "하지만 서비스가 원활하게 디벨롭되기 위해서는 PM이 없어도 누군가는 문제정의, 우선순위, 지표추적, 설득을 누군가는 계속 진행을 해야합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "efd7d953-55b0-4b21-bc18-e1b986239fd7",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "그렇기 때문에 문제를 찾아가는 과정, 문제를 찾고 이를 해결해나가는 과정을 무수히 경험하게 되는데",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d3bb23a5-d0ed-4ab5-8a81-63f821ab15b4",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "무엇을 달성하고 싶은지 목표를 명확하게 하고, 무엇이 목표를 막고있는지 가설을 세우고 진짜 문제와 원인을 데이터로 확인합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4d97c558-8694-49ab-bad0-9f2e4cb950ce",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "그리고 이를 통해 해결 방안을 찾아 서비스에 녹이는 과정을 진행합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f9115eab-61db-4d97-af45-4cb611daf9a8",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "당근 페이팀에서 발표에서 사용했던 주제로 세웠던 가설은 \"당근머니가 당근 서비스 안에서 잘 사용되고 있을까?\" 라는 가설이었으며,",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1bf283d5-7e99-441a-9d17-2c35ef32e062",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "실제로 데이터로 확인을 해보니 46.5%가 서비스 내에서 사용되는 것이 아니라 이벤트를 통해 리워드를 받게되면 바로 계좌로 출금하는 형태로 사용되고 있었고, 이를 통해 \"서비스 내에서 건강하게 사용되고 있는가?\"에 대해 다시 한번 생각해야했습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "98079e1d-6e9d-4482-ad6e-977934114415",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이를 해결하고자, \"당근머니와 다르게 서비스 내부에서 사용할 수 있는 포인트 제도를 운용하면 어떨까?\" 라는 생각을 하였고 곧바로 여러 서비스 팀에 전달하는 과정을 진행하게 됩니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "0fff25ff-6ea1-4f78-81fd-0ec1debe1f39",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "하지만 이러한 문제는 당근페이팀의 문제 해결을 위해서 고안된 것이지 다른 서비스 팀에서는 유저들이 당근 머니에 익숙하고 친화적이기 때문에 거절을 당했습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "3965b3f5-f102-4bbf-89c2-c6ddbb263ac0",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "사내에서는 이미 검증된 머니라는 훌륭한 아이템이 존재하고, 이를 바꿀 이유가 굳이 없다는 것이 문제였으며 앱 내에서 유저들에게 당근 포인트가 잘 알려지지 않다는 것이 문제이기도 했습니다. (사실은 포인트 제도는 이미 존재하고 있었으나, 구성원들조차 이를 잘 모르고있었음)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "a9b342ef-b088-40b2-8540-24f4d7a60adb",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "내부의 우려를 설득으로 바꾸는 것이 정말 중요한 시점이었고, 머니는 외부로 나가고 포인트는 서비스 내부에서 남기 때문에 머니가 어떻게 밖으로 새고있고, 포인트는 당근 서비스 내에서 어떻게 건강하게 순환되고 있는지 전사에 알리고자 하였습니다.\n하지만 이 또한 서비스 팀 별로 개별적인 문제가 발생하였고 \"유저들이 포인트를 소비할 곳이 부족하지 않는가?\", \"전반적으로 포인트는 가치가 없지 않은가?\" 등의 여러 문제 제기가 되었습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4c13ccf7-6f73-4310-a434-ad2a3fe3f825",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "가치는 써 본 사람이 만든다(개별 서비스 팀)와 가치가 있어야 줄 수 있다(당근 페이팀)라는 의견이 충돌하고 있었고,",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ec6558e6-f52a-4d62-88b0-ceeea34cb015",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "그렇다면 사내를 설득할 수 있도록 당근페이팀에서 직접 증명할 수 있는 데이터들을 만들어보자라는 생각을 하였으며, 광고를 보면 포인트를 주거나, 새로운 이벤트에 보상을 포인트로 일부 변경하는 등 페이 이벤트를 진행해보았습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "47b55227-ff85-4b95-804c-a01047fa6777",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "여기서 이벤트를 진행하면서 세웠던 가설은 \"과연 머니를 포인트로 바꿨다고 이벤트 참여율이 줄어들까?\" 라는 가설을 세웠지만, 0.5%만 줄어들 뿐 너무 급격한 변화가 있지않았습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "92d36e03-a685-4760-90e3-727cb04f4af0",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이벤트에서 추출한 데이터 통계 등을 통해 다른 서비스 팀을 설득할 수 있었고, 점진적으로 전환을 하면서 현재는 머니가 아닌 대부분의 이벤트에서 포인트를 기본으로 제공하고 있습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c9159d2c-c54b-4ecc-a6ed-cba4f7d101de",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "하지만 전사 내부적으로 머니에서 포인트라는 전환의 안쪽 구멍은 막았는데, 아직도 외부에서는 \"당근 포인트\"를 잘 모르는 상황이었습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4e8bff78-0581-4fe6-aad9-1e30b64e19dd",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "그래서 이를 위해 포인트가 있다는 것을 먼저 알리고, 포인트를 모르는 유저들에게 적립처를 더 잘 보이게 고치면서 포인트를 쌓을 수 있는 공간을 제공했습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "de1b7487-27ac-48c5-a452-c87e81dc75f8",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "첫 적립의 순간, 받은 포인트의 쓸 곳을 알려주고 바로 쓸 수 있도록 알려주는 온보딩 또한 제공하고, 포인트 홈과 사용처를 리뉴얼 하며 포인트 홈의 소진처 블록을 쓸 곳이 생길 때마다 유저 알고리즘에 맞게 하나씩 붙이는 작업을 진행했습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "badb198d-550b-4ade-85f7-615faee3b504",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이러한 과정들을 걸치니 점차 포인트를 쌓고 이를 소진하고, 내부적으로 건강하게 소비되기 시작했으며 당근 머니의 계좌 출금율이 줄어들고있었습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d527da03-c838-4f0b-b4fe-261be0be8f60",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "데이터를 통해 증빙하면서 타 서비스 팀에서도 당근 포인트의 신빙성을 통해 머니에서 포인트로의 전환을 진행하였으며, 현재는 이벤트의 대부분을 포인트 형식으로 진행을 하고 있습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "461de187-2f35-429e-8c26-a83e47a827e8",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이렇게 변화를 겪으면서 당근 포인트로의 전환은 진행이 되었지만, 한번도 사용해보지 않은 유저들을 사용할 수 있도록 하는 것이 새로운 숙제이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b22da0a6-8aac-49f2-a55d-6ce2299101df",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이를 위해 문제를 계속 적극적으로 찾고자 지표 및 대시보드를 직접 만들고, 여기서 발견된 문제들을 메신저에 수시로 공유하고 위클리에서 같이 이야기를 나누며 티켓으로 만들어 실험합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "2ad5e4b4-0b4c-4797-83c7-8e2d5daf49ad",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "\"PM이 없으면 충돌이 발생할 수 있지 않을까?\" 라는 생각을 보통 하지만, 당근 페이에서는 아래와 같이 수행합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "32d698e7-dbc1-4200-98e9-a7e3b8d3aa0d",
+    "type": "numberedListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "지표가 문제를 고른다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b112e9eb-466f-42da-b7b5-fa9d4d5eb766",
+    "type": "numberedListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "실험이 결판을 낸다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6337aa2a-9a6b-4ccd-97c8-fb89e1830b86",
+    "type": "numberedListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "오너가 책임진다. (아이디어를 초기에 제안한 사람이 책임진다)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "355beb2e-eb64-40e8-a66f-1862f0ae989a",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이를 통해 당근에서는 프로덕트 빌더의 정의를 문제를 직접 찾고, 빠르게 배우는 사람 (보통 하나의 기능을 만들기 위해 모든 직군이 다 모여야 진행이 되는 것이 아니라, 필요한 사람들이 그때 그때 참여하여 만드는 사람들)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b0df8613-2013-4df7-9a7e-1f73caa82106",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "제안한 사람이 바로 만들며, 직접 데이터를 뽑고, 디자인하고, 기획하고 최종적으로 만드는 행위를 하는 사람들을 빌더라고 정의합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4b69febb-17bc-48aa-829b-543137672404",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "개발 딸깍, 디자인 딸깍, 운영 딸깍",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6acf66bf-f0e5-43ca-a06d-7cdab2ee0607",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "바야흐로 딸깍의 시대, 당근 POS팀은 난의도가 높은 양면의 시대에 직면하고 있었습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4d86fd84-d416-44be-aca8-07ce67225b2e",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "여러 카테고리의 매장이 필요한데 이것들을 모두 수집해야하는 문제",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c53aa892-8831-485d-9cf3-12fcfe8ded4e",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "주문을 해주는 이웃(사장님) 데이터 수집",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "018077f6-7b17-4bc7-9e4a-87f6fc48e79a",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "매장 확보",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f006517f-34c4-4750-9e78-2bb4768a1936",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "그런데 또 하나의 문제가 발생했습니다. 바로 열악한 매장 환경으로 인해 당근에서 만든 POS 서비스(Eletron으로 구성된 서비스)가 정상작동하지 않는 현상이 발생했습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "08a4cfa5-19d3-4daf-baf6-8305a11fe888",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "POS 시장의 10%가 Windows 7",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "da5ceacd-72bc-48b1-9bc0-cfe6a27cc950",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "디스크가 500MB도 안남은 매장",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b8f278c4-5c6c-49ac-9160-d9e74a7716b6",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "기타 등등",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "db17f6af-5448-4a05-9f63-7319b83c4416",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이로 인해 프렌차이즈 영업이 막히는 상황이 발생하였고, 윈도우 7에 대한 대응이 필요했습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "bb703517-4063-4dc8-af68-11b3a13276e1",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "하지만, 당근 POS 팀에서는 윈도우 개발자가 없었고, 채용상의 리소스 그리고 소수 정예 문화를 깰 수 없다고 판단하여 백엔드 개발자인 자신이 직접 윈도우 개발을 하고자 하였습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "69cf4d82-f49c-415e-8238-13c0b9af2de9",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "마침, 전사적으로 AI를 잘 사용하고자 하는 문화를 도입하고 있었고, AI를 통해 .NET 앱을 셋업하고 4시간 만에 동작하는 핵심 기능들을 완성했습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "381d9ff3-c225-4bae-8b7d-afca6e8bef82",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "MVP 모델이 망하는 이유는 기능을 덕지덕지 붙여서 깨진 유리창이 되기 때문인데, 망하지 않은 프로덕트는 핵심 기능을 담으면서 실제로 유저가 원하는 기능을 넣는 것이었습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "def1e3fb-dcde-4b2c-aef2-442edf14425f",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "가드레일로는 Windows 7이 지원되어야하고, 디스크 500MB, Mac OS에서 개발이 되어야한다는 점을 제시하였고 Avalonia 이라는 기술 스택을 Opus가 제안하여 개발을 진행했습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1a83a86a-2c69-401a-9f6b-9498a6d7b5b9",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "하지만 윈도우 .NET 코드는 아직도 전혀 모르는 상태이고, 코드를 모르는데 품질을 어떻게 확인할 수 있을까요?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "2345776d-a684-412c-95fe-40ea773125a9",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "개발 검증 루프를 제시",
+        "styles": {}
+      }
+    ],
+    "children": [
+      {
+        "id": "e9a6a0a5-8ca8-44fb-8717-d521d25d2fd8",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "AI가 스스로 완료를 판단할 수 있는가 (완료 조건)",
+            "styles": {}
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "dd6109cf-0484-4eb5-b8d6-cbda5e18b8ac",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "검증 한 바퀴가 얼마나 빠른가 (반복 속도)",
+            "styles": {}
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "7a3cc033-9cb9-46f2-a236-9a651861f055",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "내가 언제 개입해야하는가? (오류 보고)",
+            "styles": {}
+          }
+        ],
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "51ba7073-db13-4865-8484-8e6997179fa0",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "AI가 검증할 수 있도록 매번 반복 검증 수행 (LLM 검증)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "3cb2c73f-3cbc-4f91-af16-a1f9b65b2c08",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "그래도 사람이 해야하는 영역은 존재하며, 실제로 사내에 POS 테스트 기기를 구입하여 테스트 매장 구축",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "9b42a2ef-f394-4067-bca4-bb43e87174a4",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "POS의 오류 현황을 파악하기 위한 POS 모니터링 지표 추가",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "af03b542-ee81-47a5-8a86-7e3c0c0ac2bc",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "딸깍으로 서비스를 만들었기 때문에, 다음 문제점은 \"디자인\" 이었습니다. AI는 UI를 정말 못하기 때문에 이를 위해 전문성을 가진 디자이너가 직접 루프를 돌리면 어떨까 라는 생각을 했습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "422e193a-fa3d-4a6e-9d48-a42027977f26",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "스킬을 통해 Avalonia 개발자 도구 (웹 개발자 도구와 비슷한) 에서 패딩이나 마진 등을 수정하게 되면 변경사항 감지 후, 자동으로 코드에 적용이 되고 이 적용된 내용을 기반으로 풀리퀘스트가 자동으로 올라가는 형태로 적용이 되었습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "03724d62-2921-4bf2-a0df-3bb214f91769",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "그렇게 AI 딸깍만으로 디자이너 커밋이 73개가 쌓였고, 딸깍 하나만으로 윈도우를 모르던 백엔드 개발자가 서비스를 구축하여 4일 후에 바로 배포가 되었습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "3e52acc9-c100-40fd-ade1-3594c3debf31",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "만약 오류가 발생하게 되면 AI가 담당자 별 오류 대응 행동에 대한 안내를 진행합니다. (자동 접수된 앱 크러시 분석 사례를 AI가 슬랙 메세지로 제공)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "a822597e-3c4b-46ae-9edd-2833f7f477f1",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "사람이 아예 개입하지 않는다라는 것이 아니라, 사람의 개입을 최소화하는 것이 목표입니다. 결과적으로 매장 2,000 곳에 배포되었고 디자이너 커밋을 통해 이틀만에 73개의 PR, CS가 2달간 316건을 빠르게 처리할 수 있었습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "550a4692-a62a-43f9-b828-2f2e1337f8ce",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "AI 시대에서는 AI에게는 지속 가능한 루프가 정말 중요합니다. 그리고 우리에게는 이 루프를 지속 가능하게 조율하는 것에 집중을 하면 됩니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "709c1292-ea6e-4f82-87c8-1a88e84dfd0b",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "기획, 개발, 디자인 다 한다고 프로덕트 엔지니어일까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c5cd870e-3211-477c-90d8-52a779dd61ac",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "프로덕트 엔지니어란 제조, 기계 공학 쪽에서 동작했던 용어이고 16년전부터 소프트웨어 공학에서 점차 등장하기 시작했습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7b17bd99-d952-48c6-9833-50117ad6758f",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "16년전에도 존재했던 이름이지만, 다시 최근에 AI 시대로 접어들며 해당 직무가 다시 나타나기 시작했습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "82af1cb0-2277-45d7-85ac-dbfc1f5e66da",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "제품 경험을 처음부터 도맡아하는 사람들, 당근 뿐만 아니라 최근 회사들의 동향들도 현재는 프론트엔드, 백엔드를 같이 하는 사람들을 점차 채용하기 시작했습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "8067d18b-29f1-41fc-8ca7-45de5522b0b3",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "프로덕트 엔지니어는 단지 풀스택 엔지니어인가?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "99dac9bd-92be-4c4e-8c3b-09c52c008359",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "왜 프로덕트 엔지니어를 뽑는걸까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "83cd2000-0e23-44c8-94c8-6e489c23507a",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "엔지니어는 이미 맥락의 75%를 잃고 있습니다. 이 말이 무엇이냐면, 기획부터 디자인, 개발까지 기능에 대한 내용이 한번씩 전달될 때마다 맥락은 절반씩 새게 됩니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6fa8c53e-2dcf-42d5-92ad-555865967f84",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "문제에 직접적으로 관계가 되어있어야 제대로된 문제를 해결할 수 있습니다. 최근 AI 시대에 가까워지면서 엔지니어라고 서비스를 무조건 잘하는 것은 아닙니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1a5baa36-b886-49f5-a13a-5d53425b9159",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "도메인을 잘 알고, 문제점 및 도메인에 가까운 바이브 코더가 엔지니어를 이기게 됩니다. (만드는 능력과 별개로, 문제를 아는 정도)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "9cac1b30-5308-465f-89dd-d17ace13f6eb",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "문제는 내 문제로 대입하고 풀 때 제일 잘 풀립니다. 그래서 회사의 문제를 내 문제로 대입하여 생각하는 자세가 중요합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "add9ede9-7228-410d-b98f-bdd5bfb4d789",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "당근 모임 팀에서는 발레, 필라테스와 같은 유료 강의 등의 수요가 늘어나고 있었습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b12a390a-63c8-439f-b3f1-36668939c533",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "\"유료 강의의 경우 어떻게 구성이 될까?\"에 대한 의문이 들었고, 이를 위해 내가 직접 당근 모임에서 AI 강사로 활약하여 문제로 직면해보자라는 생각을 했습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "42ca8b46-1aef-40a1-8d94-123851fd54ec",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "직접 내 문제로 체험함으로써 직관을 데이터로 확인하고, 제품의 결과까지 책임지도록 하였습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ebe39d02-d846-4376-835f-cd8f00a782be",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "문제 정의부터, 해결을 하려했던 과정을 진행하다보니 아래와 같은 것들을 깨닫게 되었습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "3788ee53-434d-4d6c-8b51-fdb0406e010c",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "왜 이 문제를 풀어야하는가를 제대로 알게 됩니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e139477d-d044-461d-9a43-bc70a22db8a4",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "문제에 가까워 맥락이 세지 않아서 더 빠르게 해결됩니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6567e9b3-88e9-4573-b6a8-6fede1dcec29",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "그렇다면, 엔지니어가 문제까지 정의를 하게 되면 PM, PD, PO는 왜 필요할까요?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "837f2c59-2240-46b6-9907-3296c4a007d9",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "본래, Product Enginner가 존재했지만 이 엔지니어 직무가 BE, FE, iOS, And 등으로 쪼개진 것일 뿐 다시 합쳐지는 쪽으로 시대가 변화하고 있습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "52aebf3f-430b-4abd-b57e-a68cdada1162",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "인원이 많아지면 아키텍쳐는 달라질 수 밖에 없고, 이때 판단에 필요한 엔지니어링 기본기가 필요합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "3ea6ea10-5549-4c1e-a0de-8265d4622c25",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "모두를 다 하는 것이 아니라 본질은 문제에 가까이 접근하고, 제품의 결과까지 책임지고, 엔지니어링 기본기를 AI 에이전트 설계에 녹여 제품에 기여하는 것입니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "fa1e722d-eaed-4911-ba5f-86d0c930b37c",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "현재 엔지니어링의 모습은 각 분야의 영역에서 한 분야로 노력하고 있지만 당근은 직군의 경계를 넘어서고자 노력하고 있습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "a1e11979-27c3-469a-8d14-24be26219f8b",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "AI는 결국에 한 사람이 프로덕트를 만드는데 큰 속도로 발전하고 있고 이를 통해 결국에는 모두 잘 해야하고, 이것들 지향해야하는 목표라고 생각하고 있습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "0e0e6592-b310-407a-9a9d-ae778612df19",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "하지만 당장 바로 이를 실행하기에는 여러 어려움이 있기 때문에 현실적인 목표들을 먼저 달성하고, 각 직군의 전문성을 에이전트 스킬로 만들고, 이를 에이전트에게 달아주고 있습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "69c20515-2e7c-4264-9b73-4233fedee4d5",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "그리고 다른 직군들은 이를 사용하여 타직군의 협업 범위를 넘나들고 있습니다. 프론트엔드와 백엔드는 각자 레포에 하네스 등의 다양한 구축을 진행하고, 프론트엔드 / 백엔드가 서로 교육을 하며 전문성을 키우고 있습니다. (프론트 → 백엔드 : Streaming SSR 개념, 프론트엔드 아키텍쳐 구조)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "2cc184bf-9769-46a6-a065-6f258dc7cb91",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "1차로 하네스로 직군의 전문성을 대체하고 있지만, 이것조차 부족하다고 생각을 합니다. 정말 중요한 것은 해당 직군에 대해서 공부하고 접해보며, 적용해보는 것이 중요하다고 생각합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "bd887fc6-ebb2-4865-997b-afe445b0d40a",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "FE, BE를 한팀으로 합친 첫 분기 이야기",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "94204a0f-7933-4ab7-a1ea-2a4a3ad7abb6",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "직군을 하나로 합치는 것이 아니라, 전문성을 존중하면서 프론트엔드가 백엔드도 진행하고, 백엔드가 프론트엔드도 진행하면서 직군을 넘나드는 이야기입니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "8801e8f7-d6ea-4eda-8e58-1ef575f67d8c",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "기존에는 프론트엔드가 화면과 상호작용을, 백엔드는 서버의 처리와 데이터를 맡았습니다. 당근 광고팀에서는 하나의 기능을 만드는 것이어도 엔지니어링 백그라운드에서는 다양한 엔지니어들이 투입하여 진행을 합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "3f988701-64c5-4cdc-80e9-e5416f200833",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "당근에서는 2주마다 스프린트를 진행하며 계획하고 돌아보는 과정을 진행합니다. 이때 API 협의, 일정 조율, 직군 별 대기 시간과 같은 병목 현상이 발생하고 있었습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b5972b9f-6584-453a-8fc5-9dfbaaf6d5f2",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "화면과 서버가 API 스펙에 대한 협의가 오래 되어서 만약 스펙이 바뀌는 경우에는 한 팀이 작업할 때, 다른 팀은 그 반영사항이 적용될 때까지 기다려야하는 상황이 발생했습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "2971420d-3e55-4262-93ed-fef735e60958",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "그래서 일하는 방식을 변화하고자하였습니다, 하지만 그 과정에서 선제적으로 지켜져야하는 것들이 있었습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "73ec4a0b-4c1e-4be1-b924-471e33f4ae34",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이미 광고주가 이용하고 있는 당근 광조 서비스의 안정성",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "896e4c06-da2e-428a-8922-198b7d38435f",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "각자 엔지니어링 측면에서 쌓아온 전문성 (프론트엔드, 백엔드)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ba986a77-c0a3-48c6-9118-12ef5d875d23",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이를 위해 작게 맡아보고, 함께 운영하면서 한 분기를 보내보기로 했습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "00e68040-1237-4f50-b855-0bb927b8aff6",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "매 스프린트마다 반대 직군의 일을 하나씩 진행해보고 원래 있던 실제 일에서 작은 과제들을 맡아 진행했습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c40906b3-391b-4d76-9c4d-a5d89c4f8ca1",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "FE → BE (간단한 제품, 운영 과제)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "145e56e1-0fe6-4130-ac95-d1e2380130c2",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "BE → FE (자기 일에서 이어지는 화면 개발)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e67cdf1e-8f88-41b2-a594-f12b5298333a",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "해볼 수 있다는 감각을 행동으로 보여주고 싶어서 백엔드 개발자인 자신이 프론트엔드 일을 진행하였고, 실행해본 방법들을 기록으로 남기고 검증 도구를 함께 쓰도록 공유했습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "88ac1368-314a-4ab1-9a94-28397002876a",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "방법과 기록을 하고, 팀에 공유하면서 이 방법들이 자산화될 수 있도록 하였습니다. (이런 자산화된 문서들은 추후 검증 도구로 활용됩니다)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c724a428-a148-44fb-8dae-60f324bbae39",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이를 통해 전체 티켓 완료량은 크게 흔들리지 않았으며, 낯선 일을 배우는 동안에도 비슷한 수준을 유지할 수 있었습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "191a0d39-8966-4e8f-bf2d-d681282975f4",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "돌아보니 작은 과제를 맡기도, 배우는 일을 뒷받침해주는 바탕, 규칙이 있어 유지하기에도 훨씬 수월했습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1ffca823-19e3-4296-9048-af411705ad8c",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "합의 : 함께 일하는 방식",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "20417bb0-24e1-4daa-a980-6950ce5eb85b",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "리듬 : 2주 스프린트 (계획, 실행, 회고)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "3aeab5a7-ffd8-40ef-b290-96b5c2862cf4",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "기록 : 기획, 설계, 서비스 지식",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "cabd87e8-16ac-468b-ab98-8d98261b009a",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이렇게 직군을 넘나들며 서로의 티겟을 잘 완료해내면서, \"운영\" 측면에서 큰 성과를 얻을 수 있었습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "575a82ea-144b-4bd8-91ac-cdf709669123",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "버그가 발생했을 때, 서로의 서비스를 익히면서 장애 대응도 같이 병행을 진행하였습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "9d4f857f-cb2f-4dff-938b-afd13e3b77e1",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "모르는 서비스에서 알림이 오면 운영 문서 (당근에서는 이 운영문서를 'RunBook' 이라고 호칭)을 참고하였습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f6f1ccb5-f805-47b8-b25e-478eacb60a4f",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "서로의 업무를 하면서 도메인 지식이 넓어지며, 팀이 합쳐지면서 특히 걱정되었던 온콜이 이 런북을 통해 잘 처리될 수 있었습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "55161078-3079-4681-afe5-37419f7a2d61",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "낯선 서비스를 맡았을 때 무엇이 평소와 다른지 볼 수 있도록 대시보드를 구축하여 현재 상태를 볼 수 있게 하여 조금 더 다른 직군도 쉽게 대응할 수 있도록 접근성을 높였고 (ex. 계정 정상, 광고 관리 정상 상태 노출 여부 등)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "708ac7fb-2adb-47e4-9eaa-efe50582bddf",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "AI와 팀의 지식이 맞물렸고, AI 코딩 도구를 통해 직군의 진입 장벽이 낮아지면서 AI 코딩 도구는 팀의 쌓인 지식을 통해 맥락으로 이해하고, 이를 통해 작업하면서 새롭게 알게된 부분을 작업하면서 계속 기록했습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4e93c230-305e-418e-85c1-0a99627fc28f",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "한명이 문제를 끝까지 해결하는 과정을 진행하면서 그 과정을 동료와 함께 상호 검증을 진행합니다. (문제를 풀어낼 때 PRD도 같이 작성을 하는 등)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "cb440107-d3e2-4f68-99b9-d0154397f4b1",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "직군의 업무를 통합하는 과정을 하기 전, 티겟이 나왔을 때 직군 사이를 오가면서 경계가 지날때마다 처리를 위한 대기를 진행했다면, 현재는 이슈 티켓의 담당자가 끝까지 이어서 진행을 합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1180202c-2115-4d0b-ac61-5664951a89fe",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "담당자가 설계부터 개발, 배포까지 진행을 하는 플로우로 변화가 되었습니다. 하지만 이 과정에서도 아직 풀어야할 숙제는 있었습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "8391a8dd-dee1-4156-9ef7-6fafc7be776a",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "\"더 넓게 역할을 맡으면서도 깊이를 지켜야한다\"",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "180563b9-c6ac-4270-bfb0-9795118942c0",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "서로 다른 직군의 리뷰가 옅어질 위험성",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "94035cdc-fcbb-4c34-98b0-03ac1cd1851a",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "특정 사람에게 지식이 쏠릴 위험성",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d6545436-7f0d-4b6e-9d5e-fcf46a7da32e",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "각자의 전문성을 깊게 쌓는 과제가 옅어질 수 있습니다. (이를 위해 상호 검증과 학습이 계속해서 필요합니다)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c6ca42c1-4b81-42f4-ad30-e5ad77c1bb56",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "작은 실무 과제부터 진행해보면서 문서와 동료를 정하고 (참고할 맥락과 검증), 함께 돌아보는 과정 (완료, 계획 변화, 서로의 업무 공유)이 중요합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  }
+]

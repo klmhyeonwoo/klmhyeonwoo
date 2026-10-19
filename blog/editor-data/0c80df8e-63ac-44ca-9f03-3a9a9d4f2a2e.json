@@ -1,0 +1,1474 @@
+[
+  {
+    "id": "52c7ccb6-884c-45de-bf7b-db50ba808d42",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "내가 노드 서버를 언제 켜놓았더라?",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 하면서 새로운 포트번호의 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "localhost",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 서버가 실행되어 포트 번호를 직접 입력해주었던 경험.. 그래서 포트 번호를 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "3001",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "로 바꾸고, API 서버는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "8080",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "인지 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "3001",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "인지 헷갈리고, 어제 열어둔 브라우저 탭은 이미 죽은 서버를 가리키는 문제점들이 모든 프론트엔드 개발자라면 한번 쯔음 모두 경험해본다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4bc2ae60-d3ba-4fa3-b554-09512215224e",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "거기에 요즘 AI 코딩 에이전트까지 쓰게 되면 문제가 더 심해지는데, 에이전트가 서비스 포트를 추측하다가 틀려서 엉뚱한 곳에 요청을 보내는 일이 생긴다. 이 문제들은 사실 전부 포트 번호라는 개념에서 비롯된다. 포트 번호는 원래 개발자가 매번 의식해야 할 대상이 아니다. 네트워크 계층의 구현 세부사항인데, 어쩌다 보니 우리가 매일 외우고 관리해야 하는 것이 되어버렸다. ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Portless",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 바로 이 문제점들을 지적하기 위해 나온 개념이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "89b84783-3541-4620-906e-eadd4c6e89f7",
+    "type": "divider",
+    "props": {},
+    "children": []
+  },
+  {
+    "id": "a35171cf-3d58-4dc6-b369-0e9ed08b6653",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Portless가 무엇일까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "fbdc7ceb-945f-4fc6-94be-44e8de5a99ed",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "link",
+        "href": "https://github.com/vercel-labs/portless",
+        "content": [
+          {
+            "type": "text",
+            "text": "GitHub - vercel-labs/portless: Replace port numbers with stable, named local URLs. For humans and agents.",
+            "styles": {}
+          }
+        ]
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ec298652-d2e9-4fc7-bac1-a4a11a8d6d7c",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "포트 번호를 이름 기반의 안정적인 로컬 URL로 바꿔주는 도구",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7ee7da83-23fa-4704-838e-55d3b8393e6c",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "localhost:3000",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 대신 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "[my-app.localhost](https://my-app.localhost)",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 같은 URL로 앱에 접근할 수 있게 된다. 그리고 이 URL은 세션이 바뀌어도, 컴퓨터를 껐다 켜도 항상 동일하게 유지된다. 내부적으로는 경량 로컬 프록시가 동작하는 방식인데, 실제 앱은 여전히 포트에 바인딩되지만 그 포트를 Portless가 알아서 관리해준다. 개발자는 포트를 몰라도 되는 것이다. ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "4000~4999",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 범위에서 빈 포트를 자동으로 찾아 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "PORT",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 환경변수로 주입하고, ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "HOST",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "127.0.0.1",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "로 설정해 IPv4 루프백에 바인딩한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "112de0dc-d957-4609-974f-4c1cc34d25d1",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "기존 방식",
+        "styles": {}
+      }
+    ],
+    "children": [
+      {
+        "id": "9b95d4f3-9d5e-4ca7-a0af-299451f25c11",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "link",
+            "href": "http://localhost:3000",
+            "content": [
+              {
+                "type": "text",
+                "text": "http://localhost:3000",
+                "styles": {}
+              }
+            ]
+          }
+        ],
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "f10fea06-904e-4ae4-a4af-fb8d10e98683",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Portless 사용 시",
+        "styles": {}
+      }
+    ],
+    "children": [
+      {
+        "id": "20adbf12-790c-4506-86c8-7a5b68d889f9",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "link",
+            "href": "http://my-app.localhost",
+            "content": [
+              {
+                "type": "text",
+                "text": "http://my-app.localhost",
+                "styles": {}
+              }
+            ]
+          }
+        ],
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "852dbadb-4a16-4da9-a34b-c6643a50c75f",
+    "type": "divider",
+    "props": {},
+    "children": []
+  },
+  {
+    "id": "86c120ed-ac6e-48a6-8742-f92c38b2f186",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "어떤 문제를 해결하려고 했을까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "2b8c56ce-5b98-4746-a9d2-25be9a47244a",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "포트 충돌과 관리 피로",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "392693e6-0b06-4fb2-8b6e-325a7d9e3108",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "멀티 서비스 프로젝트를 하다 보면 포트 관리가 은근히 번거롭다. 프론트엔드는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "3000",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": ", 백엔드 API는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "8080",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": ", 어드민은 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "3001",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "... 팀마다 포트 번호 컨벤션도 다 다르고, 로컬 환경에 다른 뭔가가 실행 중이면 충돌이 생긴다. ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "EADDRINUSE",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "라는 에러를 처음 봤을 때의 당혹감을 기억하는 사람이 많을 것이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "8caa0ae5-66cd-4f80-9f4e-195ca4703c13",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "AI 에이전트 환경에서의 신뢰성 문제",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "11d9e2c8-7331-4e62-9afb-8ac7bf6d9f4f",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "요즘 Claude, Cursor 같은 AI 에이전트를 개발에 적극적으로 활용하는 경우가 많아졌는데, 에이전트가 가장 헤매는 부분 중 하나가 바로 서비스 위치다. \"API 서버가 어디서 실행 중이야?\"라는 질문에 에이전트가 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "3001",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "을 시도해보고, ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "8080",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "을 시도해보고... 이게 생각보다 자주 발생하는 문제다. ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "Portless",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 를 쓰면 URL이 항상 예측 가능하기 때문에 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "[AGENTS.md](https://AGENTS.md)",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "에 한 번만 명시해두면 에이전트가 세션이 바뀌어도 정확한 위치를 참조할 수 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5e495e30-ece5-4d88-9751-9ba5ad612867",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Git Worktree 환경에서의 URL 충돌",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "0f415152-8547-4ebc-9df7-d643f338b04d",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Git worktree를 사용해서 여러 브랜치를 동시에 작업하는 경우, 각 워크트리마다 다른 포트를 수동으로 설정해야 하는 번거로움이 있다. Portless는 워크트리를 자동으로 감지하고 브랜치명을 서브도메인으로 붙여준다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "fdcdf89a-ab07-4faa-85ca-86300d49fa03",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "main branch",
+        "styles": {}
+      }
+    ],
+    "children": [
+      {
+        "id": "77fbfbac-816c-4e50-abb8-a5edc7f142b9",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "link",
+            "href": "https://my-app.localhost",
+            "content": [
+              {
+                "type": "text",
+                "text": "my-app.localhost",
+                "styles": {}
+              }
+            ]
+          }
+        ],
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "84fb745f-6703-46d6-a763-ec3a90035917",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "feature/login branch",
+        "styles": {}
+      }
+    ],
+    "children": [
+      {
+        "id": "59b14d7e-399a-475e-9b35-ae39ea03f564",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "link",
+            "href": "https://feature-login.my-app.localhost",
+            "content": [
+              {
+                "type": "text",
+                "text": "feature-login.my-app.localhost",
+                "styles": {}
+              }
+            ]
+          }
+        ],
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "7daa273f-972c-4298-94e2-9496aed1bdc8",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "설정 파일 하나 건드리지 않아도 각 워크트리가 자기만의 URL을 가지게 된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1d485f0d-a62d-41af-84fe-1771965fb3f9",
+    "type": "divider",
+    "props": {},
+    "children": []
+  },
+  {
+    "id": "a046d90f-4b8b-41ff-81f2-5bfdf680eea0",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Portless의 주요 특징",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1086990b-1b6b-4854-a2ca-f48d30cdd474",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Named URL : 이름 기반 안정적인 URL",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e801de4a-a7d8-40c5-b9f4-8b46f84136f1",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": ".localhost",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 도메인은 대부분의 브라우저에서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "127.0.0.1",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "로 자동 해석된다. 별도의 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "/etc/hosts",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 설정이나 DNS 설정 없이 바로 동작하는 것이다. 그리고 이 URL은 세션이 끝나도, 재시작해도 동일하게 유지되기 때문에 팀 문서나 에이전트 설정에 적어두기 딱 좋다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ca081e17-4b5c-4645-9811-d03d94237be8",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "HTTP/2 지원 : 개발 서버 성능 향상",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f1e59e2d-ee37-4f36-8f6e-17504adf7c3c",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "브라우저는 HTTP/1.1에서 호스트 하나당 동시 커넥션을 6개로 제한한다. 최근 Vite처럼 번들링 없이 수백 개의 모듈 파일을 그대로 서빙하는 개발 서버에서는 이게 실제 병목이 된다. 파일 하나하나가 HTTP 요청이 되다 보니 큐가 쌓이는 것이다. HTTP/2는 단일 커넥션에서 모든 요청을 멀티플렉싱으로 처리하기 때문에 이 제약이 사라진다. 개발 서버 로딩이 눈에 띄게 빨라지는 걸 느낄 수 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "0a6dd53d-7d80-4bdc-a4f5-88ae92285a9d",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "어떻게 로컬 환경에서 HTTP/2를 지원할까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1a91e912-b392-4cf9-9bdf-7036f5235f22",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "HTTP/2는 브라우저 레벨에서 HTTPS가 필수다. 브라우저들이 보안상의 이유로 HTTP/2를 TLS(HTTPS) 위에서만 지원하도록 결정했기 때문이다. 기술 스펙상 평문 HTTP/2(h2c)도 존재하긴 하는데, 실제 브라우저는 아무것도 지원하지 않는다. 그래서 기존 localhost:3000은 plain HTTP → 브라우저가 HTTP/1.1로만 통신하게 된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "41528ba3-5d6f-4646-baed-44ee4477e92b",
+    "type": "divider",
+    "props": {},
+    "children": []
+  },
+  {
+    "id": "e126ec96-f34e-4af3-a256-b264eb7b6134",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Portless는 이 문제를 이렇게 해결한다",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "acef302c-ca1b-4e42-a8c3-050cc67a7a57",
+    "type": "numberedListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "로컬 프록시를 띄우면서 TLS 인증서를 자동 생성",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4f31416e-17e3-47cb-a8ab-dffe492cd629",
+    "type": "numberedListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "해당 인증서를 로컬 시스템에 자동으로 신뢰 등록 (브라우저 경고 없음)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "aec6520b-bcd5-4a77-9f9a-b037376e8fca",
+    "type": "numberedListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "브라우저 ↔ Portless 프록시 구간이 HTTPS/HTTP/2로 통신",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "a9bbca3c-e556-49e9-9ea1-f563f052fe2d",
+    "type": "numberedListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Portless 프록시 ↔ 실제 앱 구간은 내부적으로 HTTP/1.1",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e4f1afe5-e5cd-46fe-9465-f67217f214d7",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "즉, 앱 자체는 그대로인데 브라우저 입장에서는 HTTPS/HTTP/2로 접근하게 되는 것이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "12954e22-e8dc-462f-8c9c-7ae9d5ba114b",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "그래서 Vite처럼 파일을 잘게 쪼개서 수백 개 요청이 생기는 개발 서버에서 체감 속도 차이가 나는 것이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "54cfeecd-4baf-4cef-8d11-23575c361d7c",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "프레임워크 자동 호환",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "bd91c00c-4d0f-45d7-84e0-47a03a0d55be",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "PORT",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 환경변수를 무시하는 프레임워크들이 꽤 있다. Vite, Astro, React Router, Angular 등이 그렇다. Portless는 이런 프레임워크를 자동으로 감지해서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "--port",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": ", ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "--host",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 플래그를 자동으로 주입해준다. 사용자가 따로 설정할 게 없다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4253bb23-01b8-4c91-9de4-831cceeb1cfc",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "설치 및 사용 방법",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "cbd086b2-1f82-4c93-8b16-78b3d3a1ad95",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "전역 설치 한 번이면 충분하고, 프로젝트별로 의존성을 추가할 필요가 없다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "deb96a02-3b95-45a2-8abd-c098bd61690e",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "npm install -g portless                                                                                                                                                                           \n                                                                                                                                                                                                  \n사용법은 기존 dev 스크립트 앞에 portless run --만 붙이면 된다.\n\n# Enable HTTPS (one-time setup, auto-generates certs)\nportless proxy start --https\n                                                                                                                                                                                                    \n# Next.js\nportless myapp next dev\n# -> https://myapp.localhost\n                                                                                                                                                                                                    \n# Vite\nportless myapp vite\n# Without --https, runs on port 1355\n# -> http://myapp.localhost:1355\n",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "03ad99db-e312-4ca9-b4b6-dae620d5a592",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Portless의 장점",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "3ddedd34-cbfe-4ea0-9c52-063d6bf29333",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "포트 관리에서 완전히 해방된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c0454060-20f5-4c93-b24c-0eff61f31122",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "더 이상 어떤 포트를 쓸지 결정하고, 충돌을 피하고, 팀원에게 알려주는 일을 반복하지 않아도 된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "bd930d9d-f764-48b1-a10a-b427eb14f2be",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "세션 간 URL이 유지된다. 북마크, 팀 위키, 에이전트 설정 파일에 한 번 적어두면 영구적으로 유효하다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "75b8b898-0915-4901-b1f3-07088fdefe69",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "멀티 브랜치 개발이 훨씬 편해진다. Git worktree를 쓴다면 브랜치별 URL이 자동으로 분리되기 때문에 설정 변경 없이 여러 브랜치를 동시에 띄워두고 작업할 수 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "0fa16b23-ebd6-4ff8-8732-43dd723976a5",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "AI 에이전트 활용도가 높아진다. 에이전트가 서비스 위치를 신뢰할 수 있게 되면 불필요한 시행착오가 줄어든다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "864cde29-f10c-4161-bf4e-2d6d366f34a5",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "HTTP/2로 개발 서버 성능이 개선된다. 특히 모듈 수가 많은 프로젝트에서 체감 차이가 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "dd4f6959-fe72-4cfe-945b-855fd375ffdd",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "단점 및 현실적인 한계",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "188c1d16-4e06-4d55-a579-a50884395c89",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "macOS, Linux만 지원",
+        "styles": {}
+      }
+    ],
+    "children": [
+      {
+        "id": "09457457-ed56-407c-907d-5421772639fc",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Windows는 현재 미지원이다. WSL2에서 동작할 수도 있다고 알려져 있지만 공식적으로 검증된 것은 아니다. Windows 환경이 메인인 팀에서는 아직 도입하기 어렵다.",
+            "styles": {}
+          }
+        ],
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "e05939e7-cff8-484b-ab85-7dbf2584e39c",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Vercel Labs 소속 실험적 프로젝트",
+        "styles": {}
+      }
+    ],
+    "children": [
+      {
+        "id": "54656a55-ca04-4826-949d-908082e78eb5",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Vercel의 메인 제품군이 아닌 Labs 소속이다. 아직 초기 단계의 실험적 도구라는 뜻인데, 안정성이나 장기 지원 여부가 보장되지 않는다. 프로덕션 환경이나 팀 전체에 강제로 도입하기보다는 개인 개발",
+            "styles": {}
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "f3133ba2-9065-4654-bd31-d377f8e30bb5",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "환경에서 먼저 써보는 게 적절하다.",
+            "styles": {}
+          }
+        ],
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "a4e59337-fad9-4905-83ce-3ea24ac5d0f2",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "일부 프레임워크와의 비호환 가능성",
+        "styles": {}
+      }
+    ],
+    "children": [
+      {
+        "id": "780ba79e-8be9-4600-8b70-394419c38eaa",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "대부분의 주요 프레임워크는 PORT 환경변수를 잘 따르지만, APP_PORT, SERVER_PORT 같은 커스텀 변수명을 쓰는 경우는 추가 설정이 필요하거나 아예 동작하지 않을 수 있다. 사용 중인 프레임워크가 표준 PORT",
+            "styles": {}
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "66a11e3f-d764-4202-ad5f-a8dec3b9abc6",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "변수를 지원하는지 미리 확인해볼 필요가 있다.",
+            "styles": {}
+          }
+        ],
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "60881fc1-412c-4ea7-bb90-46bbc5ac1777",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "로컬 네트워크 접근 불가",
+        "styles": {}
+      }
+    ],
+    "children": [
+      {
+        "id": "5d7a3810-b22a-403f-bf81-49c19cf5ee32",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "127.0.0.1",
+            "styles": {
+              "code": true
+            }
+          },
+          {
+            "type": "text",
+            "text": " 루프백에만 바인딩되기 때문에, 같은 Wi-Fi 네트워크에 있는 스마트폰이나 다른 기기로 개발 서버에 접근하는 테스트는 기본 설정으로는 안 된다. 모바일 반응형 테스트를 실제 기기로 하는 경우가",
+            "styles": {}
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "fca69008-2ef4-47e7-9e38-b2da0e37c98c",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "많다면 이 부분이 불편할 수 있다.",
+            "styles": {}
+          }
+        ],
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "ec529034-6d46-46db-8003-697e7b4e370f",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "HTTPS 필수 기능 테스트의 한계",
+        "styles": {}
+      }
+    ],
+    "children": [
+      {
+        "id": "ce37f491-f92b-4119-a1ba-e5336ab171fd",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "기본 동작은 HTTP다. Secure Cookie, Service Worker, WebAuthn처럼 HTTPS 환경이 필수인 기능을 테스트할 때는 Portless만으로는 부족하고, 별도의 HTTPS 로컬 환경 설정이 필요하다.",
+            "styles": {}
+          }
+        ],
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "4484d557-dab1-4cf7-9a3b-a2617bd84867",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Portless는 \"포트 번호가 왜 개발자의 관심사여야 하지?\"라는 근본적인 질문에서 출발한 도구라고 한다. 작은 불편함처럼 보이지만 매일 반복되는 마찰을 없애주고, 특히 멀티 서비스 환경이나 AI 에이전트와 함께 개발하는 경우에 실질적인 도움이 될 것이라고 생각이 든다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "2bebcb99-5824-4763-94a1-d9eccb4b3c51",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "다만 아직은 실험적인 단계이고 Windows 지원이 없다는 점에서 모든 팀에 맞는 도구는 아니다. 하지만 macOS나 Linux 기반으로 개발하면서 포트 관리의 번거로움을 느끼고 있다면, 한 번쯤 써볼 만한 가치가 충분히 있을 것이라 생각이 든다. 얼른 레이어에 적용을 해봐야겠다 ^,^",
+        "styles": {}
+      }
+    ],
+    "children": []
+  }
+]

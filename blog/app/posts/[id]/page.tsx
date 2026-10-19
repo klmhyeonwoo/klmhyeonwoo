@@ -63,9 +63,12 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const title = `${postTitle} | wavy studio`;
   const description = postDescription(source, data) || `${postTitle}에 관한 글입니다.`;
   const canonical = `/posts/${id}`;
-  const image = `${canonical}/opengraph-image`;
   const publishedTime = postPublishedAtValue(data.publishedAt ?? data.date);
   const modifiedTime = postPublishedAtValue(data.updatedAt) ?? publishedTime;
+  // Social platforms cache OG images aggressively. Tie the image URL to the
+  // last published revision so an edited title or description gets a fresh
+  // share preview without weakening the image route's own caching.
+  const image = `${canonical}/opengraph-image?v=${encodeURIComponent(modifiedTime ?? postTitle)}`;
   const keywords = [post?.category, post?.series].filter((value): value is string => Boolean(value));
 
   return {

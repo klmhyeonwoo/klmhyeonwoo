@@ -8,6 +8,7 @@ import { getCategories } from "@/lib/posts";
 import { getProfile } from "@/lib/profile";
 import { RecentComments, RecentCommentsFallback } from "@/components/recent-comments";
 import { PrefetchLink } from "@/components/prefetch-link";
+import { PostSearch } from "@/components/post-search";
 
 export const dynamic = "force-dynamic";
 
@@ -65,13 +66,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
       <main className="kb-list-page" id="top">
         <div className="kb-list-controls">
           <nav className="kb-category-nav" id="topics" aria-label="글 카테고리"><Link className={!selectedCategory ? "active" : ""} href={categoryHref()}>전체 <span>{posts.length}</span></Link>{categories.map((category) => <Link key={category.id} className={selectedCategory === category.id ? "active" : ""} href={categoryHref(category.id)}>{category.name} <span>{categoryCounts.get(category.id) ?? 0}</span></Link>)}</nav>
-          <form action="/" className="kb-post-search" role="search">
-            {selectedCategory && <input name="category" type="hidden" value={selectedCategory} />}
-            <label className="sr-only" htmlFor="post-search">게시글 검색</label>
-            <input defaultValue={searchQuery} id="post-search" name="q" placeholder="게시글 검색" type="search" />
-            {searchQuery && <Link aria-label="검색어 지우기" className="kb-search-reset" href={categoryHref(selectedCategory)}>지우기</Link>}
-            <button type="submit">검색</button>
-          </form>
+          <PostSearch categoryId={selectedCategory} initialQuery={searchQuery} posts={posts} />
         </div>
         <div className="kb-content-layout">
         <section className="kb-feed" id="all" aria-label={selectedCategory ? categories.find((item) => item.id === selectedCategory)?.name ?? "미분류" : "전체 글"}>

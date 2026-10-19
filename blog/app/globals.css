@@ -11,7 +11,7 @@
   /* Keep the editorial text near-black, but give interactive states a
      recognisable green counterpart to the dark theme. */
   --accent: #43d982;
-  --accent-text: #167a4b;
+  --accent-text: #43d982;
   --soft-green: #e3f6ea;
   --acid: #dff8b0;
   --blue: #edf5ff;

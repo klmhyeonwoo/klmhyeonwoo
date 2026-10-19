@@ -6,6 +6,7 @@ import { BlockNoteView } from "@blocknote/ariakit";
 import { insertOrUpdateBlockForSlashMenu } from "@blocknote/core";
 import { BlockNoteSchema, createCodeBlockSpec } from "@blocknote/core/blocks";
 import { SideMenuExtension } from "@blocknote/core/extensions";
+import { ko } from "@blocknote/core/locales";
 import { codeBlockOptions, syntaxHighlighter } from "@blocknote/code-block";
 import {
   BlockColorsItem,
@@ -152,6 +153,14 @@ const schema = BlockNoteSchema.create().extend({
   },
 });
 
+const koreanEditorDictionary = {
+  ...ko,
+  placeholders: {
+    ...ko.placeholders,
+    default: "내용을 입력하거나 '/'를 눌러 명령을 선택하세요.",
+  },
+};
+
 function errorMessage(error: unknown) {
   return error instanceof Error ? error.message : "이미지 업로드에 실패했습니다.";
 }
@@ -234,6 +243,7 @@ function Editor({ initialBlocks, mentions, onChange }: Props) {
   }, []);
   const editor = useCreateBlockNote({
     initialContent: initialBlocks && initialBlocks.length > 0 ? initialBlocks as never : undefined,
+    dictionary: koreanEditorDictionary,
     uploadFile,
     schema,
     extensions: [syntaxHighlighter],

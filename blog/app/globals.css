@@ -10,7 +10,8 @@
   --interactive-subtle: #eff2ef;
   /* Keep the editorial text near-black, but give interactive states a
      recognisable green counterpart to the dark theme. */
-  --accent: #167a4b;
+  --accent: #43d982;
+  --accent-text: #167a4b;
   --soft-green: #e3f6ea;
   --acid: #dff8b0;
   --blue: #edf5ff;
@@ -56,7 +57,7 @@ input {
   letter-spacing: -1px;
 }
 .brand span {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .quiet-link {
   color: var(--muted);
@@ -83,7 +84,7 @@ input {
   font-size: 17px;
 }
 .eyebrow {
-  color: var(--accent);
+  color: var(--accent-text);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.13em;
@@ -108,7 +109,7 @@ input {
   margin: 0;
 }
 .post-card h2 a:hover {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .description,
 .empty {
@@ -178,7 +179,7 @@ input {
 }
 .author-byline > span {
   align-items: center;
-  color: var(--accent);
+  color: var(--accent-text);
   display: inline-flex;
   font-size: 14px;
   font-weight: 700;
@@ -308,7 +309,7 @@ input {
   color: var(--ink);
 }
 .kb-category-nav span {
-  color: var(--accent);
+  color: var(--accent-text);
   font-size: 12px;
   margin-left: 3px;
 }
@@ -355,7 +356,7 @@ input {
 }
 .kb-post-avatar {
   align-items: center;
-  color: var(--accent);
+  color: var(--accent-text);
   display: grid;
   font-size: 28px;
   font-weight: 700;
@@ -406,14 +407,14 @@ input {
   padding: 10px 18px;
 }
 .kb-post:hover h2 {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .kb-empty {
   color: var(--muted);
   padding: 40px 0;
 }
 .kb-empty a {
-  color: var(--accent);
+  color: var(--accent-text);
   font-weight: 700;
 }
 .kb-footer {
@@ -665,7 +666,7 @@ input {
 }
 .profile-placeholder {
   align-items: center;
-  color: var(--accent);
+  color: var(--accent-text);
   display: grid;
   font-size: 54px;
   font-weight: 700;
@@ -677,7 +678,7 @@ input {
   margin: 10px 0 22px;
 }
 .profile-edit-link {
-  color: var(--accent);
+  color: var(--accent-text);
   display: inline-block;
   font-size: 14px;
   font-weight: 700;
@@ -897,7 +898,7 @@ input {
   padding: 14px 0;
 }
 .draft-list a:hover {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .draft-list span {
   color: var(--muted);
@@ -969,7 +970,7 @@ input {
   letter-spacing: -0.9px;
 }
 .masthead .brand span {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .masthead nav {
   display: flex;
@@ -981,7 +982,7 @@ input {
   font-weight: 600;
 }
 .masthead nav a:hover {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .cover {
   align-items: stretch;
@@ -1009,7 +1010,7 @@ input {
   margin: 0;
 }
 .cover h1 em {
-  color: var(--accent);
+  color: var(--accent-text);
   font-style: normal;
 }
 .cover-description {
@@ -1131,7 +1132,7 @@ input {
   padding-bottom: 19px;
 }
 .section-kicker span {
-  color: var(--accent);
+  color: var(--accent-text);
   font-size: 12px;
 }
 .section-kicker p {
@@ -1176,7 +1177,7 @@ input {
 }
 .featured-story h2 a:hover,
 .post-card h2 a:hover {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .featured-story article > p:not(.meta) {
   color: #777;
@@ -1200,7 +1201,7 @@ input {
   text-align: right;
 }
 .story-index span:last-child {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .feed-section {
   padding: 74px 0;
@@ -1507,7 +1508,7 @@ html[data-theme="dark"] .editor .bn-container {
   letter-spacing: -0.09em;
 }
 .ff-logo strong {
-  color: var(--accent);
+  color: var(--accent-text);
   font-weight: 750;
 }
 .ff-header nav {
@@ -1520,7 +1521,7 @@ html[data-theme="dark"] .editor .bn-container {
   font-weight: 550;
 }
 .ff-header nav a:hover {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .shared-header {
   background: #fff;
@@ -1541,7 +1542,7 @@ html[data-theme="dark"] .editor .bn-container {
   letter-spacing: -0.09em;
 }
 .shared-logo strong {
-  color: var(--accent);
+  color: var(--accent-text);
   font-weight: 750;
 }
 .shared-header nav {
@@ -1554,7 +1555,7 @@ html[data-theme="dark"] .editor .bn-container {
   font-weight: 550;
 }
 .shared-header nav a:hover {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .ff-lead {
   display: grid;
@@ -1611,7 +1612,7 @@ html[data-theme="dark"] .editor .bn-container {
   margin: 0;
 }
 .ff-meta span {
-  color: var(--accent);
+  color: var(--accent-text);
   margin: 0 5px;
 }
 .ff-lead h1 {
@@ -1624,7 +1625,7 @@ html[data-theme="dark"] .editor .bn-container {
 }
 .ff-lead h1 a:hover,
 .ff-card h2 a:hover {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .ff-summary {
   color: #777;
@@ -1644,7 +1645,7 @@ html[data-theme="dark"] .editor .bn-container {
   padding-bottom: 8px;
 }
 .ff-read span {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .ff-topics {
   border-top: 1px solid #1d1d1d;
@@ -1729,7 +1730,7 @@ html[data-theme="dark"] .editor .bn-container {
   letter-spacing: -0.07em;
 }
 .ff-empty-lead a {
-  color: var(--accent);
+  color: var(--accent-text);
   font-weight: 650;
 }
 .ff-footer {
@@ -1844,6 +1845,7 @@ html[data-theme="dark"] {
   --surface-raised: #202321;
   --interactive-subtle: #292d2a;
   --accent: #43d982;
+  --accent-text: #43d982;
   --soft-green: #153321;
   color-scheme: dark;
 }
@@ -2128,7 +2130,7 @@ html[data-theme="dark"] .post-admin-actions button {
   padding-bottom: 7px;
 }
 .series-write:hover {
-  color: var(--accent);
+  color: var(--accent-text);
   border-color: var(--accent);
 }
 @media (prefers-reduced-motion: reduce) {
@@ -2608,7 +2610,7 @@ html[data-theme="dark"] .notion-select-options .notion-select-create > span {
   font-size: 28px;
 }
 .shared-logo span {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .shared-header nav a {
   font-size: 15px;
@@ -3503,7 +3505,7 @@ html[data-theme="dark"] .popup-preview b {
   display: block;
 }
 .recent-comments a:hover .recent-comment-body {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .recent-comment-author {
   align-items: center;
@@ -3520,7 +3522,7 @@ html[data-theme="dark"] .popup-preview b {
 }
 .recent-comment-author > span {
   align-items: center;
-  color: var(--accent);
+  color: var(--accent-text);
   display: flex;
   font-size: 12px;
   font-weight: 700;

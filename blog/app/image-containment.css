@@ -277,7 +277,7 @@
 }
 
 .prose a {
-  color: var(--accent);
+  color: var(--accent-text);
   font-weight: 600;
   text-decoration: underline;
   text-decoration-color: color-mix(in srgb, var(--accent) 46%, transparent);
@@ -327,7 +327,7 @@
 }
 
 .external-link-kicker {
-  color: var(--accent);
+  color: var(--accent-text);
   font-size: 0.75rem;
   font-weight: 650;
   margin: 0 0 0.5rem;
@@ -696,7 +696,7 @@ html[data-theme="dark"] .editor [data-content-type="codeBlock"] .shiki {
 
 .editor .editor-bookmark-copy small,
 .post-bookmark-copy > small {
-  color: var(--accent);
+  color: var(--accent-text);
   font-size: 0.75rem;
   font-weight: 650;
 }
@@ -1832,7 +1832,7 @@ html[data-theme="dark"] .editor [data-content-type="codeBlock"] .shiki {
 
 /* A same-day marker adds recency without competing with the article title. */
 .kb-post-new {
-  color: var(--accent);
+  color: var(--accent-text);
   display: inline-block;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.5em;

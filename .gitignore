@@ -5,9 +5,12 @@ node_modules/
 .next/
 out/
 
-# Environment variables (keep the shareable template)
-.env*
-!.env.example
+# Environment variables
+# Never commit secrets or environment-specific configuration, including examples.
+.env
+.env.*
+**/.env
+**/.env.*
 
 # Logs
 *.log

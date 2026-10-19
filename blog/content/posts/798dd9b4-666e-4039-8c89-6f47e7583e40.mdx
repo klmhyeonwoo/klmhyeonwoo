@@ -1,0 +1,461 @@
+---
+title: "선언적 프로그래밍과 절차적 프로그래밍이란"
+date: 2026-10-19
+publishedAt: "2026-10-19T12:50:04.125Z"
+updatedAt: "2026-10-19T12:50:04.125Z"
+description: ""
+category: "category-9606d629"
+series: "-"
+private: false
+---
+
+코드 리뷰를 하다 보면 "이 코드 좀 더 선언적으로 작성하면 좋겠는데요"라는 말을 종종 듣는다.
+
+근데 막상 "선언적이 뭔지 설명해봐"라고 하면 정확히 말하기가 쉽지 않다. 처음 컴퓨터 공학과에서 선언적 프로그래밍과 절차적 프로그래밍의 개념을 숙지하고, 프론트엔드에 적용을 할 때 조차 이 구분이 명확하게 와닿지 않았다.
+
+예전만 해도 목록에서 특정 조건을 만족하는 항목만 골라 새 배열을 만드는 코드를 `for` 루프로 짰고, 그게 잘못됐다는 생각을 해본 적이 없었다. 코드 리뷰를 스스로 돌이켜보면서 `.filter()` 로 쓰면 의도가 더 잘 드러난다는 것을 생각해보면서, 무엇(what)을 원하는 선언적 프로그래밍과 어떻게(how)를 원하는 절차적 프로그래밍이 단순히 스타일 차이가 아니라는 것을 깨닫게 되었다.
+
+## 본래 프로그래밍의 시작은 절차적 프로그래밍이였다.
+
+컴퓨터는 본래 절차적으로 작동한다. CPU는 명령어를 위에서 아래로, 순서대로 실행한다.
+
+초기 프로그래밍 언어(FORTRAN, C)도 그 구조를 그대로 따랐으며,
+
+"데이터를 읽어라 → 조건을 확인해라 → 이 변수에 결과를 써라" 같은 방식으로 진행이 된다.
+
+JS도 초기에는 이 패러다임이 주류였다. `for` 루프로 배열을 순회하고, 변수에 값을 직접 쌓고, 콜백을 중첩했다. 지금도 JS 엔진 자체는 절차적으로 코드를 실행한다. 선언적 코드도 결국 런타임에서는 절차적 명령어의 연속이다.
+
+선언적 프로그래밍은 그 절차적 세부 사항을 추상화 뒤로 숨긴다. 개발자는 **무엇을(What)** 원하는지를 표현하고, **어떻게(How)** 할지는 추상화가 담당하게 한다.
+
+## 두 방식의 내부 동작은 어떻게 다를까?
+
+### 같은 결과이지만 신기하게도 다르게 표현이 될 수 있다.
+
+배열에서 짝수만 골라 제곱한 결과를 만드는 코드를 두 방식으로 써보자.
+
+```javascript
+// 절차적 접근
+const numbers = [1, 2, 3, 4, 5, 6];
+const result = [];
+
+for (let i = 0; i < numbers.length; i++) {    // ← "i를 0부터 하나씩 증가"
+  if (numbers[i] % 2 === 0) {                 // ← "짝수인지 확인해라"
+    result.push(numbers[i] ** 2);             // ← "제곱해서 result에 넣어라"
+  }
+}
+// result: [4, 16, 36]
+```
+
+```javascript
+// 선언적 접근
+const numbers = [1, 2, 3, 4, 5, 6];
+const result = numbers
+  .filter(n => n % 2 === 0)    // ← "짝수인 것들만"
+  .map(n => n ** 2);           // ← "제곱한 결과로"
+// result: [4, 16, 36]
+```
+
+두 코드는 실행 결과가 동일하다. 근데 읽히는 방식이 다르다. 절차적 코드는 루프 변수 `i`의 흐름을 따라가야 의도가 보인다. 선언적 코드는 `.filter().map()`이라는 서술만 봐도 의도가 드러난다.
+
+### 런타임에서 실제로 무슨 일이 일어날까?
+
+절차적 `for` 루프의 실행 흐름:
+
+```javascript
+i = 0 → numbers[0] = 1 → 1 % 2 !== 0 → skip
+i = 1 → numbers[1] = 2 → 2 % 2 === 0 → result.push(4)
+i = 2 → numbers[2] = 3 → 3 % 2 !== 0 → skip
+i = 3 → numbers[3] = 4 → 4 % 2 === 0 → result.push(16)
+i = 4 → numbers[4] = 5 → 5 % 2 !== 0 → skip
+i = 5 → numbers[5] = 6 → 6 % 2 === 0 → result.push(36)
+i = 6 → i >= numbers.length → 종료
+```
+
+선언적 `.filter().map()`의 실행 흐름:
+
+```javascript
+filter 호출
+  → 내부적으로 새 배열 생성
+  → 1 → predicate(1) = false → 포함 안 함
+  → 2 → predicate(2) = true  → [2]
+  → 3 → predicate(3) = false → 포함 안 함
+  → 4 → predicate(4) = true  → [2, 4]
+  → 5 → predicate(5) = false → 포함 안 함
+  → 6 → predicate(6) = true  → [2, 4, 6] 반환
+
+map 호출 (filter 결과를 받아서)
+  → 내부적으로 새 배열 생성
+  → 2 → transform(2) = 4   → [4]
+  → 4 → transform(4) = 16  → [4, 16]
+  → 6 → transform(6) = 36  → [4, 16, 36] 반환
+```
+
+런타임에서 두 방식 모두 결국 "순서대로 요소를 하나씩 처리"하는 루프를 실행한다. `[Array.prototype.filter](https://Array.prototype.filter)`의 명세를 보면 내부적으로 index를 증가시키며 순회한다. 선언적 코드가 더 효율적이어서가 아니다. 단지 "짝수를 걸러내는 방법"이라는 세부 구현을 추상화 뒤에 숨겨서 코드가 의도를 직접 표현하게 만든 것이다.
+
+선언적 프로그래밍은 성능 최적화 기법이 아니다. **가독성과 의도 표현에 관한 것**이다.
+
+### 추상화 레이어가 만들어지는 방식
+
+선언적 코드가 가능한 이유는 JS가 **함수를 일급 값(first-class value)** 으로 다루기 때문이다. 함수를 다른 함수의 인자로 전달할 수 있고, 이 특성이 고차 함수(Higher-Order Function)를 만든다.
+
+`.filter()`를 직접 구현해보면 그 구조가 명확하게 드러난다:
+
+```javascript
+Array.prototype.myFilter = function(predicate) {
+  const result = [];
+  for (let i = 0; i < this.length; i++) {
+    if (predicate(this[i], i, this)) {     // ← "어떻게 걸러낼지"는 호출자가 결정
+      result.push(this[i]);
+    }
+  }
+  return result;
+};
+
+// 사용할 때
+[1, 2, 3, 4].myFilter(n => n % 2 === 0);  // ← "짝수만"이라는 의도만 전달
+```
+
+`myFilter` 안의 `for` 루프는 절차적이다. 하지만 그 루프를 직접 쓰지 않고 추상화 뒤로 숨기면, 호출하는 쪽의 코드는 선언적이 된다. 선언적 코드는 대부분 이런 구조다. **내부 어딘가에는 반드시 절차적 구현이 존재하고, 선언적 코드는 그걸 감싼 추상화다.**
+
+```javascript
+추상화 레이어 구조:
+
+  선언적 코드 (의도 표현)
+    .filter(n => n % 2 === 0)
+         ↓
+  고차 함수 (추상화)
+    Array.prototype.filter
+         ↓
+  절차적 구현 (how)
+    for loop + predicate 호출
+         ↓
+  JS 엔진
+    바이트코드 실행
+```
+
+### 상태 변이와 불변성
+
+절차적 프로그래밍에서 자주 보이는 또 다른 특징은 **상태 직접 변이(mutation)** 다.
+
+```javascript
+// 절차적 — 기존 배열을 직접 변경
+const users = [
+  { name: '김현우', active: true },
+  { name: '이준호', active: false },
+  { name: '박지영', active: true },
+];
+
+for (let i = 0; i < users.length; i++) {
+  if (!users[i].active) {
+    users.splice(i, 1);    // ← 원본 배열을 직접 수정
+    i--;                   // ← splice 후 인덱스 보정 필요
+  }
+}
+```
+
+이 코드에는 숨겨진 복잡성이 있다. `splice`는 원본 배열을 바꾸기 때문에 `i--`로 인덱스를 보정해야 한다. 코드를 읽는 사람은 루프 변수 `i`의 값이 중간에 변한다는 사실까지 머릿속에 들고 따라가야 한다.
+
+```javascript
+// 선언적 — 새 배열을 만든다
+const activeUsers = users.filter(user => user.active);  // ← 원본은 그대로
+```
+
+선언적 버전은 원본 `users` 배열을 건드리지 않는다. `filter`는 항상 새 배열을 반환한다. 이 특성을 **불변성(immutability)** 이라고 하고, 선언적 스타일에서 중요하게 다루는 개념이다.
+
+**불변성이 왜 중요한지는 아래와 같은 상황에서 명확해진다.**
+
+```javascript
+// 절차적 — mutation으로 인한 버그 가능성
+function processUsers(users) {
+  for (let i = 0; i < users.length; i++) {
+    if (!users[i].active) {
+      users.splice(i, 1);    // ← 원본을 바꾼다
+      i--;
+    }
+  }
+  return users;
+}
+
+const originalUsers = [...];
+const result = processUsers(originalUsers);
+
+// originalUsers도 바뀌어 있다. 함수가 인자를 변이시켰기 때문.
+console.log(originalUsers);  // ← 예상과 다른 결과
+```
+
+```javascript
+// 선언적 — 원본 보존
+function processUsers(users) {
+  return users.filter(user => user.active);  // ← 새 배열 반환
+}
+
+const originalUsers = [...];
+const result = processUsers(originalUsers);
+
+// originalUsers는 그대로다.
+console.log(originalUsers);  // ← 예상한 결과
+```
+
+함수가 인자를 변이시키지 않으면 함수의 동작을 외부 상태 없이 예측할 수 있다. 이런 함수를 **순수 함수(pure function)** 라고 한다. 선언적 스타일은 순수 함수를 지향한다.
+
+### 비동기 코드에서도 같은 패턴이 적용된다
+
+비동기 처리에서도 두 방식의 차이가 뚜렷하게 드러난다.
+
+```javascript
+// 절차적 — 콜백 중첩 (Callback Hell)
+getUserById(userId, function(err, user) {
+  if (err) {
+    console.error(err);
+    return;
+  }
+  getPostsByUser(user.id, function(err, posts) {    // ← 중첩
+    if (err) {
+      console.error(err);
+      return;
+    }
+    getCommentsByPost(posts[0].id, function(err, comments) {  // ← 더 깊은 중첩
+      if (err) {
+        console.error(err);
+        return;
+      }
+      console.log(comments);
+    });
+  });
+});
+```
+
+이 코드는 에러 처리가 각 단계마다 반복되고, 들여쓰기가 깊어지면서 흐름을 파악하기 어렵다.
+
+에러가 나면 어느 콜백에서 발생했는지 추적하기도 까다롭다.
+
+```javascript
+// 선언적 — Promise 체인
+getUserById(userId)
+  .then(user => getPostsByUser(user.id))       // ← "user를 받아서 posts를 가져와"
+  .then(posts => getCommentsByPost(posts[0].id)) // ← "posts를 받아서 comments를 가져와"
+  .then(comments => console.log(comments))
+  .catch(err => console.error(err));           // ← 에러 처리는 한 곳에서
+```
+
+```javascript
+// 더 선언적 — async/await
+async function loadComments(userId) {
+  const user = await getUserById(userId);
+  const posts = await getPostsByUser(user.id);
+  const comments = await getCommentsByPost(posts[0].id);
+  return comments;
+}
+```
+
+`async/await`는 Promise 기반의 비동기 코드를 동기 코드처럼 읽히게 만드는 문법적 추상화다.
+
+내부적으로는 Promise chain이 실행되지만, 코드에서는 그 세부 흐름이 드러나지 않는다.
+
+JS 엔진 관점에서 `await`가 있는 함수의 실행 흐름:
+
+```javascript
+loadComments(userId) 호출
+  → 함수 실행 시작
+  → await getUserById(userId) 만남
+  → 현재 실행 컨텍스트를 저장하고 콜 스택에서 내려옴   ← 비동기 대기
+  → getUserById의 Promise가 resolve되면
+  → 저장된 실행 컨텍스트를 콜 스택에 다시 올림
+  → user 변수에 결과를 바인딩하고 다음 줄 실행
+  → ... 반복
+```
+
+`async/await`를 쓴다고 해서 블로킹이 없어지는 게 아니다. 여전히 Promise 기반으로 비동기가 처리되고, JS의 이벤트 루프가 그 흐름을 관리한다. 개발자에게 보이는 코드에서 그 세부 흐름이 감춰질 뿐이다.
+
+### 유효성 검사 — 선언적 스타일이 빛나는 영역
+
+절차적 유효성 검사 코드는 요구사항이 늘수록 분기가 빠르게 증가한다.
+
+```javascript
+// 절차적 유효성 검사
+function validateUser(user) {
+  const errors = {};
+
+  if (!user.name) {
+    errors.name = '이름은 필수입니다';
+  } else if (user.name.length < 2) {
+    errors.name = '이름은 2자 이상이어야 합니다';
+  }
+
+  if (!user.email) {
+    errors.email = '이메일은 필수입니다';
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(user.email)) {
+    errors.email = '올바른 이메일 형식이 아닙니다';
+  }
+
+  if (!user.age) {
+    errors.age = '나이는 필수입니다';
+  } else if (user.age < 0 || user.age > 150) {
+    errors.age = '나이는 0~150 사이여야 합니다';
+  }
+
+  return errors;
+}
+```
+
+필드가 늘어날수록 `if/else if` 분기가 선형으로 증가한다.
+
+"user 스키마가 어떻게 생겼는지"를 파악하려면 검사 로직을 전부 읽어야 한다.
+
+```javascript
+// 선언적 유효성 검사 — Zod 사용
+import { z } from 'zod';
+
+const userSchema = z.object({
+  name: z.string().min(2, '이름은 2자 이상이어야 합니다'),  // ← "name은 2자 이상 문자열"
+  email: z.string().email('올바른 이메일 형식이 아닙니다'),  // ← "email은 이메일 형식"
+  age: z.number().min(0).max(150),                          // ← "age는 0~150 숫자"
+});
+
+const result = userSchema.safeParse(user);
+if (!result.success) {
+  console.log(result.error.issues);
+}
+```
+
+스키마 선언만 보면 `user`의 구조가 한눈에 들어온다. 검사 로직(how)은 Zod 내부에 있고, 코드에는 스키마 구조(what)만 남는다. 새 필드가 추가되면 스키마에 한 줄만 추가하면 된다.
+
+## 선언적 · 절차적 프로그래밍의 비교 정리
+
+| 구분         | 절차적 (Imperative)           | 선언적 (Declarative)       |
+| ---------- | -------------------------- | ----------------------- |
+| 핵심 질문      | 어떻게 할 것인가?                 | 무엇을 원하는가?               |
+| 상태 관리      | 직접 변이 (mutation)           | 변환 후 새 값 (immutability) |
+| 흐름 제어      | 명시적 (`for`, `if`, `while`) | 추상화 안으로 위임              |
+| 에러 처리      | 각 단계마다 명시                  | 체인의 끝에서 일괄 처리 가능        |
+| 가독성        | 구현 세부사항이 보임                | 의도가 보임                  |
+| 테스트 용이성    | 부수효과로 인해 어려울 수 있음          | 순수 함수 기반으로 쉬움           |
+| 디버깅        | 스텝별 추적 가능                  | 추상화 내부 접근이 필요할 수 있음     |
+
+## 실제로 어떤 상황에서 어떻게 선택해야 할까?
+
+### 데이터 변환 → 선언적 접근
+
+배열을 다루는 대부분의 경우 `map`, `filter`, `reduce`, `flatMap` 같은 메서드가 적합하다.
+
+```javascript
+// 주문 목록에서 완료된 주문의 총 금액 계산
+const totalAmount = orders
+  .filter(order => order.status === 'completed')   // ← "완료된 것만"
+  .map(order => order.amount)                      // ← "금액만 추출"
+  .reduce((sum, amount) => sum + amount, 0);       // ← "합산"
+```
+
+체인의 각 단계가 이전 결과를 받아 새 값을 반환한다. 어느 단계에서 어떤 값이 흘러가는지 추적하기 쉽다.
+
+### 복잡한 데이터 집계 → `reduce`의 선언적 활용
+
+루프 + 조건 분기가 복잡하게 얽힌 경우도 `reduce`로 선언적으로 표현할 수 있다.
+
+```javascript
+// 절차적
+const grouped = {};
+for (const item of items) {
+  if (!grouped[item.category]) {
+    grouped[item.category] = [];
+  }
+  grouped[item.category].push(item);
+}
+
+// 선언적
+const grouped = items.reduce((acc, item) => ({
+  ...acc,
+  [item.category]: [...(acc[item.category] ?? []), item],  // ← 불변 방식으로 누적
+}), {});
+```
+
+`reduce`의 선언적 버전은 매 단계에서 새 객체를 만든다. 원본 `acc`를 직접 수정하지 않는다. 이게 불변성 원칙이다.
+
+단, 성능이 중요한 케이스(수십만 건 이상)에서는 spread 연산이 반복되면 GC 부하가 생길 수 있다.
+
+그 경우 절차적 접근이 더 적합하다.
+
+### 부수효과가 필요한 경우 → 절차적 접근
+
+로깅, 외부 API 호출, 파일 쓰기 같은 작업은 본질적으로 절차적이다.
+
+"이 작업들을 이 순서로 실행하라"를 직접 기술하는 것이 더 명확하다.
+
+```javascript
+// 이 경우는 절차적이 더 명확하다
+async function syncUserData(userId) {
+  const user = await db.users.findById(userId);      // 1. 조회
+  const externalData = await api.fetchUser(user.externalId);  // 2. 외부 데이터
+  await db.users.update(userId, externalData);       // 3. 업데이트
+  await cache.invalidate(`user:${userId}`);          // 4. 캐시 무효화
+  logger.info(`User ${userId} synced`);              // 5. 로깅
+}
+```
+
+이 함수는 실행 순서가 의미를 가진다. 선언적으로 표현하면 오히려 순서 관계가 숨겨져서 읽기 어렵다.
+
+### 선언적과 절차적을 섞을 때
+
+실제 코드는 두 방식이 함께 있다. 중요한 건 각 레이어의 역할을 분리하는 것이다.
+
+```javascript
+// 함수 내부는 절차적이지만, 외부에는 선언적 인터페이스를 제공
+function groupBy(array, keyFn) {         // ← 추상화 (선언적 인터페이스)
+  const result = {};
+  for (const item of array) {           // ← 내부 구현 (절차적)
+    const key = keyFn(item);
+    if (!result[key]) result[key] = [];
+    result[key].push(item);
+  }
+  return result;
+}
+
+// 사용하는 쪽은 선언적
+const byCategory = groupBy(items, item => item.category);  // ← "카테고리별로 묶어줘"
+```
+
+## 선언적 코드가 무조건 좋은 건 아닐 수 있다?
+
+프로그래밍에서 무조건 좋다고 하는 것은 없다, 반드시 트레이드 오프가 발생한다.
+
+그렇기 떄문에 선언적 스타일에도 주의할 점이 있다.
+
+> 과도한 체인은 오히려 읽기 어렵다.
+
+```javascript
+// 지나치게 체이닝된 코드 — 중간 값이 뭔지 파악하기 어렵다
+const result = data
+  .flatMap(x => x.items)
+  .filter(item => item.valid)
+  .map(item => ({ ...item, score: item.value * 1.2 }))
+  .sort((a, b) => b.score - a.score)
+  .slice(0, 10)
+  .reduce((acc, item) => ({ ...acc, [item.id]: item }), {});
+```
+
+이 경우 중간 단계에 변수를 만들어 분리하는 것이 더 읽기 편하다.
+
+```javascript
+차적 ㄹconst allItems = data.flatMap(x => x.items);
+const validItems = allItems.filter(item => item.valid);
+const scoredItems = validItems.map(item => ({ ...item, score: item.value * 1.2 }));
+const topItems = scoredItems.sort((a, b) => b.score - a.score).slice(0, 10);
+const itemMap = topItems.reduce((acc, item) => ({ ...acc, [item.id]: item }), {});
+```
+
+> 추상화가 숨긴 세부 사항이 디버깅을 어렵게 만들 수 있다.
+
+`.filter().map()`이 예상과 다른 결과를 내면, 절차적 코드보다 중간 상태를 확인하기가 번거롭다.
+
+> 불변성을 지나치게 고집하면 성능 문제가 생긴다.
+
+큰 배열에 매 단계마다 `...spread`를 하면 메모리와 GC에 부담이 된다. 이 경우 내부 구현을 절차적으로 유지하고 외부 인터페이스만 선언적으로 노출하는 것이 좋다.
+
+선언적 프로그래밍은 "어떻게"를 추상화 안에 숨기고 "무엇을"을 표면에 드러내는 방식이다. 절차적 프로그래밍은 그 세부 흐름을 직접 제어한다. JS에서 둘 중 하나만 쓰는 코드는 없다. 결국 어느 레이어에서 세부 흐름을 감추고, 어느 레이어에서 그걸 직접 다룰지를 판단하는 문제다.
+
+지금 작성 중인 함수가 "이걸 어떻게 하는지"를 설명하고 있는지, 아니면 "이게 무엇인지"를 선언하고 있는지를 구분하는 것이 아직 판단이 명확하게 서지는 않지만 경험이 쌓일수록 "아 이 로직은 어떻게 추상화를 하고, 설계를 해야겠다" 라는 것이 점차 보이기 시작한다. 오늘도 열심히 개발자들이 잘 읽을 수 있는 글과 같은 코드들을 만들어봐야겠다 ^,^ ..
+
+시간될 때 아래 글도 한번 확인해보면 정말 좋다, 시간 가는 줄 모르고 재밌게 읽었던 글 중 하나이다.
+
+[선언적 프로그래밍에 대한 착각과 오해](https://evan-moon.github.io/2025/09/07/declarative-programming-misconceptions-and-essence/)
+

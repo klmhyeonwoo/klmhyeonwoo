@@ -1,0 +1,1794 @@
+[
+  {
+    "id": "df70d143-8175-44e6-89e8-6f2f8710494f",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "CSS로 레이아웃을 만들다 보면 요소들이 겹치는 상황이 생긴다. 모달, 툴팁, 드롭다운 같은 UI가 대표적이다. 이때 어떤 요소가 위에 올라올지를 제어하는 속성이 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "z-index",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d5c82ce1-4960-4f93-b79c-0e9755b3d64a",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "그런데 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "z-index",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 단순히 \"숫자가 크면 위에 온다\"는 규칙으로 동작하지 않는다. ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "스태킹 컨텍스트(Stacking Context)",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 라는 경계 안에서만 비교되는 값이기 때문이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "669e9e78-4e07-4d50-9fa3-63c442285084",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "z-index: 9999",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 줬는데 다른 요소 뒤에 가려진 적이 있다. 분명히 숫자는 더 큰데, 원하는 대로 쌓이지 않았다. 한참을 디버깅하다가 결국 찾아낸 원인은 스태킹 컨텍스트를 이해하지 못한 채로 z-index를 쓰고 있었던 것이었다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f76bb51f-5b04-4964-b25a-66bea334fafa",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "스태킹 컨텍스트는 무엇일까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "fcd32d05-0a5a-4267-8efd-9ca516f90c66",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "스태킹 컨텍스트(Stacking Context)",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 는 z축(화면 깊이) 방향으로 요소를 쌓는 독립적인 단위다. 각 스태킹 컨텍스트는 내부적으로 고유한 레이어 순서를 가지며, 외부 스태킹 컨텍스트와 완전히 독립된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "74d7eb01-d400-4c83-a21b-559a419c4bf8",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "쉽게 말하면, z-index 비교는 같은 스태킹 컨텍스트 안에서만 유효하다. 부모가 다른 스태킹 컨텍스트에 속해 있다면, 자식의 z-index 값이 아무리 커도 그 경계를 넘어갈 수 없다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "a231a41c-8898-4982-9bf4-453fa7b21ee3",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Document (root stacking context)\n  ├── A (z-index: 1, 새 stacking context 생성)\n  │     └── A-1 (z-index: 9999)  ← A 안에 갇혀 있음\n  └── B (z-index: 2, 새 stacking context 생성)\n        └── B-1 (z-index: 1)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "fc5a2e18-16b3-4b24-81d9-86d8cdfab258",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "위 구조에서 A-1의 z-index가 9999여도, B보다 아래에 쌓인다. A 자체가 z-index: 1로 B(z-index: 2)보다 낮기 때문이다. A-1은 A의 스태킹 컨텍스트 안에서만 의미가 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d70eadfc-389c-4d29-bf7d-2db29f5d8a4f",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "스태킹 컨텍스트는 언제 만들어질까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "48df2b70-b104-40e0-b464-a078f91f6b3c",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "모든 요소가 스태킹 컨텍스트를 생성하는 건 아니다. 특정 CSS 속성을 가진 요소가 새로운 스태킹 컨텍스트를 만든다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1e959d58-aef0-4e39-8cc8-6e69d0c4acc3",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "/* 스태킹 컨텍스트를 생성하는 속성들 */\n\n/* 1. position + z-index */\n.el { position: relative; z-index: 1; }    /* ← z-index가 auto가 아니면 생성 */\n.el { position: absolute; z-index: 0; }\n.el { position: fixed; }                   /* ← z-index 없어도 생성 */\n.el { position: sticky; }                  /* ← z-index 없어도 생성 */\n\n/* 2. opacity */\n.el { opacity: 0.99; }                     /* ← 1 미만이면 생성 */\n\n/* 3. transform */\n.el { transform: translateX(0); }          /* ← none이 아니면 생성 */\n\n/* 4. filter */\n.el { filter: blur(0px); }                 /* ← none이 아니면 생성 */\n\n/* 5. isolation */\n.el { isolation: isolate; }               /* ← 명시적으로 생성 */\n\n/* 6. will-change */\n.el { will-change: transform; }            /* ← GPU 레이어로 분리하면서 생성 */\n\n/* 7. mix-blend-mode */\n.el { mix-blend-mode: multiply; }\n\n/* 8. clip-path, mask */\n.el { clip-path: inset(0); }",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4ce8e7a3-1459-4e92-9218-71e7ef9bc9a1",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이 중에서 실수가 가장 많이 발생하는 경우는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "transform과 opacity",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "다. 애니메이션 성능 최적화를 위해 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "transform: translateZ(0)",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 이나 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "will-change: transform",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "을 추가했다가, 의도치 않게 스태킹 컨텍스트가 생성되어 z-index가 꼬이는 경우가 많다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "99962496-fa24-4a34-abe7-4b63907cbc19",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "같은 스태킹 컨텍스트 안에서의 쌓임 순서",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "a99e1c80-871a-45c4-851a-b444cbb4b325",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "스태킹 컨텍스트 안에서도 요소들은 일정한 순서로 쌓인다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "24d358ad-f661-4ef0-b32e-071d352420bf",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "같은 스태킹 컨텍스트 내 쌓임 순서 (아래에서 위로)\n\n1. 스태킹 컨텍스트를 만든 요소 자체의 배경과 테두리\n2. z-index가 음수인 자식 스태킹 컨텍스트\n3. position이 없는 블록 요소 (div, p 등)\n4. float 요소\n5. position이 없는 인라인 요소\n6. z-index가 auto 또는 0인 position 요소\n7. z-index가 양수인 자식 스태킹 컨텍스트",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "cb75d4c2-c121-425e-88dc-a41628f3ed77",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "z-index를 명시하지 않아도, ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "position: relative",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 추가하는 것만으로도 일반 블록 요소보다 위에 올라온다. z-index가 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "auto",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "인 경우 새 스태킹 컨텍스트를 만들지 않으면서도 쌓임 순서에 영향을 준다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b22b829a-a627-4518-b669-e562d5130ea8",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "실제로 문제가 되는 패턴들",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "9b6b9419-57fc-4f7f-84bb-58629d0f5dd8",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "패턴 1: 모달이 다른 요소 뒤에 가려지는 경우",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "0a232d9b-c625-4d8d-89f3-f728e95089cd",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "<div class=\"sidebar\" style=\"transform: translateX(0);\">  <!-- ← 스태킹 컨텍스트 생성! -->\n  <div class=\"tooltip\" style=\"z-index: 100;\">툴팁</div>\n</div>\n\n<div class=\"modal\" style=\"z-index: 50;\">모달</div>",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "825ea1aa-3813-4bbb-9cd5-2daac1110f8e",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Document\n  ├── .sidebar (transform으로 스태킹 컨텍스트 생성, z-index: auto)\n  │     └── .tooltip (z-index: 100)  ← sidebar 안에 갇힘\n  └── .modal (z-index: 50)           ← sidebar보다 위에 올 수 있음",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "74a9dad1-abad-4cb7-8def-faaf1c0a1640",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": ".tooltip",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "의 z-index가 100이어도, ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": ".sidebar",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 자체에 z-index가 없기 때문에 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": ".modal",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "과의 비교는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": ".sidebar",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 단위로 이뤄진다. ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": ".sidebar",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": ".modal",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "보다 먼저 쌓이면 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": ".tooltip",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "도 같이 가려진다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4bb08f26-057c-4bfb-8665-a2fcc28cc37d",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "패턴 2: 부모의 opacity가 자식을 가두는 경우",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f85d4afd-cd65-4675-b115-1714f60affb6",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": ".parent {\n  opacity: 0.99;       /* ← 이것만으로 스태킹 컨텍스트 생성 */\n}\n\n.child {\n  z-index: 9999;       /* ← 의미 없음. parent 안에 갇혀 있음 */\n  position: absolute;\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "2d740699-73d4-4b71-86fe-12ca8c30aa89",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "fade-in 애니메이션을 위해 opacity를 건드리면, 그 시점에 스태킹 컨텍스트가 생성되면서 자식의 z-index 동작이 바뀔 수 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5571375c-63b4-497f-b39a-dfc05cae9a68",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "패턴 3: CSS 애니메이션 중에만 레이어가 꼬이는 경우",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "54cf9260-0e39-4073-9b5e-9b6a42a6b201",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": ".card {\n  transition: transform 0.3s;   /* transform 시작 전: 스태킹 컨텍스트 없음 */\n}\n\n.card:hover {\n  transform: scale(1.05);       /* ← hover 시 스태킹 컨텍스트 생성 */\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "22d5e8d1-dcf2-43fe-a58c-46cc6fb4bd7b",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "hover 전후로 z-index 동작이 달라진다. 평소엔 잘 쌓이다가 hover 순간에 다른 요소 뒤로 사라지는 버그가 이런 패턴에서 나온다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "2c393718-fd0f-41ab-803f-565452e2b738",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "isolation: isolate — 의도적으로 컨텍스트를 만드는 방법",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "9dfa6858-6ecf-4dcf-9317-6d8a7e8d292b",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "스태킹 컨텍스트를 의도치 않게 생성하는 게 문제라면, 반대로 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "의도적으로",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 생성해서 외부의 z-index 영향을 차단할 수도 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "2cf39361-59d2-488e-b289-096ddc95d806",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "isolation: isolate",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 부작용 없이 스태킹 컨텍스트만 만드는 속성이다. transform이나 opacity처럼 시각적 변화를 수반하지 않는다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "bf752dc6-8696-4544-8f03-356476247f81",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": ".component {\n  isolation: isolate;   /* ← z-index, transform, opacity 변화 없이 스태킹 컨텍스트 생성 */\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "63621660-937a-47fb-843b-65c241b95679",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "컴포넌트 기반 개발에서 유용하다. 외부 환경의 z-index가 어떻게 설정되어 있든, 컴포넌트 내부의 레이어 순서를 독립적으로 관리할 수 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "32d8dac7-c196-4c3f-b916-67f5eff7ab5b",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "<!-- 외부 z-index 환경에 영향받지 않는 독립된 컴포넌트 -->\n<div class=\"dropdown\" style=\"isolation: isolate;\">\n  <div class=\"dropdown-trigger\">메뉴</div>\n  <div class=\"dropdown-menu\" style=\"z-index: 10;\">   <!-- ← 이 컴포넌트 안에서만 유효 -->\n    <ul>...</ul>\n  </div>\n</div>",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ff3b5716-96a6-49f7-af23-7120daed7615",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "스태킹 컨텍스트를 만드는 속성 비교해보기",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "0316da6d-b900-4d6c-82bf-3969e667336c",
+    "type": "table",
+    "props": {
+      "textColor": "default"
+    },
+    "content": {
+      "type": "tableContent",
+      "columnWidths": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "headerRows": 1,
+      "rows": [
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "속성",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "스태킹 컨텍스트 생성",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "시각적 부작용",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "주의 상황",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "position",
+                  "styles": {
+                    "code": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": " + ",
+                  "styles": {}
+                },
+                {
+                  "type": "text",
+                  "text": "z-index",
+                  "styles": {
+                    "code": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": " (auto 제외)",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "O",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "없음",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "의도한 경우가 대부분",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "opacity < 1",
+                  "styles": {
+                    "code": true
+                  }
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "O",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "반투명 처리",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "애니메이션 중 일시적으로 생성될 수 있음",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "transform",
+                  "styles": {
+                    "code": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": " (none 제외)",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "O",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "변형/이동",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "성능 최적화용 ",
+                  "styles": {}
+                },
+                {
+                  "type": "text",
+                  "text": "translateZ(0)",
+                  "styles": {
+                    "code": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": " 사용 시 주의",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "filter",
+                  "styles": {
+                    "code": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": " (none 제외)",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "O",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "필터 효과",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "blur(0)도 해당",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "will-change",
+                  "styles": {
+                    "code": true
+                  }
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "O",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "없음",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "GPU 레이어 분리와 동반 생성",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "isolation: isolate",
+                  "styles": {
+                    "code": true
+                  }
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "O",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "없음",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "의도적 격리 목적에 최적",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "position: fixed/sticky",
+                  "styles": {
+                    "code": true
+                  }
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "O",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "없음",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "z-index 없어도 생성",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "children": []
+  },
+  {
+    "id": "83a043f3-3950-40fd-bec7-529be773945e",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "스태킹 컨텍스트 디버깅하는 방법",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6cd18b80-891d-4015-86b1-6634e48c9387",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "z-index 문제가 생겼을 때 가장 빠른 방법은 Chrome DevTools를 활용하는 것이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b3f9e78d-eea5-480a-84b0-5905930b3f97",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "DevTools → Elements 탭 → 요소 선택 → Computed 탭\n→ \"Stacking context\" 항목 확인",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b0d1a95a-b974-457c-accd-0d73e2691578",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "또는 Elements 탭 우측의 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "3D View",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 활용하면 스태킹 컨텍스트 구조를 시각적으로 확인할 수 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "0000c453-095c-4465-8278-71e8ea2539e9",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "DevTools → 우측 상단 점 세 개 → More tools → Layers",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ee20767a-a800-4aed-9b5e-55fc0590196e",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Layers 탭에서 각 레이어가 어떤 요소에 의해 생성되었는지, 어떻게 합성되는지 확인할 수 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "fa5c9f95-52c6-444a-ae1f-0b6e4a2d5279",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "어떻게 접근하는 것이 바람직할까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "627e0cde-28a8-4f3c-ad52-24e419ee2f63",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "z-index 관련 버그가 생겼을 때의 접근 순서는 아래와 같이 접근하면 좋다 ^,^ ..",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ac37b97c-ef78-4fd9-802a-41839dec45cf",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "1. 문제가 되는 요소의 부모 체인을 확인한다",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ea624106-ab50-47d8-8dea-8b3fa6d33eec",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "어떤 조상 요소가 스태킹 컨텍스트를 만들고 있는지 확인한다. DevTools에서 부모 요소를 하나씩 클릭하며 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "transform",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": ", ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "opacity",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": ", ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "filter",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": ", ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "will-change",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 속성이 있는지 체크한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "8d98dc24-110f-4426-b6f8-f44f37be2c25",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "2. 의도치 않은 스태킹 컨텍스트를 제거하거나 격리한다",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5f12887f-eaaa-4ad3-be37-2cbe47b29824",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "불필요한 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "transform: translateZ(0)",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 이나 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "will-change",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "가 있다면 제거하는 것이 좋다. 제거가 어렵다면 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "isolation: isolate",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "로 컴포넌트 경계를 명확히 하는 것도 방법이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5ec87b41-51f2-42a8-9c1a-e5bdf692a256",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "3. z-index 값은 의미 있는 범위 내에서 관리한다",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "64dc856d-713d-4e0e-8af0-fe720bf6888d",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "z-index를 9999 같은 큰 값으로 설정하는 것은 문제를 해결하는 게 아니라 덮는 것이다. 스태킹 컨텍스트 구조를 이해한 뒤, 같은 컨텍스트 안에서 1, 2, 3처럼 작은 값으로도 충분히 제어할 수 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "758f87d3-a8f4-4b6f-a1dd-05e08efb59a2",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "z-index 문제가 생겼다면 값을 키우기 전에, 먼저 DevTools에서 스태킹 컨텍스트 구조를 확인해보자.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  }
+]

@@ -23,10 +23,10 @@ export function bookmarkTitle(content: unknown): string {
   }).join("").trim();
 }
 
-export function bookmarkMarkdown(url: string, title: string, description = "", image = "") {
+export function bookmarkMarkdown(url: string, title: string, description = "", image = "", layout = "bookmark") {
   const descriptionAttribute = description ? ` description="${escapeAttribute(description)}"` : "";
   const imageAttribute = image ? ` image="${escapeAttribute(image)}"` : "";
-  return `<Bookmark url="${escapeAttribute(url)}" title="${escapeAttribute(title)}"${descriptionAttribute}${imageAttribute} />\n`;
+  return `<Bookmark url="${escapeAttribute(url)}" title="${escapeAttribute(title)}"${descriptionAttribute}${imageAttribute} layout="${layout === "card" ? "card" : "bookmark"}" />\n`;
 }
 
 /** Converts legacy editor bookmark links into the card used by published articles. */

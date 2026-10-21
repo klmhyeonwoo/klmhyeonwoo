@@ -1,2656 +1,1515 @@
 [
   {
-    "id": "7b7f2e9d-ac56-437c-940b-8124bcbcf637",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
+    "type": "plate-content",
+    "version": 1,
     "content": [
       {
-        "type": "text",
-        "text": "사내에서 각 프로젝트 별로 유틸 함수들이 따로 관리되다보니 동기화 과정 자체가 너무 힘들었다. 그래서 모노레포로 프로젝트를 만들기에는 빌드 설정과 리소스가 부족하다보니 유틸 함수 라이브러리를 만들어서 배포하자는 생각을 했다. 그 당시 당연하게만 생각헀던 NPM 라이브러리였다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "4a8609b0-e56b-437b-b2c5-55e789a59b71",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "그러다 우연히 면접 과정에서 \"서브 모듈로도 고려해보시지 않은 이유가 무엇인가요?\" 라는 질문이 나왔고, \"왜 서브모듈이어야할까?\" 라는 생각이 문득 들었다. 사실 NPM이 아니라 서브모듈이라는게 많이 낯설었다. \"그게 뭐가 다른 거지?\" 라는 의문이 생겼고, 막상 찾아보니 둘의 동작 방식이 생각보다 근본적으로 달랐다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "d64d04cd-356b-4a6a-9292-8d610c406db9",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "그냥 나한테 익숙하다고 빠른 선택을 하는 것이 아닌, 어떤 것들이 존재하고 무엇이 최선의 선택인지를 항상 생각해야한다는 것을 다시 한번 일깨워주었다. 그래서 GIt 서브 모듈로 했을 때의 경험들은 어떠할까에 대한 내용을 배워보고자 포스팅을 진행한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "a91676ff-96c3-4196-a3a1-6e27931ed58c",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "두 방식이 각각 왜 생겼을까?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "59962a92-cdbf-42aa-aa7a-971575a8aef9",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "코드를 공유하는 방법의 역사",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "90cafebf-ab4e-4488-94a2-3092a4f88c0f",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "소프트웨어에서 코드를 공유하는 방법은 크게 두 방향으로 발전해왔다. 하나는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "소스 코드를 직접 참조",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "하는 방식이고, 다른 하나는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "배포된 패키지를 의존성으로 선언",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "하는 방식이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "8e379edd-7ade-46ce-9201-95b387ee495e",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Git 서브모듈은 전자의 계보에 있다. 2008년 Git 1.5.3에 처음 도입됐다. 당시에는 모노레포 도구도 없었고, 하나의 저장소에 여러 프로젝트를 담는 표준적인 방법이 없었다. \"다른 저장소를 내 저장소 안에 포함시키는\" 서브모듈은 그 공백을 채우는 자연스러운 해결책이었다. 내부 공유 라이브러리, 서드파티 코드, 플러그인 시스템 등에 쓰였다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "1a96318e-d31c-4104-b9c7-68682c6a1f8e",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "NPM은 후자의 계보다. 2010년 Node.js 생태계와 함께 등장했다. 소스 코드가 아니라 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "빌드되고 버전이 붙은 패키지",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "를 중앙 레지스트리*에서 내려받는 방식이다. 버전 범위를 선언하면 npm이 알아서 호환되는 버전을 찾아주고, ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "node_modules",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "에 설치해준다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "24472ea9-790a-4d80-88b5-da426dbf407e",
-    "type": "quote",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "레지스트리",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "87e90d3c-d988-4d3f-ad0d-198d888c40eb",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "패키지를 저장하고 배포하는 중앙 서버. 기본값은 npmjs.com이며, 사설 레지스트리(GitHub Packages, Verdaccio 등)를 직접 운영할 수도 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "bfc7779c-a071-4620-9ec2-f883ae3c7050",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "두 방식의 설계 목적부터 다르다. 서브모듈은 \"소스 코드를 버전 고정해서 함께 관리\"하는 것이고, npm은 \"빌드된 패키지를 버전 범위로 가져와서 쓰는 것\"이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "6c78ef3a-40f5-43f5-9683-634016a27b15",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Git 서브모듈은 내부에서 어떻게 동작할까?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "2b05746c-2560-4b6a-a15d-ab64064d8361",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "저장소 안에 저장소를 넣는 구조",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "4906ccdc-04ea-4cea-b888-703cb89c5218",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "서브모듈을 추가하면 부모 저장소에 두 가지가 생긴다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "7f293ae2-338b-4792-bc3c-318d359bffd5",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "git submodule add https://github.com/example/shared-ui.git packages/shared-ui",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c581748a-f433-4412-b25b-c7345005a71c",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "my-project/\n  .gitmodules          ← 서브모듈 URL과 경로 매핑 파일\n  packages/\n    shared-ui/         ← 서브모듈 디렉토리 (독립된 git 저장소)\n      .git             ← 실제로는 ../.git/modules/shared-ui를 가리키는 파일\n      src/\n      package.json",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "b8d8a1cc-5e19-4c8e-a1dc-5632cd64b882",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": ".gitmodules",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 파일은 이렇게 생겼다:",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "d7d9e177-8ac6-44ba-b2e2-ddb153237877",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "[submodule \"packages/shared-ui\"]\n    path = packages/shared-ui       ← 로컬 경로\n    url = https://github.com/example/shared-ui.git  ← 원격 URL",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "4633c40b-a862-4ab1-80dc-02624ec9f74a",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "여기까지는 직관적이다. 핵심은 다음이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "0f188a0f-b45b-4652-881e-65ba9da2d3da",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "부모 저장소가 서브모듈의 \"어떤 상태\"를 기록하는가?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "8e21c5a7-ceaa-4885-a4da-0957c5cf33a4",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "부모 저장소는 서브모듈 디렉토리를 일반 파일처럼 추적하지 않는다. 대신 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "특정 커밋 SHA 하나",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "를 기록한다. Git 용어로는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "gitlink",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "라고 한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "efe57855-3c26-479c-a81f-0f132e485f39",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "# 부모 저장소에서 git ls-tree로 확인\ngit ls-tree HEAD packages/\n\n160000 commit a3f9c2d1b4e8...  packages/shared-ui\n   ↑               ↑\n gitlink 모드    서브모듈이 가리키는 커밋 SHA",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "76bd24a6-d0b8-40a8-8dcc-04e479c63567",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "160000",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "은 일반 파일(",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "100644",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": ")이나 디렉토리가 아닌, 서브모듈을 나타내는 특수 모드다. 부모 저장소의 git 히스토리에는 \"이 시점에 shared-ui의 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "a3f9c2d",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 커밋을 쓴다\"는 정보만 남는다. 서브모듈의 파일 내용은 부모 저장소에 들어오지 않는다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "b0478450-3578-491e-b3d8-e5811c3f339e",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "clone 후 서브모듈 디렉토리가 비어 있는 이유",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c7bbf620-523a-4285-aec7-6f3e3ff87142",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "git clone https://github.com/example/my-project.git\ncd my-project\nls packages/shared-ui/   # → 비어 있음",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "58a3100a-a9f2-461a-83b4-80953c1a6c49",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "git clone",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "은 기본적으로 서브모듈을 내려받지 않는다. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": ".gitmodules",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "가 있다는 건 알지만, 서브모듈 저장소를 실제로 클론하지는 않는다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "ca5a5722-222c-46af-8dcb-d8e3ac151dd7",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "git submodule init      # ← .gitmodules를 읽어서 .git/config에 URL 등록\ngit submodule update    # ← 각 서브모듈을 클론하고 기록된 커밋으로 체크아웃",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "956c4f8d-c6a2-482d-b823-8ad3ce42b709",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "또는 한 번에:",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f7cd543c-2694-4e99-8974-52367653ae66",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "git clone --recurse-submodules https://github.com/example/my-project.git",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "d69fdcbc-520c-4f7c-9de0-c022cdea9cf0",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "이 과정이 끝나면 서브모듈 디렉토리는 부모가 기록한 커밋 SHA 상태로 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Detached HEAD",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "가 된다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "4a6260a9-cea8-46fe-8d7b-358a074650b4",
-    "type": "quote",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "**Detached HEAD **",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "9ed24c02-f01f-48b6-aa04-ce47b2056d0f",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "특정 브랜치가 아닌 커밋을 직접 체크아웃한 상태. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "HEAD",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "가 브랜치 이름이 아닌 커밋 SHA를 가리킨다. 이 상태에서 커밋하면 어느 브랜치에도 속하지 않는 커밋이 생긴다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "31e9f22b-8369-49ea-8cd5-c145759669b0",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "cd packages/shared-ui\ngit status\n# HEAD detached at a3f9c2d    ← 브랜치가 없는 상태",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f5ddb9cd-a473-4b2d-bc9a-acd110fe1999",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "서브모듈을 업데이트하는 두 가지 흐름",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "edef57c7-3a1c-4a44-b9e0-9fd7a2404a27",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "서브모듈이 업데이트됐을 때 부모 저장소에서 반영하려면 두 단계가 필요하다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "eeb7a30c-8e0f-49fd-86fa-b7963105c45f",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "[서브모듈에 변경이 생겼을 때]\n\n1. 서브모듈 안에서 최신 커밋으로 이동\n   cd packages/shared-ui\n   git pull origin main            ← 서브모듈 저장소에서 직접 pull\n   cd ../..\n\n2. 부모 저장소에 \"이 커밋으로 바뀐다\"고 기록\n   git add packages/shared-ui      ← gitlink 포인터 업데이트\n   git commit -m \"chore: update shared-ui to v2.3\"\n   git push",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "a00baaec-e855-4b5f-b5e3-2fa6e396b485",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "팀원이 이 커밋을 받아서 반영하려면:",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "32cd0624-eeda-4448-939b-5ce10e988972",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "git pull\ngit submodule update               ← 바뀐 포인터가 가리키는 커밋으로 이동",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e673c5e5-245b-4cde-807d-e71a9df09d3e",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "git pull",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "만 하고 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "submodule update",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "를 빠뜨리면 서브모듈은 이전 커밋 상태 그대로다. 팀 내에서 가장 자주 겪는 혼란이 이 지점이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "cb463b88-b094-432e-85a1-3f1c72491bc9",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "NPM 라이브러리는 내부에서 어떻게 동작할까?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f7ff89fa-89b1-4ba2-a365-0703d97eb410",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "package.json과 버전 범위 선언",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "3b18cf81-e066-4ce1-b2b9-35e07a1c5064",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "{\n  \"dependencies\": {\n    \"react\":   \"^18.2.0\",   ← ^ : 마이너/패치 버전 자동 업데이트\n    \"lodash\":  \"~4.17.21\",  ← ~ : 패치 버전만 자동 업데이트\n    \"axios\":   \"1.4.0\"      ←   : 정확한 버전 고정\n  }\n}",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "7b5ec46d-2ade-4378-a376-dd555bc61747",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "npm install",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "을 실행하면 npm은 다음 순서로 동작한다:",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "3cb99ea2-a158-489e-ad70-0e0b1770db3b",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "[npm install 실행 흐름]\n\n1. package.json의 버전 범위 읽기\n   \"react\": \"^18.2.0\"\n       ↓\n2. npm 레지스트리(npmjs.com)에 쿼리\n   GET https://registry.npmjs.org/react\n   → 사용 가능한 버전 목록 + 각 버전의 메타데이터 반환\n       ↓\n3. 버전 범위에 맞는 최신 버전 결정\n   ^18.2.0 → 18.x.x 중 최신 = 18.3.1 (가정)\n       ↓\n4. package-lock.json에 정확한 버전 기록\n   \"react\": { \"version\": \"18.3.1\", \"resolved\": \"...\", \"integrity\": \"sha512-...\" }\n       ↓\n5. tarball 다운로드 및 node_modules에 압축 해제\n   node_modules/react/       ← 소스 코드가 아닌 빌드된 배포 파일",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "cb934742-f2fb-4b23-8b90-8e4b2af37361",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "package-lock.json",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "은 \"이 시점에 어떤 버전이 설치됐는지\"를 기록한다. 다음번 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "npm install",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "은 레지스트리 조회 없이 이 파일을 기준으로 동일한 버전을 설치한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "7e822b2d-6bac-47ab-bcc1-e4b9a83171ef",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "node_modules의 flat 구조",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "dcbb9b44-35e6-41bc-a49d-0845c8d2ecd6",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "npm v3 이전에는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "node_modules",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "가 중첩 구조였다. A가 ",
-        "styles": {}
-      },
-      {
-        "type": "link",
-        "href": "mailto:C@1.0",
-        "content": [
+        "type": "p",
+        "children": [
           {
-            "type": "text",
-            "text": "C@1.0",
-            "styles": {}
+            "text": "사내에서 각 프로젝트 별로 유틸 함수들이 따로 관리되다보니 동기화 과정 자체가 너무 힘들었다. 그래서 모노레포로 프로젝트를 만들기에는 빌드 설정과 리소스가 부족하다보니 유틸 함수 라이브러리를 만들어서 배포하자는 생각을 했다. 그 당시 당연하게만 생각헀던 NPM 라이브러리였다."
           }
         ]
       },
       {
-        "type": "text",
-        "text": "을 쓰고 B도 ",
-        "styles": {}
-      },
-      {
-        "type": "link",
-        "href": "mailto:C@1.0",
-        "content": [
+        "type": "p",
+        "children": [
           {
-            "type": "text",
-            "text": "C@1.0",
-            "styles": {}
+            "text": "그러다 우연히 면접 과정에서 \"서브 모듈로도 고려해보시지 않은 이유가 무엇인가요?\" 라는 질문이 나왔고, \"왜 서브모듈이어야할까?\" 라는 생각이 문득 들었다. 사실 NPM이 아니라 서브모듈이라는게 많이 낯설었다. \"그게 뭐가 다른 거지?\" 라는 의문이 생겼고, 막상 찾아보니 둘의 동작 방식이 생각보다 근본적으로 달랐다."
           }
         ]
       },
       {
-        "type": "text",
-        "text": "을 쓰면, C가 두 곳에 중복 설치됐다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "3fa2ccd1-a145-4a52-97e9-e928295200f6",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "[npm v2 — 중첩 구조]\nnode_modules/\n  package-a/\n    node_modules/\n      package-c@1.0/   ← A의 C\n  package-b/\n    node_modules/\n      package-c@1.0/   ← B의 C (중복)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "122382f9-e3c0-4e3d-ba2e-02b5bbb0fdcb",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "npm v3부터는 ",
-        "styles": {}
+        "type": "p",
+        "children": [
+          {
+            "text": "그냥 나한테 익숙하다고 빠른 선택을 하는 것이 아닌, 어떤 것들이 존재하고 무엇이 최선의 선택인지를 항상 생각해야한다는 것을 다시 한번 일깨워주었다. 그래서 GIt 서브 모듈로 했을 때의 경험들은 어떠할까에 대한 내용을 배워보고자 포스팅을 진행한다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "호이스팅(hoisting)",
-        "styles": {
-          "bold": true
-        }
+        "type": "h2",
+        "children": [
+          {
+            "text": "두 방식이 각각 왜 생겼을까?"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "을 적용해 flat 구조로 바꿨다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "1f7ab029-8cb8-4bf0-98bf-1c78cb94a3f3",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "*호이스팅: npm이 중첩된 의존성을 최대한 최상위 ",
-        "styles": {}
+        "type": "h3",
+        "children": [
+          {
+            "text": "코드를 공유하는 방법의 역사"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "node_modules",
-        "styles": {
-          "code": true
-        }
+        "type": "p",
+        "children": [
+          {
+            "text": "소프트웨어에서 코드를 공유하는 방법은 크게 두 방향으로 발전해왔다. 하나는 "
+          },
+          {
+            "text": "소스 코드를 직접 참조",
+            "bold": true
+          },
+          {
+            "text": "하는 방식이고, 다른 하나는 "
+          },
+          {
+            "text": "배포된 패키지를 의존성으로 선언",
+            "bold": true
+          },
+          {
+            "text": "하는 방식이다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "로 끌어올리는 최적화. 중복 설치를 줄이는 대신, 의존성 선언 없이 최상위 패키지를 require할 수 있는 \"유령 의존성\" 문제가 생긴다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "ad7f94c7-1232-4453-9985-18ccbeaa5908",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "[npm v3+ — flat 구조]\nnode_modules/\n  package-a/           ← 최상위로 끌어올림\n  package-b/\n  package-c@1.0/       ← 공유 (단일 설치)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "198d0927-9ac1-4436-bb62-aede0392bce9",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "버전이 충돌할 때만 중첩이 허용된다:",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "ffbddbb4-e59b-4bb6-a03d-aa97cff296a5",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "[버전 충돌 시]\nnode_modules/\n  package-a/\n    node_modules/\n      package-c@2.0/   ← A는 2.0이 필요 (별도 설치)\n  package-b/\n  package-c@1.0/       ← B는 1.0 사용 (최상위)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "bdd1e79f-3b2f-4ac2-a3bf-ee1c86a404dd",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "설치된 패키지는 소스가 아니라 빌드 결과물",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "7dd73f52-263a-465b-8064-538fbe568746",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "서브모듈과 가장 다른 점이 여기에 있다. ",
-        "styles": {}
+        "type": "p",
+        "children": [
+          {
+            "text": "Git 서브모듈은 전자의 계보에 있다. 2008년 Git 1.5.3에 처음 도입됐다. 당시에는 모노레포 도구도 없었고, 하나의 저장소에 여러 프로젝트를 담는 표준적인 방법이 없었다. \"다른 저장소를 내 저장소 안에 포함시키는\" 서브모듈은 그 공백을 채우는 자연스러운 해결책이었다. 내부 공유 라이브러리, 서드파티 코드, 플러그인 시스템 등에 쓰였다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "node_modules/react",
-        "styles": {
-          "code": true
-        }
+        "type": "p",
+        "children": [
+          {
+            "text": "NPM은 후자의 계보다. 2010년 Node.js 생태계와 함께 등장했다. 소스 코드가 아니라 "
+          },
+          {
+            "text": "빌드되고 버전이 붙은 패키지",
+            "bold": true
+          },
+          {
+            "text": "를 중앙 레지스트리*에서 내려받는 방식이다. 버전 범위를 선언하면 npm이 알아서 호환되는 버전을 찾아주고, "
+          },
+          {
+            "text": "node_modules",
+            "code": true
+          },
+          {
+            "text": "에 설치해준다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "를 열어보면 TypeScript 소스 파일이 아니라 이미 빌드된 JS 파일들이 들어 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "55cda23e-54a3-4dba-b190-85b8a1f4c49a",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "node_modules/react/\n  index.js             ← CJS 빌드\n  cjs/\n    react.development.js\n    react.production.min.js\n  package.json         ← 진입점, exports 필드\n  LICENSE\n  README.md\n  # .ts 파일 없음       ← 소스 코드는 포함되지 않음",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "a4062c3b-b089-4528-88b8-70d699d66de3",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "npm 패키지 제작자가 ",
-        "styles": {}
+        "type": "blockquote",
+        "children": [
+          {
+            "text": "레지스트리",
+            "bold": true
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "npm publish",
-        "styles": {
-          "code": true
-        }
+        "type": "p",
+        "children": [
+          {
+            "text": "패키지를 저장하고 배포하는 중앙 서버. 기본값은 npmjs.com이며, 사설 레지스트리(GitHub Packages, Verdaccio 등)를 직접 운영할 수도 있다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "로 올린 파일들만 설치된다. 내부 구현을 바꾸려면 패키지를 fork하거나 patch-package 같은 도구를 써야 한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "77f489cc-61d5-40ae-9ced-6793d6654c35",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "메인 프로젝트를 빌드할 때, 서브 모듈은 어떻게 될까?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "756c0c76-fe55-40b7-b749-8ba445941317",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "두 가지 시나리오로 나뉜다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "2b80319b-132d-42d1-888a-027caa2b5ed2",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "서브모듈을 ",
-        "styles": {}
+        "type": "p",
+        "children": [
+          {
+            "text": "두 방식의 설계 목적부터 다르다. 서브모듈은 \"소스 코드를 버전 고정해서 함께 관리\"하는 것이고, npm은 \"빌드된 패키지를 버전 범위로 가져와서 쓰는 것\"이다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "소스 그대로",
-        "styles": {
-          "bold": true
-        }
+        "type": "h2",
+        "children": [
+          {
+            "text": "Git 서브모듈은 내부에서 어떻게 동작할까?"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": " 쓰느냐, ",
-        "styles": {}
+        "type": "h3",
+        "children": [
+          {
+            "text": "저장소 안에 저장소를 넣는 구조"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "빌드 결과물(dist)",
-        "styles": {
-          "bold": true
-        }
+        "type": "p",
+        "children": [
+          {
+            "text": "서브모듈을 추가하면 부모 저장소에 두 가지가 생긴다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": " 로 쓰느냐에 따라 동작이 완전히 달라진다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "325ce495-ff7f-46d5-a97e-2b2bbb6084f0",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "시나리오 A — 소스 파일 직접 참조",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "7862fc98-8e0c-4a58-a581-09040a6e8969",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "my-react-app/\n  packages/\n    ui-components/       ← 서브모듈 (소스 .tsx 파일 그대로)\n      src/\n        Button.tsx\n        index.ts\n      package.json       ← 여기 dependencies도 있음\n  src/\n    App.tsx",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "07358b58-8069-4683-aec9-4e757736b74c",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// App.tsx\nimport { Button } from '../packages/ui-components/src'",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "5f757637-3fcd-4852-88ff-49e87db687e4",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "이 경우 Vite/Webpack이 ",
-        "styles": {}
+        "type": "code_block",
+        "children": [
+          {
+            "text": "git submodule add https://github.com/example/shared-ui.git packages/shared-ui"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": "[Button.tsx](https://Button.tsx)",
-        "styles": {
-          "code": true
-        }
+        "type": "code_block",
+        "children": [
+          {
+            "text": "my-project/\n  .gitmodules          ← 서브모듈 URL과 경로 매핑 파일\n  packages/\n    shared-ui/         ← 서브모듈 디렉토리 (독립된 git 저장소)\n      .git             ← 실제로는 ../.git/modules/shared-ui를 가리키는 파일\n      src/\n      package.json"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": "를 ",
-        "styles": {}
+        "type": "p",
+        "children": [
+          {
+            "text": ".gitmodules",
+            "code": true
+          },
+          {
+            "text": " 파일은 이렇게 생겼다:"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "직접 트랜스파일",
-        "styles": {
-          "bold": true
-        }
+        "type": "code_block",
+        "children": [
+          {
+            "text": "[submodule \"packages/shared-ui\"]\n    path = packages/shared-ui       ← 로컬 경로\n    url = https://github.com/example/shared-ui.git  ← 원격 URL"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": "한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c981f7d2-b27f-4025-82d9-20fb57c0a19a",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "부모 프로젝트의 빌드 파이프라인이 서브모듈 소스를 자기 소스처럼 처리하는 것이다. 별도 빌드 단계가 없어도 된다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "639cfeb2-7139-4d29-9931-e86b79b8c912",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "단, 두 가지 함정이 있다.",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "ed60f9bc-02f0-436e-be07-12be4a512afb",
-    "type": "numberedListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "서브모듈의 **",
-        "styles": {
-          "bold": true
-        }
+        "type": "p",
+        "children": [
+          {
+            "text": "여기까지는 직관적이다. 핵심은 다음이다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "node_modules",
-        "styles": {
-          "code": true
-        }
+        "type": "h3",
+        "children": [
+          {
+            "text": "부모 저장소가 서브모듈의 \"어떤 상태\"를 기록하는가?"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "는 자동으로 설치되지 않는다.**",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "b8a5ee27-c6f1-41d2-9c20-a02ec15ac5e7",
-    "type": "numberedListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "부모에서 ",
-        "styles": {}
+        "type": "p",
+        "children": [
+          {
+            "text": "부모 저장소는 서브모듈 디렉토리를 일반 파일처럼 추적하지 않는다. 대신 "
+          },
+          {
+            "text": "특정 커밋 SHA 하나",
+            "bold": true
+          },
+          {
+            "text": "를 기록한다. Git 용어로는 "
+          },
+          {
+            "text": "gitlink",
+            "bold": true
+          },
+          {
+            "text": "라고 한다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "npm install",
-        "styles": {
-          "code": true
-        }
+        "type": "code_block",
+        "children": [
+          {
+            "text": "# 부모 저장소에서 git ls-tree로 확인\ngit ls-tree HEAD packages/\n\n160000 commit a3f9c2d1b4e8...  packages/shared-ui\n   ↑               ↑\n gitlink 모드    서브모듈이 가리키는 커밋 SHA"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": "을 해도 서브모듈 디렉토리의 의존성은 별개다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "50282383-0087-4009-8dcd-652a5aa50442",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "# 서브모듈 안에서 따로 설치해야 함\ncd packages/ui-components\nnpm install\n\n# 또는 부모 프로젝트에서 수동으로 같이 설치\n# (package.json에 서브모듈 의존성을 중복 선언)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "8bc12103-85d7-467a-8339-8ee4804a8e1e",
-    "type": "numberedListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "TypeScript를 쓴다면 **",
-        "styles": {
-          "bold": true
-        }
+        "type": "p",
+        "children": [
+          {
+            "text": "160000",
+            "code": true
+          },
+          {
+            "text": "은 일반 파일("
+          },
+          {
+            "text": "100644",
+            "code": true
+          },
+          {
+            "text": ")이나 디렉토리가 아닌, 서브모듈을 나타내는 특수 모드다. 부모 저장소의 git 히스토리에는 \"이 시점에 shared-ui의 "
+          },
+          {
+            "text": "a3f9c2d",
+            "code": true
+          },
+          {
+            "text": " 커밋을 쓴다\"는 정보만 남는다. 서브모듈의 파일 내용은 부모 저장소에 들어오지 않는다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "tsconfig.json",
-        "styles": {
-          "code": true
-        }
+        "type": "h3",
+        "children": [
+          {
+            "text": "clone 후 서브모듈 디렉토리가 비어 있는 이유"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "의 경로 설정이 필요하다.**",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "6a018074-f873-4237-8957-9fa5b4b01f4b",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// tsconfig.json (부모)\n{\n  \"compilerOptions\": {\n    \"paths\": {\n      \"@ui/*\": [\"./packages/ui-components/src/*\"]\n    }\n  },\n  \"include\": [\n    \"src\",\n    \"packages/ui-components/src\"   // ← 명시적으로 포함\n  ]\n}",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "1719ebaa-3479-4f90-be98-d817f15d94e4",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "시나리오 B — 서브모듈을 먼저 빌드하고 dist 참조",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e72d08e6-6992-43e9-8a0f-e5a6bfa1542a",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "packages/ui-components/\n  src/\n    Button.tsx\n  dist/                  ← 빌드 결과물\n    index.js\n    index.d.ts\n  package.json\n    \"main\": \"dist/index.js\"\n    \"types\": \"dist/index.d.ts\"",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "a1115282-ccd8-459a-89a0-8e2e15e96e1a",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "이 경우 부모 프로젝트는 ",
-        "styles": {}
+        "type": "code_block",
+        "children": [
+          {
+            "text": "git clone https://github.com/example/my-project.git\ncd my-project\nls packages/shared-ui/   # → 비어 있음"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": "dist/",
-        "styles": {
-          "code": true
-        }
+        "type": "p",
+        "children": [
+          {
+            "text": "git clone",
+            "code": true
+          },
+          {
+            "text": "은 기본적으로 서브모듈을 내려받지 않는다. "
+          },
+          {
+            "text": ".gitmodules",
+            "code": true
+          },
+          {
+            "text": "가 있다는 건 알지만, 서브모듈 저장소를 실제로 클론하지는 않는다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "를 참조하고, 서브모듈 소스는 건드리지 않는다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e866d20f-24da-4503-9736-38e8c8d11ce4",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "npm 패키지처럼 동작하는 구조다. 이 경우에는 빌드 결과물이 사전에 나와야하기 때문에 빌드 순서가 강제된다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "6185ebca-4bf3-49ff-99aa-49efd5b5e539",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "# CI에서 빌드 순서\ncd packages/ui-components && npm install && npm run build  # ← 먼저\ncd ../../ && npm run build                                  # ← 그 다음",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "10bc5ea2-4c86-40af-be78-9f26ade5ef01",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "서브모듈 빌드가 끝나지 않으면 부모 빌드가 실패한다. 로컬 개발 중에 서브모듈 소스를 수정하면 ",
-        "styles": {}
+        "type": "code_block",
+        "children": [
+          {
+            "text": "git submodule init      # ← .gitmodules를 읽어서 .git/config에 URL 등록\ngit submodule update    # ← 각 서브모듈을 클론하고 기록된 커밋으로 체크아웃"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": "dist",
-        "styles": {
-          "code": true
-        }
+        "type": "p",
+        "children": [
+          {
+            "text": "또는 한 번에:"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "가 갱신되지 않아서 변경이 반영 안 되는 상황도 생긴다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "119d2226-ee55-479e-ba64-e3f5dbabed11",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "실무에서 서브모듈을 UI 컴포넌트에 쓴다면 ",
-        "styles": {}
+        "type": "code_block",
+        "children": [
+          {
+            "text": "git clone --recurse-submodules https://github.com/example/my-project.git"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": "A 방식이 개발 편의성은 높지만",
-        "styles": {
-          "bold": true
-        }
+        "type": "p",
+        "children": [
+          {
+            "text": "이 과정이 끝나면 서브모듈 디렉토리는 부모가 기록한 커밋 SHA 상태로 "
+          },
+          {
+            "text": "Detached HEAD",
+            "bold": true
+          },
+          {
+            "text": "가 된다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": ", 의존성 이중 관리 문제 때문에 팀 규모가 커지면 점점 관리 비용이 올라간다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "13b4ebe6-29f5-40f9-b3b3-90ac7d8a46c3",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
+        "type": "blockquote",
+        "children": [
+          {
+            "text": "**Detached HEAD **"
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "서브모듈과 라이브리러 비교하기",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "55ee8707-68e0-4d6a-a5a5-7572cddc244f",
-    "type": "table",
-    "props": {
-      "textColor": "default"
-    },
-    "content": {
-      "type": "tableContent",
-      "columnWidths": [
-        null,
-        null,
-        null
-      ],
-      "headerRows": 1,
-      "rows": [
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "항목",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "Git 서브모듈",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "NPM 라이브러리",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "참조 대상",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "소스 코드 (특정 커밋 SHA)",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "빌드된 패키지 (버전 번호)",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "버전 고정 방식",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "커밋 SHA 고정",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "package-lock.json으로 고정",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "버전 업데이트",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "수동 (pointer commit 변경)",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "npm update",
-                  "styles": {
-                    "code": true
+        "type": "p",
+        "children": [
+          {
+            "text": "특정 브랜치가 아닌 커밋을 직접 체크아웃한 상태. "
+          },
+          {
+            "text": "HEAD",
+            "code": true
+          },
+          {
+            "text": "가 브랜치 이름이 아닌 커밋 SHA를 가리킨다. 이 상태에서 커밋하면 어느 브랜치에도 속하지 않는 커밋이 생긴다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "cd packages/shared-ui\ngit status\n# HEAD detached at a3f9c2d    ← 브랜치가 없는 상태"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "서브모듈을 업데이트하는 두 가지 흐름"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "서브모듈이 업데이트됐을 때 부모 저장소에서 반영하려면 두 단계가 필요하다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "[서브모듈에 변경이 생겼을 때]\n\n1. 서브모듈 안에서 최신 커밋으로 이동\n   cd packages/shared-ui\n   git pull origin main            ← 서브모듈 저장소에서 직접 pull\n   cd ../..\n\n2. 부모 저장소에 \"이 커밋으로 바뀐다\"고 기록\n   git add packages/shared-ui      ← gitlink 포인터 업데이트\n   git commit -m \"chore: update shared-ui to v2.3\"\n   git push"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "팀원이 이 커밋을 받아서 반영하려면:"
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "git pull\ngit submodule update               ← 바뀐 포인터가 가리키는 커밋으로 이동"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "git pull",
+            "code": true
+          },
+          {
+            "text": "만 하고 "
+          },
+          {
+            "text": "submodule update",
+            "code": true
+          },
+          {
+            "text": "를 빠뜨리면 서브모듈은 이전 커밋 상태 그대로다. 팀 내에서 가장 자주 겪는 혼란이 이 지점이다."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "NPM 라이브러리는 내부에서 어떻게 동작할까?"
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "package.json과 버전 범위 선언"
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "{\n  \"dependencies\": {\n    \"react\":   \"^18.2.0\",   ← ^ : 마이너/패치 버전 자동 업데이트\n    \"lodash\":  \"~4.17.21\",  ← ~ : 패치 버전만 자동 업데이트\n    \"axios\":   \"1.4.0\"      ←   : 정확한 버전 고정\n  }\n}"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "npm install",
+            "code": true
+          },
+          {
+            "text": "을 실행하면 npm은 다음 순서로 동작한다:"
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "[npm install 실행 흐름]\n\n1. package.json의 버전 범위 읽기\n   \"react\": \"^18.2.0\"\n       ↓\n2. npm 레지스트리(npmjs.com)에 쿼리\n   GET https://registry.npmjs.org/react\n   → 사용 가능한 버전 목록 + 각 버전의 메타데이터 반환\n       ↓\n3. 버전 범위에 맞는 최신 버전 결정\n   ^18.2.0 → 18.x.x 중 최신 = 18.3.1 (가정)\n       ↓\n4. package-lock.json에 정확한 버전 기록\n   \"react\": { \"version\": \"18.3.1\", \"resolved\": \"...\", \"integrity\": \"sha512-...\" }\n       ↓\n5. tarball 다운로드 및 node_modules에 압축 해제\n   node_modules/react/       ← 소스 코드가 아닌 빌드된 배포 파일"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "package-lock.json",
+            "code": true
+          },
+          {
+            "text": "은 \"이 시점에 어떤 버전이 설치됐는지\"를 기록한다. 다음번 "
+          },
+          {
+            "text": "npm install",
+            "code": true
+          },
+          {
+            "text": "은 레지스트리 조회 없이 이 파일을 기준으로 동일한 버전을 설치한다."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "node_modules의 flat 구조"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "npm v3 이전에는 "
+          },
+          {
+            "text": "node_modules",
+            "code": true
+          },
+          {
+            "text": "가 중첩 구조였다. A가 "
+          },
+          {
+            "text": "C@1.0"
+          },
+          {
+            "text": "을 쓰고 B도 "
+          },
+          {
+            "text": "C@1.0"
+          },
+          {
+            "text": "을 쓰면, C가 두 곳에 중복 설치됐다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "[npm v2 — 중첩 구조]\nnode_modules/\n  package-a/\n    node_modules/\n      package-c@1.0/   ← A의 C\n  package-b/\n    node_modules/\n      package-c@1.0/   ← B의 C (중복)"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "npm v3부터는 "
+          },
+          {
+            "text": "호이스팅(hoisting)",
+            "bold": true
+          },
+          {
+            "text": "을 적용해 flat 구조로 바꿨다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "*호이스팅: npm이 중첩된 의존성을 최대한 최상위 "
+          },
+          {
+            "text": "node_modules",
+            "code": true
+          },
+          {
+            "text": "로 끌어올리는 최적화. 중복 설치를 줄이는 대신, 의존성 선언 없이 최상위 패키지를 require할 수 있는 \"유령 의존성\" 문제가 생긴다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "[npm v3+ — flat 구조]\nnode_modules/\n  package-a/           ← 최상위로 끌어올림\n  package-b/\n  package-c@1.0/       ← 공유 (단일 설치)"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "버전이 충돌할 때만 중첩이 허용된다:"
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "[버전 충돌 시]\nnode_modules/\n  package-a/\n    node_modules/\n      package-c@2.0/   ← A는 2.0이 필요 (별도 설치)\n  package-b/\n  package-c@1.0/       ← B는 1.0 사용 (최상위)"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "설치된 패키지는 소스가 아니라 빌드 결과물"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "서브모듈과 가장 다른 점이 여기에 있다. "
+          },
+          {
+            "text": "node_modules/react",
+            "code": true
+          },
+          {
+            "text": "를 열어보면 TypeScript 소스 파일이 아니라 이미 빌드된 JS 파일들이 들어 있다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "node_modules/react/\n  index.js             ← CJS 빌드\n  cjs/\n    react.development.js\n    react.production.min.js\n  package.json         ← 진입점, exports 필드\n  LICENSE\n  README.md\n  # .ts 파일 없음       ← 소스 코드는 포함되지 않음"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "npm 패키지 제작자가 "
+          },
+          {
+            "text": "npm publish",
+            "code": true
+          },
+          {
+            "text": "로 올린 파일들만 설치된다. 내부 구현을 바꾸려면 패키지를 fork하거나 patch-package 같은 도구를 써야 한다."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "메인 프로젝트를 빌드할 때, 서브 모듈은 어떻게 될까?"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "두 가지 시나리오로 나뉜다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "서브모듈을 "
+          },
+          {
+            "text": "소스 그대로",
+            "bold": true
+          },
+          {
+            "text": " 쓰느냐, "
+          },
+          {
+            "text": "빌드 결과물(dist)",
+            "bold": true
+          },
+          {
+            "text": " 로 쓰느냐에 따라 동작이 완전히 달라진다."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "시나리오 A — 소스 파일 직접 참조"
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "my-react-app/\n  packages/\n    ui-components/       ← 서브모듈 (소스 .tsx 파일 그대로)\n      src/\n        Button.tsx\n        index.ts\n      package.json       ← 여기 dependencies도 있음\n  src/\n    App.tsx"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// App.tsx\nimport { Button } from '../packages/ui-components/src'"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "이 경우 Vite/Webpack이 "
+          },
+          {
+            "text": "[Button.tsx](https://Button.tsx)",
+            "code": true
+          },
+          {
+            "text": "를 "
+          },
+          {
+            "text": "직접 트랜스파일",
+            "bold": true
+          },
+          {
+            "text": "한다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "부모 프로젝트의 빌드 파이프라인이 서브모듈 소스를 자기 소스처럼 처리하는 것이다. 별도 빌드 단계가 없어도 된다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "단, 두 가지 함정이 있다.",
+            "bold": true
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "서브모듈의 **",
+            "bold": true
+          },
+          {
+            "text": "node_modules",
+            "code": true
+          },
+          {
+            "text": "는 자동으로 설치되지 않는다.**"
+          }
+        ],
+        "listStyleType": "ol"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "부모에서 "
+          },
+          {
+            "text": "npm install",
+            "code": true
+          },
+          {
+            "text": "을 해도 서브모듈 디렉토리의 의존성은 별개다."
+          }
+        ],
+        "listStyleType": "ol"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "# 서브모듈 안에서 따로 설치해야 함\ncd packages/ui-components\nnpm install\n\n# 또는 부모 프로젝트에서 수동으로 같이 설치\n# (package.json에 서브모듈 의존성을 중복 선언)"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "TypeScript를 쓴다면 **",
+            "bold": true
+          },
+          {
+            "text": "tsconfig.json",
+            "code": true
+          },
+          {
+            "text": "의 경로 설정이 필요하다.**"
+          }
+        ],
+        "listStyleType": "ol"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// tsconfig.json (부모)\n{\n  \"compilerOptions\": {\n    \"paths\": {\n      \"@ui/*\": [\"./packages/ui-components/src/*\"]\n    }\n  },\n  \"include\": [\n    \"src\",\n    \"packages/ui-components/src\"   // ← 명시적으로 포함\n  ]\n}"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "시나리오 B — 서브모듈을 먼저 빌드하고 dist 참조"
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "packages/ui-components/\n  src/\n    Button.tsx\n  dist/                  ← 빌드 결과물\n    index.js\n    index.d.ts\n  package.json\n    \"main\": \"dist/index.js\"\n    \"types\": \"dist/index.d.ts\""
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "이 경우 부모 프로젝트는 "
+          },
+          {
+            "text": "dist/",
+            "code": true
+          },
+          {
+            "text": "를 참조하고, 서브모듈 소스는 건드리지 않는다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "npm 패키지처럼 동작하는 구조다. 이 경우에는 빌드 결과물이 사전에 나와야하기 때문에 빌드 순서가 강제된다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "# CI에서 빌드 순서\ncd packages/ui-components && npm install && npm run build  # ← 먼저\ncd ../../ && npm run build                                  # ← 그 다음"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "서브모듈 빌드가 끝나지 않으면 부모 빌드가 실패한다. 로컬 개발 중에 서브모듈 소스를 수정하면 "
+          },
+          {
+            "text": "dist",
+            "code": true
+          },
+          {
+            "text": "가 갱신되지 않아서 변경이 반영 안 되는 상황도 생긴다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "실무에서 서브모듈을 UI 컴포넌트에 쓴다면 "
+          },
+          {
+            "text": "A 방식이 개발 편의성은 높지만",
+            "bold": true
+          },
+          {
+            "text": ", 의존성 이중 관리 문제 때문에 팀 규모가 커지면 점점 관리 비용이 올라간다."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "서브모듈과 라이브리러 비교하기"
+          }
+        ]
+      },
+      {
+        "type": "table",
+        "children": [
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "th",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "항목"
+                      }
+                    ]
                   }
-                },
-                {
-                  "type": "text",
-                  "text": " 또는 버전 범위로 자동",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "코드 수정 가능 여부",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "가능 (서브모듈 안에서 직접 편집)",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "불가 (빌드 결과물만 존재)",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "저장소 접근 권한",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "서브모듈 저장소에 접근 권한 필요",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "레지스트리 접근 권한만 필요 (공개 패키지는 무조건)",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "클론 후 초기 설정",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "git submodule init && update",
-                  "styles": {
-                    "code": true
+                ]
+              },
+              {
+                "type": "th",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "Git 서브모듈"
+                      }
+                    ]
                   }
-                },
-                {
-                  "type": "text",
-                  "text": " 필요",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "npm install",
-                  "styles": {
-                    "code": true
+                ]
+              },
+              {
+                "type": "th",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "NPM 라이브러리"
+                      }
+                    ]
                   }
-                },
-                {
-                  "type": "text",
-                  "text": "만 실행",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+                ]
               }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "CI/CD 설정",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "참조 대상"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "소스 코드 (특정 커밋 SHA)"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "빌드된 패키지 (버전 번호)"
+                      }
+                    ]
+                  }
+                ]
               }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "서브모듈 토큰/접근 설정 별도 필요",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "버전 고정 방식"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "커밋 SHA 고정"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "package-lock.json으로 고정"
+                      }
+                    ]
+                  }
+                ]
               }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "추가 설정 거의 없음",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "버전 업데이트"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "수동 (pointer commit 변경)"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "npm update",
+                        "code": true
+                      },
+                      {
+                        "text": " 또는 버전 범위로 자동"
+                      }
+                    ]
+                  }
+                ]
               }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "히스토리 공유",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "코드 수정 가능 여부"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "가능 (서브모듈 안에서 직접 편집)"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "불가 (빌드 결과물만 존재)"
+                      }
+                    ]
+                  }
+                ]
               }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "서브모듈의 git 히스토리 전체 포함",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "저장소 접근 권한"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "서브모듈 저장소에 접근 권한 필요"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "레지스트리 접근 권한만 필요 (공개 패키지는 무조건)"
+                      }
+                    ]
+                  }
+                ]
               }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "배포 파일만 포함, 히스토리 없음",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "클론 후 초기 설정"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "git submodule init && update",
+                        "code": true
+                      },
+                      {
+                        "text": " 필요"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "npm install",
+                        "code": true
+                      },
+                      {
+                        "text": "만 실행"
+                      }
+                    ]
+                  }
+                ]
               }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "적합한 팀 규모",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "CI/CD 설정"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "서브모듈 토큰/접근 설정 별도 필요"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "추가 설정 거의 없음"
+                      }
+                    ]
+                  }
+                ]
               }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "소수 팀, 내부 공유 코드",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "히스토리 공유"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "서브모듈의 git 히스토리 전체 포함"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "배포 파일만 포함, 히스토리 없음"
+                      }
+                    ]
+                  }
+                ]
               }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "제한 없음",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "적합한 팀 규모"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "소수 팀, 내부 공유 코드"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "제한 없음"
+                      }
+                    ]
+                  }
+                ]
               }
-            }
-          ]
-        }
-      ]
-    },
-    "children": []
-  },
-  {
-    "id": "7aa96ba2-8e14-4f58-a892-59391000f79c",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "어떤 상황에 어느 쪽을 쓰면 좋을까?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "22378900-e5fe-49c7-953b-8d13d25addba",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "서브모듈이 더 나은 경우",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "ebbd8782-c9c6-4cef-b654-00cf788e8efe",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "공유 코드를 메인 프로젝트와 동시에 수정해야 할 때",
-        "styles": {
-          "bold": true
-        }
+            ]
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "가 서브모듈이 잘 맞는 전형적인 상황이다. 예를 들어, 공유 디자인 시스템이 있고 메인 서비스와 함께 빠르게 진화 중이라면 — npm 배포 → 버전 업데이트 → 메인 프로젝트 반영 사이클이 개발 속도를 늦춘다. 서브모듈이면 공유 코드를 직접 수정하고, 양쪽에서 커밋할 수 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "ff17a6c5-2cd0-49d7-87af-7fd8ae449a9b",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "[서브모듈 적합 시나리오]\n\nmy-service/\n  packages/\n    design-system/    ← 서브모듈\n      Button.vue      ← 여기서 직접 수정\n    frontend/\n      App.vue         ← 수정된 Button 바로 반영\n  # 두 저장소를 하나의 작업 단위로 커밋 가능",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "b6bb2ebc-6422-4c6b-8f01-3cf1eef2356b",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "또는 외부 라이브러리인데 npm에 배포되지 않은 경우, 내부 보안 정책상 npm 레지스트리를 사용할 수 없는 경우에도 서브모듈이 대안이 된다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f20d3307-1686-422b-baf8-d1371f97f1c4",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "NPM이 더 나은 경우",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "6abf86b4-1a31-4fd6-b0a3-71eb58bceb50",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "공유 코드가 ",
-        "styles": {}
+        "type": "h2",
+        "children": [
+          {
+            "text": "어떤 상황에 어느 쪽을 쓰면 좋을까?"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "안정적이고 버전 계약(API)이 명확할 때",
-        "styles": {
-          "bold": true
-        }
+        "type": "h3",
+        "children": [
+          {
+            "text": "서브모듈이 더 나은 경우"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "는 npm이 맞다. 외부 팀이 쓰거나, 수정 없이 가져다 쓰는 유틸리티라면 서브모듈의 복잡한 초기 설정과 업데이트 절차가 오히려 부담이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f5078d78-50f0-44f4-8094-054fea206e7e",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "[NPM 적합 시나리오]\n\n# 외부 팀이 소비만 하는 공유 라이브러리\nnpm install @company/design-system   ← 한 줄로 설치 완료\n\n# CI에서도 추가 설정 없음\nnpm ci                               ← package-lock.json 기준 설치",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "a278edd7-f67d-4553-aaba-87df9c703ff5",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "수십 명 이상이 쓰는 라이브러리, 오픈소스, 버전 계약이 중요한 SDK라면 npm 배포가 훨씬 관리하기 쉽다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "4c540549-23e3-4d09-945f-3d80b54a9381",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "절충안 — npm + 사설 레지스트리",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c9615fc6-69fd-4540-a5cf-91f166ba3aa9",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "이건 몰랐는데 너무나도 도움이 많이 될 것 같아서 따로 공유해봐야겠다,, ^,^ ..",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "b5c8e707-05f9-44e5-9ffe-1d32de5efc77",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "서브모듈의 \"소스 직접 참조\"와 npm의 \"간편한 설치\" 사이에서 ",
-        "styles": {}
+        "type": "p",
+        "children": [
+          {
+            "text": "공유 코드를 메인 프로젝트와 동시에 수정해야 할 때",
+            "bold": true
+          },
+          {
+            "text": "가 서브모듈이 잘 맞는 전형적인 상황이다. 예를 들어, 공유 디자인 시스템이 있고 메인 서비스와 함께 빠르게 진화 중이라면 — npm 배포 → 버전 업데이트 → 메인 프로젝트 반영 사이클이 개발 속도를 늦춘다. 서브모듈이면 공유 코드를 직접 수정하고, 양쪽에서 커밋할 수 있다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "사설 npm 레지스트리",
-        "styles": {
-          "bold": true
-        }
+        "type": "code_block",
+        "children": [
+          {
+            "text": "[서브모듈 적합 시나리오]\n\nmy-service/\n  packages/\n    design-system/    ← 서브모듈\n      Button.vue      ← 여기서 직접 수정\n    frontend/\n      App.vue         ← 수정된 Button 바로 반영\n  # 두 저장소를 하나의 작업 단위로 커밋 가능"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": "를 운영하는 방법이 있다. GitHub Packages나 Verdaccio를 사용하면 외부에 공개하지 않고도 npm 워크플로우를 그대로 쓸 수 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "74996247-046e-460e-a425-5d16782e3b36",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "# .npmrc에 사설 레지스트리 지정\n@company:registry=https://npm.pkg.github.com\n\n# 일반 npm install과 동일하게 사용\nnpm install @company/shared-ui",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "53016bc7-8edb-44f8-8a43-60bff828166d",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "서브모듈과 비교했을 때 \"코드를 직접 수정하는 유연성\"은 없지만, 팀 규모가 커지고 소비자가 늘어날수록 이 방식이 유지보수 비용이 낮다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "a4596472-3fc7-43e1-a41a-bada3723f739",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "실제로 파고들어 보니 서브모듈은 \"같이 개발하는 저장소를 포함시키는 것\"이고, npm은 \"완성된 패키지를 가져다 쓰는 것\"이었다. 목표가 비슷해 보여도 설계 철학이 달라서, 잘못 선택하면 불필요한 마찰이 계속 생긴다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "4f0c3af9-e986-4398-8a5b-8a051c723d03",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "서브모듈을 쓰면서 팀원들이 ",
-        "styles": {}
+        "type": "p",
+        "children": [
+          {
+            "text": "또는 외부 라이브러리인데 npm에 배포되지 않은 경우, 내부 보안 정책상 npm 레지스트리를 사용할 수 없는 경우에도 서브모듈이 대안이 된다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "submodule update",
-        "styles": {
-          "code": true
-        }
+        "type": "h3",
+        "children": [
+          {
+            "text": "NPM이 더 나은 경우"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "를 빠뜨려 \"왜 내 환경에선 안 되지?\"를 반복하는 상황, npm을 쓰면서 공유 컴포넌트 수정할 때마다 배포-버전업-재설치 사이클을 도는 상황 — 두 가지 방식 모두 트레이드 오프가 존재한다. 그때마다 \"애초에 이 코드를 어떻게 관리할 것인가\"를 먼저 결정하는 게 더 중요하다는 걸 느꼈다.",
-        "styles": {}
+        "type": "p",
+        "children": [
+          {
+            "text": "공유 코드가 "
+          },
+          {
+            "text": "안정적이고 버전 계약(API)이 명확할 때",
+            "bold": true
+          },
+          {
+            "text": "는 npm이 맞다. 외부 팀이 쓰거나, 수정 없이 가져다 쓰는 유틸리티라면 서브모듈의 복잡한 초기 설정과 업데이트 절차가 오히려 부담이다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "[NPM 적합 시나리오]\n\n# 외부 팀이 소비만 하는 공유 라이브러리\nnpm install @company/design-system   ← 한 줄로 설치 완료\n\n# CI에서도 추가 설정 없음\nnpm ci                               ← package-lock.json 기준 설치"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "수십 명 이상이 쓰는 라이브러리, 오픈소스, 버전 계약이 중요한 SDK라면 npm 배포가 훨씬 관리하기 쉽다."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "절충안 — npm + 사설 레지스트리"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "이건 몰랐는데 너무나도 도움이 많이 될 것 같아서 따로 공유해봐야겠다,, ^,^ ..",
+            "bold": true
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "서브모듈의 \"소스 직접 참조\"와 npm의 \"간편한 설치\" 사이에서 "
+          },
+          {
+            "text": "사설 npm 레지스트리",
+            "bold": true
+          },
+          {
+            "text": "를 운영하는 방법이 있다. GitHub Packages나 Verdaccio를 사용하면 외부에 공개하지 않고도 npm 워크플로우를 그대로 쓸 수 있다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "# .npmrc에 사설 레지스트리 지정\n@company:registry=https://npm.pkg.github.com\n\n# 일반 npm install과 동일하게 사용\nnpm install @company/shared-ui"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "서브모듈과 비교했을 때 \"코드를 직접 수정하는 유연성\"은 없지만, 팀 규모가 커지고 소비자가 늘어날수록 이 방식이 유지보수 비용이 낮다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "실제로 파고들어 보니 서브모듈은 \"같이 개발하는 저장소를 포함시키는 것\"이고, npm은 \"완성된 패키지를 가져다 쓰는 것\"이었다. 목표가 비슷해 보여도 설계 철학이 달라서, 잘못 선택하면 불필요한 마찰이 계속 생긴다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "서브모듈을 쓰면서 팀원들이 "
+          },
+          {
+            "text": "submodule update",
+            "code": true
+          },
+          {
+            "text": "를 빠뜨려 \"왜 내 환경에선 안 되지?\"를 반복하는 상황, npm을 쓰면서 공유 컴포넌트 수정할 때마다 배포-버전업-재설치 사이클을 도는 상황 — 두 가지 방식 모두 트레이드 오프가 존재한다. 그때마다 \"애초에 이 코드를 어떻게 관리할 것인가\"를 먼저 결정하는 게 더 중요하다는 걸 느꼈다."
+          }
+        ]
       }
-    ],
-    "children": []
+    ]
   }
 ]

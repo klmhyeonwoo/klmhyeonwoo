@@ -1,9 +1,11 @@
 "use client";
 
 import type { MouseEvent, ReactNode } from "react";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { InlineComments } from "./inline-comments";
 
-export function PostContent({ children }: { children: ReactNode }) {
+export function PostContent({ children, postId }: { children: ReactNode; postId?: string }) {
+  const root = useRef<HTMLDivElement>(null);
   const [externalUrl, setExternalUrl] = useState<string | null>(null);
 
   function confirmExternalLink(event: MouseEvent<HTMLDivElement>) {
@@ -21,7 +23,8 @@ export function PostContent({ children }: { children: ReactNode }) {
   }
 
   return <>
-    <div className="prose" onClickCapture={confirmExternalLink}>{children}</div>
+    <div className="post-content-with-comments"><div ref={root} className="prose" onClickCapture={confirmExternalLink}>{children}</div>
+    {postId && <InlineComments postId={postId} root={root} />}</div>
     {externalUrl && <div className="external-link-backdrop" role="presentation" onMouseDown={() => setExternalUrl(null)}>
       <section className="external-link-dialog" role="dialog" aria-modal="true" aria-labelledby="external-link-title" onMouseDown={(event) => event.stopPropagation()}>
         <p className="external-link-kicker">외부 링크</p>

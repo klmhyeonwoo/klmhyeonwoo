@@ -9,6 +9,7 @@ import { PostAdminActions } from "@/components/post-admin-actions";
 import { PostUnlockForm } from "@/components/post-unlock-form";
 import { CommentSection } from "@/components/comment-section";
 import { PostCallout } from "@/components/post-callout";
+import { PostDiagram } from "@/components/post-diagram";
 import { PostContent } from "@/components/post-content";
 import { PostLinkCopy } from "@/components/post-link-copy";
 import { ArticleTableOfContents } from "@/components/article-table-of-contents";
@@ -25,7 +26,7 @@ import { PostColumn, PostColumns } from "@/components/post-columns";
 import { getTableOfContents, rehypeHeadingIds } from "@/lib/table-of-contents";
 import { absoluteUrl } from "@/lib/site-url";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 type Params = Promise<{ id: string }>;
 
@@ -113,10 +114,10 @@ export default async function PostPage({ params }: { params: Params }) {
   const { id } = await params;
   const source = getPost(id);
   if (!source) notFound();
-  const authenticated = await isAdmin();
   const profile = getProfile();
   const { data } = matter(source);
   const passwordHash = typeof data.passwordHash === "string" ? data.passwordHash : null;
+  const authenticated = data.private === true ? await isAdmin() : false;
 
   if (data.private === true && !authenticated && (!passwordHash || !(await hasPostAccess(id, passwordHash)))) {
     return <><SiteHeader /><main className="article-shell"><PostUnlockForm id={id} /></main></>;
@@ -125,7 +126,7 @@ export default async function PostPage({ params }: { params: Params }) {
   const blocks = getPostBlocks(id);
   const renderSource = restoreBookmarks(restoreCallouts(source, blocks), blocks);
   const tableOfContents = getTableOfContents(renderSource);
-  const { content, frontmatter } = await compileMDX<{ title: string; date: string; description?: string; publishedAt?: string; updatedAt?: string }>({ components: { Callout: PostCallout, Bookmark: PostBookmark, Gallery: PostGallery, Columns: PostColumns, Column: PostColumn }, source: renderSource, options: { mdxOptions: { remarkPlugins: [remarkGfm], rehypePlugins: [[rehypeShiki, { themes: { light: "github-light", dark: "github-dark" } }], rehypeHeadingIds(tableOfContents)] }, parseFrontmatter: true } });
+  const { content, frontmatter } = await compileMDX<{ title: string; date: string; description?: string; publishedAt?: string; updatedAt?: string }>({ components: { Diagram: PostDiagram, Callout: PostCallout, Bookmark: PostBookmark, Gallery: PostGallery, Columns: PostColumns, Column: PostColumn }, source: renderSource, options: { mdxOptions: { remarkPlugins: [remarkGfm], rehypePlugins: [[rehypeShiki, { themes: { light: "github-light", dark: "github-dark" } }], rehypeHeadingIds(tableOfContents)] }, parseFrontmatter: true } });
   const post = getPosts(true).find((item) => item.id === id);
   const description = postDescription(source, data) || `${frontmatter.title}에 관한 글입니다.`;
   const canonicalUrl = absoluteUrl(`/posts/${id}`);
@@ -155,8 +156,9 @@ export default async function PostPage({ params }: { params: Params }) {
         <div className="article-meta-row"><div className="author-byline">{profile.image ? <img src={profile.image} alt="" /> : <span>{profile.name.slice(0, 1)}</span>}<p><strong>{profile.name}</strong><small>{formatPostDate(frontmatter.date)}{postWasUpdated(frontmatter.publishedAt ?? frontmatter.date, frontmatter.updatedAt) && <> · {formatPostUpdatedLabel(frontmatter.updatedAt)}</>}</small></p></div><PostLinkCopy /></div>
         {frontmatter.description && <p className="lede">{frontmatter.description}</p>}
       </header>
-      <div className="article-content-layout">{tableOfContents.length > 0 && <ArticleTableOfContents items={tableOfContents} />}<PostContent>{content}</PostContent></div>
-      {authenticated && <PostAdminActions id={id} title={frontmatter.title} />}
+      <div className="article-content-layout">{tableOfContents.length > 0 && <ArticleTableOfContents items={tableOfContents} />}<PostContent postId={data.private === true ? undefined : id}>{content}</PostContent></div>
+      {data.private !== true && <PostAdminActions id={id} title={frontmatter.title} />}
+      {data.private === true && authenticated && <PostAdminActions id={id} title={frontmatter.title} />}
       <CommentSection />
     </article></main></>
   );

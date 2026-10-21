@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import type { Viewport } from "next";
 import "./globals.css";
 import "./image-containment.css";
+import "@/components/editor-interactions.css";
 import { ToastProvider } from "@/components/toast-provider";
+import { AdminSessionProvider } from "@/components/admin-session";
 
 function getSiteUrl() {
   const value = process.env.NEXT_PUBLIC_SITE_URL
@@ -18,6 +20,11 @@ export const metadata: Metadata = {
   title: "wavy studio",
   description: "기록을 쌓아가는 개인 블로그, wavy studio",
   metadataBase: getSiteUrl(),
+  verification: {
+    other: {
+      "naver-site-verification": "7186ca39127c40df126d2de419d19f1aad8029d9",
+    },
+  },
   openGraph: {
     type: "website",
     locale: "ko_KR",
@@ -43,7 +50,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ko">
-      <body><ToastProvider>{children}</ToastProvider></body>
+      <body><ToastProvider><AdminSessionProvider>{children}</AdminSessionProvider></ToastProvider></body>
     </html>
   );
 }

@@ -1,2596 +1,1506 @@
 [
   {
-    "id": "56fedcac-fabd-4802-b0be-acf1ccfcc1e2",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
+    "type": "plate-content",
+    "version": 1,
     "content": [
       {
-        "type": "text",
-        "text": "회사 사내에서 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Vue",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 기술스택을 많이 사용하다보니, 자연스레 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "SCSS",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 를 많이 사용하게 된다. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "React",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 의 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Emotion",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 등의 스타일, 그리고 최근 많이 사용하고 있는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Tailwind",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 의 경우에는 자연스럽게 내부 난수와 같은 값으로 클래스 명을 유니크하게 지정해주면서 스타일을 지정해준다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c5b5ce32-e51d-4cee-a88a-a2f731e24838",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "SCSS",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 는 스타일은 서비스 도메인의 바닥부터 함께 스타일 구조들을 천천히 쌓아나가며, 직접 이름을 짓고 붙여주는 과정을 진행하게 되는데 이를 사용해보았다면 CSS 클래스 이름을 어떻게 지어야 할지 고민을 했던 적이 있을 수 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "3616d405-5212-4756-a898-9cf5a1ef372f",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "처음 CSS를 배웠을 때, 클래스 이름은 그냥 의미 있어 보이면 된다고 생각했다. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": ".header",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": ", ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": ".menu",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": ", ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": ".button",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "처럼. 회사 업무를 진행하면서 막상 생각치도 못한 곳에서 문제가 생겼다. 누군가 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": ".button",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "을 이미 쓰고 있다면, 거기에 내가 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": ".button",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "을 또 정의하면서 스타일이 충돌하게 된다는 것인데, 만약 스타일시트에 모듈과 같은 스코프가 정의되어있지 않다면 CSS의 특성상, 이건 단순한 실수가 아니라 구조적인 문제였다. 그때부터 \"이름을 어떻게 지어야 하는가\"가 진짜 문제처럼 느껴졌다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "a1b5cff6-94d6-468d-b24f-c24c3a7a1691",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "그러다 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "—",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " , ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "__",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 클래스 네임에 프리픽스가 붙는 클래스 네임들을 발견하게 되었고, 이게 뭔가 찾아보다가 포스팅을 시작하게 되었다 ^,^ .. 바로 BEM(",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Block Element Modifier)",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "이라는 개념인데, CSS 클래스 네이밍 방법론 중 가장 오래되고, 가장 널리 쓰이는 방식이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "a20dd299-c2df-4a2e-8df7-057fe34e66ed",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "BEM은 왜 생겼을까?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "fdfd1731-ec09-4148-82f8-85b10c93869a",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "BEM은 러시아 인터넷 기업 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Yandex",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "에서 2005년경 내부적으로 사용하기 시작한 방법론이다. Yandex는 대규모 웹 서비스를 수십 명의 개발자가 함께 유지보수해야 했고, 스타일 충돌과 유지보수 어려움이 반복됐다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "86147838-bf8b-4c0e-a4f2-14fdfb07933f",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "2010년대 초, CSS 생태계에는 마땅한 기준이 없었다. 클래스 이름은 개발자마다 달랐고, 프로젝트가 커질수록 스타일 파일은 누구도 건드리기 싫은 영역이 됐다. OOCSS(Object-Oriented CSS)나 SMACSS 같은 개념들이 있었지만, 구체적인 네이밍 규칙까지 제시한 건 BEM이 처음이었다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "8ba717b6-fb81-46b7-9ba3-ca8cbce7cd56",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Yandex가 2012년에 BEM을 공개하면서 빠르게 퍼졌다. 특히 컴포넌트 기반 UI가 주류가 된 이후, BEM의 구조적 사고방식이 React나 Vue의 컴포넌트 개념과 잘 맞아떨어져서 더 주목받았다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "519dbd93-8b4f-4af5-ba75-d4995a6a4bdf",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "BEM의 핵심 구조",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "004696cd-967b-447e-96c1-e52111d2efef",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "BEM의 기본 구조는 세 가지로 이뤄진다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e6094965-bd32-442a-be9d-6978ff9667f9",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Block__Element--Modifier\n  ↑       ↑        ↑\n 블록    엘리먼트    수정자",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "7f03d33d-3705-418a-ba54-82c61c561ea7",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Block — 독립적인 UI 단위",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f26dcaae-7fe0-44f2-a0f2-5c72c3ae16a0",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Block",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "은 그 자체로 독립적으로 존재할 수 있는 UI 구성 요소다. 예를 들어 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "nav",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": ", ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "card",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": ", ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "button",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": ", ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "form",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 같은 것들이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "58d50320-6568-48a2-8dfb-6dc10e6b06a8",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": ".card { }         /* 카드 블록 */\n.nav { }          /* 내비게이션 블록 */\n.button { }       /* 버튼 블록 */",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "7fe8e2f0-6e52-406a-ae32-1ecc5cc55581",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Block은 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "위치에 의존하지 않는다",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "는 점이 중요하다. 어디에 놓여도 같은 모양이어야 한다. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "margin",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": ", ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "position",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "처럼 외부 레이아웃을 정의하는 속성은 Block 자체에 넣지 않는 것이 원칙이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "b700786f-72a6-408d-a0ad-0171b4b8d293",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Element — Block에 종속된 구성 요소",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f0b8b166-45f6-4203-b79c-964069feb6ed",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Element",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "는 Block 내부에서만 의미를 가지는 구성 요소다. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "__",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " (언더스코어 두 개)로 Block과 연결한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "4783328c-a37d-4451-8c60-6c6ab2ff7e84",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": ".card__title { }      /* 카드 안의 제목 */\n.card__image { }      /* 카드 안의 이미지 */\n.card__footer { }     /* 카드 안의 푸터 */\n.nav__item { }        /* 내비게이션의 항목 */\n.nav__link { }        /* 내비게이션 항목 안의 링크 */",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f3731d2f-3fa8-464a-9a45-9ca3095bda17",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Element는 Block 없이는 존재할 수 없다. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": ".card__title",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "은 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": ".card",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 없이는 의미가 없다. 이게 BEM이 말하는 \"종속\"이다. Element는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "중첩하지 않는다",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": ". ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": ".card__footer__button",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "처럼 쓰면 안 된다. 카드 푸터 안에 있는 버튼이라도 클래스 이름은 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": ".card__button",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "이 맞다. 구조는 HTML로 표현하고, 클래스 이름은 깊이를 반영하지 않아야한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c39ee532-1f90-483a-8d46-90ba8dd87bce",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "여기서 내가 잘못 알고 있었던 점은, 무조건 엘리먼트 클래스 네임 명명 규칙은 상위 엘리먼트를 따라가야한다고 생각했다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "95db85dd-21ac-4ca9-8ede-f86131c12945",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "<!-- 이렇게 하면 안 된다 -->\n<div class=\"card\">\n  <div class=\"card__footer\">\n    <button class=\"card__footer__button\">확인</button>  ← 중첩 금지\n  </div>\n</div>\n\n<!-- BEM에서 맞는 방식 -->\n<div class=\"card\">\n  <div class=\"card__footer\">\n    <button class=\"card__button\">확인</button>  ← Block 기준으로 평탄화\n  </div>\n</div>",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "ee29d4be-16cb-448f-93c7-7f23ee4650cc",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Modifier — 상태나 변형을 나타내는 수정자",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "b1fa7818-7efd-4ee3-a34c-cbbb6215aef1",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Modifier",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "는 Block이나 Element의 다른 상태, 다른 변형을 나타낸다. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "--",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " (하이픈 두 개)로 연결한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "594fd664-befb-4be1-96b9-af24a8fdd81e",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": ".button--primary { }      /* 주요 액션 버튼 */\n.button--disabled { }     /* 비활성화된 버튼 */\n.button--large { }        /* 큰 버튼 */\n.card--highlighted { }    /* 강조된 카드 */\n.nav__item--active { }    /* 활성화된 내비게이션 항목 */",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "60fe9a3e-dcdc-476a-bbf6-b41617939de4",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Modifier는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "독립적으로 사용하지 않는다",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": ". ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": ".button--primary",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": ".button",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "과 함께 쓴다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "98d240f4-6cf1-4505-9abe-ebb93c29bf0f",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "<!-- 맞는 방식 -->\n<button class=\"button button--primary\">저장</button>\n\n<!-- 틀린 방식 — Modifier만 단독 사용 -->\n<button class=\"button--primary\">저장</button>",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "886460c3-3018-41e0-93c6-743ba5d4d22b",
-    "type": "divider",
-    "props": {},
-    "children": []
-  },
-  {
-    "id": "5cc5857f-524d-436b-aa72-b028ae4b9ee2",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "런타임에서 BEM이 작동하는 방식",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "8e18006f-85a5-495a-bf98-cfcce619ac21",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "BEM은 런타임 메커니즘이 아니라 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "명명 규칙",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "이다. 브라우저는 BEM을 전혀 모른다. 브라우저 입장에서 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": ".card__title",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "은 그냥 클래스 이름일 뿐이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "110537e0-69e6-4e66-ad8c-d68ea343dd2e",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "그러나 바로 이 점이 BEM의 강점이다. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "특이도(specificity)를 낮게 유지한다",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": ".",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "3c347bab-0dad-4674-bab6-fee296fdb7c4",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "CSS 특이도 계산 방식을 떠올려보면:",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "1edb0659-9bc0-497b-8a69-cad0693b26ac",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "인라인 스타일 > ID > 클래스 > 태그\n\nspecificity: (0, 0, 0, 0)\n              ↑  ↑  ↑  ↑\n           인라인 ID 클래스 태그",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "5d29122b-c281-4770-9544-79c79f80d0d6",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "BEM은 클래스 하나만으로 모든 스타일을 표현한다. ID를 쓰지 않고, 태그 선택자도 최소화한다. 결과적으로 특이도가 항상 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "(0, 0, 1, 0)",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "으로 균일하게 유지된다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "26412f0b-4353-4006-b49b-f38e398236db",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "/* BEM 방식 — 특이도: (0,0,1,0) */\n.card__title { color: black; }\n\n/* 비BEM 방식 — 특이도: (0,0,1,1) */\n.card h2 { color: black; }\n\n/* 비BEM 방식 — 특이도: (0,1,0,0) */\n#card-title { color: black; }",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "ba6f43cb-a873-4482-ac60-35ab5bbd4a88",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "특이도가 균일하면, 나중에 스타일을 덮어쓸 때 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "!important",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "나 더 복잡한 선택자 없이도 가능하다. Modifier가 Base 스타일을 덮어쓰는 구조가 깔끔하게 작동하는 이유다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "0dcb0613-07b6-47af-be57-1cce1bed3a35",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": ".button {\n  background: gray;\n  color: white;\n  padding: 8px 16px;\n}\n\n.button--primary {\n  background: blue;    /* 같은 특이도, 뒤에 선언돼서 덮어씀 */\n}\n\n.button--large {\n  padding: 12px 24px;  /* 같은 특이도, 정상적으로 덮어씀 */\n}",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "4515aa4e-aa84-42dc-94bb-bfb3e69f36a6",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "브라우저는 CSS 파일을 위에서 아래로 파싱하고, 같은 특이도일 경우 나중에 선언된 규칙이 이긴다. BEM은 이 캐스케이딩 규칙을 예측 가능하게 만든다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e27dec8a-e49c-4634-8cbb-be542254bfc4",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "실제 HTML 구조와 BEM 적용 예시",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "b4b2feb9-d0e8-4df9-a9fa-d62c1497d0d3",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "실제로 카드 컴포넌트를 만들면 이렇게 된다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "0c6764cc-dcb3-45b4-91da-761149c3c612",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "<article class=\"card card--featured\">         <!-- ← Block + Modifier -->\n  <img class=\"card__image\" src=\"...\" />       <!-- ← Element -->\n  <div class=\"card__body\">                    <!-- ← Element -->\n    <h2 class=\"card__title\">제목</h2>         <!-- ← Element -->\n    <p class=\"card__description\">설명</p>     <!-- ← Element -->\n  </div>\n  <footer class=\"card__footer\">              <!-- ← Element -->\n    <button class=\"button button--primary\">  <!-- ← 별도 Block + Modifier -->\n      자세히 보기\n    </button>\n  </footer>\n</article>",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "eb052bba-d37f-4f3b-88e7-b757d4fc7067",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "여기서 주목할 점은 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "button",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "이다. 카드 안에 있지만 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": ".card__button",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "이 아니라 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": ".button",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "이다. 버튼은 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "독립적인 Block",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "으로 재사용되기 때문이다. 카드 안에서만 쓰이는 요소라면 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": ".card__button",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "으로 만들겠지만, 여러 곳에서 쓰이는 버튼이라면 별도 Block으로 두는 것이 맞다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "8a405652-fca1-4814-bfaa-3518b7a134de",
-    "type": "quote",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "BEM이 유독 좋은 것만은 아니다?",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "2683bde3-1957-458a-b5cb-9f1ab29a3a9c",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "실제로 BEM 구조로 엘리먼트를 사용하게 되면, CSS 스타일을 적용할 때는 정말 가독성이 좋다고 느껴진다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "16b17933-c348-46bb-af92-a373c67a257b",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "이를 테면 SCSS의 중첩 구조에서 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "&__",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " , ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "&—",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "를 통해 중첩 구조에서 어떤 엘리먼트를 가르키는지 명확하게 알 수 있었다. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "&",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 를 표현해주기 위한 블록의 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "prefix",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 를 계속해서 붙여줘야한다는 특징을 가지고 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "157bd822-309c-4603-9ba6-2c2591bfa3fd",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "다만 엘리먼트에서는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "&",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 를 표현해주기 위한 블록의 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "prefix",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 를 계속해서 붙여줘야한다는 특징을 가지고 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "98d271f5-6aec-4746-9747-fa15fa236692",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// 계속 `prefix` 가 붙는 구조\n\n<div class=\"card\">\n  <h2 class=\"card__title\">제목</h2>      <!-- card__ 계속 반복 -->\n  <img class=\"card__image\" />            <!-- card__ 계속 반복 -->\n  <p class=\"card__description\">설명</p>  <!-- card__ 계속 반복 -->\n</div>",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "317d9761-1ff0-46f2-86da-c5a2286894b4",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// 구조적인 SCSS 중첩 구조\n\n.card {\n  background: white;\n   \n  &__title {        // ← 컴파일하면 .card__title\n    font-size: 20px;\n  }\n\n  &__image {        // ← .card__image\n    width: 100%;\n  }\n\n  &--featured {     // ← .card--featured (Modifier)\n    border: 2px solid blue;\n  }\n\n  &--featured &__title {  // ← .card--featured .card__title\n    color: blue;\n  }\n}",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "86df0d30-544e-45c1-b27f-a63249e10f93",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "BEM과 다른 방법론 비교",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "5fc9ee63-d0ec-4472-b09b-345475fab4fb",
-    "type": "table",
-    "props": {
-      "textColor": "default"
-    },
-    "content": {
-      "type": "tableContent",
-      "columnWidths": [
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "headerRows": 1,
-      "rows": [
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "방법론",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "핵심 아이디어",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "네이밍 예시",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "특이도 관리",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "학습 곡선",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "BEM",
-                  "styles": {
-                    "bold": true
+        "type": "p",
+        "children": [
+          {
+            "text": "회사 사내에서 "
+          },
+          {
+            "text": "Vue",
+            "code": true
+          },
+          {
+            "text": " 기술스택을 많이 사용하다보니, 자연스레 "
+          },
+          {
+            "text": "SCSS",
+            "code": true
+          },
+          {
+            "text": " 를 많이 사용하게 된다. "
+          },
+          {
+            "text": "React",
+            "code": true
+          },
+          {
+            "text": " 의 "
+          },
+          {
+            "text": "Emotion",
+            "code": true
+          },
+          {
+            "text": " 등의 스타일, 그리고 최근 많이 사용하고 있는 "
+          },
+          {
+            "text": "Tailwind",
+            "code": true
+          },
+          {
+            "text": " 의 경우에는 자연스럽게 내부 난수와 같은 값으로 클래스 명을 유니크하게 지정해주면서 스타일을 지정해준다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "SCSS",
+            "code": true
+          },
+          {
+            "text": " 는 스타일은 서비스 도메인의 바닥부터 함께 스타일 구조들을 천천히 쌓아나가며, 직접 이름을 짓고 붙여주는 과정을 진행하게 되는데 이를 사용해보았다면 CSS 클래스 이름을 어떻게 지어야 할지 고민을 했던 적이 있을 수 있다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "처음 CSS를 배웠을 때, 클래스 이름은 그냥 의미 있어 보이면 된다고 생각했다. "
+          },
+          {
+            "text": ".header",
+            "code": true
+          },
+          {
+            "text": ", "
+          },
+          {
+            "text": ".menu",
+            "code": true
+          },
+          {
+            "text": ", "
+          },
+          {
+            "text": ".button",
+            "code": true
+          },
+          {
+            "text": "처럼. 회사 업무를 진행하면서 막상 생각치도 못한 곳에서 문제가 생겼다. 누군가 "
+          },
+          {
+            "text": ".button",
+            "code": true
+          },
+          {
+            "text": "을 이미 쓰고 있다면, 거기에 내가 "
+          },
+          {
+            "text": ".button",
+            "code": true
+          },
+          {
+            "text": "을 또 정의하면서 스타일이 충돌하게 된다는 것인데, 만약 스타일시트에 모듈과 같은 스코프가 정의되어있지 않다면 CSS의 특성상, 이건 단순한 실수가 아니라 구조적인 문제였다. 그때부터 \"이름을 어떻게 지어야 하는가\"가 진짜 문제처럼 느껴졌다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "그러다 "
+          },
+          {
+            "text": "—",
+            "code": true
+          },
+          {
+            "text": " , "
+          },
+          {
+            "text": "__",
+            "code": true
+          },
+          {
+            "text": " 클래스 네임에 프리픽스가 붙는 클래스 네임들을 발견하게 되었고, 이게 뭔가 찾아보다가 포스팅을 시작하게 되었다 ^,^ .. 바로 BEM("
+          },
+          {
+            "text": "Block Element Modifier)",
+            "bold": true
+          },
+          {
+            "text": "이라는 개념인데, CSS 클래스 네이밍 방법론 중 가장 오래되고, 가장 널리 쓰이는 방식이다."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "BEM은 왜 생겼을까?"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "BEM은 러시아 인터넷 기업 "
+          },
+          {
+            "text": "Yandex",
+            "bold": true
+          },
+          {
+            "text": "에서 2005년경 내부적으로 사용하기 시작한 방법론이다. Yandex는 대규모 웹 서비스를 수십 명의 개발자가 함께 유지보수해야 했고, 스타일 충돌과 유지보수 어려움이 반복됐다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "2010년대 초, CSS 생태계에는 마땅한 기준이 없었다. 클래스 이름은 개발자마다 달랐고, 프로젝트가 커질수록 스타일 파일은 누구도 건드리기 싫은 영역이 됐다. OOCSS(Object-Oriented CSS)나 SMACSS 같은 개념들이 있었지만, 구체적인 네이밍 규칙까지 제시한 건 BEM이 처음이었다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Yandex가 2012년에 BEM을 공개하면서 빠르게 퍼졌다. 특히 컴포넌트 기반 UI가 주류가 된 이후, BEM의 구조적 사고방식이 React나 Vue의 컴포넌트 개념과 잘 맞아떨어져서 더 주목받았다."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "BEM의 핵심 구조"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "BEM의 기본 구조는 세 가지로 이뤄진다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "Block__Element--Modifier\n  ↑       ↑        ↑\n 블록    엘리먼트    수정자"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "Block — 독립적인 UI 단위"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Block",
+            "bold": true
+          },
+          {
+            "text": "은 그 자체로 독립적으로 존재할 수 있는 UI 구성 요소다. 예를 들어 "
+          },
+          {
+            "text": "nav",
+            "code": true
+          },
+          {
+            "text": ", "
+          },
+          {
+            "text": "card",
+            "code": true
+          },
+          {
+            "text": ", "
+          },
+          {
+            "text": "button",
+            "code": true
+          },
+          {
+            "text": ", "
+          },
+          {
+            "text": "form",
+            "code": true
+          },
+          {
+            "text": " 같은 것들이다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": ".card { }         /* 카드 블록 */\n.nav { }          /* 내비게이션 블록 */\n.button { }       /* 버튼 블록 */"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Block은 "
+          },
+          {
+            "text": "위치에 의존하지 않는다",
+            "bold": true
+          },
+          {
+            "text": "는 점이 중요하다. 어디에 놓여도 같은 모양이어야 한다. "
+          },
+          {
+            "text": "margin",
+            "code": true
+          },
+          {
+            "text": ", "
+          },
+          {
+            "text": "position",
+            "code": true
+          },
+          {
+            "text": "처럼 외부 레이아웃을 정의하는 속성은 Block 자체에 넣지 않는 것이 원칙이다."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "Element — Block에 종속된 구성 요소"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Element",
+            "bold": true
+          },
+          {
+            "text": "는 Block 내부에서만 의미를 가지는 구성 요소다. "
+          },
+          {
+            "text": "__",
+            "code": true
+          },
+          {
+            "text": " (언더스코어 두 개)로 Block과 연결한다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": ".card__title { }      /* 카드 안의 제목 */\n.card__image { }      /* 카드 안의 이미지 */\n.card__footer { }     /* 카드 안의 푸터 */\n.nav__item { }        /* 내비게이션의 항목 */\n.nav__link { }        /* 내비게이션 항목 안의 링크 */"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Element는 Block 없이는 존재할 수 없다. "
+          },
+          {
+            "text": ".card__title",
+            "code": true
+          },
+          {
+            "text": "은 "
+          },
+          {
+            "text": ".card",
+            "code": true
+          },
+          {
+            "text": " 없이는 의미가 없다. 이게 BEM이 말하는 \"종속\"이다. Element는 "
+          },
+          {
+            "text": "중첩하지 않는다",
+            "bold": true
+          },
+          {
+            "text": ". "
+          },
+          {
+            "text": ".card__footer__button",
+            "code": true
+          },
+          {
+            "text": "처럼 쓰면 안 된다. 카드 푸터 안에 있는 버튼이라도 클래스 이름은 "
+          },
+          {
+            "text": ".card__button",
+            "code": true
+          },
+          {
+            "text": "이 맞다. 구조는 HTML로 표현하고, 클래스 이름은 깊이를 반영하지 않아야한다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "여기서 내가 잘못 알고 있었던 점은, 무조건 엘리먼트 클래스 네임 명명 규칙은 상위 엘리먼트를 따라가야한다고 생각했다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "<!-- 이렇게 하면 안 된다 -->\n<div class=\"card\">\n  <div class=\"card__footer\">\n    <button class=\"card__footer__button\">확인</button>  ← 중첩 금지\n  </div>\n</div>\n\n<!-- BEM에서 맞는 방식 -->\n<div class=\"card\">\n  <div class=\"card__footer\">\n    <button class=\"card__button\">확인</button>  ← Block 기준으로 평탄화\n  </div>\n</div>"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "Modifier — 상태나 변형을 나타내는 수정자"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Modifier",
+            "bold": true
+          },
+          {
+            "text": "는 Block이나 Element의 다른 상태, 다른 변형을 나타낸다. "
+          },
+          {
+            "text": "--",
+            "code": true
+          },
+          {
+            "text": " (하이픈 두 개)로 연결한다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": ".button--primary { }      /* 주요 액션 버튼 */\n.button--disabled { }     /* 비활성화된 버튼 */\n.button--large { }        /* 큰 버튼 */\n.card--highlighted { }    /* 강조된 카드 */\n.nav__item--active { }    /* 활성화된 내비게이션 항목 */"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Modifier는 "
+          },
+          {
+            "text": "독립적으로 사용하지 않는다",
+            "bold": true
+          },
+          {
+            "text": ". "
+          },
+          {
+            "text": ".button--primary",
+            "code": true
+          },
+          {
+            "text": "는 "
+          },
+          {
+            "text": ".button",
+            "code": true
+          },
+          {
+            "text": "과 함께 쓴다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "<!-- 맞는 방식 -->\n<button class=\"button button--primary\">저장</button>\n\n<!-- 틀린 방식 — Modifier만 단독 사용 -->\n<button class=\"button--primary\">저장</button>"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "hr",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "런타임에서 BEM이 작동하는 방식"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "BEM은 런타임 메커니즘이 아니라 "
+          },
+          {
+            "text": "명명 규칙",
+            "bold": true
+          },
+          {
+            "text": "이다. 브라우저는 BEM을 전혀 모른다. 브라우저 입장에서 "
+          },
+          {
+            "text": ".card__title",
+            "code": true
+          },
+          {
+            "text": "은 그냥 클래스 이름일 뿐이다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "그러나 바로 이 점이 BEM의 강점이다. "
+          },
+          {
+            "text": "특이도(specificity)를 낮게 유지한다",
+            "bold": true
+          },
+          {
+            "text": "."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "CSS 특이도 계산 방식을 떠올려보면:"
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "인라인 스타일 > ID > 클래스 > 태그\n\nspecificity: (0, 0, 0, 0)\n              ↑  ↑  ↑  ↑\n           인라인 ID 클래스 태그"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "BEM은 클래스 하나만으로 모든 스타일을 표현한다. ID를 쓰지 않고, 태그 선택자도 최소화한다. 결과적으로 특이도가 항상 "
+          },
+          {
+            "text": "(0, 0, 1, 0)",
+            "code": true
+          },
+          {
+            "text": "으로 균일하게 유지된다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "/* BEM 방식 — 특이도: (0,0,1,0) */\n.card__title { color: black; }\n\n/* 비BEM 방식 — 특이도: (0,0,1,1) */\n.card h2 { color: black; }\n\n/* 비BEM 방식 — 특이도: (0,1,0,0) */\n#card-title { color: black; }"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "특이도가 균일하면, 나중에 스타일을 덮어쓸 때 "
+          },
+          {
+            "text": "!important",
+            "code": true
+          },
+          {
+            "text": "나 더 복잡한 선택자 없이도 가능하다. Modifier가 Base 스타일을 덮어쓰는 구조가 깔끔하게 작동하는 이유다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": ".button {\n  background: gray;\n  color: white;\n  padding: 8px 16px;\n}\n\n.button--primary {\n  background: blue;    /* 같은 특이도, 뒤에 선언돼서 덮어씀 */\n}\n\n.button--large {\n  padding: 12px 24px;  /* 같은 특이도, 정상적으로 덮어씀 */\n}"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "브라우저는 CSS 파일을 위에서 아래로 파싱하고, 같은 특이도일 경우 나중에 선언된 규칙이 이긴다. BEM은 이 캐스케이딩 규칙을 예측 가능하게 만든다."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "실제 HTML 구조와 BEM 적용 예시"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "실제로 카드 컴포넌트를 만들면 이렇게 된다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "<article class=\"card card--featured\">         <!-- ← Block + Modifier -->\n  <img class=\"card__image\" src=\"...\" />       <!-- ← Element -->\n  <div class=\"card__body\">                    <!-- ← Element -->\n    <h2 class=\"card__title\">제목</h2>         <!-- ← Element -->\n    <p class=\"card__description\">설명</p>     <!-- ← Element -->\n  </div>\n  <footer class=\"card__footer\">              <!-- ← Element -->\n    <button class=\"button button--primary\">  <!-- ← 별도 Block + Modifier -->\n      자세히 보기\n    </button>\n  </footer>\n</article>"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "여기서 주목할 점은 "
+          },
+          {
+            "text": "button",
+            "code": true
+          },
+          {
+            "text": "이다. 카드 안에 있지만 "
+          },
+          {
+            "text": ".card__button",
+            "code": true
+          },
+          {
+            "text": "이 아니라 "
+          },
+          {
+            "text": ".button",
+            "code": true
+          },
+          {
+            "text": "이다. 버튼은 "
+          },
+          {
+            "text": "독립적인 Block",
+            "bold": true
+          },
+          {
+            "text": "으로 재사용되기 때문이다. 카드 안에서만 쓰이는 요소라면 "
+          },
+          {
+            "text": ".card__button",
+            "code": true
+          },
+          {
+            "text": "으로 만들겠지만, 여러 곳에서 쓰이는 버튼이라면 별도 Block으로 두는 것이 맞다."
+          }
+        ]
+      },
+      {
+        "type": "blockquote",
+        "children": [
+          {
+            "text": "BEM이 유독 좋은 것만은 아니다?",
+            "bold": true
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "실제로 BEM 구조로 엘리먼트를 사용하게 되면, CSS 스타일을 적용할 때는 정말 가독성이 좋다고 느껴진다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "이를 테면 SCSS의 중첩 구조에서 "
+          },
+          {
+            "text": "&__",
+            "code": true
+          },
+          {
+            "text": " , "
+          },
+          {
+            "text": "&—",
+            "code": true
+          },
+          {
+            "text": "를 통해 중첩 구조에서 어떤 엘리먼트를 가르키는지 명확하게 알 수 있었다. "
+          },
+          {
+            "text": "&",
+            "code": true
+          },
+          {
+            "text": " 를 표현해주기 위한 블록의 "
+          },
+          {
+            "text": "prefix",
+            "code": true
+          },
+          {
+            "text": " 를 계속해서 붙여줘야한다는 특징을 가지고 있다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "다만 엘리먼트에서는 "
+          },
+          {
+            "text": "&",
+            "code": true
+          },
+          {
+            "text": " 를 표현해주기 위한 블록의 "
+          },
+          {
+            "text": "prefix",
+            "code": true
+          },
+          {
+            "text": " 를 계속해서 붙여줘야한다는 특징을 가지고 있다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// 계속 `prefix` 가 붙는 구조\n\n<div class=\"card\">\n  <h2 class=\"card__title\">제목</h2>      <!-- card__ 계속 반복 -->\n  <img class=\"card__image\" />            <!-- card__ 계속 반복 -->\n  <p class=\"card__description\">설명</p>  <!-- card__ 계속 반복 -->\n</div>"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// 구조적인 SCSS 중첩 구조\n\n.card {\n  background: white;\n   \n  &__title {        // ← 컴파일하면 .card__title\n    font-size: 20px;\n  }\n\n  &__image {        // ← .card__image\n    width: 100%;\n  }\n\n  &--featured {     // ← .card--featured (Modifier)\n    border: 2px solid blue;\n  }\n\n  &--featured &__title {  // ← .card--featured .card__title\n    color: blue;\n  }\n}"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "BEM과 다른 방법론 비교"
+          }
+        ]
+      },
+      {
+        "type": "table",
+        "children": [
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "th",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "방법론"
+                      }
+                    ]
                   }
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "Block–Element–Modifier 구조화",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": ".card__title--bold",
-                  "styles": {
-                    "code": true
+                ]
+              },
+              {
+                "type": "th",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "핵심 아이디어"
+                      }
+                    ]
                   }
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "균일하게 낮음",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "중간",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "OOCSS",
-                  "styles": {
-                    "bold": true
+                ]
+              },
+              {
+                "type": "th",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "네이밍 예시"
+                      }
+                    ]
                   }
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "구조와 스킨 분리",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": ".btn .btn-skin-blue",
-                  "styles": {
-                    "code": true
+                ]
+              },
+              {
+                "type": "th",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "특이도 관리"
+                      }
+                    ]
                   }
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "보통",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "낮음",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "SMACSS",
-                  "styles": {
-                    "bold": true
+                ]
+              },
+              {
+                "type": "th",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "학습 곡선"
+                      }
+                    ]
                   }
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+                ]
               }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "카테고리별 분류 (Base, Layout, Module...)",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": ".l-grid",
-                  "styles": {
-                    "code": true
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "BEM",
+                        "bold": true
+                      }
+                    ]
                   }
-                },
-                {
-                  "type": "text",
-                  "text": ", ",
-                  "styles": {}
-                },
-                {
-                  "type": "text",
-                  "text": ".is-active",
-                  "styles": {
-                    "code": true
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "Block–Element–Modifier 구조화"
+                      }
+                    ]
                   }
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "카테고리마다 다름",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "높음",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "CSS Modules",
-                  "styles": {
-                    "bold": true
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": ".card__title--bold",
+                        "code": true
+                      }
+                    ]
                   }
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "로컬 스코프로 충돌 방지",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "styles.card",
-                  "styles": {
-                    "code": true
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "균일하게 낮음"
+                      }
+                    ]
                   }
-                },
-                {
-                  "type": "text",
-                  "text": " (컴파일 후 해시)",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "자동 격리",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "낮음",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "Utility-first (Tailwind)",
-                  "styles": {
-                    "bold": true
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "중간"
+                      }
+                    ]
                   }
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+                ]
               }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "작은 유틸리티 클래스 조합",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "flex gap-4 p-4 rounded",
-                  "styles": {
-                    "code": true
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "OOCSS",
+                        "bold": true
+                      }
+                    ]
                   }
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "구조와 스킨 분리"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": ".btn .btn-skin-blue",
+                        "code": true
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "보통"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "낮음"
+                      }
+                    ]
+                  }
+                ]
               }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "거의 없음",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "SMACSS",
+                        "bold": true
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "카테고리별 분류 (Base, Layout, Module...)"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": ".l-grid",
+                        "code": true
+                      },
+                      {
+                        "text": ", "
+                      },
+                      {
+                        "text": ".is-active",
+                        "code": true
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "카테고리마다 다름"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "높음"
+                      }
+                    ]
+                  }
+                ]
               }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "낮음",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "CSS Modules",
+                        "bold": true
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "로컬 스코프로 충돌 방지"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "styles.card",
+                        "code": true
+                      },
+                      {
+                        "text": " (컴파일 후 해시)"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "자동 격리"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "낮음"
+                      }
+                    ]
+                  }
+                ]
               }
-            }
-          ]
-        }
-      ]
-    },
-    "children": []
-  },
-  {
-    "id": "4d0d7542-3bf8-4250-b91d-8e080bc0ef5f",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "BEM의 가장 큰 장점은 ",
-        "styles": {}
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "Utility-first (Tailwind)",
+                        "bold": true
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "작은 유틸리티 클래스 조합"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "flex gap-4 p-4 rounded",
+                        "code": true
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "거의 없음"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "낮음"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "클래스 이름만 보고도 구조를 파악할 수 있다는 점",
-        "styles": {
-          "bold": true
-        }
+        "type": "p",
+        "children": [
+          {
+            "text": "BEM의 가장 큰 장점은 "
+          },
+          {
+            "text": "클래스 이름만 보고도 구조를 파악할 수 있다는 점",
+            "bold": true
+          },
+          {
+            "text": "이다. 반면 클래스 이름이 길어지는 단점도 있다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "이다. 반면 클래스 이름이 길어지는 단점도 있다.",
-        "styles": {}
+        "type": "p",
+        "children": [
+          {
+            "text": "CSS Modules나 Tailwind가 대세가 된 지금도 BEM이 여전히 쓰이는 이유는, 빌드 도구 없이도 동작하고 팀 전체가 쉽게 합의할 수 있는 기준이기 때문이다."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "언제 BEM을 선택하면 좋을까?"
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "BEM이 잘 맞는 경우"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "디자인 시스템이나 UI 라이브러리를 만들 때.",
+            "bold": true
+          },
+          {
+            "text": " 컴포넌트가 여러 프로젝트에서 재사용된다면, 스타일 충돌 없이 예측 가능한 클래스 이름이 필요하다. BEM은 이 요구를 잘 충족한다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "/* 라이브러리 수준에서 명확한 네임스페이스 */\n.ds-button { }           /* ds = design system */\n.ds-button--primary { }\n.ds-card__title { }"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "빌드 도구 없이 순수 CSS를 써야 할 때.",
+            "bold": true
+          },
+          {
+            "text": " CSS Modules나 styled-components처럼 컴파일 과정이 필요한 방식은 쓸 수 없는 환경이 있다. 그때 BEM은 충돌 없는 네이밍을 보장하는 실용적인 선택이 될 수 있다. "
+          },
+          {
+            "text": "팀 내 CSS 컨벤션을 통일해야 할 때.",
+            "bold": true
+          },
+          {
+            "text": " 경험이 다른 팀원들이 함께 CSS를 작성할 때, BEM은 명확한 규칙을 제공한다. 코드 리뷰에서 \"이 클래스 이름 왜 이렇게 지었어요?\" 라는 질문이 줄어든다. (현재 팀 내에 가장 도입이 되어야하는 이유 중에 하나이기도 하다, 일부 프로젝트에서는 BEM으로 디자인 시스템 규격이 되어있는데, 일부 백오피스를 비롯한 프로젝트에서는 명명 규칙이 따로 존재하지 않는다)"
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "BEM이 불편한 경우"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "글의 시작말에서 언급했던 것처럼 "
+          },
+          {
+            "text": "React, Vue처럼 컴포넌트 스코프가 기본으로 제공되는 환경",
+            "bold": true
+          },
+          {
+            "text": "에서는 이미 CSS Modules나 Vue의 "
+          },
+          {
+            "text": "scoped",
+            "code": true
+          },
+          {
+            "text": " 스타일이 충돌을 막아준다면 BEM의 주요 이점이 줄어든다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Tailwind 같은 유틸리티 퍼스트 방식을 쓸 때.",
+            "bold": true
+          },
+          {
+            "text": " 클래스 이름 자체를 최소화하는 방식과 BEM은 철학이 다르다. 섞어 쓰면 혼란이 생길 수 있다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "클래스 이름 길이가 큰 부담이 될 때가 있다. ",
+            "bold": true
+          },
+          {
+            "text": "이게 사실 BEM을 도입하면서 가장 우려가 되었던 부분인데, "
+          },
+          {
+            "text": ".some-component__inner-wrapper--with-special-state",
+            "code": true
+          },
+          {
+            "text": "처럼 길어지면 HTML이 읽기 어려워진다. 이럴 땐 Block 분리를 다시 검토하거나, CSS Modules를 도입하는 쪽이 낫다."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "어떻게 하면 BEM을 더 잘 쓸 수 있을까?"
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "Mix — 여러 Block을 한 요소에"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "한 HTML 요소가 두 가지 역할을 할 때, BEM은 "
+          },
+          {
+            "text": "Mix",
+            "bold": true
+          },
+          {
+            "text": "를 허용한다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "<!-- nav__item이면서 동시에 독립적인 link Block -->\n<a class=\"link nav__item\" href=\"...\">메뉴</a>"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "nav__item",
+            "code": true
+          },
+          {
+            "text": "은 "
+          },
+          {
+            "text": "nav",
+            "code": true
+          },
+          {
+            "text": " 블록 안에서의 역할을 담당하고, "
+          },
+          {
+            "text": "link",
+            "code": true
+          },
+          {
+            "text": "는 링크로서의 스타일을 담당한다. 각 클래스의 책임이 분리된다."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "Modifier 값 표현"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Boolean modifier("
+          },
+          {
+            "text": "--active",
+            "code": true
+          },
+          {
+            "text": ", "
+          },
+          {
+            "text": "--disabled",
+            "code": true
+          },
+          {
+            "text": ")와 Key-Value modifier("
+          },
+          {
+            "text": "--size-large",
+            "code": true
+          },
+          {
+            "text": ", "
+          },
+          {
+            "text": "--theme-dark",
+            "code": true
+          },
+          {
+            "text": ")를 구분하면 더 명확하다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "/* Boolean Modifier */\n.button--disabled { }\n\n/* Key-Value Modifier */\n.button--size-large { }    /* size: large */\n.button--theme-dark { }    /* theme: dark */"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "네임스페이스 prefix 추가"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "대규모 프로젝트에서는 Block 이름 앞에 prefix를 붙여서 역할을 명확히 한다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": ".c-card { }        /* c = component */\n.l-header { }      /* l = layout */\n.u-visually-hidden { }  /* u = utility */\n.js-modal-trigger { }   /* js = JavaScript hook, 스타일 없음 */"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "js-",
+            "code": true
+          },
+          {
+            "text": "로 시작하는 클래스는 CSS 스타일링에 쓰지 않고 JavaScript에서만 쓰는 규칙이다. 스타일과 동작의 결합을 방지한다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "실제로 써보면 BEM은 처음에는 클래스 이름이 너무 길다는 느낌이 든다. 근데 시간이 지나면 HTML을 보는 것만으로도 구조가 눈에 들어오는 경험을 할 수 있다. (처음부터 BEM으로 명명 규칙을 설정하고 진행해볼 것이라는 생각을 한다. 무지성으로 "
+          },
+          {
+            "text": "__",
+            "code": true
+          },
+          {
+            "text": " 을 넣곤했는데 ^,^.. ) 아직 명명 규칙을 찾고있는 팀이라면 클래스 이름들을 BEM 기준으로 한번 다시 살펴보는 것만으로도 구조적으로 무엇이 Block이고 무엇이 Element인지 프로젝트에서 명확해지는 경험을 할 수 있을 것이라 생각이 든다."
+          }
+        ]
       }
-    ],
-    "children": []
-  },
-  {
-    "id": "c08c77d8-c92b-4a09-9f1d-93cd09e8162d",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "CSS Modules나 Tailwind가 대세가 된 지금도 BEM이 여전히 쓰이는 이유는, 빌드 도구 없이도 동작하고 팀 전체가 쉽게 합의할 수 있는 기준이기 때문이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "82b95f60-e840-451e-831b-17fc23d81e2e",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "언제 BEM을 선택하면 좋을까?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "75ac6036-841a-4384-946d-1cd7aaf9cbc4",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "BEM이 잘 맞는 경우",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "d89d8d99-64ad-41dc-a997-d3d89c77cb81",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "디자인 시스템이나 UI 라이브러리를 만들 때.",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 컴포넌트가 여러 프로젝트에서 재사용된다면, 스타일 충돌 없이 예측 가능한 클래스 이름이 필요하다. BEM은 이 요구를 잘 충족한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "7dd848af-9b51-41e6-a30e-9a5edab131fe",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "/* 라이브러리 수준에서 명확한 네임스페이스 */\n.ds-button { }           /* ds = design system */\n.ds-button--primary { }\n.ds-card__title { }",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "2a20e80b-e01b-45c8-afb9-99b94863e5cc",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "빌드 도구 없이 순수 CSS를 써야 할 때.",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " CSS Modules나 styled-components처럼 컴파일 과정이 필요한 방식은 쓸 수 없는 환경이 있다. 그때 BEM은 충돌 없는 네이밍을 보장하는 실용적인 선택이 될 수 있다. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "팀 내 CSS 컨벤션을 통일해야 할 때.",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 경험이 다른 팀원들이 함께 CSS를 작성할 때, BEM은 명확한 규칙을 제공한다. 코드 리뷰에서 \"이 클래스 이름 왜 이렇게 지었어요?\" 라는 질문이 줄어든다. (현재 팀 내에 가장 도입이 되어야하는 이유 중에 하나이기도 하다, 일부 프로젝트에서는 BEM으로 디자인 시스템 규격이 되어있는데, 일부 백오피스를 비롯한 프로젝트에서는 명명 규칙이 따로 존재하지 않는다)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c946a132-d78d-4eed-8018-8727a27bba34",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "BEM이 불편한 경우",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "744f2955-60ca-4fc6-91bb-d2f5f9a2fca7",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "글의 시작말에서 언급했던 것처럼 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "React, Vue처럼 컴포넌트 스코프가 기본으로 제공되는 환경",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "에서는 이미 CSS Modules나 Vue의 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "scoped",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 스타일이 충돌을 막아준다면 BEM의 주요 이점이 줄어든다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c14a8381-c4eb-4d89-b340-38701f947212",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Tailwind 같은 유틸리티 퍼스트 방식을 쓸 때.",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 클래스 이름 자체를 최소화하는 방식과 BEM은 철학이 다르다. 섞어 쓰면 혼란이 생길 수 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "0149b5ff-3b61-404c-b8a7-2032c23dcc33",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "클래스 이름 길이가 큰 부담이 될 때가 있다. ",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "이게 사실 BEM을 도입하면서 가장 우려가 되었던 부분인데, ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": ".some-component__inner-wrapper--with-special-state",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "처럼 길어지면 HTML이 읽기 어려워진다. 이럴 땐 Block 분리를 다시 검토하거나, CSS Modules를 도입하는 쪽이 낫다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "0275b230-c1b9-478f-85e5-c91dd0f90810",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "어떻게 하면 BEM을 더 잘 쓸 수 있을까?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "4870aa35-9a1e-4e14-8298-c64f82d3530e",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Mix — 여러 Block을 한 요소에",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e6ee743a-658b-4398-8374-4dde6c53e71a",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "한 HTML 요소가 두 가지 역할을 할 때, BEM은 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Mix",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "를 허용한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "99b978d1-497f-46c9-a4eb-0e28679b2852",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "<!-- nav__item이면서 동시에 독립적인 link Block -->\n<a class=\"link nav__item\" href=\"...\">메뉴</a>",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c5eba49a-8c96-497c-ae98-2ec20608a4a8",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "nav__item",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "은 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "nav",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 블록 안에서의 역할을 담당하고, ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "link",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "는 링크로서의 스타일을 담당한다. 각 클래스의 책임이 분리된다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "3f9803b0-dd81-47b3-9613-ab5ec7a69c3a",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Modifier 값 표현",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "1261b804-c315-4885-8117-75742af503c1",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Boolean modifier(",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "--active",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": ", ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "--disabled",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": ")와 Key-Value modifier(",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "--size-large",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": ", ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "--theme-dark",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": ")를 구분하면 더 명확하다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "73bc5c88-4028-45ee-88ce-a9bba3036a10",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "/* Boolean Modifier */\n.button--disabled { }\n\n/* Key-Value Modifier */\n.button--size-large { }    /* size: large */\n.button--theme-dark { }    /* theme: dark */",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "651cea61-b3a2-4f21-9f7e-13add8859dde",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "네임스페이스 prefix 추가",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "902e396a-9761-4846-afaa-baae7651a642",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "대규모 프로젝트에서는 Block 이름 앞에 prefix를 붙여서 역할을 명확히 한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "3419b7a0-8561-4607-9229-bc64f5265fee",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": ".c-card { }        /* c = component */\n.l-header { }      /* l = layout */\n.u-visually-hidden { }  /* u = utility */\n.js-modal-trigger { }   /* js = JavaScript hook, 스타일 없음 */",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "3407b9f2-4e07-4847-8df9-f4f14e971d49",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "js-",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "로 시작하는 클래스는 CSS 스타일링에 쓰지 않고 JavaScript에서만 쓰는 규칙이다. 스타일과 동작의 결합을 방지한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "d3a96a62-286f-453c-aadd-a68a0da66c10",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "실제로 써보면 BEM은 처음에는 클래스 이름이 너무 길다는 느낌이 든다. 근데 시간이 지나면 HTML을 보는 것만으로도 구조가 눈에 들어오는 경험을 할 수 있다. (처음부터 BEM으로 명명 규칙을 설정하고 진행해볼 것이라는 생각을 한다. 무지성으로 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "__",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 을 넣곤했는데 ^,^.. ) 아직 명명 규칙을 찾고있는 팀이라면 클래스 이름들을 BEM 기준으로 한번 다시 살펴보는 것만으로도 구조적으로 무엇이 Block이고 무엇이 Element인지 프로젝트에서 명확해지는 경험을 할 수 있을 것이라 생각이 든다.",
-        "styles": {}
-      }
-    ],
-    "children": []
+    ]
   }
 ]

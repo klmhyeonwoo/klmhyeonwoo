@@ -1,2485 +1,1397 @@
 [
   {
-    "id": "bc3a3b02-c162-495f-9039-4223e7883c88",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
+    "type": "plate-content",
+    "version": 1,
     "content": [
       {
-        "type": "text",
-        "text": "코드 리뷰를 하다 보면 \"이 코드 좀 더 선언적으로 작성하면 좋겠는데요\"라는 말을 종종 듣는다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e7c81688-65b0-40f0-b01c-d9186ec7d15c",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "근데 막상 \"선언적이 뭔지 설명해봐\"라고 하면 정확히 말하기가 쉽지 않다. 처음 컴퓨터 공학과에서 선언적 프로그래밍과 절차적 프로그래밍의 개념을 숙지하고, 프론트엔드에 적용을 할 때 조차 이 구분이 명확하게 와닿지 않았다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "a23b1aec-78be-492c-bfa3-0d11b18f7e2b",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "예전만 해도 목록에서 특정 조건을 만족하는 항목만 골라 새 배열을 만드는 코드를 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "for",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 루프로 짰고, 그게 잘못됐다는 생각을 해본 적이 없었다. 코드 리뷰를 스스로 돌이켜보면서 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": ".filter()",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 로 쓰면 의도가 더 잘 드러난다는 것을 생각해보면서, 무엇(what)을 원하는 선언적 프로그래밍과 어떻게(how)를 원하는 절차적 프로그래밍이 단순히 스타일 차이가 아니라는 것을 깨닫게 되었다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "03a13a11-b13e-4060-ad7b-cb43dc8901e7",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "본래 프로그래밍의 시작은 절차적 프로그래밍이였다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "ef185af8-be78-4a99-9d46-4b92f42bf11d",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "컴퓨터는 본래 절차적으로 작동한다. CPU는 명령어를 위에서 아래로, 순서대로 실행한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "4d3651e8-e124-4816-8d46-0c37556da64b",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "초기 프로그래밍 언어(FORTRAN, C)도 그 구조를 그대로 따랐으며,",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "8990ec0d-1e33-426b-b751-88be16365a70",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "\"데이터를 읽어라 → 조건을 확인해라 → 이 변수에 결과를 써라\" 같은 방식으로 진행이 된다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "a5e7d941-511f-49b2-82e5-94db444a66f7",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "JS도 초기에는 이 패러다임이 주류였다. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "for",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 루프로 배열을 순회하고, 변수에 값을 직접 쌓고, 콜백을 중첩했다. 지금도 JS 엔진 자체는 절차적으로 코드를 실행한다. 선언적 코드도 결국 런타임에서는 절차적 명령어의 연속이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c029a2b4-e172-4551-8043-ea48d8ffb357",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "선언적 프로그래밍은 그 절차적 세부 사항을 추상화 뒤로 숨긴다. 개발자는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "무엇을(What)",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 원하는지를 표현하고, ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "어떻게(How)",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 할지는 추상화가 담당하게 한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f24df557-a2e6-45f4-8385-fc55cc8bd49c",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "두 방식의 내부 동작은 어떻게 다를까?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "63bb25c1-71d8-4059-85dc-2f11f5abcadb",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "같은 결과이지만 신기하게도 다르게 표현이 될 수 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "1985a2b8-d6e4-4025-8e9c-a149cd401fed",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "배열에서 짝수만 골라 제곱한 결과를 만드는 코드를 두 방식으로 써보자.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "ab311513-74e2-427c-880f-ff92a076ef47",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// 절차적 접근\nconst numbers = [1, 2, 3, 4, 5, 6];\nconst result = [];\n\nfor (let i = 0; i < numbers.length; i++) {    // ← \"i를 0부터 하나씩 증가\"\n  if (numbers[i] % 2 === 0) {                 // ← \"짝수인지 확인해라\"\n    result.push(numbers[i] ** 2);             // ← \"제곱해서 result에 넣어라\"\n  }\n}\n// result: [4, 16, 36]",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "ce6d3304-5492-4a9a-aaec-99b33ace4cdb",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// 선언적 접근\nconst numbers = [1, 2, 3, 4, 5, 6];\nconst result = numbers\n  .filter(n => n % 2 === 0)    // ← \"짝수인 것들만\"\n  .map(n => n ** 2);           // ← \"제곱한 결과로\"\n// result: [4, 16, 36]",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "ab739c0b-081a-4180-945c-dfb244385cfa",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "두 코드는 실행 결과가 동일하다. 근데 읽히는 방식이 다르다. 절차적 코드는 루프 변수 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "i",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "의 흐름을 따라가야 의도가 보인다. 선언적 코드는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": ".filter().map()",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "이라는 서술만 봐도 의도가 드러난다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "d6a70484-3b5f-4ad5-8259-c7e4db1f9a9a",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "런타임에서 실제로 무슨 일이 일어날까?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "3d13d7ce-f714-48e2-84cb-924ad2dae07d",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "절차적 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "for",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 루프의 실행 흐름:",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "bfa7fee8-c34b-43c0-96d0-391b2a08756e",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "i = 0 → numbers[0] = 1 → 1 % 2 !== 0 → skip\ni = 1 → numbers[1] = 2 → 2 % 2 === 0 → result.push(4)\ni = 2 → numbers[2] = 3 → 3 % 2 !== 0 → skip\ni = 3 → numbers[3] = 4 → 4 % 2 === 0 → result.push(16)\ni = 4 → numbers[4] = 5 → 5 % 2 !== 0 → skip\ni = 5 → numbers[5] = 6 → 6 % 2 === 0 → result.push(36)\ni = 6 → i >= numbers.length → 종료",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "78e1e7fe-4c91-41f0-bc09-c23be34239c5",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "선언적 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": ".filter().map()",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "의 실행 흐름:",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "d7bc9f7a-ebf4-42b7-9c19-1d53cbf0fc99",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "filter 호출\n  → 내부적으로 새 배열 생성\n  → 1 → predicate(1) = false → 포함 안 함\n  → 2 → predicate(2) = true  → [2]\n  → 3 → predicate(3) = false → 포함 안 함\n  → 4 → predicate(4) = true  → [2, 4]\n  → 5 → predicate(5) = false → 포함 안 함\n  → 6 → predicate(6) = true  → [2, 4, 6] 반환\n\nmap 호출 (filter 결과를 받아서)\n  → 내부적으로 새 배열 생성\n  → 2 → transform(2) = 4   → [4]\n  → 4 → transform(4) = 16  → [4, 16]\n  → 6 → transform(6) = 36  → [4, 16, 36] 반환",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "47c751e6-1ab4-486f-9130-77043ceedc0d",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "런타임에서 두 방식 모두 결국 \"순서대로 요소를 하나씩 처리\"하는 루프를 실행한다. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "[Array.prototype.filter](https://Array.prototype.filter)",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "의 명세를 보면 내부적으로 index를 증가시키며 순회한다. 선언적 코드가 더 효율적이어서가 아니다. 단지 \"짝수를 걸러내는 방법\"이라는 세부 구현을 추상화 뒤에 숨겨서 코드가 의도를 직접 표현하게 만든 것이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "fad0051c-6f19-4b33-ab69-2e76ed07ad3a",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "선언적 프로그래밍은 성능 최적화 기법이 아니다. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "가독성과 의도 표현에 관한 것",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "bab0dfb7-e331-41c2-911c-5729b006f2e0",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "추상화 레이어가 만들어지는 방식",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "14be04df-f3c0-4368-b13c-3f351f9eb815",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "선언적 코드가 가능한 이유는 JS가 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "함수를 일급 값(first-class value)",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 으로 다루기 때문이다. 함수를 다른 함수의 인자로 전달할 수 있고, 이 특성이 고차 함수(Higher-Order Function)를 만든다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "39184d2a-c647-4148-906a-1204f06a31bb",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": ".filter()",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "를 직접 구현해보면 그 구조가 명확하게 드러난다:",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "4e9c30f2-20a6-4118-acb6-a1358b84ffb9",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Array.prototype.myFilter = function(predicate) {\n  const result = [];\n  for (let i = 0; i < this.length; i++) {\n    if (predicate(this[i], i, this)) {     // ← \"어떻게 걸러낼지\"는 호출자가 결정\n      result.push(this[i]);\n    }\n  }\n  return result;\n};\n\n// 사용할 때\n[1, 2, 3, 4].myFilter(n => n % 2 === 0);  // ← \"짝수만\"이라는 의도만 전달",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "edcc9f5d-ff49-4b7c-8fa3-484f406703e4",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "myFilter",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 안의 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "for",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 루프는 절차적이다. 하지만 그 루프를 직접 쓰지 않고 추상화 뒤로 숨기면, 호출하는 쪽의 코드는 선언적이 된다. 선언적 코드는 대부분 이런 구조다. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "내부 어딘가에는 반드시 절차적 구현이 존재하고, 선언적 코드는 그걸 감싼 추상화다.",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "7d85f005-9fd6-4bb2-9045-79d6886503a6",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "추상화 레이어 구조:\n\n  선언적 코드 (의도 표현)\n    .filter(n => n % 2 === 0)\n         ↓\n  고차 함수 (추상화)\n    Array.prototype.filter\n         ↓\n  절차적 구현 (how)\n    for loop + predicate 호출\n         ↓\n  JS 엔진\n    바이트코드 실행",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "723205db-4721-4eca-a7f8-a9160e3b0587",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "상태 변이와 불변성",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e4078132-de3b-4a12-b755-dc66b7252f6b",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "절차적 프로그래밍에서 자주 보이는 또 다른 특징은 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "상태 직접 변이(mutation)",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "739d7388-99f3-49ef-afdf-e9c5aa439937",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// 절차적 — 기존 배열을 직접 변경\nconst users = [\n  { name: '김현우', active: true },\n  { name: '이준호', active: false },\n  { name: '박지영', active: true },\n];\n\nfor (let i = 0; i < users.length; i++) {\n  if (!users[i].active) {\n    users.splice(i, 1);    // ← 원본 배열을 직접 수정\n    i--;                   // ← splice 후 인덱스 보정 필요\n  }\n}",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "52387725-02c3-4f4d-bf71-76796b9b3091",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "이 코드에는 숨겨진 복잡성이 있다. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "splice",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "는 원본 배열을 바꾸기 때문에 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "i--",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "로 인덱스를 보정해야 한다. 코드를 읽는 사람은 루프 변수 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "i",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "의 값이 중간에 변한다는 사실까지 머릿속에 들고 따라가야 한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "76a0bb08-3d79-4992-b1e2-fa3a91466517",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// 선언적 — 새 배열을 만든다\nconst activeUsers = users.filter(user => user.active);  // ← 원본은 그대로",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "fee02aa2-9857-471e-9f86-725588872d4f",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "선언적 버전은 원본 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "users",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 배열을 건드리지 않는다. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "filter",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "는 항상 새 배열을 반환한다. 이 특성을 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "불변성(immutability)",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 이라고 하고, 선언적 스타일에서 중요하게 다루는 개념이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "ed21cc21-58ba-480c-8f0b-2961e617d9f5",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "불변성이 왜 중요한지는 아래와 같은 상황에서 명확해진다.",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "8452a3b2-8bb4-4116-ae6c-684dfe99c78d",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// 절차적 — mutation으로 인한 버그 가능성\nfunction processUsers(users) {\n  for (let i = 0; i < users.length; i++) {\n    if (!users[i].active) {\n      users.splice(i, 1);    // ← 원본을 바꾼다\n      i--;\n    }\n  }\n  return users;\n}\n\nconst originalUsers = [...];\nconst result = processUsers(originalUsers);\n\n// originalUsers도 바뀌어 있다. 함수가 인자를 변이시켰기 때문.\nconsole.log(originalUsers);  // ← 예상과 다른 결과",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "2dee2068-5098-4744-a00d-a21b320e6813",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// 선언적 — 원본 보존\nfunction processUsers(users) {\n  return users.filter(user => user.active);  // ← 새 배열 반환\n}\n\nconst originalUsers = [...];\nconst result = processUsers(originalUsers);\n\n// originalUsers는 그대로다.\nconsole.log(originalUsers);  // ← 예상한 결과",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "55ca1045-8900-47bf-8658-2d1bb840934d",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "함수가 인자를 변이시키지 않으면 함수의 동작을 외부 상태 없이 예측할 수 있다. 이런 함수를 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "순수 함수(pure function)",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 라고 한다. 선언적 스타일은 순수 함수를 지향한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "1403a9cd-4e2e-47f9-9f32-08765ace3d68",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "비동기 코드에서도 같은 패턴이 적용된다",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e811eab9-32b8-4d32-9d39-a2c251d7c77b",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "비동기 처리에서도 두 방식의 차이가 뚜렷하게 드러난다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "dc782749-8cec-4e6c-8a1a-8bf6da6d707a",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// 절차적 — 콜백 중첩 (Callback Hell)\ngetUserById(userId, function(err, user) {\n  if (err) {\n    console.error(err);\n    return;\n  }\n  getPostsByUser(user.id, function(err, posts) {    // ← 중첩\n    if (err) {\n      console.error(err);\n      return;\n    }\n    getCommentsByPost(posts[0].id, function(err, comments) {  // ← 더 깊은 중첩\n      if (err) {\n        console.error(err);\n        return;\n      }\n      console.log(comments);\n    });\n  });\n});",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "9f796e1d-092b-4345-bc19-d07b2a536ec4",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "이 코드는 에러 처리가 각 단계마다 반복되고, 들여쓰기가 깊어지면서 흐름을 파악하기 어렵다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e61ee4ce-f556-4b9d-9cb8-1c4f0791fb68",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "에러가 나면 어느 콜백에서 발생했는지 추적하기도 까다롭다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c1da7bd9-6a63-4afa-a3a5-bdcf1618e439",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// 선언적 — Promise 체인\ngetUserById(userId)\n  .then(user => getPostsByUser(user.id))       // ← \"user를 받아서 posts를 가져와\"\n  .then(posts => getCommentsByPost(posts[0].id)) // ← \"posts를 받아서 comments를 가져와\"\n  .then(comments => console.log(comments))\n  .catch(err => console.error(err));           // ← 에러 처리는 한 곳에서",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "b3dbb172-f2d4-4a8f-8361-eb39b9a31463",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// 더 선언적 — async/await\nasync function loadComments(userId) {\n  const user = await getUserById(userId);\n  const posts = await getPostsByUser(user.id);\n  const comments = await getCommentsByPost(posts[0].id);\n  return comments;\n}",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "44de18e8-d75b-49b6-94fb-37b1ffde073f",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "async/await",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "는 Promise 기반의 비동기 코드를 동기 코드처럼 읽히게 만드는 문법적 추상화다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "08700c29-2713-4abc-ba2a-911ba891db7d",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "내부적으로는 Promise chain이 실행되지만, 코드에서는 그 세부 흐름이 드러나지 않는다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "2bc660c7-3c0e-4f42-9f4b-330b8758827a",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "JS 엔진 관점에서 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "await",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "가 있는 함수의 실행 흐름:",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "22fd1f64-cc70-44c4-b193-48e1ceb021ff",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "loadComments(userId) 호출\n  → 함수 실행 시작\n  → await getUserById(userId) 만남\n  → 현재 실행 컨텍스트를 저장하고 콜 스택에서 내려옴   ← 비동기 대기\n  → getUserById의 Promise가 resolve되면\n  → 저장된 실행 컨텍스트를 콜 스택에 다시 올림\n  → user 변수에 결과를 바인딩하고 다음 줄 실행\n  → ... 반복",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "215d55d3-d7c8-4fdc-a031-c37c77f925ea",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "async/await",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "를 쓴다고 해서 블로킹이 없어지는 게 아니다. 여전히 Promise 기반으로 비동기가 처리되고, JS의 이벤트 루프가 그 흐름을 관리한다. 개발자에게 보이는 코드에서 그 세부 흐름이 감춰질 뿐이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "28cf954b-c225-4b5b-bf4b-a06ba5b0d4e3",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "유효성 검사 — 선언적 스타일이 빛나는 영역",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "66058714-65c7-42b7-ab08-d156f05bb8b6",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "절차적 유효성 검사 코드는 요구사항이 늘수록 분기가 빠르게 증가한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "7c7e76d5-0a26-4c2c-a027-52a8a1d1f813",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// 절차적 유효성 검사\nfunction validateUser(user) {\n  const errors = {};\n\n  if (!user.name) {\n    errors.name = '이름은 필수입니다';\n  } else if (user.name.length < 2) {\n    errors.name = '이름은 2자 이상이어야 합니다';\n  }\n\n  if (!user.email) {\n    errors.email = '이메일은 필수입니다';\n  } else if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(user.email)) {\n    errors.email = '올바른 이메일 형식이 아닙니다';\n  }\n\n  if (!user.age) {\n    errors.age = '나이는 필수입니다';\n  } else if (user.age < 0 || user.age > 150) {\n    errors.age = '나이는 0~150 사이여야 합니다';\n  }\n\n  return errors;\n}",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "31a1faaf-f854-4cac-a46a-7644d94fd189",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "필드가 늘어날수록 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "if/else if",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 분기가 선형으로 증가한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "5ee663b2-72ef-4f2b-964a-554efb6b3b28",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "\"user 스키마가 어떻게 생겼는지\"를 파악하려면 검사 로직을 전부 읽어야 한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "3587ee65-25fa-491c-92b1-419dfbff7f8b",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// 선언적 유효성 검사 — Zod 사용\nimport { z } from 'zod';\n\nconst userSchema = z.object({\n  name: z.string().min(2, '이름은 2자 이상이어야 합니다'),  // ← \"name은 2자 이상 문자열\"\n  email: z.string().email('올바른 이메일 형식이 아닙니다'),  // ← \"email은 이메일 형식\"\n  age: z.number().min(0).max(150),                          // ← \"age는 0~150 숫자\"\n});\n\nconst result = userSchema.safeParse(user);\nif (!result.success) {\n  console.log(result.error.issues);\n}",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "3c3271f7-6a5a-4cfd-9122-a77b30939a73",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "스키마 선언만 보면 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "user",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "의 구조가 한눈에 들어온다. 검사 로직(how)은 Zod 내부에 있고, 코드에는 스키마 구조(what)만 남는다. 새 필드가 추가되면 스키마에 한 줄만 추가하면 된다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "716d47d4-5902-4c07-b586-9f54ed21c078",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "선언적 · 절차적 프로그래밍의 비교 정리",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "60863f2c-a76c-4a8a-9677-480c46b955d1",
-    "type": "table",
-    "props": {
-      "textColor": "default"
-    },
-    "content": {
-      "type": "tableContent",
-      "columnWidths": [
-        null,
-        null,
-        null
-      ],
-      "headerRows": 1,
-      "rows": [
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "구분",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "절차적 (Imperative)",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "선언적 (Declarative)",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "핵심 질문",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "어떻게 할 것인가?",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "무엇을 원하는가?",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "상태 관리",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "직접 변이 (mutation)",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "변환 후 새 값 (immutability)",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "흐름 제어",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "명시적 (",
-                  "styles": {}
-                },
-                {
-                  "type": "text",
-                  "text": "for",
-                  "styles": {
-                    "code": true
-                  }
-                },
-                {
-                  "type": "text",
-                  "text": ", ",
-                  "styles": {}
-                },
-                {
-                  "type": "text",
-                  "text": "if",
-                  "styles": {
-                    "code": true
-                  }
-                },
-                {
-                  "type": "text",
-                  "text": ", ",
-                  "styles": {}
-                },
-                {
-                  "type": "text",
-                  "text": "while",
-                  "styles": {
-                    "code": true
-                  }
-                },
-                {
-                  "type": "text",
-                  "text": ")",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "추상화 안으로 위임",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "에러 처리",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "각 단계마다 명시",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "체인의 끝에서 일괄 처리 가능",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "가독성",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "구현 세부사항이 보임",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "의도가 보임",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "테스트 용이성",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "부수효과로 인해 어려울 수 있음",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "순수 함수 기반으로 쉬움",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "디버깅",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "스텝별 추적 가능",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "추상화 내부 접근이 필요할 수 있음",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    "children": []
-  },
-  {
-    "id": "d68adfe8-627b-48be-bd4c-39f272635670",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "실제로 어떤 상황에서 어떻게 선택해야 할까?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "713359ad-9cc2-4733-b3d1-3ab0d31d15dc",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "데이터 변환 → 선언적 접근",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "4cb3eeaf-f6b3-4588-bc87-c429be7a02b5",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "배열을 다루는 대부분의 경우 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "map",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": ", ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "filter",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": ", ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "reduce",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": ", ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "flatMap",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 같은 메서드가 적합하다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "1b6e03d4-66ce-4e6e-94a2-30f8886673b2",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// 주문 목록에서 완료된 주문의 총 금액 계산\nconst totalAmount = orders\n  .filter(order => order.status === 'completed')   // ← \"완료된 것만\"\n  .map(order => order.amount)                      // ← \"금액만 추출\"\n  .reduce((sum, amount) => sum + amount, 0);       // ← \"합산\"",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "51e9e4fb-385f-4b61-9fbc-b4bc34a7b5cc",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "체인의 각 단계가 이전 결과를 받아 새 값을 반환한다. 어느 단계에서 어떤 값이 흘러가는지 추적하기 쉽다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "01a24abf-4570-4f1e-96ce-b450bc307134",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "복잡한 데이터 집계 → ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "reduce",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "의 선언적 활용",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "2645464f-ebbf-4b60-840d-0a9ad570e2c9",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "루프 + 조건 분기가 복잡하게 얽힌 경우도 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "reduce",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "로 선언적으로 표현할 수 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "3b2eaca0-de04-45e2-b296-eab5bf5cbbba",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// 절차적\nconst grouped = {};\nfor (const item of items) {\n  if (!grouped[item.category]) {\n    grouped[item.category] = [];\n  }\n  grouped[item.category].push(item);\n}\n\n// 선언적\nconst grouped = items.reduce((acc, item) => ({\n  ...acc,\n  [item.category]: [...(acc[item.category] ?? []), item],  // ← 불변 방식으로 누적\n}), {});",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e0a83468-871a-48c6-be3c-9043f6733304",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "reduce",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "의 선언적 버전은 매 단계에서 새 객체를 만든다. 원본 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "acc",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "를 직접 수정하지 않는다. 이게 불변성 원칙이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "1fad3f45-015f-4864-a495-7bfd7b8ff52e",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "단, 성능이 중요한 케이스(수십만 건 이상)에서는 spread 연산이 반복되면 GC 부하가 생길 수 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "8ad75427-f13a-4c60-86a1-c8c785ab16ac",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "그 경우 절차적 접근이 더 적합하다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "8f84958c-30e7-4e70-8981-c4c3065549b7",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "부수효과가 필요한 경우 → 절차적 접근",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "d81f61a5-6fcf-486d-9c43-9938e1692ece",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "로깅, 외부 API 호출, 파일 쓰기 같은 작업은 본질적으로 절차적이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "47a478db-6e3e-4fb2-bceb-fe5a610eb40e",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "\"이 작업들을 이 순서로 실행하라\"를 직접 기술하는 것이 더 명확하다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "ae316257-7e9e-4878-b4d6-093a6a6a6f56",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// 이 경우는 절차적이 더 명확하다\nasync function syncUserData(userId) {\n  const user = await db.users.findById(userId);      // 1. 조회\n  const externalData = await api.fetchUser(user.externalId);  // 2. 외부 데이터\n  await db.users.update(userId, externalData);       // 3. 업데이트\n  await cache.invalidate(`user:${userId}`);          // 4. 캐시 무효화\n  logger.info(`User ${userId} synced`);              // 5. 로깅\n}",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "127e36d8-50d0-4a97-ab21-1ccfe0445a50",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "이 함수는 실행 순서가 의미를 가진다. 선언적으로 표현하면 오히려 순서 관계가 숨겨져서 읽기 어렵다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "5369e45a-836e-4be1-a69f-6dc2325026c6",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "선언적과 절차적을 섞을 때",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f219d5dc-8bc0-47fb-b6c3-9f958dc96336",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "실제 코드는 두 방식이 함께 있다. 중요한 건 각 레이어의 역할을 분리하는 것이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "0b556666-0331-41f1-bd99-07e8ae53959f",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// 함수 내부는 절차적이지만, 외부에는 선언적 인터페이스를 제공\nfunction groupBy(array, keyFn) {         // ← 추상화 (선언적 인터페이스)\n  const result = {};\n  for (const item of array) {           // ← 내부 구현 (절차적)\n    const key = keyFn(item);\n    if (!result[key]) result[key] = [];\n    result[key].push(item);\n  }\n  return result;\n}\n\n// 사용하는 쪽은 선언적\nconst byCategory = groupBy(items, item => item.category);  // ← \"카테고리별로 묶어줘\"",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "580871ae-d00c-45e1-91ee-8fc057a8ae8a",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "선언적 코드가 무조건 좋은 건 아닐 수 있다?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "0e249f45-2843-4b32-a417-3d82e66111fc",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "프로그래밍에서 무조건 좋다고 하는 것은 없다, 반드시 트레이드 오프가 발생한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c6895a2f-f479-4a73-8c0d-5ac455475485",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "그렇기 떄문에 선언적 스타일에도 주의할 점이 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c6794c4d-0c65-42b5-8b7d-f4f494debfc7",
-    "type": "quote",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "과도한 체인은 오히려 읽기 어렵다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "362189d5-0d2c-4b7e-8a44-145cfc8d0f96",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// 지나치게 체이닝된 코드 — 중간 값이 뭔지 파악하기 어렵다\nconst result = data\n  .flatMap(x => x.items)\n  .filter(item => item.valid)\n  .map(item => ({ ...item, score: item.value * 1.2 }))\n  .sort((a, b) => b.score - a.score)\n  .slice(0, 10)\n  .reduce((acc, item) => ({ ...acc, [item.id]: item }), {});",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "eec8491d-78ef-4349-8902-aaf7139fe370",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "이 경우 중간 단계에 변수를 만들어 분리하는 것이 더 읽기 편하다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "0c898a7d-81f3-4838-be21-6a3f27de5bb7",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "차적 ㄹconst allItems = data.flatMap(x => x.items);\nconst validItems = allItems.filter(item => item.valid);\nconst scoredItems = validItems.map(item => ({ ...item, score: item.value * 1.2 }));\nconst topItems = scoredItems.sort((a, b) => b.score - a.score).slice(0, 10);\nconst itemMap = topItems.reduce((acc, item) => ({ ...acc, [item.id]: item }), {});",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "3185fb7a-9db4-4884-8289-7714a3f2ef04",
-    "type": "quote",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "추상화가 숨긴 세부 사항이 디버깅을 어렵게 만들 수 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "0754b3cc-155e-4ac5-8b4b-4e0b2a5271f5",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": ".filter().map()",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "이 예상과 다른 결과를 내면, 절차적 코드보다 중간 상태를 확인하기가 번거롭다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "39c76c50-1f33-484c-8e54-d67aec0d0732",
-    "type": "quote",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "불변성을 지나치게 고집하면 성능 문제가 생긴다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "286e8b32-a4e7-4fca-8082-496e20f5a9f9",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "큰 배열에 매 단계마다 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "...spread",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "를 하면 메모리와 GC에 부담이 된다. 이 경우 내부 구현을 절차적으로 유지하고 외부 인터페이스만 선언적으로 노출하는 것이 좋다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "91f61d55-2543-40bb-a3b1-506b117d56a3",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "선언적 프로그래밍은 \"어떻게\"를 추상화 안에 숨기고 \"무엇을\"을 표면에 드러내는 방식이다. 절차적 프로그래밍은 그 세부 흐름을 직접 제어한다. JS에서 둘 중 하나만 쓰는 코드는 없다. 결국 어느 레이어에서 세부 흐름을 감추고, 어느 레이어에서 그걸 직접 다룰지를 판단하는 문제다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "d6f421a3-230f-4f35-ab1c-05d4e3115f6b",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "지금 작성 중인 함수가 \"이걸 어떻게 하는지\"를 설명하고 있는지, 아니면 \"이게 무엇인지\"를 선언하고 있는지를 구분하는 것이 아직 판단이 명확하게 서지는 않지만 경험이 쌓일수록 \"아 이 로직은 어떻게 추상화를 하고, 설계를 해야겠다\" 라는 것이 점차 보이기 시작한다. 오늘도 열심히 개발자들이 잘 읽을 수 있는 글과 같은 코드들을 만들어봐야겠다 ^,^ ..",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e4ab383b-6478-40b5-bae7-7ca5facb453f",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "시간될 때 아래 글도 한번 확인해보면 정말 좋다, 시간 가는 줄 모르고 재밌게 읽었던 글 중 하나이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "55bcaaf5-8abe-4d5b-8c27-7cac5503550f",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "link",
-        "href": "https://evan-moon.github.io/2025/09/07/declarative-programming-misconceptions-and-essence/",
-        "content": [
+        "type": "p",
+        "children": [
           {
-            "type": "text",
-            "text": "선언적 프로그래밍에 대한 착각과 오해",
-            "styles": {}
+            "text": "코드 리뷰를 하다 보면 \"이 코드 좀 더 선언적으로 작성하면 좋겠는데요\"라는 말을 종종 듣는다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "근데 막상 \"선언적이 뭔지 설명해봐\"라고 하면 정확히 말하기가 쉽지 않다. 처음 컴퓨터 공학과에서 선언적 프로그래밍과 절차적 프로그래밍의 개념을 숙지하고, 프론트엔드에 적용을 할 때 조차 이 구분이 명확하게 와닿지 않았다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "예전만 해도 목록에서 특정 조건을 만족하는 항목만 골라 새 배열을 만드는 코드를 "
+          },
+          {
+            "text": "for",
+            "code": true
+          },
+          {
+            "text": " 루프로 짰고, 그게 잘못됐다는 생각을 해본 적이 없었다. 코드 리뷰를 스스로 돌이켜보면서 "
+          },
+          {
+            "text": ".filter()",
+            "code": true
+          },
+          {
+            "text": " 로 쓰면 의도가 더 잘 드러난다는 것을 생각해보면서, 무엇(what)을 원하는 선언적 프로그래밍과 어떻게(how)를 원하는 절차적 프로그래밍이 단순히 스타일 차이가 아니라는 것을 깨닫게 되었다."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "본래 프로그래밍의 시작은 절차적 프로그래밍이였다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "컴퓨터는 본래 절차적으로 작동한다. CPU는 명령어를 위에서 아래로, 순서대로 실행한다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "초기 프로그래밍 언어(FORTRAN, C)도 그 구조를 그대로 따랐으며,"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "\"데이터를 읽어라 → 조건을 확인해라 → 이 변수에 결과를 써라\" 같은 방식으로 진행이 된다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "JS도 초기에는 이 패러다임이 주류였다. "
+          },
+          {
+            "text": "for",
+            "code": true
+          },
+          {
+            "text": " 루프로 배열을 순회하고, 변수에 값을 직접 쌓고, 콜백을 중첩했다. 지금도 JS 엔진 자체는 절차적으로 코드를 실행한다. 선언적 코드도 결국 런타임에서는 절차적 명령어의 연속이다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "선언적 프로그래밍은 그 절차적 세부 사항을 추상화 뒤로 숨긴다. 개발자는 "
+          },
+          {
+            "text": "무엇을(What)",
+            "bold": true
+          },
+          {
+            "text": " 원하는지를 표현하고, "
+          },
+          {
+            "text": "어떻게(How)",
+            "bold": true
+          },
+          {
+            "text": " 할지는 추상화가 담당하게 한다."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "두 방식의 내부 동작은 어떻게 다를까?"
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "같은 결과이지만 신기하게도 다르게 표현이 될 수 있다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "배열에서 짝수만 골라 제곱한 결과를 만드는 코드를 두 방식으로 써보자."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// 절차적 접근\nconst numbers = [1, 2, 3, 4, 5, 6];\nconst result = [];\n\nfor (let i = 0; i < numbers.length; i++) {    // ← \"i를 0부터 하나씩 증가\"\n  if (numbers[i] % 2 === 0) {                 // ← \"짝수인지 확인해라\"\n    result.push(numbers[i] ** 2);             // ← \"제곱해서 result에 넣어라\"\n  }\n}\n// result: [4, 16, 36]"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// 선언적 접근\nconst numbers = [1, 2, 3, 4, 5, 6];\nconst result = numbers\n  .filter(n => n % 2 === 0)    // ← \"짝수인 것들만\"\n  .map(n => n ** 2);           // ← \"제곱한 결과로\"\n// result: [4, 16, 36]"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "두 코드는 실행 결과가 동일하다. 근데 읽히는 방식이 다르다. 절차적 코드는 루프 변수 "
+          },
+          {
+            "text": "i",
+            "code": true
+          },
+          {
+            "text": "의 흐름을 따라가야 의도가 보인다. 선언적 코드는 "
+          },
+          {
+            "text": ".filter().map()",
+            "code": true
+          },
+          {
+            "text": "이라는 서술만 봐도 의도가 드러난다."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "런타임에서 실제로 무슨 일이 일어날까?"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "절차적 "
+          },
+          {
+            "text": "for",
+            "code": true
+          },
+          {
+            "text": " 루프의 실행 흐름:"
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "i = 0 → numbers[0] = 1 → 1 % 2 !== 0 → skip\ni = 1 → numbers[1] = 2 → 2 % 2 === 0 → result.push(4)\ni = 2 → numbers[2] = 3 → 3 % 2 !== 0 → skip\ni = 3 → numbers[3] = 4 → 4 % 2 === 0 → result.push(16)\ni = 4 → numbers[4] = 5 → 5 % 2 !== 0 → skip\ni = 5 → numbers[5] = 6 → 6 % 2 === 0 → result.push(36)\ni = 6 → i >= numbers.length → 종료"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "선언적 "
+          },
+          {
+            "text": ".filter().map()",
+            "code": true
+          },
+          {
+            "text": "의 실행 흐름:"
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "filter 호출\n  → 내부적으로 새 배열 생성\n  → 1 → predicate(1) = false → 포함 안 함\n  → 2 → predicate(2) = true  → [2]\n  → 3 → predicate(3) = false → 포함 안 함\n  → 4 → predicate(4) = true  → [2, 4]\n  → 5 → predicate(5) = false → 포함 안 함\n  → 6 → predicate(6) = true  → [2, 4, 6] 반환\n\nmap 호출 (filter 결과를 받아서)\n  → 내부적으로 새 배열 생성\n  → 2 → transform(2) = 4   → [4]\n  → 4 → transform(4) = 16  → [4, 16]\n  → 6 → transform(6) = 36  → [4, 16, 36] 반환"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "런타임에서 두 방식 모두 결국 \"순서대로 요소를 하나씩 처리\"하는 루프를 실행한다. "
+          },
+          {
+            "text": "[Array.prototype.filter](https://Array.prototype.filter)",
+            "code": true
+          },
+          {
+            "text": "의 명세를 보면 내부적으로 index를 증가시키며 순회한다. 선언적 코드가 더 효율적이어서가 아니다. 단지 \"짝수를 걸러내는 방법\"이라는 세부 구현을 추상화 뒤에 숨겨서 코드가 의도를 직접 표현하게 만든 것이다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "선언적 프로그래밍은 성능 최적화 기법이 아니다. "
+          },
+          {
+            "text": "가독성과 의도 표현에 관한 것",
+            "bold": true
+          },
+          {
+            "text": "이다."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "추상화 레이어가 만들어지는 방식"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "선언적 코드가 가능한 이유는 JS가 "
+          },
+          {
+            "text": "함수를 일급 값(first-class value)",
+            "bold": true
+          },
+          {
+            "text": " 으로 다루기 때문이다. 함수를 다른 함수의 인자로 전달할 수 있고, 이 특성이 고차 함수(Higher-Order Function)를 만든다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": ".filter()",
+            "code": true
+          },
+          {
+            "text": "를 직접 구현해보면 그 구조가 명확하게 드러난다:"
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "Array.prototype.myFilter = function(predicate) {\n  const result = [];\n  for (let i = 0; i < this.length; i++) {\n    if (predicate(this[i], i, this)) {     // ← \"어떻게 걸러낼지\"는 호출자가 결정\n      result.push(this[i]);\n    }\n  }\n  return result;\n};\n\n// 사용할 때\n[1, 2, 3, 4].myFilter(n => n % 2 === 0);  // ← \"짝수만\"이라는 의도만 전달"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "myFilter",
+            "code": true
+          },
+          {
+            "text": " 안의 "
+          },
+          {
+            "text": "for",
+            "code": true
+          },
+          {
+            "text": " 루프는 절차적이다. 하지만 그 루프를 직접 쓰지 않고 추상화 뒤로 숨기면, 호출하는 쪽의 코드는 선언적이 된다. 선언적 코드는 대부분 이런 구조다. "
+          },
+          {
+            "text": "내부 어딘가에는 반드시 절차적 구현이 존재하고, 선언적 코드는 그걸 감싼 추상화다.",
+            "bold": true
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "추상화 레이어 구조:\n\n  선언적 코드 (의도 표현)\n    .filter(n => n % 2 === 0)\n         ↓\n  고차 함수 (추상화)\n    Array.prototype.filter\n         ↓\n  절차적 구현 (how)\n    for loop + predicate 호출\n         ↓\n  JS 엔진\n    바이트코드 실행"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "상태 변이와 불변성"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "절차적 프로그래밍에서 자주 보이는 또 다른 특징은 "
+          },
+          {
+            "text": "상태 직접 변이(mutation)",
+            "bold": true
+          },
+          {
+            "text": " 다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// 절차적 — 기존 배열을 직접 변경\nconst users = [\n  { name: '김현우', active: true },\n  { name: '이준호', active: false },\n  { name: '박지영', active: true },\n];\n\nfor (let i = 0; i < users.length; i++) {\n  if (!users[i].active) {\n    users.splice(i, 1);    // ← 원본 배열을 직접 수정\n    i--;                   // ← splice 후 인덱스 보정 필요\n  }\n}"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "이 코드에는 숨겨진 복잡성이 있다. "
+          },
+          {
+            "text": "splice",
+            "code": true
+          },
+          {
+            "text": "는 원본 배열을 바꾸기 때문에 "
+          },
+          {
+            "text": "i--",
+            "code": true
+          },
+          {
+            "text": "로 인덱스를 보정해야 한다. 코드를 읽는 사람은 루프 변수 "
+          },
+          {
+            "text": "i",
+            "code": true
+          },
+          {
+            "text": "의 값이 중간에 변한다는 사실까지 머릿속에 들고 따라가야 한다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// 선언적 — 새 배열을 만든다\nconst activeUsers = users.filter(user => user.active);  // ← 원본은 그대로"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "선언적 버전은 원본 "
+          },
+          {
+            "text": "users",
+            "code": true
+          },
+          {
+            "text": " 배열을 건드리지 않는다. "
+          },
+          {
+            "text": "filter",
+            "code": true
+          },
+          {
+            "text": "는 항상 새 배열을 반환한다. 이 특성을 "
+          },
+          {
+            "text": "불변성(immutability)",
+            "bold": true
+          },
+          {
+            "text": " 이라고 하고, 선언적 스타일에서 중요하게 다루는 개념이다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "불변성이 왜 중요한지는 아래와 같은 상황에서 명확해진다.",
+            "bold": true
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// 절차적 — mutation으로 인한 버그 가능성\nfunction processUsers(users) {\n  for (let i = 0; i < users.length; i++) {\n    if (!users[i].active) {\n      users.splice(i, 1);    // ← 원본을 바꾼다\n      i--;\n    }\n  }\n  return users;\n}\n\nconst originalUsers = [...];\nconst result = processUsers(originalUsers);\n\n// originalUsers도 바뀌어 있다. 함수가 인자를 변이시켰기 때문.\nconsole.log(originalUsers);  // ← 예상과 다른 결과"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// 선언적 — 원본 보존\nfunction processUsers(users) {\n  return users.filter(user => user.active);  // ← 새 배열 반환\n}\n\nconst originalUsers = [...];\nconst result = processUsers(originalUsers);\n\n// originalUsers는 그대로다.\nconsole.log(originalUsers);  // ← 예상한 결과"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "함수가 인자를 변이시키지 않으면 함수의 동작을 외부 상태 없이 예측할 수 있다. 이런 함수를 "
+          },
+          {
+            "text": "순수 함수(pure function)",
+            "bold": true
+          },
+          {
+            "text": " 라고 한다. 선언적 스타일은 순수 함수를 지향한다."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "비동기 코드에서도 같은 패턴이 적용된다"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "비동기 처리에서도 두 방식의 차이가 뚜렷하게 드러난다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// 절차적 — 콜백 중첩 (Callback Hell)\ngetUserById(userId, function(err, user) {\n  if (err) {\n    console.error(err);\n    return;\n  }\n  getPostsByUser(user.id, function(err, posts) {    // ← 중첩\n    if (err) {\n      console.error(err);\n      return;\n    }\n    getCommentsByPost(posts[0].id, function(err, comments) {  // ← 더 깊은 중첩\n      if (err) {\n        console.error(err);\n        return;\n      }\n      console.log(comments);\n    });\n  });\n});"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "이 코드는 에러 처리가 각 단계마다 반복되고, 들여쓰기가 깊어지면서 흐름을 파악하기 어렵다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "에러가 나면 어느 콜백에서 발생했는지 추적하기도 까다롭다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// 선언적 — Promise 체인\ngetUserById(userId)\n  .then(user => getPostsByUser(user.id))       // ← \"user를 받아서 posts를 가져와\"\n  .then(posts => getCommentsByPost(posts[0].id)) // ← \"posts를 받아서 comments를 가져와\"\n  .then(comments => console.log(comments))\n  .catch(err => console.error(err));           // ← 에러 처리는 한 곳에서"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// 더 선언적 — async/await\nasync function loadComments(userId) {\n  const user = await getUserById(userId);\n  const posts = await getPostsByUser(user.id);\n  const comments = await getCommentsByPost(posts[0].id);\n  return comments;\n}"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "async/await",
+            "code": true
+          },
+          {
+            "text": "는 Promise 기반의 비동기 코드를 동기 코드처럼 읽히게 만드는 문법적 추상화다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "내부적으로는 Promise chain이 실행되지만, 코드에서는 그 세부 흐름이 드러나지 않는다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "JS 엔진 관점에서 "
+          },
+          {
+            "text": "await",
+            "code": true
+          },
+          {
+            "text": "가 있는 함수의 실행 흐름:"
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "loadComments(userId) 호출\n  → 함수 실행 시작\n  → await getUserById(userId) 만남\n  → 현재 실행 컨텍스트를 저장하고 콜 스택에서 내려옴   ← 비동기 대기\n  → getUserById의 Promise가 resolve되면\n  → 저장된 실행 컨텍스트를 콜 스택에 다시 올림\n  → user 변수에 결과를 바인딩하고 다음 줄 실행\n  → ... 반복"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "async/await",
+            "code": true
+          },
+          {
+            "text": "를 쓴다고 해서 블로킹이 없어지는 게 아니다. 여전히 Promise 기반으로 비동기가 처리되고, JS의 이벤트 루프가 그 흐름을 관리한다. 개발자에게 보이는 코드에서 그 세부 흐름이 감춰질 뿐이다."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "유효성 검사 — 선언적 스타일이 빛나는 영역"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "절차적 유효성 검사 코드는 요구사항이 늘수록 분기가 빠르게 증가한다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// 절차적 유효성 검사\nfunction validateUser(user) {\n  const errors = {};\n\n  if (!user.name) {\n    errors.name = '이름은 필수입니다';\n  } else if (user.name.length < 2) {\n    errors.name = '이름은 2자 이상이어야 합니다';\n  }\n\n  if (!user.email) {\n    errors.email = '이메일은 필수입니다';\n  } else if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(user.email)) {\n    errors.email = '올바른 이메일 형식이 아닙니다';\n  }\n\n  if (!user.age) {\n    errors.age = '나이는 필수입니다';\n  } else if (user.age < 0 || user.age > 150) {\n    errors.age = '나이는 0~150 사이여야 합니다';\n  }\n\n  return errors;\n}"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "필드가 늘어날수록 "
+          },
+          {
+            "text": "if/else if",
+            "code": true
+          },
+          {
+            "text": " 분기가 선형으로 증가한다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "\"user 스키마가 어떻게 생겼는지\"를 파악하려면 검사 로직을 전부 읽어야 한다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// 선언적 유효성 검사 — Zod 사용\nimport { z } from 'zod';\n\nconst userSchema = z.object({\n  name: z.string().min(2, '이름은 2자 이상이어야 합니다'),  // ← \"name은 2자 이상 문자열\"\n  email: z.string().email('올바른 이메일 형식이 아닙니다'),  // ← \"email은 이메일 형식\"\n  age: z.number().min(0).max(150),                          // ← \"age는 0~150 숫자\"\n});\n\nconst result = userSchema.safeParse(user);\nif (!result.success) {\n  console.log(result.error.issues);\n}"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "스키마 선언만 보면 "
+          },
+          {
+            "text": "user",
+            "code": true
+          },
+          {
+            "text": "의 구조가 한눈에 들어온다. 검사 로직(how)은 Zod 내부에 있고, 코드에는 스키마 구조(what)만 남는다. 새 필드가 추가되면 스키마에 한 줄만 추가하면 된다."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "선언적 · 절차적 프로그래밍의 비교 정리"
+          }
+        ]
+      },
+      {
+        "type": "table",
+        "children": [
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "th",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "구분"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "th",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "절차적 (Imperative)"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "th",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "선언적 (Declarative)"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "핵심 질문"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "어떻게 할 것인가?"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "무엇을 원하는가?"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "상태 관리"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "직접 변이 (mutation)"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "변환 후 새 값 (immutability)"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "흐름 제어"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "명시적 ("
+                      },
+                      {
+                        "text": "for",
+                        "code": true
+                      },
+                      {
+                        "text": ", "
+                      },
+                      {
+                        "text": "if",
+                        "code": true
+                      },
+                      {
+                        "text": ", "
+                      },
+                      {
+                        "text": "while",
+                        "code": true
+                      },
+                      {
+                        "text": ")"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "추상화 안으로 위임"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "에러 처리"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "각 단계마다 명시"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "체인의 끝에서 일괄 처리 가능"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "가독성"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "구현 세부사항이 보임"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "의도가 보임"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "테스트 용이성"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "부수효과로 인해 어려울 수 있음"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "순수 함수 기반으로 쉬움"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "디버깅"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "스텝별 추적 가능"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "추상화 내부 접근이 필요할 수 있음"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "실제로 어떤 상황에서 어떻게 선택해야 할까?"
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "데이터 변환 → 선언적 접근"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "배열을 다루는 대부분의 경우 "
+          },
+          {
+            "text": "map",
+            "code": true
+          },
+          {
+            "text": ", "
+          },
+          {
+            "text": "filter",
+            "code": true
+          },
+          {
+            "text": ", "
+          },
+          {
+            "text": "reduce",
+            "code": true
+          },
+          {
+            "text": ", "
+          },
+          {
+            "text": "flatMap",
+            "code": true
+          },
+          {
+            "text": " 같은 메서드가 적합하다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// 주문 목록에서 완료된 주문의 총 금액 계산\nconst totalAmount = orders\n  .filter(order => order.status === 'completed')   // ← \"완료된 것만\"\n  .map(order => order.amount)                      // ← \"금액만 추출\"\n  .reduce((sum, amount) => sum + amount, 0);       // ← \"합산\""
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "체인의 각 단계가 이전 결과를 받아 새 값을 반환한다. 어느 단계에서 어떤 값이 흘러가는지 추적하기 쉽다."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "복잡한 데이터 집계 → "
+          },
+          {
+            "text": "reduce",
+            "code": true
+          },
+          {
+            "text": "의 선언적 활용"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "루프 + 조건 분기가 복잡하게 얽힌 경우도 "
+          },
+          {
+            "text": "reduce",
+            "code": true
+          },
+          {
+            "text": "로 선언적으로 표현할 수 있다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// 절차적\nconst grouped = {};\nfor (const item of items) {\n  if (!grouped[item.category]) {\n    grouped[item.category] = [];\n  }\n  grouped[item.category].push(item);\n}\n\n// 선언적\nconst grouped = items.reduce((acc, item) => ({\n  ...acc,\n  [item.category]: [...(acc[item.category] ?? []), item],  // ← 불변 방식으로 누적\n}), {});"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "reduce",
+            "code": true
+          },
+          {
+            "text": "의 선언적 버전은 매 단계에서 새 객체를 만든다. 원본 "
+          },
+          {
+            "text": "acc",
+            "code": true
+          },
+          {
+            "text": "를 직접 수정하지 않는다. 이게 불변성 원칙이다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "단, 성능이 중요한 케이스(수십만 건 이상)에서는 spread 연산이 반복되면 GC 부하가 생길 수 있다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "그 경우 절차적 접근이 더 적합하다."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "부수효과가 필요한 경우 → 절차적 접근"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "로깅, 외부 API 호출, 파일 쓰기 같은 작업은 본질적으로 절차적이다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "\"이 작업들을 이 순서로 실행하라\"를 직접 기술하는 것이 더 명확하다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// 이 경우는 절차적이 더 명확하다\nasync function syncUserData(userId) {\n  const user = await db.users.findById(userId);      // 1. 조회\n  const externalData = await api.fetchUser(user.externalId);  // 2. 외부 데이터\n  await db.users.update(userId, externalData);       // 3. 업데이트\n  await cache.invalidate(`user:${userId}`);          // 4. 캐시 무효화\n  logger.info(`User ${userId} synced`);              // 5. 로깅\n}"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "이 함수는 실행 순서가 의미를 가진다. 선언적으로 표현하면 오히려 순서 관계가 숨겨져서 읽기 어렵다."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "선언적과 절차적을 섞을 때"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "실제 코드는 두 방식이 함께 있다. 중요한 건 각 레이어의 역할을 분리하는 것이다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// 함수 내부는 절차적이지만, 외부에는 선언적 인터페이스를 제공\nfunction groupBy(array, keyFn) {         // ← 추상화 (선언적 인터페이스)\n  const result = {};\n  for (const item of array) {           // ← 내부 구현 (절차적)\n    const key = keyFn(item);\n    if (!result[key]) result[key] = [];\n    result[key].push(item);\n  }\n  return result;\n}\n\n// 사용하는 쪽은 선언적\nconst byCategory = groupBy(items, item => item.category);  // ← \"카테고리별로 묶어줘\""
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "선언적 코드가 무조건 좋은 건 아닐 수 있다?"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "프로그래밍에서 무조건 좋다고 하는 것은 없다, 반드시 트레이드 오프가 발생한다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "그렇기 떄문에 선언적 스타일에도 주의할 점이 있다."
+          }
+        ]
+      },
+      {
+        "type": "blockquote",
+        "children": [
+          {
+            "text": "과도한 체인은 오히려 읽기 어렵다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// 지나치게 체이닝된 코드 — 중간 값이 뭔지 파악하기 어렵다\nconst result = data\n  .flatMap(x => x.items)\n  .filter(item => item.valid)\n  .map(item => ({ ...item, score: item.value * 1.2 }))\n  .sort((a, b) => b.score - a.score)\n  .slice(0, 10)\n  .reduce((acc, item) => ({ ...acc, [item.id]: item }), {});"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "이 경우 중간 단계에 변수를 만들어 분리하는 것이 더 읽기 편하다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "차적 ㄹconst allItems = data.flatMap(x => x.items);\nconst validItems = allItems.filter(item => item.valid);\nconst scoredItems = validItems.map(item => ({ ...item, score: item.value * 1.2 }));\nconst topItems = scoredItems.sort((a, b) => b.score - a.score).slice(0, 10);\nconst itemMap = topItems.reduce((acc, item) => ({ ...acc, [item.id]: item }), {});"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "blockquote",
+        "children": [
+          {
+            "text": "추상화가 숨긴 세부 사항이 디버깅을 어렵게 만들 수 있다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": ".filter().map()",
+            "code": true
+          },
+          {
+            "text": "이 예상과 다른 결과를 내면, 절차적 코드보다 중간 상태를 확인하기가 번거롭다."
+          }
+        ]
+      },
+      {
+        "type": "blockquote",
+        "children": [
+          {
+            "text": "불변성을 지나치게 고집하면 성능 문제가 생긴다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "큰 배열에 매 단계마다 "
+          },
+          {
+            "text": "...spread",
+            "code": true
+          },
+          {
+            "text": "를 하면 메모리와 GC에 부담이 된다. 이 경우 내부 구현을 절차적으로 유지하고 외부 인터페이스만 선언적으로 노출하는 것이 좋다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "선언적 프로그래밍은 \"어떻게\"를 추상화 안에 숨기고 \"무엇을\"을 표면에 드러내는 방식이다. 절차적 프로그래밍은 그 세부 흐름을 직접 제어한다. JS에서 둘 중 하나만 쓰는 코드는 없다. 결국 어느 레이어에서 세부 흐름을 감추고, 어느 레이어에서 그걸 직접 다룰지를 판단하는 문제다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "지금 작성 중인 함수가 \"이걸 어떻게 하는지\"를 설명하고 있는지, 아니면 \"이게 무엇인지\"를 선언하고 있는지를 구분하는 것이 아직 판단이 명확하게 서지는 않지만 경험이 쌓일수록 \"아 이 로직은 어떻게 추상화를 하고, 설계를 해야겠다\" 라는 것이 점차 보이기 시작한다. 오늘도 열심히 개발자들이 잘 읽을 수 있는 글과 같은 코드들을 만들어봐야겠다 ^,^ .."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "시간될 때 아래 글도 한번 확인해보면 정말 좋다, 시간 가는 줄 모르고 재밌게 읽었던 글 중 하나이다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "선언적 프로그래밍에 대한 착각과 오해"
           }
         ]
       }
-    ],
-    "children": []
+    ]
   }
 ]

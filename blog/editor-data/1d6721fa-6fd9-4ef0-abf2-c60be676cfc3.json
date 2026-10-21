@@ -1,3698 +1,2131 @@
 [
   {
-    "id": "2909c99c-9486-4d0b-a6ad-a50cb68f3bad",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
+    "type": "plate-content",
+    "version": 1,
     "content": [
       {
-        "type": "text",
-        "text": "npm install",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "을 치고 멍하니 기다린 적이 있을 것이다. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "node_modules",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "가 1GB를 넘어서 당황했던 경험도. 팀원이 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "yarn",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "을 쓰는데 나는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "npm",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "을 써서 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "package-lock.json",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "과 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "yarn.lock",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "이 동시에 생겨버린 아찔한 기억도. 패키지 매니저는 워낙 당연한 도구라 깊이 생각하지 않고 그냥 쓰게 되는데, 사실 선택에 따라 설치 속도, 디스크 사용량, 팀 협업 경험이 꽤 크게 달라진다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "20706012-14df-45eb-b5df-4d0011d5d153",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "요즘 npm에서 pnpm이나 Yarn Berry로 갈아타는 팀이 늘고 있다. 어떤 패키지 매니저가 무엇이 다른지, 내부적으로 어떻게 동작하는지 제대로 정리해보려 한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "302b7e22-22f8-4140-a8a3-539d51f19f3c",
-    "type": "divider",
-    "props": {},
-    "children": []
-  },
-  {
-    "id": "2f2e8b51-a33c-4b8e-99f5-9d43ccf68f81",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "패키지 매니저의 역사를 짧게 짚고 넘어가면",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "4990049b-726e-4995-b020-b31456f9f7fa",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "2010년",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " — npm이 Node.js와 함께 등장. 사실상 표준이 됨",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "50260aac-92e8-43e1-b52e-6dce0e0aed88",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "2016년",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " — Facebook이 Yarn(v1) 출시. npm의 느린 속도와 비결정적 설치 문제를 해결하기 위해",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "3b9f6734-61c8-4383-8d80-fa92e7e8ad4c",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "2017년",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " — npm v5에서 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "package-lock.json",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 도입. Yarn의 장점을 상당 부분 흡수",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "2c16bb55-6d8e-4ac4-86f3-e1551874d3a9",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "2018년",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " — pnpm이 주목받기 시작. 디스크 효율성과 속도에서 차별화",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "befd161d-5c6d-4b47-822f-9b64f8d6bfac",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "2020년",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " — Yarn Berry(v2) 출시. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "node_modules",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "를 아예 없애는 PnP 방식 도입",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "572ed6b3-6f49-42ce-8df7-4db8d6a795f3",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "2022년",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " — Bun 등장. JS 런타임과 패키지 매니저를 통합한 새로운 접근",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "44ae2746-fe92-4b1e-ae5e-b332e2486d7e",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "2023년",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " — Deno 2.0에서 npm 호환성 강화",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c4e4c261-b4ce-43a5-94f7-4bf5ac4e791e",
-    "type": "divider",
-    "props": {},
-    "children": []
-  },
-  {
-    "id": "122190b1-42d7-4b99-b096-a772b0f35b75",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "패키지를 어떻게 설치하는가? — 핵심은 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "node_modules",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 구조",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "1b4a667b-31b1-4bf3-9ff0-ce92708cfa35",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "패키지 매니저들의 가장 근본적인 차이는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "패키지를 디스크에 어떻게 배치하는가",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "에 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "fba49c77-c4f3-4cd3-a4ca-8f88aeed5747",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "npm — 플랫 호이스팅(Flat Hoisting)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "bdc5c539-84c7-4443-adfa-b8e4c271e26d",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "초창기 npm(v1~v2)은 의존성을 중첩(nested) 구조로 설치했다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "266b15c2-aa1a-40e1-ade9-cd900f2c34f9",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "node_modules/\n  package-a/\n    node_modules/\n      package-b/\n        node_modules/\n          package-c/",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "1647ce1c-b473-4b2b-bd05-e951b77dd57b",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "package-a",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "가 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "package-b",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "를 필요로 하고, ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "package-b",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "가 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "package-c",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "를 필요로 하면 이렇게 깊이 중첩됐다. Windows에서는 경로 길이 제한(260자)에 걸려 설치가 실패하는 일도 있었고, 같은 패키지가 여러 곳에 중복 설치되어 디스크를 낭비했다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "0ef7c52c-773d-4988-bdf5-a9952422f443",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "npm v3부터는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "플랫 호이스팅",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "을 도입했다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "3f347251-a149-4694-9554-10fffb9ef501",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "node_modules/\n  package-a/\n  package-b/     ← 최상위로 끌어올림 (hoisting)\n  package-c/",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "cd7f6dcd-b90b-4c58-a12f-7fbc20746ea7",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "가능한 한 최상위 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "node_modules",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "로 끌어올려서 중복을 줄이는 방식이다. 덕분에 경로 문제는 해결됐지만, 새로운 문제가 생겼다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "b2795047-b022-4889-9ff5-bf4392d1e6cb",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "팬텀 디펜던시(Phantom Dependency)",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 문제다. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "package.json",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "에 명시하지 않았지만 호이스팅된 덕분에 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "require('package-b')",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "가 동작해버리는 것이다. 어느 날 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "package-a",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "가 내부 의존성을 바꾸면 갑자기 내 코드가 깨지는 버그의 원인이 된다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "5047a7b7-b565-4506-8ec8-d29d7bf8f7e7",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// package.json에는 package-a만 있음\n{\n  \"dependencies\": {\n    \"package-a\": \"^1.0.0\"\n  }\n}",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "bbfda518-66e1-47bf-95f8-860b94309ae9",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// 근데 이게 동작해버림 (팬텀 디펜던시)\nconst b = require('package-b')",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "adee1ee3-07a3-4526-bdab-560bcc473b11",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Yarn Classic(v1) — 같은 방식, 더 빠르게",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "9424721f-7ae6-4598-9673-83e51e8f5522",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Yarn v1은 npm과 동일한 플랫 호이스팅 구조를 사용한다. 구조 자체는 같지만, 병렬 다운로드와 로컬 캐시 활용으로 속도를 끌어올린 것이 핵심이었다. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "yarn.lock",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "을 통해 결정적 설치(deterministic install)를 보장했고, 이 개념을 npm이 나중에 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "package-lock.json",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "으로 따라했다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "4cc9d167-f8ff-4481-beb6-00b7648d1526",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "현재 Yarn v1은 사실상 유지보수 모드다. 신규 프로젝트에서 굳이 선택할 이유는 없다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "2993ea62-5a9d-454a-a270-4759e763debf",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "pnpm — 콘텐츠 주소 기반 저장소 + 심볼릭 링크",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "24f6b3ce-5f2a-49ec-9de6-872500a9c71d",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "pnpm의 접근은 근본적으로 다르다. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "글로벌 저장소(content-addressable store)",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 에 패키지를 한 번만 저장하고, 프로젝트의 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "node_modules",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "에는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "심볼릭 링크(symlink)",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 만 만든다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "a08275e8-6004-45a3-ade8-c94ebedb6e06",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "~/.pnpm-store/             ← 글로벌 저장소 (한 번만 저장)\n  v3/\n    files/\n      00/abc123...         ← 파일 해시 기반으로 저장\n      01/def456...\n\nmy-project/\n  node_modules/\n    .pnpm/                 ← 실제 패키지들 (글로벌 저장소에서 하드링크)\n      package-a@1.0.0/\n        node_modules/\n          package-b → .pnpm/package-b@2.0.0/  ← 심볼릭 링크\n    package-a → .pnpm/package-a@1.0.0/node_modules/package-a",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "604e9b6d-4f56-4314-b7eb-25d3e3939494",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "이 구조가 주는 이점이 상당하다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "ddbdf95b-e17d-4576-a3db-18504a3a1f81",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "디스크 절약",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": ": ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "react@18.2.0",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "을 10개 프로젝트에서 써도 파일은 글로벌 저장소에 하나만 존재한다. 프로젝트마다 하드링크만 생긴다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "052b5874-7162-482f-981b-64f519e0892f",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "팬텀 디펜던시 차단",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": ": ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "node_modules",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 최상위에는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "[package.json](https://package.json)",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "에 명시한 패키지만 노출된다. 내부 의존성은 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": ".pnpm/",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 안에 격리된다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "5246ceac-307b-42d2-adb1-a915caa8bfe4",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "빠른 설치",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": ": 이미 글로벌 저장소에 있는 파일은 다운로드하지 않고 링크만 생성한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "78422699-cefd-4285-8f01-70c02952edce",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "# 같은 패키지를 100개 프로젝트에서 설치해도\n# 실제 파일은 글로벌 저장소에 딱 하나\n\n~/.pnpm-store/v3/files/  ← react@18.2.0 파일들이 여기 한 번만\nproject-1/node_modules/.pnpm/react@18.2.0/  ← 하드링크\nproject-2/node_modules/.pnpm/react@18.2.0/  ← 하드링크\nproject-3/node_modules/.pnpm/react@18.2.0/  ← 하드링크",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "cb458c51-ef89-4676-a426-48f993b306b3",
-    "type": "quote",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "하드링크와 심볼릭링크 차이",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "ed5da6e3-7e42-443a-96e8-338b93a9e289",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "하드링크는 원본 파일과 동일한 실제 데이터를 공유하여 원본 삭제 후에도 데이터가 유지 되나,",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "29e2aac4-c433-4e95-bde3-ecf8901f0c8a",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "심볼릭 링크는 원본의 경로만 기록한 바로가기 파일로 원본 삭제 시 링크가 깨진다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "94cdaf77-92f2-4984-82e3-83ddc944dbc2",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "심볼릭 링크는 디렉토리 링크와 파티션 간 이동이 가능하지만, 하드링크는 동일 파일 시스템 내 파일만 가능하다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "7c6927dd-664f-496b-8a9b-aa4f805fc97f",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Yarn Berry(v2+) — PnP로 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "node_modules",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "를 없애다",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "18d5e90d-2983-4983-a521-bee392023d26",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Yarn Berry는 가장 급진적인 접근을 택했다. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Plug'n'Play(PnP)",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 라는 방식으로 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "node_modules",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 디렉토리 자체를 없애버린다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "a17df171-b16f-4870-a439-3980943b4f20",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "대신 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": ".yarn/cache/",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 에 압축된 zip 파일로 패키지를 저장하고, ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": ".pnp.cjs",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 라는 파일 하나로 \"어떤 패키지가 어디에 있는지\"를 Node.js에 알려준다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "94072914-e19c-4cbe-bb3c-56d3785426ac",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "my-project/\n  .yarn/\n    cache/\n      package-a-npm-1.0.0-abc123.zip   ← zip으로 압축 저장\n      package-b-npm-2.0.0-def456.zip\n  .pnp.cjs                              ← 패키지 위치 맵\n  package.json\n  yarn.lock",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "6a4dfcb2-610d-4da4-8a4f-83923bc3448e",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// .pnp.cjs 내부 (간략화)\nconst packageLocatorsByLocations = new Map([\n  [\"package-a/\", { name: \"package-a\", version: \"1.0.0\" }],\n  // ...\n])",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "d5da05fe-beb0-4a9f-8116-92adcf67428e",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Node.js가 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "require('package-a')",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "를 만나면 기존처럼 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "node_modules",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "를 탐색하는 대신, ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": ".pnp.cjs",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "의 맵을 참조해서 zip 안에서 바로 파일을 읽는다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "56f22835-3756-42a9-90e2-69fb974aeceb",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Zero-Installs",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "라는 개념도 여기서 나온다. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": ".yarn/cache/",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "의 zip 파일들을 Git에 커밋해두면, 저장소를 클론한 직후 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "yarn install",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 없이도 바로 실행이 가능하다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "ac588901-3e50-4d8f-98d4-74a896e3673b",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "git clone https://github.com/my-project\ncd my-project\n# yarn install 없이 바로\nyarn dev  # 동작함",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "57814541-fab1-48b4-9de7-74c3fe9e5093",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "단, zip 파일을 Git에 올리면 저장소 크기가 상당히 커진다는 트레이드오프가 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "614786c2-4b20-4e20-bfe9-220d8f4e74d3",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Bun — 런타임과 패키지 매니저의 통합",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "1a7d2e6e-5c29-4c9b-a1ec-10132d33501d",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Bun은 패키지 매니저만이 아니라 JS 런타임, 번들러, 테스트 러너까지 통합한 도구다. 패키지 설치 방식은 npm과 유사한 플랫 구조를 따르지만, Zig로 작성된 네이티브 코드 덕분에 속도가 압도적으로 빠르다. 글로벌 캐시도 지원한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "96e9eaf5-e40c-4307-b709-559779042928",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "bun install    # npm install과 동일한 사용법\nbun add react  # npm install react\nbun remove react",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "19b9e4e2-77cc-4466-865f-5839ca88792b",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "package.json",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "과 호환되고 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "bun.lockb",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "라는 바이너리 락파일을 생성한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "416f1cad-d27e-41f3-974c-713a2d49fd5b",
-    "type": "divider",
-    "props": {},
-    "children": []
-  },
-  {
-    "id": "f3c06c5e-567a-485d-a7f9-7e7d77978e54",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "성능 비교",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "bb1529cc-77a3-4c99-8f24-dc5f2d161599",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "벤치마크는 환경과 프로젝트 크기에 따라 다르지만, 일반적으로 알려진 경향성이 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "2b38a336-4cba-4d91-b163-eaff9f4da8f1",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "설치 속도 (캐시 없을 때 → 캐시 있을 때)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "8ebea01e-043d-470d-b0c2-a29c27f59275",
-    "type": "table",
-    "props": {
-      "textColor": "default"
-    },
-    "content": {
-      "type": "tableContent",
-      "columnWidths": [
-        null,
-        null,
-        null,
-        null
-      ],
-      "headerRows": 1,
-      "rows": [
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "패키지 매니저",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+        "type": "p",
+        "children": [
+          {
+            "text": "npm install",
+            "code": true
+          },
+          {
+            "text": "을 치고 멍하니 기다린 적이 있을 것이다. "
+          },
+          {
+            "text": "node_modules",
+            "code": true
+          },
+          {
+            "text": "가 1GB를 넘어서 당황했던 경험도. 팀원이 "
+          },
+          {
+            "text": "yarn",
+            "code": true
+          },
+          {
+            "text": "을 쓰는데 나는 "
+          },
+          {
+            "text": "npm",
+            "code": true
+          },
+          {
+            "text": "을 써서 "
+          },
+          {
+            "text": "package-lock.json",
+            "code": true
+          },
+          {
+            "text": "과 "
+          },
+          {
+            "text": "yarn.lock",
+            "code": true
+          },
+          {
+            "text": "이 동시에 생겨버린 아찔한 기억도. 패키지 매니저는 워낙 당연한 도구라 깊이 생각하지 않고 그냥 쓰게 되는데, 사실 선택에 따라 설치 속도, 디스크 사용량, 팀 협업 경험이 꽤 크게 달라진다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "요즘 npm에서 pnpm이나 Yarn Berry로 갈아타는 팀이 늘고 있다. 어떤 패키지 매니저가 무엇이 다른지, 내부적으로 어떻게 동작하는지 제대로 정리해보려 한다."
+          }
+        ]
+      },
+      {
+        "type": "hr",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "패키지 매니저의 역사를 짧게 짚고 넘어가면"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "2010년",
+            "bold": true
+          },
+          {
+            "text": " — npm이 Node.js와 함께 등장. 사실상 표준이 됨"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "2016년",
+            "bold": true
+          },
+          {
+            "text": " — Facebook이 Yarn(v1) 출시. npm의 느린 속도와 비결정적 설치 문제를 해결하기 위해"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "2017년",
+            "bold": true
+          },
+          {
+            "text": " — npm v5에서 "
+          },
+          {
+            "text": "package-lock.json",
+            "code": true
+          },
+          {
+            "text": " 도입. Yarn의 장점을 상당 부분 흡수"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "2018년",
+            "bold": true
+          },
+          {
+            "text": " — pnpm이 주목받기 시작. 디스크 효율성과 속도에서 차별화"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "2020년",
+            "bold": true
+          },
+          {
+            "text": " — Yarn Berry(v2) 출시. "
+          },
+          {
+            "text": "node_modules",
+            "code": true
+          },
+          {
+            "text": "를 아예 없애는 PnP 방식 도입"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "2022년",
+            "bold": true
+          },
+          {
+            "text": " — Bun 등장. JS 런타임과 패키지 매니저를 통합한 새로운 접근"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "2023년",
+            "bold": true
+          },
+          {
+            "text": " — Deno 2.0에서 npm 호환성 강화"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "hr",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "패키지를 어떻게 설치하는가? — 핵심은 "
+          },
+          {
+            "text": "node_modules",
+            "code": true
+          },
+          {
+            "text": " 구조"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "패키지 매니저들의 가장 근본적인 차이는 "
+          },
+          {
+            "text": "패키지를 디스크에 어떻게 배치하는가",
+            "bold": true
+          },
+          {
+            "text": "에 있다."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "npm — 플랫 호이스팅(Flat Hoisting)"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "초창기 npm(v1~v2)은 의존성을 중첩(nested) 구조로 설치했다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "node_modules/\n  package-a/\n    node_modules/\n      package-b/\n        node_modules/\n          package-c/"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "package-a",
+            "code": true
+          },
+          {
+            "text": "가 "
+          },
+          {
+            "text": "package-b",
+            "code": true
+          },
+          {
+            "text": "를 필요로 하고, "
+          },
+          {
+            "text": "package-b",
+            "code": true
+          },
+          {
+            "text": "가 "
+          },
+          {
+            "text": "package-c",
+            "code": true
+          },
+          {
+            "text": "를 필요로 하면 이렇게 깊이 중첩됐다. Windows에서는 경로 길이 제한(260자)에 걸려 설치가 실패하는 일도 있었고, 같은 패키지가 여러 곳에 중복 설치되어 디스크를 낭비했다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "npm v3부터는 "
+          },
+          {
+            "text": "플랫 호이스팅",
+            "bold": true
+          },
+          {
+            "text": "을 도입했다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "node_modules/\n  package-a/\n  package-b/     ← 최상위로 끌어올림 (hoisting)\n  package-c/"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "가능한 한 최상위 "
+          },
+          {
+            "text": "node_modules",
+            "code": true
+          },
+          {
+            "text": "로 끌어올려서 중복을 줄이는 방식이다. 덕분에 경로 문제는 해결됐지만, 새로운 문제가 생겼다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "팬텀 디펜던시(Phantom Dependency)",
+            "bold": true
+          },
+          {
+            "text": " 문제다. "
+          },
+          {
+            "text": "package.json",
+            "code": true
+          },
+          {
+            "text": "에 명시하지 않았지만 호이스팅된 덕분에 "
+          },
+          {
+            "text": "require('package-b')",
+            "code": true
+          },
+          {
+            "text": "가 동작해버리는 것이다. 어느 날 "
+          },
+          {
+            "text": "package-a",
+            "code": true
+          },
+          {
+            "text": "가 내부 의존성을 바꾸면 갑자기 내 코드가 깨지는 버그의 원인이 된다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// package.json에는 package-a만 있음\n{\n  \"dependencies\": {\n    \"package-a\": \"^1.0.0\"\n  }\n}"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// 근데 이게 동작해버림 (팬텀 디펜던시)\nconst b = require('package-b')"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "Yarn Classic(v1) — 같은 방식, 더 빠르게"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Yarn v1은 npm과 동일한 플랫 호이스팅 구조를 사용한다. 구조 자체는 같지만, 병렬 다운로드와 로컬 캐시 활용으로 속도를 끌어올린 것이 핵심이었다. "
+          },
+          {
+            "text": "yarn.lock",
+            "code": true
+          },
+          {
+            "text": "을 통해 결정적 설치(deterministic install)를 보장했고, 이 개념을 npm이 나중에 "
+          },
+          {
+            "text": "package-lock.json",
+            "code": true
+          },
+          {
+            "text": "으로 따라했다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "현재 Yarn v1은 사실상 유지보수 모드다. 신규 프로젝트에서 굳이 선택할 이유는 없다."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "pnpm — 콘텐츠 주소 기반 저장소 + 심볼릭 링크"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "pnpm의 접근은 근본적으로 다르다. "
+          },
+          {
+            "text": "글로벌 저장소(content-addressable store)",
+            "bold": true
+          },
+          {
+            "text": " 에 패키지를 한 번만 저장하고, 프로젝트의 "
+          },
+          {
+            "text": "node_modules",
+            "code": true
+          },
+          {
+            "text": "에는 "
+          },
+          {
+            "text": "심볼릭 링크(symlink)",
+            "bold": true
+          },
+          {
+            "text": " 만 만든다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "~/.pnpm-store/             ← 글로벌 저장소 (한 번만 저장)\n  v3/\n    files/\n      00/abc123...         ← 파일 해시 기반으로 저장\n      01/def456...\n\nmy-project/\n  node_modules/\n    .pnpm/                 ← 실제 패키지들 (글로벌 저장소에서 하드링크)\n      package-a@1.0.0/\n        node_modules/\n          package-b → .pnpm/package-b@2.0.0/  ← 심볼릭 링크\n    package-a → .pnpm/package-a@1.0.0/node_modules/package-a"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "이 구조가 주는 이점이 상당하다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "디스크 절약",
+            "bold": true
+          },
+          {
+            "text": ": "
+          },
+          {
+            "text": "react@18.2.0",
+            "code": true
+          },
+          {
+            "text": "을 10개 프로젝트에서 써도 파일은 글로벌 저장소에 하나만 존재한다. 프로젝트마다 하드링크만 생긴다."
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "팬텀 디펜던시 차단",
+            "bold": true
+          },
+          {
+            "text": ": "
+          },
+          {
+            "text": "node_modules",
+            "code": true
+          },
+          {
+            "text": " 최상위에는 "
+          },
+          {
+            "text": "[package.json](https://package.json)",
+            "code": true
+          },
+          {
+            "text": "에 명시한 패키지만 노출된다. 내부 의존성은 "
+          },
+          {
+            "text": ".pnpm/",
+            "code": true
+          },
+          {
+            "text": " 안에 격리된다."
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "빠른 설치",
+            "bold": true
+          },
+          {
+            "text": ": 이미 글로벌 저장소에 있는 파일은 다운로드하지 않고 링크만 생성한다."
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "# 같은 패키지를 100개 프로젝트에서 설치해도\n# 실제 파일은 글로벌 저장소에 딱 하나\n\n~/.pnpm-store/v3/files/  ← react@18.2.0 파일들이 여기 한 번만\nproject-1/node_modules/.pnpm/react@18.2.0/  ← 하드링크\nproject-2/node_modules/.pnpm/react@18.2.0/  ← 하드링크\nproject-3/node_modules/.pnpm/react@18.2.0/  ← 하드링크"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "blockquote",
+        "children": [
+          {
+            "text": "하드링크와 심볼릭링크 차이",
+            "bold": true
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "하드링크는 원본 파일과 동일한 실제 데이터를 공유하여 원본 삭제 후에도 데이터가 유지 되나,"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "심볼릭 링크는 원본의 경로만 기록한 바로가기 파일로 원본 삭제 시 링크가 깨진다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "심볼릭 링크는 디렉토리 링크와 파티션 간 이동이 가능하지만, 하드링크는 동일 파일 시스템 내 파일만 가능하다."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "Yarn Berry(v2+) — PnP로 "
+          },
+          {
+            "text": "node_modules",
+            "code": true
+          },
+          {
+            "text": "를 없애다"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Yarn Berry는 가장 급진적인 접근을 택했다. "
+          },
+          {
+            "text": "Plug'n'Play(PnP)",
+            "bold": true
+          },
+          {
+            "text": " 라는 방식으로 "
+          },
+          {
+            "text": "node_modules",
+            "code": true
+          },
+          {
+            "text": " 디렉토리 자체를 없애버린다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "대신 "
+          },
+          {
+            "text": ".yarn/cache/",
+            "code": true
+          },
+          {
+            "text": " 에 압축된 zip 파일로 패키지를 저장하고, "
+          },
+          {
+            "text": ".pnp.cjs",
+            "code": true
+          },
+          {
+            "text": " 라는 파일 하나로 \"어떤 패키지가 어디에 있는지\"를 Node.js에 알려준다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "my-project/\n  .yarn/\n    cache/\n      package-a-npm-1.0.0-abc123.zip   ← zip으로 압축 저장\n      package-b-npm-2.0.0-def456.zip\n  .pnp.cjs                              ← 패키지 위치 맵\n  package.json\n  yarn.lock"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// .pnp.cjs 내부 (간략화)\nconst packageLocatorsByLocations = new Map([\n  [\"package-a/\", { name: \"package-a\", version: \"1.0.0\" }],\n  // ...\n])"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Node.js가 "
+          },
+          {
+            "text": "require('package-a')",
+            "code": true
+          },
+          {
+            "text": "를 만나면 기존처럼 "
+          },
+          {
+            "text": "node_modules",
+            "code": true
+          },
+          {
+            "text": "를 탐색하는 대신, "
+          },
+          {
+            "text": ".pnp.cjs",
+            "code": true
+          },
+          {
+            "text": "의 맵을 참조해서 zip 안에서 바로 파일을 읽는다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Zero-Installs",
+            "bold": true
+          },
+          {
+            "text": "라는 개념도 여기서 나온다. "
+          },
+          {
+            "text": ".yarn/cache/",
+            "code": true
+          },
+          {
+            "text": "의 zip 파일들을 Git에 커밋해두면, 저장소를 클론한 직후 "
+          },
+          {
+            "text": "yarn install",
+            "code": true
+          },
+          {
+            "text": " 없이도 바로 실행이 가능하다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "git clone https://github.com/my-project\ncd my-project\n# yarn install 없이 바로\nyarn dev  # 동작함"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "단, zip 파일을 Git에 올리면 저장소 크기가 상당히 커진다는 트레이드오프가 있다."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "Bun — 런타임과 패키지 매니저의 통합"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Bun은 패키지 매니저만이 아니라 JS 런타임, 번들러, 테스트 러너까지 통합한 도구다. 패키지 설치 방식은 npm과 유사한 플랫 구조를 따르지만, Zig로 작성된 네이티브 코드 덕분에 속도가 압도적으로 빠르다. 글로벌 캐시도 지원한다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "bun install    # npm install과 동일한 사용법\nbun add react  # npm install react\nbun remove react"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "package.json",
+            "code": true
+          },
+          {
+            "text": "과 호환되고 "
+          },
+          {
+            "text": "bun.lockb",
+            "code": true
+          },
+          {
+            "text": "라는 바이너리 락파일을 생성한다."
+          }
+        ]
+      },
+      {
+        "type": "hr",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "성능 비교"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "벤치마크는 환경과 프로젝트 크기에 따라 다르지만, 일반적으로 알려진 경향성이 있다."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "설치 속도 (캐시 없을 때 → 캐시 있을 때)"
+          }
+        ]
+      },
+      {
+        "type": "table",
+        "children": [
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "th",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "패키지 매니저"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "th",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "캐시 없음"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "th",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "캐시 있음"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "th",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "lockfile만 있을 때"
+                      }
+                    ]
+                  }
+                ]
               }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "캐시 없음",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "npm"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "느림"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "보통"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "보통"
+                      }
+                    ]
+                  }
+                ]
               }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "캐시 있음",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "Yarn v1"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "보통"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "빠름"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "빠름"
+                      }
+                    ]
+                  }
+                ]
               }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "lockfile만 있을 때",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "pnpm"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "빠름"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "매우 빠름"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "매우 빠름"
+                      }
+                    ]
+                  }
+                ]
               }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "npm",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "Yarn Berry (PnP)"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "보통"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "빠름"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "매우 빠름"
+                      }
+                    ]
+                  }
+                ]
               }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "느림",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "Bun"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "매우 빠름"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "압도적으로 빠름"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "압도적으로 빠름"
+                      }
+                    ]
+                  }
+                ]
               }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "보통",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "보통",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "Yarn v1",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "보통",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "빠름",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "빠름",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "pnpm",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "빠름",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "매우 빠름",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "매우 빠름",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "Yarn Berry (PnP)",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "보통",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "빠름",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "매우 빠름",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "Bun",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "매우 빠름",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "압도적으로 빠름",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "압도적으로 빠름",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    "children": []
-  },
-  {
-    "id": "ee711048-86c9-40d7-89e4-a327976ea829",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Bun의 경우 npm 대비 10~25배 빠른 벤치마크 결과도 자주 보인다. pnpm은 캐시 활용 시 npm 대비 2~3배 빠른 경우가 많다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "0ee118d4-78bf-4b13-8a69-2e8595a9a4cd",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "디스크 사용량",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "02f9c94e-b28a-4b5a-8b78-21abdf9a1773",
-    "type": "table",
-    "props": {
-      "textColor": "default"
-    },
-    "content": {
-      "type": "tableContent",
-      "columnWidths": [
-        null,
-        null
-      ],
-      "headerRows": 1,
-      "rows": [
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "패키지 매니저",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "특징",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "npm",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "프로젝트마다 완전한 복사본",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "Yarn v1",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "npm과 비슷, 글로벌 캐시 별도",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "pnpm",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "글로벌 저장소 하드링크 → 가장 효율적",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "Yarn Berry",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "zip 압축으로 npm 대비 30~50% 절약",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "Bun",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "글로벌 캐시 + npm 수준의 node_modules",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    "children": []
-  },
-  {
-    "id": "cf0bab08-5c7a-4555-b781-74d50e6811a8",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "pnpm이 디스크 사용량에서 가장 효율적이다. 모노레포 환경에서 특히 차이가 두드러진다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "2b202324-d865-47db-9296-fc8393537666",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "node_modules",
-        "styles": {
-          "code": true
-        }
+            ]
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": " 크기 직관적 비교",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "038657c9-a302-4d5c-aa79-f2b3cc803acd",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "같은 Next.js 프로젝트 기준으로 대략적인 크기 비교:",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "840d3b8d-3092-4fbe-abc0-7a12e0c2ab77",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "npm install    → node_modules: ~350MB\nyarn install   → node_modules: ~340MB\npnpm install   → node_modules: ~180MB (하드링크 + 글로벌 저장소)\nyarn berry     → .yarn/cache: ~70MB (zip 압축)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "cc09cb09-44d8-4b97-ac2c-1e484a9c39ef",
-    "type": "divider",
-    "props": {},
-    "children": []
-  },
-  {
-    "id": "4fe461c3-7473-4ec2-a9ea-d91c51d1080c",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "각 패키지 매니저의 주요 명령어",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "1102ad8a-6b88-4122-af35-91161143ea82",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "# 패키지 설치 (전체)\nnpm install\nyarn\npnpm install\nbun install\n\n# 패키지 추가\nnpm install react\nyarn add react\npnpm add react\nbun add react\n\n# 개발 의존성 추가\nnpm install -D typescript\nyarn add -D typescript\npnpm add -D typescript\nbun add -d typescript\n\n# 패키지 제거\nnpm uninstall react\nyarn remove react\npnpm remove react\nbun remove react\n\n# 스크립트 실행\nnpm run dev\nyarn dev\npnpm dev\nbun run dev",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "10ec34ab-9127-46fa-a720-a4984847fbd8",
-    "type": "divider",
-    "props": {},
-    "children": []
-  },
-  {
-    "id": "1c84059c-7891-48f5-b479-0541c8d9c20a",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "각 패키지 매니저의 장단점",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "8df3ae61-5d9d-48a3-b409-32d725bc8dc1",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "npm",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "6c20be8f-071f-4031-8237-9582c3fb8218",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "장점",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "7e77e7e3-14d9-4c39-acf6-9e49cce83a37",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Node.js와 함께 기본 설치됨. 아무것도 안 해도 쓸 수 있다",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "3d27521a-08af-464e-a0e3-c428e052b67f",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "가장 많은 문서와 레퍼런스",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e5a2e0f4-15b7-4440-b711-7bd59cc4c72d",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "호환성 문제가 거의 없다",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "103b078d-144f-4e1f-9731-14ae9818f640",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "단점",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "96701b35-95d9-4889-8053-0ebc759cfdba",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "속도가 가장 느리다",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "fa6e3d38-8015-4975-b888-712224ac5eff",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "팬텀 디펜던시 문제가 여전히 존재",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "110bd502-82c9-41c3-a4a3-288b3218ac65",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "모노레포 지원이 약하다 (",
-        "styles": {}
+        "type": "p",
+        "children": [
+          {
+            "text": "Bun의 경우 npm 대비 10~25배 빠른 벤치마크 결과도 자주 보인다. pnpm은 캐시 활용 시 npm 대비 2~3배 빠른 경우가 많다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "workspaces",
-        "styles": {
-          "code": true
-        }
+        "type": "h3",
+        "children": [
+          {
+            "text": "디스크 사용량"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "는 있지만 기능이 제한적)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "416e92da-c785-40ac-a4bb-320e2b3d3411",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Yarn Classic(v1)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "1db50276-8e2b-4436-967c-8524a285c15e",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "장점",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "a6e73e60-8113-4086-952e-541c9d7cfed4",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "npm보다 빠름",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e56ae604-9a62-45d1-8eb0-d6b3561d664f",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Workspaces 지원이 npm보다 성숙했음",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "89ccc438-b6bc-498c-bf88-8fc724f71504",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "단점",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "cf616361-82d9-45c8-86df-e4be0a4ebf88",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "사실상 유지보수 모드. 새 프로젝트에서 굳이 선택할 이유가 없다",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "ae771499-59b4-4397-bc61-1e15353ddcc7",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "npm과 구조적 차이가 없어 팬텀 디펜던시 문제 동일하게 존재",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "dbb7d731-ce39-4eee-83c0-e6bd502c19cd",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "pnpm",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "160e6998-318b-424b-b2c5-4055c1b8909d",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "장점",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "5c89363b-cb51-433d-87bb-38592b195617",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "속도와 디스크 효율 모두 우수",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "b18f0587-8e06-46ae-a157-c96ba8fd153c",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "팬텀 디펜던시를 구조적으로 차단",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "38633466-459a-46ba-9792-63cab4fc62e4",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "모노레포(workspaces) 지원이 강력",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "08c90d1d-74b8-4d27-9f69-e2ebdab4aaf9",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "npm, yarn과 명령어 호환성이 높아 마이그레이션이 쉬움",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "0ee94735-046a-458d-b6ad-6a16eae3ac1a",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "node_modules 구조를 유지해서 대부분의 도구와 호환됨",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "17785280-1f3f-426b-832d-c85c58e325ea",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "단점",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "1c80e73e-e52d-49e4-8fd7-32e06dfab791",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "심볼릭 링크 방식이 일부 도구와 충돌할 수 있음 (특히 오래된 빌드 도구)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "ff63c41a-eb7c-415f-875e-7673183325ee",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "팀 전체가 같은 버전을 써야 안정적",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "fafc4f8c-985c-4527-9880-877282f2a0f3",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Yarn Berry(v2+)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f5394011-640c-4e7e-a896-367924f99d2d",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "장점",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "507a998b-c186-4e2b-b18c-2c3268442a4c",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "PnP 방식으로 팬텀 디펜던시 완전 차단",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "2edd838b-366a-4bb6-8d91-35e9d4458cc2",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Zero-Installs로 CI 캐시 없이도 빠른 설치",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "302e63e8-1ca9-45b8-ba27-65dca5df7314",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "zip 압축으로 디스크 효율이 높음",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "3e32b4cb-7ea1-4c44-957d-9b5bd24439d1",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "타입스크립트 인텔리전스 지원 (",
-        "styles": {}
+        "type": "table",
+        "children": [
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "th",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "패키지 매니저"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "th",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "특징"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "npm"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "프로젝트마다 완전한 복사본"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "Yarn v1"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "npm과 비슷, 글로벌 캐시 별도"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "pnpm"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "글로벌 저장소 하드링크 → 가장 효율적"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "Yarn Berry"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "zip 압축으로 npm 대비 30~50% 절약"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "Bun"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "글로벌 캐시 + npm 수준의 node_modules"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "@yarnpkg/sdks",
-        "styles": {
-          "code": true
-        }
+        "type": "p",
+        "children": [
+          {
+            "text": "pnpm이 디스크 사용량에서 가장 효율적이다. 모노레포 환경에서 특히 차이가 두드러진다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": ")",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "24eee057-157c-4f05-96a5-a8fba3641d94",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "단점",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "0c694141-4540-4366-99b6-67ac8b81c3d7",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "학습 곡선이 높다. PnP는 기존 개념과 많이 다름",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "770c145c-1397-46c6-8aaf-88feab721960",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "PnP와 호환되지 않는 패키지들이 아직 있다 (",
-        "styles": {}
+        "type": "h3",
+        "children": [
+          {
+            "text": "node_modules",
+            "code": true
+          },
+          {
+            "text": " 크기 직관적 비교"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "node-linker=node-modules",
-        "styles": {
-          "code": true
-        }
+        "type": "p",
+        "children": [
+          {
+            "text": "같은 Next.js 프로젝트 기준으로 대략적인 크기 비교:"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "로 우회 가능하지만 PnP 이점이 줄어듦)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "519b320c-f5b7-4abb-9091-93b6f8de03c7",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "에디터 설정이 필요함 (",
-        "styles": {}
+        "type": "code_block",
+        "children": [
+          {
+            "text": "npm install    → node_modules: ~350MB\nyarn install   → node_modules: ~340MB\npnpm install   → node_modules: ~180MB (하드링크 + 글로벌 저장소)\nyarn berry     → .yarn/cache: ~70MB (zip 압축)"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": ".pnp.cjs",
-        "styles": {
-          "code": true
-        }
+        "type": "hr",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": " 인식을 위해)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "d188d73e-1a96-47ef-98f0-1c02b3d69b1e",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Zero-Installs 사용 시 Git 저장소 크기 증가",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "9ebfe04a-0906-49fb-a4e4-f326b5d747c9",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Bun",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "ecd06a79-3008-4279-8025-488226b3e149",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "장점",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "11807013-2fb7-4c72-b4fc-d5a3fc262c7c",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "압도적인 설치 속도",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "377a4476-27b2-4219-bdec-0a7052508098",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "패키지 매니저 외 런타임, 번들러, 테스트 러너 통합",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "071fdc7b-4553-481e-8e9f-1860c3c69bd7",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "npm과 동일한 사용법으로 학습 부담 없음",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "fb0b4a87-5e36-4d73-92fc-407a5c3a7d6f",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "단점",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "b79a51fe-6b6c-426a-844d-640bda2d499e",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "아직 성숙하지 않은 생태계. 일부 Node.js API와 호환성 이슈",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "019f8e15-c4e0-4a63-81b1-c135f403d061",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Linux/macOS만 완전 지원 (Windows는 실험적)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "a4977aaa-9708-484e-9af6-1e2e37749247",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "회사 프로덕션 환경에 도입하기엔 아직 리스크가 있음",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "b12b6a22-0e65-46d1-871b-1d41c3b591d9",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "락파일(",
-        "styles": {}
+        "type": "h2",
+        "children": [
+          {
+            "text": "각 패키지 매니저의 주요 명령어"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "bun.lockb",
-        "styles": {
-          "code": true
-        }
+        "type": "code_block",
+        "children": [
+          {
+            "text": "# 패키지 설치 (전체)\nnpm install\nyarn\npnpm install\nbun install\n\n# 패키지 추가\nnpm install react\nyarn add react\npnpm add react\nbun add react\n\n# 개발 의존성 추가\nnpm install -D typescript\nyarn add -D typescript\npnpm add -D typescript\nbun add -d typescript\n\n# 패키지 제거\nnpm uninstall react\nyarn remove react\npnpm remove react\nbun remove react\n\n# 스크립트 실행\nnpm run dev\nyarn dev\npnpm dev\nbun run dev"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": ")이 바이너리 포맷이라 diff 확인이 어려움",
-        "styles": {}
+        "type": "hr",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "각 패키지 매니저의 장단점"
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "npm"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "장점",
+            "bold": true
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Node.js와 함께 기본 설치됨. 아무것도 안 해도 쓸 수 있다"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "가장 많은 문서와 레퍼런스"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "호환성 문제가 거의 없다"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "단점",
+            "bold": true
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "속도가 가장 느리다"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "팬텀 디펜던시 문제가 여전히 존재"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "모노레포 지원이 약하다 ("
+          },
+          {
+            "text": "workspaces",
+            "code": true
+          },
+          {
+            "text": "는 있지만 기능이 제한적)"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "Yarn Classic(v1)"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "장점",
+            "bold": true
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "npm보다 빠름"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Workspaces 지원이 npm보다 성숙했음"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "단점",
+            "bold": true
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "사실상 유지보수 모드. 새 프로젝트에서 굳이 선택할 이유가 없다"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "npm과 구조적 차이가 없어 팬텀 디펜던시 문제 동일하게 존재"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "pnpm"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "장점",
+            "bold": true
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "속도와 디스크 효율 모두 우수"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "팬텀 디펜던시를 구조적으로 차단"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "모노레포(workspaces) 지원이 강력"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "npm, yarn과 명령어 호환성이 높아 마이그레이션이 쉬움"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "node_modules 구조를 유지해서 대부분의 도구와 호환됨"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "단점",
+            "bold": true
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "심볼릭 링크 방식이 일부 도구와 충돌할 수 있음 (특히 오래된 빌드 도구)"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "팀 전체가 같은 버전을 써야 안정적"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "Yarn Berry(v2+)"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "장점",
+            "bold": true
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "PnP 방식으로 팬텀 디펜던시 완전 차단"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Zero-Installs로 CI 캐시 없이도 빠른 설치"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "zip 압축으로 디스크 효율이 높음"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "타입스크립트 인텔리전스 지원 ("
+          },
+          {
+            "text": "@yarnpkg/sdks",
+            "code": true
+          },
+          {
+            "text": ")"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "단점",
+            "bold": true
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "학습 곡선이 높다. PnP는 기존 개념과 많이 다름"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "PnP와 호환되지 않는 패키지들이 아직 있다 ("
+          },
+          {
+            "text": "node-linker=node-modules",
+            "code": true
+          },
+          {
+            "text": "로 우회 가능하지만 PnP 이점이 줄어듦)"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "에디터 설정이 필요함 ("
+          },
+          {
+            "text": ".pnp.cjs",
+            "code": true
+          },
+          {
+            "text": " 인식을 위해)"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Zero-Installs 사용 시 Git 저장소 크기 증가"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "Bun"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "장점",
+            "bold": true
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "압도적인 설치 속도"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "패키지 매니저 외 런타임, 번들러, 테스트 러너 통합"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "npm과 동일한 사용법으로 학습 부담 없음"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "단점",
+            "bold": true
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "아직 성숙하지 않은 생태계. 일부 Node.js API와 호환성 이슈"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Linux/macOS만 완전 지원 (Windows는 실험적)"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "회사 프로덕션 환경에 도입하기엔 아직 리스크가 있음"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "락파일("
+          },
+          {
+            "text": "bun.lockb",
+            "code": true
+          },
+          {
+            "text": ")이 바이너리 포맷이라 diff 확인이 어려움"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "hr",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "어떤 걸 선택해야 할까?"
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "개인 프로젝트나 소규모 팀"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "pnpm",
+            "bold": true
+          },
+          {
+            "text": " 을 추천한다. npm에서 마이그레이션이 쉽고, 속도와 디스크 효율이 좋다. "
+          },
+          {
+            "text": "pnpm import",
+            "code": true
+          },
+          {
+            "text": " 명령어 하나로 기존 "
+          },
+          {
+            "text": "package-lock.json",
+            "code": true
+          },
+          {
+            "text": "에서 "
+          },
+          {
+            "text": "pnpm-lock.yaml",
+            "code": true
+          },
+          {
+            "text": "을 생성할 수 있다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "npm install -g pnpm\npnpm import        # package-lock.json → pnpm-lock.yaml 변환\nrm package-lock.json\npnpm install"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "모노레포"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "pnpm workspaces",
+            "bold": true
+          },
+          {
+            "text": " 또는 "
+          },
+          {
+            "text": "Yarn Berry",
+            "bold": true
+          },
+          {
+            "text": ". pnpm은 "
+          },
+          {
+            "text": "pnpm-workspace.yaml",
+            "code": true
+          },
+          {
+            "text": " 하나로 설정이 간단하고, 패키지 간 링크도 자동으로 처리된다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "# pnpm-workspace.yaml\npackages:\n  - 'apps/*'\n  - 'packages/*'"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "CI 속도가 최우선"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Yarn Berry의 Zero-Installs",
+            "bold": true
+          },
+          {
+            "text": " 또는 "
+          },
+          {
+            "text": "Bun",
+            "bold": true
+          },
+          {
+            "text": ". Zero-Installs는 CI에서 "
+          },
+          {
+            "text": "yarn install",
+            "code": true
+          },
+          {
+            "text": " 자체를 건너뛸 수 있어서 극단적으로 빠르다. Bun은 캐시가 있을 때 가장 빠른 설치 속도를 보인다."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "안정성과 호환성이 최우선인 팀"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "npm",
+            "bold": true
+          },
+          {
+            "text": " 또는 "
+          },
+          {
+            "text": "pnpm (node-modules linker)",
+            "bold": true
+          },
+          {
+            "text": ". 새로운 방식이 주는 이점보다 호환성 트러블슈팅 비용이 더 크다면 검증된 방식을 유지하는 게 맞다."
+          }
+        ]
+      },
+      {
+        "type": "hr",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "마이그레이션 체크리스트"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "npm에서 pnpm으로 전환할 때 확인할 것들:"
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "# 1. pnpm 설치\nnpm install -g pnpm\n\n# 2. 기존 lock 파일 변환\npnpm import\n\n# 3. node_modules 재설치\nrm -rf node_modules\npnpm install\n\n# 4. .npmrc에 hoisting 설정 확인 (필요 시)\n# .npmrc\npublic-hoist-pattern[]=*eslint*\npublic-hoist-pattern[]=*prettier*\n\n# 5. CI 스크립트 수정 (npm → pnpm)\n# .github/workflows/ci.yml\n- uses: pnpm/action-setup@v2\n  with:\n    version: 8"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "팬텀 디펜던시로 인한 오류가 생기면 실제로 의존하는 패키지를 "
+          },
+          {
+            "text": "package.json",
+            "code": true
+          },
+          {
+            "text": "에 명시적으로 추가해주면 된다. 처음에 약간의 트러블슈팅이 있을 수 있지만, 한 번 정리해두면 오히려 의존성이 명확해지는 장점이 있다."
+          }
+        ]
+      },
+      {
+        "type": "hr",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "패키지 매니저는 어떤 것을 써도 기본 동작은 한다. 하지만 프로젝트 규모가 커질수록, 팀이 커질수록, CI가 느릴수록 차이가 피부로 느껴지기 시작한다. npm을 오래 써왔다면 pnpm을 한 번 써보는 것을 권한다. 마이그레이션 비용 대비 얻는 것이 꽤 크다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Yarn Berry의 PnP는 분명 미래지향적인 접근이지만, 생태계 호환성 문제를 먼저 확인하는 것이 좋다. Bun은 지금 당장 프로덕션 도입보다는 개인 프로젝트에서 먼저 경험해보는 것을 추천한다. 속도는 정말 인상적이다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "결국 완벽한 패키지 매니저는 없고, 팀의 상황과 프로젝트 특성에 맞는 선택이 있을 뿐이다. 일단 써봐야 안다."
+          }
+        ]
       }
-    ],
-    "children": []
-  },
-  {
-    "id": "7207db78-d81b-4664-8a3d-2564cbd252a3",
-    "type": "divider",
-    "props": {},
-    "children": []
-  },
-  {
-    "id": "d5d66515-83dc-4626-87a0-d6b58642500e",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "어떤 걸 선택해야 할까?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "0e39cdd0-8baf-4f1a-a45d-a69411c4b463",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "개인 프로젝트나 소규모 팀",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "41d2c731-0a9d-45af-9a19-882ed643bc62",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "pnpm",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 을 추천한다. npm에서 마이그레이션이 쉽고, 속도와 디스크 효율이 좋다. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "pnpm import",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 명령어 하나로 기존 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "package-lock.json",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "에서 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "pnpm-lock.yaml",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "을 생성할 수 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "05aa3e15-6309-4c2d-89f8-d154a0e9c888",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "npm install -g pnpm\npnpm import        # package-lock.json → pnpm-lock.yaml 변환\nrm package-lock.json\npnpm install",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e2ea2449-7046-456f-872b-9be4520d7040",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "모노레포",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "8a4ca48f-4cea-4761-bfd6-6d1ddbc9f72d",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "pnpm workspaces",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 또는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Yarn Berry",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": ". pnpm은 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "pnpm-workspace.yaml",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 하나로 설정이 간단하고, 패키지 간 링크도 자동으로 처리된다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "b1e4f2d3-09ed-47d5-a5d7-4acb2ff5c47c",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "# pnpm-workspace.yaml\npackages:\n  - 'apps/*'\n  - 'packages/*'",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "dfa52a2b-61ad-4b0e-8bd8-e5087cebdab4",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "CI 속도가 최우선",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "13415ce5-7add-43de-b920-bbdd10a5b109",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Yarn Berry의 Zero-Installs",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 또는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Bun",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": ". Zero-Installs는 CI에서 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "yarn install",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 자체를 건너뛸 수 있어서 극단적으로 빠르다. Bun은 캐시가 있을 때 가장 빠른 설치 속도를 보인다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "506a240d-4ff5-435e-abb6-3b6b889b4420",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "안정성과 호환성이 최우선인 팀",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "1e26c2f4-ab50-4dc7-981f-d8186e7a2765",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "npm",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 또는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "pnpm (node-modules linker)",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": ". 새로운 방식이 주는 이점보다 호환성 트러블슈팅 비용이 더 크다면 검증된 방식을 유지하는 게 맞다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "5336ed5e-14da-4af6-90ad-b9b594fd40ad",
-    "type": "divider",
-    "props": {},
-    "children": []
-  },
-  {
-    "id": "4b914d5e-699a-4c72-998d-2c2b91a0ba9d",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "마이그레이션 체크리스트",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "4596e443-fcd9-4d09-b602-5dde0d269649",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "npm에서 pnpm으로 전환할 때 확인할 것들:",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "235c360b-f6fa-46cf-b303-2daa7be3b44a",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "# 1. pnpm 설치\nnpm install -g pnpm\n\n# 2. 기존 lock 파일 변환\npnpm import\n\n# 3. node_modules 재설치\nrm -rf node_modules\npnpm install\n\n# 4. .npmrc에 hoisting 설정 확인 (필요 시)\n# .npmrc\npublic-hoist-pattern[]=*eslint*\npublic-hoist-pattern[]=*prettier*\n\n# 5. CI 스크립트 수정 (npm → pnpm)\n# .github/workflows/ci.yml\n- uses: pnpm/action-setup@v2\n  with:\n    version: 8",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "79e534f2-a6ca-418b-a479-1e5f7a6146b5",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "팬텀 디펜던시로 인한 오류가 생기면 실제로 의존하는 패키지를 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "package.json",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "에 명시적으로 추가해주면 된다. 처음에 약간의 트러블슈팅이 있을 수 있지만, 한 번 정리해두면 오히려 의존성이 명확해지는 장점이 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "fee8a409-52c5-46bd-b829-ef72ac17ef18",
-    "type": "divider",
-    "props": {},
-    "children": []
-  },
-  {
-    "id": "bf3ddb3c-49e9-4dd9-9afc-4dd859109019",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "패키지 매니저는 어떤 것을 써도 기본 동작은 한다. 하지만 프로젝트 규모가 커질수록, 팀이 커질수록, CI가 느릴수록 차이가 피부로 느껴지기 시작한다. npm을 오래 써왔다면 pnpm을 한 번 써보는 것을 권한다. 마이그레이션 비용 대비 얻는 것이 꽤 크다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "21b04c71-4ff7-43e1-8bbd-52282cd1bc12",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Yarn Berry의 PnP는 분명 미래지향적인 접근이지만, 생태계 호환성 문제를 먼저 확인하는 것이 좋다. Bun은 지금 당장 프로덕션 도입보다는 개인 프로젝트에서 먼저 경험해보는 것을 추천한다. 속도는 정말 인상적이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "50360472-bf87-4165-845a-c8f9c1c851f9",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "결국 완벽한 패키지 매니저는 없고, 팀의 상황과 프로젝트 특성에 맞는 선택이 있을 뿐이다. 일단 써봐야 안다.",
-        "styles": {}
-      }
-    ],
-    "children": []
+    ]
   }
 ]

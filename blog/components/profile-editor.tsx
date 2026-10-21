@@ -8,7 +8,7 @@ import { IconCameraLine, IconXmarkLine } from "@karrotmarket/react-monochrome-ic
 import type { Profile } from "@/lib/profile";
 import { ToastMessage } from "./toast-message";
 
-const Editor = dynamic(() => import("./editor"), { ssr: false });
+const Editor = dynamic(() => import("./tiptap-editor"), { ssr: false });
 
 export function ProfileEditor({ profile }: { profile: Profile }) {
   const [name, setName] = useState(profile.name);

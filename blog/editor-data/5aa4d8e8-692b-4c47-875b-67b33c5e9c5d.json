@@ -1,2100 +1,1089 @@
 [
   {
-    "id": "497a1fb9-2cc6-4eeb-859f-bc0d5873899d",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
+    "type": "plate-content",
+    "version": 1,
     "content": [
       {
-        "type": "text",
-        "text": "IndexedDB",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "는 기술 면접을 준비할 때 브라우저의 로컬 저장소에 관련된 내용들을 배우면서, 한번쯔음 들어보았을 용어이다. 사실 쿠키를 많이 사용해보았지, ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "IndexedDB",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "의 경우에는 사용할 일이 많이 없다고 생각해 실제로 써보지는 못했는데 이번에 게시글 자동저장 기능을 구현해보면서 여러 로컬 저장소들과의 특징들을 비교하며 도입을 하고자했다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "0078a51c-751f-44d8-a18e-9040b4af4aee",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "객체 형태의 저장 형태 · 대용량 저장소 · 비동기 처리 등의 특징과 메인 스레드를 블로킹하지 않는 특성들이 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "IndexedDB",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "가 자동 저장에 적합하다고 생각이 들었다. 오늘은 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "IndexedDB",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 를 활용해보며 배웠던 내용들을 복기차 포스팅을 해보려고 한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "77ce5fc9-838f-4513-a392-b04b3fd6c55a",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "IndexedDB란?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "6172b00f-0ab4-4cb4-a3db-74ed0a7e369c",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "브라우저에 내장된 비동기 NoSQL 데이터베이스로, 대용량 및 구조화된 데이터를 영구적으로 저장할 수 있는 클라이언트 DB이다. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "IndexedDB",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "는 웹이 단순 문서에서 오프라인 및 대용량 데이터를 다루는 어플리케이션으로 진화하면서, 기존 저장소(Local Stoarge, Cookie)가 이러한 요구 조건들을 감당하지 못해 등장하게 되었다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f4eac374-c45b-483a-b85c-378b39891972",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "초창기 웹 저장소의 한계점",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f54099ca-6770-417a-88c2-899ff02719da",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "우리가 흔히 알고 있는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Cookie",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 와 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "LocalStorage",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 와 같은 로컬 스토리지의 경우에는 아래와 같은 한계점을 가지고 있었다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f5d8d839-c41b-451b-bf8a-78fa422f2516",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Cookie",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "81c62032-0ece-44e5-adf6-bd66198e2ac8",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "4KB의 용량을 가진다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "cb1e32a5-ad6f-4384-8c2e-a52d13c04c64",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "모든 요청마다 서버로 전송된다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "6599ed19-ddb6-4d97-9712-60104e20995b",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "LocalStorage / SessionStorage",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "3dac09cf-24bd-4dfd-ae56-8b3f807597e7",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "~5MB의 용량을 가진다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "ff9dac4c-5d24-4a89-9f53-a13a673b1aaf",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "동기 API로 메인 스레드의 블로킹을 한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "80d92a5d-f83a-4a68-96c9-0861c09c1cfc",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "문자열만 저장이 가능하며, 인덱싱 및 검색이 불가하다. (별도 로직 필요)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "7dd04691-2fc3-4bf2-8ea5-9922bc79dc5e",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "브라우저에서 제공하는 기존 로컬 저장소들은 설정 값을 저장하는 저장소 수준이지, DB 개념으로 사용하기에는 무리가 있었다. 2008 ~ 2012년 Gmail, Google Docs, Facebook 등의 웹 서비스들이 급부상되면서 수천수만 건의 데이터가 저장되어야하고 오프라인에서도 동작을 해야했다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "0bd792c5-98ba-4493-9ce8-e2be28d97c25",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "또 빠른 검색이 필요하며 UI 멈춤 없이 비동기 처리가 가능해야했기에 브라우저 자체에서 DB가 필요하다고 느끼게 되었고, 기존 브라우저의 로컬 저장소로는 해결이 되지 않던 문제를 IndexedDB를 정의하며 해결하고자 했던 것이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "dc9eebc6-c261-4714-89e6-69f657148e75",
-    "type": "quote",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "IndexedDB의 초기 설계 목표는 무엇이었을까?",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e0b070c4-22b4-48ad-9860-1a6636aab62d",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "비동기 API로 메인스레드 블로킹을 최소화한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "406ea68f-8daa-4b1c-92db-6c2335a50981",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "대용량 저장이 가능해야한다. (수백MB ~ 수 GB)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c21528b9-e977-48a6-883d-c2b0e06c8357",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "객체 형태 그대로 저장할 수 있도록 설계",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "2871255f-246b-4fdd-9797-42620849f0d6",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "인덱싱 및 검색이 가능해야한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "ca1494dd-21fa-45fc-a0ff-52973f843c59",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "트랜잭션을 지원한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "454e8b3c-587b-4f50-a1c8-d3df70c8dbfa",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "브라우저 오프라인 환경을 우선적으로 지원한다. (오프라인 퍼스트)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "6054ef83-e05b-49c6-ae5c-f01738b43a6e",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "단, 여기서 IndexedDB는 서버 DB를 대체하려는 것이 아닌 네트워크 없이도 웹 앱이 살아있게 하고자하는 철학을 가지고 있다. (인증, 보안 데이터가 아닌 캐시 및 오프라인 데이터 제공)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "8f34495e-a88c-4985-91f0-fd0a6f693308",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "IndexedDB는 브라우저 자체의 DB라고 했다, 브라우저에서 사용하는 DB는 SQL이 아닌 NoSQL을 사용한다. 그 이유는 웹 데이터는 유연해야하기 때문에 스키마를 강제하지 않으며, 로컬스토리지와 같이 직렬화를 하지 않고 객체 그대로 저장하고 싶었다. 또 브라우저 구현을 단순화시키며, JS 객체 모델과 자연스럽게 맞추고자했던 포인트들이 있었기에 IndexedDB는 NoSQL을 채택하여 Key-Value + Object Store 구조를 가지게 되었다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "43713769-6937-4b12-987f-bec112773772",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Native IndexedDB 사용해보기",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "4d244ed7-3c03-4bba-870f-ccc3dccff7e4",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "IndexedDB는 항상 DB 오픈 → Object Store 생성 (최초 1번) → Transaction 시작 → 읽기 / 쓰기 순서로 진행된다. 실무에서는 idb 라는 라이브러리를 사용한다고 하지만, 순수 IndexedDB도 어떤 방식으로 동작하는지 파악해야한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "2f0a3e12-807e-400b-95f4-72f0ea36690c",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "1. DB 오픈",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "8d13fbd0-018a-49b3-b42a-cd7ac40919c1",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "version",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 이 변경되면 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "onupgradeneeded",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 실행시킨다. 이 안에서 테이블(ObjectStore)을 생성한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "5bca8120-492d-4dd8-b348-a763e998b0ff",
-    "type": "quote",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "IndexedDB의 Version이란?",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "888a9705-aed5-47b0-a3df-cf2716316b54",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "IndexedDB에서 version 은 DB 스키마의 버전을 의미하며, 데이터 구조 변경의 이력 관리용이라고 생각하면 된다. IndexedDB는 한번 만들어진 ObjectStore를 그냥 아무때나 수정할 수 없으며, onupgradeneeded (버전이 변경되었을 때 호출) 안에서만 변경이 가능하다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f6f9ccce-b07d-4667-96ae-2da796da23e1",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Version의 경우, 만약 이미 브라우저 상에 존재하는 DB의 인덱스 구조가 바뀌는 것과 같은 상황이 발생했을 때 업데이트를 해주어야하며 업데이트를 해주지 않을 경우 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "이미 기존 DB 구조를 사용하고 있는 사용자들에게는 프로덕션 에러가 발생",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "할 것이다. 그래서 구조가 변경되면 버전 업데이트는 정말 중요하게 작용한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "bee70533-362a-4942-9f10-b5158d1f81be",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "단, 아직 프로덕션 환경으로 배포되지 않고 개발 중인 상태라면 DB 삭제 후 다시 개발을 진행하면 된다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "ce595ab4-8a89-4cb1-8b44-390631580734",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "\"app\" : DB 이름",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "22862c11-744a-456e-9e30-60c57630eed6",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "1 : 스키마 버전",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f2a97608-4897-4e78-a17d-971b9b76b7d8",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "반환 값은 DB가 아니라 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "IDBOpenDBRequest",
-        "styles": {
-          "code": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "38b9b5c8-0e43-412f-8946-cdf535b3905a",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "const request = indexedDB.open('app', 1);",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "2d6baefa-d316-4b40-9435-8aee40dea184",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "2. 스키마 정의",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "7d866674-3225-406e-9258-ad5e71dc55a3",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "ObjectStore",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " · ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "index",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 생성 및 변경은 이 과정에서만 가능하다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c18a25bf-a83d-4c06-ac37-66e9da6f52ff",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "request.onupgradeneeded = (e) => {\nconst db = e.target.result;\n\n// ObjectStore 생성 (테이블)\nconst store = db.createObjectStore('post', { keyPath: 'id' });\n\n// 인덱스 생성\nstore.createIndex('by_title', 'title');\n}",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "b966c29d-5e30-4843-a91d-50219cf2462f",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "3. DB 오픈 완료",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "154cb72a-2a3c-4b85-a2e7-0ad2cdac9cdb",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "db",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "IDBDatabase",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 인스턴스를 의미한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "cbe2c450-ebcc-4a05-ac42-65181aaa2ba9",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "읽기 및 쓰기가 가능하다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f5552a0d-907e-4953-81a6-0c52ca6fced7",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "let db;\n\nrequest.onsuccess = () => {\ndb = request.result;\n};",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e7bc9771-ced7-4104-a62b-535763aeb0ef",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "4. 트랜잭션 시작",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f2d50f69-1cc1-41f3-a1e2-53d8963aaaa5",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "IndexedDB",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "의 모든 CRUD는 트랜잭션 안에서만 가능하다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "2ae8c165-06e9-497d-a4fd-d16e0a370b5b",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "트랜잭션 메서드는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "\"readonly\"",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " or ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "\"readwrite\"",
-        "styles": {
-          "code": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "25025101-b57d-44df-be0a-7b3e7aa7d79e",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "const tx = db.transaction(\"posts\", \"readwrite\");\nconst store = tx.objectStore('post');",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "fab7b26d-49e9-49ee-bdfa-b9c8f49286bb",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "5. 데이터 저장 (add / put)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "0594fc74-de49-4de9-a6c4-5501a2ddf449",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "add → 중복 key가 존재하면 적용되지 않는다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "af1cd84e-f7fc-4c41-a233-90db24541c17",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "put → 중복 key가 존재하면 update 되고, 없으면 Insert 된다. (실무에서는 보통 put 방식을 사용한다고 한다)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "1c37de19-d92f-488a-abae-043639e62013",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "store.add({\nid: 1,\ntitle: \"Hello\"\n});",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "798250e1-7b85-48ac-acf2-f4f2e0b60321",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "6. 데이터 조회 (get)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "4df19876-830b-4965-bac0-ee29fbf504c9",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "모든 결과는 이벤트로 받으며, return 값은 존재하지 않는다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e080fcc2-64d3-4e63-87c3-63ac0ef6a6a4",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "const getRequest = store.get(1);\ngetRequest.onsuccess = () => {\nconsole.log(getRequest.result);\n};",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "a2bae8cf-7327-4fd6-9063-15e021965fa6",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "7. 전체 조회 (cursor)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "4568ae45-6192-42aa-8db5-507d09224418",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "IndexedDB",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "는 대량 데이터 전제이며, ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "getAll()",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "도 존재하지만 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "cursor",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "가 기본 설계로 이루어져있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "a50f251c-48b8-4020-93fa-e684bd834c59",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "const cursorReq = store.openCursor();\n\ncursorReq.onsuccess = (e) => {\nconst cursor = e.target.result;\nif (cursor) {\nconsole.log(cursor.value);\ncursor.continue();\n}\n}",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "39a87290-5cae-421c-b34f-133dd88e62d4",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "8. 인덱스 조회",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "71e3a181-07c4-4c03-8677-31efc2d0f6bd",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "인덱스가 존재하지 않으면 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "name == \"Kim\"",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 과 같은 조건 검색을 하기 위해 풀 스캔을 해야하지만, 인덱스 내부에 자동으로 트리구조로 빠른 loopup을 제공할 수 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c0f03cd9-aea9-4b4b-a725-216358a87baf",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "const index = store.index('by_title'); // 2.스키마 정의 부분 확인\nconst req = index.get('title');\n\nreq.onsuccess = () => {\nconsole.log(req.result);\n};",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "46bfc4ba-e363-4a72-b692-60d3e8f2ef6b",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "9. 트랜잭션 완료 및 실패",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "62a3b550-34c0-4cf4-a90e-623d543736c6",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "하나라도 실패하게 되면 전체를 롤백하며 DB의 일관성을 보장해준다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e5e66000-43b0-4ef1-8718-ebefda22b05e",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "const tx = db.transaction(\"posts\", \"readwrite\");\n\ntx.oncomplete = () => {\nconsole.log(\"트랜잭션 완료\");\n}\n\ntx.onerror = () => {\nconsole.error(\"트랜잭션 실패\");\n}",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "2ba95149-e9f8-45df-8a3a-286c9f6910c8",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "사실 indexedDB를 들여다보았을 때, 실제로 개발자들은 원본 IndexedDB의 메서드보다는 NPM 패키지인 idb 를 많이 사용한다고 한다. 그 이유는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "아래와 같이",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " indexedDB의 중첩 로직과 이벤트 지옥으로 인해 코드의 양과 가독성이 현저히 떨어지기 때문이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "9f4ac353-7421-4fec-bb43-5730b1673c05",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "request.onsuccess = () => {\nconst tx = db.transaction(\"posts\", \"readwrite\");\nconst store = tx.objectStore('posts\");\nconst req = store.get(1);\nreq.onsuccess = () => { // 지옥\nconsole.log(req.result);\n}\n};",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "d976d7dc-eb51-4c82-897d-781b0da650bd",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "idb",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 를 많이 사용한다길래, idb 부터 사용을 해보았는데 idb 는 Promise 기반으로 이루어져있다. 그렇다면 왜 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "IndexedDB",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Promise",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "가 아니라 이벤트 기반으로 설계가 되었을까?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "0deffe47-7dd9-4057-831b-52481ec32d18",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "IndexedDB가 이벤트 기반으로 설계된 이유",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "5aca61cd-23d3-4ebf-8eaf-30a776bc9555",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "IndexedDB가 설계되었을 당시에는 Promise가 존재하지 않았기 때문에 브라우저 스레드를 절대 막지 않으면서 취소 및 진행 상태를 다뤄야했기 때문에 이벤트 기반으로 설계되었다고 한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "0844659f-f8cd-4db4-8655-1d9b03522b00",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Promise가 없고, Async - Await이 존재하지 않았으며, 별도의 스레드인 Web Worker 또한 현재만큼 안정적이기 않았기 때문에 당시에는 비동기를 구현하기 위해서는 이벤트 및 콜백이 유일한 선택지였다. 그래서 IndexedDB도 DOM 이벤트 모델을 그대로 차용하여 구현이 된 것이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f6e9ff48-61df-4056-8c7e-d23675890bb0",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "IndexedDB는 모든 동작마다 성공, 실패, 차단 이벤트가 발생하기 때문에 Promise보다는 상태 머신에 가까우며, onupgradeneeded, onblocked, onsuccess, onerror와 같은 상태들을 하나의 결과만을 반환하는 Promise로는 표현하기 역부족이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "fb643bb3-5805-48c3-99ca-096f573878c9",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "하지만 IndexedDB 자체의 각 상태는 어플리케이션 비즈니스 로직의 문제가 아닌, DB 엔진의 라이프사이클 관리의 영역이기 때문에 일반적인 개발자가 매번 직접 관여할 필요가 없다. 대부분의 클라이언트 코드에서는 복잡성보다는 가독성과 효율성을 원하기 때문에, idb 라이브러리에서는 Promise UX를 통해 결과 값만을 도출하며 또 DB 오픈 과정도 훨씬 간소화된 것이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "a8eefd07-44a8-4bc3-81ef-bd14667d0e76",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "NPM Package (idb) 사용해보기",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "08c2ec0a-71ef-4619-b958-b2cf4b740c14",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "idb는 IndexedDB 이벤트 기반의 API를 Promise 기반으로 변환해주며 트랜잭션, cursor, upgrade를 안전하게 감싸주는 역할을 한다. 또, 타입스크립트 친화적이기에 사용법도 네이티브 indexedDB보다 훨씬 간편하다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e0fdf40f-3ca9-42cb-b662-b64ee9362f70",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "1. DB 오픈",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "0fd8cbe3-678c-4e49-973b-c79fb62525cc",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "openDB 메서드를 통해 Promise를 반환하며, 내부적으로는 ",
-        "styles": {}
-      },
-      {
-        "type": "link",
-        "href": "https://indexedDB.open",
-        "content": [
+        "type": "p",
+        "children": [
           {
-            "type": "text",
-            "text": "indexedDB.open",
-            "styles": {}
+            "text": "IndexedDB",
+            "code": true
+          },
+          {
+            "text": "는 기술 면접을 준비할 때 브라우저의 로컬 저장소에 관련된 내용들을 배우면서, 한번쯔음 들어보았을 용어이다. 사실 쿠키를 많이 사용해보았지, "
+          },
+          {
+            "text": "IndexedDB",
+            "code": true
+          },
+          {
+            "text": "의 경우에는 사용할 일이 많이 없다고 생각해 실제로 써보지는 못했는데 이번에 게시글 자동저장 기능을 구현해보면서 여러 로컬 저장소들과의 특징들을 비교하며 도입을 하고자했다."
           }
         ]
       },
       {
-        "type": "text",
-        "text": ", onupgradeneeded, onsuccess 까지의 라이프 사이클을 여기서 끝낸다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "5976def7-768b-4374-ab9b-b234ed267b19",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "객체 형태의 저장 형태 · 대용량 저장소 · 비동기 처리 등의 특징과 메인 스레드를 블로킹하지 않는 특성들이 "
+          },
+          {
+            "text": "IndexedDB",
+            "code": true
+          },
+          {
+            "text": "가 자동 저장에 적합하다고 생각이 들었다. 오늘은 "
+          },
+          {
+            "text": "IndexedDB",
+            "code": true
+          },
+          {
+            "text": " 를 활용해보며 배웠던 내용들을 복기차 포스팅을 해보려고 한다."
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "import { openDB } from 'idb';\n\nexport const dbPromise = openDB('app-db', 1, {\nupgrade(db) {\ndb.createObjectStore('posts', { keyPath: 'id' });\n}\n});",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c46557a4-931c-47da-b63b-5cd48e0c839c",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
+        "type": "h2",
+        "children": [
+          {
+            "text": "IndexedDB란?"
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "2. DB 인스턴스 얻기",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "1bd590b4-42f2-436d-abdb-dd80fdda66ac",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "브라우저에 내장된 비동기 NoSQL 데이터베이스로, 대용량 및 구조화된 데이터를 영구적으로 저장할 수 있는 클라이언트 DB이다. "
+          },
+          {
+            "text": "IndexedDB",
+            "code": true
+          },
+          {
+            "text": "는 웹이 단순 문서에서 오프라인 및 대용량 데이터를 다루는 어플리케이션으로 진화하면서, 기존 저장소(Local Stoarge, Cookie)가 이러한 요구 조건들을 감당하지 못해 등장하게 되었다."
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "db는 IDBDatabase 인스턴스를 지칭하며, 현재부터는 이벤트는 없으며 await 키워드만 사용해야한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "50320996-9a0b-4ef0-9f02-16942d298a91",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
+        "type": "h3",
+        "children": [
+          {
+            "text": "초창기 웹 저장소의 한계점"
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "const db = await dbPromise;",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "61da7860-7f57-4718-8cc3-8cc782607238",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "우리가 흔히 알고 있는 "
+          },
+          {
+            "text": "Cookie",
+            "code": true
+          },
+          {
+            "text": " 와 "
+          },
+          {
+            "text": "LocalStorage",
+            "code": true
+          },
+          {
+            "text": " 와 같은 로컬 스토리지의 경우에는 아래와 같은 한계점을 가지고 있었다."
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "3. CRUD",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "295dc2a9-3ea5-4cf2-b1d6-df064b93b4a6",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "Cookie",
+            "bold": true
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "저장(insert, update)의 경우, put 메서드를 사용하며 내부적으로는 transaction 생성, store 접근, put 실행, 완료 대기까지의 과정을 진행한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f3bd4395-46eb-4ab0-94ed-428fe1c071bf",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "4KB의 용량을 가진다."
+          }
+        ],
+        "listStyleType": "ul"
+      },
       {
-        "type": "text",
-        "text": "await db.put(\"posts\", {\nid: 1,\ntitle: 'Hello'\n});",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f59db900-64ee-45c9-8153-d8ef84e751d9",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "모든 요청마다 서버로 전송된다."
+          }
+        ],
+        "listStyleType": "ul"
+      },
       {
-        "type": "text",
-        "text": "조회의 경우에는 get 메서드와 관련 id 값을 통해 조회할 수 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "70c1faa9-7b46-4769-9f83-30fe352cfe0c",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "LocalStorage / SessionStorage",
+            "bold": true
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "const post = await db.get('posts', 1);",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "175d9885-9abd-41d9-8880-ae29c5aa5711",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "~5MB의 용량을 가진다."
+          }
+        ],
+        "listStyleType": "ul"
+      },
       {
-        "type": "text",
-        "text": "전체 조회의 경우에는 getAll 메서드를 통해 관련 테이블의 모든 데이터들을 조회할 수 있다, 이때도 id 값을 필요로한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "21d4905a-f5f8-42dc-8eee-4ded3ca487d2",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "동기 API로 메인 스레드의 블로킹을 한다."
+          }
+        ],
+        "listStyleType": "ul"
+      },
       {
-        "type": "text",
-        "text": "const posts = await db.getAll('posts');",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "68d4d58b-7de9-47d4-9aa9-17883db3cc9d",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "문자열만 저장이 가능하며, 인덱싱 및 검색이 불가하다. (별도 로직 필요)"
+          }
+        ],
+        "listStyleType": "ul"
+      },
       {
-        "type": "text",
-        "text": "삭제의 경우에는 delete 메서드와 id 값을 통해 삭제할 수 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c19d064e-7ea2-438d-84cc-e9b9519891a9",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "브라우저에서 제공하는 기존 로컬 저장소들은 설정 값을 저장하는 저장소 수준이지, DB 개념으로 사용하기에는 무리가 있었다. 2008 ~ 2012년 Gmail, Google Docs, Facebook 등의 웹 서비스들이 급부상되면서 수천수만 건의 데이터가 저장되어야하고 오프라인에서도 동작을 해야했다."
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "await db.delete('posts', 1);",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "9d036b1a-ffa6-4e00-9cae-d2867a69d07e",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "또 빠른 검색이 필요하며 UI 멈춤 없이 비동기 처리가 가능해야했기에 브라우저 자체에서 DB가 필요하다고 느끼게 되었고, 기존 브라우저의 로컬 저장소로는 해결이 되지 않던 문제를 IndexedDB를 정의하며 해결하고자 했던 것이다."
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "4. 트랜잭션 사용하기 (여러 작업들을 한번에 묶어 사용하기)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "bdf3e786-fd1f-41df-b6d5-0fda1ad8e13b",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
+        "type": "blockquote",
+        "children": [
+          {
+            "text": "IndexedDB의 초기 설계 목표는 무엇이었을까?",
+            "bold": true
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "트랜잭션을 통해 원자성을 보장받을 수 있으며, 여러 작업들을 묶어 작업하기 때문에 중간 코드가 실패 시에 전체적으로 롤백된다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f0257584-b893-473c-85e8-64a52da8b332",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "비동기 API로 메인스레드 블로킹을 최소화한다."
+          }
+        ],
+        "listStyleType": "ul"
+      },
       {
-        "type": "text",
-        "text": "const tx = db.transaction('posts', 'readwrite');\nconst store = tx.objectStore('posts');\n\nawait store.put({ id: 1, title: 'A' });\nawait store.put({ id: 2, title : 'B' });\n\nawait tx.done() // 중요",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "b6d826ca-a890-4995-bcd7-7bf14fb4d045",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "대용량 저장이 가능해야한다. (수백MB ~ 수 GB)"
+          }
+        ],
+        "listStyleType": "ul"
+      },
       {
-        "type": "text",
-        "text": "5. 인덱스 사용하기",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c216c861-be3e-4b7b-9a79-04724670b4e0",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "객체 형태 그대로 저장할 수 있도록 설계"
+          }
+        ],
+        "listStyleType": "ul"
+      },
       {
-        "type": "text",
-        "text": "// 인덱스 생성 (Upgrade 단계)\nupgrade(db) {\nconst store = db.createObjectStore('posts', { keyPath: 'id' });\nstore.createIndex('by_title', 'title');\n}\n\n// 인덱스 조회\nconst post = await db.getFromIndex('posts', 'by_title', 'Hello');",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "5026408e-9e3e-402b-b7d2-544038fb4673",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "인덱싱 및 검색이 가능해야한다."
+          }
+        ],
+        "listStyleType": "ul"
+      },
       {
-        "type": "text",
-        "text": "6. cursor 사용하기 (대량 데이터 조회)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "2360b565-198b-440c-bf94-97c635ed3175",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "트랜잭션을 지원한다."
+          }
+        ],
+        "listStyleType": "ul"
+      },
       {
-        "type": "text",
-        "text": "내부에서는 openCursor, cursor.continue, 이벤트 루프를 전부 감춰준다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "41079cd7-8861-4480-9b7f-581661f6cb89",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "브라우저 오프라인 환경을 우선적으로 지원한다. (오프라인 퍼스트)"
+          }
+        ],
+        "listStyleType": "ul"
+      },
       {
-        "type": "text",
-        "text": "for await (const cursor of db\n.transaction(\"posts\")\n.store\n.openCursor()) {\nconsole.log(cursor.value);\n}",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "27e8e7cc-8b82-4992-8f24-b60692351ba9",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "단, 여기서 IndexedDB는 서버 DB를 대체하려는 것이 아닌 네트워크 없이도 웹 앱이 살아있게 하고자하는 철학을 가지고 있다. (인증, 보안 데이터가 아닌 캐시 및 오프라인 데이터 제공)"
+          }
+        ],
+        "listStyleType": "ul"
+      },
       {
-        "type": "text",
-        "text": "백오피스에는 실제로 어떻게 로직을 담았을까?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "38a74277-9e93-44c6-a8df-3280eafb9c70",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "IndexedDB는 브라우저 자체의 DB라고 했다, 브라우저에서 사용하는 DB는 SQL이 아닌 NoSQL을 사용한다. 그 이유는 웹 데이터는 유연해야하기 때문에 스키마를 강제하지 않으며, 로컬스토리지와 같이 직렬화를 하지 않고 객체 그대로 저장하고 싶었다. 또 브라우저 구현을 단순화시키며, JS 객체 모델과 자연스럽게 맞추고자했던 포인트들이 있었기에 IndexedDB는 NoSQL을 채택하여 Key-Value + Object Store 구조를 가지게 되었다."
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "실제로 백오피스 서비스에서는 에디터가 변경될 때마다 디바운스 처리와 IndexedDB에 저장을 하면서, 클라이언트 상에서 자동저장을 구현하고자 했다. 그래서, 관련하여 컴포저블을 구성하고 이 컴포저블을 가져다 관련 DB 비즈니스 로직들을 메인 로직에 삽입하는 방식으로 진행했다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "6805a0ab-f81a-4852-9c88-fed90b6228b9",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
+        "type": "h2",
+        "children": [
+          {
+            "text": "Native IndexedDB 사용해보기"
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "// useContentsAutoSave.ts\nimport { openDB } from 'idb';\n\ninterface ErrorResponse {\n    success: boolean,\n    error: Object | null\n}\n\nexport default function useContentsAutoSave() {\n    const contentDB = async () => await openDB('content-db', 1, {\n        upgrade(db) {\n            db.createObjectStore('contents', { keyPath: 'id' });\n        }\n    });\n\n    const saveContent = async (id: string, data: any): Promise<ErrorResponse> => {\n        try {\n            const db = await contentDB();\n            await db.put('contents', { id, ...data });\n            return { success: true, error: null }\n        } catch (error) {\n            return { success: false, error: {} }\n        }\n    };\n\n    const loadContent = async (id: string) => {\n        const db = await contentDB();\n        return await db.get('contents', id);\n    }\n\n    const removeContent = async (id: string) => {\n        try {\n            const db = await contentDB();\n            await db.delete('contents', id);\n            return { success: true, error: null }\n        } catch(error) {\n            return { success: false, error: {} }\n        }\n    }\n\n    return { contentDB, saveContent, removeContent, loadContent }\n}",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "9a1de649-72cf-4f59-b85b-1816833a63c3",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "IndexedDB는 항상 DB 오픈 → Object Store 생성 (최초 1번) → Transaction 시작 → 읽기 / 쓰기 순서로 진행된다. 실무에서는 idb 라는 라이브러리를 사용한다고 하지만, 순수 IndexedDB도 어떤 방식으로 동작하는지 파악해야한다."
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "// Form.vue (저장)\n\n<script setup>\nconst { saveContent } = useContentsAutoSave();\n\n// htmlContent는 디바운스에 걸려 3초 시간의 간격을 가지고 있다.\nwatch(() => props.htmlContent, async () => {\nawait saveMount('content', {\ntitle: 'title',\ncontents: 'html-content',\ncontentType: 'content-type',\n})\n});\n</script setup>",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "eabb7f42-fa12-4638-b45b-bee45c09f87f",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
+        "type": "h3",
+        "children": [
+          {
+            "text": "1. DB 오픈"
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "다른 브라우저 로컬 스토리지와 다르게 객체 그대로 전달되는 것을 확인할 수 있었으며, 값도 정상적으로 저장된 것을 확인할 수 있었다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "74b30192-fbe5-4b29-bbea-af022390c659",
-    "type": "image",
-    "props": {
-      "textAlignment": "left",
-      "backgroundColor": "default",
-      "name": "Image",
-      "url": "https://upload.cafenono.com/image/slashpagePost/20260129/235525_BLDRy2deRS3yNrllmh?q=80&s=1280x180&t=outside&f=webp",
-      "caption": "",
-      "showPreview": true
-    },
-    "children": []
-  },
-  {
-    "id": "8ca9f444-33db-4000-b1bf-27f4aa8a0c1e",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "version",
+            "code": true
+          },
+          {
+            "text": " 이 변경되면 "
+          },
+          {
+            "text": "onupgradeneeded",
+            "code": true
+          },
+          {
+            "text": " 실행시킨다. 이 안에서 테이블(ObjectStore)을 생성한다."
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "데이터를 정상적으로 저장했다면, 데이터 로드는 아래와 같이 컴포저블의 일부 함수를 호출해 바로 불러와줄 수 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "9e8d4368-66b6-497e-9c34-0549c824669c",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
+        "type": "blockquote",
+        "children": [
+          {
+            "text": "IndexedDB의 Version이란?",
+            "bold": true
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "// Form.vue (로드)\n\n<script setup>\nconst { loadContent } = useContentsAutoSave();\n\nonMounted(() => {\nconst { title, contents } = await loadContent('content');\ntitle.value = title;\ncontents.value = contents;\n});\n</script>",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "20a7d8a9-af7e-4586-83a8-072650e70a75",
-    "type": "image",
-    "props": {
-      "textAlignment": "left",
-      "backgroundColor": "default",
-      "name": "Image",
-      "url": "https://upload.cafenono.com/image/slashpagePost/20260129/235547_oXCBSh2dhq7OIrQEGk?q=80&s=1280x180&t=outside&f=webp",
-      "caption": "",
-      "showPreview": true
-    },
-    "children": []
-  },
-  {
-    "id": "a8b21eef-577c-4f0d-8b07-f68876b1f427",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "IndexedDB에서 version 은 DB 스키마의 버전을 의미하며, 데이터 구조 변경의 이력 관리용이라고 생각하면 된다. IndexedDB는 한번 만들어진 ObjectStore를 그냥 아무때나 수정할 수 없으며, onupgradeneeded (버전이 변경되었을 때 호출) 안에서만 변경이 가능하다."
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "최근에 백오피스 서비스에 IndexedDB를 새롭게 도입하면서, 아직까지는 Safari의 시크릿 모드 미지원 등과 같은 단점들을 제외하고는 큰 이팩트있는 단점을 찾지 못해 실시간 동기화 작업의 경우에는 IndexedDB를 활용한 저장 기능들을 추가해보고 있다. 아무래도 다른 로컬스토리지의 경우에는 객체 형태를 직렬화하여 저장하고, 또 이 값을 가져올 때는 다시 원복하는 로직들을 추가해야하는 경우가 허다했는데 단순히 객체에서 값만 뽑아오는 형태로 구성되니 훨씬 개발이 편리했다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c2b8922f-213c-4709-9386-ba0b050f63cb",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "Version의 경우, 만약 이미 브라우저 상에 존재하는 DB의 인덱스 구조가 바뀌는 것과 같은 상황이 발생했을 때 업데이트를 해주어야하며 업데이트를 해주지 않을 경우 "
+          },
+          {
+            "text": "이미 기존 DB 구조를 사용하고 있는 사용자들에게는 프로덕션 에러가 발생",
+            "bold": true
+          },
+          {
+            "text": "할 것이다. 그래서 구조가 변경되면 버전 업데이트는 정말 중요하게 작용한다."
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "현재는 자동저장 기능에 IndexedDB를 활용한 방법을 녹여보았지만, 추후에 더 좋은 방법을 경험하거나 생각하게 된다면 리팩토링으로 개선해보는 시간을 가져보며 현 상황에 맞는 좋은 방법들을 적용해보려고한다.",
-        "styles": {}
+        "type": "p",
+        "children": [
+          {
+            "text": "단, 아직 프로덕션 환경으로 배포되지 않고 개발 중인 상태라면 DB 삭제 후 다시 개발을 진행하면 된다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "\"app\" : DB 이름"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "1 : 스키마 버전"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "반환 값은 DB가 아니라 "
+          },
+          {
+            "text": "IDBOpenDBRequest",
+            "code": true
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "const request = indexedDB.open('app', 1);"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "2. 스키마 정의"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "ObjectStore",
+            "code": true
+          },
+          {
+            "text": " · "
+          },
+          {
+            "text": "index",
+            "code": true
+          },
+          {
+            "text": " 생성 및 변경은 이 과정에서만 가능하다."
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "request.onupgradeneeded = (e) => {\nconst db = e.target.result;\n\n// ObjectStore 생성 (테이블)\nconst store = db.createObjectStore('post', { keyPath: 'id' });\n\n// 인덱스 생성\nstore.createIndex('by_title', 'title');\n}"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "3. DB 오픈 완료"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "db",
+            "code": true
+          },
+          {
+            "text": " 는 "
+          },
+          {
+            "text": "IDBDatabase",
+            "code": true
+          },
+          {
+            "text": " 인스턴스를 의미한다."
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "읽기 및 쓰기가 가능하다."
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "let db;\n\nrequest.onsuccess = () => {\ndb = request.result;\n};"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "4. 트랜잭션 시작"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "IndexedDB",
+            "code": true
+          },
+          {
+            "text": "의 모든 CRUD는 트랜잭션 안에서만 가능하다."
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "트랜잭션 메서드는 "
+          },
+          {
+            "text": "\"readonly\"",
+            "code": true
+          },
+          {
+            "text": " or "
+          },
+          {
+            "text": "\"readwrite\"",
+            "code": true
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "const tx = db.transaction(\"posts\", \"readwrite\");\nconst store = tx.objectStore('post');"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "5. 데이터 저장 (add / put)"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "add → 중복 key가 존재하면 적용되지 않는다."
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "put → 중복 key가 존재하면 update 되고, 없으면 Insert 된다. (실무에서는 보통 put 방식을 사용한다고 한다)"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "store.add({\nid: 1,\ntitle: \"Hello\"\n});"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "6. 데이터 조회 (get)"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "모든 결과는 이벤트로 받으며, return 값은 존재하지 않는다."
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "const getRequest = store.get(1);\ngetRequest.onsuccess = () => {\nconsole.log(getRequest.result);\n};"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "7. 전체 조회 (cursor)"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "IndexedDB",
+            "code": true
+          },
+          {
+            "text": "는 대량 데이터 전제이며, "
+          },
+          {
+            "text": "getAll()",
+            "code": true
+          },
+          {
+            "text": "도 존재하지만 "
+          },
+          {
+            "text": "cursor",
+            "code": true
+          },
+          {
+            "text": "가 기본 설계로 이루어져있다."
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "const cursorReq = store.openCursor();\n\ncursorReq.onsuccess = (e) => {\nconst cursor = e.target.result;\nif (cursor) {\nconsole.log(cursor.value);\ncursor.continue();\n}\n}"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "8. 인덱스 조회"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "인덱스가 존재하지 않으면 "
+          },
+          {
+            "text": "name == \"Kim\"",
+            "code": true
+          },
+          {
+            "text": " 과 같은 조건 검색을 하기 위해 풀 스캔을 해야하지만, 인덱스 내부에 자동으로 트리구조로 빠른 loopup을 제공할 수 있다."
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "const index = store.index('by_title'); // 2.스키마 정의 부분 확인\nconst req = index.get('title');\n\nreq.onsuccess = () => {\nconsole.log(req.result);\n};"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "9. 트랜잭션 완료 및 실패"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "하나라도 실패하게 되면 전체를 롤백하며 DB의 일관성을 보장해준다."
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "const tx = db.transaction(\"posts\", \"readwrite\");\n\ntx.oncomplete = () => {\nconsole.log(\"트랜잭션 완료\");\n}\n\ntx.onerror = () => {\nconsole.error(\"트랜잭션 실패\");\n}"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "사실 indexedDB를 들여다보았을 때, 실제로 개발자들은 원본 IndexedDB의 메서드보다는 NPM 패키지인 idb 를 많이 사용한다고 한다. 그 이유는 "
+          },
+          {
+            "text": "아래와 같이",
+            "bold": true
+          },
+          {
+            "text": " indexedDB의 중첩 로직과 이벤트 지옥으로 인해 코드의 양과 가독성이 현저히 떨어지기 때문이다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "request.onsuccess = () => {\nconst tx = db.transaction(\"posts\", \"readwrite\");\nconst store = tx.objectStore('posts\");\nconst req = store.get(1);\nreq.onsuccess = () => { // 지옥\nconsole.log(req.result);\n}\n};"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "idb",
+            "code": true
+          },
+          {
+            "text": " 를 많이 사용한다길래, idb 부터 사용을 해보았는데 idb 는 Promise 기반으로 이루어져있다. 그렇다면 왜 "
+          },
+          {
+            "text": "IndexedDB",
+            "code": true
+          },
+          {
+            "text": "는 "
+          },
+          {
+            "text": "Promise",
+            "code": true
+          },
+          {
+            "text": "가 아니라 이벤트 기반으로 설계가 되었을까?"
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "IndexedDB가 이벤트 기반으로 설계된 이유"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "IndexedDB가 설계되었을 당시에는 Promise가 존재하지 않았기 때문에 브라우저 스레드를 절대 막지 않으면서 취소 및 진행 상태를 다뤄야했기 때문에 이벤트 기반으로 설계되었다고 한다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Promise가 없고, Async - Await이 존재하지 않았으며, 별도의 스레드인 Web Worker 또한 현재만큼 안정적이기 않았기 때문에 당시에는 비동기를 구현하기 위해서는 이벤트 및 콜백이 유일한 선택지였다. 그래서 IndexedDB도 DOM 이벤트 모델을 그대로 차용하여 구현이 된 것이다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "IndexedDB는 모든 동작마다 성공, 실패, 차단 이벤트가 발생하기 때문에 Promise보다는 상태 머신에 가까우며, onupgradeneeded, onblocked, onsuccess, onerror와 같은 상태들을 하나의 결과만을 반환하는 Promise로는 표현하기 역부족이다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "하지만 IndexedDB 자체의 각 상태는 어플리케이션 비즈니스 로직의 문제가 아닌, DB 엔진의 라이프사이클 관리의 영역이기 때문에 일반적인 개발자가 매번 직접 관여할 필요가 없다. 대부분의 클라이언트 코드에서는 복잡성보다는 가독성과 효율성을 원하기 때문에, idb 라이브러리에서는 Promise UX를 통해 결과 값만을 도출하며 또 DB 오픈 과정도 훨씬 간소화된 것이다."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "NPM Package (idb) 사용해보기"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "idb는 IndexedDB 이벤트 기반의 API를 Promise 기반으로 변환해주며 트랜잭션, cursor, upgrade를 안전하게 감싸주는 역할을 한다. 또, 타입스크립트 친화적이기에 사용법도 네이티브 indexedDB보다 훨씬 간편하다."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "1. DB 오픈"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "openDB 메서드를 통해 Promise를 반환하며, 내부적으로는 "
+          },
+          {
+            "text": "indexedDB.open"
+          },
+          {
+            "text": ", onupgradeneeded, onsuccess 까지의 라이프 사이클을 여기서 끝낸다."
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "import { openDB } from 'idb';\n\nexport const dbPromise = openDB('app-db', 1, {\nupgrade(db) {\ndb.createObjectStore('posts', { keyPath: 'id' });\n}\n});"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "2. DB 인스턴스 얻기"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "db는 IDBDatabase 인스턴스를 지칭하며, 현재부터는 이벤트는 없으며 await 키워드만 사용해야한다."
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "const db = await dbPromise;"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "3. CRUD"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "저장(insert, update)의 경우, put 메서드를 사용하며 내부적으로는 transaction 생성, store 접근, put 실행, 완료 대기까지의 과정을 진행한다."
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "await db.put(\"posts\", {\nid: 1,\ntitle: 'Hello'\n});"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "조회의 경우에는 get 메서드와 관련 id 값을 통해 조회할 수 있다."
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "const post = await db.get('posts', 1);"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "전체 조회의 경우에는 getAll 메서드를 통해 관련 테이블의 모든 데이터들을 조회할 수 있다, 이때도 id 값을 필요로한다."
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "const posts = await db.getAll('posts');"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "삭제의 경우에는 delete 메서드와 id 값을 통해 삭제할 수 있다."
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "await db.delete('posts', 1);"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "4. 트랜잭션 사용하기 (여러 작업들을 한번에 묶어 사용하기)"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "트랜잭션을 통해 원자성을 보장받을 수 있으며, 여러 작업들을 묶어 작업하기 때문에 중간 코드가 실패 시에 전체적으로 롤백된다."
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "const tx = db.transaction('posts', 'readwrite');\nconst store = tx.objectStore('posts');\n\nawait store.put({ id: 1, title: 'A' });\nawait store.put({ id: 2, title : 'B' });\n\nawait tx.done() // 중요"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "5. 인덱스 사용하기"
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// 인덱스 생성 (Upgrade 단계)\nupgrade(db) {\nconst store = db.createObjectStore('posts', { keyPath: 'id' });\nstore.createIndex('by_title', 'title');\n}\n\n// 인덱스 조회\nconst post = await db.getFromIndex('posts', 'by_title', 'Hello');"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "6. cursor 사용하기 (대량 데이터 조회)"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "내부에서는 openCursor, cursor.continue, 이벤트 루프를 전부 감춰준다."
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "for await (const cursor of db\n.transaction(\"posts\")\n.store\n.openCursor()) {\nconsole.log(cursor.value);\n}"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "백오피스에는 실제로 어떻게 로직을 담았을까?"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "실제로 백오피스 서비스에서는 에디터가 변경될 때마다 디바운스 처리와 IndexedDB에 저장을 하면서, 클라이언트 상에서 자동저장을 구현하고자 했다. 그래서, 관련하여 컴포저블을 구성하고 이 컴포저블을 가져다 관련 DB 비즈니스 로직들을 메인 로직에 삽입하는 방식으로 진행했다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// useContentsAutoSave.ts\nimport { openDB } from 'idb';\n\ninterface ErrorResponse {\n    success: boolean,\n    error: Object | null\n}\n\nexport default function useContentsAutoSave() {\n    const contentDB = async () => await openDB('content-db', 1, {\n        upgrade(db) {\n            db.createObjectStore('contents', { keyPath: 'id' });\n        }\n    });\n\n    const saveContent = async (id: string, data: any): Promise<ErrorResponse> => {\n        try {\n            const db = await contentDB();\n            await db.put('contents', { id, ...data });\n            return { success: true, error: null }\n        } catch (error) {\n            return { success: false, error: {} }\n        }\n    };\n\n    const loadContent = async (id: string) => {\n        const db = await contentDB();\n        return await db.get('contents', id);\n    }\n\n    const removeContent = async (id: string) => {\n        try {\n            const db = await contentDB();\n            await db.delete('contents', id);\n            return { success: true, error: null }\n        } catch(error) {\n            return { success: false, error: {} }\n        }\n    }\n\n    return { contentDB, saveContent, removeContent, loadContent }\n}"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// Form.vue (저장)\n\n<script setup>\nconst { saveContent } = useContentsAutoSave();\n\n// htmlContent는 디바운스에 걸려 3초 시간의 간격을 가지고 있다.\nwatch(() => props.htmlContent, async () => {\nawait saveMount('content', {\ntitle: 'title',\ncontents: 'html-content',\ncontentType: 'content-type',\n})\n});\n</script setup>"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "다른 브라우저 로컬 스토리지와 다르게 객체 그대로 전달되는 것을 확인할 수 있었으며, 값도 정상적으로 저장된 것을 확인할 수 있었다."
+          }
+        ]
+      },
+      {
+        "type": "img",
+        "url": "https://upload.cafenono.com/image/slashpagePost/20260129/235525_BLDRy2deRS3yNrllmh?q=80&s=1280x180&t=outside&f=webp",
+        "caption": "",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "데이터를 정상적으로 저장했다면, 데이터 로드는 아래와 같이 컴포저블의 일부 함수를 호출해 바로 불러와줄 수 있다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// Form.vue (로드)\n\n<script setup>\nconst { loadContent } = useContentsAutoSave();\n\nonMounted(() => {\nconst { title, contents } = await loadContent('content');\ntitle.value = title;\ncontents.value = contents;\n});\n</script>"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "img",
+        "url": "https://upload.cafenono.com/image/slashpagePost/20260129/235547_oXCBSh2dhq7OIrQEGk?q=80&s=1280x180&t=outside&f=webp",
+        "caption": "",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "최근에 백오피스 서비스에 IndexedDB를 새롭게 도입하면서, 아직까지는 Safari의 시크릿 모드 미지원 등과 같은 단점들을 제외하고는 큰 이팩트있는 단점을 찾지 못해 실시간 동기화 작업의 경우에는 IndexedDB를 활용한 저장 기능들을 추가해보고 있다. 아무래도 다른 로컬스토리지의 경우에는 객체 형태를 직렬화하여 저장하고, 또 이 값을 가져올 때는 다시 원복하는 로직들을 추가해야하는 경우가 허다했는데 단순히 객체에서 값만 뽑아오는 형태로 구성되니 훨씬 개발이 편리했다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "현재는 자동저장 기능에 IndexedDB를 활용한 방법을 녹여보았지만, 추후에 더 좋은 방법을 경험하거나 생각하게 된다면 리팩토링으로 개선해보는 시간을 가져보며 현 상황에 맞는 좋은 방법들을 적용해보려고한다."
+          }
+        ]
       }
-    ],
-    "children": []
+    ]
   }
 ]

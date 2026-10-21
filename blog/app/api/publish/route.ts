@@ -1,5 +1,6 @@
 import { randomUUID } from "crypto";
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { isAdmin } from "@/lib/auth";
 import { isContentReferenceId } from "@/lib/content-reference";
 import { deleteDraft, savePost } from "@/lib/github";
@@ -64,6 +65,9 @@ export async function POST(request: Request) {
       passwordHash,
     });
     if (fromDraft) await deleteDraft(postId, title.trim());
+    revalidatePath("/");
+    revalidatePath(`/posts/${postId}`);
+    revalidatePath("/series");
     return NextResponse.json({ ok: true, id: postId, version });
   } catch (error) {
     console.error(error);

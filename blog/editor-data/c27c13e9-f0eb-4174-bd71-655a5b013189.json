@@ -1,642 +1,314 @@
 [
   {
-    "id": "09bce5e3-dc1f-4164-a6fd-b1433b8c8031",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
+    "type": "plate-content",
+    "version": 1,
     "content": [
       {
-        "type": "text",
-        "text": "전사 AX(Artificial Intelligence Transformation) 전환을 하면서 자연스레 서비스에도 Agentic UI를 적용하면서, SSE를 적용하는 과정에서 브라우저에서 제공하는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "new EventSource",
-        "styles": {
-          "backgroundColor": "rgba(192, 192, 192, 0.2)"
-        }
-      },
-      {
-        "type": "text",
-        "text": " 를 POST 메서드에서는 사용하지 못한다는 것을 알게되었고 EventSource 방식과 Fetch + ReadableStream(SSE) 방식의 차이를 공부해보고자 해요.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "2d8bd594-8715-4fce-bf39-5f3988618536",
-    "type": "image",
-    "props": {
-      "textAlignment": "left",
-      "backgroundColor": "default",
-      "name": "💬",
-      "url": "https://static.cafenono.com/emoji/14/img-apple-64/1f4ac.png",
-      "caption": "",
-      "showPreview": true
-    },
-    "children": []
-  },
-  {
-    "id": "7a4070d8-516a-4402-8f91-44b763e28a3e",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "AX(Artificial Intelligence Transformation)이란?",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "8ccd55ae-b007-413b-857c-86180857793e",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "'인공지능 전환'을 뜻하는 말로, 기업이나 조직이 인공지능(AI)을 핵심 동력으로 삼아 업무 방식, 의사결정 체계, 비즈니스 모델 전반을 새롭게 재설계하는 혁신 과정을 의미합니다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "07822945-f1e0-4923-bfa9-50c7c4454869",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "SSE(Server-Sent Events)란?",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "5f85ef4e-5e7d-4b41-aab6-6812715c2c57",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "서버 → 클라이언트 단방향 실시간 스트리밍 프로토콜입니다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e4bba8ad-eb6f-4a6f-83b9-876c539b35c3",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Content-Type: text/event-stream 으로 연결을 유지하면서 서버가 data: ...\\n\\n 형식으로 계속 데이터를 밀어냅니다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "4928cb4a-3b34-420e-bdad-c2c890e60ca1",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "실제로 호출을 하게 되면 아래와 같은 결과 값을 네트워크 탭에서 확인할 수 있습니다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "aaf9d4b8-f2ff-45a9-b253-5b081a65e889",
-    "type": "image",
-    "props": {
-      "textAlignment": "left",
-      "backgroundColor": "transparent",
-      "name": "",
-      "url": "https://upload.cafenono.com/image/slashpagePost/20260601/215431_7PMdVK5C70IQttSMJZ?q=100&s=1440x1&t=outside&f=webp",
-      "caption": "",
-      "showPreview": true,
-      "previewWidth": 1359
-    },
-    "children": []
-  },
-  {
-    "id": "94b21827-b8ea-43d1-a59a-45424081588b",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "EventSource (브라우저 내장 API)",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "48fbb20d-da03-4be1-a812-40ad373e913b",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "•",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "3a3454b1-b031-42d6-802a-413859924032",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "브라우저가 자동으로 재연결 처리를 지원합니다. (retry : 필드 지원)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "24c4ac01-5ca0-49ed-bb6f-475803856d89",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "•",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c4a0219a-75dc-4e3e-bbbf-747220065e54",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "연결이 끊기면 자동으로 재시도를 합니다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "91fdc6b1-4827-43e5-92e0-12a078919623",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "•",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "624e6673-9f08-4cc0-9238-a5a46686e63b",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "GET 전용입니다, URL에 파라미터를 쿼리스트링으로만 전달이 가능합니다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "399236ce-c5be-4771-a280-8646e4d82196",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "•",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "bbab2002-4081-4fee-b067-0b43f76b659d",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Authorization 헤더 추가가 불가합니다. 즉, JWT 인증이 불가한 상황이라는 겁니다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "5be887e0-dd00-4a21-97f2-05a5b511e4d3",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "•",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "29cc567e-c4bd-417f-b392-8038576b51a7",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "쿠기 기반의 인증만 가능합니다. (withcredentials : true)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "cda57162-1f83-4c92-a244-b5ce7379d340",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "const es = new EventSource('/api/stream'); es.onmessage = (e) => console.log(",
-        "styles": {}
-      },
-      {
-        "type": "link",
-        "href": "https://e.data",
-        "content": [
+        "type": "p",
+        "children": [
           {
-            "type": "text",
-            "text": "e.data",
-            "styles": {}
+            "text": "전사 AX(Artificial Intelligence Transformation) 전환을 하면서 자연스레 서비스에도 Agentic UI를 적용하면서, SSE를 적용하는 과정에서 브라우저에서 제공하는 "
+          },
+          {
+            "text": "new EventSource"
+          },
+          {
+            "text": " 를 POST 메서드에서는 사용하지 못한다는 것을 알게되었고 EventSource 방식과 Fetch + ReadableStream(SSE) 방식의 차이를 공부해보고자 해요."
           }
         ]
       },
       {
-        "type": "text",
-        "text": "); es.onerror = (e) => es.close();",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "025629b1-99ed-4792-911b-da9b07225590",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "JavaScript",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "fcceafc6-50b3-4851-8fab-5f8d16461395",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "제약 사항으로는 GET 메서드 전용이며, 헤더를 추가하지 못합니다. 보통 주식 시세, 알림, 공개 피드 같은 곳에서 사용을 합니다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "49bd76e6-1968-4164-a08a-f4044f348402",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Fetch + ReadableStream (SSE)",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "0440e084-15f5-40a6-a43f-624bb030b00a",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "•",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "1d965161-315e-48d7-af8f-2a667d990b26",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "POST + Request Body → 긴 질문, 복잡한 옵션 전달이 가능합니다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f2c98a4e-5d7d-46a6-91e4-217252630907",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "•",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "79d0f282-5d17-4f04-a1f2-8fdb7bc16e2a",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Authorization: Bearer ... 헤더가 가능합니다. 즉, JWT 인증이 가능합니다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "ae02b8b7-458c-42a1-81be-5ab2f12d83d4",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "•",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "5b5353ad-3de5-4a85-9249-02c82703399a",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "자동 재연결이 없으며, 직접 구현해야합니다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "47d8d6b1-c619-4f28-a98c-ac886c808c2a",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "•",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "97ce74f1-da01-4aac-b68b-d538e2bf7f05",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "브라우저 스트리밍 지원 덕분에 청크 단위로 읽기가 가능합니다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "0cd68407-6504-4415-8c1b-5a2e5e086e5e",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "const response = await fetch('/api/stream', { method: 'POST', headers: { 'Authorization': 'Bearer ' + token, // ✅ 가능 'Content-Type': 'application/json', 'Accept': 'text/event-stream', }, body: JSON.stringify({ question: '...' }) // ✅ 가능 }); const reader = response.body.getReader(); const decoder = new TextDecoder(); while (true) { const { done, value } = await ",
-        "styles": {}
-      },
-      {
-        "type": "link",
-        "href": "https://reader.read",
-        "content": [
+        "type": "img",
+        "url": "https://static.cafenono.com/emoji/14/img-apple-64/1f4ac.png",
+        "caption": "",
+        "children": [
           {
-            "type": "text",
-            "text": "reader.read",
-            "styles": {}
+            "text": ""
           }
         ]
       },
       {
-        "type": "text",
-        "text": "(); if (done) break; const chunk = decoder.decode(value, { stream: true }); // chunk에서 \"data: {...}\\n\\n\" 파싱 }",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e05b9032-a98c-4873-8349-e580c5cc6da5",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "AX(Artificial Intelligence Transformation)이란?",
+            "bold": true
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "JavaScript",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "11e597cd-9712-4250-8e54-01552972f7ad",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "'인공지능 전환'을 뜻하는 말로, 기업이나 조직이 인공지능(AI)을 핵심 동력으로 삼아 업무 방식, 의사결정 체계, 비즈니스 모델 전반을 새롭게 재설계하는 혁신 과정을 의미합니다."
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "제약 사항으로는 재열결을 하는 로직을 직접 구현해야하며 AI 채팅, 인증이 필요한 API 같은 곳에서 사용을 합니다.",
-        "styles": {}
+        "type": "p",
+        "children": [
+          {
+            "text": "SSE(Server-Sent Events)란?",
+            "bold": true
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "서버 → 클라이언트 단방향 실시간 스트리밍 프로토콜입니다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Content-Type: text/event-stream 으로 연결을 유지하면서 서버가 data: ...\\n\\n 형식으로 계속 데이터를 밀어냅니다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "실제로 호출을 하게 되면 아래와 같은 결과 값을 네트워크 탭에서 확인할 수 있습니다."
+          }
+        ]
+      },
+      {
+        "type": "img",
+        "url": "https://upload.cafenono.com/image/slashpagePost/20260601/215431_7PMdVK5C70IQttSMJZ?q=100&s=1440x1&t=outside&f=webp",
+        "caption": "",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "EventSource (브라우저 내장 API)",
+            "bold": true
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "•"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "브라우저가 자동으로 재연결 처리를 지원합니다. (retry : 필드 지원)"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "•"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "연결이 끊기면 자동으로 재시도를 합니다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "•"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "GET 전용입니다, URL에 파라미터를 쿼리스트링으로만 전달이 가능합니다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "•"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Authorization 헤더 추가가 불가합니다. 즉, JWT 인증이 불가한 상황이라는 겁니다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "•"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "쿠기 기반의 인증만 가능합니다. (withcredentials : true)"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "const es = new EventSource('/api/stream'); es.onmessage = (e) => console.log("
+          },
+          {
+            "text": "e.data"
+          },
+          {
+            "text": "); es.onerror = (e) => es.close();"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "JavaScript"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "제약 사항으로는 GET 메서드 전용이며, 헤더를 추가하지 못합니다. 보통 주식 시세, 알림, 공개 피드 같은 곳에서 사용을 합니다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Fetch + ReadableStream (SSE)",
+            "bold": true
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "•"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "POST + Request Body → 긴 질문, 복잡한 옵션 전달이 가능합니다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "•"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Authorization: Bearer ... 헤더가 가능합니다. 즉, JWT 인증이 가능합니다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "•"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "자동 재연결이 없으며, 직접 구현해야합니다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "•"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "브라우저 스트리밍 지원 덕분에 청크 단위로 읽기가 가능합니다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "const response = await fetch('/api/stream', { method: 'POST', headers: { 'Authorization': 'Bearer ' + token, // ✅ 가능 'Content-Type': 'application/json', 'Accept': 'text/event-stream', }, body: JSON.stringify({ question: '...' }) // ✅ 가능 }); const reader = response.body.getReader(); const decoder = new TextDecoder(); while (true) { const { done, value } = await "
+          },
+          {
+            "text": "reader.read"
+          },
+          {
+            "text": "(); if (done) break; const chunk = decoder.decode(value, { stream: true }); // chunk에서 \"data: {...}\\n\\n\" 파싱 }"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "JavaScript"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "제약 사항으로는 재열결을 하는 로직을 직접 구현해야하며 AI 채팅, 인증이 필요한 API 같은 곳에서 사용을 합니다."
+          }
+        ]
       }
-    ],
-    "children": []
+    ]
   }
 ]

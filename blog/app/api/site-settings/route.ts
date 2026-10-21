@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { isAdmin } from "@/lib/auth";
 import { saveSiteSettings } from "@/lib/github";
 import type { SiteAction, SiteSettings } from "@/lib/site-settings";
@@ -47,6 +48,7 @@ export async function PUT(request: Request) {
   if (!nextSettings) return NextResponse.json({ error: "설정 내용을 확인해 주세요." }, { status: 400 });
   try {
     await saveSiteSettings(nextSettings);
+    revalidatePath("/", "layout");
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error(error);

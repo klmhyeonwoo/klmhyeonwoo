@@ -1,0 +1,57 @@
+import assert from 'node:assert/strict';
+import { createRequire } from 'node:module';
+import fs from 'node:fs';
+import { JSDOM } from 'jsdom';
+const dom = new JSDOM('<html><body><div id="editor"></div><div id="tools"></div></body></html>', { url: 'http://localhost', pretendToBeVisual: true });
+for (const key of ['window', 'document', 'navigator', 'Node', 'Element', 'HTMLElement', 'MutationObserver', 'DOMParser', 'getComputedStyle', 'KeyboardEvent', 'Event', 'Range']) Object.defineProperty(globalThis, key, { configurable: true, value: dom.window[key] });
+globalThis.requestAnimationFrame = callback => setTimeout(callback, 0);
+globalThis.cancelAnimationFrame = clearTimeout;
+globalThis.innerHeight = 900;
+globalThis.innerWidth = 1200;
+globalThis.IS_REACT_ACT_ENVIRONMENT = true;
+dom.window.Range.prototype.getClientRects = () => [];
+dom.window.Range.prototype.getBoundingClientRect = () => ({ left: 100, right: 100, top: 100, bottom: 120, width: 0, height: 20 });
+const require = createRequire(import.meta.url);
+const ts = require('typescript');
+require.extensions['.tsx'] = (module, filename) => module._compile(ts.transpileModule(fs.readFileSync(filename, 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX, esModuleInterop: true } }).outputText, filename);
+const React = require('react');
+const { createRoot } = require('react-dom/client');
+const core = await import('@tiptap/core');
+const tiptapReact = await import('@tiptap/react');
+const Module = require('node:module');
+const originalLoad = Module._load;
+Module._load = function (id, ...args) { return id === '@tiptap/core' ? core : id === '@tiptap/react' ? tiptapReact : originalLoad.call(this, id, ...args); };
+const { Editor } = core;
+const { createBlockKit } = await import('@slash-editor/core');
+const { BookmarkNode, LinkMentionNode, LinkPasteTools, linkFormatEvent } = require('../components/slash-link-blocks.tsx');
+const editor = new Editor({ element: document.querySelector('#editor'), extensions: createBlockKit({ extend: [BookmarkNode, LinkMentionNode] }), content: '<p></p>' });
+const root = createRoot(document.querySelector('#tools'));
+await React.act(async () => { root.render(React.createElement(LinkPasteTools, { editor })); });
+await React.act(async () => {
+  const paste = new dom.window.Event('paste', { bubbles: true, cancelable: true });
+  Object.defineProperty(paste, 'clipboardData', { value: { getData: type => type === 'text/plain' ? 'https://example.com/' : '' } });
+  editor.view.dom.dispatchEvent(paste);
+  await new Promise(resolve => setTimeout(resolve, 50));
+});
+assert.ok(document.querySelector('.slash-paste-menu'), 'URL paste must open the format menu');
+await React.act(async () => { document.querySelector('.slash-paste-menu button').click(); });
+assert.equal(document.querySelector('.slash-paste-menu'), null);
+await React.act(async () => { editor.view.dom.querySelector('a').click(); });
+assert.ok(document.querySelector('.slash-paste-menu'), 'Existing URL click must reopen format menu');
+await React.act(async () => {
+  const button = [...document.querySelectorAll('.slash-paste-menu button')].find(button => button.textContent === '카드 미리보기');
+  button.click();
+});
+assert.ok(editor.getJSON().content.some(node => node.type === 'bookmark' && node.attrs.layout === 'card'), 'Card choice must create a card bookmark');
+await React.act(async () => {
+  editor.commands.setContent('<p><a href="https://example.com/">사이트 소개</a></p>');
+  editor.commands.setTextSelection(2);
+  editor.view.dom.dispatchEvent(new dom.window.Event(linkFormatEvent));
+});
+assert.ok(document.querySelector('.slash-paste-menu'), 'Inserted named link must offer formats');
+await React.act(async () => {
+  [...document.querySelectorAll('.slash-paste-menu button')].find(button => button.textContent === '북마크').click();
+});
+assert.ok(editor.getJSON().content.some(node => node.type === 'bookmark' && node.attrs.layout === 'bookmark'), 'Named links must convert to bookmarks');
+console.log('PASS: URL paste, existing link click, inserted named link, card/bookmark conversion');
+await React.act(async () => { root.unmount(); editor.destroy(); });

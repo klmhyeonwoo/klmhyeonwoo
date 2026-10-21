@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useAdminSession } from "./admin-session";
 import { Button } from "@base-ui/react/button";
 import { waitForDeployment } from "./deployment-waiter";
 import { ToastMessage } from "./toast-message";
@@ -14,6 +15,7 @@ export function PostAdminActions({ id, title }: Props) {
   const [message, setMessage] = useState("");
   const [deleting, setDeleting] = useState(false);
   const [waitingForDeployment, setWaitingForDeployment] = useState(false);
+  const { authenticated } = useAdminSession();
 
   async function removePost() {
     if (!window.confirm(`“${title}” 글을 삭제할까요? 이 작업은 되돌릴 수 없습니다.`)) return;
@@ -35,6 +37,8 @@ export function PostAdminActions({ id, title }: Props) {
     if (deployed) router.replace("/");
     else setMessage("배포 확인에 시간이 걸리고 있습니다. 잠시 후 목록에서 확인해 주세요.");
   }
+
+  if (authenticated !== true) return null;
 
   return (
     <aside className="post-admin-actions" aria-label="글 관리">

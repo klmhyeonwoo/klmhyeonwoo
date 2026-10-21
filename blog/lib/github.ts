@@ -1,4 +1,5 @@
 import { randomUUID } from "crypto";
+import { attachmentExtension } from "./editor-media";
 import type { SiteSettings } from "./site-settings";
 import { postSourceVersion } from "./posts";
 
@@ -85,6 +86,15 @@ export async function saveImage(image: { name: string; type: string; bytes: Buff
 
 function yaml(value: string) {
   return JSON.stringify(value);
+}
+
+export async function saveAttachment(file: { name: string; type: string; bytes: Buffer }) {
+  const extension = attachmentExtension(file.name, file.type);
+  if (!extension || file.bytes.length > 5 * 1024 * 1024) throw new Error("Invalid attachment");
+  const { owner, repo, branch } = config();
+  const path = `blog/public/uploads/${randomUUID()}.${extension}`;
+  await writeFile(path, file.bytes, `Upload attachment: ${path.split("/").pop()}`);
+  return `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
 }
 
 export async function savePost(post: Post) {

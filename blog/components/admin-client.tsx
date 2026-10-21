@@ -10,11 +10,12 @@ import type { PostMeta } from "@/lib/posts";
 import type { Category } from "@/lib/posts";
 import type { Series } from "@/lib/series";
 import { NotionSelect, type SelectOption } from "./notion-select";
-import type { EditorMention } from "./editor";
+import type { EditorMention } from "./tiptap-editor";
 import { waitForDeployment } from "./deployment-waiter";
 import { ToastMessage } from "./toast-message";
+import { useAdminSession } from "./admin-session";
 
-const Editor = dynamic(() => import("./editor"), { ssr: false });
+const Editor = dynamic(() => import("./tiptap-editor"), { ssr: false });
 
 type InitialPost = {
   id: string;
@@ -76,7 +77,8 @@ function TitleField({ value, onValueChange }: { value: string; onValueChange: (v
 
 export function AdminClient({ authenticated: initiallyAuthenticated, initialPost, initialDraft, defaultSeriesId, posts, drafts, categories: initialCategories, series: initialSeries }: Props) {
   const initialEntry = initialPost ?? initialDraft;
-  const [authenticated, setAuthenticated] = useState(initiallyAuthenticated);
+  const { authenticated: sessionAuthenticated, updateSession } = useAdminSession();
+  const authenticated = sessionAuthenticated ?? initiallyAuthenticated;
   const [adminPassword, setAdminPassword] = useState("");
   const [title, setTitle] = useState(initialEntry?.title ?? "");
   const [postId, setPostId] = useState<string | null>(initialEntry?.id ?? null);
@@ -173,7 +175,7 @@ export function AdminClient({ authenticated: initiallyAuthenticated, initialPost
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ password: adminPassword }),
     });
-    if (response.ok) setAuthenticated(true);
+    if (response.ok) { updateSession(true); setAdminPassword(""); }
     else setMessage((await response.json()).error);
   }
 

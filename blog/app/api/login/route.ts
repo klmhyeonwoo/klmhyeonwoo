@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
-import { login, passwordsMatch } from "@/lib/auth";
+import { isAdmin, login, passwordsMatch } from "@/lib/auth";
+
+export async function GET() {
+  return NextResponse.json({ authenticated: await isAdmin() }, { headers: { "Cache-Control": "private, no-store" } });
+}
 
 export async function POST(request: Request) {
   const { password } = await request.json().catch(() => ({ password: "" }));

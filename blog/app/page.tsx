@@ -1,7 +1,7 @@
 import Link from "next/link";
+import { unstable_cache } from "next/cache";
 import { Suspense } from "react";
 import { SiteHeader } from "@/components/site-header";
-import { isAdmin } from "@/lib/auth";
 import { formatPostDate, formatPostUpdatedLabel, postPublishedToday, postWasUpdated } from "@/lib/post-date";
 import { getPosts } from "@/lib/posts";
 import { getCategories } from "@/lib/posts";
@@ -10,9 +10,15 @@ import { RecentComments, RecentCommentsFallback } from "@/components/recent-comm
 import { PrefetchLink } from "@/components/prefetch-link";
 import { PostSearch } from "@/components/post-search";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 const postsPerPage = 8;
+
+const getHomeContent = unstable_cache(
+  async () => ({ posts: getPosts(true), categories: getCategories(), profile: getProfile() }),
+  ["home-content"],
+  { revalidate: 300 },
+);
 
 function normalizedSearchQuery(value: string | undefined) {
   return value?.trim().replace(/\s+/g, " ").slice(0, 120) ?? "";
@@ -33,8 +39,7 @@ function pageNumber(value: string | undefined) {
 }
 
 export default async function HomePage({ searchParams }: { searchParams: Promise<{ category?: string; page?: string; q?: string }> }) {
-  const posts = getPosts(true);
-  const categories = getCategories();
+  const { posts, categories, profile } = await getHomeContent();
   const { category: selectedCategory, page, q } = await searchParams;
   const searchQuery = normalizedSearchQuery(q);
   const filteredPosts = posts.filter((post) => (!selectedCategory || post.categoryId === selectedCategory) && matchesSearch(post, searchQuery));
@@ -42,8 +47,6 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
   const totalPages = Math.max(1, Math.ceil(filteredPosts.length / postsPerPage));
   const currentPage = Math.min(pageNumber(page), totalPages);
   const pagedPosts = filteredPosts.slice((currentPage - 1) * postsPerPage, currentPage * postsPerPage);
-  const authenticated = await isAdmin();
-  const profile = getProfile();
   const pageHref = (nextPage: number) => {
     const params = new URLSearchParams();
     if (selectedCategory) params.set("category", selectedCategory);
@@ -62,7 +65,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
 
   return (
     <>
-      <SiteHeader authenticated={authenticated} />
+      <SiteHeader />
       <main className="kb-list-page" id="top">
         <div className="kb-list-controls">
           <nav className="kb-category-nav" id="topics" aria-label="글 카테고리"><Link className={!selectedCategory ? "active" : ""} href={categoryHref()}>전체 <span>{posts.length}</span></Link>{categories.map((category) => <Link key={category.id} className={selectedCategory === category.id ? "active" : ""} href={categoryHref(category.id)}>{category.name} <span>{categoryCounts.get(category.id) ?? 0}</span></Link>)}</nav>
@@ -87,7 +90,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 </div>
               </PrefetchLink>
             </article>
-          )) : <p className="kb-empty">{searchQuery ? `“${searchQuery}”에 맞는 글을 찾지 못했습니다.` : "아직 이 카테고리에 글이 없습니다."}{authenticated && !searchQuery && <Link href="/ykk"> 글 작성하기</Link>}</p>}
+          )) : <p className="kb-empty">{searchQuery ? `“${searchQuery}”에 맞는 글을 찾지 못했습니다.` : "아직 이 카테고리에 글이 없습니다."}</p>}
           {totalPages > 1 && <nav className="kb-pagination" aria-label="글 목록 페이지"><Link aria-disabled={currentPage === 1} className={currentPage === 1 ? "is-disabled" : ""} href={pageHref(Math.max(1, currentPage - 1))}>이전</Link>{Array.from({ length: totalPages }, (_, index) => index + 1).map((number) => <Link aria-current={number === currentPage ? "page" : undefined} className={number === currentPage ? "active" : ""} href={pageHref(number)} key={number}>{number}</Link>)}<Link aria-disabled={currentPage === totalPages} className={currentPage === totalPages ? "is-disabled" : ""} href={pageHref(Math.min(totalPages, currentPage + 1))}>다음</Link></nav>}
         </section>
         <Suspense fallback={<RecentCommentsFallback />}>

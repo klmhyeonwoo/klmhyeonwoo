@@ -1,448 +1,236 @@
 [
   {
-    "id": "97a5b99d-7de0-41e3-87bc-e748d910851f",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
+    "type": "plate-content",
+    "version": 1,
     "content": [
       {
-        "type": "text",
-        "text": "Vercel 서버리스 함수는 서버를 직접 관리하지 않고, 백엔드 로직을 실행할 수 있는 기능이에요. 기본적으로 상태가 없는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Stateless",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 하며, 각 요청은 독립적으로 처리되어요. 함수는 HTTP 요청이 들어올 때만 실행이 되고, 유후 상태에서는 비용이 발생되지 않아요. 또, 트래픽에 따라 자동으로 인스턴스가 늘어나는 구조를 가지게 됩니다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c14c0415-1698-4aa7-9ef8-580634451077",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "/api 폴더 아키텍쳐로 서버리스 함수 구현해보기",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "9f98b347-bda8-4b32-b218-034d9ab4a45d",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "비교적 간단하게 사용을 할 수 있는데, 아래와 같은 예제로 구성을 할 수 있어요.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e2694aae-7927-4a83-a989-0674276979e0",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "서버리스 함수는 서버가 없어도 호출할 수 있는 구조이기에, 단순한 정적 사이트에서도 API 호출을 테스트하거나 간단한 서버 로직을 구현하는데 활용 할 수 있어요. 프론트엔드 중심의 프로젝트에서 별도의 백엔드 환경 없이도 빠르게 데이터를 처리할 수 있다는 것이 강점인 것이죠.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "801943e3-e674-4e70-acd2-0ec80492b509",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "/api\n  └── hello.ts       → GET /api/hello\n  └── users/\n        └── [id].ts  → GET /api/users/123 (동적 라우트)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "66e698bd-8a06-4f1e-8b41-3a3637fd261a",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// api/hello.ts\n// 만약 동적으로 하고 싶다면 api/post/[id].ts 형식으로 지정하면 된다.\nimport type { VercelRequest, VercelResponse } from '@vercel/node';\n \nexport default function handler(req: VercelRequest, res: VercelResponse) {\n  res.status(200).json({ message: 'Hello!' });\n}",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "8f9aaebb-befc-4185-a3f8-383702a0903e",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// app.ts\nconst response = await fetch('/api/hello');\nconst data = await response.json();\nconsole.log(data.message);",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "5da7767c-22a7-4985-a144-fe37ba16ab08",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "vercel.json으로 서버리스 함수 구현해보기",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "6ae336be-1276-439c-810d-50788605ecff",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "/api 폴더 아키텍쳐가 아닌 ",
-        "styles": {}
-      },
-      {
-        "type": "link",
-        "href": "https://vercel.json",
-        "content": [
+        "type": "p",
+        "children": [
           {
-            "type": "text",
-            "text": "vercel.json",
-            "styles": {}
+            "text": "Vercel 서버리스 함수는 서버를 직접 관리하지 않고, 백엔드 로직을 실행할 수 있는 기능이에요. 기본적으로 상태가 없는 "
+          },
+          {
+            "text": "Stateless",
+            "code": true
+          },
+          {
+            "text": " 하며, 각 요청은 독립적으로 처리되어요. 함수는 HTTP 요청이 들어올 때만 실행이 되고, 유후 상태에서는 비용이 발생되지 않아요. 또, 트래픽에 따라 자동으로 인스턴스가 늘어나는 구조를 가지게 됩니다."
           }
         ]
       },
       {
-        "type": "text",
-        "text": " 으로 서버리스 함수를 명시적으로 구현을 하는 방법도 존재해요. 만약 서버 자원이 아닌, 서버에서 ",
-        "styles": {}
+        "type": "h2",
+        "children": [
+          {
+            "text": "/api 폴더 아키텍쳐로 서버리스 함수 구현해보기"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "html",
-        "styles": {
-          "code": true
-        }
+        "type": "p",
+        "children": [
+          {
+            "text": "비교적 간단하게 사용을 할 수 있는데, 아래와 같은 예제로 구성을 할 수 있어요."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": " 을 받아 ",
-        "styles": {}
+        "type": "p",
+        "children": [
+          {
+            "text": "서버리스 함수는 서버가 없어도 호출할 수 있는 구조이기에, 단순한 정적 사이트에서도 API 호출을 테스트하거나 간단한 서버 로직을 구현하는데 활용 할 수 있어요. 프론트엔드 중심의 프로젝트에서 별도의 백엔드 환경 없이도 빠르게 데이터를 처리할 수 있다는 것이 강점인 것이죠."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "html",
-        "styles": {
-          "code": true
-        }
+        "type": "code_block",
+        "children": [
+          {
+            "text": "/api\n  └── hello.ts       → GET /api/hello\n  └── users/\n        └── [id].ts  → GET /api/users/123 (동적 라우트)"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": " 의 일부를 파싱하고, 수정하는 서버리스 함수를 만든다고 가정을 해볼게요.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "9763d757-e4cf-42f8-8a99-6a6c969d834b",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// server/server.cjs\n// 아키텍쳐 구조는 분명 express.js의 자율적인 구조\n \nconst app = express();\n \n// 프로젝트 루트 경로에서 dist 폴더 제공\nconst distPath = path.resolve(__dirname, \"../dist\"); // 절대 경로 사용\n \napp.use(express.static(distPath));\n \napp.get(\"/space/join/:id\", async (req, res) => {\n  const encryptedId = req.params.id;\n  const filePath = path.join(distPath, \"index.html\"); // dist 경로에 있는 index.html 사용\n  let html;\n...\n(이하 코드 생략)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "10408cd9-d9ed-411d-866d-0842052b4b3c",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// vercel.json\n{\n  \"version\": 2, // 1은 deprecated라서 2버젼이 고정이라고 생각하면 된다.\n  \"builds\": [\n    {\n      \"src\": \"server/server.cjs\",\n      \"use\": \"@vercel/node\"\n    } // Express 서버를 서버리스 함수로 변환한다,\n  ],\n  \"routes\": [\n    {\n      \"src\": \"/space/join/(.*)\",\n      \"dest\": \"/server/server.cjs\"\n    }, // 이 경로로 오는 요청만 서버리스 함수로 보낸다.\n  ]\n}",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "6f3b07da-b397-4b8f-ac0e-785b2ede9712",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Vercel 서버리스 함수, 편하고 마냥 좋은거 아닌가요?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "bebc82c9-dc5b-42c8-810c-3b6fb1bb9bd0",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "마냥 좋지만은 않아요. 콜드스타트 방식이면서 Vercel 서버리스 함수는 실행에 제약을 가지고 있는데, 기본은 10초 · Pro 플랜은 60초의 최대 요청 시간을 제공해요. 메모리는 최대 1GB이기 때문에 주의해서 사용을 해야합니다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "8abe67f3-b36c-401e-a822-3adf471cd872",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Vercel 서버리스 함수의 동작 원리",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "25713f56-3d49-46f9-b35c-bbb4100f4074",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "일반 서버와 서버리스 함수를 비교해보면 아래와 같은 동작 원리를 가지게 되는 것을 볼 수 있어요.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "7a5ed19d-022b-48ef-a2b2-2b697f39092e",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "[일반 서버]\n서버 시작 → 계속 대기 중 → 요청 처리 → 계속 대기 중...\n(24시간 프로세스가 살아있음)\n \n[서버리스]\n요청 들어옴 → 함수 생성 → 요청 처리 → 함수 종료\n(요청이 없으면 아무것도 없음)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "428b66a8-d9b6-42a2-b8a7-1cba966971a7",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "요청이 들어올 때만 함수를 생성해서 요청을 처리한다는 것은 ",
-        "styles": {}
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// api/hello.ts\n// 만약 동적으로 하고 싶다면 api/post/[id].ts 형식으로 지정하면 된다.\nimport type { VercelRequest, VercelResponse } from '@vercel/node';\n \nexport default function handler(req: VercelRequest, res: VercelResponse) {\n  res.status(200).json({ message: 'Hello!' });\n}"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": "\"콜드 스타트\"",
-        "styles": {
-          "bold": true
-        }
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// app.ts\nconst response = await fetch('/api/hello');\nconst data = await response.json();\nconsole.log(data.message);"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": " 라는 방식이에요.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "9bd9c625-4ebd-45a7-b79e-bdca51206bf4",
-    "type": "quote",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default"
-    },
-    "content": [
+        "type": "h2",
+        "children": [
+          {
+            "text": "vercel.json으로 서버리스 함수 구현해보기"
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "콜드 스타트와 웜 스타트?",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "46f3eb65-b8a2-4cf0-9af3-be61c3bd2e6a",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "/api 폴더 아키텍쳐가 아닌 "
+          },
+          {
+            "text": "vercel.json"
+          },
+          {
+            "text": " 으로 서버리스 함수를 명시적으로 구현을 하는 방법도 존재해요. 만약 서버 자원이 아닌, 서버에서 "
+          },
+          {
+            "text": "html",
+            "code": true
+          },
+          {
+            "text": " 을 받아 "
+          },
+          {
+            "text": "html",
+            "code": true
+          },
+          {
+            "text": " 의 일부를 파싱하고, 수정하는 서버리스 함수를 만든다고 가정을 해볼게요."
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "[콜드 스타트] 첫 요청 or 오래 쉰 후\n컨테이너 생성 + 코드 로드 + 실행 → 느림 (수백ms ~ 수초)\n \n[웜 스타트] 연속 요청\n이미 떠있는 컨테이너 재사용 → 빠름",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "a08d1f89-e3ce-47bf-aca2-c5fbcc6fd554",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// server/server.cjs\n// 아키텍쳐 구조는 분명 express.js의 자율적인 구조\n \nconst app = express();\n \n// 프로젝트 루트 경로에서 dist 폴더 제공\nconst distPath = path.resolve(__dirname, \"../dist\"); // 절대 경로 사용\n \napp.use(express.static(distPath));\n \napp.get(\"/space/join/:id\", async (req, res) => {\n  const encryptedId = req.params.id;\n  const filePath = path.join(distPath, \"index.html\"); // dist 경로에 있는 index.html 사용\n  let html;\n...\n(이하 코드 생략)"
+          }
+        ],
+        "lang": "javascript"
+      },
       {
-        "type": "text",
-        "text": "위에서 확인한 콜드스타트의 개념을 차용해서 보면 Vercel 서버리스 함수는 아래와 같은 내부적인 세부 동작을 가지게 돼요.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "20992c02-5481-41a0-8f96-e2e02a3a8783",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// vercel.json\n{\n  \"version\": 2, // 1은 deprecated라서 2버젼이 고정이라고 생각하면 된다.\n  \"builds\": [\n    {\n      \"src\": \"server/server.cjs\",\n      \"use\": \"@vercel/node\"\n    } // Express 서버를 서버리스 함수로 변환한다,\n  ],\n  \"routes\": [\n    {\n      \"src\": \"/space/join/(.*)\",\n      \"dest\": \"/server/server.cjs\"\n    }, // 이 경로로 오는 요청만 서버리스 함수로 보낸다.\n  ]\n}"
+          }
+        ],
+        "lang": "javascript"
+      },
       {
-        "type": "text",
-        "text": "1. 사용자가 /space/join/abc 요청\n          ↓\n2. Vercel 엣지 네트워크가 요청 수신\n          ↓\n3. routes 규칙 확인 → server.cjs 매핑됨\n          ↓\n4. AWS Lambda 위에서 컨테이너 생성 (콜드 스타트)\n          ↓\n5. server.cjs 코드 로드 & 실행\n          ↓\n6. 응답 반환\n          ↓\n7. 컨테이너 대기 (일정 시간 후 소멸)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "5daa5579-bd44-49ad-8b7b-eaa89f3cf486",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
+        "type": "h2",
+        "children": [
+          {
+            "text": "Vercel 서버리스 함수, 편하고 마냥 좋은거 아닌가요?"
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "또 각각의 Vercel 서버리스 함수는 각 요청 시 마다 개별적이고 독립적으로 움직이게 됩니다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "eca65efd-e9b0-4152-8183-2aef6864e881",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "마냥 좋지만은 않아요. 콜드스타트 방식이면서 Vercel 서버리스 함수는 실행에 제약을 가지고 있는데, 기본은 10초 · Pro 플랜은 60초의 최대 요청 시간을 제공해요. 메모리는 최대 1GB이기 때문에 주의해서 사용을 해야합니다."
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "요청 A ─→ [컨테이너 1] 처리 후 종료\n요청 B ─→ [컨테이너 2] 처리 후 종료\n요청 C ─→ [컨테이너 1] 재사용 (웜 스타트)",
-        "styles": {}
+        "type": "h2",
+        "children": [
+          {
+            "text": "Vercel 서버리스 함수의 동작 원리"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "일반 서버와 서버리스 함수를 비교해보면 아래와 같은 동작 원리를 가지게 되는 것을 볼 수 있어요."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "[일반 서버]\n서버 시작 → 계속 대기 중 → 요청 처리 → 계속 대기 중...\n(24시간 프로세스가 살아있음)\n \n[서버리스]\n요청 들어옴 → 함수 생성 → 요청 처리 → 함수 종료\n(요청이 없으면 아무것도 없음)"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "요청이 들어올 때만 함수를 생성해서 요청을 처리한다는 것은 "
+          },
+          {
+            "text": "\"콜드 스타트\"",
+            "bold": true
+          },
+          {
+            "text": " 라는 방식이에요."
+          }
+        ]
+      },
+      {
+        "type": "blockquote",
+        "children": [
+          {
+            "text": "콜드 스타트와 웜 스타트?",
+            "bold": true
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "[콜드 스타트] 첫 요청 or 오래 쉰 후\n컨테이너 생성 + 코드 로드 + 실행 → 느림 (수백ms ~ 수초)\n \n[웜 스타트] 연속 요청\n이미 떠있는 컨테이너 재사용 → 빠름"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "위에서 확인한 콜드스타트의 개념을 차용해서 보면 Vercel 서버리스 함수는 아래와 같은 내부적인 세부 동작을 가지게 돼요."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "1. 사용자가 /space/join/abc 요청\n          ↓\n2. Vercel 엣지 네트워크가 요청 수신\n          ↓\n3. routes 규칙 확인 → server.cjs 매핑됨\n          ↓\n4. AWS Lambda 위에서 컨테이너 생성 (콜드 스타트)\n          ↓\n5. server.cjs 코드 로드 & 실행\n          ↓\n6. 응답 반환\n          ↓\n7. 컨테이너 대기 (일정 시간 후 소멸)"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "또 각각의 Vercel 서버리스 함수는 각 요청 시 마다 개별적이고 독립적으로 움직이게 됩니다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "요청 A ─→ [컨테이너 1] 처리 후 종료\n요청 B ─→ [컨테이너 2] 처리 후 종료\n요청 C ─→ [컨테이너 1] 재사용 (웜 스타트)"
+          }
+        ],
+        "lang": "javascript"
       }
-    ],
-    "children": []
+    ]
   }
 ]

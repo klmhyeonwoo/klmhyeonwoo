@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { isAdmin } from "@/lib/auth";
 import { deletePost } from "@/lib/github";
 import { getPosts } from "@/lib/posts";
@@ -16,6 +17,9 @@ export async function DELETE(_: Request, { params }: { params: Promise<{ id: str
 
   try {
     await deletePost(id, post.title);
+    revalidatePath("/");
+    revalidatePath(`/posts/${id}`);
+    revalidatePath("/series");
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error(error);

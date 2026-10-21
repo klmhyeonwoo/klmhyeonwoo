@@ -1,1580 +1,876 @@
 [
   {
-    "id": "367bdd2f-7e4e-49e6-91e5-417206fbac9f",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
+    "type": "plate-content",
+    "version": 1,
     "content": [
       {
-        "type": "text",
-        "text": "NPM Audit 이란?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "d2127a6d-66ab-4e59-94ee-88a98ed3e93c",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
+        "type": "h2",
+        "children": [
+          {
+            "text": "NPM Audit 이란?"
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "2018년에 발표된 NPM v6에서 처음 도입되었다. 이 명령어는 프로젝트의 의존성 트리를 검사하여 보안 취약점을 찾고, 이를 보고하는 기능을 제공한다. NPM 사용자들이 프로젝트에서 사용하고 있는 패키지들의 보안 상태를 쉽게 확인하고, 필요한 경우 취약점을 수정할 수 있도록 하기 위한 중요한 기능이다. npm audit 명령어는 CLI 커맨드이며, Node Security Platform (NSP)의 데이터베이스에서 취약점에 대한 정보를 얻을 수 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "14520416-fc0a-48f5-a7af-f046b46c74ed",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "2018년에 발표된 NPM v6에서 처음 도입되었다. 이 명령어는 프로젝트의 의존성 트리를 검사하여 보안 취약점을 찾고, 이를 보고하는 기능을 제공한다. NPM 사용자들이 프로젝트에서 사용하고 있는 패키지들의 보안 상태를 쉽게 확인하고, 필요한 경우 취약점을 수정할 수 있도록 하기 위한 중요한 기능이다. npm audit 명령어는 CLI 커맨드이며, Node Security Platform (NSP)의 데이터베이스에서 취약점에 대한 정보를 얻을 수 있다."
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "NPM Audit 활용 방안",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "dcef991f-feb4-418b-9aef-e782cb962bc7",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
+        "type": "h2",
+        "children": [
+          {
+            "text": "NPM Audit 활용 방안"
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "사용 커맨드는 비교적 간단하다. npm audit을 통해 패키지 내의 의존성 트리들을 검사할 수 있고, 관련하여 프로젝트 내에 패키지들이 어떤 위험성을 가지고 있는지 알려준다. 여기서 취약성의 심각도를 알려주는 Severity 라는 속성이 존재한다. 이는 취약성의 심각도를 나타내며, 취약점의 영향과 악용 가능성에 따라 결정된다. 기본적으로 취약점은 CVSS (Common Vulnerability Scoring System)에 의해 스코어와 심각도를 부여받는다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "09b4c8a8-b42d-4c91-928b-b9005767a966",
-    "type": "table",
-    "props": {
-      "textColor": "default"
-    },
-    "content": {
-      "type": "tableContent",
-      "columnWidths": [
-        null,
-        null
-      ],
-      "headerRows": 1,
-      "rows": [
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "Tier",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+        "type": "p",
+        "children": [
+          {
+            "text": "사용 커맨드는 비교적 간단하다. npm audit을 통해 패키지 내의 의존성 트리들을 검사할 수 있고, 관련하여 프로젝트 내에 패키지들이 어떤 위험성을 가지고 있는지 알려준다. 여기서 취약성의 심각도를 알려주는 Severity 라는 속성이 존재한다. 이는 취약성의 심각도를 나타내며, 취약점의 영향과 악용 가능성에 따라 결정된다. 기본적으로 취약점은 CVSS (Common Vulnerability Scoring System)에 의해 스코어와 심각도를 부여받는다."
+          }
+        ]
+      },
+      {
+        "type": "table",
+        "children": [
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "th",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "Tier"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "th",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "Description"
+                      }
+                    ]
+                  }
+                ]
               }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "Description",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "Critical"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "Highest severity; requires immediate action as it can be easily exploited, often remotely. (최고 심각도; 즉각적인 조치가 필요하며 원격으로 쉽게 악용될 수 있음) - 가장 위험한 취약점을 의미한다. - 즉시 수정 조치를 필요로 한다. - 원격 공격에 노출될 수 있다."
+                      }
+                    ]
+                  }
+                ]
               }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "Critical",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "High"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "Very serious; should be addressed as quickly as possible. (매우 심각함; 가능한 한 빨리 해결해야 함) - 심각한 보안 취약점을 의미한다. - 최우선적으로 수정 조치를 필요로 한다. - 빠른 시일 내 패치를 권장한다."
+                      }
+                    ]
+                  }
+                ]
               }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "Highest severity; requires immediate action as it can be easily exploited, often remotely. (최고 심각도; 즉각적인 조치가 필요하며 원격으로 쉽게 악용될 수 있음) - 가장 위험한 취약점을 의미한다. - 즉시 수정 조치를 필요로 한다. - 원격 공격에 노출될 수 있다.",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "Moderate"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "Can become risky under specific conditions; address as time allows. (특정 조건에서 위험해질 수 있음; 시간이 허락하는대로 해결) - 중간 수준의 위험을 의미한다. - 특정 상황에서 보안 문제가 발생할 수 있다. - High 보다는 우선순위가 낮지만, 그래도 처리를 권장한다."
+                      }
+                    ]
+                  }
+                ]
               }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "High",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "Low"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "Minor issues, potentially harmless edge cases; address at your discretion. (경미한 문제, 잠재적으로 무해한 엣지 케이스; 재량에 따라 해결) - 사소한 취약점을 의미한다. - 실제 피해 가능성이 낮으며, 필요 때에 처리를 권장한다."
+                      }
+                    ]
+                  }
+                ]
               }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "Very serious; should be addressed as quickly as possible. (매우 심각함; 가능한 한 빨리 해결해야 함) - 심각한 보안 취약점을 의미한다. - 최우선적으로 수정 조치를 필요로 한다. - 빠른 시일 내 패치를 권장한다.",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "Moderate",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "Can become risky under specific conditions; address as time allows. (특정 조건에서 위험해질 수 있음; 시간이 허락하는대로 해결) - 중간 수준의 위험을 의미한다. - 특정 상황에서 보안 문제가 발생할 수 있다. - High 보다는 우선순위가 낮지만, 그래도 처리를 권장한다.",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "Low",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "Minor issues, potentially harmless edge cases; address at your discretion. (경미한 문제, 잠재적으로 무해한 엣지 케이스; 재량에 따라 해결) - 사소한 취약점을 의미한다. - 실제 피해 가능성이 낮으며, 필요 때에 처리를 권장한다.",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    "children": []
-  },
-  {
-    "id": "462d4004-bd45-4332-bb1c-66feceaab834",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "해당 패키지에서 어떤 보안 취약점이 발생했는지 확인하기",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "602e4ef3-0f4b-4fdb-9f27-29d990d4eb69",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "아래 명령어를 통해 리포트처럼 자세한 내용들을 확인할 수 있다. 자세한 내용에 대한 구성요소는 아래와 같다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "df823498-3faa-4b89-8d56-b6f4b271f53a",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "취약점 ID",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "5ecce2ff-f3c3-4025-a5a6-b9e51606e7aa",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "영향받는 패키지",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "12966b16-744e-4f58-be1c-1bb4a02ae526",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "dependency path",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "7cd667df-bbbf-4935-8c48-d6a6cf90fe03",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "fix 가능 여부 (",
-        "styles": {}
+            ]
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "fixAvailable",
-        "styles": {
-          "bold": true
-        }
+        "type": "h2",
+        "children": [
+          {
+            "text": "해당 패키지에서 어떤 보안 취약점이 발생했는지 확인하기"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": ")",
-        "styles": {}
+        "type": "p",
+        "children": [
+          {
+            "text": "아래 명령어를 통해 리포트처럼 자세한 내용들을 확인할 수 있다. 자세한 내용에 대한 구성요소는 아래와 같다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "취약점 ID"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "영향받는 패키지"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "dependency path"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "fix 가능 여부 ("
+          },
+          {
+            "text": "fixAvailable",
+            "bold": true
+          },
+          {
+            "text": ")"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "npm audit --json\n\n// 혹여나 json 파일로 추출해서 확인을 하고 싶다면, 아래 명령어를 사용하면 된다.\nnpm audit --json > audit.json"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "--json",
+            "code": true
+          },
+          {
+            "text": " 키워드를 붙여서 npm audit을 실행하게 되면, 보안 취약점이 있는 패키지들이 나열되는데 이때 아래와 같은 구조로 각 패키지에 대한 취약 정보들을 확인할 수 있다. 아래 코드 블럭에서 설명하는 패키지는 보안 취약점 레벨이 high인 micromatch 패키지에 대한 설명이다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "    \"micromatch\": {\n      \"name\": \"micromatch\", // 취약점이 발견된 패키지 이름\n      \"severity\": \"high\", // 전체 심각도: 높음 (매우 심각)\n      \"isDirect\": false, // 직접 설치한 패키지가 아님 (간접 의존성)\n      \"via\": [ // 취약점 상세 정보\n        {\n          \"source\": 1098681, // Github Advisory Database Id\n          \"name\": \"micromatch\", // 취약점 패키지\n          \"dependency\": \"micromatch\", // 의존성 이름\n          \"title\": \"Regular Expression Denial of Service (ReDoS) in micromatch\", // 제목 : micromatch에서 정규 표현식 서비스 거부 공격 취약점\n          \"url\": \"https://github.com/advisories/GHSA-952p-6rrq-rcjv\", // 취약점 상세 정보 URL (Github Security Advisory)\n          \"severity\": \"moderate\", // 이 취약점 자체의 심각도: 보통\n          \"cwe\": [\n            \"CWE-1333\" // CWE 분류: 비효율적인 정규표현식 복잡도\n          ],\n          \"cvss\": {\n            \"score\": 5.3, // CVSS 점수 (0-10, 높을수록 위험)\n            \"vectorString\": \"CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L\" // CVSS 벡터 스트링\n          },\n          \"range\": \"<4.0.8\" // 취약한 버전 범위: 4.0.8 미만\n        },\n        \"braces\" // braces 패키지가 micromatch를 의존함\n      ],\n      \"effects\": [ // 영향받는 패키지\n        \"jscodeshift\" // jscodeshift가 이 취약점에 영향받음\n      ],\n      \"range\": \"<=4.0.7\", // 취약한 버전 범위: 4.0.7 이하\n      \"nodes\": [\n        \"node_modules/jscodeshift/node_modules/micromatch\" // 실제 설치된 위치\n      ],\n      \"fixAvailable\": false // 자동 수정 불가능\n    },"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "여기서 cvss 안에 vectorString이 의미하는 바는 아래와 같다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L\n\nAV:N  (Attack Vector: Network)\n      → 네트워크를 통한 원격 공격 가능\n\nAC:L  (Attack Complexity: Low)\n      → 공격 복잡도 낮음 (쉽게 공격 가능)\n\nPR:N  (Privileges Required: None)\n      → 권한 불필요 (누구나 공격 가능)\n\nUI:N  (User Interaction: None)\n      → 사용자 상호작용 불필요 (자동 공격 가능)\n\nS:U   (Scope: Unchanged)\n      → 영향 범위가 취약한 컴포넌트에 한정\n\nC:N   (Confidentiality: None)\n      → 기밀성 영향 없음 (데이터 유출 없음)\n\nI:N   (Integrity: None)\n      → 무결성 영향 없음 (데이터 변조 없음)\n\nA:L   (Availability: Low)\n      → 가용성에 낮은 영향 (서비스가 느려지거나 일시적 중단)"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "어떻게 취약점을 대응할 수 있을까?"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "관련 정보들을 보고 취약점을 확인했다면 대응을 시작해야하는데, NPM에서 공식적으로 제공하고 있는 메뉴얼은 3가지 정도가 있다."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "Suggested Update"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "취약점을 해결하기 위해 특정 버전을 설치하라고 가이드를 해주는 경우가 많다. 취약한 버전을 피해 새롭게 개별로 업데이트를 진행해도 좋은 방법이지만, npm audit fix 명령어로도 취약한 종속성에 대한 호환 가능한 업데이트를 한 번에 자동으로 설치할 수 있다. "
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "Semver Warning"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "현재 사용 중인 패키지와 메이저 버전이 다른 경우에 띄어주는 경고이다. 메이저 버전 업그레이드는 패키지의 인터페이스에 큰 변화가 있을 확률 높기 때문에, 취약점의 Severity나 내용에 따라 업그레이드를 해야할지 판단이 필요하다. 이 경우에는 "
+          },
+          {
+            "text": "npm audit fix",
+            "code": true
+          },
+          {
+            "text": "로 업데이트되지는 않고, "
+          },
+          {
+            "text": "npm audit fix",
+            "code": true
+          },
+          {
+            "text": "에 "
+          },
+          {
+            "text": "--force",
+            "code": true
+          },
+          {
+            "text": " 옵션을 통해 한 번에 업데이트가 가능하다. 다만 프로젝트에 영향을 줄 수 있기 때문에 조심스럽게 접근해야한다."
+          }
+        ]
+      },
+      {
+        "type": "blockquote",
+        "children": [
+          {
+            "text": "npm audit fix",
+            "code": true
+          },
+          {
+            "text": " 명령어를 실행하게 되면, 패키지를 최신 버젼으로 업데이트하는 것이 아닌 "
+          },
+          {
+            "text": "npm audit --json",
+            "code": true
+          },
+          {
+            "text": "으로 노출된 "
+          },
+          {
+            "text": "fixAvailable",
+            "code": true
+          },
+          {
+            "text": "에 기재된 해결 가능한 버젼으로 변경을 하니 이 부분을 주의하자."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "Manual Review"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "취약점이 보완된 버전이 나오지 않는 경우에는 Maunal Review로 따로 나오게 되는데, 단순 버전 업데이트로는 해결되지 않기 떄문에 별도의 대응이 필요하다. 이 경우에는 NPM 공식 페이지에서 "
+          },
+          {
+            "text": "4가지",
+            "bold": true
+          },
+          {
+            "text": " 정도로 해결책을 제시하고 있다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "제한적인 사용",
+            "bold": true
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "해당 취약점은 특정 운영체제에서 사용할 경우, 또는 특정 함수를 호출할 때만 발생할 수 있기 때문에 그렇지 않은 경우 사용해도 된다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "수정사항이 있는 경우 의존하는 패키지를 업데이트하기",
+            "bold": true
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "취약점을 해결하는 패치가 존재하지만, 해당 패치에 의존하는 패키지들이 아직 수정된 버전을 포함하도록 업데이트되지 않은 경우가 일부 있다. 해당 패키지 저장소에 PR 또는 MR을 통해 수정된 버전을 사용하도록 요청해야한다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "취약점 수정하기",
+            "bold": true
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "취약점이 개선된 버전이 아예 나오지 않는 것처럼 해결책이 존재하지 않는 경우, 패키지 저장소에서 PR 또는 MR을 통해 관리자에게 취약점을 해결하는 변경 사항을 제안할 수 있다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "해당 패키지 또는 의존하는 패키지에 이슈를 등록하기",
+            "bold": true
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "취약점을 직접 수정하거나 의존하는 패키지를 직접 수정하고 싶지 않다면 해당 패키지 또는 의존하는 패키지의 이슈 트래커에 이슈를 등록할 수 있다."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "이런 취약점들을 무시하면 어떤 일이 발생할까?"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "정말 많은 보안 위험유형이 존재하지만 대표적으로 몇가지 예시를 들어보자면 아래와 같다."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "Prototype Pollution"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "자바스크립트의 프로토타입 체인을 조작해 모든 객체에 영향을 주는 값을 주입하는 공격이다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "{}.isAdmin === true"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "위와 같은 상태가 만들어질 수 있고, 그 결과로 권한 체크 로직을 우회하거나, 인증되지 않는 사용자로 접근하는 등의 보안 사고로 이어질 수 있다. 이를테면 lodash, minimist, qs, deepmerge 등의 자바스크립트 라이브러리에서 많이 보일 수 있는 형태이다."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "XSS (Cross-Site Scrpition)"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "XSS는 공격자가 악성 스크립트를 웹 페이지에 삽입하여 사용자의 브라우저에서 실행시키는 공격이다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "마크다운을 파서하거나, 템플릿 엔진, WYSIWYG 에디터와 같이 DOM에서 엘리먼트를 직접적으로 다루는 경우에 발생할 수 있다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "악의적인 사용자에 의해 HTML/JS가 그대로 렌더링되면서 세션 쿠키 및 사용자 계정이 탈취되거나, 악성 사이트로 리다이렉트되는 보안사고로 이어질 수 있다."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "children": [
+          {
+            "text": "Arbitrary File Access"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Arbitrary File Read/Write은 공격자가 서버의 임의 파일을 읽거나 수정할 수 있는 취약점 및 공격이다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "압축 해제 라이브러리(tar, unzip), 파일 업로드 관련 패키지, path 처리 유틸과 같은 패키지에서 발생할 수 있다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": ".env, API Key과 노출되거나, 설정 파일의 악의적인 변경, 인증 정보 탈취 등의 보안 사고로 이어질 수 있다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "이외에 발견된 취약점 및 위험을 사전에 조치를 하지 않게 되면 내부 어플리케이션에 SSRF, Supply Chain Attack 등의 다양한 보안 위험으로 이어질 수 있다.",
+            "bold": true
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "실제로 취약점 대응해보기"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "사내 백오피스 프론트엔드 프로젝트는 node 20 버전과 npm 10 버전을 사용하고 있으며, "
+          },
+          {
+            "text": "npm audit —fix",
+            "code": true
+          },
+          {
+            "text": " 명령어를 통해 취약점을 조치해보았을 때, 아래와 같은 결과를 얻을 수 있었다."
+          }
+        ]
+      },
+      {
+        "type": "img",
+        "url": "https://upload.cafenono.com/image/slashpagePost/20251229/161931_t87I1dfatLunDwTT7T?q=80&s=1280x180&t=outside&f=webp",
+        "caption": "",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "img",
+        "url": "https://upload.cafenono.com/image/slashpagePost/20251229/162011_nxxN6U1sgnEIClF6pj?q=80&s=1280x180&t=outside&f=webp",
+        "caption": "",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "그리고 "
+          },
+          {
+            "text": "fixAvailble",
+            "code": true
+          },
+          {
+            "text": " 한 취약점의 경우 조치를 하기 위해 "
+          },
+          {
+            "text": "npm audit —fix",
+            "code": true
+          },
+          {
+            "text": " 명령어를 1차적으로 수행했고, 아래와 같은 결과가 나왔다. 고쳐지면서 또 다른 버젼으로 이동하며 또 다른 취약점이 나온 것 같다."
+          }
+        ]
+      },
+      {
+        "type": "img",
+        "url": "https://upload.cafenono.com/image/slashpagePost/20251229/162108_HLXA1FUC94ictmMCIN?q=80&s=1280x180&t=outside&f=webp",
+        "caption": "",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "기존 백오피스 프론트엔드 프로젝트 같은 경우 "
+          },
+          {
+            "text": "vue-cli",
+            "code": true
+          },
+          {
+            "text": " 를 통해 스캐폴딩 된 프로젝트였기 때문에, 웹팩 기반의 플러그인을 많이 사용하는 (일부는 "
+          },
+          {
+            "text": "Deprecated",
+            "code": true
+          },
+          {
+            "text": " 된 플러그인도 존재한다) 번들링 코드베이스를 "
+          },
+          {
+            "text": "vite",
+            "code": true
+          },
+          {
+            "text": " 로 전환하고자 하는 계획이 있었다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "취약점 관련하여 "
+          },
+          {
+            "text": "high",
+            "code": true
+          },
+          {
+            "text": " 와 "
+          },
+          {
+            "text": "critical",
+            "code": true
+          },
+          {
+            "text": " 의 취약점 대부분 "
+          },
+          {
+            "text": "vue-cli",
+            "code": true
+          },
+          {
+            "text": " 와 이에 따른 파생 플러그인에 대한 내용들이 많았기 때문에 "
+          },
+          {
+            "text": "vue-cli",
+            "code": true
+          },
+          {
+            "text": " 를 걷어내고 "
+          },
+          {
+            "text": "vite",
+            "code": true
+          },
+          {
+            "text": " 번들러로 전환을 진행했다. 진행하면서 "
+          },
+          {
+            "text": "npm audit —json",
+            "code": true
+          },
+          {
+            "text": " 을 통해 어떤 요소에 어떤 위험성과 수정 가능 여부가 존재하는지 확인할 수 있었고, 일부는 버전 업데이트를 통해 빠르게 해결할 수 있었다. (메이저 버젼을 업데이트 해야하는 경우에는 코드 베이스가 많이 달라지는지 확인하는 과정도 거쳤다)"
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// 아래와 같이 자동으로 수정할 수 있는 경우에는 fixAvailable 란에 버젼과 이름이 노출된다.\n    \"fixAvailable\": {\n        \"name\": \"vitest\",\n        \"version\": \"4.0.16\",\n        \"isSemVerMajor\": true\n      }"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "취약점을 고치다가, 내가 프로젝트 안에 설치한 패키지가 아님에도 취약점으로 뜨는 경우에는 이 패키지가 어떤 패키지에 존재하는지 아래 명령어를 통해 빠르게 파악할 수 있다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "npm ls { 취약점 패키지 이름 }"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "img",
+        "url": "https://upload.cafenono.com/image/slashpagePost/20251229/162638_dYOwSsaew5Y2zjz7ZI?q=80&s=1280x180&t=outside&f=webp",
+        "caption": "",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "최종적으로 "
+          },
+          {
+            "text": "high",
+            "code": true
+          },
+          {
+            "text": " , "
+          },
+          {
+            "text": "critical",
+            "code": true
+          },
+          {
+            "text": " 위험성의 취약점은 모두 해결했지만, 현재 백오피스 내에 "
+          },
+          {
+            "text": "CKEditor",
+            "code": true
+          },
+          {
+            "text": " 와 같은 리치에디터의 경우 확정된 패키지가 아니다보니 언제든 변경 가능성이 있어 "
+          },
+          {
+            "text": "CKEditor",
+            "code": true
+          },
+          {
+            "text": " 패키지는 제외하고 모두 해결을 하였다. "
+          },
+          {
+            "text": "CKEditor",
+            "code": true
+          },
+          {
+            "text": " 관련 플러그인이 워낙 많다보니 "
+          },
+          {
+            "text": "moderate",
+            "code": true
+          },
+          {
+            "text": " 로 발생하는 취약점 갯수도 생각보다 많은 편이다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "처음에는 패키지를 일일히 따라가는 과정이나, PR을 하나하나 찾아보는 과정들이 많이 복잡했는데 최근 보안 위험성에 대한 이슈가 대두되면서 패키지 취약점을 대응하는 이슈가 생긴다면 이러한 과정들을 녹여 빠르게 해결할 수 있을 것 같다."
+          }
+        ]
+      },
+      {
+        "type": "img",
+        "url": "https://upload.cafenono.com/image/slashpagePost/20251229/163349_XzRh3Yf6hWsPlUJU77?q=80&s=1280x180&t=outside&f=webp",
+        "caption": "",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
       }
-    ],
-    "children": []
-  },
-  {
-    "id": "541ceba2-5532-41b0-9258-e5a26923836a",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "npm audit --json\n\n// 혹여나 json 파일로 추출해서 확인을 하고 싶다면, 아래 명령어를 사용하면 된다.\nnpm audit --json > audit.json",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "004faade-5322-4a17-b032-305e550c4efe",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "--json",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 키워드를 붙여서 npm audit을 실행하게 되면, 보안 취약점이 있는 패키지들이 나열되는데 이때 아래와 같은 구조로 각 패키지에 대한 취약 정보들을 확인할 수 있다. 아래 코드 블럭에서 설명하는 패키지는 보안 취약점 레벨이 high인 micromatch 패키지에 대한 설명이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f834279b-12cf-4579-9765-140928237368",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "    \"micromatch\": {\n      \"name\": \"micromatch\", // 취약점이 발견된 패키지 이름\n      \"severity\": \"high\", // 전체 심각도: 높음 (매우 심각)\n      \"isDirect\": false, // 직접 설치한 패키지가 아님 (간접 의존성)\n      \"via\": [ // 취약점 상세 정보\n        {\n          \"source\": 1098681, // Github Advisory Database Id\n          \"name\": \"micromatch\", // 취약점 패키지\n          \"dependency\": \"micromatch\", // 의존성 이름\n          \"title\": \"Regular Expression Denial of Service (ReDoS) in micromatch\", // 제목 : micromatch에서 정규 표현식 서비스 거부 공격 취약점\n          \"url\": \"https://github.com/advisories/GHSA-952p-6rrq-rcjv\", // 취약점 상세 정보 URL (Github Security Advisory)\n          \"severity\": \"moderate\", // 이 취약점 자체의 심각도: 보통\n          \"cwe\": [\n            \"CWE-1333\" // CWE 분류: 비효율적인 정규표현식 복잡도\n          ],\n          \"cvss\": {\n            \"score\": 5.3, // CVSS 점수 (0-10, 높을수록 위험)\n            \"vectorString\": \"CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L\" // CVSS 벡터 스트링\n          },\n          \"range\": \"<4.0.8\" // 취약한 버전 범위: 4.0.8 미만\n        },\n        \"braces\" // braces 패키지가 micromatch를 의존함\n      ],\n      \"effects\": [ // 영향받는 패키지\n        \"jscodeshift\" // jscodeshift가 이 취약점에 영향받음\n      ],\n      \"range\": \"<=4.0.7\", // 취약한 버전 범위: 4.0.7 이하\n      \"nodes\": [\n        \"node_modules/jscodeshift/node_modules/micromatch\" // 실제 설치된 위치\n      ],\n      \"fixAvailable\": false // 자동 수정 불가능\n    },",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f9ef2b83-75f4-47b9-95c5-8102877f930b",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "여기서 cvss 안에 vectorString이 의미하는 바는 아래와 같다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "0e7f02a1-dadb-4a25-b4a2-b08873226e72",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L\n\nAV:N  (Attack Vector: Network)\n      → 네트워크를 통한 원격 공격 가능\n\nAC:L  (Attack Complexity: Low)\n      → 공격 복잡도 낮음 (쉽게 공격 가능)\n\nPR:N  (Privileges Required: None)\n      → 권한 불필요 (누구나 공격 가능)\n\nUI:N  (User Interaction: None)\n      → 사용자 상호작용 불필요 (자동 공격 가능)\n\nS:U   (Scope: Unchanged)\n      → 영향 범위가 취약한 컴포넌트에 한정\n\nC:N   (Confidentiality: None)\n      → 기밀성 영향 없음 (데이터 유출 없음)\n\nI:N   (Integrity: None)\n      → 무결성 영향 없음 (데이터 변조 없음)\n\nA:L   (Availability: Low)\n      → 가용성에 낮은 영향 (서비스가 느려지거나 일시적 중단)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "b64587b2-c6fb-4b51-9812-5aee7498cc84",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "어떻게 취약점을 대응할 수 있을까?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "39a5330a-8506-4a3e-9f2b-87ac414e2543",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "관련 정보들을 보고 취약점을 확인했다면 대응을 시작해야하는데, NPM에서 공식적으로 제공하고 있는 메뉴얼은 3가지 정도가 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c0c1adff-41f3-4e60-b03e-fe90b17abb23",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Suggested Update",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "4aacc14c-4396-47f0-bf95-2c47bb6c0be8",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "취약점을 해결하기 위해 특정 버전을 설치하라고 가이드를 해주는 경우가 많다. 취약한 버전을 피해 새롭게 개별로 업데이트를 진행해도 좋은 방법이지만, npm audit fix 명령어로도 취약한 종속성에 대한 호환 가능한 업데이트를 한 번에 자동으로 설치할 수 있다. ",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "71cd1739-7944-4552-b015-2091fa15c7b6",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Semver Warning",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "687834c9-1ada-4381-8096-3997639e176e",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "현재 사용 중인 패키지와 메이저 버전이 다른 경우에 띄어주는 경고이다. 메이저 버전 업그레이드는 패키지의 인터페이스에 큰 변화가 있을 확률 높기 때문에, 취약점의 Severity나 내용에 따라 업그레이드를 해야할지 판단이 필요하다. 이 경우에는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "npm audit fix",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "로 업데이트되지는 않고, ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "npm audit fix",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "에 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "--force",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 옵션을 통해 한 번에 업데이트가 가능하다. 다만 프로젝트에 영향을 줄 수 있기 때문에 조심스럽게 접근해야한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "88054ba3-e52e-4063-b7cb-2399768b8c40",
-    "type": "quote",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "npm audit fix",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 명령어를 실행하게 되면, 패키지를 최신 버젼으로 업데이트하는 것이 아닌 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "npm audit --json",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "으로 노출된 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "fixAvailable",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "에 기재된 해결 가능한 버젼으로 변경을 하니 이 부분을 주의하자.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f375d7ac-5056-40c0-a0f3-0ce1847e77c4",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Manual Review",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "ec7e80a2-2807-4e70-a187-2a4fe80e8cd4",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "취약점이 보완된 버전이 나오지 않는 경우에는 Maunal Review로 따로 나오게 되는데, 단순 버전 업데이트로는 해결되지 않기 떄문에 별도의 대응이 필요하다. 이 경우에는 NPM 공식 페이지에서 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "4가지",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 정도로 해결책을 제시하고 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "33274abe-a603-4999-a377-4dbdcd738d96",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "제한적인 사용",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f2370b98-7f6f-41ae-aca5-5f709b690f48",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "해당 취약점은 특정 운영체제에서 사용할 경우, 또는 특정 함수를 호출할 때만 발생할 수 있기 때문에 그렇지 않은 경우 사용해도 된다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "2fd385cb-93c5-46b6-9776-0fb47a8644e9",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "수정사항이 있는 경우 의존하는 패키지를 업데이트하기",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "3620a0d7-8792-4966-aaeb-7cdb67fe5b91",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "취약점을 해결하는 패치가 존재하지만, 해당 패치에 의존하는 패키지들이 아직 수정된 버전을 포함하도록 업데이트되지 않은 경우가 일부 있다. 해당 패키지 저장소에 PR 또는 MR을 통해 수정된 버전을 사용하도록 요청해야한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "3aaffd1f-a5f1-41e9-991e-20a707cc905b",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "취약점 수정하기",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "b8b48df4-3d6a-4d8f-992b-78fe0975a0ee",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "취약점이 개선된 버전이 아예 나오지 않는 것처럼 해결책이 존재하지 않는 경우, 패키지 저장소에서 PR 또는 MR을 통해 관리자에게 취약점을 해결하는 변경 사항을 제안할 수 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "60083236-b0c6-41a3-bcf8-9eefbff8ce9a",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "해당 패키지 또는 의존하는 패키지에 이슈를 등록하기",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f49a04fb-d78b-4f85-91b1-fdaba087b51d",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "취약점을 직접 수정하거나 의존하는 패키지를 직접 수정하고 싶지 않다면 해당 패키지 또는 의존하는 패키지의 이슈 트래커에 이슈를 등록할 수 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "8fe6e0c0-acf6-41bd-b921-167ff47a8c2a",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "이런 취약점들을 무시하면 어떤 일이 발생할까?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "8c65507c-f11d-4cf0-9ec0-bc2fa3ad0e9f",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "정말 많은 보안 위험유형이 존재하지만 대표적으로 몇가지 예시를 들어보자면 아래와 같다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "fd19923a-3cb8-4774-b1a2-6cba6a3398d2",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Prototype Pollution",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f4981ac6-24ab-40c8-8057-0b442214cf1f",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "자바스크립트의 프로토타입 체인을 조작해 모든 객체에 영향을 주는 값을 주입하는 공격이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "3a40a2cd-ac65-44f2-8b0d-4c71dcd5239f",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "{}.isAdmin === true",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "00d9aee9-636b-4b66-8724-59db9662595c",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "위와 같은 상태가 만들어질 수 있고, 그 결과로 권한 체크 로직을 우회하거나, 인증되지 않는 사용자로 접근하는 등의 보안 사고로 이어질 수 있다. 이를테면 lodash, minimist, qs, deepmerge 등의 자바스크립트 라이브러리에서 많이 보일 수 있는 형태이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "78b5d9a8-3d1c-4089-ae3f-b17444e0d4cc",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "XSS (Cross-Site Scrpition)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "fc591fac-b8a2-40ae-97f4-6d6961dca17a",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "XSS는 공격자가 악성 스크립트를 웹 페이지에 삽입하여 사용자의 브라우저에서 실행시키는 공격이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "99ea5c62-7a08-4c74-9bcf-61b14e593797",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "마크다운을 파서하거나, 템플릿 엔진, WYSIWYG 에디터와 같이 DOM에서 엘리먼트를 직접적으로 다루는 경우에 발생할 수 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "0f27bfdf-458e-4a13-af68-4a888f17f292",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "악의적인 사용자에 의해 HTML/JS가 그대로 렌더링되면서 세션 쿠키 및 사용자 계정이 탈취되거나, 악성 사이트로 리다이렉트되는 보안사고로 이어질 수 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "eb53823b-56af-4b55-a547-3cd327f98e01",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Arbitrary File Access",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e6d79c1c-7759-4433-b30b-a850c7a1d1aa",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Arbitrary File Read/Write은 공격자가 서버의 임의 파일을 읽거나 수정할 수 있는 취약점 및 공격이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "8b61b00a-5234-4478-af95-69989c870cb4",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "압축 해제 라이브러리(tar, unzip), 파일 업로드 관련 패키지, path 처리 유틸과 같은 패키지에서 발생할 수 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c0fc4899-b587-4816-87a2-b1a69d9dd6c9",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": ".env, API Key과 노출되거나, 설정 파일의 악의적인 변경, 인증 정보 탈취 등의 보안 사고로 이어질 수 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "a0e240de-ff90-4117-8e6c-2a31b54978ef",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "이외에 발견된 취약점 및 위험을 사전에 조치를 하지 않게 되면 내부 어플리케이션에 SSRF, Supply Chain Attack 등의 다양한 보안 위험으로 이어질 수 있다.",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "18b8f468-2958-449e-bab4-cca3f9b33af6",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "실제로 취약점 대응해보기",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e3e24dc2-a93a-41e6-b20c-eda055afc400",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "사내 백오피스 프론트엔드 프로젝트는 node 20 버전과 npm 10 버전을 사용하고 있으며, ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "npm audit —fix",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 명령어를 통해 취약점을 조치해보았을 때, 아래와 같은 결과를 얻을 수 있었다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "3a868735-f8a0-4290-8025-61eb3b740bfa",
-    "type": "image",
-    "props": {
-      "textAlignment": "left",
-      "backgroundColor": "default",
-      "name": "Image",
-      "url": "https://upload.cafenono.com/image/slashpagePost/20251229/161931_t87I1dfatLunDwTT7T?q=80&s=1280x180&t=outside&f=webp",
-      "caption": "",
-      "showPreview": true
-    },
-    "children": []
-  },
-  {
-    "id": "e8460fec-436a-42fe-a351-c19d117461b2",
-    "type": "image",
-    "props": {
-      "textAlignment": "left",
-      "backgroundColor": "default",
-      "name": "Image",
-      "url": "https://upload.cafenono.com/image/slashpagePost/20251229/162011_nxxN6U1sgnEIClF6pj?q=80&s=1280x180&t=outside&f=webp",
-      "caption": "",
-      "showPreview": true,
-      "previewWidth": 612
-    },
-    "children": []
-  },
-  {
-    "id": "4f29f4f6-4b4d-46a5-b182-47d5dfbc703f",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "그리고 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "fixAvailble",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 한 취약점의 경우 조치를 하기 위해 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "npm audit —fix",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 명령어를 1차적으로 수행했고, 아래와 같은 결과가 나왔다. 고쳐지면서 또 다른 버젼으로 이동하며 또 다른 취약점이 나온 것 같다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "5a2b93ed-d91a-4c11-b822-eed08faef1f4",
-    "type": "image",
-    "props": {
-      "textAlignment": "left",
-      "backgroundColor": "default",
-      "name": "Image",
-      "url": "https://upload.cafenono.com/image/slashpagePost/20251229/162108_HLXA1FUC94ictmMCIN?q=80&s=1280x180&t=outside&f=webp",
-      "caption": "",
-      "showPreview": true
-    },
-    "children": []
-  },
-  {
-    "id": "5a8b5943-f68c-4259-a2a3-4124e3132b8a",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "기존 백오피스 프론트엔드 프로젝트 같은 경우 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "vue-cli",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 를 통해 스캐폴딩 된 프로젝트였기 때문에, 웹팩 기반의 플러그인을 많이 사용하는 (일부는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Deprecated",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 된 플러그인도 존재한다) 번들링 코드베이스를 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "vite",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 로 전환하고자 하는 계획이 있었다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "5b7a54e7-87af-48b9-968e-271399b36059",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "취약점 관련하여 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "high",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 와 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "critical",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 의 취약점 대부분 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "vue-cli",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 와 이에 따른 파생 플러그인에 대한 내용들이 많았기 때문에 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "vue-cli",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 를 걷어내고 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "vite",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 번들러로 전환을 진행했다. 진행하면서 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "npm audit —json",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 을 통해 어떤 요소에 어떤 위험성과 수정 가능 여부가 존재하는지 확인할 수 있었고, 일부는 버전 업데이트를 통해 빠르게 해결할 수 있었다. (메이저 버젼을 업데이트 해야하는 경우에는 코드 베이스가 많이 달라지는지 확인하는 과정도 거쳤다)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "34b8d6b7-2185-431c-a5dd-654cba4ad52a",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// 아래와 같이 자동으로 수정할 수 있는 경우에는 fixAvailable 란에 버젼과 이름이 노출된다.\n    \"fixAvailable\": {\n        \"name\": \"vitest\",\n        \"version\": \"4.0.16\",\n        \"isSemVerMajor\": true\n      }",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "932371ec-e45b-4798-ac20-f1eb72147016",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "취약점을 고치다가, 내가 프로젝트 안에 설치한 패키지가 아님에도 취약점으로 뜨는 경우에는 이 패키지가 어떤 패키지에 존재하는지 아래 명령어를 통해 빠르게 파악할 수 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "561e6747-bde4-4445-afd3-ce610fc28579",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "npm ls { 취약점 패키지 이름 }",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "2555d09b-e65c-4586-b166-d3b95c1c9228",
-    "type": "image",
-    "props": {
-      "textAlignment": "left",
-      "backgroundColor": "default",
-      "name": "Image",
-      "url": "https://upload.cafenono.com/image/slashpagePost/20251229/162638_dYOwSsaew5Y2zjz7ZI?q=80&s=1280x180&t=outside&f=webp",
-      "caption": "",
-      "showPreview": true
-    },
-    "children": []
-  },
-  {
-    "id": "e95bc4b0-db41-461e-a51b-a0f880b9239f",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "최종적으로 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "high",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " , ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "critical",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 위험성의 취약점은 모두 해결했지만, 현재 백오피스 내에 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "CKEditor",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 와 같은 리치에디터의 경우 확정된 패키지가 아니다보니 언제든 변경 가능성이 있어 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "CKEditor",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 패키지는 제외하고 모두 해결을 하였다. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "CKEditor",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 관련 플러그인이 워낙 많다보니 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "moderate",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 로 발생하는 취약점 갯수도 생각보다 많은 편이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "1935e773-6ded-409d-9595-1f27fc6f8246",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "처음에는 패키지를 일일히 따라가는 과정이나, PR을 하나하나 찾아보는 과정들이 많이 복잡했는데 최근 보안 위험성에 대한 이슈가 대두되면서 패키지 취약점을 대응하는 이슈가 생긴다면 이러한 과정들을 녹여 빠르게 해결할 수 있을 것 같다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f28445b1-1b3a-4896-b3dc-5211dd1a0ac8",
-    "type": "image",
-    "props": {
-      "textAlignment": "left",
-      "backgroundColor": "default",
-      "name": "Image",
-      "url": "https://upload.cafenono.com/image/slashpagePost/20251229/163349_XzRh3Yf6hWsPlUJU77?q=80&s=1280x180&t=outside&f=webp",
-      "caption": "",
-      "showPreview": true
-    },
-    "children": []
+    ]
   }
 ]

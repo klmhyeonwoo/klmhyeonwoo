@@ -9,11 +9,11 @@ function previewUrl(value: string) {
 }
 
 /** A stable, self-contained external-link card rendered from editor bookmark blocks. */
-export function PostBookmark({ url, title, description, image }: { url: string; title?: string; description?: string; image?: string }) {
+export function PostBookmark({ url, title, description, image, layout = "bookmark" }: { url: string; title?: string; description?: string; image?: string; layout?: string }) {
   const { href, hostname, label } = previewUrl(url);
   if (!href) return null;
 
-  return <a className="post-bookmark" href={href} rel="noreferrer">
+  return <a className="post-bookmark" data-layout={layout === "card" ? "card" : "bookmark"} href={href} rel="noreferrer">
     <span aria-hidden="true" className="post-bookmark-visual">{image ? <img alt="" src={image} referrerPolicy="no-referrer" /> : <span>{label}</span>}</span>
     <span className="post-bookmark-copy">
       <small>링크 · {hostname}</small>

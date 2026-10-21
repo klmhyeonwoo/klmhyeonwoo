@@ -1,0 +1,22 @@
+.inline-comments { margin: 3rem 0 1rem; padding-top: 1.5rem; border-top: 1px solid color-mix(in srgb, currentColor 15%, transparent); font-size: .9rem; }
+.inline-comments h2 { font-size: 1.1rem; margin: 0; }
+.inline-comments header p, .inline-comments time, .inline-comments form > p { opacity: .65; font-size: .8rem; }
+.inline-comments button { cursor: pointer; color: inherit; background: transparent; border: 1px solid color-mix(in srgb, currentColor 20%, transparent); border-radius: .5rem; padding: .45rem .7rem; }
+.inline-comments button:disabled { cursor: wait; opacity: .5; }
+.inline-comments button:focus-visible, .inline-comments input:focus-visible, .inline-comments textarea:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+.inline-comments ul { list-style: none; padding: 0; }
+.inline-comments li { padding: 1rem 0; border-bottom: 1px solid color-mix(in srgb, currentColor 12%, transparent); }
+.inline-comments li p { white-space: pre-wrap; overflow-wrap: anywhere; }
+.inline-comments .inline-comment-quote { display: block; width: 100%; text-align: left; background: color-mix(in srgb, currentColor 5%, transparent); margin-bottom: .7rem; overflow-wrap: anywhere; }
+.inline-comments li time { margin-left: .5rem; }
+.inline-comments li div > button { margin-left: .75rem; }
+.inline-comments form { padding: 1rem; border: 1px solid color-mix(in srgb, currentColor 20%, transparent); border-radius: .75rem; margin-top: 1rem; }
+.inline-comments blockquote { margin: 0 0 1rem; padding-left: .75rem; border-left: 2px solid currentColor; max-height: 8rem; overflow: auto; white-space: pre-wrap; }
+.inline-comments label { display: block; margin: .75rem 0; }
+.inline-comments input, .inline-comments textarea { display: block; width: 100%; box-sizing: border-box; padding: .6rem; margin-top: .3rem; border: 1px solid color-mix(in srgb, currentColor 25%, transparent); border-radius: .4rem; background: transparent; color: inherit; font: inherit; }
+.inline-comments form div { display: flex; gap: .5rem; }
+.inline-comment-start { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%); z-index: 40; background: var(--background, Canvas) !important; box-shadow: 0 4px 24px #0002; max-width: calc(100vw - 2rem); }
+.post-content-with-comments { min-width: 0; }
+@media (min-width: 1100px) {
+  .article-with-toc .article-content-layout > .post-content-with-comments { grid-column: 1; grid-row: 1; }
+}

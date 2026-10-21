@@ -1,745 +1,408 @@
 [
   {
-    "id": "917dcc67-d0da-4511-98da-7167f2d425e2",
-    "type": "bookmark",
-    "props": {
-      "url": "https://toss.tech/article/rethinking-design-system",
-      "description": "\"어떻게 하면 더 많은 팀이 우리 시스템을 잘 사용하게 할 수 있을까?\" TDS가 이 질문에 답하기 위해 고민했던 과정을 공유합니다.",
-      "image": "https://static.toss.im/3d-common/tds-kv-no-text-hero.png"
-    },
+    "type": "plate-content",
+    "version": 1,
     "content": [
       {
-        "type": "text",
-        "text": "디자인 시스템 다시 생각해보기",
-        "styles": {}
+        "type": "p",
+        "children": [
+          {
+            "text": "디자인 시스템 다시 생각해보기"
+          }
+        ],
+        "url": "https://toss.tech/article/rethinking-design-system"
+      },
+      {
+        "type": "hr",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "React를 사용하면서 여러 기능들이 추가되며 화면에서 사용되는 컴포넌트들이 존재하는 경우가 많아진다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "이때, 확장성을 위해 고려할 수 있는 2가지 정도의 컴포넌트 설계 패턴에 대해서 알아보자."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "Flat 패턴"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Flat 컴포넌트는 내부 구조를 감추고, 대부분의 변형을 "
+          },
+          {
+            "text": "props",
+            "code": true
+          },
+          {
+            "text": " 로 제공하는 방식을 의미한다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "type cardProps = {\n  title: string\n  description?: string\n  actionLabel?: string\n  onActionClick: () => void\n}\n\nfunction Card({ title, description, actionLabel, onActionClick }: CardProps) {\n  return (\n    <section className=\"card\">\n      <header className=\"cardHeader\">\n        <h2> {title} </h2>\n        { actionLabel ? <button onClick={onActionClick}> {actionLabel} </button> : null }\n      </header>\n      { description ? <p className=\"cardDesc\"> {description} </p> : null }\n    </section>\n  )\n}"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "위의 방식은 사용은 직관적이지만, Flat API 설계의 단점은 분명하다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "시스템이 상정하지 않는 요구사항이 등장하면, "
+          },
+          {
+            "text": "props",
+            "code": true
+          },
+          {
+            "text": " 는 끝없이 늘어나게 된다는 한계점을 가지고 있다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "actionLabel",
+            "code": true
+          },
+          {
+            "text": " 을 "
+          },
+          {
+            "text": "hover",
+            "code": true
+          },
+          {
+            "text": " 했을 때, "
+          },
+          {
+            "text": "callback",
+            "code": true
+          },
+          {
+            "text": " 을 전달하고 싶을 때, "
+          },
+          {
+            "text": "button",
+            "code": true
+          },
+          {
+            "text": " 이 아니라 "
+          },
+          {
+            "text": "anchor",
+            "code": true
+          },
+          {
+            "text": " 로 그려 "
+          },
+          {
+            "text": "href",
+            "code": true
+          },
+          {
+            "text": " 를 전달하고 싶을 때는 이런 "
+          },
+          {
+            "text": "flat",
+            "code": true
+          },
+          {
+            "text": " 패턴이 오히려 확장과 유지보수를 어렵게 할 수 있다."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "Compound 패턴"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "하위 컴포넌트를 제공하고, 제품 팀이 직접 조합하여 사용하도록 제공하는 방식이다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "function Card({ children }: { children: React.ReactNode }) {\n  return <section className=\"card\"> { children } </section>\n}\n\nCard.Header = function CardHeader({ children }: { children: React.ReactNode }) {\n  return <header className=\"cardHeader\"> { children } </header>\n}\n\nCard.Title = function CardTitle({ children }: { children: React.ReactNode }) {\n  return <div className=\"cardBody\"> { children } </div>\n}\n\nCard.Footer = funcdtion CardBody({ children }: { children: React.ReactNode }) {\n  return <footer classsName=\"cardFooter\"> { children } </footer>\n}\n\nexport { Card }"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "사용하는 쪽에서는 아래와 같이 활용할 수 있다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "<Card>\n  <Card.Header>\n    <Card.Title> 월간 리포트 </Card.Title>\n  </Card.Header>\n  <Card.Body>\n    <ReportSummary/>\n  </Card.Body>\n  <Card.Footer>\n    <small> 최근 업데이트 : 30분 전 </small>\n  </Card.Footer>\n</Card>"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Flat",
+            "code": true
+          },
+          {
+            "text": " 패턴과 비교했을 때, "
+          },
+          {
+            "text": "Compound",
+            "code": true
+          },
+          {
+            "text": " 패턴의 장점은 유연함이다. 시스템이 미리 예측하지 못한 레이아웃도 조합으로 해결이 가능하며, 확장 지점이 코드 레벨에서 자연스럽게 제공되는 것을 확인할 수 있다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "다만, "
+          },
+          {
+            "text": "Compound",
+            "code": true
+          },
+          {
+            "text": " 패턴도 만능은 아니며, 사용하는 측에서 구현 난이도와 코드량이 늘어나게 되는 특징을 가지고 있다. 변형 여지가 거의 없는 컴포넌트까지 "
+          },
+          {
+            "text": "Compound",
+            "code": true
+          },
+          {
+            "text": " 패턴으로 컴포넌트화 하게 되면 사용하기 오히려 불편해지는 상황이 발생한다."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "어떤 것을 사용해야 좋은 패턴 구조일까?"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "두 패턴을 비교해보자, 공통 컴포넌트 틀에서 "
+          },
+          {
+            "text": "title",
+            "code": true
+          },
+          {
+            "text": " 만이 다른 상태라고 가정했을 때, "
+          },
+          {
+            "text": "Flat",
+            "code": true
+          },
+          {
+            "text": " 패턴과 "
+          },
+          {
+            "text": "Compound",
+            "code": true
+          },
+          {
+            "text": " 패턴은 아래와 같이 도출될 수 있다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// Flat API\n<Card title=\"월간 리포트\">\n  <ReportSummary/>\n</Card>"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// Compound API\n<Card>\n  <Card.Header>>\n    월간 리포트\n  </Card.Header>\n  <Card.Body>\n    <ReportSummary/>\n  </Card.Body>\n</Card>"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "둘의 차이를 확인해보면 조립하는 쪽과, 조립된 상태에서 사용법을 통해 컨트롤하는 것과 같이 둘의 차이는 명확한 것을 확인할 수 있다. "
+          },
+          {
+            "text": "Flat API",
+            "code": true
+          },
+          {
+            "text": " 는 사용 방법 또한 간결하고, "
+          },
+          {
+            "text": "Card",
+            "code": true
+          },
+          {
+            "text": " 컴포넌트 외에는 알아야할 것들이 그다지 많지 않다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "반면 "
+          },
+          {
+            "text": "Compound API",
+            "code": true
+          },
+          {
+            "text": " 는 개발자가 "
+          },
+          {
+            "text": "Card",
+            "code": true
+          },
+          {
+            "text": " 구조를 이해하고 있어야하며, "
+          },
+          {
+            "text": "Header",
+            "code": true
+          },
+          {
+            "text": " 안에 "
+          },
+          {
+            "text": "Title",
+            "code": true
+          },
+          {
+            "text": " 들어가야하는지, "
+          },
+          {
+            "text": "Body",
+            "code": true
+          },
+          {
+            "text": " 는 필수인지 등 학습해야할 것들이 많다. "
+          },
+          {
+            "text": "dot operator",
+            "code": true
+          },
+          {
+            "text": " 로 하위 컴포넌트들을 탐색할 수 있지만, 올바른 조합 방법을 찾는 것은 또 다른 러닝 커브가 된다. 결과적으로 친절한 도구보다 번거로운 도구로 경험될 수 있다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "요구사항이 어떻게 언제 변할지 모르는 것이 서비스의 이치이다. 그리고 이 서비스에 대한 변화에 대한 대처를 어떻게 할 것인가는 개발자의 판단이 될 수 있다. "
+          },
+          {
+            "text": "요구사항이 잦은 복잡하고 변형이 잦은 케이스라면 **",
+            "bold": true
+          },
+          {
+            "text": "Compound API",
+            "code": true
+          },
+          {
+            "text": " 를 선제적으로 도입을 하고, 단순하고 자주 사용되는 케이스의 컴포넌트라면 "
+          },
+          {
+            "text": "Flat API",
+            "code": true
+          },
+          {
+            "text": " 를 사용**해보자."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "소프트웨어 코드는 영구적으로 운용되는 코드는 존재하지 않는다. 그 상황에서 맞는 최선의 코드를 적용해야하며, 현재 판단하기에 "
+          },
+          {
+            "text": "Flat API",
+            "code": true
+          },
+          {
+            "text": " 가 가장 적합하다고 판단해도, 추후에는 "
+          },
+          {
+            "text": "Compound API",
+            "code": true
+          },
+          {
+            "text": " 로 확장해야하는 경우가 생긴다. 당장 상황에 맞는 컴포넌트 패턴으로 설계를 진행해보자."
+          }
+        ]
       }
-    ],
-    "children": []
-  },
-  {
-    "id": "5a80b3a5-339c-465e-a05e-feaa3b3132f9",
-    "type": "divider",
-    "props": {},
-    "children": []
-  },
-  {
-    "id": "b7390812-cd45-45c0-ba3e-5354c58cf3e0",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "React를 사용하면서 여러 기능들이 추가되며 화면에서 사용되는 컴포넌트들이 존재하는 경우가 많아진다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e290082b-e1a6-49ac-9ac3-735be69d736d",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "이때, 확장성을 위해 고려할 수 있는 2가지 정도의 컴포넌트 설계 패턴에 대해서 알아보자.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "97ced1bd-2a59-4a6b-80a3-a907dc9bb5f5",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Flat 패턴",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "9270029b-e7e5-4781-a044-85c1aac22106",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Flat 컴포넌트는 내부 구조를 감추고, 대부분의 변형을 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "props",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 로 제공하는 방식을 의미한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "1bf97ee9-5303-4ab5-a631-f8601fcbc7bd",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "type cardProps = {\n  title: string\n  description?: string\n  actionLabel?: string\n  onActionClick: () => void\n}\n\nfunction Card({ title, description, actionLabel, onActionClick }: CardProps) {\n  return (\n    <section className=\"card\">\n      <header className=\"cardHeader\">\n        <h2> {title} </h2>\n        { actionLabel ? <button onClick={onActionClick}> {actionLabel} </button> : null }\n      </header>\n      { description ? <p className=\"cardDesc\"> {description} </p> : null }\n    </section>\n  )\n}",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "1d6f2117-6239-4a3e-a9ba-df5eec6be154",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "위의 방식은 사용은 직관적이지만, Flat API 설계의 단점은 분명하다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "2446b5fa-832e-4960-9a70-62416be7a284",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "시스템이 상정하지 않는 요구사항이 등장하면, ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "props",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 는 끝없이 늘어나게 된다는 한계점을 가지고 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c8165d0e-0c56-48bb-b7a8-ba3448f27181",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "actionLabel",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 을 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "hover",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 했을 때, ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "callback",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 을 전달하고 싶을 때, ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "button",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 이 아니라 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "anchor",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 로 그려 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "href",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 를 전달하고 싶을 때는 이런 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "flat",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 패턴이 오히려 확장과 유지보수를 어렵게 할 수 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "0f656e7b-3a91-45a4-baba-7ea0ce1ab4e1",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Compound 패턴",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "6f7bf1f7-d386-4d9f-9b2c-eccb59cc4715",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "하위 컴포넌트를 제공하고, 제품 팀이 직접 조합하여 사용하도록 제공하는 방식이다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "4904e4e6-e794-4cfe-84a3-325d9b904383",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "function Card({ children }: { children: React.ReactNode }) {\n  return <section className=\"card\"> { children } </section>\n}\n\nCard.Header = function CardHeader({ children }: { children: React.ReactNode }) {\n  return <header className=\"cardHeader\"> { children } </header>\n}\n\nCard.Title = function CardTitle({ children }: { children: React.ReactNode }) {\n  return <div className=\"cardBody\"> { children } </div>\n}\n\nCard.Footer = funcdtion CardBody({ children }: { children: React.ReactNode }) {\n  return <footer classsName=\"cardFooter\"> { children } </footer>\n}\n\nexport { Card }",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "9cf36066-21df-4e42-8197-c844bed6abc9",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "사용하는 쪽에서는 아래와 같이 활용할 수 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "4cbddc32-08c9-4ae4-bcc0-2cf2c37a63de",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "<Card>\n  <Card.Header>\n    <Card.Title> 월간 리포트 </Card.Title>\n  </Card.Header>\n  <Card.Body>\n    <ReportSummary/>\n  </Card.Body>\n  <Card.Footer>\n    <small> 최근 업데이트 : 30분 전 </small>\n  </Card.Footer>\n</Card>",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "aa34b072-343c-43d2-8dd0-18b15ef00379",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Flat",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 패턴과 비교했을 때, ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Compound",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 패턴의 장점은 유연함이다. 시스템이 미리 예측하지 못한 레이아웃도 조합으로 해결이 가능하며, 확장 지점이 코드 레벨에서 자연스럽게 제공되는 것을 확인할 수 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "638e632e-8615-4b1d-aa4a-f3f84e572d94",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "다만, ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Compound",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 패턴도 만능은 아니며, 사용하는 측에서 구현 난이도와 코드량이 늘어나게 되는 특징을 가지고 있다. 변형 여지가 거의 없는 컴포넌트까지 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Compound",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 패턴으로 컴포넌트화 하게 되면 사용하기 오히려 불편해지는 상황이 발생한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "93d359b0-0056-49cf-98a9-2e0cc8a27d01",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "어떤 것을 사용해야 좋은 패턴 구조일까?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "abe33e4f-e584-4257-b7e7-a84900c1d9ab",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "두 패턴을 비교해보자, 공통 컴포넌트 틀에서 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "title",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 만이 다른 상태라고 가정했을 때, ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Flat",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 패턴과 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Compound",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 패턴은 아래와 같이 도출될 수 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "840facbc-8c75-4b81-9608-bfa672a566f9",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// Flat API\n<Card title=\"월간 리포트\">\n  <ReportSummary/>\n</Card>",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "4ddc2c3c-06a8-4c62-b470-d829a0f28021",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// Compound API\n<Card>\n  <Card.Header>>\n    월간 리포트\n  </Card.Header>\n  <Card.Body>\n    <ReportSummary/>\n  </Card.Body>\n</Card>",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "a9084aa8-c8b8-4095-a487-5972100f0b54",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "둘의 차이를 확인해보면 조립하는 쪽과, 조립된 상태에서 사용법을 통해 컨트롤하는 것과 같이 둘의 차이는 명확한 것을 확인할 수 있다. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Flat API",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 는 사용 방법 또한 간결하고, ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Card",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 컴포넌트 외에는 알아야할 것들이 그다지 많지 않다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "f5311f2e-e60f-4c26-947b-a764215cf066",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "반면 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Compound API",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 는 개발자가 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Card",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 구조를 이해하고 있어야하며, ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Header",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 안에 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Title",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 들어가야하는지, ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Body",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 는 필수인지 등 학습해야할 것들이 많다. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "dot operator",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 로 하위 컴포넌트들을 탐색할 수 있지만, 올바른 조합 방법을 찾는 것은 또 다른 러닝 커브가 된다. 결과적으로 친절한 도구보다 번거로운 도구로 경험될 수 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "eb92fe8b-5b50-4eeb-b7c0-de0d2a676736",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "요구사항이 어떻게 언제 변할지 모르는 것이 서비스의 이치이다. 그리고 이 서비스에 대한 변화에 대한 대처를 어떻게 할 것인가는 개발자의 판단이 될 수 있다. ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "요구사항이 잦은 복잡하고 변형이 잦은 케이스라면 **",
-        "styles": {
-          "bold": true
-        }
-      },
-      {
-        "type": "text",
-        "text": "Compound API",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 를 선제적으로 도입을 하고, 단순하고 자주 사용되는 케이스의 컴포넌트라면 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Flat API",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 를 사용**해보자.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "73beff17-3432-4e21-bd2d-8b363b9e3026",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "소프트웨어 코드는 영구적으로 운용되는 코드는 존재하지 않는다. 그 상황에서 맞는 최선의 코드를 적용해야하며, 현재 판단하기에 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Flat API",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 가 가장 적합하다고 판단해도, 추후에는 ",
-        "styles": {}
-      },
-      {
-        "type": "text",
-        "text": "Compound API",
-        "styles": {
-          "code": true
-        }
-      },
-      {
-        "type": "text",
-        "text": " 로 확장해야하는 경우가 생긴다. 당장 상황에 맞는 컴포넌트 패턴으로 설계를 진행해보자.",
-        "styles": {}
-      }
-    ],
-    "children": []
+    ]
   }
 ]

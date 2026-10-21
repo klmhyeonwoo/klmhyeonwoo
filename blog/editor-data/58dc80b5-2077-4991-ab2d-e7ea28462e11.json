@@ -1,2136 +1,1251 @@
 [
   {
-    "id": "52e16fa0-d5f1-47af-bd6a-7c8fca7792af",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
+    "type": "plate-content",
+    "version": 1,
     "content": [
       {
-        "type": "text",
-        "text": "React와 Vue를 함께 쓰다 보면 두 프레임워크 모두 지정된 포맷팅이 너무 다르기도 하고, 추상화 방식도 생각보다 달라서 ",
-        "styles": {}
+        "type": "p",
+        "children": [
+          {
+            "text": "React와 Vue를 함께 쓰다 보면 두 프레임워크 모두 지정된 포맷팅이 너무 다르기도 하고, 추상화 방식도 생각보다 달라서 "
+          },
+          {
+            "text": "Vue",
+            "code": true
+          },
+          {
+            "text": " 를 쓰다가 "
+          },
+          {
+            "text": "React",
+            "code": true
+          },
+          {
+            "text": " 를 사용하게 되면 혼동되는 경우가 많이 생긴다. 예전에 풀던 과제들도 다시 풀면 롤백되어 탈락하기도 하고.. "
+          },
+          {
+            "text": "React",
+            "code": true
+          },
+          {
+            "text": " 를 "
+          },
+          {
+            "text": "Vue",
+            "code": true
+          },
+          {
+            "text": " 의 "
+          },
+          {
+            "text": "template",
+            "code": true
+          },
+          {
+            "text": " 문법처럼 사용하는 경우도 많아서, 천천히 돌아볼겸 두 프레임워크를 동시에 사용하는 사람들을 위해 다시 한번 정리를 하고자한다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "Vue",
-        "styles": {
-          "code": true
-        }
+        "type": "p",
+        "children": [
+          {
+            "text": "사실 두 프레임워크의 차이를 명확하게 알고있으면 되긴 하지만, "
+          },
+          {
+            "text": "React",
+            "code": true
+          },
+          {
+            "text": " 에서는 한 파일에서 여러 모듈들을 임포트할 수 있고, "
+          },
+          {
+            "text": "Vue",
+            "code": true
+          },
+          {
+            "text": " 의 경우에는 "
+          },
+          {
+            "text": "SFC (Single File Component)",
+            "code": true
+          },
+          {
+            "text": " 이기 때문에 단 하나의 모듈만 임포트할 수 있다. 사실 자바스크립트라는 교집합이 존재하지만 이 과정에서 두 프레임워크의 차이를 명확하게 알고 있고, 어떤 방식에서 차이점을 가지고 있는지 알아야 프레임워크에서 추구하는 추상화가 가능하다는 생각이 들었다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": " 를 쓰다가 ",
-        "styles": {}
+        "type": "p",
+        "children": [
+          {
+            "text": "인터넷에서 여러 문서들을 참고하고, 또 여러 과제들을 진행하면서 느꼈던 부분들을 적은 내용들이라 아마 개발자들마다 코드에 대해 생각하는 부분들이 다를 수 있겠지만 여러 문서들을 읽으며 동의했던 부분들과 내가 생각한 좋은 코드에 대한 기준을 적은 문서이니 지나가시는 분들은 가볍게 보시면 좋을 것 같다 ^,^ .."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "React",
-        "styles": {
-          "code": true
-        }
+        "type": "h2",
+        "children": [
+          {
+            "text": "React — 좋은 코드를 작성하는 방법"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": " 를 사용하게 되면 혼동되는 경우가 많이 생긴다. 예전에 풀던 과제들도 다시 풀면 롤백되어 탈락하기도 하고.. ",
-        "styles": {}
+        "type": "h3",
+        "children": [
+          {
+            "text": "코드는 예측 가능해야 한다"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "React",
-        "styles": {
-          "code": true
-        }
+        "type": "p",
+        "children": [
+          {
+            "text": "좋은 코드의 기준은 하나라고 생각한다. "
+          },
+          {
+            "text": "다음 줄이 어떻게 생겼을지 읽기 전에 예측할 수 있어야 한다. ",
+            "bold": true
+          },
+          {
+            "text": "이름, 구조, 인터페이스가 일관된 패턴을 따를수록 읽는 사람의 인지 부하가 줄어든다. 예측이 맞으면 빠르게 읽히고, 빗나가면 흐름이 끊긴다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": " 를 ",
-        "styles": {}
+        "type": "code_block",
+        "children": [
+          {
+            "text": "예측 가능한 코드\n\nconst [isOpen, setIsOpen] = useState(false)\n//  → 어딘가에서 setIsOpen(true/false)가 나올 것이다\n\nconst { data: product, isLoading } = useProduct(id)\n//  → product가 null일 수 있고, isLoading 중엔 스켈레톤을 보여줄 것이다\n\n예측 불가한 코드\n\nconst [d, setD] = useState(null)\n//  → d가 뭔지, 어떤 타입인지, 언제 바뀌는지 알 수 없다"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": "Vue",
-        "styles": {
-          "code": true
-        }
+        "type": "h3",
+        "children": [
+          {
+            "text": "컴포넌트는 하나의 관심사만 가지는 것이 좋다"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": " 의 ",
-        "styles": {}
+        "type": "p",
+        "children": [
+          {
+            "text": "컴포넌트가 커지는 가장 흔한 이유는 \"여기에 추가하면 빠르니까\"다. 하지만 한 컴포넌트가 데이터 페칭, 레이아웃, 인터랙션을 모두 담당하면 어느 하나를 바꿀 때 다른 것이 영향을 받는다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "template",
-        "styles": {
-          "code": true
-        }
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// ❌ 하나의 컴포넌트가 너무 많은 일을 함\nfunction ProductPage({ id }: { id: number }) {\n  const [product, setProduct] = useState<Product | null>(null)\n  const [isLoading, setIsLoading] = useState(true)\n  const [quantity, setQuantity] = useState(1)\n  const [isWished, setIsWished] = useState(false)\n\n  useEffect(() => {\n    fetch(`/api/products/${id}`)\n      .then(res => res.json())\n      .then(data => {\n        setProduct(data)\n        setIsLoading(false)\n      })\n  }, [id])\n\n  if (isLoading) return <Spinner />\n\n  return (\n    <div>\n      <img src={product?.imageUrl} />\n      <h1>{product?.name}</h1>\n      <p>{product?.price.toLocaleString()}원</p>\n      <div>\n        <button onClick={() => setQuantity(q => q - 1)}>-</button>\n        <span>{quantity}</span>\n        <button onClick={() => setQuantity(q => q + 1)}>+</button>\n      </div>\n      <button onClick={() => setIsWished(w => !w)}>\n        {isWished ? '♥' : '♡'}\n      </button>\n      <button onClick={() => addToCart(product, quantity)}>장바구니</button>\n    </div>\n  )\n}"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": " 문법처럼 사용하는 경우도 많아서, 천천히 돌아볼겸 두 프레임워크를 동시에 사용하는 사람들을 위해 다시 한번 정리를 하고자한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "787720ce-0fdd-45ee-858b-b73a9a4706e7",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "사실 두 프레임워크의 차이를 명확하게 알고있으면 되긴 하지만, ",
-        "styles": {}
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// ✅ 관심사를 분리\nfunction ProductPage({ id }: { id: number }) {\n  const { product, isLoading } = useProduct(id)   ← 데이터 페칭 분리\n\n  if (isLoading) return <Spinner />\n  if (!product) return <NotFound />\n\n  return <ProductDetail product={product} />        ← UI 렌더링 분리\n}\n\nfunction ProductDetail({ product }: { product: Product }) {\n  return (\n    <div>\n      <ProductImage src={product.imageUrl} alt={product.name} />\n      <ProductInfo product={product} />\n      <ProductActions productId={product.id} price={product.price} />\n    </div>\n  )\n}\n\nfunction ProductActions({ productId, price }: { productId: number; price: number }) {\n  const [quantity, setQuantity] = useState(1)       ← 이 컴포넌트에서만 필요한 상태\n  const [isWished, setIsWished] = useState(false)\n\n  return (\n    <div>\n      <QuantitySelector value={quantity} onChange={setQuantity} />\n      <WishButton isWished={isWished} onToggle={() => setIsWished(w => !w)} />\n      <CartButton productId={productId} quantity={quantity} price={price} />\n    </div>\n  )\n}"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": "React",
-        "styles": {
-          "code": true
-        }
+        "type": "p",
+        "children": [
+          {
+            "text": "ProductPage",
+            "code": true
+          },
+          {
+            "text": "는 데이터를 가져오는 것에만 집중하고, "
+          },
+          {
+            "text": "ProductDetail",
+            "code": true
+          },
+          {
+            "text": "은 레이아웃에만 집중하고, "
+          },
+          {
+            "text": "ProductActions",
+            "code": true
+          },
+          {
+            "text": "는 인터랙션에만 집중한다. 각 컴포넌트를 독립적으로 테스트하고 교체할 수 있다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": " 에서는 한 파일에서 여러 모듈들을 임포트할 수 있고, ",
-        "styles": {}
+        "type": "h3",
+        "children": [
+          {
+            "text": "컴포넌트 상태 설계 — 어디에 위치 시켜야할까?"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "Vue",
-        "styles": {
-          "code": true
-        }
+        "type": "p",
+        "children": [
+          {
+            "text": "상태를 어디에 두느냐는 코드 복잡도에 직접 영향을 준다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": " 의 경우에는 ",
-        "styles": {}
+        "type": "p",
+        "children": [
+          {
+            "text": "상태는 그것을 필요로 하는 컴포넌트에 가장 가까운 곳에 둬야한다.",
+            "bold": true
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "SFC (Single File Component)",
-        "styles": {
-          "code": true
-        }
+        "type": "code_block",
+        "children": [
+          {
+            "text": "상태 위치 결정 기준\n\n이 컴포넌트에서만 쓰인다     → 컴포넌트 로컬 useState\n형제/부모가 함께 쓴다         → 공통 부모로 상태 끌어올리기 (lifting state up)\n멀리 떨어진 컴포넌트가 쓴다   → Context 또는 전역 상태\nURL로 관리할 수 있다          → URL searchParams"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": " 이기 때문에 단 하나의 모듈만 임포트할 수 있다. 사실 자바스크립트라는 교집합이 존재하지만 이 과정에서 두 프레임워크의 차이를 명확하게 알고 있고, 어떤 방식에서 차이점을 가지고 있는지 알아야 프레임워크에서 추구하는 추상화가 가능하다는 생각이 들었다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "50f63291-3c49-4322-a341-eb71baa7b61a",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "인터넷에서 여러 문서들을 참고하고, 또 여러 과제들을 진행하면서 느꼈던 부분들을 적은 내용들이라 아마 개발자들마다 코드에 대해 생각하는 부분들이 다를 수 있겠지만 여러 문서들을 읽으며 동의했던 부분들과 내가 생각한 좋은 코드에 대한 기준을 적은 문서이니 지나가시는 분들은 가볍게 보시면 좋을 것 같다 ^,^ ..",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "a211f227-345f-4f2f-ac59-1e1ddac18224",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "React — 좋은 코드를 작성하는 방법",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "b26e1373-e55c-4114-bcd0-8c0b85e9be91",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "코드는 예측 가능해야 한다",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "522552fd-9e98-4fcf-a702-3170335f8f01",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "좋은 코드의 기준은 하나라고 생각한다. ",
-        "styles": {}
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// ❌ 모든 상태를 최상단에 몰아두는 패턴\nfunction App() {\n  const [isModalOpen, setIsModalOpen] = useState(false)\n  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)\n  const [cartCount, setCartCount] = useState(0)\n  const [searchKeyword, setSearchKeyword] = useState('')\n  // ... 스크롤하지 않으면 어떤 상태가 어디서 쓰이는지 알 수 없다\n}\n\n// ✅ 상태는 쓰이는 곳 가장 가까이에\nfunction ProductList() {\n  const [searchKeyword, setSearchKeyword] = useState('')  ← 이 컴포넌트 트리에서만 필요\n\n  return (\n    <>\n      <SearchInput value={searchKeyword} onChange={setSearchKeyword} />\n      <ProductGrid keyword={searchKeyword} />\n    </>\n  )\n}\n\nfunction ProductCard({ product }: { product: Product }) {\n  const [isModalOpen, setIsModalOpen] = useState(false)  ← 이 카드에서만 필요\n\n  return (\n    <>\n      <img onClick={() => setIsModalOpen(true)} src={product.imageUrl} />\n      {isModalOpen && <ProductModal product={product} onClose={() => setIsModalOpen(false)} />}\n    </>\n  )\n}"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": "다음 줄이 어떻게 생겼을지 읽기 전에 예측할 수 있어야 한다. ",
-        "styles": {
-          "bold": true
-        }
+        "type": "h3",
+        "children": [
+          {
+            "text": "상태 설계 — 어떤 형태로 설계해야할까?"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "이름, 구조, 인터페이스가 일관된 패턴을 따를수록 읽는 사람의 인지 부하가 줄어든다. 예측이 맞으면 빠르게 읽히고, 빗나가면 흐름이 끊긴다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "62c6a94d-7782-4753-b6ad-56d607392f93",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "예측 가능한 코드\n\nconst [isOpen, setIsOpen] = useState(false)\n//  → 어딘가에서 setIsOpen(true/false)가 나올 것이다\n\nconst { data: product, isLoading } = useProduct(id)\n//  → product가 null일 수 있고, isLoading 중엔 스켈레톤을 보여줄 것이다\n\n예측 불가한 코드\n\nconst [d, setD] = useState(null)\n//  → d가 뭔지, 어떤 타입인지, 언제 바뀌는지 알 수 없다",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "6d759994-bac0-4bb0-9ff9-9fe1164a556c",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "컴포넌트는 하나의 관심사만 가지는 것이 좋다",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e134ee86-e7d1-4898-bb09-400ae82abe3b",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "컴포넌트가 커지는 가장 흔한 이유는 \"여기에 추가하면 빠르니까\"다. 하지만 한 컴포넌트가 데이터 페칭, 레이아웃, 인터랙션을 모두 담당하면 어느 하나를 바꿀 때 다른 것이 영향을 받는다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "8599f1a8-1ef1-4e36-ae14-4516d471aa06",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// ❌ 하나의 컴포넌트가 너무 많은 일을 함\nfunction ProductPage({ id }: { id: number }) {\n  const [product, setProduct] = useState<Product | null>(null)\n  const [isLoading, setIsLoading] = useState(true)\n  const [quantity, setQuantity] = useState(1)\n  const [isWished, setIsWished] = useState(false)\n\n  useEffect(() => {\n    fetch(`/api/products/${id}`)\n      .then(res => res.json())\n      .then(data => {\n        setProduct(data)\n        setIsLoading(false)\n      })\n  }, [id])\n\n  if (isLoading) return <Spinner />\n\n  return (\n    <div>\n      <img src={product?.imageUrl} />\n      <h1>{product?.name}</h1>\n      <p>{product?.price.toLocaleString()}원</p>\n      <div>\n        <button onClick={() => setQuantity(q => q - 1)}>-</button>\n        <span>{quantity}</span>\n        <button onClick={() => setQuantity(q => q + 1)}>+</button>\n      </div>\n      <button onClick={() => setIsWished(w => !w)}>\n        {isWished ? '♥' : '♡'}\n      </button>\n      <button onClick={() => addToCart(product, quantity)}>장바구니</button>\n    </div>\n  )\n}",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "8b2f3250-7175-4a63-b72b-06a4fccad597",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// ✅ 관심사를 분리\nfunction ProductPage({ id }: { id: number }) {\n  const { product, isLoading } = useProduct(id)   ← 데이터 페칭 분리\n\n  if (isLoading) return <Spinner />\n  if (!product) return <NotFound />\n\n  return <ProductDetail product={product} />        ← UI 렌더링 분리\n}\n\nfunction ProductDetail({ product }: { product: Product }) {\n  return (\n    <div>\n      <ProductImage src={product.imageUrl} alt={product.name} />\n      <ProductInfo product={product} />\n      <ProductActions productId={product.id} price={product.price} />\n    </div>\n  )\n}\n\nfunction ProductActions({ productId, price }: { productId: number; price: number }) {\n  const [quantity, setQuantity] = useState(1)       ← 이 컴포넌트에서만 필요한 상태\n  const [isWished, setIsWished] = useState(false)\n\n  return (\n    <div>\n      <QuantitySelector value={quantity} onChange={setQuantity} />\n      <WishButton isWished={isWished} onToggle={() => setIsWished(w => !w)} />\n      <CartButton productId={productId} quantity={quantity} price={price} />\n    </div>\n  )\n}",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "1291c861-0997-49a0-846e-aaaa0623fd64",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "ProductPage",
-        "styles": {
-          "code": true
-        }
+        "type": "p",
+        "children": [
+          {
+            "text": "상태의 개수가 많아질수록 동기화 문제가 생긴다. 서로 연관된 상태는 하나의 객체로 묶거나, "
+          },
+          {
+            "text": "useReducer",
+            "code": true
+          },
+          {
+            "text": "로 전환하는 것이 좋다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "는 데이터를 가져오는 것에만 집중하고, ",
-        "styles": {}
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// ❌ 연관된 상태가 분산되어 있음\nconst [isLoading, setIsLoading] = useState(false)\nconst [data, setData] = useState<User | null>(null)\nconst [error, setError] = useState<Error | null>(null)\n// isLoading=true이면서 error가 있는 상태가 생길 수 있다 — 불가능한 상태\n\n// ✅ 상태를 discriminated union으로 설계\ntype AsyncState<T> =\n  | { status: 'idle' }\n  | { status: 'loading' }\n  | { status: 'success'; data: T }\n  | { status: 'error'; error: Error }\n\nconst [state, setState] = useState<AsyncState<User>>({ status: 'idle' })\n\n// 불가능한 상태 조합 자체가 타입 수준에서 막힌다\nif (state.status === 'success') {\n  console.log(state.data)   ← 타입스크립트가 data를 보장함\n}"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": "ProductDetail",
-        "styles": {
-          "code": true
-        }
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// ❌ 복잡한 폼 상태를 useState로 하나씩 관리\nconst [name, setName] = useState('')\nconst [email, setEmail] = useState('')\nconst [phone, setPhone] = useState('')\nconst [agree, setAgree] = useState(false)\n\n// ✅ useReducer로 폼 상태를 하나로 관리\ntype FormState = {\n  name: string\n  email: string\n  phone: string\n  agree: boolean\n}\n\ntype FormAction =\n  | { type: 'SET_FIELD'; field: keyof FormState; value: string | boolean }\n  | { type: 'RESET' }\n\nconst initialState: FormState = {\n  name: '',\n  email: '',\n  phone: '',\n  agree: false,\n}\n\nfunction formReducer(state: FormState, action: FormAction): FormState {\n  switch (action.type) {\n    case 'SET_FIELD':\n      return { ...state, [action.field]: action.value }\n    case 'RESET':\n      return initialState\n  }\n}\n\nconst [form, dispatch] = useReducer(formReducer, initialState)\n\n// 사용할 때\ndispatch({ type: 'SET_FIELD', field: 'name', value: '김현우' })\ndispatch({ type: 'RESET' })"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": "은 레이아웃에만 집중하고, ",
-        "styles": {}
+        "type": "h3",
+        "children": [
+          {
+            "text": "Custom Hook 설계 — 어떤 지점에서 어떤 것들을 캡슐화해야할까?"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "ProductActions",
-        "styles": {
-          "code": true
-        }
+        "type": "p",
+        "children": [
+          {
+            "text": "Custom Hook은 상태와 그 상태를 다루는 로직을 함께 묶는 도구다. 단순히 코드를 줄이기 위해 쪼개는 것은 오히려 코드를 따라가기 어렵게 만든다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "는 인터랙션에만 집중한다. 각 컴포넌트를 독립적으로 테스트하고 교체할 수 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "b4a8417e-b189-40ef-b3aa-9be0c7f5371a",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "컴포넌트 상태 설계 — 어디에 위치 시켜야할까?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "2eb4f55a-300c-4857-b2f7-a3ad4ae200f4",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "상태를 어디에 두느냐는 코드 복잡도에 직접 영향을 준다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c182564d-8d98-4888-a9af-a98f96afd0dc",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "상태는 그것을 필요로 하는 컴포넌트에 가장 가까운 곳에 둬야한다.",
-        "styles": {
-          "bold": true
-        }
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "833c1560-8921-4048-bf1f-ffc979207a3f",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "상태 위치 결정 기준\n\n이 컴포넌트에서만 쓰인다     → 컴포넌트 로컬 useState\n형제/부모가 함께 쓴다         → 공통 부모로 상태 끌어올리기 (lifting state up)\n멀리 떨어진 컴포넌트가 쓴다   → Context 또는 전역 상태\nURL로 관리할 수 있다          → URL searchParams",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "a2af8079-6a35-4045-bb3a-11ca1c6d30f4",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// ❌ 모든 상태를 최상단에 몰아두는 패턴\nfunction App() {\n  const [isModalOpen, setIsModalOpen] = useState(false)\n  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)\n  const [cartCount, setCartCount] = useState(0)\n  const [searchKeyword, setSearchKeyword] = useState('')\n  // ... 스크롤하지 않으면 어떤 상태가 어디서 쓰이는지 알 수 없다\n}\n\n// ✅ 상태는 쓰이는 곳 가장 가까이에\nfunction ProductList() {\n  const [searchKeyword, setSearchKeyword] = useState('')  ← 이 컴포넌트 트리에서만 필요\n\n  return (\n    <>\n      <SearchInput value={searchKeyword} onChange={setSearchKeyword} />\n      <ProductGrid keyword={searchKeyword} />\n    </>\n  )\n}\n\nfunction ProductCard({ product }: { product: Product }) {\n  const [isModalOpen, setIsModalOpen] = useState(false)  ← 이 카드에서만 필요\n\n  return (\n    <>\n      <img onClick={() => setIsModalOpen(true)} src={product.imageUrl} />\n      {isModalOpen && <ProductModal product={product} onClose={() => setIsModalOpen(false)} />}\n    </>\n  )\n}",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "9d7c8609-51ac-4270-a7de-2545636e736f",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "상태 설계 — 어떤 형태로 설계해야할까?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c7c451ba-2e8d-4745-a6ff-81ed8ada08b3",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "상태의 개수가 많아질수록 동기화 문제가 생긴다. 서로 연관된 상태는 하나의 객체로 묶거나, ",
-        "styles": {}
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// ❌ 너무 잘게 쪼갠 훅 — 오히려 추적이 어려움\nfunction useIsOpen() {\n  const [isOpen, setIsOpen] = useState(false)\n  return { isOpen, open: () => setIsOpen(true), close: () => setIsOpen(false) }\n}\n\n// ❌ React와 무관한 계산 로직을 훅으로 만든 경우\nfunction useFormattedPrice(price: number) {\n  return useMemo(() => price.toLocaleString() + '원', [price])\n  // useMemo가 필요 없는 단순 계산 — 그냥 함수면 충분하다\n}\n\n// ✅ 상태와 관련 로직이 함께 있어야 의미 있는 훅\nfunction useImageUpload() {\n  const [preview, setPreview] = useState<string | null>(null)\n  const [isUploading, setIsUploading] = useState(false)\n  const [error, setError] = useState<string | null>(null)\n\n  function handleFileSelect(file: File) {\n    const reader = new FileReader()\n    reader.onload = (e) => setPreview(e.target?.result as string)\n    reader.readAsDataURL(file)\n  }\n\n  async function upload(file: File): Promise<string> {\n    setIsUploading(true)\n    setError(null)\n    try {\n      const url = await uploadFile(file)\n      return url\n    } catch (e) {\n      setError('업로드에 실패했습니다')\n      throw e\n    } finally {\n      setIsUploading(false)\n    }\n  }\n\n  return { preview, isUploading, error, handleFileSelect, upload }\n}"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": "useReducer",
-        "styles": {
-          "code": true
-        }
+        "type": "p",
+        "children": [
+          {
+            "text": "순수한 계산 로직은 훅이 아닌 함수로 분리하는 것이 좋다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "로 전환하는 것이 좋다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "cfedbc30-b267-4f78-9d9b-73a1957c3638",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// ❌ 연관된 상태가 분산되어 있음\nconst [isLoading, setIsLoading] = useState(false)\nconst [data, setData] = useState<User | null>(null)\nconst [error, setError] = useState<Error | null>(null)\n// isLoading=true이면서 error가 있는 상태가 생길 수 있다 — 불가능한 상태\n\n// ✅ 상태를 discriminated union으로 설계\ntype AsyncState<T> =\n  | { status: 'idle' }\n  | { status: 'loading' }\n  | { status: 'success'; data: T }\n  | { status: 'error'; error: Error }\n\nconst [state, setState] = useState<AsyncState<User>>({ status: 'idle' })\n\n// 불가능한 상태 조합 자체가 타입 수준에서 막힌다\nif (state.status === 'success') {\n  console.log(state.data)   ← 타입스크립트가 data를 보장함\n}",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "b4026f1c-ffa2-4a46-8d7f-dfd46630ef67",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// ❌ 복잡한 폼 상태를 useState로 하나씩 관리\nconst [name, setName] = useState('')\nconst [email, setEmail] = useState('')\nconst [phone, setPhone] = useState('')\nconst [agree, setAgree] = useState(false)\n\n// ✅ useReducer로 폼 상태를 하나로 관리\ntype FormState = {\n  name: string\n  email: string\n  phone: string\n  agree: boolean\n}\n\ntype FormAction =\n  | { type: 'SET_FIELD'; field: keyof FormState; value: string | boolean }\n  | { type: 'RESET' }\n\nconst initialState: FormState = {\n  name: '',\n  email: '',\n  phone: '',\n  agree: false,\n}\n\nfunction formReducer(state: FormState, action: FormAction): FormState {\n  switch (action.type) {\n    case 'SET_FIELD':\n      return { ...state, [action.field]: action.value }\n    case 'RESET':\n      return initialState\n  }\n}\n\nconst [form, dispatch] = useReducer(formReducer, initialState)\n\n// 사용할 때\ndispatch({ type: 'SET_FIELD', field: 'name', value: '김현우' })\ndispatch({ type: 'RESET' })",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "bdeb6aa1-c3d7-4003-aa3b-a4095a4bb6dc",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Custom Hook 설계 — 어떤 지점에서 어떤 것들을 캡슐화해야할까?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "077bf0b4-0aa4-4408-9a15-c72740f91e07",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Custom Hook은 상태와 그 상태를 다루는 로직을 함께 묶는 도구다. 단순히 코드를 줄이기 위해 쪼개는 것은 오히려 코드를 따라가기 어렵게 만든다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "89175c47-87d9-418c-b8ab-80443117894e",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// ❌ 너무 잘게 쪼갠 훅 — 오히려 추적이 어려움\nfunction useIsOpen() {\n  const [isOpen, setIsOpen] = useState(false)\n  return { isOpen, open: () => setIsOpen(true), close: () => setIsOpen(false) }\n}\n\n// ❌ React와 무관한 계산 로직을 훅으로 만든 경우\nfunction useFormattedPrice(price: number) {\n  return useMemo(() => price.toLocaleString() + '원', [price])\n  // useMemo가 필요 없는 단순 계산 — 그냥 함수면 충분하다\n}\n\n// ✅ 상태와 관련 로직이 함께 있어야 의미 있는 훅\nfunction useImageUpload() {\n  const [preview, setPreview] = useState<string | null>(null)\n  const [isUploading, setIsUploading] = useState(false)\n  const [error, setError] = useState<string | null>(null)\n\n  function handleFileSelect(file: File) {\n    const reader = new FileReader()\n    reader.onload = (e) => setPreview(e.target?.result as string)\n    reader.readAsDataURL(file)\n  }\n\n  async function upload(file: File): Promise<string> {\n    setIsUploading(true)\n    setError(null)\n    try {\n      const url = await uploadFile(file)\n      return url\n    } catch (e) {\n      setError('업로드에 실패했습니다')\n      throw e\n    } finally {\n      setIsUploading(false)\n    }\n  }\n\n  return { preview, isUploading, error, handleFileSelect, upload }\n}",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "3ccfbe32-42cd-4cbd-a662-a4d4a8d82863",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "순수한 계산 로직은 훅이 아닌 함수로 분리하는 것이 좋다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "9063dd46-5d9b-42c5-b9b9-457e5422f43c",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "함수로 만들면 ",
-        "styles": {}
+        "type": "p",
+        "children": [
+          {
+            "text": "함수로 만들면 "
+          },
+          {
+            "text": "renderHook",
+            "code": true
+          },
+          {
+            "text": " 없이 바로 단위 테스트를 작성할 수 있다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "renderHook",
-        "styles": {
-          "code": true
-        }
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// 순수 함수 — React와 완전히 분리된 로직\nfunction formatPrice(price: number): string {\n  return price.toLocaleString() + '원'\n}\n\nfunction filterByCategory(products: Product[], category: string): Product[] {\n  return category === 'all' ? products : products.filter(p => p.category === category)\n}\n\nfunction sortByPrice(products: Product[], order: 'asc' | 'desc'): Product[] {\n  return [...products].sort((a, b) =>\n    order === 'asc' ? a.price - b.price : b.price - a.price\n  )\n}\n\n// 컴포넌트에서는 조합해서 사용\nconst displayed = useMemo(\n  () => sortByPrice(filterByCategory(products, category), sortOrder),\n  [products, category, sortOrder]\n)"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": " 없이 바로 단위 테스트를 작성할 수 있다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "8ffe7d80-8e6b-4559-8820-7f2d64d5c743",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// 순수 함수 — React와 완전히 분리된 로직\nfunction formatPrice(price: number): string {\n  return price.toLocaleString() + '원'\n}\n\nfunction filterByCategory(products: Product[], category: string): Product[] {\n  return category === 'all' ? products : products.filter(p => p.category === category)\n}\n\nfunction sortByPrice(products: Product[], order: 'asc' | 'desc'): Product[] {\n  return [...products].sort((a, b) =>\n    order === 'asc' ? a.price - b.price : b.price - a.price\n  )\n}\n\n// 컴포넌트에서는 조합해서 사용\nconst displayed = useMemo(\n  () => sortByPrice(filterByCategory(products, category), sortOrder),\n  [products, category, sortOrder]\n)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "6821d9a1-f0be-44d2-8cbb-5d7889d6c091",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Props 설계하기 — 인터페이스를 어떻게 만들 수 있을까?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "6c982fd0-7b4f-4cf8-aacb-a7165530dfe1",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "컴포넌트의 Props는 내부 구현을 숨기고 명확한 계약을 드러내야 한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "36e1507d-7ec9-4874-808d-fded06661b7d",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Props 이름이 호출하는 쪽의 상태 구조를 반영하면 컴포넌트의 재사용성이 떨어진다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "3d6805ff-399f-4e88-a981-d4365d876f09",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// ❌ 부모의 상태 구조가 드러남\ninterface DatePickerProps {\n  date: string\n  setDate: (v: string) => void   ← \"부모가 date라는 useState를 쓴다\"가 노출됨\n}\n\n// ✅ 네이티브 input 인터페이스를 따름\ninterface DatePickerProps {\n  value?: string\n  defaultValue?: string\n  min?: string\n  onChange?: (e: ChangeEvent<HTMLInputElement>) => void\n  onBlur?: (e: FocusEvent<HTMLInputElement>) => void\n  name?: string\n}\n\nexport const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(\n  ({ value, defaultValue, min, onChange, onBlur, name }, ref) => {\n    const inputProps = value !== undefined ? { value } : { defaultValue }\n    return (\n      <input\n        ref={ref}\n        type=\"date\"\n        {...inputProps}\n        min={min}\n        onChange={onChange}\n        onBlur={onBlur}\n        name={name}\n      />\n    )\n  }\n)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "29266cfa-c69d-4143-8980-239bb47bfaed",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "관련 있는 Props는 타입으로 묶는 것이 좋다. 항목이 추가되어도 시그니처가 변하지 않는다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "a9a9562a-4285-4465-8cfd-f974d4b45b53",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// ❌ 항목이 늘어날수록 시그니처가 폭발\n<SearchFilter\n  keyword={keyword}\n  category={category}\n  startDate={startDate}\n  endDate={endDate}\n  onKeywordChange={setKeyword}\n  onCategoryChange={setCategory}\n  onStartDateChange={setStartDate}\n  onEndDateChange={setEndDate}\n/>\n\n// ✅ 타입으로 묶음\ntype SearchFilter = {\n  keyword: string\n  category: string\n  startDate: string\n  endDate: string\n}\n\n<SearchFilter filter={filter} onFilterChange={setFilter} />",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "42df853e-9442-4d82-bb74-1e35bf179976",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Vue — 좋은 코드를 작성하는 방법",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "a4c1a643-13dc-47c2-85f1-2a20d32065b3",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "컴포넌트는 하나의 관심사만 가지는 것이 좋다",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "5998568b-9e61-49b3-a708-bc194e7aea06",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Vue에서도 ",
-        "styles": {}
+        "type": "h3",
+        "children": [
+          {
+            "text": "Props 설계하기 — 인터페이스를 어떻게 만들 수 있을까?"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "<script setup>",
-        "styles": {
-          "code": true
-        }
+        "type": "p",
+        "children": [
+          {
+            "text": "컴포넌트의 Props는 내부 구현을 숨기고 명확한 계약을 드러내야 한다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": " 안에 모든 것을 넣으면 컴포넌트가 무거워진다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "91771457-e59a-487f-a417-b600c83e2b62",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "<!-- ❌ 하나의 컴포넌트가 너무 많은 일을 함 -->\n<script setup lang=\"ts\">\nconst route = useRoute()\nconst product = ref<Product | null>(null)\nconst isLoading = ref(true)\nconst quantity = ref(1)\nconst isWished = ref(false)\n\nonMounted(async () => {\n  product.value = await fetchProduct(Number(route.params.id))\n  isLoading.value = false\n})\n</script>\n\n<template>\n  <div v-if=\"isLoading\"><Spinner /></div>\n  <div v-else>\n    <img :src=\"product?.imageUrl\" />\n    <h1>{{ product?.name }}</h1>\n    <!-- 수십 줄의 인터랙션 로직 -->\n  </div>\n</template>",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "a81fccc4-5d0d-4bf0-8bfe-b0958960f6cd",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "<!-- ✅ 관심사 분리 -->\n<!-- ProductPage.vue -->\n<script setup lang=\"ts\">\nconst props = defineProps<{ id: number }>()\nconst { product, isLoading } = useProduct(props.id)  ← 데이터 페칭 분리\n</script>\n\n<template>\n  <Spinner v-if=\"isLoading\" />\n  <ProductDetail v-else-if=\"product\" :product=\"product\" />\n  <NotFound v-else />\n</template>",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "d61c1c41-6aa1-4798-98f2-572ae2a416ad",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "<!-- ProductActions.vue — 인터랙션만 담당 -->\n<script setup lang=\"ts\">\ndefineProps<{ productId: number; price: number }>()\n\nconst quantity = ref(1)          ← 이 컴포넌트에서만 필요한 상태\nconst isWished = ref(false)\n</script>\n\n<template>\n  <QuantitySelector v-model=\"quantity\" />\n  <WishButton v-model=\"isWished\" />\n  <CartButton :product-id=\"productId\" :quantity=\"quantity\" :price=\"price\" />\n</template>",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "910360de-bd3c-46b2-961f-59bf9ca2c55a",
-    "type": "divider",
-    "props": {},
-    "children": []
-  },
-  {
-    "id": "07f378ab-3d95-460d-b57a-955449c29f7d",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "defineModel()로 양방향 바인딩 설계하기",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c6ec9963-e350-4c08-a02a-fa2191b08906",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Vue 3.4부터 ",
-        "styles": {}
+        "type": "p",
+        "children": [
+          {
+            "text": "Props 이름이 호출하는 쪽의 상태 구조를 반영하면 컴포넌트의 재사용성이 떨어진다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "defineModel()",
-        "styles": {
-          "code": true
-        }
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// ❌ 부모의 상태 구조가 드러남\ninterface DatePickerProps {\n  date: string\n  setDate: (v: string) => void   ← \"부모가 date라는 useState를 쓴다\"가 노출됨\n}\n\n// ✅ 네이티브 input 인터페이스를 따름\ninterface DatePickerProps {\n  value?: string\n  defaultValue?: string\n  min?: string\n  onChange?: (e: ChangeEvent<HTMLInputElement>) => void\n  onBlur?: (e: FocusEvent<HTMLInputElement>) => void\n  name?: string\n}\n\nexport const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(\n  ({ value, defaultValue, min, onChange, onBlur, name }, ref) => {\n    const inputProps = value !== undefined ? { value } : { defaultValue }\n    return (\n      <input\n        ref={ref}\n        type=\"date\"\n        {...inputProps}\n        min={min}\n        onChange={onChange}\n        onBlur={onBlur}\n        name={name}\n      />\n    )\n  }\n)"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": " 매크로가 안정화되었다고 한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "8f7ab66d-3832-49a1-8d4d-2b81cb44825c",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "기존에는 ",
-        "styles": {}
+        "type": "p",
+        "children": [
+          {
+            "text": "관련 있는 Props는 타입으로 묶는 것이 좋다. 항목이 추가되어도 시그니처가 변하지 않는다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "defineProps",
-        "styles": {
-          "code": true
-        }
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// ❌ 항목이 늘어날수록 시그니처가 폭발\n<SearchFilter\n  keyword={keyword}\n  category={category}\n  startDate={startDate}\n  endDate={endDate}\n  onKeywordChange={setKeyword}\n  onCategoryChange={setCategory}\n  onStartDateChange={setStartDate}\n  onEndDateChange={setEndDate}\n/>\n\n// ✅ 타입으로 묶음\ntype SearchFilter = {\n  keyword: string\n  category: string\n  startDate: string\n  endDate: string\n}\n\n<SearchFilter filter={filter} onFilterChange={setFilter} />"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": " + ",
-        "styles": {}
+        "type": "h2",
+        "children": [
+          {
+            "text": "Vue — 좋은 코드를 작성하는 방법"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "defineEmits",
-        "styles": {
-          "code": true
-        }
+        "type": "h3",
+        "children": [
+          {
+            "text": "컴포넌트는 하나의 관심사만 가지는 것이 좋다"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "를 조합해야 했던 양방향 바인딩이 한 줄로 줄어든다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "dfa4e9ee-9cb9-46ee-beb6-d9369ca3e89a",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "<!-- ❌ Vue 3.3 이하 — 보일러플레이트가 많음 -->\n<script setup lang=\"ts\">\nconst props = defineProps<{ modelValue: string }>()\nconst emit = defineEmits<{ 'update:modelValue': [value: string] }>()\n\nfunction handleChange(e: Event) {\n  emit('update:modelValue', (e.target as HTMLInputElement).value)\n}\n</script>\n\n<template>\n  <input :value=\"props.modelValue\" @change=\"handleChange\" />\n</template>",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "d07448d1-9565-4568-89df-7dabf51616ae",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "<!-- ✅ Vue 3.4+ — defineModel() -->\n<script setup lang=\"ts\">\nconst value = defineModel<string>({ default: '' })\n</script>\n\n<template>\n  <input v-model=\"value\" />\n</template>",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "aa498cb5-21e6-47d2-a13a-3192b50f4a28",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "여러 개의 v-model이 필요한 경우도 이름을 붙이면 된다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c616a20b-9258-46b4-b59e-6e8a73c5f2c8",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "<!-- DateRangePicker.vue -->\n<script setup lang=\"ts\">\nconst startDate = defineModel<string>('start', { default: '' })\nconst endDate = defineModel<string>('end', { default: '' })\n</script>\n\n<template>\n  <input type=\"date\" v-model=\"startDate\" />\n  <input type=\"date\" v-model=\"endDate\" :min=\"startDate\" />\n</template>\n\n<!-- 사용하는 쪽 -->\n<DateRangePicker v-model:start=\"start\" v-model:end=\"end\" />",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "c7a54d99-4430-4c4e-8828-a4e3e21f7c51",
-    "type": "divider",
-    "props": {},
-    "children": []
-  },
-  {
-    "id": "19b9e4ab-e664-4e95-a2a0-fb6e58389b3d",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "상태 설계 — ref vs reactive",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "68f71bd0-30e0-46ee-ac96-69c157ab62b9",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "ref",
-        "styles": {
-          "code": true
-        }
+        "type": "p",
+        "children": [
+          {
+            "text": "Vue에서도 "
+          },
+          {
+            "text": "<script setup>",
+            "code": true
+          },
+          {
+            "text": " 안에 모든 것을 넣으면 컴포넌트가 무거워진다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "와 ",
-        "styles": {}
+        "type": "code_block",
+        "children": [
+          {
+            "text": "<!-- ❌ 하나의 컴포넌트가 너무 많은 일을 함 -->\n<script setup lang=\"ts\">\nconst route = useRoute()\nconst product = ref<Product | null>(null)\nconst isLoading = ref(true)\nconst quantity = ref(1)\nconst isWished = ref(false)\n\nonMounted(async () => {\n  product.value = await fetchProduct(Number(route.params.id))\n  isLoading.value = false\n})\n</script>\n\n<template>\n  <div v-if=\"isLoading\"><Spinner /></div>\n  <div v-else>\n    <img :src=\"product?.imageUrl\" />\n    <h1>{{ product?.name }}</h1>\n    <!-- 수십 줄의 인터랙션 로직 -->\n  </div>\n</template>"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": "reactive",
-        "styles": {
-          "code": true
-        }
+        "type": "code_block",
+        "children": [
+          {
+            "text": "<!-- ✅ 관심사 분리 -->\n<!-- ProductPage.vue -->\n<script setup lang=\"ts\">\nconst props = defineProps<{ id: number }>()\nconst { product, isLoading } = useProduct(props.id)  ← 데이터 페칭 분리\n</script>\n\n<template>\n  <Spinner v-if=\"isLoading\" />\n  <ProductDetail v-else-if=\"product\" :product=\"product\" />\n  <NotFound v-else />\n</template>"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": " 중 어떤 걸 써야 할지 헷갈리는 경우가 많다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "5a618586-37b4-4761-a69a-9f7dba51284b",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "처음에 ",
-        "styles": {}
+        "type": "code_block",
+        "children": [
+          {
+            "text": "<!-- ProductActions.vue — 인터랙션만 담당 -->\n<script setup lang=\"ts\">\ndefineProps<{ productId: number; price: number }>()\n\nconst quantity = ref(1)          ← 이 컴포넌트에서만 필요한 상태\nconst isWished = ref(false)\n</script>\n\n<template>\n  <QuantitySelector v-model=\"quantity\" />\n  <WishButton v-model=\"isWished\" />\n  <CartButton :product-id=\"productId\" :quantity=\"quantity\" :price=\"price\" />\n</template>"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": "reactive",
-        "styles": {
-          "code": true
-        }
+        "type": "hr",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": " 는 그냥 사용하지 말자~ 라고 생각했었는데 폼과 같은 복잡한 데이터 구조에서는 유용하기도 하다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "32ca7bdd-4098-4e0a-ab1a-8bb0397c44d3",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// ref — 원시값, 또는 교체가 일어나는 참조에 적합\nconst count = ref(0)\nconst user = ref<User | null>(null)\n\n// 나중에 객체 자체를 교체할 수 있다\nuser.value = await fetchUser(id)   ← ref는 교체 가능\n\n// reactive — 내부 속성만 바뀌는 객체에 적합\nconst filter = reactive({\n  keyword: '',\n  category: 'all',\n  sortOrder: 'asc' as 'asc' | 'desc',\n})\n\nfilter.keyword = '나이키'   ← 교체 없이 내부 속성만 변경\n\n// ❌ reactive는 객체 자체를 교체하면 반응성이 끊긴다\n// filter = { keyword: '나이키', category: 'all', sortOrder: 'asc' }  ← 절대 이렇게 쓰면 안 됨",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "64b08a9d-56e1-454d-9d39-74b2c663f11a",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "실무에서는 ",
-        "styles": {}
+        "type": "h3",
+        "children": [
+          {
+            "text": "defineModel()로 양방향 바인딩 설계하기"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "ref",
-        "styles": {
-          "code": true
-        }
+        "type": "p",
+        "children": [
+          {
+            "text": "Vue 3.4부터 "
+          },
+          {
+            "text": "defineModel()",
+            "code": true
+          },
+          {
+            "text": " 매크로가 안정화되었다고 한다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "를 기본으로 쓰고, 폼 상태처럼 여러 속성을 한 덩어리로 다루는 경우에만 ",
-        "styles": {}
+        "type": "p",
+        "children": [
+          {
+            "text": "기존에는 "
+          },
+          {
+            "text": "defineProps",
+            "code": true
+          },
+          {
+            "text": " + "
+          },
+          {
+            "text": "defineEmits",
+            "code": true
+          },
+          {
+            "text": "를 조합해야 했던 양방향 바인딩이 한 줄로 줄어든다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "reactive",
-        "styles": {
-          "code": true
-        }
+        "type": "code_block",
+        "children": [
+          {
+            "text": "<!-- ❌ Vue 3.3 이하 — 보일러플레이트가 많음 -->\n<script setup lang=\"ts\">\nconst props = defineProps<{ modelValue: string }>()\nconst emit = defineEmits<{ 'update:modelValue': [value: string] }>()\n\nfunction handleChange(e: Event) {\n  emit('update:modelValue', (e.target as HTMLInputElement).value)\n}\n</script>\n\n<template>\n  <input :value=\"props.modelValue\" @change=\"handleChange\" />\n</template>"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": "를 선택하는 방식이 안전하다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "367a692b-5671-407b-a199-b680eed08d8a",
-    "type": "divider",
-    "props": {},
-    "children": []
-  },
-  {
-    "id": "2cb71719-08e7-49a4-a272-d2b7172b2f8e",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Composable 설계 — 무엇을 묶어야 할까",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "7716d7f8-b3a1-4aa2-b211-eb8a52d598ad",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Composable은 반응형 상태와 관련 로직을 함께 묶는 도구다. Vue 반응형 API(",
-        "styles": {}
+        "type": "code_block",
+        "children": [
+          {
+            "text": "<!-- ✅ Vue 3.4+ — defineModel() -->\n<script setup lang=\"ts\">\nconst value = defineModel<string>({ default: '' })\n</script>\n\n<template>\n  <input v-model=\"value\" />\n</template>"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": "ref",
-        "styles": {
-          "code": true
-        }
+        "type": "p",
+        "children": [
+          {
+            "text": "여러 개의 v-model이 필요한 경우도 이름을 붙이면 된다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": ", ",
-        "styles": {}
+        "type": "code_block",
+        "children": [
+          {
+            "text": "<!-- DateRangePicker.vue -->\n<script setup lang=\"ts\">\nconst startDate = defineModel<string>('start', { default: '' })\nconst endDate = defineModel<string>('end', { default: '' })\n</script>\n\n<template>\n  <input type=\"date\" v-model=\"startDate\" />\n  <input type=\"date\" v-model=\"endDate\" :min=\"startDate\" />\n</template>\n\n<!-- 사용하는 쪽 -->\n<DateRangePicker v-model:start=\"start\" v-model:end=\"end\" />"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": "computed",
-        "styles": {
-          "code": true
-        }
+        "type": "hr",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": ", ",
-        "styles": {}
+        "type": "h3",
+        "children": [
+          {
+            "text": "상태 설계 — ref vs reactive"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "watch",
-        "styles": {
-          "code": true
-        }
+        "type": "p",
+        "children": [
+          {
+            "text": "ref",
+            "code": true
+          },
+          {
+            "text": "와 "
+          },
+          {
+            "text": "reactive",
+            "code": true
+          },
+          {
+            "text": " 중 어떤 걸 써야 할지 헷갈리는 경우가 많다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": ", ",
-        "styles": {}
+        "type": "p",
+        "children": [
+          {
+            "text": "처음에 "
+          },
+          {
+            "text": "reactive",
+            "code": true
+          },
+          {
+            "text": " 는 그냥 사용하지 말자~ 라고 생각했었는데 폼과 같은 복잡한 데이터 구조에서는 유용하기도 하다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "onMounted",
-        "styles": {
-          "code": true
-        }
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// ref — 원시값, 또는 교체가 일어나는 참조에 적합\nconst count = ref(0)\nconst user = ref<User | null>(null)\n\n// 나중에 객체 자체를 교체할 수 있다\nuser.value = await fetchUser(id)   ← ref는 교체 가능\n\n// reactive — 내부 속성만 바뀌는 객체에 적합\nconst filter = reactive({\n  keyword: '',\n  category: 'all',\n  sortOrder: 'asc' as 'asc' | 'desc',\n})\n\nfilter.keyword = '나이키'   ← 교체 없이 내부 속성만 변경\n\n// ❌ reactive는 객체 자체를 교체하면 반응성이 끊긴다\n// filter = { keyword: '나이키', category: 'all', sortOrder: 'asc' }  ← 절대 이렇게 쓰면 안 됨"
+          }
+        ],
+        "lang": "javascript"
       },
       {
-        "type": "text",
-        "text": ")가 실제로 필요한 경우에만 Composable로 만드는 것이 좋다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "4326c43a-3937-469a-a8f8-6babf7a3e037",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// ❌ Vue 반응형과 무관한 계산 로직을 Composable로 만든 경우\nexport function useFilteredProducts(products: Ref<Product[]>, filter: Ref<Filter>) {\n  return computed(() =>\n    products.value\n      .filter(p => p.category === filter.value.category)\n      .sort((a, b) => a.price - b.price)\n  )\n  // computed만 쓴다고 Composable이 될 필요는 없다\n}\n\n// ✅ 순수 함수로 분리 — 테스트가 쉽고 Vue 없이도 동작\nfunction filterProducts(products: Product[], filter: Filter): Product[] {\n  return products\n    .filter(p => p.category === filter.category)\n    .sort((a, b) =>\n      filter.sortOrder === 'asc' ? a.price - b.price : b.price - a.price\n    )\n}\n\n// 컴포넌트에서는 computed로 감싸서 사용\nconst filtered = computed(() => filterProducts(products.value, filter))",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "d7fe8185-4d70-4fb2-ade8-59507acb033c",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "반응형 + 라이프사이클이 조합될 때 Composable이 실제로 가치를 발휘한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "04d5f5e4-a29f-4d34-b0bf-c9f864832187",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "// ✅ 진짜 Composable이 필요한 경우 — 반응형과 라이프사이클이 함께 필요함\nexport function useIntersectionObserver(target: Ref<HTMLElement | null>) {\n  const isVisible = ref(false)\n\n  onMounted(() => {\n    if (!target.value) return\n\n    const observer = new IntersectionObserver(([entry]) => {\n      isVisible.value = entry.isIntersecting\n    })\n\n    observer.observe(target.value)\n    onUnmounted(() => observer.disconnect())\n  })\n\n  return { isVisible }\n}\n\n// 컴포넌트에서\nconst cardRef = ref<HTMLElement | null>(null)\nconst { isVisible } = useIntersectionObserver(cardRef)",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "a45b6d51-c616-426b-9650-2a4dc9a722e0",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 3,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Props 설계 — 인터페이스를 어떻게 만들 것인가",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e0326dfb-3120-4f7a-8e0d-f7fc03c8afa7",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "Vue의 ",
-        "styles": {}
+        "type": "p",
+        "children": [
+          {
+            "text": "실무에서는 "
+          },
+          {
+            "text": "ref",
+            "code": true
+          },
+          {
+            "text": "를 기본으로 쓰고, 폼 상태처럼 여러 속성을 한 덩어리로 다루는 경우에만 "
+          },
+          {
+            "text": "reactive",
+            "code": true
+          },
+          {
+            "text": "를 선택하는 방식이 안전하다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "defineProps",
-        "styles": {
-          "code": true
-        }
+        "type": "hr",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "는 TypeScript 제네릭 문법을 그대로 지원한다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "0aedaeab-31b4-4808-bde8-11ff620a33d3",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
+        "type": "h3",
+        "children": [
+          {
+            "text": "Composable 설계 — 무엇을 묶어야 할까"
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "Props 이름이 부모의 상태 구조를 드러내면 재사용성이 떨어진다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "b911d630-f38c-4b09-a474-327351158dda",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "Composable은 반응형 상태와 관련 로직을 함께 묶는 도구다. Vue 반응형 API("
+          },
+          {
+            "text": "ref",
+            "code": true
+          },
+          {
+            "text": ", "
+          },
+          {
+            "text": "computed",
+            "code": true
+          },
+          {
+            "text": ", "
+          },
+          {
+            "text": "watch",
+            "code": true
+          },
+          {
+            "text": ", "
+          },
+          {
+            "text": "onMounted",
+            "code": true
+          },
+          {
+            "text": ")가 실제로 필요한 경우에만 Composable로 만드는 것이 좋다."
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "<!-- ❌ 부모의 상태 구조가 Props로 새어나옴 -->\n<script setup lang=\"ts\">\ndefineProps<{\n  date: string\n  setDate: (v: string) => void   ← 부모 구현이 노출됨\n}>()\n</script>",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "204001b0-86ed-420d-9975-ac08b3c5341f",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// ❌ Vue 반응형과 무관한 계산 로직을 Composable로 만든 경우\nexport function useFilteredProducts(products: Ref<Product[]>, filter: Ref<Filter>) {\n  return computed(() =>\n    products.value\n      .filter(p => p.category === filter.value.category)\n      .sort((a, b) => a.price - b.price)\n  )\n  // computed만 쓴다고 Composable이 될 필요는 없다\n}\n\n// ✅ 순수 함수로 분리 — 테스트가 쉽고 Vue 없이도 동작\nfunction filterProducts(products: Product[], filter: Filter): Product[] {\n  return products\n    .filter(p => p.category === filter.category)\n    .sort((a, b) =>\n      filter.sortOrder === 'asc' ? a.price - b.price : b.price - a.price\n    )\n}\n\n// 컴포넌트에서는 computed로 감싸서 사용\nconst filtered = computed(() => filterProducts(products.value, filter))"
+          }
+        ],
+        "lang": "javascript"
+      },
       {
-        "type": "text",
-        "text": "<!-- ✅ 컴포넌트 자신의 역할만 드러내는 인터페이스 -->\n<script setup lang=\"ts\">\nconst value = defineModel<string>({ default: '' })\n\ndefineProps<{\n  min?: string\n  max?: string\n  disabled?: boolean\n}>()\n</script>\n\n<template>\n  <input\n    type=\"date\"\n    v-model=\"value\"\n    :min=\"min\"\n    :max=\"max\"\n    :disabled=\"disabled\"\n  />\n</template>",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "affa12d6-48d1-4f9e-ab72-9b39bed5358c",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "반응형 + 라이프사이클이 조합될 때 Composable이 실제로 가치를 발휘한다."
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "관련 있는 Props는 타입으로 묶는 것이 좋다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "414fd60d-da1d-4128-ad27-b95eff5e3d90",
-    "type": "codeBlock",
-    "props": {
-      "language": "javascript"
-    },
-    "content": [
+        "type": "code_block",
+        "children": [
+          {
+            "text": "// ✅ 진짜 Composable이 필요한 경우 — 반응형과 라이프사이클이 함께 필요함\nexport function useIntersectionObserver(target: Ref<HTMLElement | null>) {\n  const isVisible = ref(false)\n\n  onMounted(() => {\n    if (!target.value) return\n\n    const observer = new IntersectionObserver(([entry]) => {\n      isVisible.value = entry.isIntersecting\n    })\n\n    observer.observe(target.value)\n    onUnmounted(() => observer.disconnect())\n  })\n\n  return { isVisible }\n}\n\n// 컴포넌트에서\nconst cardRef = ref<HTMLElement | null>(null)\nconst { isVisible } = useIntersectionObserver(cardRef)"
+          }
+        ],
+        "lang": "javascript"
+      },
       {
-        "type": "text",
-        "text": "<!-- ❌ 항목이 늘어날수록 시그니처가 폭발 -->\n<script setup lang=\"ts\">\ndefineProps<{\n  keyword: string\n  category: string\n  startDate: string\n  endDate: string\n}>()\n\ndefineEmits<{\n  'update:keyword': [value: string]\n  'update:category': [value: string]\n  'update:startDate': [value: string]\n  'update:endDate': [value: string]\n}>()\n</script>\n\n<!-- ✅ 타입으로 묶어서 인터페이스를 안정적으로 유지 -->\n<script setup lang=\"ts\">\ntype SearchFilter = {\n  keyword: string\n  category: string\n  startDate: string\n  endDate: string\n}\n\nconst props = defineProps<{ filter: SearchFilter }>()\n\nconst emit = defineEmits<{\n  'update:filter': [filter: SearchFilter]\n}>()\n\nfunction handleChange<K extends keyof SearchFilter>(key: K, value: SearchFilter[K]) {\n  emit('update:filter', { ...props.filter, [key]: value })\n}\n</script>",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "ec66f387-22a0-4d71-9eb6-15ffef635dd0",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
+        "type": "h3",
+        "children": [
+          {
+            "text": "Props 설계 — 인터페이스를 어떻게 만들 것인가"
+          }
+        ]
+      },
       {
-        "type": "text",
-        "text": "React와 Vue 라이브러리 패턴 비교해보기",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "7a914bff-0d39-4c3a-9f1a-a3dd13606730",
-    "type": "table",
-    "props": {
-      "textColor": "default"
-    },
-    "content": {
-      "type": "tableContent",
-      "columnWidths": [
-        null,
-        null,
-        null
-      ],
-      "headerRows": 1,
-      "rows": [
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "관심사",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "React",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "Vue",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "양방향 바인딩",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "value",
-                  "styles": {
-                    "code": true
+        "type": "p",
+        "children": [
+          {
+            "text": "Vue의 "
+          },
+          {
+            "text": "defineProps",
+            "code": true
+          },
+          {
+            "text": "는 TypeScript 제네릭 문법을 그대로 지원한다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "Props 이름이 부모의 상태 구조를 드러내면 재사용성이 떨어진다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "<!-- ❌ 부모의 상태 구조가 Props로 새어나옴 -->\n<script setup lang=\"ts\">\ndefineProps<{\n  date: string\n  setDate: (v: string) => void   ← 부모 구현이 노출됨\n}>()\n</script>"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "<!-- ✅ 컴포넌트 자신의 역할만 드러내는 인터페이스 -->\n<script setup lang=\"ts\">\nconst value = defineModel<string>({ default: '' })\n\ndefineProps<{\n  min?: string\n  max?: string\n  disabled?: boolean\n}>()\n</script>\n\n<template>\n  <input\n    type=\"date\"\n    v-model=\"value\"\n    :min=\"min\"\n    :max=\"max\"\n    :disabled=\"disabled\"\n  />\n</template>"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "관련 있는 Props는 타입으로 묶는 것이 좋다."
+          }
+        ]
+      },
+      {
+        "type": "code_block",
+        "children": [
+          {
+            "text": "<!-- ❌ 항목이 늘어날수록 시그니처가 폭발 -->\n<script setup lang=\"ts\">\ndefineProps<{\n  keyword: string\n  category: string\n  startDate: string\n  endDate: string\n}>()\n\ndefineEmits<{\n  'update:keyword': [value: string]\n  'update:category': [value: string]\n  'update:startDate': [value: string]\n  'update:endDate': [value: string]\n}>()\n</script>\n\n<!-- ✅ 타입으로 묶어서 인터페이스를 안정적으로 유지 -->\n<script setup lang=\"ts\">\ntype SearchFilter = {\n  keyword: string\n  category: string\n  startDate: string\n  endDate: string\n}\n\nconst props = defineProps<{ filter: SearchFilter }>()\n\nconst emit = defineEmits<{\n  'update:filter': [filter: SearchFilter]\n}>()\n\nfunction handleChange<K extends keyof SearchFilter>(key: K, value: SearchFilter[K]) {\n  emit('update:filter', { ...props.filter, [key]: value })\n}\n</script>"
+          }
+        ],
+        "lang": "javascript"
+      },
+      {
+        "type": "h2",
+        "children": [
+          {
+            "text": "React와 Vue 라이브러리 패턴 비교해보기"
+          }
+        ]
+      },
+      {
+        "type": "table",
+        "children": [
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "th",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "관심사"
+                      }
+                    ]
                   }
-                },
-                {
-                  "type": "text",
-                  "text": " + ",
-                  "styles": {}
-                },
-                {
-                  "type": "text",
-                  "text": "onChange",
-                  "styles": {
-                    "code": true
+                ]
+              },
+              {
+                "type": "th",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "React"
+                      }
+                    ]
                   }
-                },
-                {
-                  "type": "text",
-                  "text": " (controlled)",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "defineModel()",
-                  "styles": {
-                    "code": true
+                ]
+              },
+              {
+                "type": "th",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "Vue"
+                      }
+                    ]
                   }
-                },
-                {
-                  "type": "text",
-                  "text": " (3.4+)",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+                ]
               }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "로컬 상태",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "useState",
-                  "styles": {
-                    "code": true
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "양방향 바인딩"
+                      }
+                    ]
                   }
-                },
-                {
-                  "type": "text",
-                  "text": " / ",
-                  "styles": {}
-                },
-                {
-                  "type": "text",
-                  "text": "useReducer",
-                  "styles": {
-                    "code": true
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "value",
+                        "code": true
+                      },
+                      {
+                        "text": " + "
+                      },
+                      {
+                        "text": "onChange",
+                        "code": true
+                      },
+                      {
+                        "text": " (controlled)"
+                      }
+                    ]
                   }
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "ref",
-                  "styles": {
-                    "code": true
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "defineModel()",
+                        "code": true
+                      },
+                      {
+                        "text": " (3.4+)"
+                      }
+                    ]
                   }
-                },
-                {
-                  "type": "text",
-                  "text": " / ",
-                  "styles": {}
-                },
-                {
-                  "type": "text",
-                  "text": "reactive",
-                  "styles": {
-                    "code": true
+                ]
+              }
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "로컬 상태"
+                      }
+                    ]
                   }
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "파생 상태",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "useMemo",
-                  "styles": {
-                    "code": true
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "useState",
+                        "code": true
+                      },
+                      {
+                        "text": " / "
+                      },
+                      {
+                        "text": "useReducer",
+                        "code": true
+                      }
+                    ]
                   }
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "computed",
-                  "styles": {
-                    "code": true
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "ref",
+                        "code": true
+                      },
+                      {
+                        "text": " / "
+                      },
+                      {
+                        "text": "reactive",
+                        "code": true
+                      }
+                    ]
                   }
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+                ]
               }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "사이드 이펙트",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "useEffect",
-                  "styles": {
-                    "code": true
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "파생 상태"
+                      }
+                    ]
                   }
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "watch",
-                  "styles": {
-                    "code": true
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "useMemo",
+                        "code": true
+                      }
+                    ]
                   }
-                },
-                {
-                  "type": "text",
-                  "text": " / ",
-                  "styles": {}
-                },
-                {
-                  "type": "text",
-                  "text": "watchEffect",
-                  "styles": {
-                    "code": true
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "computed",
+                        "code": true
+                      }
+                    ]
                   }
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+                ]
               }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "로직 캡슐화",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "Custom Hook",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "Composable",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "컴포넌트 간 공유",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "Context",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "provide",
-                  "styles": {
-                    "code": true
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "사이드 이펙트"
+                      }
+                    ]
                   }
-                },
-                {
-                  "type": "text",
-                  "text": " / ",
-                  "styles": {}
-                },
-                {
-                  "type": "text",
-                  "text": "inject",
-                  "styles": {
-                    "code": true
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "useEffect",
+                        "code": true
+                      }
+                    ]
                   }
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "DOM 접근",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
-              }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "useRef",
-                  "styles": {
-                    "code": true
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "watch",
+                        "code": true
+                      },
+                      {
+                        "text": " / "
+                      },
+                      {
+                        "text": "watchEffect",
+                        "code": true
+                      }
+                    ]
                   }
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+                ]
               }
-            },
-            {
-              "type": "tableCell",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "ref",
-                  "styles": {
-                    "code": true
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "로직 캡슐화"
+                      }
+                    ]
                   }
-                },
-                {
-                  "type": "text",
-                  "text": " (template ref)",
-                  "styles": {}
-                }
-              ],
-              "props": {
-                "colspan": 1,
-                "rowspan": 1,
-                "backgroundColor": "default",
-                "textColor": "default",
-                "textAlignment": "left"
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "Custom Hook"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "Composable"
+                      }
+                    ]
+                  }
+                ]
               }
-            }
-          ]
-        }
-      ]
-    },
-    "children": []
-  },
-  {
-    "id": "4708a507-d101-4d45-9f5f-dfc3756dba6d",
-    "type": "heading",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left",
-      "level": 2,
-      "isToggleable": false
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "추상화는 언제 해야 좋을까?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "1cbf3f37-565d-4562-9501-d6c08c4a2be2",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "추상화는 코드를 단순히 숨기는 플로우가 아니라 ",
-        "styles": {}
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "컴포넌트 간 공유"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "Context"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "provide",
+                        "code": true
+                      },
+                      {
+                        "text": " / "
+                      },
+                      {
+                        "text": "inject",
+                        "code": true
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "DOM 접근"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "useRef",
+                        "code": true
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "p",
+                    "children": [
+                      {
+                        "text": "ref",
+                        "code": true
+                      },
+                      {
+                        "text": " (template ref)"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "반복이 실제로 발생했을 때, 변경 가능성이 있는 경계가 생겼을 때",
-        "styles": {
-          "bold": true
-        }
+        "type": "h2",
+        "children": [
+          {
+            "text": "추상화는 언제 해야 좋을까?"
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": " 의미가 생긴다고 생각한다. 추상화 전에 확인해야할 부분들은 아래와 같다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "e9e9b568-0cdc-446c-9cba-2205e462fc49",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "이 로직이 두 곳 이상에서 실제로 사용되고 있는지?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "48e56af1-2c2a-4a93-b1ac-75ac9e415b3c",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "내부 구현이 바뀌어도 인터페이스는 유지될 수 있는지?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "79a5567c-d766-47a2-820e-39bc83cb8ca1",
-    "type": "bulletListItem",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "추상화 후에 코드가 이전보다 더 예측 가능해지는지?",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "a4b16c3d-aa7c-40fd-abc8-be3bac1117c1",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "세 질문 중 하나도 해당하지 않으면 추상화는 유지보수 비용만 늘어날 수 있다. React의 Custom Hook이나 Vue의 Composable을 너무 잘게 쪼개면 코드를 따라가기 위해 파일을 여러 개 열어야 하는 상황이 생긴다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "94d229e0-8590-4def-af99-22a97c4ad799",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
-      {
-        "type": "text",
-        "text": "응집도는 파일 수가 아니라 ",
-        "styles": {}
+        "type": "p",
+        "children": [
+          {
+            "text": "추상화는 코드를 단순히 숨기는 플로우가 아니라 "
+          },
+          {
+            "text": "반복이 실제로 발생했을 때, 변경 가능성이 있는 경계가 생겼을 때",
+            "bold": true
+          },
+          {
+            "text": " 의미가 생긴다고 생각한다. 추상화 전에 확인해야할 부분들은 아래와 같다."
+          }
+        ]
       },
       {
-        "type": "text",
-        "text": "관련 있는 코드가 얼마나 가까이 있는가",
-        "styles": {
-          "bold": true
-        }
+        "type": "p",
+        "children": [
+          {
+            "text": "이 로직이 두 곳 이상에서 실제로 사용되고 있는지?"
+          }
+        ],
+        "listStyleType": "ul"
       },
       {
-        "type": "text",
-        "text": "로 판단하는 것이 좋다. 항상 개발을 진행하면서 확장성을 생각하며 개발을 진행하지만 이 확장성이 오히려 현재 구현되지 않는 기능까지 고려하며 개발을 진행하다보니 나만 알 수 있는 코드가 되어버리는 경우가 정말 많다.",
-        "styles": {}
-      }
-    ],
-    "children": []
-  },
-  {
-    "id": "49b38eb3-dded-4aee-bc67-163d016d1b0e",
-    "type": "paragraph",
-    "props": {
-      "backgroundColor": "default",
-      "textColor": "default",
-      "textAlignment": "left"
-    },
-    "content": [
+        "type": "p",
+        "children": [
+          {
+            "text": "내부 구현이 바뀌어도 인터페이스는 유지될 수 있는지?"
+          }
+        ],
+        "listStyleType": "ul"
+      },
       {
-        "type": "text",
-        "text": "코드는 영구적인 것이 아니라, 항상 다듬고 다듬어주는 글과 같은 존재라고 생각이 든다. 현재에서 최선의 코드를 작성하고, 이 코드가 추후에는 어떤 기능이 추가되었을 때 또 어떻게 변화할지는 개발자가 계속해서 신경을 써줘야하는 몫이라고 생각이 든다.",
-        "styles": {}
+        "type": "p",
+        "children": [
+          {
+            "text": "추상화 후에 코드가 이전보다 더 예측 가능해지는지?"
+          }
+        ],
+        "listStyleType": "ul"
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "세 질문 중 하나도 해당하지 않으면 추상화는 유지보수 비용만 늘어날 수 있다. React의 Custom Hook이나 Vue의 Composable을 너무 잘게 쪼개면 코드를 따라가기 위해 파일을 여러 개 열어야 하는 상황이 생긴다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "응집도는 파일 수가 아니라 "
+          },
+          {
+            "text": "관련 있는 코드가 얼마나 가까이 있는가",
+            "bold": true
+          },
+          {
+            "text": "로 판단하는 것이 좋다. 항상 개발을 진행하면서 확장성을 생각하며 개발을 진행하지만 이 확장성이 오히려 현재 구현되지 않는 기능까지 고려하며 개발을 진행하다보니 나만 알 수 있는 코드가 되어버리는 경우가 정말 많다."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "children": [
+          {
+            "text": "코드는 영구적인 것이 아니라, 항상 다듬고 다듬어주는 글과 같은 존재라고 생각이 든다. 현재에서 최선의 코드를 작성하고, 이 코드가 추후에는 어떤 기능이 추가되었을 때 또 어떻게 변화할지는 개발자가 계속해서 신경을 써줘야하는 몫이라고 생각이 든다."
+          }
+        ]
       }
-    ],
-    "children": []
+    ]
   }
 ]

@@ -1,0 +1,241 @@
+[
+  {
+    "id": "423f2dcb-1ded-4361-9afe-e9ecc7cc24ce",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Axios를 사용하면서, 배열 파라미터로 서버에 데이터를 전송할 때 클라이언트 상태에서는 정상적으로 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "['A', 'C', 'D']",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 형태로 삽입되는 것을 확인했다. 그런데 Axios로 서버에 전송을 할 때마다 아래와 같이 전송이 되는 현상이 발생한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1ea3b075-2d73-4429-b81b-911885776310",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Axios에서 제공하는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "paramSerializer",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 를 사용하게 된다면 원하는 형태의 배열을 브라켓 없이 손쉽게 전송할 수 있다. axios@1.x 기준으로 아래 코드를 참고한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1bb617bc-40fc-4f96-8062-c10dae24fd46",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "organizationCode[]=A\norganizationCode[]=B",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6e220570-94b4-4cf1-bfda-80e8b39e767e",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "위의 전송 동작으로 네트워크 탭의 페이로드를 확인하게 되면 URL 인코딩이 되면서 아래와 같이 노출된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "fd587629-e212-41d0-ab3d-d9ccdc712505",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "organizationCode%5B%5D=A\norganizationCode%5B%5D=B",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "20f523bc-2b45-44e2-904f-729c75fd4a63",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "서버 측에서는 아래와 같이 배열을 브라켓 없이 반복 key로 보내는 방식으로 원하고 있는데,\n이 경우에는 클라이언트에서 어떻게 처리를 해줄 수 있을까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e97fd072-8a91-49c8-ae1c-3f88430e1e89",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// 서버에서는 이렇게 받고싶어한다.\norganizationCodes=A&organizationCodes=C",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e23cb1d4-9248-4908-bf12-c3a8507104d7",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Axios paramsSerializer 사용해보기",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c2410ac3-6658-4a17-a83b-7f9e50a35d6b",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "export const getOrganizationList = (requestParams: OrganizationSearchParams = {}) => axios.get<OrganizationListResponse>('industry/organizations', {\nparams: requestParams,\nparamsSerializer: {\nindexes: null\n}\n});",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4c1ad489-20a4-4033-8a01-06bbd695816a",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "indexs = null",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 을 주면 배열이 아래와 같이 서버로 전송된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "daafbcde-32f0-482e-91a2-9a7157b6ce1d",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "organizationCode=A&organizationCode=B",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b27c2e15-6203-469b-a8ff-a1f000863353",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "반대로 기본 값 또는 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "ìndexes: false",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 면 직렬화가 되지 않으니 주의해야한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  }
+]

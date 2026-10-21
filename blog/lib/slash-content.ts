@@ -45,6 +45,17 @@ export function convertBlocks(blocks?: unknown[]): JsonNode {
   const content = plate.flatMap((node): JsonNode[] => {
     const type = node.type ?? "paragraph"; const children = textNodes(node.children ?? node.content); const props = (node.props ?? {}) as Record<string, unknown>;
     if (["table", "tr", "td", "th"].includes(type)) {
+      const legacy = node.content as unknown as { type?: string; headerRows?: number; columnWidths?: (number | null)[]; rows?: { cells: unknown[] }[] } | undefined;
+      if (type === "table" && legacy?.type === "tableContent" && legacy.rows) {
+        return [{ type: "table", content: legacy.rows.map((row, rowIndex) => ({
+          type: "tableRow", content: row.cells.map((value, column) => {
+            const cell = value as { content?: unknown; props?: { colspan?: number; rowspan?: number } };
+            const colspan = cell.props?.colspan ?? 1;
+            const widths = legacy.columnWidths?.slice(column, column + colspan);
+            return { type: rowIndex < (legacy.headerRows ?? 0) ? "tableHeader" : "tableCell", attrs: { colspan, rowspan: cell.props?.rowspan ?? 1, colwidth: widths?.every(width => typeof width === "number" && width > 0) ? widths : null }, content: [paragraph(textNodes(Array.isArray(value) ? value : cell.content))] };
+          }),
+        })) }];
+      }
       const nested = Array.isArray(node.children) ? convertBlocks(node.children).content ?? [] : [paragraph(children)];
       return [{ type: ({ table: "table", tr: "tableRow", td: "tableCell", th: "tableHeader" } as Record<string, string>)[type], attrs: { colspan: node.colSpan ?? 1, rowspan: node.rowSpan ?? 1 }, content: nested }];
     }

@@ -1,0 +1,492 @@
+[
+  {
+    "id": "0e0974ab-621c-4d9d-b6ee-5191823841bf",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "웹에서 코드 편집기를 만들 때 가장 많이 사용하는 선택지 중 하나는 Monaco Editor 입니다. VSCode의 편집기 엔진을 기반으로 하여 자동 완성, 진단, 다중 커서 같은 편집 경험들을 쉽게 구현할 수 있습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "05474904-5637-4f04-9a1c-cdd9671fb00e",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "다만 기본 문법 강조의 경우, VSCode에서 보이는 결과와 완전히 같지 않을 수 있습니다. Monaco Editor의 기본 토크나이저가 모든 TextMate 문법을 그대로 처리하지 않기 때문입니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "8006cdd4-11b1-4cfe-8fa3-947757dc8d51",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이때 Shiki를 연결하면 VS Code 계열의 TextMate 문법과 테마를 사용하여 더 정확한 색상 표현을 할 수 있습니다. Shiki는 Monaco 용도의 공식 어댑터 @shikijs/monaco 를 제공합니다. 해당 어댑터를 통해 직접 토큰화 결과를 Monaco에 주입하는 방식보다 이 패키지를 사용하여 적용하는 편이 훨씬 더 간단합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "2216a4f7-0205-4bb1-ba12-a3b32d1d2a25",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "패키지 설치하기",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e39dd9db-ef06-465b-9746-8abf0ac2a899",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Monaco , shiki, @shikijs/monaco 패키지를 설치합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "72289c6d-b568-4c39-bfb2-34ea09215213",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "npm install monaco-editor shiki @shikijs/monaco",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "62a8aaad-ddf9-4eea-bac3-871538ce5a9a",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "적용해보기",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c4503002-c558-462d-bfc4-b3eb959d398b",
+    "type": "numberedListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "createHighlighter",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 로 필요한 언어와 테마를 로드합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "188c2823-9cfa-4901-a0a2-15bb5d2c9982",
+    "type": "numberedListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "사용할 언어의 ID를 monaco.languages.register() 을 통해 등록합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "12ef4002-2089-45e0-aaf5-03375dda7c08",
+    "type": "numberedListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "shikiToMonaco()",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 를 통해 Shiki 문법과 테마를 Monaco에 연결합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "0a485c61-08ba-4f2f-8b66-90acabab70dd",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이때 지원되는 themes (에디터 테마)와 langs (언어 설정) shiki 공식 홈페이지에서 확인이 가능합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "63e1244b-e6c2-40a2-8f21-2593f0cc0947",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "import * as monaco from 'monaco-editor'\nimport { createHighlighter } from 'shiki'\nimport { shikiToMonaco } from '@shikijs/monaco'\n\nasync function createEditor() {\n  const highlighter = await createHighlighter({\n    themes: ['github-dark', 'github-light'],\n    langs: ['typescript', 'javascript', 'json'],\n  })\n\n  // Shiki로 강조할 언어는 Monaco에도 등록해야 한다.\n  for (const id of ['typescript', 'javascript', 'json']) {\n    monaco.languages.register({ id })\n  }\n\n  // Shiki 테마와 문법 강조 규칙을 Monaco에 등록한다.\n  shikiToMonaco(highlighter, monaco)\n\n  monaco.editor.create(document.getElementById('editor')!, {\n    value: `const greeting: string = 'Hello, Shiki!'`,\n    language: 'typescript',\n    theme: 'github-dark',\n    automaticLayout: true,\n  })\n}\n\nvoid createEditor()",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "52bab11c-8898-4e16-8698-1e5d759c39c3",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "다크모드와 같이 테마를 동적으로 변경하고 싶다면",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "18dbb8a7-3368-4cb1-8271-fd203b8ed873",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Shiki에 여러 테마를 미리 등록했다면 Monaco 테마로 바로 전환이 가능합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "bee57bc9-4e47-44d4-9e13-6fd931cadca6",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "function applyTheme(isDark: boolean) {\nmonaco.editor.setTheme(isDark ? 'github-dark' : 'github-light');\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4bbb89da-f6be-403d-b2e1-fdfbc0675fd6",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "중요한 점은 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "monaco.editor.defineTheme()",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 를 별도로 호출할 필요가 없으며, ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "shikiToMonaco()",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 가 Shiki에서 로드한 테마를 Moaco 테마로 자동 등록해줍니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "8592adaf-db2a-498a-90ba-e228c2c57173",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "커스텀 언어셋을 나만의 언어로 하이라이팅 하고싶다면",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f0501e1b-c93a-4d7e-800e-8aa890c1b1aa",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "만약 사내에서 커스텀 언어 (ex. 보안 위협 탐지룰 등) 으로 기본 언어 목록에 없는 문법으로 강조를 해야한다면, TextMate Grammer 파일, 즉 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": ".tmLanguage.json",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 을 추가하여 로드해야합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "36cd0555-1fb7-45d0-be89-7046f4e5e44c",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "import myDslGrammar from './my-dsl.tmLanguage.json'\nimport * as monaco from 'monaco-editor'\nimport { createHighlighter } from 'shiki'\nimport { shikiToMonaco } from '@shikijs/monaco'\n\nconst highlighter = await createHighlighter({\n  themes: ['github-dark'],\n  langs: [myDslGrammar],\n})\n\nmonaco.languages.register({ id: 'my-dsl' })\nshikiToMonaco(highlighter, monaco)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5ab3b8cf-d226-4a1c-9a7b-aba3d658a1e6",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "그리고 이후 모델 또는 에디터의 언어를 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "my-dsl",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 로 지정해주면 설정이 완료됩니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "38480085-b7f6-4bac-83e7-054dba57dd1d",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "editor.setModelLanguage(editor.getModel()!, 'my-dsl')",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ee34a128-8c41-4781-a83c-0c74be7761ad",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "tmLanguage.json",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 은 색상 값을 담는 파일이 아니라, 어떤 문자열을 키워드, 문자열, 주석, 함수 명으로 볼지 정의하는 정규식 기반의 문법 파일입니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "fbc9c6e0-c241-48ba-80e4-7a16ffb5735f",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "반면 실제 색상은 Shiki 하이라이팅의 테마가 결정합니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e34b6cda-5947-4d1e-9403-4b4e4a735f7e",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"name\": 'my-dsl',\n  \"scopeName\": \"source.my-dsl\",\n  \"patterns\": [\n    {\n      \"name\": \"keyword.control.my-dsl\",\n      \"match\": \"\\\\b(task|when|end)\\\\b\"\n    },\n    {\n      \"name\": \"string.quoted.double.my-dsl\",\n      \"begin\": \"\\\"\",\n      \"end\": \"\\\"\"\n    }\n  ]\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "eb35588a-3dab-4256-b480-696afeeef47f",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "문법을 처음부터 만드는 일은 생각보다 유지보수 비용이 많이 듭니다. 기존 VSCode 확장에 같은 언어의 TextMate Grammer가 있다면 그것을 재사용하는 것이 기회 비용을 줄일 수 있는 방법 중 하나이니 참고하면 좋을 것 같습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  }
+]

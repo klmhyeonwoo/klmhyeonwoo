@@ -1,0 +1,155 @@
+---
+title: "사내 NPM 저장소에 공통 모듈 배포하기"
+date: 2026-10-19
+publishedAt: "2026-10-19T14:33:40.934Z"
+updatedAt: "2026-10-19T14:33:40.935Z"
+description: ""
+category: "category-9606d629"
+series: "-"
+private: false
+---
+
+공통적으로 사용되는 위협 탐지룰의 텍스트 메이트 문법을 공통적으로 관리하기 위해 공통 모듈을 만들고자 했습니다. NPM 라이브러리의 경우 NPM 저장소에 올라가며 비즈니스 플랜이 아니고서야 오픈되는 경향이 있습니다. 그래서 외부로 노출되지 않고 내부에서만 사용하기 위해 사내 NPM 저장소를 찾아 배포를 진행하며 로컬 저장소에 어떤 방식으로 배포할 수 있는지 포스팅을 하고자 합니다. 아래 예제에서는 사내 NPM 저장소에 배포되는 모나코 에디터에 자체 텍스트 메이트 문법을 적용하기 위해 패키지를 배포하는 과정을 담은 내용입니다.
+
+## 프로젝트 구성하기
+
+각각으로 공통적으로 모듈을 레포지토리로 구성하여 만드려고했으나, 앞으로 많아질 공통 모듈들을 각 레포지토리 별로 관리하기가 어렵다는 생각이 들었습니다. 그래서 공통 모듈을 한 곳에 모아두는 레포지토리를 각각 레포로 구성하기 보다는 한 레포지토리에서 관리할 수 있도록 모노레포 방식으로 구성하기로 했습니다. 모노레포로 구성을 하게 되면 한 레포지토리에서 여러 프로젝트 관리가 용이하기 때문입니다.
+
+```javascript
+company-libs/
+├─ packages/
+│  ├─ utils/          # 날짜, 문자열, 배열, 객체 등 범용 유틸
+│  ├─ api-types/      # 공통 TypeScript 타입
+│  ├─ eslint-config/  # 팀 린트 규칙
+│  └─ tsconfig/       # 공통 TS 설정
+├─ package.json
+└─ pnpm-workspace.yaml
+```
+
+모노레포로 관리하기 위한 패키지들에는 서비스가 들어가지는 않고, 유틸 성격의 코드들이 패키지 형태로 제공이 될 예정입니다.
+
+```javascript
+{
+  "name": "common_npm_module",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "pnpm -r run build",
+    "publish:beta": "pnpm run build && pnpm -r publish --tag beta --no-git-checks",
+    "publish:release": "pnpm run build && pnpm -r publish --no-git-checks"
+  },
+  "packageManager": "pnpm@12.4.2",
+  "publishConfig": {
+    "registry": "https://abis.ahnlab.com/artifactory/api/npm/npm-local-repos/"
+  } 
+}
+```
+
+루트의 `package.json` 에서는 아래와 같이 `pnpm` 을 통해 모든 패키지들을 순회하며 배포를 진행하게 됩니다. 배포를 진행하며, 버전이 바뀌지 않은 패키지의 경우에는 넘어가고 버전이 바뀐 패키지에 한해서 배포를 진행합니다. 여기서 중요한 점은 `package.json` 에 `registry` 를 명시해줘야 NPM 공개 저장소에 배포되는 것이 아닌 사설 레포지토리 주소로 배포됩니다.
+
+```javascript
+packages/detection-signature/
+  index.js
+  language/yara.tmLanguage.json
+  language/snort.tmLanguage.json
+  language/sigma.tmLanguage.json
+  package.json
+  vite.config.js
+```
+
+이제 배포할 패키지를 하나 만들어놓을 차례입니다. 위와 같이 위협 탐지 시그니쳐 룰을 임포트할 수 있는 패키지들을 만들었습니다.
+
+```javascript
+export { default as yara } from "./language/yara.tmLanguage.json";
+export { default as snort } from "./language/snort.tmLanguage.json";
+export { default as sigma } from "./language/sigma.tmLanguage.json";
+```
+
+메인 엔트리 파일 (index) 에서는 배럴 패턴으로 정의해놓은 텍스트 메이트 언어 파일들을 내보냅니다.
+
+```javascript
+{
+    "name": "detection-signature",
+    "version": "0.1.0-beta.0",
+    "type": "module",
+    "files": [
+        "dist"
+    ],
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.js",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "require": "./dist/index.cjs"
+        }
+    },
+    "scripts": {
+        "build": "vite build"
+    },
+    "devDependencies": {
+        "vite": "^7.0.0"
+    }
+}
+```
+
+`package.json` 에서는 위와 같이 구성을 해주며, `.cjs` 와 `.mjs` 에 대한 호환을 진행합니다. 관련하여 아래 이어지는 `vite.config.js` 도 같이 참고해주면 좋습니다.
+
+> 패키지 구성을 위한 각각의 속성 이야기
+
+name : npm에 배포될 패키지 이름입니다.
+
+version : 배포 배전을 의미합니다.
+
+type : 해당 프로젝트를 어떻게 해석할지 결정합니다, 현재는 ESM으로 해석합니다.
+
+files : 배포 파일에 포함시킬 폴더를 선택합니다. NPM 배포본에는 현재 dist 폴더만을 포함합니다.
+
+main : commonJS 환경의 진입점이며, require() 사용자를 위한 파일입니다.
+
+module : ESM 번들러가 참고하는 진입점입니다.
+
+types : TypeScript 타입 선언의 파일 위치입니다.
+
+exports : 패키지 공개 API를 명시합니다. import에는 ESM, require에는 commonJS를 연결하고, 타입 파일도 지정합니다. 외부에서 허용하지 않은 내부 경로를 import 하는 것도 막습니다.
+
+```javascript
+import { defineConfig } from "vite";
+
+export default defineConfig({
+    build: {
+        lib: {
+            entry: './index.js',
+            formats: ["es", "cjs"],
+            fileName: (format) => `index.${format === "es" ? "js" : "cjs"}`
+        }
+    }
+})
+```
+
+Vite 번들러 설정 파일 (vite.config.js) 에서 빌드 시점에 `dist` 파일에 라이브러리 진입점 파일들을 만들어주고, `fileName` 은 선택사항이지만, dist 파일 안에 생성되는 파일들이 패키지 네임 이름을 따라가기 때문에 복잡스러울 수 있어 index 로 파일명을 통일해주는 것이 편합니다.
+
+## 배포하고 사용해보기
+
+```javascript
+npm login --registry=사내 레포지토리 주소
+```
+
+배포 전 사내 NPM 라이브러리에 접속하여 로그인을 진행합니다. 로그인을 통해 인증정보가 갱신됩니다.
+
+```javascript
+npm publish
+```
+
+위에서 프로젝트를 구성하여 스크립트를 구성해놓았지만, 기본 명령어를 한번 실행해보겠습니다. 위 명령어를 실행하게 되면 자동으로 지정한 사내 레포지토리 주소로 배포를 진행하게 됩니다. `—registry` 플래그를 매번 작성을 해주지 않으면 공개 레포지토리 주소를 바라보게 되어 오류가 발생할 수 있는데 매번 이러한 작업들이 번거로우면 패키지의 설정 파일 (`package.json`)에 명시를 해주면 됩니다.
+
+![Image](https://upload.cafenono.com/image/slashpagePost/20260919/134309_o8Wl1BT5nEQu0SO5fN?q=80&s=1280x180&t=outside&f=webp)
+
+성공적으로 라이브러리가 배포되었고, 설정해놓았던 패키지 이름으로 설치가 가능합니다.
+
+```javascript
+npm install detection-signature // 또는 pnpm add detection-signature
+```
+
+## 추가 과제
+
+프론트엔드에서 공통적인 모듈들을 어떻개 빼서 사용할 수 있을까 계속 고민을 하다가 깃 서브 모듈등의 내용들을 생각했었습니다. 현재는 CLI를 통해 이렇게 배포하는 과정을 진행해보았다면 다음 챕터로는 풀리퀘스트와 동시에 빌드를 진행하며 베타 버전으로 자동으로 배포가 되는 것입니다. 이때는 빌드 환경이 사내 NPM 저장소에 원활하게 접근하고 바라 볼 수 있도록 인증 정보를 위해 `.npmrc` 와 `package.json` 에 관련 정보를 남겨놓는 것이 좋습니다.
+

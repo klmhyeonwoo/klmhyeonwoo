@@ -1,0 +1,233 @@
+[
+  {
+    "id": "7274f2bb-a5bc-4baa-912a-57068c146f54",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "AhnLab ISF란 자사에서 매년 개최하는 공공기간, 금융권, 일반 기업의 보안 담당자와 IT 전문가들을 대상으로 하는 고객 최대 규모의 보안 전략 컨퍼런스입니다. 최신 사이버 보안 트렌드를 공유하고, 이에 대응하기 위한 안랩의 차세대 보안 솔루션 및 비즈니스 전략을 공유하는 자리입니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5d23cc6a-6ae4-404e-a51b-fc5b1c595c75",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "전사에 AX 도입이 진행되면서, 이번에 ATIP 서비스에도 Agentic UI가 주요 기능으로 들어가게 되었습니다. 평소 B2B 서비스를 다루다보니, 고객사의 보안담당자들이 우리 서비스를 어떻게 사용할까에 대한 의문점이 가득했습니다. 그래서 입사 이후로 사내에서 개최하는 외부 컨퍼런스에 참여해보고 싶기도 했고, AhnLab ISF에서 우리 서비스가 어떻게 홍보되고 있는지 알아보고자 참여했습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6efaa934-c9db-47d4-9ca4-c303f119a893",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "무엇보다 제품들이 고객들에게 어떤 방식으로 다가가며, 어떤 방식으로 피드백을 받을 수 있는지 너무나도 궁금했습니다. B2C와 다르게 B2B의 경우, 유저에게 직접적으로 피드백을 받을 수 있는 순간이 많이 존재하지 않기 때문에 고객들이 어떻게 서비스를 바라보고 있는지, 사용하고 있는지 알아보고자 했습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "37c9d42e-ba67-4e9b-9c2f-1a1a4d60f440",
+    "type": "image",
+    "props": {
+      "textAlignment": "left",
+      "backgroundColor": "default",
+      "name": "Image",
+      "url": "https://upload.cafenono.com/image/slashpagePost/20260929/001931_JEfEkhGtnWr9Xzn9og?q=80&s=1280x180&t=outside&f=webp",
+      "caption": "",
+      "showPreview": true
+    },
+    "children": []
+  },
+  {
+    "id": "706e57e1-0d32-4230-a604-8142c768608b",
+    "type": "image",
+    "props": {
+      "textAlignment": "left",
+      "backgroundColor": "default",
+      "name": "Image",
+      "url": "https://upload.cafenono.com/image/slashpagePost/20260929/001941_uirY9SUoeQ6gFb6udF?q=80&s=1280x180&t=outside&f=webp",
+      "caption": "",
+      "showPreview": true
+    },
+    "children": []
+  },
+  {
+    "id": "c33f381e-85a4-479e-abae-95df59db204e",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "AhnLab ISF는 고객사를 위한 프라이빗 행사이기 때문에 먼저 입장 부스에서 고객사인지, 아니면 자사 직원인지에 대한 인증 여부를 진행합니다. 저는 자사 직원이기에 직원 인증을 하고 행사에 참여했습니다. 호텔에서 하는 컨퍼런스인 만큼 생각했던 것보다 규모가 엄청나게 커서 놀랐습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "75b222af-f1bc-48b8-a1e2-6e11fc510f5d",
+    "type": "image",
+    "props": {
+      "textAlignment": "left",
+      "backgroundColor": "default",
+      "name": "Image",
+      "url": "https://upload.cafenono.com/image/slashpagePost/20260929/002109_Sqdqm7Dlrjm654F8Cf?q=80&s=1280x180&t=outside&f=webp",
+      "caption": "",
+      "showPreview": true
+    },
+    "children": []
+  },
+  {
+    "id": "b9dba55a-8f14-4c90-8140-e1763eb442c7",
+    "type": "image",
+    "props": {
+      "textAlignment": "left",
+      "backgroundColor": "default",
+      "name": "Image",
+      "url": "https://upload.cafenono.com/image/slashpagePost/20260929/002114_r1klxWO6iZVRkGNuE2?q=80&s=1280x180&t=outside&f=webp",
+      "caption": "",
+      "showPreview": true
+    },
+    "children": []
+  },
+  {
+    "id": "034ed073-6b7e-42cc-a1f9-c7ead0aa7bd6",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "입사했을 때부터 안랩 자사의 여러 제품들이 많다는 것은 알고있었지만, 사실 팀들도 모듈화되어있는 것처럼 정말 세분화되어있기 때문에 내가 만드는 제품 말고는 제대로 알지 못한다는 것이 조금 아쉬웠던 점이었는데 행사에서 각 제품 별로 어떤 일들을 하고 있는지 알 수 있어 정말 좋았습니다. 특히 제가 기여하고 있는 제품이 사람들에게 설명되는 자리와 더불어 현재 각 국의 컨퍼런스에서 홍보가 되며 \"아, 해외 고객사들이 이런 식으로 유입이 되는거구나\" 라는 생각을 했습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "3252c85b-8fb2-482d-94ee-a9e9ac213c97",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "각 보안 담당자들이 제품에 대한 흥미를 보이고, 제품 담당자들이 보안 담당자들에게 보안 제품에 대한 이점과 기대효과, 여러 보안 사례들을 설명하면서 기업에 신규로 도입을 하는 플로우 이 자체가 고객사 유입의 시작점이라는 것을 알게되었습니다. 그리고 무엇보다 매일 앉아서 코드로 개발하던 화면들이 눈 앞에서 시연되고 있는 자체가 정말 흥미로웠습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "5607db3d-776c-4eeb-9d9e-8c0f2cfbaade",
+    "type": "image",
+    "props": {
+      "textAlignment": "left",
+      "backgroundColor": "default",
+      "name": "Image",
+      "url": "https://upload.cafenono.com/image/slashpagePost/20260929/002615_2Y3hDQ59FNV6IVCB4R?q=80&s=1280x180&t=outside&f=webp",
+      "caption": "",
+      "showPreview": true
+    },
+    "children": []
+  },
+  {
+    "id": "11c17631-6de3-4db5-b621-e4566de53d74",
+    "type": "image",
+    "props": {
+      "textAlignment": "left",
+      "backgroundColor": "default",
+      "name": "Image",
+      "url": "https://upload.cafenono.com/image/slashpagePost/20260929/002619_vVeuKXnggrgcn0ouj8?q=80&s=1280x180&t=outside&f=webp",
+      "caption": "",
+      "showPreview": true
+    },
+    "children": []
+  },
+  {
+    "id": "f6d52cdc-0fbb-4f76-8ba0-de7055c0ef3a",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "사내에서 대두가 되고있는 주제는 AX(AI Transformation) 입니다. 이에 맞춰 AhnLab ISF 에서 시연되는 모든 제품에는 자사에서 개발한 보안 AI 모델이 모두 탑재되어있습니다. 초기에는 사실 입력한 정보에 따른 결과 값만 응답해주는 챗봇 느낌이었다면, 현재는 사람과 인공지능 사이에 대화가 원활할 정도로 많이 발전한 상태입니다. (그렇게 발전을 빠르게 했으니까, 컨퍼런스도 원활하게 진행이 되었을 것 같기도) 제가 개발하고 있는 AhnLab TIP에서도 Agentic UI를 새로운 기능으로 맞이함으로서, 사람이 많은 메뉴에서 찾던 정보들을 \"~ 찾아줘\" 라는 메세지 하나로 편리하게 찾고, 상호작용 할 수 있는 시대가 왔습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "cfaf2612-7205-4050-82a0-9abd1463179b",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "컨퍼런스에서는 AI가 공격했다면, AI가 방어하는 시대가 온다는 것이 정말 인상적인 메세지였는데, 작년까지만해도 아직 그럴 세상이 멀리있다는 생각을 했다면 이번년도에는 당장 그 세상이 도래했다는 생각이 들기도 합니다. 그만큼 인공지능의 발전 속도는 빠르고, 내년의 우리 일상이 어떻게 변화될지 정말 궁금한 매일매일인 것 같습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4763d8a1-2b5b-4417-908b-881f7ab4538a",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "처음에는 회사에 다니면서 큰 행사를 한번도 가보지 못하면 후회할 것 같다는 생각과, \"우리 제품이 대체 어떻게 사용되고 홍보되고 있을까?\" 라는 생각에 팀장님께 말씀드려 참여했던 행사였습니다. B2B 서비스를 만들면 벽을 보고 서비스를 만든다는 느낌을 많이 받았는데, 이 벽 너머에는 여러 담당자들이 서비스를 통해 다양한 활동들을 하고 있다는 것을 새롭게 알게 되었습니다. B2B 서비스 개발자로서 많은 경험을 할 수 있던 소중한 순간이었습니다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  }
+]

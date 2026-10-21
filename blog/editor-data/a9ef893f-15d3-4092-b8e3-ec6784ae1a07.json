@@ -1,0 +1,1160 @@
+[
+  {
+    "id": "13d806cb-a9fb-450d-aed9-88367b0f4331",
+    "type": "quote",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "한 눈에 확인해보자면 ..",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "017d3e8a-7086-430d-b494-93b60ca15e25",
+    "type": "callout",
+    "props": {
+      "emoji": "😆",
+      "fluent": "",
+      "fluentUrl": ""
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "한 눈에 확인해보자면..\nstaleTime : 이 데이터가 신선하다고 보는 시간\ngcTime : 아무 컴포",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "39fb3da2-c14e-4c66-b3bc-e89c268afc75",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "gcTime : 아무 컴포넌트가도 안쓰는 캐시를 메모리에 남겨놓는 시간",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4e0e8df4-0c64-4424-8ac5-7b92aa95e944",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [],
+    "children": []
+  },
+  {
+    "id": "16a9c6cd-174e-45d5-a429-d3c6950fa64b",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "staleTime은 refetch를 할지 말지 영향을 주는 요소이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "9115e1b8-bb1b-45b7-b35e-93c861fc9059",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Q. 5분이라고 가정했을 때, 흐름은 아래와 같다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "24b81cc5-2177-41e2-b8d2-19317762c147",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "0분 : 데이터 fetch",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c46a1fba-42ec-4e1e-a1e5-48c94897e883",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "0 ~ 5분 : 데이터가 fresh한 상태",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "04e8fe69-12da-4113-8392-a78d87c1f357",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "5분 이후 : stale 상태",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "a5f2ae74-bb44-46cd-9559-64dd8a79568b",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "fresh 상태에서는 같은 querykey로 다시 useQuery가 실행되어도 보통 네트워크 요청을 다시하지 않고, 캐시 데이터를 사용한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "860c70d6-a6db-463d-a3d2-d5eff91a5ea7",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Q. 만약 5분이 지난 경우라면?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6ae4e0ae-82ef-4b24-923d-1280300de2a3",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "0분 : \"/organizations\" 진입 → API 요청",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "be4c1d59-ce8b-4fca-9a96-c1f34b782640",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "7분 : 다른 페이지 갔다가 다시 \"/organizations\" 진입",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f62dc0da-1a63-41b7-a243-b23a86f3781e",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "→ stale 상태",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "67cc7671-bcf9-49d9-ba93-3b485fbd6922",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "→ 기존 캐시 데이터 먼저 보여줄 수 있음",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "1fed0d2f-0e6e-4888-8eb7-dae46b1f6644",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "→ 백그라운드 refetch 가능",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "883ea42b-6d89-4135-b273-de79b091bc09",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "2. gcTime은 캐시를 언제 알게할지에 대한 영향을 주는 요소이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "64d3d545-984d-407e-8726-2e9475f8b319",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "여기서 중요한 점은 gcTime은 쿼리가 inactive 된 순간부터 돌아간다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f05a0215-84bc-4b74-a4d9-2c68ef05f20c",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "active와 inactive의 차이점",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6a978bba-d560-4d01-bf61-73e0dc9fecfd",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "active : 어떤 컴포넌트가 useQuery로 이 데이터를 사용 중",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "9076b2e8-5cf9-4604-a20f-54caab2f59bf",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "inactive : 아무 컴포넌트도 이 queryKey를 사용하지 않음",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6fc6f92a-4b07-4842-9bfb-91e040afc455",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "0분 : \"/organization\" 페이지 진입 → useQuery 사용 중 → active 상태",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ab08c5d5-8b99-4966-bddc-b0240265e2a4",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "2분 : 다른 페이지로 이동 → useQuery 사라짐 → inactive 상태",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "42802960-8bdc-4289-86b8-27e98fd2d67c",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "12분 : inactive 된 지 10분이 지났고, 캐시 삭제",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "70ffb49d-be2f-435f-93ac-3e0a4b0a334c",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "컴포넌트가 계속 마운트되어있으면 gcTime이 지나도 삭제되지 않으며, gcTime은 사용중인 데이터가 아니라 사용하지 않는 캐시에 대한 삭제 타이머이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "2c155ef2-52ab-44e1-a948-20e97be64cf9",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "3. staleTime과 gcTime을 같이 비교해보면 이렇게 정의할 수 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "9ed21292-8612-431b-b39a-29c4ba1dd41e",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "먼저 useQuery에 아래와 같이 설정을 했다고 가정을 해보자.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "efe57475-ef78-410c-b3d6-cdb0b34b1134",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "staleTime: 5 * 60 * 1000 // 5분\ngcTime: 10 * 60 * 1000 // 10분",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "85b48868-15f8-4bdf-9524-6fa0d6e39f23",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "다양한 예제로 확인을 해보면 쉽게 이해할 수 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ea163b08-2253-442b-99d7-52237ac9299b",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "<예제 A> 3분 뒤에 들어옴",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "fea42c46-fdc9-4eb8-bf9c-fb2e18448a99",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "0분 : 목록 조회",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7c35aba2-aecc-4b6f-adbe-4d4dff7dc469",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "1분 : 페이지 이탈 → inactive",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "37c5ce99-4e2c-4926-b994-c709fd509eae",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "3분 : 다시 진입",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "66137662-7f3a-43d8-af81-1c44d77d20d4",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "캐시 있음 → 바로 보여줌",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "245f9f91-f092-4fe3-9dfe-408aa15ac3ff",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "staleTime 5분 안지남 → fresh 상태 → refetch 거의 안함",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f278a6d7-5af7-425e-ad84-25586d7d683c",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "<예제 B> 7분 뒤 다시 들어옴",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "30c032fb-b6e9-44f2-917a-cb2d64b49907",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "0분 : 목록 조회",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "417e9ed0-5489-4df5-a8b3-7f24cd4b52d9",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "1분 : 페이지 이탈 → inactive",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "9ddac730-5089-42c4-920d-c7278aa7e81f",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "7분 : 다시 진입",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "8efe958d-5137-4fbc-b3b9-804cc92ee1d5",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "캐시 있음 → 바로 이전 데이터 보여줌",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d2fb57c6-4210-4458-b81e-66d949d5e667",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "staleTime 지남 → stale 상태 → 백그라운드 refetch 가능",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "24e1fc30-8347-4a09-9536-3a807d4a208d",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "<예제 C> 12분 뒤 들어옴",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d28817d7-dfd4-4ac2-a261-065c4a65751b",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "0분 : 목록 조회",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "6bad47b6-ada4-4a9e-9672-e5965cd35416",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "1분 : 페이지 이탈 → inactive",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e8a770ae-8edb-40ca-a399-d85a448fbcc0",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "12분 : 다시 진입",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "70a35f3d-e0aa-4bd7-a2ea-61f6a7f28d98",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "inactive 된지 10분 넘음 → gcTime 지남 → 캐시 삭제됨 → 이전 데이터 없음 → 처음 로딩처럼 API 요청",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "0e088d07-91e6-41b3-86f2-7955d8500b64",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "4. staleTime만 길고, gcTime이 짧은 경우는 어떻게 될까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "8dd3fd58-3215-49b8-931c-9bb0656f48a7",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "useQuery에 아래와 같이 gcTime을 더 짧게 설정한 경우가 있다고 가정해보자.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4caa324e-2ea8-4aa8-819a-6c170a5978ed",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "staleTime: 30 * 60 * 1000 // 30분\ngcTime: 5 * 60 * 1000 // 5분",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "05c01bc8-27c9-4edf-9c40-fbb6464858c5",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "6분 뒤 처음 조회했던 페이지에 다시 접근을 하는 상황을 상상해보았을 때 아래와 같다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "82a7535c-b146-4da8-9f45-f79415c5a853",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "0분 : 데이터 목록 조회",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "08cb18a9-c043-48c8-9c4d-63ef45bfe769",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "1분 : 페이지 이탈 → inactive 상태",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "722d7b21-24fc-4c53-bc69-ab145dc9004f",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "6분 : 다시 페이지 재진입",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "a930b46e-0e8c-4fca-be13-8e0059a43824",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "staleTime은 30분이라 아직 fresh였을 데이터지만, inactive 상태로 gcTime은 5분을 넘은 6분이 지났다. 그러면 메모리 상의 캐시는 삭제되고 다시 API를 요청하는 꼴이 된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "89d8f878-3387-47c2-a5f2-fe570fdfa6f6",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "그래서, 보통은 gcTime >= staleTime으로 권장되며 보통 이렇게 사용한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "65da2632-3142-43f9-8105-ce7e2a274059",
+    "type": "bulletListItem",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "staleTime은 컴포넌트 활성/비활성화와 상관없이 데이터가 fetch된 시점부터 계속 흘러간다. (페이지를 머무르고 있든, 페이지를 벗어났든, 컴포넌트가 언마운트 되었든 상관없이 마지막으로 데이터를 가져온 시간으로 계산이 된다)",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "a5540445-dd89-4c21-8bca-2b059a196733",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "정리해보기",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "75fe2601-06d6-479e-933c-21909b44cb71",
+    "type": "table",
+    "props": {
+      "textColor": "default"
+    },
+    "content": {
+      "type": "tableContent",
+      "columnWidths": [
+        null,
+        null
+      ],
+      "headerRows": 1,
+      "rows": [
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "staleTime",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "gcTime",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "언제까지 fresh로 볼 것인가?",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "inactive 캐시를 언제 삭제할 것인가?",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "refetch 빈도에 영향을 준다.",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "이전 데이터를 다시 보여줄 수 있는 기간에 영향을 준다.",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "길수록 API 요청이 줄어든다.",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "길수록 메모리에 남는다.",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "children": []
+  }
+]

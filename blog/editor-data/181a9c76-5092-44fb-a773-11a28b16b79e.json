@@ -1,0 +1,219 @@
+[
+  {
+    "id": "5fd60680-2b66-439b-874d-ce91a6824c09",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "SCSS를 사용하는 환경에서 Flex 박스로 레이아웃을 정의하며 계속 하위 트리로 내려간다고 가정을 할 때, 아래와 같은 구조가 발생하게 된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b5b4130f-57aa-490c-802e-e3cf4ca7feca",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// element.html\n<div class=\"parent-container\">\n<div class=\"sub-parent-container>\n...\n</div>\n</div>\n\n// element.scss\n.parent-container {\ndisplay: flex;\nflex-direction: column;\nrow-gap: 5px;\n\n.sub-parent-container {\ndisplay: flex;\nflex-direction: column;\nrow-gap: 10px;\n}\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f8c986b5-623a-439c-947d-cbc578e35500",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "부모에서 Flex 스타일 속성을 정의하고, 또 자식 요소에서 레이아웃 구조 구성을 위해 Flex 스타일을 정의하게 되면 무한으로 Flex 스타일 속성을 매번 정의를 해줘야하는 상황이 발생한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "04ca66e1-8b00-42cd-8940-777673ac4684",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이러한 반복 구조를 매번 직접 작성을 해주면 개발 피로도가 생각보다 엄청나다, 그래서 SCSS에서는 @mixin 키워드를 사용하여 이러한 문제들을 해결할 수 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "43d30566-2809-4769-a2c5-fb9de1e51aa1",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "1. @mixin으로 스타일 반복 구조 줄여보기",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d4bcf830-daea-4d82-869a-343bec444ee2",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "flex 라는 mixin을 정의하고, 이 구조를 프로그래밍 언어의 함수처럼 사용을 할 수 있다. 먼저 .scss 파일에 아래와 같이 정의를 하면 된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "fff9b9c2-13ad-411d-9625-0de6ace62298",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// scss define\n@mixin flex($align: null, $justify: null, $direction: row, $gap: null, $wrap: null) {\ndisplay: flex;\nflex-direction: $direction;\n@if $align != null { align-items: $align; }\n@if $justify != null { justify-content: $justify; }\n@if $gap != null { gap: $gap; }\n@if $wrap != null { flex-wrap: $wrap; }\n}\n\n// scss mxin usage\n.parent-container {\n@include flex(null, null, column, 5px, null);\n\n.sub-parent-container {\n@include flex(null, null, column, 10px, null);\n}\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "0eaf24c1-3855-4e51-93e7-7c1dbeaced4a",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "그런데 여기서, Vue의 SFC scope SCSS를 사용하는 사람이라면, 해당 블록은 독립적으로 컴파일 되기 때문에 아무리 @mixin을 글로벌로 선언하더라도 모듈을 불러오지 못하기 때문에 사용을 하지 못한다. 그럴 경우에는 파일에서 @use 키워드를 통해 직접 임포트를 하거나, 아래와 같이 vite.config.js에 모든 SCSS에 자동 주입을 하는 방법이 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "afd0a33c-4ff5-49ef-beec-00e52d5143d0",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// plz add vite.config.js\ncss: {\n  preprocessorOptions: {\n    scss: {\n      additionalData: `@use \"@/assets/style/mixin\" as *;`\n    }\n  }\n}",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ab0407d0-8192-4910-91ac-80e0ef4fbbbe",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "2. 컴포넌트로 추상화해보기",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f23950d2-d998-442f-8876-7424feadbccf",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "위의 @mixin 스타일을 그대로 사용해 컴포넌트로 만들기는 했지만, 위의 @mixin 스타일 적용을 해보았다면 아래 컴포넌트 구조화는 쉽게 이해가 될 수 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "bc87649b-4dfd-4f5b-afaf-68353326b658",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "컴포넌트를 래핑하여 하위 컴포넌트들의 엘리먼트 배치를 컴포넌트 선언단에서 제어하는 방식이다. 래핑된 컴포넌트들은 에 렌더링되면서 사전에 정의한 배치 구조로 나오게 된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7b35a5b2-d7dd-425b-8a46-ba14f2365430",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "// Stack.vue\n<template>\n  <component\n    :is=\"tag\"\n    class=\"stack\"\n    :style=\"stackStyle\"\n    v-bind=\"attrs\"\n  >\n    <slot />\n  </component>\n</template>\n\n<script setup lang=\"ts\">\nimport { computed, useAttrs } from 'vue';\n\nimport type { CSSProperties } from 'vue';\n\ntype AlignItems = NonNullable<CSSProperties['alignItems']>;\ntype JustifyContent = NonNullable<CSSProperties['justifyContent']>;\ntype FlexWrap = NonNullable<CSSProperties['flexWrap']>;\ntype FlexDirection = NonNullable<CSSProperties['flexDirection']>;\ntype Gap = NonNullable<CSSProperties['gap']>;\n\ninterface Props {\n    tag?: string;\n    align?: AlignItems;\n    justify?: JustifyContent;\n    direction?: FlexDirection;\n    gap?: Gap;\n    wrap?: FlexWrap;\n}\n\nconst props = withDefaults(defineProps<Props>(), {\n  tag: 'div',\n  align: 'stretch',\n  justify: 'flex-start',\n  direction: 'row',\n  gap: '0',\n  wrap: 'nowrap',\n});\n\nconst attrs = useAttrs();\n\nconst stackStyle = computed(() => ({\n  '--stack-align': props.align,\n  '--stack-justify': props.justify,\n  '--stack-direction': props.direction,\n  '--stack-gap': `${props.gap}px`,\n  '--stack-wrap': props.wrap,\n}));\n</script>\n\n<style lang=\"scss\" scoped>\n.stack {\n  @include flex(\n    var(--stack-align),\n    var(--stack-justify),\n    var(--stack-direction),\n    var(--stack-gap),\n    var(--stack-wrap)\n  );\n}\n</style>\n\n// Stack Component Usage\n<Stack :gap=\"2\" :direction=\"'column'\" class=\"parent-container\">\n<Stack :gap=\"3\" :direction=\"column\" class=\"parent-sub-container\"></Stack>\n</Stack>",
+        "styles": {}
+      }
+    ],
+    "children": []
+  }
+]

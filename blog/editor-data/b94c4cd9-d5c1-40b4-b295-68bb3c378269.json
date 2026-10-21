@@ -1,0 +1,1602 @@
+[
+  {
+    "id": "03db72f3-0947-4f4f-864f-2258e7439f8e",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "최근에 전직장 멘토님과 이야기를 하면서, 전 직장에 AI 플로우가 도입되고 있다는 것을 알게되었다. 이야기 중에 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "PRD(Product Requirements)",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "와 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "WRD(Work Requirement Document)",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 먼저 정의해놓고 개발을 진행하신다는 이야기를 듣게 되면서, PRD와 WRD가 대체 무엇인지 그리고 이 두가지 문서를 사용하게 되면 어떤 이점들이 있는지 알아보고자 한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "fb3f7084-ef55-40dc-83d9-40435e6ec3c1",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "처음엔 에이전트에게 \"기능 만들어줘\"라고 입력하는 것으로만 기능 구현을 할 수 있었지만, 프로젝트가 커질수록 담고있어야하는 컨텍스트 크기 뿐만 아니라 기능에 대한 정의가 이전 대화 기록으로 남아있어 사용자는 기억하기 쉽지 않았다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "fb733c49-7b63-46f9-9154-e686e4532cc7",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "만약 컨텍스트가 초기화되면 이전 요청한 기능들을 다시 기억하게 해줘야하는 순간들도 생각보다 많다 ^,^.. AI가 앞에서 했던 맥락을 잊어버리거나, 같은 기능을 요청했는데 매번 다른 구조로 짜주거나, 토큰이 터져서 대화 자체가 중단되는 순간들도 빈번하다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e123e2e6-672c-4c89-a76f-b70f18269755",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "AI 기반 개발 방식이 자리를 잡으면서, 프롬프트 한 줄로 코드를 생성하는 것 이상의 체계가 필요해졌다. 그 중심에 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "PRD(Product Requirements Document)",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "와 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "WRD(Work Requirement Document)",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 먼저 작성하고, 이를 기반으로 AI가 구현하게 만드는 흐름, 일명 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "\"플로우(Flow)\"",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 방식이 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "cdbf3f7f-da59-4848-b3aa-7675f69f68f9",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "왜 이 방식이 사용되고 있을까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "47ded68c-e5ea-4803-a0dc-c0054a1242d0",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "AI 코딩 도구가 처음 나왔을 때, 대부분의 사용법은 단순했다. 프롬프트로 함수 하나를 만들고, 수정하고, 반복하는 식이었다. 그런데 GPT-4 급의 모델이 대화 컨텍스트를 길게 유지하면서 더 복잡한 작업을 하게 되자, 기존 방식의 한계가 드러났다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "a02eaf2b-c1a8-467c-a1a4-66acd01ac2e7",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "AI에게 프로젝트 전체를 설명하려면 대화 초반부터 엄청난 토큰을 소모하게 된다. 매 세션마다 같은 배경을 반복 설명해야 하고, 맥락이 흐릿한 상태에서 생성된 코드는 전체 구조와 맞지 않는 경우가 많다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "461d00bb-c473-4a06-963b-1c7d658a9dc4",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "그 대안으로 나온 것이 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "문서를 먼저 작성하고, 그 문서를 AI의 참고 자료로 삼는 방식",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "이다. 소프트웨어 개발에서 PM이 작성하던 PRD의 개념을 AI 개발 워크플로우에 끌어들인 것이다. WRD는 그보다 한 단계 더 내려가서, 실제로 어떤 기능들을 만들 것인지를 정리한 문서다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "fb59855e-83b6-4d91-bf15-5a7bb01acd2b",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "PRD와 WRD는 무엇이고, 어떻게 다를까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ed312776-c863-4622-a1e3-b872f305c2a3",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "PRD(Product Requirements Document) — 제품이 왜 존재하는지를 정의한다",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "92861c3b-9c86-4083-a883-91446eb54c8c",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "P",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "RD(Product Requirements Document)",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 제품의 목적, 사용자, 핵심 요구사항을 담은 문서다. \"무엇을 만들 것인가\"를 추상적인 수준에서 정의한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "73a91951-0302-45c2-b88c-4ecb62ce16e0",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "# PRD 예시 — 채용공고 알림 서비스\n\n## 제품 목표\n구직자가 원하는 기업의 채용공고를 놓치지 않도록\n실시간으로 알림을 제공하는 서비스\n\n## 대상 사용자\n- 이직을 준비 중인 개발자\n- 특정 기업/포지션을 주시하는 구직자\n\n## 핵심 요구사항\n- 사용자가 관심 기업과 직무를 등록할 수 있어야 한다\n- 새로운 채용공고가 올라오면 24시간 이내에 알림이 발송되어야 한다\n- 웹/앱 모두에서 접근 가능해야 한다\n\n## 범위 밖\n- 이력서 작성 기능\n- 채용공고 지원 기능",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "07513c27-7551-4f24-bafd-d67265c02bc7",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "PRD의 핵심은 프로덕션의 요구사항 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "범위(scope)",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "를 명확히 하는 것을 의미하며, 무엇을 만들지만큼 무엇을 만들지 않는지를 적는 것이 중요하다. AI가 이 문서를 읽으면 프로젝트의 전체 맥락을 단번에 파악할 수 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4046245d-4779-46bf-8c2e-3263bd724515",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "WRD — 구체적으로 어떤 기능을 만들지 정의한다",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "9f2bd3dc-5acb-48d0-9144-b005516073e8",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "WRD(Work Requirement Document)",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "는 PRD에서 정의한 요구사항을 바탕으로, 실제 구현할 기능들을 세부적으로 정리한 문서다. \"어떻게 만들 것인가\"를 기능 단위로 쪼갠다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "fe2b3e4f-9a8e-4e52-b5e4-aa717e910bf8",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "# WRD 예시 — 채용공고 알림 서비스\n\n## 기능 목록\n\n### 1. 관심 기업 등록\n- 기업명 검색 자동완성 (최소 2글자 입력 시 동작)\n- 최대 10개 기업 등록 가능\n- 등록/삭제 API 필요\n\n### 2. 알림 발송\n- 신규 채용공고 감지 시 푸시 알림 발송\n- 발송 주기: 매일 오전 9시 배치 처리\n- 중복 알림 방지: 동일 공고 알림은 7일에 1회\n\n### 3. 공고 목록 화면\n- 무한 스크롤 방식\n- 필터: 직무, 경력, 지역\n- 정렬: 최신순, 마감순\n\n## 기술 스택\n- Frontend: Next.js, TypeScript, Tanstack-Query\n- Backend: Node.js (API), Python (크롤러)\n- DB: PostgreSQL",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "3e193f0d-d8fa-4da9-a77c-8ea77d95799f",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "WRD는 개발자 관점에서 작성된다. AI가 이 문서를 읽으면 각 기능의 경계와 기술적 제약을 이해하고, 불필요한 추측 없이 구현에 집중할 수 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e8bbfee5-de52-43a5-b726-58c8e5973bf6",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "플로우 방식에서 실제로 어떤 일이 일어날까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "fdad760e-6155-4258-b8e6-3813fcc9cda5",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "AI가 문서를 어떻게 처리하는지 이해하면, 왜 이 방식이 효율적인지 더 명확하게 보인다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "37c3cad7-0c53-458b-90bf-d0eeba86974b",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "[전통적인 AI 개발 방식]\n\n사용자 ──→ \"로그인 기능 만들어줘\"\nAI    ──→ (맥락 없이 일반적인 로그인 구현)\n사용자 ──→ \"아 근데 JWT 써야 해, 리프레시 토큰도 필요해\"\nAI    ──→ (수정)\n사용자 ──→ \"기존 DB 스키마랑 맞춰줘\"\nAI    ──→ (또 수정)\n        ↑ 매번 맥락 재설명, 토큰 누적 소모\n\n[플로우 방식]\n\nPRD 작성 ─→ WRD 작성\n              ↓\n    AI에게 PRD + WRD 전달 (단 1회)\n              ↓\n    AI: 전체 맥락 파악 완료\n              ↓\n    \"로그인 기능 구현해줘\" ─→ JWT, 리프레시 토큰, DB 스키마까지\n                              문서 기반으로 한 번에 구현",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "4e165e06-7c78-477f-b5d0-ac5de1f6beb9",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "AI의 컨텍스트 창은 유한하다. 대화가 길어질수록 초반 내용이 밀려나고 맥락이 손실된다. PRD와 WRD는 대화보다 정보 밀도가 높다. 같은 내용을 대화체로 설명했을 때보다 구조화된 문서로 전달했을 때 훨씬 적은 토큰으로 동일한 맥락을 제공할 수 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "34853ce2-6918-49d4-80b0-81d82bf31f74",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "새로운 세션을 시작할 때도 마찬가지다. \"지난번에 말했던 것처럼...\"으로 시작하는 대신, 문서를 첨부하면 AI가 즉시 프로젝트 전체를 이해한 상태에서 작업을 시작한다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "eb3742dd-9713-4ab9-ad10-a28c31af157f",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "PRD vs WRD — 역할과 작성 시점 비교",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "b4e9375b-09cd-4754-919f-b9e6d6f31715",
+    "type": "table",
+    "props": {
+      "textColor": "default"
+    },
+    "content": {
+      "type": "tableContent",
+      "columnWidths": [
+        null,
+        null,
+        null
+      ],
+      "headerRows": 1,
+      "rows": [
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "항목",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "PRD",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "WRD",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "목적",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "제품의 목표와 범위 정의",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "구현할 기능 목록 정의",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "추상화 수준",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "높음 (비즈니스 관점)",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "낮음 (개발자 관점)",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "작성 시점",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "프로젝트 착수 시",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "PRD 완성 후",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "주요 독자",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "팀 전체, 이해관계자",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "개발자, AI",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "업데이트 빈도",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "드물다",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "기능 추가/변경 시",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "AI 활용 방식",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "전체 맥락 제공",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "기능별 구현 지시",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "children": []
+  },
+  {
+    "id": "54a3edcb-d5a1-4f82-94a2-b8e5aef1f443",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "PRD가 먼저고 WRD를 추후에 작성하는 것이 순서이며, PRD 없이 WRD를 쓰면 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "기능 목록은 있는데 왜 그 기능이 필요한지 근거가 없어진다.",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 반대로 WRD 없이 PRD만 있으면 AI는 \"어떤 기능을 만들어야 하는지\"를 매번 다시 물어보거나 스스로 추론하게 된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "416c1ab2-4dd3-4573-b6cc-96552dbcbd47",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "실제로 어떻게 작성하면 좋을까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "162e8f04-ebde-4de8-adef-c2ff76263f01",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "PRD 작성 흐름",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "238d0178-47e1-4ba3-8839-7968d0d0b9a0",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "PRD를 처음 작성할 때 막막하면, AI에게 요구사항을 구어체로 설명하고 PRD 형태로 정리해달라고 요청하는 방법이 있다. 초안이 나오면 내가 직접 다듬는 방식이다. ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "멘토님은 이것을 계속 깎아나간다라고 말해주셨다.",
+        "styles": {
+          "bold": true
+        }
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d7847198-d251-44f2-a2e6-75da582dfb30",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "프롬프트 예시:\n\"다음 내용을 PRD 형식으로 정리해줘.\n 제품 목표, 대상 사용자, 핵심 요구사항, 범위 밖 항목으로 나눠서.\n\n [요구사항 설명]\n 채용공고를 크롤링해서 사용자가 관심 있는 기업에 새 공고가 뜨면\n 알림을 보내는 서비스를 만들려고 해...\"",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ae0dec87-391f-4ae1-82b0-9298d41e15fe",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "중요한 건 PRD를 AI가 대신 완성해주는 게 아니라, ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "내가 검토하고 결정하는 과정",
+        "styles": {
+          "bold": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "이 반드시 있어야 한다는 점이다. AI가 요구사항을 오해해서 잘못된 범위로 정리할 수도 있기 때문이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "9880e596-703b-4bec-964f-0d033eb0f17d",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "WRD 작성 흐름",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "8c4f55dc-9543-4ed6-b2dc-37f4a1fb9ed9",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "PRD가 완성되면, 기능 목록을 뽑는 작업을 AI와 함께 진행하면 효율적이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "7a499eaa-2e22-4ae5-b2b0-214c80f701c5",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "프롬프트 예시:\n\"첨부한 PRD를 바탕으로 WRD를 작성해줘.\n 각 요구사항을 구체적인 기능 단위로 쪼개고,\n 각 기능에 필요한 세부 동작과 기술 제약을 포함해줘.\"",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "a353be8f-b679-41a3-8801-c6713218d3eb",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "WRD는 기능이 추가될수록 계속 업데이트된다. 새 기능을 AI에게 구현 요청하기 전에 WRD에 해당 기능을 먼저 추가하는 습관이 중요하다. AI가 WRD 기준으로 코드를 생성하기 때문에, 문서와 코드베이스가 일치하는 상태를 유지하는 것이 전체 흐름의 핵심이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f66fa781-51c0-4e07-8993-12049e57381c",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "문서 길이는 얼마가 적당할까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "9734514d-c4c8-44c2-96ce-06f9cc38ee2a",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "문서가 길면 오히려 AI가 전체를 처리하는 데 더 많은 토큰을 쓰고, 핵심이 희석될 수 있다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "af3a5cf3-be2a-4b54-bf38-9790655dad58",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "권장 분량 기준:\n\nPRD  ─→ A4 1~2페이지 (500~1000 토큰 내외)\nWRD  ─→ 기능 10개 이내 권장, 각 기능당 3~5줄\n         (전체 1000~2000 토큰 내외)\n\n초과 시 조치:\n- 기능이 너무 많으면 WRD를 도메인별로 분리\n  예: WRD-auth.md, WRD-notification.md\n- PRD는 최대한 간결하게 유지하고\n  상세 내용은 WRD로 위임",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "62f808bf-90bf-4688-85d5-7c87a770b399",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 3,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "AI에게 문서를 전달하는 방식",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e67680d8-4d31-44f2-be20-ddd816f4c2cd",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "세션 시작 시점에 두 문서를 함께 첨부하는 게 기본이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "8664b230-0aba-42ae-af0a-ccd32f61348e",
+    "type": "codeBlock",
+    "props": {
+      "language": "javascript"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "[세션 시작 시 프롬프트 구조]\n\n시스템 컨텍스트:\n  - PRD 전문\n  - WRD 전문\n  - 현재 폴더 구조 (선택)\n\n작업 요청:\n  \"WRD의 [기능 이름] 항목을 구현해줘.\n   기술 스택은 PRD에 명시된 것을 따라줘.\"",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "c430d563-93df-4f84-bb02-35e2a4b52b43",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "문서를 매번 붙여넣는 게 번거롭다면, Claude Code나 Cursor 같은 도구에서 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": ".context",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": " 파일이나 ",
+        "styles": {}
+      },
+      {
+        "type": "text",
+        "text": "[CLAUDE.md](https://CLAUDE.md)",
+        "styles": {
+          "code": true
+        }
+      },
+      {
+        "type": "text",
+        "text": "에 문서 경로를 지정해두는 방법도 있다. AI가 세션 시작 시 자동으로 문서를 읽게 된다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "d5360560-0944-4192-98bb-e91e7da1535d",
+    "type": "heading",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left",
+      "level": 2,
+      "isToggleable": false
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이 방식이 모든 프로젝트에 맞을까?",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "a74adf95-02c6-469d-997f-3cd79dde0f10",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "그렇다면 WRD와 PRD, 이 두 문서를 이미 존재하는 프로젝트에 적용하는 것이 맞을지,",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "44e2b266-ac8c-4b2e-9317-6efa815a34fc",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "아니면 어떠한 속성을 가진 신규 프로젝트에 적용을 하는 것이 좋을지 궁금해졌다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "ecaefeea-eb96-411b-b6c8-e3642f4a57ce",
+    "type": "table",
+    "props": {
+      "textColor": "default"
+    },
+    "content": {
+      "type": "tableContent",
+      "columnWidths": [
+        null,
+        null
+      ],
+      "headerRows": 1,
+      "rows": [
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "상황",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "플로우 방식 적합성",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "사이드 프로젝트 (기능 5개 이상)",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "적합",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "팀 프로젝트 (AI 협업 포함)",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "매우 적합",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "빠른 PoC/프로토타입",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "불필요할 수 있음",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "단순 함수 1~2개 생성",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "오버엔지니어링",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "장기 운영 서비스",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            },
+            {
+              "type": "tableCell",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "적합 (문서 관리 비용 고려)",
+                  "styles": {}
+                }
+              ],
+              "props": {
+                "colspan": 1,
+                "rowspan": 1,
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "children": []
+  },
+  {
+    "id": "bf893cca-2717-432a-9c1d-62e970bf6cef",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "규모가 작은 작업이라면 문서 작성 자체가 더 많은 시간을 쓰는 경우도 있다. 플로우 방식은 프로젝트의 범위가 어느 정도 있고, 세션을 여러 번 나눠서 진행하는 상황에서 효과가 크다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "e7aa2a25-b42a-4a36-b387-b0a121b1bcfc",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "PRD와 WRD를 먼저 작성하는 것은 결국 AI가 아니라 내가 설계 주도권을 갖는 방식이다. AI에게 맡기더라도 반드시 내가 검증하고 판단하는 과정들은 필수적이다. AI에게 맥락을 설명하는 비용을 줄이고, 매번 다른 결과물이 나오는 불확실성을 줄이는 구조적인 접근이다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  },
+  {
+    "id": "f3ab6d73-d429-4699-a3bc-c26c380ca423",
+    "type": "paragraph",
+    "props": {
+      "backgroundColor": "default",
+      "textColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "신규로 진행하는 사이드 프로젝트의 경우 지금까지 요구사항을 한 페이지짜리 PRD로 먼저 정리해보는 것을 프로젝트의 출발점으로 잡고 있다. 어쩌면 모르는 사람에게 프로젝트를 설명해주는 것은 당연한 일인데, 이제는 AI를 단순 어시스턴트라기 보다는 하나의 동료라고 인식하는 것이 맞을지도 모르겠다.",
+        "styles": {}
+      }
+    ],
+    "children": []
+  }
+]

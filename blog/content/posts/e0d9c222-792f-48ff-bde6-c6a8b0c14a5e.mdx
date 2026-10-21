@@ -1,0 +1,54 @@
+---
+title: "Axios 배열 파라미터에 [] 형태가 붙는 경우 어떻게 해결할까?"
+date: 2026-10-19
+publishedAt: "2026-10-19T14:27:52.103Z"
+updatedAt: "2026-10-19T14:27:52.104Z"
+description: ""
+category: "category-9606d629"
+series: "-"
+private: false
+---
+
+Axios를 사용하면서, 배열 파라미터로 서버에 데이터를 전송할 때 클라이언트 상태에서는 정상적으로 `['A', 'C', 'D']` 형태로 삽입되는 것을 확인했다. 그런데 Axios로 서버에 전송을 할 때마다 아래와 같이 전송이 되는 현상이 발생한다.
+
+Axios에서 제공하는 `paramSerializer` 를 사용하게 된다면 원하는 형태의 배열을 브라켓 없이 손쉽게 전송할 수 있다. axios@1.x 기준으로 아래 코드를 참고한다.
+
+```javascript
+organizationCode[]=A
+organizationCode[]=B
+```
+
+위의 전송 동작으로 네트워크 탭의 페이로드를 확인하게 되면 URL 인코딩이 되면서 아래와 같이 노출된다.
+
+```javascript
+organizationCode%5B%5D=A
+organizationCode%5B%5D=B
+```
+
+서버 측에서는 아래와 같이 배열을 브라켓 없이 반복 key로 보내는 방식으로 원하고 있는데,\
+이 경우에는 클라이언트에서 어떻게 처리를 해줄 수 있을까?
+
+```javascript
+// 서버에서는 이렇게 받고싶어한다.
+organizationCodes=A&organizationCodes=C
+```
+
+## Axios paramsSerializer 사용해보기
+
+```javascript
+export const getOrganizationList = (requestParams: OrganizationSearchParams = {}) => axios.get<OrganizationListResponse>('industry/organizations', {
+params: requestParams,
+paramsSerializer: {
+indexes: null
+}
+});
+```
+
+`indexs = null` 을 주면 배열이 아래와 같이 서버로 전송된다.
+
+```javascript
+organizationCode=A&organizationCode=B
+```
+
+반대로 기본 값 또는 `ìndexes: false` 면 직렬화가 되지 않으니 주의해야한다.
+

@@ -1,0 +1,523 @@
+[
+  {
+    "type": "slash-content",
+    "version": 1,
+    "content": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "4QBEEL2k1V2h"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "이 글은 서비스를 운영하고 있지만, "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "”도대체 내 서비스를 왜 안쓸까?“"
+            },
+            {
+              "type": "text",
+              "text": " 라고 의문이 드는 사람에게 도움이 될만한 글일 수 있습니다. 회고 서비스를 운영하고 있지만, 간간이 들어오는 유저들에 기쁨을 느끼는 과정에서 내 서비스를 이용하는 유저들이 더 활발해졌으면 하는 바램에 직접 유저가 되어 프로덕트를 매일 사용해보기로 했습니다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "Np6UA26Cl0HX",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "내 서비스를 사용하지 않는 이유가 무엇일까"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "l0RnTPRqVzYc"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "내 서비스를 사용하지 않는 이유는 여러 요소가 있습니다. UX가 불편해서 사용하지 않을 수 있고, 서비스가 너무 느려서 사용하지 않을 수 있고, 굳이 이 서비스를 쓰지 않아도 되는 이유도 있습니다. 서비스는 갑자기 “짠!” 하고 나타나지 않습니다. 서비스를 만드는 사람들 중 어느 누군가가 불편함을 느꼈고, 이 불편함을 서비스로 해결하고자 나오게 된 것입니다. 그래서 아무 이유가 없는 서비스는 존재하지 않는다고 믿습니다."
+            }
+          ]
+        },
+        {
+          "type": "blockquote",
+          "attrs": {
+            "id": "cYbitq0CDJQd"
+          },
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "id": "8ADOZyY_2Pjh"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "“그렇다면 문제를 해결하기 위해 나온 서비스인데 왜 아무도 사용하지 않을까요?“"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "9HyezoWh8Toc"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "사실 회고 서비스 레이어도 주변 회고를 위한 성장 니즈를 위해 만들어진 서비스였고, 여러 기업이나 단체에서 프로젝트가 종료가 되면 한번씩 찾아주는 서비스였습니다. 찾아와주는 것 자체만으로도 감사하지만 여기서 발생한 문제는 “리텐션” 문제였습니다. 사용자가 일회성으로 사용하고 그 뒤로는 들어오지 않는 서비스가 되었습니다. 그래서 회원 수는 천명을 넘어가지만 유지되는 회원 수는 그리 많지 않았습니다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "z48BY2wwsEt8"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "처음에는 "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "“기능이 뭔가 부실한가? 추가해볼까?“"
+            },
+            {
+              "type": "text",
+              "text": " 라는 생각으로 여러 기능들을 추가해보았지만, 근본적인 원인은 기능이 아니라는 사실을 알게되었습니다. Clarity를 통해 디자이너와 UX를 개선해보기도 하고, 데스크탑 뷰로 확장을 하면서 데스크탑 환경에서도 SasS 형태로 사용할 수 있도록 제공도 해주었습니다. 그럼에도 유저들은 우리의 기능들을 잠깐 반짝여주고 사라졌습니다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "KrPm0cKI-W1F"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "곰곰이 생각해보니까, 우리 팀원들조차도 생각날 때 하는 회고 서비스이기 때문에 정작 내부에서도 유지가 되지 않는다는 문제점을 발견했습니다. 그리고 서비스를 직접 오래 사용해보고 유저가 되어 유저가 느낄만한 불편함들을 해결해보자라는 생각을 했습니다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "SwEgmYOSH94j",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "그 누구보다, 내 서비스에서 내가 헤비유저가 되어보기"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "zbs6_5hcR0iF"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "예전에 첫 직장에서 "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "“한국의 노션”"
+            },
+            {
+              "type": "text",
+              "text": "을 만들겠다며 노트 서비스를 만들던 때가 있었습니다. 제가 속했던 팀은 그 노트 안에 코어 역할을 하는 웹 에디터를 만드는 팀이었는데, 노트 서비스에 버그가 발생하고 사용성 개선을 위한 여러 작업을 하면서 정작 웹 에디터를 만드는 우리 팀에서는 노트가 어떤 방식으로 누군가에게 전달되는지 잘 모르고 있었습니다. 그때 프로덕트를 리드하시고 계셨던 그룹장님은 “우리조차 제품을 사용하지 않으면, 누가 제품을 사용할까요?” 라는 말씀을 하셨습니다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "RsWTnVlUb5ZW"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "당연한 말이지만 우리는 간과하고 넘어갑니다. 항상 프로덕트를 만들 때 프로덕트에는 다른 의도가 존재해서는 안됩니다. 그 의도가 "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "“돈”"
+            },
+            {
+              "type": "text",
+              "text": "이 될 수도 있고, 또 누군가에게는 "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "“취업”"
+            },
+            {
+              "type": "text",
+              "text": "의 문이 될 수도 있지만 이 프로덕트가 궁극적으로 존재하기 위한 모습은 "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "“사용자가 실제로 사용할 수 있는가”"
+            },
+            {
+              "type": "text",
+              "text": " 라는 생각을 합니다. 그래서 저는 한 서비스의 개발자가 아닌, 서비스의 헤비유저가 되어보기로 했습니다."
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "attrs": {
+            "id": "Bvbvfj3uZyV_",
+            "src": "https://upload.cafenono.com/image/slashpagePost/20261014/131049_jvXaULNdzRDqMfbhGS?q=80&s=1280x180&t=outside&f=webp",
+            "alt": "Image",
+            "title": null,
+            "width": 754,
+            "height": null
+          }
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "iYdhf-Wcdzx6"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "먼저, 다양한 커뮤니티에 회고를 진행하고자 회고 모임원들을 모집하기 시작했습니다. 처음에는 2명으로 시작하면서 10명까지 모아서 진행해보자라는 생각으로 점차 늘려나가며 지금은 10명의 인원으로 회고 모임의 운영을 하게 되었습니다. 모임에서 규칙은 아래와 같습니다."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "attrs": {
+            "id": "k8uKSPX8IJJ7"
+          },
+          "content": [
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "LBLZMIxTKRkY"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "LhMZNrrNEqBC"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "카카오톡으로 진행을 하지만, 카카오톡은 네트워킹 용도로 사용된다."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "FfBVN3DEnqxT"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "1aN8tzlL8lC-"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "주마다 자신의 목표를 설정하고, 모든 회고는 \"레이어\" 플랫폼에서 진행이 된다."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "W2ea8WwTGMOn"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "IXCUzgn0evMk"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "회고는 의무가 아니고 자신이 편안한 장소에서 자유로운 시각에 진행한다."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "z9GvMyN04fA2"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "그렇게 여러 회고들이 생성되었고, 매일매일을 간단하지만 꾸준한 회고를 진행하고 있습니다. 그러다보니 개발자 입장에서는 보이지 않던 시각이 생겼습니다. "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "유저로써 불편했던 점"
+            },
+            {
+              "type": "text",
+              "text": "과 더불어 "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "\"이런 기능이 있으면 더 좋았을 것 같은데?\""
+            },
+            {
+              "type": "text",
+              "text": " 와 같이 개선되었으면 하는 점들이었습니다."
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "attrs": {
+            "id": "MmrDFf7YdFAe",
+            "src": "https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/main/blog/public/uploads/1792589394321-ca95ffef.png",
+            "alt": "스크린샷 2026-10-21 오후 10.29.24.png",
+            "title": null,
+            "width": null,
+            "height": null
+          }
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "AC8jfVpJSVpS"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "회고 모임을 운영하면서 \"과연 유저가 매일매일 회고하는 것이 가능할까?\" 라는 생각이 들기도 했습니다. 사실 서비스를 운영하면서 이러한 부분이 가장 큰 의문점도 이기도 했습니다. 하지만 결론은 "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "\"가능하겠구나!\""
+            },
+            {
+              "type": "text",
+              "text": " 라고 생각했습니다. 하지만 유저들이 서비스를 자주 들어오게 하기 위해 매일매일을 유지시켜주기 위한 서비스의 장치가 필요하다는 점도 느꼈습니다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "TaWAzoOGW3ws",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "서비스에는 주기적인 알림을 줘야한다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "OLAeGEsoghKZ"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "우리가 주변에서 많이 사용하고 있는 로컬 어플인 "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "\"토스\""
+            },
+            {
+              "type": "text",
+              "text": "와 "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "\"당근\""
+            },
+            {
+              "type": "text",
+              "text": "을 많이 찾는 이유도, 잊을만할 때 쯔음 우리에게로 푸쉬 알림을 통해 알림을 주곤합니다. 그 알림을 통해 매일매일 반복해서 어플에 대한 유입을 진행합니다. 회고도 우리 일상을 진행하다가 매일매일을 잊지 않고 진행하기 위해 "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "italic"
+                }
+              ],
+              "text": "(유저 리텐션을 고려하기 위한)"
+            },
+            {
+              "type": "text",
+              "text": " 푸쉬 알림은 필수라고 생각했습니다. 직접 서비스를 사용하기 전에는 마냥 \"왜 서비스를 한번 사용하고 말까?\" 라는 생각을 하고 회고를 작성하는 화면이나 기능을 개선하는데 집중했을 것 같습니다. 유저가 되어보니 서비스를 사용하는 순간뿐 아니라, 서비스를 떠올리고 다시 찾아오기까지의 과정도 함께 고민을 할 수 있었습니다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "YVrvX99sCcxm"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "레이어도 본래 크로스플랫폼 형태로 어플리케이션도 제공을 하고 있었으나, 애플 디벨로퍼스 가격 이슈로 인해 잠깐 내려간 상태입니다. 그래서 지금은 카카오톡에서 매일 저녁 11시에 회고에 대한 알림을 자동으로 알려주도록 설정해놓았고, 그 임시 과정을 통해 간접적으로라도 리텐션을 제공하고자 했습니다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "Z0wr_nvXKsp1",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "계속 지켜보기, 그리고 개선해보기"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "m0i5owX_9nob"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "서비스가 완성된 상태는 아니라고 생각하고, 그로스의 끝이 어딘지는 아직도 잘 모르겠습니다. 현재 회고 모임도 계속해서 진행을 하고 있습니다. 온라인으로 모임을 운영하고 있지만, 추후에 모임에 관리 케이스가 조금 더 탄탄해진다면 오프라인 모임을 통해 회고의 다양한 모습으로 프로덕트를 디벨롭해볼 생각입니다. "
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "44uKu1TTOwLT"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "여러 대외활동들을 통해 많은 프로덕트들을 만들었다고 생각했는데, 여러 대표님들을 만나면서 나는 아직 우물 안의 개구리라는 것을 한참 느꼈습니다. 프로덕트를 어떻게 가꾸어나가는 것이 "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "\"그로스를 잘한다\""
+            },
+            {
+              "type": "text",
+              "text": " 라고 명확하게 떠오르지 않는 것이 정상인 것인지, 아니면 그로스에 대한 행위가 명확하게 정의되어있는 것인지는 잘 모르겠으나 프로덕트를 만드는 사람으로써 정말 중요한 과정을 진행하고 있다고 생각하니 계속 지켜보고 개선을 해보려고 합니다. 그리고 그 여정은 계속 포스팅으로 남겨 훗날에도 "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "\"이렇게 느끼고 있었구나\" "
+            },
+            {
+              "type": "text",
+              "text": "라는 것을 회고해보려고 합니다."
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

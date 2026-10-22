@@ -25,6 +25,7 @@ import { PostGallery } from "@/components/post-gallery";
 import { PostColumn, PostColumns } from "@/components/post-columns";
 import { getTableOfContents, rehypeHeadingIds } from "@/lib/table-of-contents";
 import { absoluteUrl } from "@/lib/site-url";
+import { convertBlocks, markdownFor } from "@/lib/slash-content";
 
 // Publishing and deletion call revalidatePath for this route, so this is only
 // the safety-net interval for changes made outside the application.
@@ -43,6 +44,18 @@ function postDescription(source: string, data: Record<string, unknown>) {
     .replace(/\s+/g, " ")
     .trim();
   return text.length > 180 ? `${text.slice(0, 180).trimEnd()}…` : text;
+}
+
+/**
+ * Older saves can contain editor JSON while their MDX projection is empty.
+ * Render from that JSON rather than presenting a blank published article.
+ * New saves always persist both representations in the publish route.
+ */
+function sourceWithEditorFallback(source: string, blocks: unknown[]) {
+  const parsed = matter(source);
+  if (parsed.content.trim() || blocks.length === 0) return source;
+  const body = markdownFor(convertBlocks(blocks));
+  return body.trim() ? matter.stringify(body, parsed.data) : source;
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
@@ -126,7 +139,7 @@ export default async function PostPage({ params }: { params: Params }) {
   }
 
   const blocks = getPostBlocks(id);
-  const renderSource = restoreBookmarks(restoreCallouts(source, blocks), blocks);
+  const renderSource = restoreBookmarks(restoreCallouts(sourceWithEditorFallback(source, blocks), blocks), blocks);
   const tableOfContents = getTableOfContents(renderSource);
   const { content, frontmatter } = await compileMDX<{ title: string; date: string; description?: string; publishedAt?: string; updatedAt?: string }>({ components: { Diagram: PostDiagram, Callout: PostCallout, Bookmark: PostBookmark, Gallery: PostGallery, Columns: PostColumns, Column: PostColumn }, source: renderSource, options: { mdxOptions: { remarkPlugins: [remarkGfm], rehypePlugins: [[rehypeShiki, { themes: { light: "github-light", dark: "github-dark" } }], rehypeHeadingIds(tableOfContents)] }, parseFrontmatter: true } });
   const post = getPosts(true).find((item) => item.id === id);

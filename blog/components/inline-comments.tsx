@@ -1,40 +1,59 @@
 "use client";
 
-import { useEffect, useRef, useState, type RefObject } from "react";
+import { useEffect, useRef, useState, type FormEvent, type RefObject } from "react";
 import type { InlineComment, TextAnchor } from "@/lib/inline-comment-types";
 import { anchorRange } from "@/lib/text-anchor";
 import "./inline-comments.css";
+
+type FloatingPoint = { top: number; left: number };
 
 function anchorKey({ start, quote, prefix, suffix }: TextAnchor) {
   return `${start}:${quote}:${prefix}:${suffix}`;
 }
 
-type FloatingPoint = { top: number; left: number };
+function pointFor(rect: DOMRect, width: number, height = 56): FloatingPoint {
+  return { left: Math.max(12, Math.min(window.innerWidth - width - 12, rect.left)), top: Math.max(12, Math.min(window.innerHeight - height - 12, rect.bottom + 10)) };
+}
 
+function CommentGlyph() {
+  return <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 5.75A2.75 2.75 0 0 1 7.75 3h8.5A2.75 2.75 0 0 1 19 5.75v6.5A2.75 2.75 0 0 1 16.25 15H11l-4.4 3.3A.6.6 0 0 1 5.64 17V15.8A2.75 2.75 0 0 1 5 14.05V5.75Z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" /><path d="M8 8h8M8 11h5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>;
+}
+
+/** Selection anchored discussion UI. The persistent anchor is text context, never DOM offsets. */
 export function InlineComments({ postId, root }: { postId: string; root: RefObject<HTMLDivElement | null> }) {
   const [comments, setComments] = useState<InlineComment[]>([]);
   const [canDelete, setCanDelete] = useState(false);
   const [anchor, setAnchor] = useState<TextAnchor | null>(null);
+  const [selectionPoint, setSelectionPoint] = useState<FloatingPoint | null>(null);
   const [composing, setComposing] = useState(false);
-  const [name, setName] = useState("");
+  const [composerPoint, setComposerPoint] = useState<FloatingPoint | null>(null);
+  const [activeAnchorKey, setActiveAnchorKey] = useState<string | null>(null);
+  const [threadPoint, setThreadPoint] = useState<FloatingPoint | null>(null);
+  const [panelOpen, setPanelOpen] = useState(false);
+  const [name, setName] = useState("익명");
+  const [showName, setShowName] = useState(false);
   const [body, setBody] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
   const [attempt, setAttempt] = useState(0);
-  const [selectionPoint, setSelectionPoint] = useState<FloatingPoint | null>(null);
-  const [activeAnchorKey, setActiveAnchorKey] = useState<string | null>(null);
-  const [threadPoint, setThreadPoint] = useState<FloatingPoint | null>(null);
   const form = useRef<HTMLFormElement>(null);
   const endpoint = `/api/posts/${encodeURIComponent(postId)}/inline-comments`;
 
   useEffect(() => {
+    const stored = window.localStorage.getItem("wavy:inline-comment-name");
+    if (stored?.trim()) setName(stored.slice(0, 40));
+  }, []);
+
+  useEffect(() => {
     const controller = new AbortController();
-    fetch(endpoint, { signal: controller.signal, cache: "no-store" }).then(async response => {
+    fetch(endpoint, { signal: controller.signal, cache: "no-store" }).then(async (response) => {
       const data = await response.json();
       if (!response.ok) throw new Error(data.error);
-      setComments(data.comments); setCanDelete(data.canDelete); setError(""); setLoading(false);
-    }).catch(error => { if (!controller.signal.aborted) { setError(error.message); setLoading(false); } });
+      setComments(data.comments); setCanDelete(data.canDelete); setError("");
+    }).catch((fetchError) => {
+      if (!controller.signal.aborted) setError(fetchError instanceof Error ? fetchError.message : "댓글을 불러오지 못했습니다.");
+    }).finally(() => { if (!controller.signal.aborted) setLoading(false); });
     return () => controller.abort();
   }, [endpoint, attempt]);
 
@@ -43,32 +62,27 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
       if (composing) return;
       const element = root.current;
       const selection = window.getSelection();
-      if (!element || !selection?.rangeCount || selection.isCollapsed) { setAnchor(null); return; }
+      if (!element || !selection?.rangeCount || selection.isCollapsed) { setAnchor(null); setSelectionPoint(null); return; }
       const range = selection.getRangeAt(0);
-      if (!element.contains(range.startContainer) || !element.contains(range.endContainer)) { setAnchor(null); return; }
+      if (!element.contains(range.startContainer) || !element.contains(range.endContainer)) { setAnchor(null); setSelectionPoint(null); return; }
       const quote = range.toString();
-      if (!quote.trim() || quote.length > 1000) { setAnchor(null); return; }
+      if (!quote.trim() || quote.length > 1000) { setAnchor(null); setSelectionPoint(null); return; }
       const before = range.cloneRange();
       before.selectNodeContents(element); before.setEnd(range.startContainer, range.startOffset);
       const start = before.toString().length;
       const text = element.textContent ?? "";
       setAnchor({ quote, start, prefix: text.slice(Math.max(0, start - 60), start), suffix: text.slice(start + quote.length, start + quote.length + 60) });
-      const rect = range.getBoundingClientRect();
-      setSelectionPoint({ left: Math.max(12, Math.min(window.innerWidth - 220, rect.left)), top: Math.min(window.innerHeight - 56, rect.bottom + 8) });
+      setSelectionPoint(pointFor(range.getBoundingClientRect(), 156));
     }
     document.addEventListener("selectionchange", selectionChanged);
     return () => document.removeEventListener("selectionchange", selectionChanged);
-  }, [root, composing]);
+  }, [composing, root]);
 
-  // Persist selected-text comments in the reading surface itself. The stored
-  // anchor is still the source of truth; these marks are a non-destructive
-  // interaction layer rebuilt whenever comments change.
   useEffect(() => {
     const element = root.current;
     if (!element) return;
     const unwrap = () => element.querySelectorAll<HTMLElement>("mark[data-inline-comment-anchor]").forEach((mark) => mark.replaceWith(...Array.from(mark.childNodes)));
     unwrap();
-
     const grouped = new Map<string, InlineComment[]>();
     comments.forEach((comment) => {
       const key = anchorKey(comment.anchor);
@@ -79,16 +93,12 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
       if (!range) continue;
       const marker = document.createElement("mark");
       marker.dataset.inlineCommentAnchor = key;
+      marker.dataset.commentCount = String(thread.length);
       marker.tabIndex = 0;
       marker.setAttribute("role", "button");
       marker.setAttribute("aria-label", `본문 댓글 ${thread.length}개 보기`);
-      marker.title = `본문 댓글 ${thread.length}개`;
       try { range.surroundContents(marker); }
-      catch {
-        const fragment = range.extractContents();
-        marker.append(fragment);
-        range.insertNode(marker);
-      }
+      catch { const fragment = range.extractContents(); marker.append(fragment); range.insertNode(marker); }
     }
     return unwrap;
   }, [comments, root]);
@@ -101,9 +111,7 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
   const activeThread = activeAnchorKey ? threads.get(activeAnchorKey) : undefined;
 
   function openThread(key: string, element: HTMLElement) {
-    const rect = element.getBoundingClientRect();
-    setActiveAnchorKey(key);
-    setThreadPoint({ left: Math.max(12, Math.min(window.innerWidth - 340, rect.left)), top: Math.min(window.innerHeight - 190, rect.bottom + 10) });
+    setComposing(false); setActiveAnchorKey(key); setThreadPoint(pointFor(element.getBoundingClientRect(), 336, 220));
   }
 
   useEffect(() => {
@@ -123,9 +131,21 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
     return () => { element.removeEventListener("click", openFromEvent); element.removeEventListener("keydown", openFromEvent); };
   }, [root]);
 
+  useEffect(() => {
+    const close = (event: KeyboardEvent) => { if (event.key === "Escape") { setComposing(false); setActiveAnchorKey(null); setPanelOpen(false); } };
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, []);
+
+  function startComment() {
+    if (!anchor || !selectionPoint) return;
+    setComposerPoint(selectionPoint); setActiveAnchorKey(null); setComposing(true);
+    requestAnimationFrame(() => form.current?.querySelector<HTMLTextAreaElement>("textarea")?.focus());
+  }
+
   function showQuote(comment: InlineComment) {
     const range = root.current && anchorRange(root.current, comment.anchor);
-    if (!range) { setError("글이 수정되어 원문 위치를 찾을 수 없습니다. 댓글의 인용 문장을 확인해주세요."); return; }
+    if (!range) { setError("글이 수정되어 원문 위치를 찾을 수 없습니다. 인용 문장을 확인해 주세요."); return; }
     const selection = window.getSelection();
     selection?.removeAllRanges(); selection?.addRange(range);
     const marker = range.commonAncestorContainer.parentElement?.closest<HTMLElement>("mark[data-inline-comment-anchor]");
@@ -139,37 +159,33 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
     try {
       const response = await fetch(`${endpoint}?commentId=${commentId}`, { method: "DELETE" });
       if (!response.ok) throw new Error((await response.json()).error);
-      setComments(current => current.filter(comment => comment.id !== commentId));
-    } catch (error) { setError(error instanceof Error ? error.message : "댓글을 삭제하지 못했습니다."); }
+      setComments((current) => current.filter((comment) => comment.id !== commentId));
+    } catch (removeError) { setError(removeError instanceof Error ? removeError.message : "댓글을 삭제하지 못했습니다."); }
+    finally { setBusy(false); }
+  }
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!anchor || busy || !body.trim()) return;
+    setBusy(true); setError("");
+    try {
+      const commentName = name.trim() || "익명";
+      const response = await fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: commentName, body, anchor }) });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error);
+      window.localStorage.setItem("wavy:inline-comment-name", commentName);
+      setComments((current) => [...current, data.comment]);
+      setBody(""); setAnchor(null); setSelectionPoint(null); setComposing(false); setPanelOpen(false);
+    } catch (submitError) { setError(submitError instanceof Error ? submitError.message : "댓글을 저장하지 못했습니다."); }
     finally { setBusy(false); }
   }
 
   return <section className="inline-comments" aria-label="본문 댓글">
-    <header><h2>본문 댓글 <small>{comments.length}</small></h2><p>본문에서 문장을 선택하면 로그인 없이 댓글을 남길 수 있어요.</p></header>
-    {anchor && !composing && <button className="inline-comment-start" style={selectionPoint ? { left: selectionPoint.left, top: selectionPoint.top } : undefined} type="button" onMouseDown={event => event.preventDefault()} onClick={() => { setComposing(true); requestAnimationFrame(() => { form.current?.scrollIntoView({ block: "nearest" }); form.current?.querySelector("input")?.focus(); }); }}>선택한 문장에 댓글 쓰기</button>}
-    {composing && anchor && <form ref={form} onSubmit={async event => {
-      event.preventDefault(); if (busy) return; setBusy(true); setError("");
-      try {
-        const response = await fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, body, anchor }) });
-        const data = await response.json();
-        if (!response.ok) throw new Error(data.error);
-        setComments(current => [...current, data.comment]); setBody(""); setComposing(false); setAnchor(null); setSelectionPoint(null);
-      } catch (error) { setError(error instanceof Error ? error.message : "댓글을 저장하지 못했습니다."); }
-      finally { setBusy(false); }
-    }}>
-      <blockquote>{anchor.quote}</blockquote>
-      <label>이름 <input required maxLength={40} value={name} onChange={event => setName(event.target.value)} autoComplete="nickname" /></label>
-      <label>댓글 <textarea required maxLength={2000} rows={3} value={body} onChange={event => setBody(event.target.value)} /></label>
-      <p>이름과 댓글은 공개됩니다. 개인정보를 입력하지 마세요.</p>
-      <div><button type="submit" disabled={busy || !name.trim() || !body.trim()}>{busy ? "저장 중…" : "댓글 등록"}</button><button type="button" disabled={busy} onClick={() => { setComposing(false); setAnchor(null); setSelectionPoint(null); }}>취소</button></div>
-    </form>}
-    {error && <p role="alert">{error} <button type="button" disabled={busy} onClick={() => setAttempt(value => value + 1)}>다시 불러오기</button></p>}
-    {loading ? <p role="status">댓글을 불러오는 중…</p> : !comments.length && <p>아직 본문 댓글이 없습니다.</p>}
-    {activeThread && threadPoint && <aside className="inline-comment-thread" role="region" aria-label="선택한 문장 댓글" style={{ left: threadPoint.left, top: threadPoint.top }}><header><strong>본문 댓글 {activeThread.length}</strong><button type="button" aria-label="댓글 창 닫기" onClick={() => setActiveAnchorKey(null)}>×</button></header><blockquote>{activeThread[0].anchor.quote}</blockquote><ul>{activeThread.map(comment => <li key={comment.id}><strong>{comment.name}</strong><time dateTime={comment.createdAt}>{new Date(comment.createdAt).toLocaleDateString("ko-KR")}</time><p>{comment.body}</p></li>)}</ul></aside>}
-    <ul>{comments.map(comment => <li key={comment.id}>
-      <button className="inline-comment-quote" type="button" onClick={() => showQuote(comment)} aria-label={`원문 보기: ${comment.anchor.quote}`}>“{comment.anchor.quote}”</button>
-      <div><strong>{comment.name}</strong> <time dateTime={comment.createdAt}>{new Date(comment.createdAt).toLocaleDateString("ko-KR")}</time>{canDelete && <button type="button" disabled={busy} onClick={() => void remove(comment.id)}>삭제</button>}</div>
-      <p>{comment.body}</p>
-    </li>)}</ul>
+    <button className="inline-comments-summary" type="button" onClick={() => setPanelOpen((value) => !value)} aria-expanded={panelOpen}><CommentGlyph /><span>{loading ? "…" : comments.length}</span></button>
+    {anchor && !composing && <button className="inline-comment-start" style={selectionPoint ? { left: selectionPoint.left, top: selectionPoint.top } : undefined} type="button" onMouseDown={(event) => event.preventDefault()} onClick={startComment}>댓글 추가</button>}
+    {composing && anchor && <aside className="inline-comment-composer" style={composerPoint ? { left: composerPoint.left, top: composerPoint.top } : undefined} onMouseDown={(event) => event.stopPropagation()}><form ref={form} onSubmit={submit}><blockquote>{anchor.quote}</blockquote><div className="inline-comment-entry"><span className="inline-comment-avatar" aria-hidden="true">{(name.trim() || "익명").slice(0, 1)}</span><textarea required maxLength={2000} rows={1} value={body} onChange={(event) => setBody(event.target.value)} placeholder="댓글 추가" aria-label="댓글" /></div>{showName && <label className="inline-comment-name">표시 이름<input maxLength={40} value={name} onChange={(event) => setName(event.target.value)} placeholder="익명" /></label>}<footer><button className="inline-comment-name-button" type="button" onClick={() => setShowName((value) => !value)} aria-label="표시 이름 설정" aria-pressed={showName}>@</button><span /><button type="button" onClick={() => { setComposing(false); setAnchor(null); setSelectionPoint(null); }}>취소</button><button className="inline-comment-send" type="submit" disabled={busy || !body.trim()} aria-label="댓글 등록">↑</button></footer></form></aside>}
+    {activeThread && threadPoint && <aside className="inline-comment-thread" role="region" aria-label="선택한 문장 댓글" style={{ left: threadPoint.left, top: threadPoint.top }}><header><strong>댓글 {activeThread.length}</strong><button type="button" aria-label="댓글 창 닫기" onClick={() => setActiveAnchorKey(null)}>×</button></header><blockquote>{activeThread[0].anchor.quote}</blockquote><ul>{activeThread.map((comment) => <li key={comment.id}><div><strong>{comment.name}</strong><time dateTime={comment.createdAt}>{new Date(comment.createdAt).toLocaleDateString("ko-KR")}</time>{canDelete && <button type="button" disabled={busy} onClick={() => void remove(comment.id)}>삭제</button>}</div><p>{comment.body}</p></li>)}</ul></aside>}
+    {panelOpen && <aside className="inline-comments-panel" role="region" aria-label="모든 본문 댓글"><header><div><strong>본문 댓글</strong><small>{comments.length}개</small></div><button type="button" onClick={() => setPanelOpen(false)} aria-label="댓글 목록 닫기">×</button></header>{loading ? <p>댓글을 불러오는 중…</p> : comments.length ? <ul>{comments.map((comment) => <li key={comment.id}><button type="button" onClick={() => showQuote(comment)}>“{comment.anchor.quote}”</button><strong>{comment.name}</strong><time dateTime={comment.createdAt}>{new Date(comment.createdAt).toLocaleDateString("ko-KR")}</time><p>{comment.body}</p></li>)}</ul> : <p>아직 본문 댓글이 없습니다.<br />문장을 선택해 첫 댓글을 남겨보세요.</p>}</aside>}
+    {error && <p className="inline-comment-error" role="alert">{error} <button type="button" disabled={busy} onClick={() => { setLoading(true); setAttempt((value) => value + 1); }}>다시 시도</button></p>}
   </section>;
 }

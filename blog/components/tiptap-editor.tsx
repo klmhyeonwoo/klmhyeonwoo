@@ -283,8 +283,13 @@ function TiptapSurface({ initial, mentions, onChange }: { initial: JsonNode; men
   }, []);
   const editor = useSlashEditor({ blockKit: false, extensions, content: initial,
     editorProps: { attributes: { class: "tiptap-prose slash-content", "aria-label": "게시글 본문" } },
+    // `onUpdate` is intentionally only fired after an edit. Sync once as the
+    // editor is created so the visible document and publish payload start in
+    // the same state, including when an existing post is saved unchanged.
+    onCreate: ({ editor }) => onChangeRef.current(editor.getJSON() as JsonNode),
     onUpdate: ({ editor }) => onChangeRef.current(editor.getJSON() as JsonNode),
   });
+
   return <section className="tiptap-editor-shell" data-editor="slash-editor"><EditorContext.Provider value={{ editor }}><EditorContent editor={editor} />{editor && <><SlashEditorTools editor={editor} /><NovelEditorChrome onUpload={uploadImage} /><LinkPasteTools editor={editor} /></>}</EditorContext.Provider>{uploadError && <p className="tiptap-editor-error" role="alert">{uploadError}</p>}</section>;
 }
 

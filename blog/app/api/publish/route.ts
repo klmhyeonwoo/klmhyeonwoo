@@ -6,6 +6,7 @@ import { isContentReferenceId } from "@/lib/content-reference";
 import { deleteDraft, savePost } from "@/lib/github";
 import { hashPostPassword } from "@/lib/post-access";
 import { getPostPasswordHash, getPostPublishedAt, getPosts } from "@/lib/posts";
+import { convertBlocks, markdownFor } from "@/lib/slash-content";
 
 const validPostId = /^[a-z0-9]+(?:[a-z0-9-]*[a-z0-9])?$/;
 
@@ -38,6 +39,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "글의 크기는 1MB 이하여야 합니다." }, { status: 413 });
   }
 
+  // The editor document is the lossless source of truth.  The Markdown/MDX
+  // string is its public rendering projection, so recover it here when a
+  // browser has not received its first editor `onUpdate` yet.
+  const renderMarkdown = markdown.trim() || markdownFor(convertBlocks(blocks));
+  if (!renderMarkdown.trim()) {
+    return NextResponse.json({ error: "본문을 입력해 주세요." }, { status: 400 });
+  }
+
   const postId = id ?? randomUUID();
   const previousSeriesId = id ? getPosts(true).find((post) => post.id === id)?.seriesId : undefined;
   const publishedAt = id ? getPostPublishedAt(id) ?? new Date().toISOString() : new Date().toISOString();
@@ -60,7 +69,7 @@ export async function POST(request: Request) {
       seriesId: series,
       publishedAt,
       updatedAt,
-      markdown,
+      markdown: renderMarkdown,
       blocks,
       isPrivate,
       passwordHash,

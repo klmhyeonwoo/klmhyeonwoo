@@ -27,9 +27,11 @@ import { getTableOfContents, rehypeHeadingIds } from "@/lib/table-of-contents";
 import { absoluteUrl } from "@/lib/site-url";
 import { convertBlocks, markdownFor } from "@/lib/slash-content";
 
-// Publishing and deletion call revalidatePath for this route, so this is only
-// the safety-net interval for changes made outside the application.
-export const revalidate = 3600;
+// A single post URL can change between public and password-protected states.
+// Next cannot safely combine that cookie-dependent branch with a pre-rendered
+// dynamic segment, so render this leaf per request. The post list, assets and
+// all non-article routes keep their existing cache policies.
+export const dynamic = "force-dynamic";
 
 type Params = Promise<{ id: string }>;
 

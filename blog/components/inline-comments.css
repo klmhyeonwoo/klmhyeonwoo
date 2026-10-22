@@ -13,8 +13,13 @@
 .inline-comment-avatar { align-items: center; background: color-mix(in srgb, var(--ink) 11%, transparent); border-radius: 50%; display: inline-flex; flex: 0 0 auto; font-size: .72rem; font-weight: 700; height: 1.85rem; justify-content: center; margin-top: .12rem; width: 1.85rem; }
 .inline-comment-entry textarea { background: transparent; border: 0; color: inherit; flex: 1; min-height: 2rem; outline: 0; padding: .3rem 0; resize: none; }
 .inline-comment-entry textarea::placeholder { color: var(--muted); }
-.inline-comment-name { color: var(--muted); display: block; font-size: .75rem; margin: .4rem 0 0 2.4rem; }
-.inline-comment-name input { background: transparent; border: 0; border-bottom: 1px solid var(--line); color: inherit; margin-left: .4rem; max-width: 11rem; padding: .15rem .1rem; }
+.inline-comment-avatar { overflow: hidden; }
+.inline-comment-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.inline-comment-entry textarea { min-width: 0; font-size: .875rem; line-height: 1.6; max-height: 8rem; }
+.inline-comment-composer footer small { color: var(--muted); font-size: .72rem; margin-left: 2.4rem; }
+.inline-comment-entry .inline-comment-send { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 2rem; width: 2rem; height: 2rem; border: 0; border-radius: 50%; background: var(--ink); color: var(--surface, Canvas); padding: .4rem; }
+.inline-comment-send svg { width: 100%; height: 100%; }
+.inline-comment-composer { box-sizing: border-box; max-height: calc(100dvh - 1.5rem); overflow: auto; }
 .inline-comment-composer footer { align-items: center; display: flex; gap: .4rem; margin-top: .3rem; }
 .inline-comment-composer footer span { flex: 1; }
 .inline-comment-composer footer button { background: transparent; border: 0; border-radius: .45rem; color: var(--muted); font-size: .76rem; padding: .28rem .45rem; }

@@ -1,6 +1,7 @@
 import { createHash } from "crypto";
 import { isAdmin } from "@/lib/auth";
 import { getPosts } from "@/lib/posts";
+import { getProfile } from "@/lib/profile";
 import { createInlineComment, deleteInlineComment, listInlineComments } from "@/lib/inline-comments";
 import { validComment } from "@/lib/inline-comment-types";
 
@@ -16,12 +17,17 @@ async function publicPost(context: Context) {
 export async function GET(_: Request, context: Context) {
   const id = await publicPost(context);
   if (!id) return json({ error: "글을 찾을 수 없습니다." }, 404);
-  try { return json({ comments: await listInlineComments(id), canDelete: await isAdmin() }); }
+  try {
+    const admin = await isAdmin();
+    const { name, image } = getProfile();
+    return json({ comments: await listInlineComments(id), canCreate: admin, canDelete: admin, author: admin ? { name, image } : null });
+  }
   catch { return json({ error: "댓글을 불러오지 못했습니다. 잠시 후 다시 시도해주세요." }, 503); }
 }
 
 export async function POST(request: Request, context: Context) {
   if (request.headers.get("origin") !== new URL(request.url).origin) return json({ error: "허용되지 않은 요청입니다." }, 403);
+  if (!(await isAdmin())) return json({ error: "본문 댓글은 관리자만 작성할 수 있습니다." }, 401);
   const id = await publicPost(context);
   if (!id) return json({ error: "글을 찾을 수 없습니다." }, 404);
   const key = createHash("sha256").update(request.headers.get("x-forwarded-for")?.split(",")[0] ?? "unknown").digest("hex");
@@ -44,7 +50,9 @@ export async function POST(request: Request, context: Context) {
     }
     let value: unknown;
     try { value = JSON.parse(Buffer.concat(chunks).toString("utf8")); } catch { return json({ error: "잘못된 댓글 형식입니다." }, 400); }
-    if (!validComment(value)) return json({ error: "이름, 본문 선택 영역과 댓글을 확인해주세요." }, 400);
+    // Identity belongs to the authenticated blog owner, never the request payload.
+    value = value && typeof value === "object" ? { ...value, name: getProfile().name.trim().slice(0, 40) } : value;
+    if (!validComment(value)) return json({ error: "본문 선택 영역과 댓글을 확인해주세요." }, 400);
     return json({ comment: await createInlineComment(id, { name: value.name.trim(), body: value.body.trim(), anchor: value.anchor }) }, 201);
   } catch { return json({ error: "댓글을 저장하지 못했습니다. 잠시 후 다시 시도해주세요." }, 503); }
 }

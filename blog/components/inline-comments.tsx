@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type FormEvent, type RefObject } from "react";
 import type { InlineComment, TextAnchor } from "@/lib/inline-comment-types";
 import { anchorRange } from "@/lib/text-anchor";
+import { useAdminSession } from "./admin-session";
 import "./inline-comments.css";
 
 type FloatingPoint = { top: number; left: number };
@@ -21,6 +22,10 @@ function CommentGlyph() {
 
 /** Selection anchored discussion UI. The persistent anchor is text context, never DOM offsets. */
 export function InlineComments({ postId, root }: { postId: string; root: RefObject<HTMLDivElement | null> }) {
+  const { authenticated } = useAdminSession();
+  const [author, setAuthor] = useState<{ name: string; image: string } | null>(null);
+  const [canCreate, setCanCreate] = useState(false);
+  const canWrite = authenticated === true && canCreate;
   const [comments, setComments] = useState<InlineComment[]>([]);
   const [canDelete, setCanDelete] = useState(false);
   const [anchor, setAnchor] = useState<TextAnchor | null>(null);
@@ -30,8 +35,6 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
   const [activeAnchorKey, setActiveAnchorKey] = useState<string | null>(null);
   const [threadPoint, setThreadPoint] = useState<FloatingPoint | null>(null);
   const [panelOpen, setPanelOpen] = useState(false);
-  const [name, setName] = useState("익명");
-  const [showName, setShowName] = useState(false);
   const [body, setBody] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
@@ -41,23 +44,24 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
   const endpoint = `/api/posts/${encodeURIComponent(postId)}/inline-comments`;
 
   useEffect(() => {
-    const stored = window.localStorage.getItem("wavy:inline-comment-name");
-    if (stored?.trim()) setName(stored.slice(0, 40));
-  }, []);
-
-  useEffect(() => {
     const controller = new AbortController();
     fetch(endpoint, { signal: controller.signal, cache: "no-store" }).then(async (response) => {
       const data = await response.json();
       if (!response.ok) throw new Error(data.error);
-      setComments(data.comments); setCanDelete(data.canDelete); setError("");
+      if (controller.signal.aborted) return;
+      setComments(data.comments); setCanDelete(data.canDelete === true); setCanCreate(data.canCreate === true); setAuthor(data.author); setError("");
     }).catch((fetchError) => {
       if (!controller.signal.aborted) setError(fetchError instanceof Error ? fetchError.message : "댓글을 불러오지 못했습니다.");
     }).finally(() => { if (!controller.signal.aborted) setLoading(false); });
     return () => controller.abort();
-  }, [endpoint, attempt]);
+  }, [endpoint, attempt, authenticated]);
 
   useEffect(() => {
+    if (!canWrite) { setComposing(false); setAnchor(null); setSelectionPoint(null); }
+  }, [canWrite]);
+
+  useEffect(() => {
+    if (!canWrite) return;
     function selectionChanged() {
       if (composing) return;
       const element = root.current;
@@ -76,7 +80,7 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
     }
     document.addEventListener("selectionchange", selectionChanged);
     return () => document.removeEventListener("selectionchange", selectionChanged);
-  }, [composing, root]);
+  }, [canWrite, composing, root]);
 
   useEffect(() => {
     const element = root.current;
@@ -138,8 +142,10 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
   }, []);
 
   function startComment() {
-    if (!anchor || !selectionPoint) return;
-    setComposerPoint(selectionPoint); setActiveAnchorKey(null); setComposing(true);
+    if (!canWrite || !anchor || !selectionPoint) return;
+    const range = root.current && anchorRange(root.current, anchor);
+    setComposerPoint(range ? pointFor(range.getBoundingClientRect(), Math.min(496, window.innerWidth - 24), 180) : selectionPoint);
+    setActiveAnchorKey(null); setComposing(true);
     requestAnimationFrame(() => form.current?.querySelector<HTMLTextAreaElement>("textarea")?.focus());
   }
 
@@ -166,14 +172,12 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!anchor || busy || !body.trim()) return;
+    if (!canWrite || !anchor || busy || !body.trim()) return;
     setBusy(true); setError("");
     try {
-      const commentName = name.trim() || "익명";
-      const response = await fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: commentName, body, anchor }) });
+      const response = await fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ body, anchor }) });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error);
-      window.localStorage.setItem("wavy:inline-comment-name", commentName);
       setComments((current) => [...current, data.comment]);
       setBody(""); setAnchor(null); setSelectionPoint(null); setComposing(false); setPanelOpen(false);
     } catch (submitError) { setError(submitError instanceof Error ? submitError.message : "댓글을 저장하지 못했습니다."); }
@@ -182,10 +186,23 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
 
   return <section className="inline-comments" aria-label="본문 댓글">
     <button className="inline-comments-summary" type="button" onClick={() => setPanelOpen((value) => !value)} aria-expanded={panelOpen}><CommentGlyph /><span>{loading ? "…" : comments.length}</span></button>
-    {anchor && !composing && <button className="inline-comment-start" style={selectionPoint ? { left: selectionPoint.left, top: selectionPoint.top } : undefined} type="button" onMouseDown={(event) => event.preventDefault()} onClick={startComment}>댓글 추가</button>}
-    {composing && anchor && <aside className="inline-comment-composer" style={composerPoint ? { left: composerPoint.left, top: composerPoint.top } : undefined} onMouseDown={(event) => event.stopPropagation()}><form ref={form} onSubmit={submit}><blockquote>{anchor.quote}</blockquote><div className="inline-comment-entry"><span className="inline-comment-avatar" aria-hidden="true">{(name.trim() || "익명").slice(0, 1)}</span><textarea required maxLength={2000} rows={1} value={body} onChange={(event) => setBody(event.target.value)} placeholder="댓글 추가" aria-label="댓글" /></div>{showName && <label className="inline-comment-name">표시 이름<input maxLength={40} value={name} onChange={(event) => setName(event.target.value)} placeholder="익명" /></label>}<footer><button className="inline-comment-name-button" type="button" onClick={() => setShowName((value) => !value)} aria-label="표시 이름 설정" aria-pressed={showName}>@</button><span /><button type="button" onClick={() => { setComposing(false); setAnchor(null); setSelectionPoint(null); }}>취소</button><button className="inline-comment-send" type="submit" disabled={busy || !body.trim()} aria-label="댓글 등록">↑</button></footer></form></aside>}
+    {canWrite && anchor && !composing && <button className="inline-comment-start" style={selectionPoint ? { left: selectionPoint.left, top: selectionPoint.top } : undefined} type="button" onMouseDown={(event) => event.preventDefault()} onClick={startComment}>댓글 추가</button>}
+    {canWrite && composing && anchor && <aside className="inline-comment-composer" role="region" aria-label="본문 댓글 작성" style={composerPoint ? { left: composerPoint.left, top: composerPoint.top } : undefined}>
+      <form ref={form} onSubmit={submit} aria-busy={busy}>
+        <blockquote>{anchor.quote}</blockquote>
+        <div className="inline-comment-entry">
+          <span className="inline-comment-avatar" title={author?.name} aria-hidden="true">{author?.image ? <img src={author.image} alt="" /> : (author?.name || "관리자").slice(0, 1)}</span>
+          <textarea required maxLength={2000} rows={2} value={body} onChange={(event) => setBody(event.target.value)} placeholder="댓글 추가…" aria-label="댓글" onKeyDown={(event) => {
+            if (event.key === "Enter" && (event.metaKey || event.ctrlKey) && !event.nativeEvent.isComposing) { event.preventDefault(); form.current?.requestSubmit(); }
+          }} />
+          <button className="inline-comment-send" type="submit" disabled={busy || !body.trim()} aria-label={busy ? "댓글 등록 중" : "댓글 등록"} title="댓글 등록 (⌘/Ctrl + Enter)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg></button>
+        </div>
+        <footer><small>{author?.name || "관리자"}</small><span /><button type="button" onClick={() => { setComposing(false); setAnchor(null); setSelectionPoint(null); }}>닫기</button></footer>
+        {error && <p className="inline-comment-error" role="alert">{error}</p>}
+      </form>
+    </aside>}
     {activeThread && threadPoint && <aside className="inline-comment-thread" role="region" aria-label="선택한 문장 댓글" style={{ left: threadPoint.left, top: threadPoint.top }}><header><strong>댓글 {activeThread.length}</strong><button type="button" aria-label="댓글 창 닫기" onClick={() => setActiveAnchorKey(null)}>×</button></header><blockquote>{activeThread[0].anchor.quote}</blockquote><ul>{activeThread.map((comment) => <li key={comment.id}><div><strong>{comment.name}</strong><time dateTime={comment.createdAt}>{new Date(comment.createdAt).toLocaleDateString("ko-KR")}</time>{canDelete && <button type="button" disabled={busy} onClick={() => void remove(comment.id)}>삭제</button>}</div><p>{comment.body}</p></li>)}</ul></aside>}
-    {panelOpen && <aside className="inline-comments-panel" role="region" aria-label="모든 본문 댓글"><header><div><strong>본문 댓글</strong><small>{comments.length}개</small></div><button type="button" onClick={() => setPanelOpen(false)} aria-label="댓글 목록 닫기">×</button></header>{loading ? <p>댓글을 불러오는 중…</p> : comments.length ? <ul>{comments.map((comment) => <li key={comment.id}><button type="button" onClick={() => showQuote(comment)}>“{comment.anchor.quote}”</button><strong>{comment.name}</strong><time dateTime={comment.createdAt}>{new Date(comment.createdAt).toLocaleDateString("ko-KR")}</time><p>{comment.body}</p></li>)}</ul> : <p>아직 본문 댓글이 없습니다.<br />문장을 선택해 첫 댓글을 남겨보세요.</p>}</aside>}
-    {error && <p className="inline-comment-error" role="alert">{error} <button type="button" disabled={busy} onClick={() => { setLoading(true); setAttempt((value) => value + 1); }}>다시 시도</button></p>}
+    {panelOpen && <aside className="inline-comments-panel" role="region" aria-label="모든 본문 댓글"><header><div><strong>본문 댓글</strong><small>{comments.length}개</small></div><button type="button" onClick={() => setPanelOpen(false)} aria-label="댓글 목록 닫기">×</button></header>{loading ? <p>댓글을 불러오는 중…</p> : comments.length ? <ul>{comments.map((comment) => <li key={comment.id}><button type="button" onClick={() => showQuote(comment)}>“{comment.anchor.quote}”</button><strong>{comment.name}</strong><time dateTime={comment.createdAt}>{new Date(comment.createdAt).toLocaleDateString("ko-KR")}</time><p>{comment.body}</p></li>)}</ul> : <p>아직 본문 댓글이 없습니다.{canWrite && <><br />문장을 선택해 첫 댓글을 남겨보세요.</>}</p>}</aside>}
+    {error && !composing && <p className="inline-comment-error" role="alert">{error} <button type="button" disabled={busy} onClick={() => { setLoading(true); setAttempt((value) => value + 1); }}>다시 시도</button></p>}
   </section>;
 }

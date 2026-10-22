@@ -5,6 +5,7 @@ import "./image-containment.css";
 import "@/components/editor-interactions.css";
 import { ToastProvider } from "@/components/toast-provider";
 import { AdminSessionProvider } from "@/components/admin-session";
+import { PixelWaves } from "@/components/pixel-waves";
 
 function getSiteUrl() {
   const value = process.env.NEXT_PUBLIC_SITE_URL
@@ -50,7 +51,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ko">
-      <body><ToastProvider><AdminSessionProvider>{children}</AdminSessionProvider></ToastProvider></body>
+      <body><PixelWaves /><ToastProvider><AdminSessionProvider>{children}</AdminSessionProvider></ToastProvider></body>
     </html>
   );
 }

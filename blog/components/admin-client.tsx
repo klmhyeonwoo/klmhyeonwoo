@@ -109,6 +109,13 @@ export function AdminClient({ authenticated: initiallyAuthenticated, initialPost
   ], [posts, series]);
 
   useEffect(() => {
+    // A published post is the authoritative starting point for editing. A
+    // stale browser autosave (including older empty drafts) must not replace
+    // its title or body as soon as the editor mounts.
+    if (initialPost) {
+      setDraftReady(true);
+      return;
+    }
     try {
       const savedDraft = window.localStorage.getItem(draftKey);
       if (!savedDraft) return;
@@ -130,7 +137,7 @@ export function AdminClient({ authenticated: initiallyAuthenticated, initialPost
     } finally {
       setDraftReady(true);
     }
-  }, [draftKey]);
+  }, [draftKey, initialPost]);
 
   useEffect(() => {
     if (!deployment) return;

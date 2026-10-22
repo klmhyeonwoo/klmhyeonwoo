@@ -4,6 +4,7 @@ import { createHash } from "crypto";
 import matter from "gray-matter";
 import { postDateValue, postPublishedAtValue } from "./post-date";
 import { getSeries } from "./series";
+import { markdownEditorDocument } from "./markdown-editor-document";
 
 const postsDirectory = path.join(process.cwd(), "content", "posts");
 const draftsDirectory = path.join(process.cwd(), "drafts");
@@ -151,13 +152,17 @@ export function getEditablePost(id: string): EditablePost | null {
   if (safeId !== id) return null;
   const meta = getPosts(true).find((post) => post.id === safeId);
   const editorFile = path.join(process.cwd(), "editor-data", `${safeId}.json`);
-  if (!meta || !fs.existsSync(editorFile)) return null;
+  if (!meta) return null;
+  const fallback = () => {
+    const source = getPost(safeId);
+    return source ? [{ type: "tiptap-content", version: 1, content: markdownEditorDocument(source) }] : [];
+  };
+  if (!fs.existsSync(editorFile)) return { id: safeId, title: meta.title, description: meta.description ?? "", categoryId: meta.categoryId, seriesId: meta.seriesId ?? "", isPrivate: meta.isPrivate, blocks: fallback() };
   try {
     const blocks: unknown = JSON.parse(fs.readFileSync(editorFile, "utf8"));
-    if (!Array.isArray(blocks)) return null;
-    return { id: safeId, title: meta.title, description: meta.description ?? "", categoryId: meta.categoryId, seriesId: meta.seriesId ?? "", isPrivate: meta.isPrivate, blocks };
+    return { id: safeId, title: meta.title, description: meta.description ?? "", categoryId: meta.categoryId, seriesId: meta.seriesId ?? "", isPrivate: meta.isPrivate, blocks: Array.isArray(blocks) ? blocks : fallback() };
   } catch {
-    return null;
+    return { id: safeId, title: meta.title, description: meta.description ?? "", categoryId: meta.categoryId, seriesId: meta.seriesId ?? "", isPrivate: meta.isPrivate, blocks: fallback() };
   }
 }
 

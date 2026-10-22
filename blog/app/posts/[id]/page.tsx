@@ -26,7 +26,9 @@ import { PostColumn, PostColumns } from "@/components/post-columns";
 import { getTableOfContents, rehypeHeadingIds } from "@/lib/table-of-contents";
 import { absoluteUrl } from "@/lib/site-url";
 
-export const revalidate = 300;
+// Publishing and deletion call revalidatePath for this route, so this is only
+// the safety-net interval for changes made outside the application.
+export const revalidate = 3600;
 
 type Params = Promise<{ id: string }>;
 

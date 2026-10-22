@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 
 export type SearchablePost = {
   id: string;
@@ -23,9 +23,18 @@ function searchHref(query: string, category?: string) {
   return value ? `/?${value}` : "/";
 }
 
-export function PostSearch({ categoryId, initialQuery, posts }: { categoryId?: string; initialQuery: string; posts: SearchablePost[] }) {
+type Props = {
+  categoryId?: string;
+  initialQuery: string;
+  posts: SearchablePost[];
+  onSearch?: (query: string) => void;
+  onNavigate?: (href: string) => void;
+};
+
+export function PostSearch({ categoryId, initialQuery, posts, onSearch, onNavigate }: Props) {
   const [query, setQuery] = useState(initialQuery);
   const [open, setOpen] = useState(false);
+  useEffect(() => setQuery(initialQuery), [initialQuery]);
   const needle = normalize(query);
   const suggestions = useMemo(() => {
     if (!needle) return { posts: [], topics: [] as Array<{ label: string; href: string; type: string }> };
@@ -56,7 +65,19 @@ export function PostSearch({ categoryId, initialQuery, posts }: { categoryId?: s
   }, [categoryId, needle, posts]);
   const hasSuggestions = suggestions.posts.length > 0 || suggestions.topics.length > 0;
 
-  return <form action="/" className="kb-post-search" role="search">
+  function submit(event: FormEvent<HTMLFormElement>) {
+    if (!onSearch) return;
+    event.preventDefault();
+    onSearch(query);
+  }
+
+  function navigate(event: React.MouseEvent<HTMLAnchorElement>, href: string) {
+    if (!onNavigate || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    onNavigate(href);
+  }
+
+  return <form action="/" className="kb-post-search" role="search" onSubmit={submit}>
     {categoryId && <input name="category" type="hidden" value={categoryId} />}
     <label className="sr-only" htmlFor="post-search">게시글 검색</label>
     <input
@@ -90,9 +111,9 @@ export function PostSearch({ categoryId, initialQuery, posts }: { categoryId?: s
       </section>}
       {suggestions.topics.length > 0 && <section>
         <p>관련 주제</p>
-        {suggestions.topics.map((topic) => <Link href={topic.href} key={`${topic.type}-${topic.label}`} onMouseDown={(event) => event.preventDefault()}><span>{topic.type}</span>{topic.label}</Link>)}
+        {suggestions.topics.map((topic) => <Link href={topic.href} key={`${topic.type}-${topic.label}`} onMouseDown={(event) => event.preventDefault()} onClick={(event) => navigate(event, topic.href)}><span>{topic.type}</span>{topic.label}</Link>)}
       </section>}
-      <Link className="kb-search-all" href={searchHref(query, categoryId)} onMouseDown={(event) => event.preventDefault()}>“{query.trim()}” 전체 검색</Link>
+      <Link className="kb-search-all" href={searchHref(query, categoryId)} onMouseDown={(event) => event.preventDefault()} onClick={(event) => navigate(event, searchHref(query, categoryId))}>“{query.trim()}” 전체 검색</Link>
     </aside>}
   </form>;
 }

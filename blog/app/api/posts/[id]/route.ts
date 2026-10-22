@@ -20,6 +20,7 @@ export async function DELETE(_: Request, { params }: { params: Promise<{ id: str
     revalidatePath("/");
     revalidatePath(`/posts/${id}`);
     revalidatePath("/series");
+    if (post.seriesId) revalidatePath(`/series/${post.seriesId}`);
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error(error);

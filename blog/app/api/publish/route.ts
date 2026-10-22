@@ -5,7 +5,7 @@ import { isAdmin } from "@/lib/auth";
 import { isContentReferenceId } from "@/lib/content-reference";
 import { deleteDraft, savePost } from "@/lib/github";
 import { hashPostPassword } from "@/lib/post-access";
-import { getPostPasswordHash, getPostPublishedAt } from "@/lib/posts";
+import { getPostPasswordHash, getPostPublishedAt, getPosts } from "@/lib/posts";
 
 const validPostId = /^[a-z0-9]+(?:[a-z0-9-]*[a-z0-9])?$/;
 
@@ -39,6 +39,7 @@ export async function POST(request: Request) {
   }
 
   const postId = id ?? randomUUID();
+  const previousSeriesId = id ? getPosts(true).find((post) => post.id === id)?.seriesId : undefined;
   const publishedAt = id ? getPostPublishedAt(id) ?? new Date().toISOString() : new Date().toISOString();
   const updatedAt = new Date().toISOString();
   const existingPasswordHash = id ? getPostPasswordHash(id) : null;
@@ -68,6 +69,8 @@ export async function POST(request: Request) {
     revalidatePath("/");
     revalidatePath(`/posts/${postId}`);
     revalidatePath("/series");
+    if (previousSeriesId) revalidatePath(`/series/${previousSeriesId}`);
+    if (series) revalidatePath(`/series/${series}`);
     return NextResponse.json({ ok: true, id: postId, version });
   } catch (error) {
     console.error(error);

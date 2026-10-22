@@ -15,7 +15,18 @@
 .inline-comments label { display: block; margin: .75rem 0; }
 .inline-comments input, .inline-comments textarea { display: block; width: 100%; box-sizing: border-box; padding: .6rem; margin-top: .3rem; border: 1px solid color-mix(in srgb, currentColor 25%, transparent); border-radius: .4rem; background: transparent; color: inherit; font: inherit; }
 .inline-comments form div { display: flex; gap: .5rem; }
-.inline-comment-start { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%); z-index: 40; background: var(--background, Canvas) !important; box-shadow: 0 4px 24px #0002; max-width: calc(100vw - 2rem); }
+.inline-comment-start { position: fixed; z-index: 40; background: var(--surface-raised, Canvas) !important; box-shadow: 0 8px 28px #0003; max-width: calc(100vw - 2rem); }
+.prose mark[data-inline-comment-anchor] { background: color-mix(in srgb, var(--accent) 24%, transparent); border-radius: .2rem; box-decoration-break: clone; cursor: pointer; padding: .03em .08em; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 65%, transparent); text-decoration-thickness: 2px; text-underline-offset: .13em; }
+.prose mark[data-inline-comment-anchor]:hover, .prose mark[data-inline-comment-anchor]:focus-visible { background: color-mix(in srgb, var(--accent) 36%, transparent); outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent); outline-offset: 2px; }
+.inline-comment-thread { background: var(--surface-raised, Canvas); border: 1px solid color-mix(in srgb, currentColor 18%, transparent); border-radius: .75rem; box-shadow: 0 14px 40px #0003; color: var(--ink, CanvasText); max-height: min(22rem, calc(100vh - 1.5rem)); overflow: auto; padding: .75rem; position: fixed; width: min(20rem, calc(100vw - 1.5rem)); z-index: 45; }
+.inline-comment-thread > header { align-items: center; display: flex; justify-content: space-between; gap: .5rem; }
+.inline-comment-thread > header button { border: 0; font-size: 1.25rem; line-height: 1; padding: .2rem .4rem; }
+.inline-comment-thread blockquote { margin: .65rem 0; max-height: 5rem; overflow: auto; }
+.inline-comment-thread ul { list-style: none; margin: 0; padding: 0; }
+.inline-comment-thread li { border-top: 1px solid color-mix(in srgb, currentColor 12%, transparent); padding: .65rem 0; }
+.inline-comment-thread li p { margin: .35rem 0 0; white-space: pre-wrap; }
+.inline-comment-thread time { margin-left: .35rem; opacity: .65; font-size: .75rem; }
+@media (max-width: 42rem) { .inline-comment-thread { left: .75rem !important; right: .75rem; top: auto !important; bottom: .75rem; width: auto; } }
 .post-content-with-comments { min-width: 0; }
 @media (min-width: 1100px) {
   .article-with-toc .article-content-layout > .post-content-with-comments { grid-column: 1; grid-row: 1; }

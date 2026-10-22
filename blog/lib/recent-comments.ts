@@ -12,7 +12,10 @@ export type RecentComment = { body: string; createdAt: string; href: string; pos
 // A short server cache keeps the GitHub API within rate limits while ensuring
 // a new comment becomes visible on the home page without needing to visit the
 // article that owns the discussion.
-const recentCommentsRevalidateSeconds = 60;
+// This sidebar is intentionally eventually consistent. A ten-minute cache
+// avoids waking a function and running a broad GitHub GraphQL query for each
+// ISR regeneration while still keeping the latest few comments useful.
+const recentCommentsRevalidateSeconds = 600;
 
 function repository() {
   return process.env.NEXT_PUBLIC_UTTERANCES_REPO ?? `${process.env.GITHUB_OWNER ?? "klmhyeonwoo"}/${process.env.GITHUB_REPO ?? "klmhyeonwoo"}`;
@@ -64,13 +67,13 @@ async function getGiscusRecentComments(configuration: { repository: string; cate
   const [owner, name] = repositoryName.split("/");
   const query = `query RecentGiscusComments($owner: String!, $name: String!, $categoryId: ID!) {
     repository(owner: $owner, name: $name) {
-      discussions(first: 30, categoryId: $categoryId, orderBy: { field: UPDATED_AT, direction: DESC }) {
+      discussions(first: 10, categoryId: $categoryId, orderBy: { field: UPDATED_AT, direction: DESC }) {
         nodes {
           title
-          comments(last: 10) {
+          comments(last: 6) {
             nodes {
               body createdAt url author { login avatarUrl }
-              replies(last: 10) {
+              replies(last: 6) {
                 nodes { body createdAt url author { login avatarUrl } }
               }
             }

@@ -1,14 +1,12 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { usePathname } from "next/navigation";
 
 type Session = { authenticated: boolean | null; updateSession: (authenticated: boolean) => void };
 const SessionContext = createContext<Session | null>(null);
 const sessionEvent = "wavy-admin-session";
 
 export function AdminSessionProvider({ children }: { children: ReactNode }) {
-  const pathname = usePathname();
   const [authenticated, setAuthenticated] = useState<boolean | null>(null);
   const request = useRef<AbortController | null>(null);
   const refresh = useCallback(async () => {
@@ -33,11 +31,9 @@ export function AdminSessionProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     void refresh();
     const onStorage = (event: StorageEvent) => { if (event.key === sessionEvent) void refresh(); };
-    const onFocus = () => { void refresh(); };
     window.addEventListener("storage", onStorage);
-    window.addEventListener("focus", onFocus);
-    return () => { request.current?.abort(); window.removeEventListener("storage", onStorage); window.removeEventListener("focus", onFocus); };
-  }, [pathname, refresh]);
+    return () => { request.current?.abort(); window.removeEventListener("storage", onStorage); };
+  }, [refresh]);
   const value = useMemo(() => ({ authenticated, updateSession }), [authenticated, updateSession]);
   return <SessionContext.Provider value={value}>{children}</SessionContext.Provider>;
 }

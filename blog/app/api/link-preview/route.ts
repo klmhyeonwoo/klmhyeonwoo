@@ -77,6 +77,11 @@ export async function GET(request: NextRequest) {
     const preview = metadata((await response.text()).slice(0, 500_000), finalUrl);
     return NextResponse.json(preview, { headers: { "Cache-Control": "public, max-age=3600, s-maxage=86400" } });
   } catch {
-    return NextResponse.json({ error: "링크 미리보기를 불러오지 못했습니다." }, { status: 422 });
+    // Avoid repeatedly doing DNS lookups and remote fetches for an invalid or
+    // temporarily unavailable URL while the editor remains open.
+    return NextResponse.json(
+      { error: "링크 미리보기를 불러오지 못했습니다." },
+      { status: 422, headers: { "Cache-Control": "public, max-age=300, s-maxage=1800" } },
+    );
   }
 }

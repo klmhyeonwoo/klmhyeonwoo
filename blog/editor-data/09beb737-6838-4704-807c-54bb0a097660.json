@@ -1,0 +1,790 @@
+[
+  {
+    "type": "slash-content",
+    "version": 1,
+    "content": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "4eXN_nvPBPTy"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "YARA, Snort, Sigma 룰은 보통 탐지 룰, 탐지 시그니처라고 합니다. 핵심 쓰임새는 아래와 같습니다."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "attrs": {
+            "id": "ZNNx87ak7Wpz"
+          },
+          "content": [
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "3pV7LK0ZZ1y3"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "F1Sa98CMPDCT"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "YARA는 네트워크 침입 탐지, 방지 시그니처"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "-5x1XJ117LVs"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "z7OEu4tsT3Gj"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Snort는 네트워크 침입 탐지, 방지 시그니처"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "SJpRvzwk_5I-"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "9wg22UJCngmV"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Sigma는 로그 기반 위협 탐지룰"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "VLODKDEiDtIz",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "YARA"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "7oWj7QRbLfZw"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "YARA는 파일이나 메모리 안에서 악성코드의 특징을 찾아내는 규칙 언어입니다. 악성코드 샘플에 반복적으로 등장하는 문자열, 바이트 패턴, PE 헤더 정보 등을 조건으로 정의합니다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "6OgjPPfVxaQw"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "예를 들어 특정 랜섬웨어에만 공통적으로 나타나는 문구, C2 도메인, 난독화되지 않은 코드 조각을 찾아 해당 파일을 분류할 수 있습니다."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "attrs": {
+            "id": "whPY3QIi4-bf"
+          },
+          "content": [
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "4bj3RRou1nRw"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "wtRcSgLycTIf"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "악성 파일 검사 및 분류"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "XqvZICyAaR3Y"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "7R4ewm3Axbam"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "메모리 덤프에서 악성코드 흔적 탐색"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "kVL6_uDuMhRD"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "T1WeK18NqoJj"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "침해사고 대응 시, IOC 기반 헌팅"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "PbcsNtau4Juv"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "67ZBF92DUYGu"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "악성코드 패밀리 식별"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "tcS_HSGPAqrj"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "위와 같이 활용되며, 이 파일 또는 메모리가 어떤 악성코드 특징을 갖는가를 룰에 규칙으로 정의합니다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "hKlUtFI2EtJz",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Snort"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "O--bbwD6Lnon"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Snort는 네트워크 트래픽을 검사해 공격 징후를 탐지하는 IDS/IPS용 룰입니다. 패킷의 출발지 - 목적지 IP, 포트, 프로토콜, 페이로드 문자열 등을 조건으로 삼습니다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "NwMGngBx3dev"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "예를 들어 외부에서 내부 서버의 취약한 웹 경로를 요청하거나, 알려진 공격 도구의 통신 패턴이 보이면 경고를 발생시킬 수 있습니다. IPS 모드에서는 탐지뿐 아니라 해당 트래픽을 차단하는데도 사용됩니다."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "attrs": {
+            "id": "isAzc2B79kOj"
+          },
+          "content": [
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "yxQ_FfmHpoBD"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "ncxAUBPPldtH"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "네트워크 침입 탐지 및 차단"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "gAwe407bqONB"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "gBfo8sVr56mH"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "취약점 공격 시도 탐지"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "INtsYPBkAOWr"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "R4cRbSu8phIz"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "악성 C2 통신 탐지"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "6EYndCjnY4fD"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "K1ljuyDN4QBb"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "비정상 프로토콜, 페이로드 분석"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "3YE7SwK70QQ4"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "위와 같이 활용되며, 네트워크에서 어떤 공격 또는 악성 통신이 발생하는 가를 룰의 규칙으로 정의합니다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "urVMJA7PPaqO",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Sigma"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "F5MFkdxinIBm"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Sigma는 Windows Event Log, Sysmon, Linux 감사로그, 클라우드 로그 등 다양한 보안 로그에서 위협 행위를 찾기 위한 범용 탐지 규칙 포맷입니다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "yI_GmewhszGm"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "예를 들어 PowerShell이 의심스러운 인코딩 명령을 실행했거나, 일반적이지 않은 부모 프로세스가 시스템 도구를 실행했을 때 이를 탐지하도록 정의할 수 있습니다. Sigma 룰은 특정 SIEM 제품에 종속되지 않으며, Splunk, Elastic, MS Sentinel 등의 쿼리로 변화해 활용할 수 있습니다."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "attrs": {
+            "id": "N76DrqYpVFA5"
+          },
+          "content": [
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "hRr42f0msS9w"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "YAIITmvmldWq"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "SIEM 기반 보안 모니터링"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "DC0haIh1omC2"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "5pwAuHtlWkt-"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "엔드포인트 행위 탐지"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "u25_23xNGUD4"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "YSeqWkqYQXfq"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "위협 헌팅"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "W0gWHtj1IH46"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "ovBzJXXGm_U-"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "ATT&CK 전술, 기반 탐지 콘텐츠 관리"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "ZfmnE3GBW2xT"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "위와 같이 활용되며, 로그에 남은 행위가 공격 기법과 일치하는가를 룰의 규칙으로 정의합니다."
+            }
+          ]
+        },
+        {
+          "type": "blockquote",
+          "attrs": {
+            "id": "ySk3az8hJzIb"
+          },
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "id": "Cpmg7iXhtd4a"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "SIEM(Security Information and Event Management) 이란?"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "vdiveNYUw_jE"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "보안 정보 및 이벤트 관리 시스템으로, 보안 장비와 시스템에서 나오는 로그를 한곳에 모아 분석하고, 공격 징후를 탐지 및 경고하는 플랫폼입니다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "pEfqZcjqs4qa",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "정리"
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "attrs": {
+            "id": "3REDCnBrQ7Yg",
+            "fullWidth": false
+          },
+          "content": [
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "id": "xI8Blaz-z0o2",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": [
+                      194
+                    ],
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "nIq4XQaMeV5H"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "룰 종류"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "id": "mcsQMQ6GRTyV",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": [
+                      448
+                    ],
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "k482zuB92D5L"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "주 대상"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "DN-neNn3pk0v",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": [
+                      194
+                    ],
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "d8dGM-w4zB5l"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "YARA"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "zh3Zel51jnYr",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": [
+                      448
+                    ],
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "i5zT30ZWpsT5"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "파일, 메모리 (이 파일은 악성코드인가?)"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "ttWRFWHzABP6",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": [
+                      194
+                    ],
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "TSsoGMmmUJIu"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Snort"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "gZD-iCXUnqHc",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": [
+                      448
+                    ],
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "Woqbpra-od5B"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "네트워크 패킷 (이 통신은 고격 또는 악성 행위인가?)"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "pmlMKlwADsOl",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": [
+                      194
+                    ],
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "Tcr3cCgPUVmb"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Sigma"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "TP0Y4OwdGzT-",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": [
+                      448
+                    ],
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "GF6RgoDsl5Ho"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "시스템, 보안 로그 (이 로그 행위는 공격 징후인가?)"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "-rK_fG7xuN_c"
+          }
+        }
+      ]
+    }
+  }
+]

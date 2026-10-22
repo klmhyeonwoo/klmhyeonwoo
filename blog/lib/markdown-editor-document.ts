@@ -2,11 +2,71 @@ import matter from "gray-matter";
 import type { JsonNode } from "./slash-content";
 
 function paragraph(text = ""): JsonNode {
-  return { type: "paragraph", content: text ? [{ type: "text", text }] : [] };
+  return { type: "paragraph", content: inlineMarkdown(text) };
 }
 
 function listItem(text: string): JsonNode {
   return { type: "listItem", content: [paragraph(text)] };
+}
+
+type Mark = NonNullable<JsonNode["marks"]>[number];
+
+function withMark(nodes: JsonNode[], mark: Mark) {
+  return nodes.map((node) => node.type === "text" ? { ...node, marks: [...(node.marks ?? []), mark] } : node);
+}
+
+function closingDelimiter(source: string, delimiter: string, from: number) {
+  for (let index = from; index < source.length; index += 1) {
+    if (source[index] === "\\") { index += 1; continue; }
+    if (source.startsWith(delimiter, index)) return index;
+  }
+  return -1;
+}
+
+/**
+ * Small, deliberately conservative inline Markdown reader for legacy posts.
+ * It converts only unambiguous notation and leaves unmatched punctuation as
+ * normal text, so opening an old article cannot silently discard content.
+ */
+export function inlineMarkdown(source: string): JsonNode[] {
+  const result: JsonNode[] = [];
+  let text = "";
+  const pushText = () => {
+    if (text) result.push({ type: "text", text });
+    text = "";
+  };
+
+  for (let index = 0; index < source.length;) {
+    if (source[index] === "\\" && index + 1 < source.length) {
+      text += source[index + 1]; index += 2; continue;
+    }
+    if (source[index] === "[") {
+      const closeLabel = closingDelimiter(source, "]", index + 1);
+      const closeUrl = closeLabel >= 0 && source[closeLabel + 1] === "(" ? closingDelimiter(source, ")", closeLabel + 2) : -1;
+      if (closeLabel > index + 1 && closeUrl > closeLabel + 2) {
+        pushText();
+        const label = inlineMarkdown(source.slice(index + 1, closeLabel));
+        const href = source.slice(closeLabel + 2, closeUrl).trim();
+        result.push(...withMark(label, { type: "link", attrs: { href } }));
+        index = closeUrl + 1; continue;
+      }
+    }
+    const delimiter = source.startsWith("**", index) ? "**" : source.startsWith("~~", index) ? "~~" : source[index] === "`" ? "`" : source[index] === "*" || source[index] === "_" ? source[index] : "";
+    if (delimiter) {
+      const end = closingDelimiter(source, delimiter, index + delimiter.length);
+      if (end > index + delimiter.length) {
+        pushText();
+        const value = source.slice(index + delimiter.length, end);
+        const mark: Mark = delimiter === "**" ? { type: "bold" } : delimiter === "~~" ? { type: "strike" } : delimiter === "`" ? { type: "code" } : { type: "italic" };
+        const nodes = delimiter === "`" ? [{ type: "text", text: value } satisfies JsonNode] : inlineMarkdown(value);
+        result.push(...withMark(nodes, mark));
+        index = end + delimiter.length; continue;
+      }
+    }
+    text += source[index]; index += 1;
+  }
+  pushText();
+  return result;
 }
 
 /**
@@ -38,7 +98,7 @@ export function markdownEditorDocument(source: string): JsonNode {
 
     const heading = line.match(/^(#{1,6})\s+(.+)$/);
     if (heading) {
-      content.push({ type: "heading", attrs: { level: Math.min(3, heading[1].length) }, content: heading[2] ? [{ type: "text", text: heading[2] }] : [] });
+      content.push({ type: "heading", attrs: { level: Math.min(3, heading[1].length) }, content: inlineMarkdown(heading[2]) });
       index += 1;
       continue;
     }

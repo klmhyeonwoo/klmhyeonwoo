@@ -1,6 +1,7 @@
 import { bookmarkMarkdown } from "./bookmark-markdown";
 import { emoji } from "@slash-editor/core/emoji";
 import { mediaUrl } from "./editor-media";
+import { inlineMarkdown } from "./markdown-editor-document";
 const emojiGlyphs = new Map(emoji().options.emojis.map(item => [item.name, item.emoji]));
 export type JsonNode = { type?: string; attrs?: Record<string, unknown>; content?: JsonNode[]; text?: string; marks?: Array<{ type: string; attrs?: Record<string, unknown> }>; [key: string]: unknown };
 
@@ -20,7 +21,12 @@ function textNodes(value: unknown): JsonNode[] {
 function paragraph(content: JsonNode[] = []): JsonNode { return { type: "paragraph", content }; }
 
 function normalize(document: JsonNode): JsonNode {
-  const content = document.content?.map(normalize);
+  const content = document.content?.flatMap((child) => {
+    // Early editor migrations stored Markdown punctuation in a plain text node.
+    // Recover it here before making a fresh Markdown projection on publish.
+    if (document.type !== "codeBlock" && child.type === "text" && typeof child.text === "string" && !child.marks?.length) return inlineMarkdown(child.text);
+    return [normalize(child)];
+  });
   if (document.type === "callout") {
     const { emoji, ...attrs } = document.attrs ?? {};
     return { ...document, attrs: { ...attrs, icon: attrs.icon ?? emoji ?? "💡" }, content: !content?.length || content.some(n => ["text", "hardBreak"].includes(n.type ?? "")) ? [paragraph(content)] : content };

@@ -1815,10 +1815,29 @@ html[data-theme="dark"] .editor .bn-container {
   display: flex;
   gap: 18px;
 }
-.header-logout { appearance: none; border: 0; background: transparent; color: var(--ink); padding: 0; font: inherit; font-size: .8125rem; cursor: pointer; white-space: nowrap; }
-.header-logout:hover { text-decoration: underline; text-underline-offset: .25em; }
-.header-logout:disabled { opacity: .55; cursor: wait; }
-.header-logout:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+.header-logout {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  padding: 0;
+  font: inherit;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.header-logout:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+.header-logout:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+.header-logout:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+}
 .theme-toggle {
   align-items: center;
   background: transparent;
@@ -4325,7 +4344,6 @@ html[data-theme="dark"] .service-toast {
 
 /* A compact card stream gives comments their own calm visual rhythm. */
 .kb-content-layout .recent-comments {
-  background: #f0f2f1;
   border: 0;
   border-radius: 26px;
   margin-top: 26px;
@@ -4409,7 +4427,12 @@ html[data-theme="dark"] .service-toast {
 }
 .recent-comments-placeholder span {
   animation: recent-comments-pulse 1.4s ease-in-out infinite;
-  background: linear-gradient(100deg, rgba(130, 142, 154, 0.12) 25%, rgba(130, 142, 154, 0.22) 40%, rgba(130, 142, 154, 0.12) 60%);
+  background: linear-gradient(
+    100deg,
+    rgba(130, 142, 154, 0.12) 25%,
+    rgba(130, 142, 154, 0.22) 40%,
+    rgba(130, 142, 154, 0.12) 60%
+  );
   background-size: 200% 100%;
   border-radius: 18px;
   display: block;
@@ -4419,11 +4442,12 @@ html[data-theme="dark"] .service-toast {
   animation-delay: 0.12s;
 }
 @keyframes recent-comments-pulse {
-  0% { background-position: 100% 0; }
-  100% { background-position: -100% 0; }
-}
-html[data-theme="dark"] .kb-content-layout .recent-comments {
-  background: #222624;
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
 }
 html[data-theme="dark"] .kb-content-layout .recent-comments h2 {
   color: #d7ded8;

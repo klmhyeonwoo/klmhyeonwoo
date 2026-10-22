@@ -10,7 +10,7 @@
     "textColor": "#ffffff"
   },
   "popup": {
-    "enabled": true,
+    "enabled": false,
     "image": "https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/main/blog/public/uploads/1792233318142-886be640.jpg",
     "title": "블로그를 새롭게 이전했어요",
     "description": "어서오세요 반갑습니당~",

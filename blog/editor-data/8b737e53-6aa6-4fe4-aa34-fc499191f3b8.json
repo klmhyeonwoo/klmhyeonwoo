@@ -125,14 +125,15 @@
           ]
         },
         {
-          "type": "paragraph",
+          "type": "heading",
           "attrs": {
-            "id": "r7i7Oal_QSTz"
+            "id": "r7i7Oal_QSTz",
+            "level": 2
           },
           "content": [
             {
               "type": "text",
-              "text": "## 그 누구보다, 내 서비스에서 내가 헤비유저가 되어보기"
+              "text": "그 누구보다, 내 서비스에서 내가 헤비유저가 되어보기"
             }
           ]
         },
@@ -236,38 +237,70 @@
           ]
         },
         {
-          "type": "paragraph",
+          "type": "bulletList",
           "attrs": {
-            "id": "OdIzcVUckoC7"
+            "id": "E6AyKngVGt8t"
           },
           "content": [
             {
-              "type": "text",
-              "text": "- 카카오톡으로 진행을 하지만, 카카오톡은 네트워킹 용도로 사용된다."
-            }
-          ]
-        },
-        {
-          "type": "paragraph",
-          "attrs": {
-            "id": "6DQ98FUxk4qc"
-          },
-          "content": [
+              "type": "listItem",
+              "attrs": {
+                "id": "jRCkjwOV-6hh"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "OdIzcVUckoC7"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "카카오톡으로 진행을 하지만, 카카오톡은 네트워킹 용도로 사용된다."
+                    }
+                  ]
+                }
+              ]
+            },
             {
-              "type": "text",
-              "text": "- 주마다 자신의 목표를 설정하고, 모든 회고는 \"레이어\" 플랫폼에서 진행이 된다."
-            }
-          ]
-        },
-        {
-          "type": "paragraph",
-          "attrs": {
-            "id": "qK2bbH2Kwjd6"
-          },
-          "content": [
+              "type": "listItem",
+              "attrs": {
+                "id": "0xxDqPxT-Jo9"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "6DQ98FUxk4qc"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "주마다 자신의 목표를 설정하고, 모든 회고는 \"레이어\" 플랫폼에서 진행이 된다."
+                    }
+                  ]
+                }
+              ]
+            },
             {
-              "type": "text",
-              "text": "- 회고는 의무가 아니고 자신이 편안한 장소에서 자유로운 시각에 진행한다."
+              "type": "listItem",
+              "attrs": {
+                "id": "5oXPzCYWWUXe"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "qK2bbH2Kwjd6"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "회고는 의무가 아니고 자신이 편안한 장소에서 자유로운 시각에 진행한다."
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },

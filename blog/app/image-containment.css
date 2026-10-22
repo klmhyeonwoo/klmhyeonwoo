@@ -690,11 +690,22 @@ html[data-theme="dark"] .editor [data-content-type="codeBlock"] .shiki {
   width: 100%;
 }
 
-/* A bookmark preview is a fixed right-hand media slot. Do not crop a source
-   image here: stretching is intentional so the whole image remains visible. */
+/* A bookmark preview is a fixed right-hand media slot. Safari needs a definite
+   grid area as well as explicit block/inline dimensions for an absolutely
+   positioned image; otherwise an OG image can retain its intrinsic height. */
+.editor .editor-bookmark:not([data-layout="card"]) .editor-bookmark-visual,
+.prose .post-bookmark:not([data-layout="card"]) .post-bookmark-visual {
+  align-self: stretch;
+  aspect-ratio: auto;
+  block-size: 100%;
+  min-block-size: 0;
+}
+
 .editor .editor-bookmark:not([data-layout="card"]) .editor-bookmark-visual > img,
 .prose .post-bookmark:not([data-layout="card"]) .post-bookmark-visual > img {
-  object-fit: fill;
+  block-size: 100%;
+  inline-size: 100%;
+  object-fit: cover;
 }
 
 .editor .editor-bookmark-copy {

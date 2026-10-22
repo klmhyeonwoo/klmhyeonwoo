@@ -25,12 +25,11 @@ export default async function HomePage() {
     <>
       <SiteHeader />
       <main className="kb-list-page" id="top">
-        <div className="kb-content-layout">
-        <HomeFeed posts={posts} categories={categories} profile={profile} />
-        <Suspense fallback={<RecentCommentsFallback />}>
-          <RecentComments posts={posts} />
-        </Suspense>
-        </div>
+        <HomeFeed posts={posts} categories={categories} profile={profile}>
+          <Suspense fallback={<RecentCommentsFallback />}>
+            <RecentComments posts={posts} />
+          </Suspense>
+        </HomeFeed>
         <footer className="kb-footer"><p>© 2026 wavy studio</p><a href="#top">맨 위로 ↑</a></footer>
       </main>
     </>

@@ -7,20 +7,20 @@
   --paper: #f7f8f7;
   --surface: #fff;
   --surface-raised: #fff;
-  --interactive-subtle: #eff2ef;
-  /* Keep the editorial text near-black, but give interactive states a
-     recognisable green counterpart to the dark theme. */
-  --accent: #43d982;
-  --accent-text: #43d982;
-  --soft-green: #e3f6ea;
-  --acid: #dff8b0;
-  --blue: #edf5ff;
-  --code-bg: #f4f6f4;
-  --code-ink: #202522;
+  /* Light mode stays deliberately neutral. Green remains a dark-theme and
+     semantic-callout color, not the default interaction color. */
+  --interactive-subtle: #f1f1f1;
+  --accent: #222;
+  --accent-text: #222;
+  --soft-green: #ededed;
+  --acid: #e8e8e8;
+  --blue: #f1f3f5;
+  --code-bg: #f5f5f5;
+  --code-ink: #222;
   --code-panel: #ffffff;
-  --code-line: #c8cfca;
-  --code-muted: #667068;
-  --accent-ink: #102217;
+  --code-line: #cfcfcf;
+  --code-muted: #626262;
+  --accent-ink: #fff;
 }
 * {
   box-sizing: border-box;

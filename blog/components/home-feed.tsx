@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useState, type MouseEvent } from "react";
+import { useEffect, useMemo, useState, type MouseEvent, type ReactNode } from "react";
 import { formatPostDate, formatPostUpdatedLabel, postPublishedToday, postWasUpdated } from "@/lib/post-date";
 import type { Category, PostMeta } from "@/lib/posts";
 import type { Profile } from "@/lib/profile";
@@ -40,14 +40,14 @@ function matches(post: PostMeta, query: string) {
   return haystack.includes(query.toLocaleLowerCase());
 }
 
-type Props = { posts: PostMeta[]; categories: Category[]; profile: Profile };
+type Props = { posts: PostMeta[]; categories: Category[]; profile: Profile; children?: ReactNode };
 
 /**
  * Query-string filtering intentionally runs in the browser so `/` remains an
  * ISR page. The server still sends the default feed as usable HTML; this only
  * changes the visible subset after a URL filter or search is requested.
  */
-export function HomeFeed({ posts, categories, profile }: Props) {
+export function HomeFeed({ posts, categories, profile, children }: Props) {
   const router = useRouter();
   const [filters, setFilters] = useState<Filters>({ page: 1, query: "" });
 
@@ -94,6 +94,7 @@ export function HomeFeed({ posts, categories, profile }: Props) {
       </nav>
       <PostSearch categoryId={filters.category} initialQuery={filters.query} posts={posts} onSearch={(query) => navigate({ category: filters.category, page: 1, query: query.trim() })} onNavigate={navigateHref} />
     </div>
+    <div className="kb-content-layout">
     <section className="kb-feed" id="all" aria-label={filters.category ? categories.find((item) => item.id === filters.category)?.name ?? "미분류" : "전체 글"}>
       {filteredPosts.length > 0 ? pagedPosts.map((post) => (
         <article className="kb-post" key={post.id}>
@@ -114,5 +115,7 @@ export function HomeFeed({ posts, categories, profile }: Props) {
         <Link aria-disabled={currentPage === totalPages} className={currentPage === totalPages ? "is-disabled" : ""} href={hrefFor({ ...filters, page: Math.min(totalPages, currentPage + 1) })} onClick={(event) => intercept(event, { ...filters, page: Math.min(totalPages, currentPage + 1) })}>다음</Link>
       </nav>}
     </section>
+    {children}
+    </div>
   </>;
 }

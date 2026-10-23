@@ -42,7 +42,11 @@ export async function POST(request: Request) {
   // The editor document is the lossless source of truth.  The Markdown/MDX
   // string is its public rendering projection, so recover it here when a
   // browser has not received its first editor `onUpdate` yet.
-  const renderMarkdown = markdown.trim() || markdownFor(convertBlocks(blocks));
+  // Always regenerate the public projection from the editor document. The
+  // client Markdown can be one update behind, which used to drop alignment
+  // attributes when a post was published and then viewed while logged out.
+  const generatedMarkdown = markdownFor(convertBlocks(blocks));
+  const renderMarkdown = generatedMarkdown.trim() || markdown.trim();
   if (!renderMarkdown.trim()) {
     return NextResponse.json({ error: "본문을 입력해 주세요." }, { status: 400 });
   }

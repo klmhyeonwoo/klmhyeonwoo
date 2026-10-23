@@ -1423,7 +1423,7 @@ html[data-theme="dark"] .editor [data-content-type="codeBlock"] .shiki {
 }
 .tiptap-prose h4 {
   color: var(--muted);
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   letter-spacing: -0.005em;
   line-height: 1.5;
@@ -3391,7 +3391,7 @@ html[data-theme="dark"] .prose pre.shiki span {
 
 .prose h4 {
   color: var(--muted);
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   letter-spacing: -0.005em;
   line-height: 1.5;

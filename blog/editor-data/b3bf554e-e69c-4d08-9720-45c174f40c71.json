@@ -146,11 +146,57 @@
           ]
         },
         {
+          "type": "heading",
+          "attrs": {
+            "id": "hU0e9V8475Gm",
+            "textAlign": "left",
+            "level": 3
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "페르소나를 구체화하기"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "X4JjFr__cQKl",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "화면 해설자막랩"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "lKDKtf83GWQU",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "동네 소식을 영상으로 보는 저시력 어르신"
+            }
+          ]
+        },
+        {
           "type": "paragraph",
           "attrs": {
             "id": "y6owtaJPVhuo",
             "textAlign": "left"
-          }
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "해설 밀도(짧게/자세히)와 말 속도 선택, 큰 글씨, 고대비 자막 켜기"
+            }
+          ]
         }
       ]
     }

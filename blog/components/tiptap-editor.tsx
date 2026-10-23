@@ -87,6 +87,8 @@ const LegacyCalloutMetadata = Extension.create({
   addGlobalAttributes() {
     return [{ types: ["paragraph", "heading"], attributes: {
       textAlign: { default: "left", parseHTML: (element: HTMLElement) => element.style.textAlign || "left", renderHTML: (attrs: Record<string, unknown>) => ({ style: `text-align: ${["center", "right"].includes(String(attrs.textAlign)) ? attrs.textAlign : "left"}` }) },
+    } }, { types: ["column"], attributes: {
+      verticalAlign: { default: "top", parseHTML: (element: HTMLElement) => element.getAttribute("data-vertical-align") || "top", renderHTML: (attrs: Record<string, unknown>) => ({ "data-vertical-align": attrs.verticalAlign }) },
     } }, { types: ["callout"], attributes: {
       fluentUrl: { default: "", rendered: false },
       background: { default: "default", rendered: false },

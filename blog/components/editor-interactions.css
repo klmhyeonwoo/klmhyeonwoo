@@ -37,6 +37,11 @@
 .tiptap-editor-shell .slash-content [data-type="callout"] > :last-child { margin-bottom: 0; }
 .slash-content [data-type="columns"] { display: flex; gap: 1rem; }
 .slash-content [data-type="column"] { flex: 1; min-width: 0; }
+.slash-content [data-type="column"], .prose .post-column { display: flex; flex-direction: column; }
+.slash-content [data-vertical-align="center"], .prose .post-column[data-vertical-align="center"] { justify-content: center; }
+.slash-content [data-vertical-align="bottom"], .prose .post-column[data-vertical-align="bottom"] { justify-content: flex-end; }
+.prose [data-text-align="center"] { text-align: center; }
+.prose [data-text-align="right"] { text-align: right; }
 .slash-content [data-type="mention"] { background: var(--interactive-subtle); border-radius: .25rem; padding: .125rem .375rem; }
 .slash-content [data-type="emoji"] img { display: inline-block; width: 1.2em; height: 1.2em; vertical-align: text-bottom; }
 .slash-media { border: 1px solid var(--line); border-radius: .75rem; padding: 1rem; color: var(--ink); background: var(--surface); }

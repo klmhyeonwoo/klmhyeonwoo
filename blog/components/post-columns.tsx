@@ -5,7 +5,7 @@ export function PostColumns({ children, columns = 2 }: { children: ReactNode; co
   return <section className="post-columns" data-columns={count}>{children}</section>;
 }
 
-export function PostColumn({ children }: { children: ReactNode }) {
-  return <div className="post-column">{children}</div>;
+export function PostColumn({ children, verticalAlign = "top" }: { children: ReactNode; verticalAlign?: string }) {
+  return <div className="post-column" data-vertical-align={verticalAlign}>{children}</div>;
 }
 

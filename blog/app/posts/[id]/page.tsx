@@ -54,6 +54,7 @@ function postDescription(source: string, data: Record<string, unknown>) {
  * New saves always persist both representations in the publish route.
  */
 function sourceWithEditorFallback(source: string, blocks: unknown[]) {
+  source = source.replace(/<div style=\{\{textAlign:\s*"(center|right)"\}\}>/g, '<div data-text-align="$1">');
   const parsed = matter(source);
   if (parsed.content.trim() || blocks.length === 0) return source;
   const body = markdownFor(convertBlocks(blocks));

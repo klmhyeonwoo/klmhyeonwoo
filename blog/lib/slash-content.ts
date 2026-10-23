@@ -108,7 +108,7 @@ export function markdownFor(document: JsonNode): string {
     const text = inline(node.content);
     if (["paragraph", "heading"].includes(node.type ?? "") && ["center", "right"].includes(String(node.attrs?.textAlign))) {
       const content = node.type === "heading" ? `${"#".repeat(Math.min(6, Math.max(1, Number(node.attrs?.level) || 2)))} ${text}` : text;
-      return `<div style={{textAlign: "${node.attrs?.textAlign}"}}>\n\n${content}\n\n</div>`;
+      return `<div data-text-align="${node.attrs?.textAlign}">\n\n${content}\n\n</div>`;
     }
     if (node.type === "paragraph") return text;
     if (node.type === "heading") return `${"#".repeat(Number(node.attrs?.level) || 2)} ${text}`;
@@ -139,7 +139,7 @@ export function markdownFor(document: JsonNode): string {
     if (["columns", "column", "detailsContent", "detailsSummary"].includes(node.type ?? "")) {
       const tag = ({ columns: "Columns", column: "Column", details: "details", detailsSummary: "summary" } as Record<string, string>)[node.type!];
       const body = node.type === "detailsSummary" ? text : (node.content ?? []).map(child => block(child)).join("\n\n");
-      return tag ? `<${tag}${node.type === "columns" ? ` columns="${node.content?.length ?? 2}"` : ""}>\n\n${body}\n\n</${tag}>` : body;
+      return tag ? `<${tag}${node.type === "columns" ? ` columns="${node.content?.length ?? 2}"` : node.type === "column" ? ` verticalAlign="${["center", "bottom"].includes(String(node.attrs?.verticalAlign)) ? node.attrs?.verticalAlign : "top"}"` : ""}>\n\n${body}\n\n</${tag}>` : body;
     }
     if (node.type === "listItem" || node.type === "taskItem") {
       const marker = node.type === "taskItem" ? `- [${node.attrs?.checked === true ? "x" : " "}] ` : orderedIndex ? `${orderedIndex}. ` : "- ";

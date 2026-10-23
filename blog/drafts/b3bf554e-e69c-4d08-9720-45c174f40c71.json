@@ -4,7 +4,7 @@
   "description": "",
   "categoryId": "category-1f4a4fd0",
   "seriesId": "",
-  "markdown": "### 아옳 버스 오래타고 오리엔테이션\n\n- 최종 결과물과 소개서 제출\n- 활동비 사용내역 등 제출\n- 운영진 확인 후 지급\n\n활동비 : 프로젝트에 필요한 AI 도구 구독료, 장소 대관비, 회의 식비 등\n\n- Cluade Pro, Codex Plus 구독\n\n(선정 과제와 직접 관련된 활동에 사용하고 계획에 따라 지출)\n\n### 페르소나를 구체화하기\n\n> **화면 해설자막랩**\n\n동네 소식을 영상으로 보는 저시력 어르신\n\n해설 밀도(짧게/자세히)와 말 속도 선택, 큰 글씨, 고대비 자막 켜기\n\n### 액션 아이템\n\n28일 수요일 19시 서울 파이낸스센터\n\n라운드테이블 계획서 25일 자정까지 제출하기\n\n---\n\n11월 말 중에서 니아(?)에서 최종 결과물을 취합해서 제출해달라고 할 것이라 예상\n\n→ 그러면 우리도 이 일정에 맞춰 제출을 해야할 수 있음",
+  "markdown": "### 아옳 버스 오래타고 오리엔테이션\n\n- 최종 결과물과 소개서 제출\n- 활동비 사용내역 등 제출\n- 운영진 확인 후 지급\n\n활동비 : 프로젝트에 필요한 AI 도구 구독료, 장소 대관비, 회의 식비 등\n\n- Cluade Pro, Codex Plus 구독\n\n(선정 과제와 직접 관련된 활동에 사용하고 계획에 따라 지출)\n\n### 페르소나를 구체화하기\n\n**화면 해설자막랩**\n\n동네 소식을 영상으로 보는 저시력 어르신\n\n해설 밀도(짧게/자세히)와 말 속도 선택, 큰 글씨, 고대비 자막 켜기\n\n### 액션 아이템\n\n28일 수요일 19시 서울 파이낸스센터\n\n라운드테이블 계획서 25일 자정까지 제출하기\n\n---\n\n니아가 11월 말 정도에 최종 결과물을 제출해달라고 할 수 있음\n\n→ 우리 기관에서도 11월 말 정도에 최종 결과물을 제출해야할 수 있으니 참고",
   "blocks": [
     {
       "type": "slash-content",
@@ -167,28 +167,20 @@
             ]
           },
           {
-            "type": "blockquote",
+            "type": "paragraph",
             "attrs": {
-              "id": "6y4Z22zm_SKT"
+              "id": "X4JjFr__cQKl",
+              "textAlign": "left"
             },
             "content": [
               {
-                "type": "paragraph",
-                "attrs": {
-                  "id": "X4JjFr__cQKl",
-                  "textAlign": "left"
-                },
-                "content": [
+                "type": "text",
+                "marks": [
                   {
-                    "type": "text",
-                    "marks": [
-                      {
-                        "type": "bold"
-                      }
-                    ],
-                    "text": "화면 해설자막랩"
+                    "type": "bold"
                   }
-                ]
+                ],
+                "text": "화면 해설자막랩"
               }
             ]
           },
@@ -248,7 +240,7 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "wMPaHvosQoIF",
+              "id": "-7qIRQVn5_Qh",
               "textAlign": "left"
             },
             "content": [
@@ -261,32 +253,32 @@
           {
             "type": "horizontalRule",
             "attrs": {
-              "id": "16thZkpvD6zr"
+              "id": "4uvBMH61wSSu"
             }
           },
           {
             "type": "paragraph",
             "attrs": {
-              "id": "UCqfE2rwnUxq",
+              "id": "3Xa7yYflVLq_",
               "textAlign": "left"
             },
             "content": [
               {
                 "type": "text",
-                "text": "11월 말 중에서 니아(?)에서 최종 결과물을 취합해서 제출해달라고 할 것이라 예상"
+                "text": "니아가 11월 말 정도에 최종 결과물을 제출해달라고 할 수 있음"
               }
             ]
           },
           {
             "type": "paragraph",
             "attrs": {
-              "id": "pgwL8Rx-zC_8",
+              "id": "y6owtaJPVhuo",
               "textAlign": "left"
             },
             "content": [
               {
                 "type": "text",
-                "text": "→ 그러면 우리도 이 일정에 맞춰 제출을 해야할 수 있음"
+                "text": "→ 우리 기관에서도 11월 말 정도에 최종 결과물을 제출해야할 수 있으니 참고"
               }
             ]
           }
@@ -295,5 +287,5 @@
     }
   ],
   "isPrivate": true,
-  "updatedAt": "2026-10-23T11:42:55.243Z"
+  "updatedAt": "2026-10-23T11:46:15.428Z"
 }

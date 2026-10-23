@@ -16,7 +16,7 @@ function pointFor(rect: DOMRect, width: number, height = 56): FloatingPoint {
   return { left: Math.max(12, Math.min(window.innerWidth - width - 12, rect.left)), top: Math.max(12, Math.min(window.innerHeight - height - 12, rect.bottom + 10)) };
 }
 
-function composerPointFor(rect: DOMRect, width = 360, height = 56): FloatingPoint {
+function composerPointFor(rect: DOMRect, width = Math.min(608, window.innerWidth - 24), height = 176): FloatingPoint {
   const gap = 16;
   if (rect.right + gap + width + 12 > window.innerWidth) return pointFor(rect, width, height);
   return { left: rect.right + gap, top: Math.max(12, Math.min(window.innerHeight - height - 12, rect.top + (rect.height - height) / 2)) };
@@ -211,7 +211,7 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
     {canWrite && composing && anchor && <aside className="inline-comment-composer" role="region" aria-label="본문 댓글 작성" style={composerPoint ? { left: composerPoint.left, top: composerPoint.top, maxHeight: `calc(100dvh - ${composerPoint.top + 12}px)` } : undefined}>
       <form ref={form} onSubmit={submit} aria-busy={busy}>
         <div className="inline-comment-entry">
-          <textarea required maxLength={2000} rows={2} value={body} onChange={(event) => { setBody(event.target.value); event.target.style.height = "auto"; event.target.style.height = `${event.target.scrollHeight}px`; }} placeholder="댓글 추가…" aria-label="댓글" onKeyDown={(event) => {
+          <textarea required maxLength={2000} rows={4} value={body} onChange={(event) => { setBody(event.target.value); event.target.style.height = "auto"; event.target.style.height = `${Math.max(event.target.scrollHeight, 120)}px`; }} placeholder="댓글 추가" aria-label="댓글" onKeyDown={(event) => {
             if (event.key === "Enter" && (event.metaKey || event.ctrlKey) && !event.nativeEvent.isComposing) { event.preventDefault(); form.current?.requestSubmit(); }
           }} />
           <button className="inline-comment-send" type="submit" disabled={busy || !body.trim()} aria-label={busy ? "댓글 등록 중" : "댓글 등록"} title="댓글 등록 (⌘/Ctrl + Enter)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg></button>

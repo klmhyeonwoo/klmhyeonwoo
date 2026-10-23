@@ -96,10 +96,9 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
       if (!range) continue;
       const marker = document.createElement("mark");
       marker.dataset.inlineCommentAnchor = key;
-      marker.dataset.commentCount = String(thread.length);
       marker.tabIndex = 0;
       marker.setAttribute("role", "button");
-      marker.setAttribute("aria-label", `본문 댓글 ${thread.length}개 보기`);
+      marker.setAttribute("aria-label", "본문 댓글 보기");
       try { range.surroundContents(marker); }
       catch { const fragment = range.extractContents(); marker.append(fragment); range.insertNode(marker); }
     }
@@ -192,7 +191,7 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
   }
 
   return <section className="inline-comments" aria-label="본문 댓글">
-    <button className="inline-comments-summary" type="button" aria-label={`본문 댓글 ${comments.length}개 보기`} onClick={() => { setActiveAnchorKey(null); setPanelOpen((value) => !value); }} aria-expanded={panelOpen}><CommentGlyph /><span>{loading ? "…" : comments.length}</span></button>
+    <button className="inline-comments-summary" type="button" aria-label="본문 댓글 목록 열기" onClick={() => { setActiveAnchorKey(null); setPanelOpen((value) => !value); }} aria-expanded={panelOpen}><CommentGlyph /><span>본문 댓글</span></button>
     {canWrite && anchor && !composing && <button className="inline-comment-start" style={selectionPoint ? { left: selectionPoint.left, top: selectionPoint.top } : undefined} type="button" onMouseDown={(event) => event.preventDefault()} onClick={startComment}><CommentGlyph />댓글</button>}
     {canWrite && composing && anchor && <aside className="inline-comment-composer" role="region" aria-label="본문 댓글 작성" style={composerPoint ? { left: composerPoint.left, top: composerPoint.top, maxHeight: `calc(100dvh - ${composerPoint.top + 12}px)` } : undefined}>
       <form ref={form} onSubmit={submit} aria-busy={busy}>
@@ -206,8 +205,8 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
         {error && <p className="inline-comment-error" role="alert">{error}</p>}
       </form>
     </aside>}
-    {activeThread && threadPoint && <aside className="inline-comment-thread" role="region" aria-label="선택한 문장 댓글" style={{ left: threadPoint.left, top: threadPoint.top, maxHeight: `min(28rem, calc(100dvh - ${threadPoint.top + 12}px))` }}><header><strong>댓글 <small>{activeThread.length}</small></strong><button type="button" aria-label="댓글 창 닫기" onClick={() => setActiveAnchorKey(null)}>×</button></header><blockquote>{activeThread[0].anchor.quote}</blockquote><ul>{activeThread.map((comment) => <li key={comment.id}><div><strong>{comment.name}</strong><time dateTime={comment.createdAt}>{new Date(comment.createdAt).toLocaleDateString("ko-KR")}</time>{canDelete && <button type="button" disabled={busy} onClick={() => void remove(comment.id)}>삭제</button>}</div><p>{comment.body}</p></li>)}</ul></aside>}
-    {panelOpen && <aside className="inline-comments-panel" role="region" aria-label="모든 본문 댓글"><header><div><strong>본문 댓글</strong><small>{comments.length}개</small></div><button type="button" onClick={() => setPanelOpen(false)} aria-label="댓글 목록 닫기">×</button></header>{loading ? <p>댓글을 불러오는 중…</p> : comments.length ? <ul>{comments.map((comment) => <li key={comment.id}><button type="button" onClick={() => showQuote(comment)}>“{comment.anchor.quote}”</button><strong>{comment.name}</strong><time dateTime={comment.createdAt}>{new Date(comment.createdAt).toLocaleDateString("ko-KR")}</time><p>{comment.body}</p></li>)}</ul> : <p>아직 본문 댓글이 없습니다.{canWrite && <><br />문장을 선택해 첫 댓글을 남겨보세요.</>}</p>}</aside>}
+    {activeThread && threadPoint && <aside className="inline-comment-thread" role="region" aria-label="선택한 문장 댓글" style={{ left: threadPoint.left, top: threadPoint.top, maxHeight: `min(28rem, calc(100dvh - ${threadPoint.top + 12}px))` }}><header><strong>댓글</strong><button type="button" aria-label="댓글 창 닫기" onClick={() => setActiveAnchorKey(null)}>×</button></header><blockquote>{activeThread[0].anchor.quote}</blockquote><ul>{activeThread.map((comment) => <li key={comment.id}><div><strong>{comment.name}</strong><time dateTime={comment.createdAt}>{new Date(comment.createdAt).toLocaleDateString("ko-KR")}</time>{canDelete && <button type="button" disabled={busy} onClick={() => void remove(comment.id)}>삭제</button>}</div><p>{comment.body}</p></li>)}</ul></aside>}
+    {panelOpen && <aside className="inline-comments-panel" role="region" aria-label="모든 본문 댓글"><header><strong>본문 댓글</strong><button type="button" onClick={() => setPanelOpen(false)} aria-label="댓글 목록 닫기">×</button></header>{loading ? <p>댓글을 불러오는 중…</p> : comments.length ? <ul>{comments.map((comment) => <li key={comment.id}><button type="button" onClick={() => showQuote(comment)}>“{comment.anchor.quote}”</button><strong>{comment.name}</strong><time dateTime={comment.createdAt}>{new Date(comment.createdAt).toLocaleDateString("ko-KR")}</time><p>{comment.body}</p></li>)}</ul> : <p>댓글이 없습니다.{canWrite && <><br />문장을 선택해 댓글을 남겨보세요.</>}</p>}</aside>}
     {error && !composing && <p className="inline-comment-error" role="alert">{error} <button type="button" disabled={busy} onClick={() => { setLoading(true); setAttempt((value) => value + 1); }}>다시 시도</button></p>}
   </section>;
 }

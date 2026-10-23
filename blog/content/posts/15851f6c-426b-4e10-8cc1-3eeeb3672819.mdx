@@ -1,0 +1,82 @@
+---
+title: "React Portal에서의 이벤트 버블링"
+date: 2026-10-23
+publishedAt: "2026-10-23T04:19:24.301Z"
+updatedAt: "2026-10-23T04:19:24.301Z"
+description: ""
+category: "category-9606d629"
+series: "-"
+private: false
+---
+
+매일 기술 지식 공부를 하다가 우연히 발견하게된 React 이벤트 버블링에 차이에 대해서 정리를 해보려고 합니다. 사실 이벤트 버블링이라고 하면 웹 개발자라면 문득 당연하게 생각하게 되는 캡쳐링 - 타겟 - 버블링 형태로 일어난다는 것을 알고 있습니다. 문득 순수한 엘리먼트의 경우에는 자식 요소에서 부모요소까지 퍼진다는 것을 인지하고 있지만, ` Portal ` 의 경우에는 렌더 위치를 옮기는 꼴인데 어떻게 될까라는 생각을 했습니다. 처음에는 의미상 버블링이니까.. 순수 엘리먼트처럼 똑같이 작동하지 않을까라는 생각을 했는데 그게 아니었습니다 🙃 
+
+## React Portal은 무엇일까?
+
+먼저 모달, 토스트 컴포넌트를 부모 요소의 루트 위치에 띄우기 위해 많이 사용하는 ` React Portal `에 대해서 한번 간단하게 알아봅시다. 간단하게 말하면 부모 컴포넌트의 DOM 계층 구조 바깥에 있는 다른 DOM 노드에 자식 컴포넌트를 렌더링할 수 있게 해주는 기능입니다. 이 기능 덕에 굳이 상태 값을 위로 계속 올리지 않아도, 손쉽게 전역에서 사용하는 모달이나, 토스트 컴포넌트 등의 루트 요소들을 조금 더 편하게 만들 수 있습니다. 단, 해당 포탈의 컨테이너가 반드시 루트와 같은 레벨에 있어야하는 것은 아닙니다.
+
+```jsx
+import { createPortal } from 'react-dom';
+
+createPortal(child, domNode, key?)
+```
+
+## 어떤 식으로 이벤트 버블링이 이뤄질까?
+
+` #root `와 ` #portal-root `가 ` body ` 아래의 형제라고 가정해보겠습니다.
+
+### 네이티브 DOM 이벤트와 React Portal 이벤트 구분하기
+
+```text
+실제 DOM 트리                  React 트리
+
+body                           App
+├─ #root                       └─ Parent (onClick)
+│  └─ Parent의 div                └─ 포탈
+└─ #portal-root                      └─ button (onClick)
+   └─ button
+```
+
+```javascript
+import { createPortal } from 'react-dom';
+
+function Parent() {
+  return (
+    <div onClick={() => console.log('Parent 클릭')}>
+      {createPortal(
+        <button onClick={() => console.log('포탈 버튼 클릭')}>
+          클릭
+        </button>,
+        document.getElementById('portal-root')
+      )}
+    </div>
+  );
+}
+```
+
+버튼을 클릭하게 되면 각각의 트리들의 전파 과정은 다음과 같습니다.
+
+### 네이티브 DOM 이벤트
+
+- button → \#portal-root → body → html → document → window
+
+### React Portal DOM 이벤트
+
+- ` button → Parent → App `의 React 조상 핸들러
+
+이렇게만 보면 이해가 잘 안될 수 있으니 이벤트를 합쳐보겠습니다.
+
+### 합쳐진 종합 이벤트
+
+```text
+button → #portal-root → body → html → document → window
+          │
+          └─ React가 포탈의 이벤트를 처리
+             button의 onClick
+               → Parent의 div.onClick
+               → App의 main.onClick
+```
+
+React를 클릭한 버튼이 React 트리에서 어떤 요소의 자식인지 알고 있습니다. 그래서 실제 DOM에서 ` #portal-root ` 밖에서 부모 ` div.click `도 실행합니다. 네이티브 이벤트가 React 트리로 경로를 바꾸는 것이 아니라, 네이티브 이벤트는 DOM 경로를 유지하고, React는 그 이벤트를 바탕으로 React 조상 핸들러를 실행하는 꼴입니다.
+
+\* ` Parent ` 컴포넌트가 렌더링된 상위 컴포넌트의 조상요소까지 전파가 되며, ` import `만 했다고 이벤트 전파가 되지 않는 점을 유의해야합니다.

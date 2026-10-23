@@ -63,6 +63,9 @@ const headingFourSlashItem: SlashItem = {
   run: ({ editor, range }) => editor.chain().focus().deleteRange(range).setNode("heading", { level: 4 }).run(),
 };
 
+const blockTypesWithHeadingFour = defaultBlockTypes.flatMap((item) => item.id === "heading-3" ? [item, headingFourBlockType] : [item]);
+const slashItemsWithHeadingFour = defaultSlashItems.flatMap((item) => item.id === "heading-3" ? [item, headingFourSlashItem] : [item]);
+
 // Keep small, familiar writing shortcuts in prose without changing code or
 // URLs. The rule runs as soon as `->` is complete; undo restores the source
 // characters as a single edit.
@@ -312,7 +315,7 @@ function TiptapSurface({ initial, mentions, onChange }: { initial: JsonNode; men
   useEffect(() => { mentionsRef.current = mentions; }, [mentions]);
   const extensions = useMemo(() => createBlockKit({
     headingLevels: [1, 2, 3, 4],
-    blockTypes: [...defaultBlockTypes, headingFourBlockType],
+    blockTypes: blockTypesWithHeadingFour,
     image: false,
     emoji: emoji(),
     mention: { items: query => (mentionsRef.current ?? []).filter(item => item.title.toLowerCase().includes(query.toLowerCase())).slice(0, 20).map(item => ({ id: item.href, label: item.title, description: item.description })) },
@@ -325,7 +328,7 @@ function TiptapSurface({ initial, mentions, onChange }: { initial: JsonNode; men
       element.setAttribute("aria-expanded", String(isOpen));
     } },
     placeholder: { text: { paragraph: "내용을 입력하거나 '/'로 블록을 추가하세요", heading1: "제목 1", heading2: "제목 2", heading3: "제목 3", callout: "강조할 내용을 입력하세요", listItem: "목록", taskItem: "할 일" } },
-    slash: { items: [...defaultSlashItems, headingFourSlashItem].map(item => ({ ...item, title: slashLabel(item.id, item.title), aliases: [...(item.aliases ?? []), item.title], ...(item.id === "image" ? { run: ({ editor, range }: Parameters<typeof item.run>[0]) => { editor.chain().focus().deleteRange(range).setImage({ src: "" }).run(); } } : {}) })) },
+    slash: { items: slashItemsWithHeadingFour.map(item => ({ ...item, title: slashLabel(item.id, item.title), aliases: [...(item.aliases ?? []), item.title], ...(item.id === "image" ? { run: ({ editor, range }: Parameters<typeof item.run>[0]) => { editor.chain().focus().deleteRange(range).setImage({ src: "" }).run(); } } : {}) })) },
     extend: [EditorFileDrop, LegacyCalloutMetadata, TypographicShortcuts, ImageBlock.configure({ inline: false, allowBase64: false }), BookmarkNode, LinkMentionNode],
   }).map(extension => nativeMediaNodes.find(node => node.name === extension.name) ?? extension), []);
   const onChangeRef = useRef(onChange);

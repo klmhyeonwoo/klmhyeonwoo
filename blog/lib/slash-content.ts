@@ -66,8 +66,8 @@ export function convertBlocks(blocks?: unknown[]): JsonNode {
       return [{ type: ({ table: "table", tr: "tableRow", td: "tableCell", th: "tableHeader" } as Record<string, string>)[type], attrs: { colspan: node.colSpan ?? 1, rowspan: node.rowSpan ?? 1 }, content: nested }];
     }
     if (type === "bookmark") return [{ type: "bookmark", attrs: { url: props.url ?? node.url, title: children.map(n => n.text ?? "").join(""), description: props.description, image: props.image, resolved: true } }];
-    if (type === "h1" || type === "h2" || type === "h3") return [{ type: "heading", attrs: { level: Number(type.slice(1)) }, content: children }];
-    if (type === "heading") return [{ type: "heading", attrs: { level: Math.min(3, Math.max(1, Number(props.level) || 2)) }, content: children }];
+    if (type === "h1" || type === "h2" || type === "h3" || type === "h4") return [{ type: "heading", attrs: { level: Number(type.slice(1)) }, content: children }];
+    if (type === "heading") return [{ type: "heading", attrs: { level: Math.min(4, Math.max(1, Number(props.level) || 2)) }, content: children }];
     if (type === "bulletListItem" || node.listStyleType === "ul") return [{ type: "bulletList", content: [{ type: "listItem", content: [paragraph(children)] }] }];
     if (type === "numberedListItem" || node.listStyleType === "ol") return [{ type: "orderedList", content: [{ type: "listItem", content: [paragraph(children)] }] }];
     if (type === "checkListItem" || node.listStyleType === "todo") return [{ type: "taskList", content: [{ type: "taskItem", attrs: { checked: props.checked === true || node.checked === true }, content: [paragraph(children)] }] }];

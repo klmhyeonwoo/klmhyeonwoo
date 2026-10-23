@@ -1421,6 +1421,14 @@ html[data-theme="dark"] .editor [data-content-type="codeBlock"] .shiki {
   font-weight: 600;
   margin: 1.25rem 0 0.5rem;
 }
+.tiptap-prose h4 {
+  color: var(--muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  line-height: 1.5;
+  margin: 1.1rem 0 0.35rem;
+}
 .tiptap-prose blockquote {
   border-inline-start: 2px solid var(--line-strong, var(--line));
   color: var(--muted);
@@ -3379,6 +3387,15 @@ html[data-theme="dark"] .prose pre.shiki span {
 .prose h3 {
   font-size: 1.0625rem;
   font-weight: 600;
+}
+
+.prose h4 {
+  color: var(--muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  line-height: 1.5;
+  margin: 1.1rem 0 0.35rem;
 }
 
 .series-card h2 {

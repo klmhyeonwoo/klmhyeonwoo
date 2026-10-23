@@ -10,7 +10,7 @@ import { convertBlocks, markdownFor } from "@/lib/slash-content";
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 import { NodeViewContent, NodeViewWrapper, ReactNodeViewRenderer, type Editor, type NodeViewProps } from "@tiptap/react";
 import { common, createLowlight } from "lowlight";
-import { createBlockKit, defaultSlashItems } from "@slash-editor/core";
+import { createBlockKit, defaultBlockTypes, defaultSlashItems, type BlockType, type SlashItem } from "@slash-editor/core";
 import { emoji } from "@slash-editor/core/emoji";
 import { nativeMediaNodes } from "./slash-media-blocks";
 import { EditorContent, EditorContext, useCurrentEditor, useSlashEditor } from "@slash-editor/react";
@@ -28,6 +28,40 @@ const imageRequestEvent = "wavy:editor-image-request";
 
 const imageUrlRequestEvent = "wavy:editor-image-url-request";
 const linkRequestEvent = "wavy:editor-link-request";
+
+// Heading 4 is intentionally a quiet, non-outline heading: useful for a
+// small section label, but not prominent enough to add noise to the article
+// table of contents.
+const headingFourBlockType: BlockType = {
+  id: "heading-4",
+  title: "제목 4",
+  group: "Basic blocks",
+  description: "작은 보조 제목",
+  aliases: ["h4", "heading4", "제목4"],
+  keywords: ["####"],
+  shortcut: "####",
+  icon: "heading-4",
+  when: (editor) => Boolean(editor.schema.nodes.heading),
+  isActive: (editor) => editor.isActive("heading", { level: 4 }),
+  convert: ({ editor, pos }) => {
+    const chain = editor.chain().focus();
+    if (typeof pos === "number") chain.setTextSelection(pos + 1);
+    return chain.setNode("heading", { level: 4 }).run();
+  },
+};
+
+const headingFourSlashItem: SlashItem = {
+  id: "heading-4",
+  title: "제목 4",
+  group: "Basic blocks",
+  description: "작은 보조 제목",
+  aliases: ["h4", "heading4", "제목4"],
+  keywords: ["####"],
+  shortcut: "####",
+  icon: "heading-4",
+  when: (editor) => Boolean(editor.schema.nodes.heading),
+  run: ({ editor, range }) => editor.chain().focus().deleteRange(range).setNode("heading", { level: 4 }).run(),
+};
 
 // Keep small, familiar writing shortcuts in prose without changing code or
 // URLs. The rule runs as soon as `->` is complete; undo restores the source
@@ -273,6 +307,8 @@ function TiptapSurface({ initial, mentions, onChange }: { initial: JsonNode; men
   const mentionsRef = useRef(mentions);
   useEffect(() => { mentionsRef.current = mentions; }, [mentions]);
   const extensions = useMemo(() => createBlockKit({
+    headingLevels: [1, 2, 3, 4],
+    blockTypes: [...defaultBlockTypes, headingFourBlockType],
     image: false,
     emoji: emoji(),
     mention: { items: query => (mentionsRef.current ?? []).filter(item => item.title.toLowerCase().includes(query.toLowerCase())).slice(0, 20).map(item => ({ id: item.href, label: item.title, description: item.description })) },
@@ -285,7 +321,7 @@ function TiptapSurface({ initial, mentions, onChange }: { initial: JsonNode; men
       element.setAttribute("aria-expanded", String(isOpen));
     } },
     placeholder: { text: { paragraph: "내용을 입력하거나 '/'로 블록을 추가하세요", heading1: "제목 1", heading2: "제목 2", heading3: "제목 3", callout: "강조할 내용을 입력하세요", listItem: "목록", taskItem: "할 일" } },
-    slash: { items: defaultSlashItems.map(item => ({ ...item, title: slashLabel(item.id, item.title), aliases: [...(item.aliases ?? []), item.title], ...(item.id === "image" ? { run: ({ editor, range }: Parameters<typeof item.run>[0]) => { editor.chain().focus().deleteRange(range).setImage({ src: "" }).run(); } } : {}) })) },
+    slash: { items: [...defaultSlashItems, headingFourSlashItem].map(item => ({ ...item, title: slashLabel(item.id, item.title), aliases: [...(item.aliases ?? []), item.title], ...(item.id === "image" ? { run: ({ editor, range }: Parameters<typeof item.run>[0]) => { editor.chain().focus().deleteRange(range).setImage({ src: "" }).run(); } } : {}) })) },
     extend: [EditorFileDrop, LegacyCalloutMetadata, TypographicShortcuts, ImageBlock.configure({ inline: false, allowBase64: false }), BookmarkNode, LinkMentionNode],
   }).map(extension => nativeMediaNodes.find(node => node.name === extension.name) ?? extension), []);
   const onChangeRef = useRef(onChange);

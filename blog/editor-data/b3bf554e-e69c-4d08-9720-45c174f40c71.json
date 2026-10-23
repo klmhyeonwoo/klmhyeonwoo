@@ -6,11 +6,18 @@
       "type": "doc",
       "content": [
         {
-          "type": "paragraph",
+          "type": "heading",
           "attrs": {
             "id": "aK8oHLuMmxIY",
-            "textAlign": "left"
-          }
+            "textAlign": "left",
+            "level": 3
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "아옳 버스 오래타고 오리엔테이션"
+            }
+          ]
         },
         {
           "type": "bulletList",
@@ -128,7 +135,7 @@
         {
           "type": "paragraph",
           "attrs": {
-            "id": "y6owtaJPVhuo",
+            "id": "_a92dHmTCSHH",
             "textAlign": "left"
           },
           "content": [
@@ -137,6 +144,13 @@
               "text": "(선정 과제와 직접 관련된 활동에 사용하고 계획에 따라 지출)"
             }
           ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "y6owtaJPVhuo",
+            "textAlign": "left"
+          }
         }
       ]
     }

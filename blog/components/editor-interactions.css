@@ -169,3 +169,12 @@
   .tiptap-editor-shell .tiptap-prose { padding-inline: 80px .25rem; }
   .editor-block-buttons button { min-height: 36px; }
 }
+.editor-upload-status { display: flex; align-items: center; gap: .75rem; padding: 1rem; margin: .75rem 0; border: 1px dashed var(--line); border-radius: .5rem; background: var(--surface-raised, Canvas); color: var(--muted); font-size: .8rem; line-height: 1.5; }
+.editor-upload-status > span { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.editor-upload-status > div { display: flex; flex-wrap: wrap; gap: .4rem; }
+.editor-upload-status button { border: 0; border-radius: .3rem; background: transparent; color: var(--ink); padding: .5rem; font: inherit; cursor: pointer; }
+.editor-upload-status button:hover { background: color-mix(in srgb, var(--ink) 7%, transparent); }
+.editor-upload-status[data-state="loading"]::before { content: ""; width: 1rem; height: 1rem; flex: 0 0 1rem; border: 2px solid var(--line); border-top-color: var(--ink); border-radius: 50%; animation: upload-spin .8s linear infinite; }
+.editor-upload-status[data-state="error"] { border-style: solid; }
+@keyframes upload-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .editor-upload-status[data-state="loading"]::before { animation: none; } }

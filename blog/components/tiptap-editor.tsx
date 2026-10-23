@@ -1,6 +1,7 @@
 "use client";
 
 import { Extension } from "@tiptap/core";
+import { EditorFileDrop } from "./editor-file-drop";
 import { SlashEditorTools, slashLabel } from "./slash-editor-tools";
 import { BookmarkNode, LinkMentionNode, LinkPasteTools, linkFormatEvent } from "./slash-link-blocks";
 import { createPortal } from "react-dom";
@@ -265,7 +266,7 @@ function TiptapSurface({ initial, mentions, onChange }: { initial: JsonNode; men
     } },
     placeholder: { text: { paragraph: "내용을 입력하거나 '/'로 블록을 추가하세요", heading1: "제목 1", heading2: "제목 2", heading3: "제목 3", callout: "강조할 내용을 입력하세요", listItem: "목록", taskItem: "할 일" } },
     slash: { items: defaultSlashItems.map(item => ({ ...item, title: slashLabel(item.id, item.title), aliases: [...(item.aliases ?? []), item.title], ...(item.id === "image" ? { run: ({ editor, range }: Parameters<typeof item.run>[0]) => { editor.chain().focus().deleteRange(range).setImage({ src: "" }).run(); } } : {}) })) },
-    extend: [LegacyCalloutMetadata, ImageBlock.configure({ inline: false, allowBase64: false }), BookmarkNode, LinkMentionNode],
+    extend: [EditorFileDrop, LegacyCalloutMetadata, ImageBlock.configure({ inline: false, allowBase64: false }), BookmarkNode, LinkMentionNode],
   }).map(extension => nativeMediaNodes.find(node => node.name === extension.name) ?? extension), []);
   const onChangeRef = useRef(onChange);
   useEffect(() => { onChangeRef.current = onChange; }, [onChange]);

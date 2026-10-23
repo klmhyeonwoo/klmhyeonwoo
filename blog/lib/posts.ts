@@ -5,6 +5,7 @@ import matter from "gray-matter";
 import { postDateValue, postPublishedAtValue } from "./post-date";
 import { getSeries } from "./series";
 import { markdownEditorDocument } from "./markdown-editor-document";
+import { postExcerpt } from "./post-excerpt";
 
 const postsDirectory = path.join(process.cwd(), "content", "posts");
 const draftsDirectory = path.join(process.cwd(), "drafts");
@@ -57,18 +58,6 @@ export type EditablePost = {
 
 export type DraftMeta = EditablePost & { updatedAt: string };
 
-function excerptFromMarkdown(markdown: string) {
-  const text = markdown
-    .replace(/```[\s\S]*?```/g, " ")
-    .replace(/!\[[^\]]*\]\([^)]*\)/g, " ")
-    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
-    .replace(/[#>*_`~-]/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-  if (!text) return undefined;
-  return text.length > 180 ? `${text.slice(0, 180).trimEnd()}…` : text;
-}
-
 export function getPosts(includePrivate = false): PostMeta[] {
   if (!fs.existsSync(postsDirectory)) return [];
   const categories = getCategories();
@@ -91,7 +80,7 @@ export function getPosts(includePrivate = false): PostMeta[] {
         publishedAt: postPublishedAtValue(data.publishedAt ?? data.date) ?? "",
         updatedAt: postPublishedAtValue(data.updatedAt),
         description: data.description ? String(data.description) : undefined,
-        excerpt: data.description ? String(data.description) : data.private === true ? undefined : excerptFromMarkdown(content),
+        excerpt: data.description ? postExcerpt(String(data.description)) : data.private === true ? undefined : postExcerpt(content),
         categoryId: category?.id ?? categoryValue,
         category: category?.name ?? "미분류",
         seriesId: series?.id,

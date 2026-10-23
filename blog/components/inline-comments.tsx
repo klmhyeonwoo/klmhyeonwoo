@@ -115,7 +115,7 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
   const activeThread = activeAnchorKey ? threads.get(activeAnchorKey) : undefined;
 
   function openThread(key: string, element: HTMLElement) {
-    setComposing(false); setActiveAnchorKey(key); setThreadPoint(pointFor(element.getBoundingClientRect(), 336, 220));
+    setComposing(false); setPanelOpen(false); setActiveAnchorKey(key); setThreadPoint(pointFor(element.getBoundingClientRect(), 336, 360));
   }
 
   useEffect(() => {
@@ -137,14 +137,20 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
 
   useEffect(() => {
     const close = (event: KeyboardEvent) => { if (event.key === "Escape") { setComposing(false); setActiveAnchorKey(null); setPanelOpen(false); } };
+    const dismiss = (event: PointerEvent) => {
+      if (!(event.target instanceof Element) || event.target.closest(".inline-comments, mark[data-inline-comment-anchor]")) return;
+      setActiveAnchorKey(null);
+      setPanelOpen(false);
+    };
     window.addEventListener("keydown", close);
-    return () => window.removeEventListener("keydown", close);
+    window.addEventListener("pointerdown", dismiss);
+    return () => { window.removeEventListener("keydown", close); window.removeEventListener("pointerdown", dismiss); };
   }, []);
 
   function startComment() {
     if (!canWrite || !anchor || !selectionPoint) return;
     const range = root.current && anchorRange(root.current, anchor);
-    setComposerPoint(range ? pointFor(range.getBoundingClientRect(), Math.min(496, window.innerWidth - 24), 180) : selectionPoint);
+    setComposerPoint(range ? pointFor(range.getBoundingClientRect(), Math.min(496, window.innerWidth - 24), 260) : selectionPoint);
     setActiveAnchorKey(null); setComposing(true);
     requestAnimationFrame(() => form.current?.querySelector<HTMLTextAreaElement>("textarea")?.focus());
   }
@@ -179,29 +185,31 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
       const data = await response.json();
       if (!response.ok) throw new Error(data.error);
       setComments((current) => [...current, data.comment]);
+      setActiveAnchorKey(anchorKey(data.comment.anchor));
+      setThreadPoint(composerPoint);
       setBody(""); setAnchor(null); setSelectionPoint(null); setComposing(false); setPanelOpen(false);
     } catch (submitError) { setError(submitError instanceof Error ? submitError.message : "댓글을 저장하지 못했습니다."); }
     finally { setBusy(false); }
   }
 
   return <section className="inline-comments" aria-label="본문 댓글">
-    <button className="inline-comments-summary" type="button" onClick={() => setPanelOpen((value) => !value)} aria-expanded={panelOpen}><CommentGlyph /><span>{loading ? "…" : comments.length}</span></button>
+    <button className="inline-comments-summary" type="button" aria-label={`본문 댓글 ${comments.length}개 보기`} onClick={() => { setActiveAnchorKey(null); setPanelOpen((value) => !value); }} aria-expanded={panelOpen}><CommentGlyph /><span>{loading ? "…" : comments.length}</span></button>
     {canWrite && anchor && !composing && <button className="inline-comment-start" style={selectionPoint ? { left: selectionPoint.left, top: selectionPoint.top } : undefined} type="button" onMouseDown={(event) => event.preventDefault()} onClick={startComment}>댓글 추가</button>}
-    {canWrite && composing && anchor && <aside className="inline-comment-composer" role="region" aria-label="본문 댓글 작성" style={composerPoint ? { left: composerPoint.left, top: composerPoint.top } : undefined}>
+    {canWrite && composing && anchor && <aside className="inline-comment-composer" role="region" aria-label="본문 댓글 작성" style={composerPoint ? { left: composerPoint.left, top: composerPoint.top, maxHeight: `calc(100dvh - ${composerPoint.top + 12}px)` } : undefined}>
       <form ref={form} onSubmit={submit} aria-busy={busy}>
         <blockquote>{anchor.quote}</blockquote>
         <div className="inline-comment-entry">
           <span className="inline-comment-avatar" title={author?.name} aria-hidden="true">{author?.image ? <img src={author.image} alt="" /> : (author?.name || "관리자").slice(0, 1)}</span>
-          <textarea required maxLength={2000} rows={2} value={body} onChange={(event) => setBody(event.target.value)} placeholder="댓글 추가…" aria-label="댓글" onKeyDown={(event) => {
+          <textarea required maxLength={2000} rows={2} value={body} onChange={(event) => { setBody(event.target.value); event.target.style.height = "auto"; event.target.style.height = `${event.target.scrollHeight}px`; }} placeholder="댓글 추가…" aria-label="댓글" onKeyDown={(event) => {
             if (event.key === "Enter" && (event.metaKey || event.ctrlKey) && !event.nativeEvent.isComposing) { event.preventDefault(); form.current?.requestSubmit(); }
           }} />
           <button className="inline-comment-send" type="submit" disabled={busy || !body.trim()} aria-label={busy ? "댓글 등록 중" : "댓글 등록"} title="댓글 등록 (⌘/Ctrl + Enter)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg></button>
         </div>
-        <footer><small>{author?.name || "관리자"}</small><span /><button type="button" onClick={() => { setComposing(false); setAnchor(null); setSelectionPoint(null); }}>닫기</button></footer>
+        <footer><small>{author?.name || "관리자"}</small><span /><button type="button" disabled={busy} onClick={() => { setComposing(false); setAnchor(null); setSelectionPoint(null); }}>닫기</button></footer>
         {error && <p className="inline-comment-error" role="alert">{error}</p>}
       </form>
     </aside>}
-    {activeThread && threadPoint && <aside className="inline-comment-thread" role="region" aria-label="선택한 문장 댓글" style={{ left: threadPoint.left, top: threadPoint.top }}><header><strong>댓글 {activeThread.length}</strong><button type="button" aria-label="댓글 창 닫기" onClick={() => setActiveAnchorKey(null)}>×</button></header><blockquote>{activeThread[0].anchor.quote}</blockquote><ul>{activeThread.map((comment) => <li key={comment.id}><div><strong>{comment.name}</strong><time dateTime={comment.createdAt}>{new Date(comment.createdAt).toLocaleDateString("ko-KR")}</time>{canDelete && <button type="button" disabled={busy} onClick={() => void remove(comment.id)}>삭제</button>}</div><p>{comment.body}</p></li>)}</ul></aside>}
+    {activeThread && threadPoint && <aside className="inline-comment-thread" role="region" aria-label="선택한 문장 댓글" style={{ left: threadPoint.left, top: threadPoint.top, maxHeight: `min(28rem, calc(100dvh - ${threadPoint.top + 12}px))` }}><header><strong>댓글 <small>{activeThread.length}</small></strong><button type="button" aria-label="댓글 창 닫기" onClick={() => setActiveAnchorKey(null)}>×</button></header><blockquote>{activeThread[0].anchor.quote}</blockquote><ul>{activeThread.map((comment) => <li key={comment.id}><div><strong>{comment.name}</strong><time dateTime={comment.createdAt}>{new Date(comment.createdAt).toLocaleDateString("ko-KR")}</time>{canDelete && <button type="button" disabled={busy} onClick={() => void remove(comment.id)}>삭제</button>}</div><p>{comment.body}</p></li>)}</ul></aside>}
     {panelOpen && <aside className="inline-comments-panel" role="region" aria-label="모든 본문 댓글"><header><div><strong>본문 댓글</strong><small>{comments.length}개</small></div><button type="button" onClick={() => setPanelOpen(false)} aria-label="댓글 목록 닫기">×</button></header>{loading ? <p>댓글을 불러오는 중…</p> : comments.length ? <ul>{comments.map((comment) => <li key={comment.id}><button type="button" onClick={() => showQuote(comment)}>“{comment.anchor.quote}”</button><strong>{comment.name}</strong><time dateTime={comment.createdAt}>{new Date(comment.createdAt).toLocaleDateString("ko-KR")}</time><p>{comment.body}</p></li>)}</ul> : <p>아직 본문 댓글이 없습니다.{canWrite && <><br />문장을 선택해 첫 댓글을 남겨보세요.</>}</p>}</aside>}
     {error && !composing && <p className="inline-comment-error" role="alert">{error} <button type="button" disabled={busy} onClick={() => { setLoading(true); setAttempt((value) => value + 1); }}>다시 시도</button></p>}
   </section>;

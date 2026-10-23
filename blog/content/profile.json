@@ -1,7 +1,7 @@
 {
   "name": "현우",
   "image": "https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/main/blog/public/uploads/1792216650443-e3ea43e2.png",
-  "markdown": "## 안녕하세요 김현우입니다.\n\n---\n\n**프론트엔드 엔지니어 김현우**입니다. 2023년부터 소프트웨어를 개발해왔고, 현재도 프론트엔드 엔지니어로 일하고 있습니다. 웹 에디터를 비롯해 보안 서비스를 거치며 사용자 화면부터 배포 환경까지 다뤘습니다. 현재는 서버에 관심이 많아 노드 기반의 백엔드를 학습하고 있습니다.\n\n단순히 스펙 문서만을 보고 개발하는 사람이 아닌, 팀원들과 함께 항상 더 나은 방향성을 위해 고민하는 것을 좋아합니다. 다양한 개발문화를 팀에 도입하며 변화시킨 것처럼 소속감과 선한 영향력을 공유하는 것을 좋아합니다. 최근에는 업무에서 에이전트의 도입을 적극적으로 하고 있으며 AI*(V0, Copilot, Claude, etc) *에이전트를 통해 효율적으로 생산성을 올리는데 관심이 많습니다.\n\n## 경력\n\n---\n\n### 안랩\n\n안랩 보안 인텔리전스 플랫폼 서비스 개발과 프론트엔드 조직의 공통 기반 구축\n\n- 위협 인텔리전스 플랫폼, 백오피스 개발\n- 디자인 토큰 기반 백오피스 인터널 컴포넌트 시스템 구축\n- 팀 내 NPM 공통 모노레포 환경 구성 및 공통 패키지 관리 체계 구축\n  \n  - 위협 탐지룰 모음 패키지 threat-detection-rule 개발\n  - AI Agentic AG-UI 컴포넌트 패키지 ai-interaction-ui 공동 기여\n- 팀 내 생산성 도구 (Zookeeper UI) 개발\n- 안랩 보안 블로그 워드프레스 리뉴얼 및 게시글 배포 자동화, 관리 및 운영\n\n### 지란지교소프트\n\n나모 웹 에디터 컴포넌트 및 에디터 편의성 개발\n\n- 나모에디터 웹 컴포넌트 개발\n- 나모에디터 React 기반 래핑 컴포넌트 개발\n- 나모에디터 웹 한글 뷰어 플러그인 개발\n\n## 참고\n\n---\n\n<Bookmark url=\"http://github.com/klmhyeonwoo\" title=\"klmhyeonwoo - Overview\" description=\"klmhyeonwoo has 124 repositories available. Follow their code on GitHub.\" image=\"https://avatars.githubusercontent.com/u/19422885?v=4?s=400\" layout=\"bookmark\" />\n\n\n<Bookmark url=\"https://ripe-launch-04b.notion.site/Kim-Hyeonwoo-a92f74b56d11400587da628990426723\" title=\"Notion | Where teams and agents work together\" description=\"Made in Notion, the connected workspace where AI agents and teams organize docs, projects and knowledge together.\" image=\"https://app.notion.com/images/meta/default.png\" layout=\"bookmark\" />\n",
+  "markdown": "## 안녕하세요 김현우입니다.\n\n---\n\n**프론트엔드 엔지니어 김현우**입니다. 2023년부터 소프트웨어를 개발해왔고, 현재도 프론트엔드 엔지니어로 일하고 있습니다. 웹 에디터를 비롯해 보안 서비스를 거치며 사용자 화면부터 배포 환경까지 다뤘습니다. 현재는 서버에 관심이 많아 노드 기반의 백엔드를 학습하고 있습니다.\n\n단순히 스펙 문서만을 보고 개발하는 사람이 아닌, 팀원들과 함께 항상 더 나은 방향성을 위해 고민하는 것을 좋아합니다. 다양한 개발문화를 팀에 도입하며 변화시킨 것처럼 소속감과 선한 영향력을 공유하는 것을 좋아합니다. 최근에는 업무에서 에이전트의 도입을 적극적으로 하고 있으며 AI*(V0, Copilot, Claude, etc) *에이전트를 통해 효율적으로 생산성을 올리는데 관심이 많습니다.\n\n## 경력\n\n---\n\n### 안랩\n\n> Frontend Engineer, Threat Intelligence Development Team ㅡ 2024.01 ~\n\n안랩 보안 인텔리전스 플랫폼 서비스 개발과 프론트엔드 조직의 공통 기반 구축\n\n- 위협 인텔리전스 플랫폼, 백오피스 개발\n- 디자인 토큰 기반 백오피스 인터널 컴포넌트 시스템 구축\n- 팀 내 NPM 공통 모노레포 환경 구성 및 공통 패키지 관리 체계 구축\n  \n  - 위협 탐지룰 모음 패키지 threat-detection-rule 개발\n  - AI Agentic AG-UI 컴포넌트 패키지 ai-interaction-ui 공동 기여\n- 팀 내 생산성 도구 (Zookeeper UI) 개발\n- 안랩 보안 블로그 워드프레스 리뉴얼 및 게시글 배포 자동화, 관리 및 운영\n\n### 지란지교소프트\n\n> Frontend Engineer, Component Development Team ㅡ 2023.04 ~ 2024.01\n\n나모 웹 에디터 컴포넌트 및 에디터 편의성 개발\n\n- 나모에디터 웹 컴포넌트 개발\n- 나모에디터 React 기반 래핑 컴포넌트 개발\n- 나모에디터 웹 한글 뷰어 플러그인 개발\n\n## 참고\n\n---\n\n<Bookmark url=\"http://github.com/klmhyeonwoo\" title=\"klmhyeonwoo - Overview\" description=\"klmhyeonwoo has 124 repositories available. Follow their code on GitHub.\" image=\"https://avatars.githubusercontent.com/u/19422885?v=4?s=400\" layout=\"bookmark\" />\n\n\n<Bookmark url=\"https://ripe-launch-04b.notion.site/Kim-Hyeonwoo-a92f74b56d11400587da628990426723\" title=\"Notion | Where teams and agents work together\" description=\"Made in Notion, the connected workspace where AI agents and teams organize docs, projects and knowledge together.\" image=\"https://app.notion.com/images/meta/default.png\" layout=\"bookmark\" />\n",
   "blocks": [
     {
       "type": "slash-content",
@@ -52,7 +52,7 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "i62NBcSIq-cl"
+              "id": "Kam9UudW4dzU"
             },
             "content": [
               {
@@ -96,13 +96,33 @@
           {
             "type": "heading",
             "attrs": {
-              "id": "6CQcd4j3HY9s",
+              "id": "75_4xNt8LkHZ",
               "level": 3
             },
             "content": [
               {
                 "type": "text",
                 "text": "안랩"
+              }
+            ]
+          },
+          {
+            "type": "blockquote",
+            "attrs": {
+              "id": "2IUF6HkRKYhD"
+            },
+            "content": [
+              {
+                "type": "paragraph",
+                "attrs": {
+                  "id": "6CQcd4j3HY9s"
+                },
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "Frontend Engineer, Threat Intelligence Development Team ㅡ 2024.01 ~"
+                  }
+                ]
               }
             ]
           },
@@ -277,13 +297,33 @@
           {
             "type": "heading",
             "attrs": {
-              "id": "ZKiDWdMtNlkQ",
+              "id": "xwrlsEcAhv2T",
               "level": 3
             },
             "content": [
               {
                 "type": "text",
                 "text": "지란지교소프트"
+              }
+            ]
+          },
+          {
+            "type": "blockquote",
+            "attrs": {
+              "id": "rsS9rHmcpZmg"
+            },
+            "content": [
+              {
+                "type": "paragraph",
+                "attrs": {
+                  "id": "MPAtWKeZ2_mo"
+                },
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "Frontend Engineer, Component Development Team ㅡ 2023.04 ~ 2024.01"
+                  }
+                ]
               }
             ]
           },

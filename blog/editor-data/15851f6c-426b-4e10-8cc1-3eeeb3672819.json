@@ -1,0 +1,419 @@
+[
+  {
+    "type": "slash-content",
+    "version": 1,
+    "content": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "j5EK3UwMXcKs"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "매일 기술 지식 공부를 하다가 우연히 발견하게된 React 이벤트 버블링에 차이에 대해서 정리를 해보려고 합니다. 사실 이벤트 버블링이라고 하면 웹 개발자라면 문득 당연하게 생각하게 되는 캡쳐링 - 타겟 - 버블링 형태로 일어난다는 것을 알고 있습니다. 문득 순수한 엘리먼트의 경우에는 자식 요소에서 부모요소까지 퍼진다는 것을 인지하고 있지만, "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "code"
+                }
+              ],
+              "text": "Portal"
+            },
+            {
+              "type": "text",
+              "text": " 의 경우에는 렌더 위치를 옮기는 꼴인데 어떻게 될까라는 생각을 했습니다. 처음에는 의미상 버블링이니까.. 순수 엘리먼트처럼 똑같이 작동하지 않을까라는 생각을 했는데 그게 아니었습니다 "
+            },
+            {
+              "type": "emoji",
+              "attrs": {
+                "name": "upside_down_face"
+              }
+            },
+            {
+              "type": "text",
+              "text": " "
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "NgUyG7DANCZ7",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "React Portal은 무엇일까?"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "aZI4mc5R6a0d"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "먼저 모달, 토스트 컴포넌트를 부모 요소의 루트 위치에 띄우기 위해 많이 사용하는 "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "code"
+                }
+              ],
+              "text": "React Portal"
+            },
+            {
+              "type": "text",
+              "text": "에 대해서 한번 간단하게 알아봅시다. 간단하게 말하면 부모 컴포넌트의 DOM 계층 구조 바깥에 있는 다른 DOM 노드에 자식 컴포넌트를 렌더링할 수 있게 해주는 기능입니다. 이 기능 덕에 굳이 상태 값을 위로 계속 올리지 않아도, 손쉽게 전역에서 사용하는 모달이나, 토스트 컴포넌트 등의 루트 요소들을 조금 더 편하게 만들 수 있습니다. 단, 해당 포탈의 컨테이너가 반드시 루트와 같은 레벨에 있어야하는 것은 아닙니다."
+            }
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "attrs": {
+            "id": "F9xtJ7g8RJUo",
+            "language": "jsx"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "import { createPortal } from 'react-dom';\n\ncreatePortal(child, domNode, key?)"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "_F0oE1BlDq1G",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "어떤 식으로 이벤트 버블링이 이뤄질까?"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "RaZ6kNmCHjfZ"
+          },
+          "content": [
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "code"
+                }
+              ],
+              "text": "#root"
+            },
+            {
+              "type": "text",
+              "text": "와 "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "code"
+                }
+              ],
+              "text": "#portal-root"
+            },
+            {
+              "type": "text",
+              "text": "가 "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "code"
+                }
+              ],
+              "text": "body"
+            },
+            {
+              "type": "text",
+              "text": " 아래의 형제라고 가정해보겠습니다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "eagZweXXPC3k",
+            "level": 3
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "네이티브 DOM 이벤트와 React Portal 이벤트 구분하기"
+            }
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "attrs": {
+            "id": "gNW289EH1YYR",
+            "language": "text"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "실제 DOM 트리                  React 트리\n\nbody                           App\n├─ #root                       └─ Parent (onClick)\n│  └─ Parent의 div                └─ 포탈\n└─ #portal-root                      └─ button (onClick)\n   └─ button"
+            }
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "attrs": {
+            "id": "6B6Y3GAge4jM",
+            "language": "javascript"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "import { createPortal } from 'react-dom';\n\nfunction Parent() {\n  return (\n    <div onClick={() => console.log('Parent 클릭')}>\n      {createPortal(\n        <button onClick={() => console.log('포탈 버튼 클릭')}>\n          클릭\n        </button>,\n        document.getElementById('portal-root')\n      )}\n    </div>\n  );\n}"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "vW96bqZDYiq5"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "버튼을 클릭하게 되면 각각의 트리들의 전파 과정은 다음과 같습니다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "AoZLHI2eS8e_",
+            "level": 3
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "네이티브 DOM 이벤트"
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "attrs": {
+            "id": "cdRIkxIbOFmP"
+          },
+          "content": [
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "GoRNzej6MGNL"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "L4MtDVHz7bUn"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "button → #portal-root → body → html → document → window"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "t1cl8LWVDLnF",
+            "level": 3
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "React Portal DOM 이벤트"
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "attrs": {
+            "id": "IgXBJTbsXPtY"
+          },
+          "content": [
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "RlYjJfupHGia"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "E5SAOmI_PZhu"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "code"
+                        }
+                      ],
+                      "text": "button → Parent → App"
+                    },
+                    {
+                      "type": "text",
+                      "text": "의 React 조상 핸들러"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "dBABP3VmKZn8"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "이렇게만 보면 이해가 잘 안될 수 있으니 이벤트를 합쳐보겠습니다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "kbbM-1-Cm7h2",
+            "level": 3
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "합쳐진 종합 이벤트"
+            }
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "attrs": {
+            "id": "jKCLlbn5N4lz",
+            "language": "text"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "button → #portal-root → body → html → document → window\n          │\n          └─ React가 포탈의 이벤트를 처리\n             button의 onClick\n               → Parent의 div.onClick\n               → App의 main.onClick"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "mzolfW31Q05s"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "React를 클릭한 버튼이 React 트리에서 어떤 요소의 자식인지 알고 있습니다. 그래서 실제 DOM에서 "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "code"
+                }
+              ],
+              "text": "#portal-root"
+            },
+            {
+              "type": "text",
+              "text": " 밖에서 부모 "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "code"
+                }
+              ],
+              "text": "div.click"
+            },
+            {
+              "type": "text",
+              "text": "도 실행합니다. 네이티브 이벤트가 React 트리로 경로를 바꾸는 것이 아니라, 네이티브 이벤트는 DOM 경로를 유지하고, React는 그 이벤트를 바탕으로 React 조상 핸들러를 실행하는 꼴입니다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "iFK_91xU96ED"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "* "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "code"
+                }
+              ],
+              "text": "Parent"
+            },
+            {
+              "type": "text",
+              "text": " 컴포넌트가 렌더링된 상위 컴포넌트의 조상요소까지 전파가 되며, "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "code"
+                }
+              ],
+              "text": "import"
+            },
+            {
+              "type": "text",
+              "text": "만 했다고 이벤트 전파가 되지 않는 점을 유의해야합니다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "PjqCVts0G3Hr"
+          }
+        }
+      ]
+    }
+  }
+]

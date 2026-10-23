@@ -25,11 +25,25 @@
 .inline-comment-composer {
   border-radius: 1rem;
   box-sizing: border-box;
-  max-width: calc(100vw - 1.5rem);
+  max-width: 100%;
   padding: 1rem 1.1rem;
-  position: fixed;
-  width: min(26rem, calc(100vw - 1.5rem));
+  width: min(38rem, 100%);
+}
+.inline-comment-composer-slot,
+.inline-comment-thread-slot {
+  position: relative;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  max-width: 100%;
   z-index: 45;
+}
+.inline-comment-composer-slot > .inline-comment-composer,
+.inline-comment-thread-slot > .inline-comment-thread {
+  position: absolute;
+  top: 0.125rem;
+  inset-inline-start: 0;
 }
 .inline-comment-composer form {
   display: flex;
@@ -131,13 +145,11 @@
 .inline-comment-thread {
   border-radius: 0.65rem;
   box-sizing: border-box;
-  max-height: min(28rem, calc(100dvh - 1.5rem));
+  max-height: 28rem;
   overflow: auto;
   overscroll-behavior: contain;
   padding: 0.8rem;
-  position: fixed;
-  width: min(20rem, calc(100vw - 1.5rem));
-  z-index: 45;
+  width: min(20rem, 100%);
 }
 .inline-comment-thread > header {
   align-items: center;
@@ -239,11 +251,7 @@
 @media (max-width: 42rem) {
   .inline-comment-composer,
   .inline-comment-thread {
-    bottom: max(0.75rem, env(safe-area-inset-bottom));
-    left: 0.75rem !important;
-    right: 0.75rem;
-    top: auto !important;
-    width: auto;
+    width: 100%;
   }
   .inline-comment-composer {
     padding: 0.8rem 0.9rem;

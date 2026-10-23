@@ -106,6 +106,10 @@ export function markdownFor(document: JsonNode): string {
   }).join("");
   const block = (node: JsonNode, orderedIndex?: number): string => {
     const text = inline(node.content);
+    if (["paragraph", "heading"].includes(node.type ?? "") && ["center", "right"].includes(String(node.attrs?.textAlign))) {
+      const content = node.type === "heading" ? `${"#".repeat(Math.min(6, Math.max(1, Number(node.attrs?.level) || 2)))} ${text}` : text;
+      return `<div style={{textAlign: "${node.attrs?.textAlign}"}}>\n\n${content}\n\n</div>`;
+    }
     if (node.type === "paragraph") return text;
     if (node.type === "heading") return `${"#".repeat(Number(node.attrs?.level) || 2)} ${text}`;
     if (node.type === "blockquote") return (node.content ?? []).map((child) => `> ${block(child)}`).join("\n");

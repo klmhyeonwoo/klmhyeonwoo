@@ -85,7 +85,9 @@ const TypographicShortcuts = Extension.create({
 const LegacyCalloutMetadata = Extension.create({
   name: "legacyCalloutMetadata",
   addGlobalAttributes() {
-    return [{ types: ["callout"], attributes: {
+    return [{ types: ["paragraph", "heading"], attributes: {
+      textAlign: { default: "left", parseHTML: (element: HTMLElement) => element.style.textAlign || "left", renderHTML: (attrs: Record<string, unknown>) => ({ style: `text-align: ${["center", "right"].includes(String(attrs.textAlign)) ? attrs.textAlign : "left"}` }) },
+    } }, { types: ["callout"], attributes: {
       fluentUrl: { default: "", rendered: false },
       background: { default: "default", rendered: false },
     } }, { types: ["table"], attributes: {

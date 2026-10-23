@@ -1,25 +1,49 @@
 "use client";
 
-import { useEffect, useRef, useState, type FormEvent, type RefObject } from "react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode, type RefObject } from "react";
+import { createPortal } from "react-dom";
 import type { InlineComment, TextAnchor } from "@/lib/inline-comment-types";
 import { anchorRange } from "@/lib/text-anchor";
 import { useAdminSession } from "./admin-session";
 import "./inline-comments.css";
 
-type FloatingPoint = { top: number; left: number };
+function commentDateLabel(value: string) {
+  const timestamp = Date.parse(value);
+  if (!Number.isFinite(timestamp)) return value;
+  // Persisted timestamps are UTC. Format the short label in the blog's
+  // Korean audience timezone without making hydration depend on a browser
+  // locale or system timezone.
+  const koreaDate = new Date(timestamp + 9 * 60 * 60 * 1000);
+  return `${koreaDate.getUTCFullYear()}. ${koreaDate.getUTCMonth() + 1}. ${koreaDate.getUTCDate()}.`;
+}
 
 function anchorKey({ start, quote, prefix, suffix }: TextAnchor) {
   return `${start}:${quote}:${prefix}:${suffix}`;
 }
 
-function pointFor(rect: DOMRect, width: number, height = 56): FloatingPoint {
-  return { left: Math.max(12, Math.min(window.innerWidth - width - 12, rect.left)), top: Math.max(12, Math.min(window.innerHeight - height - 12, rect.bottom + 10)) };
+function commentBlockFor(node: Node, root: HTMLElement) {
+  const element = node instanceof Element ? node : node.parentElement;
+  const block = element?.closest<HTMLElement>("p, h1, h2, h3, h4, h5, h6, li, blockquote, pre, td, th");
+  return block && root.contains(block) ? block : root;
 }
 
-function composerPointFor(rect: DOMRect, width = Math.min(608, window.innerWidth - 24), height = 176): FloatingPoint {
-  const gap = 16;
-  if (rect.right + gap + width + 12 > window.innerWidth) return pointFor(rect, width, height);
-  return { left: rect.right + gap, top: Math.max(12, Math.min(window.innerHeight - height - 12, rect.top + (rect.height - height) / 2)) };
+/** Renders a discussion surface immediately after its text block. */
+function AnchoredSurface({ target, className, children }: { target: HTMLElement | null; className: string; children: ReactNode }) {
+  const [host, setHost] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (!target) return;
+    const slot = document.createElement("div");
+    slot.className = `${className}-slot`;
+    // The slot follows the paragraph's bottom margin. Offset that spacing so
+    // the discussion stays close to its text without moving other content.
+    slot.style.top = `-${Math.max(0, parseFloat(getComputedStyle(target).marginBottom) || 0)}px`;
+    target.insertAdjacentElement("afterend", slot);
+    setHost(slot);
+    return () => { setHost(null); slot.remove(); };
+  }, [className, target]);
+
+  return host ? createPortal(children, host) : null;
 }
 
 /** Selection anchored discussion UI. The persistent anchor is text context, never DOM offsets. */
@@ -31,9 +55,9 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
   const [canDelete, setCanDelete] = useState(false);
   const [anchor, setAnchor] = useState<TextAnchor | null>(null);
   const [composing, setComposing] = useState(false);
-  const [composerPoint, setComposerPoint] = useState<FloatingPoint | null>(null);
+  const [composerTarget, setComposerTarget] = useState<HTMLElement | null>(null);
   const [activeAnchorKey, setActiveAnchorKey] = useState<string | null>(null);
-  const [threadPoint, setThreadPoint] = useState<FloatingPoint | null>(null);
+  const [threadTarget, setThreadTarget] = useState<HTMLElement | null>(null);
   const [body, setBody] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
@@ -56,7 +80,7 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
   }, [endpoint, attempt, authenticated]);
 
   useEffect(() => {
-    if (!canWrite) { setComposing(false); setAnchor(null); setComposerPoint(null); }
+    if (!canWrite) { setComposing(false); setAnchor(null); setComposerTarget(null); }
   }, [canWrite]);
 
   useEffect(() => {
@@ -65,17 +89,17 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
       if (composing) return;
       const element = root.current;
       const selection = window.getSelection();
-      if (!element || !selection?.rangeCount || selection.isCollapsed) { setAnchor(null); setComposerPoint(null); return; }
+      if (!element || !selection?.rangeCount || selection.isCollapsed) { setAnchor(null); setComposerTarget(null); return; }
       const range = selection.getRangeAt(0);
-      if (!element.contains(range.startContainer) || !element.contains(range.endContainer)) { setAnchor(null); setComposerPoint(null); return; }
+      if (!element.contains(range.startContainer) || !element.contains(range.endContainer)) { setAnchor(null); setComposerTarget(null); return; }
       const quote = range.toString();
-      if (!quote.trim() || quote.length > 1000) { setAnchor(null); setComposerPoint(null); return; }
+      if (!quote.trim() || quote.length > 1000) { setAnchor(null); setComposerTarget(null); return; }
       const before = range.cloneRange();
       before.selectNodeContents(element); before.setEnd(range.startContainer, range.startOffset);
       const start = before.toString().length;
       const text = element.textContent ?? "";
       setAnchor({ quote, start, prefix: text.slice(Math.max(0, start - 60), start), suffix: text.slice(start + quote.length, start + quote.length + 60) });
-      setComposerPoint(composerPointFor(range.getBoundingClientRect()));
+      setComposerTarget(commentBlockFor(range.startContainer, element));
       setActiveAnchorKey(null);
       setComposing(true);
     }
@@ -148,10 +172,6 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
   });
   const activeThread = activeAnchorKey ? threads.get(activeAnchorKey) : undefined;
 
-  function openThread(key: string, element: HTMLElement) {
-    setComposing(false); setActiveAnchorKey(key); setThreadPoint(pointFor(element.getBoundingClientRect(), 320, 360));
-  }
-
   useEffect(() => {
     const element = root.current;
     if (!element) return;
@@ -162,7 +182,7 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
       const marker = target.closest<HTMLElement>("mark[data-inline-comment-anchor]");
       if (!marker || !element.contains(marker)) return;
       if (event instanceof KeyboardEvent) event.preventDefault();
-      openThread(marker.dataset.inlineCommentAnchor ?? "", marker);
+      setComposing(false); setComposerTarget(null); setActiveAnchorKey(marker.dataset.inlineCommentAnchor ?? ""); setThreadTarget(commentBlockFor(marker, element));
     };
     element.addEventListener("click", openFromEvent);
     element.addEventListener("keydown", openFromEvent);
@@ -170,10 +190,10 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
   }, [root]);
 
   useEffect(() => {
-    const close = (event: KeyboardEvent) => { if (event.key === "Escape") { setComposing(false); setAnchor(null); setComposerPoint(null); setActiveAnchorKey(null); } };
+    const close = (event: KeyboardEvent) => { if (event.key === "Escape") { setComposing(false); setAnchor(null); setComposerTarget(null); setActiveAnchorKey(null); setThreadTarget(null); } };
     const dismiss = (event: PointerEvent) => {
-      if (!(event.target instanceof Element) || event.target.closest(".inline-comments, mark[data-inline-comment-anchor]")) return;
-      setComposing(false); setAnchor(null); setComposerPoint(null); setBody(""); setActiveAnchorKey(null);
+      if (!(event.target instanceof Element) || event.target.closest(".inline-comment-composer, .inline-comment-thread, mark[data-inline-comment-anchor]")) return;
+      setComposing(false); setAnchor(null); setComposerTarget(null); setBody(""); setActiveAnchorKey(null); setThreadTarget(null);
     };
     window.addEventListener("keydown", close);
     window.addEventListener("pointerdown", dismiss);
@@ -201,14 +221,15 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
       if (!response.ok) throw new Error(data.error);
       setComments((current) => [...current, data.comment]);
       setActiveAnchorKey(anchorKey(data.comment.anchor));
-      setThreadPoint(composerPoint);
-      setBody(""); setAnchor(null); setComposerPoint(null); setComposing(false);
+      setThreadTarget(composerTarget);
+      setBody(""); setAnchor(null); setComposerTarget(null); setComposing(false);
     } catch (submitError) { setError(submitError instanceof Error ? submitError.message : "댓글을 저장하지 못했습니다."); }
     finally { setBusy(false); }
   }
 
   return <section className="inline-comments" aria-label="본문 댓글">
-    {canWrite && composing && anchor && <aside className="inline-comment-composer" role="region" aria-label="본문 댓글 작성" style={composerPoint ? { left: composerPoint.left, top: composerPoint.top, maxHeight: `calc(100dvh - ${composerPoint.top + 12}px)` } : undefined}>
+    {canWrite && composing && anchor && <AnchoredSurface target={composerTarget} className="inline-comment-composer">
+      <aside className="inline-comment-composer" role="region" aria-label="본문 댓글 작성">
       <form ref={form} onSubmit={submit} aria-busy={busy}>
         <div className="inline-comment-entry">
           <textarea required maxLength={2000} rows={4} value={body} onChange={(event) => { setBody(event.target.value); event.target.style.height = "auto"; event.target.style.height = `${Math.max(event.target.scrollHeight, 120)}px`; }} placeholder="댓글 추가" aria-label="댓글" onKeyDown={(event) => {
@@ -218,8 +239,9 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
         </div>
         {error && <p className="inline-comment-error" role="alert">{error}</p>}
       </form>
-    </aside>}
-    {activeThread && threadPoint && <aside className="inline-comment-thread" role="region" aria-label="선택한 문장 댓글" style={{ left: threadPoint.left, top: threadPoint.top, maxHeight: `min(28rem, calc(100dvh - ${threadPoint.top + 12}px))` }}><header><strong>댓글</strong><button type="button" aria-label="댓글 창 닫기" onClick={() => setActiveAnchorKey(null)}>×</button></header><blockquote>{activeThread[0].anchor.quote}</blockquote><ul>{activeThread.map((comment) => <li key={comment.id}><div><strong>{comment.name}</strong><time dateTime={comment.createdAt}>{new Date(comment.createdAt).toLocaleDateString("ko-KR")}</time>{canDelete && <button type="button" disabled={busy} onClick={() => void remove(comment.id)}>삭제</button>}</div><p>{comment.body}</p></li>)}</ul></aside>}
+      </aside>
+    </AnchoredSurface>}
+    {activeThread && <AnchoredSurface target={threadTarget} className="inline-comment-thread"><aside className="inline-comment-thread" role="region" aria-label="선택한 문장 댓글"><header><strong>댓글</strong><button type="button" aria-label="댓글 창 닫기" onClick={() => { setActiveAnchorKey(null); setThreadTarget(null); }}>×</button></header><blockquote>{activeThread[0].anchor.quote}</blockquote><ul>{activeThread.map((comment) => <li key={comment.id}><div><strong>{comment.name}</strong><time dateTime={comment.createdAt}>{commentDateLabel(comment.createdAt)}</time>{canDelete && <button type="button" disabled={busy} onClick={() => void remove(comment.id)}>삭제</button>}</div><p>{comment.body}</p></li>)}</ul></aside></AnchoredSurface>}
     {error && !composing && <p className="inline-comment-error" role="alert">{error} <button type="button" disabled={busy} onClick={() => setAttempt((value) => value + 1)}>다시 시도</button></p>}
   </section>;
 }

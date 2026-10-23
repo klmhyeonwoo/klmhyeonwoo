@@ -105,6 +105,7 @@
 }
 .prose mark[data-inline-comment-draft] {
   background: color-mix(in srgb, #ffd54a 38%, transparent);
+  color: var(--ink);
   border-radius: 0.1rem;
   box-decoration-break: clone;
   padding: 0.03em 0.06em;
@@ -115,6 +116,7 @@
 }
 .prose mark[data-inline-comment-anchor] {
   background: color-mix(in srgb, var(--ink) 7%, transparent);
+  color: var(--ink);
   border-radius: 0.12rem;
   box-decoration-break: clone;
   cursor: pointer;
@@ -140,6 +142,25 @@
   background: color-mix(in srgb, var(--ink) 12%, transparent);
   outline: 1px solid color-mix(in srgb, var(--ink) 25%, transparent);
   outline-offset: 2px;
+}
+
+/* Keep commented text readable against the dark article surface. The native
+ * <mark> UA color is intentionally overridden so a comment never turns its
+ * text into a low-contrast dark-on-dark highlight. */
+html[data-theme="dark"] .prose mark[data-inline-comment-draft] {
+  background: color-mix(in srgb, #ffd54a 28%, transparent);
+  color: var(--ink);
+  text-decoration-color: #ffd54a;
+}
+html[data-theme="dark"] .prose mark[data-inline-comment-anchor] {
+  background: color-mix(in srgb, #ffd54a 16%, transparent);
+  color: var(--ink);
+  text-decoration-color: color-mix(in srgb, #ffd54a 78%, transparent);
+}
+html[data-theme="dark"] .prose mark[data-inline-comment-anchor]:hover,
+html[data-theme="dark"] .prose mark[data-inline-comment-anchor]:focus-visible {
+  background: color-mix(in srgb, #ffd54a 24%, transparent);
+  outline-color: color-mix(in srgb, #ffd54a 64%, transparent);
 }
 
 .inline-comment-thread {

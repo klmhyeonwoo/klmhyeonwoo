@@ -11,6 +11,14 @@ const koreanPostDateFormatter = new Intl.DateTimeFormat("ko-KR", {
   day: "numeric",
   timeZone: "Asia/Seoul",
 });
+const koreanDateTimeFormatter = new Intl.DateTimeFormat("ko-KR", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  hour: "numeric",
+  minute: "2-digit",
+  timeZone: "Asia/Seoul",
+});
 
 function normalizedDate(value: unknown) {
   if (value instanceof Date && !Number.isNaN(value.getTime())) {
@@ -79,4 +87,11 @@ export function formatPostDate(value: unknown) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return date;
 
   return koreanPostDateFormatter.format(new Date(`${date}T00:00:00+09:00`));
+}
+
+export function formatDraftSavedAt(value: unknown) {
+  const normalized = postPublishedAtValue(value);
+  if (!normalized) return "저장 시각 없음";
+  const date = new Date(normalized);
+  return Number.isNaN(date.getTime()) ? "저장 시각 없음" : koreanDateTimeFormatter.format(date);
 }

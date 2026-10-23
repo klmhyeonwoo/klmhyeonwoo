@@ -927,6 +927,7 @@ input {
   padding: 8px 0 8px 8px;
 }
 .draft-delete:hover { color: var(--ink); }
+.draft-delete:disabled { cursor: wait; opacity: .55; }
 .draft-list span {
   color: var(--muted);
   font-size: 13px;

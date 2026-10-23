@@ -388,7 +388,7 @@ export function AdminClient({ authenticated: initiallyAuthenticated, initialPost
       {publishedPostId && <Link className="published-link" href={`/posts/${publishedPostId}`}>발행된 글 보기</Link>}
       <section className="draft-list">
         <h2>임시글</h2>
-        {drafts.filter((draft) => !deletedDraftIds.has(draft.id)).length > 0 ? drafts.filter((draft) => !deletedDraftIds.has(draft.id)).map((draft) => <div className="draft-list-row" key={draft.id}><Link href={`/ykk?draft=${draft.id}`}>{draft.title || "제목 없는 임시글"}<span>{formatDraftSavedAt(draft.updatedAt)}</span></Link><button type="button" className="draft-delete" onClick={(event) => void removeDraft(event, draft)} disabled={deletingDraftIds.has(draft.id)} aria-label={`${draft.title || "제목 없는 임시글"} 삭제`}>{deletingDraftIds.has(draft.id) ? "삭제 중…" : "삭제"}</button></div>) : <p className="empty-list">저장된 임시글이 없습니다.</p>}
+        {drafts.filter((draft) => !deletedDraftIds.has(draft.id)).length > 0 ? drafts.filter((draft) => !deletedDraftIds.has(draft.id)).map((draft) => <div className="draft-list-row" key={draft.id}><Link href={`/ykk?draft=${draft.id}`}>{draft.title || "제목 없는 임시글"}<span>{formatDraftSavedAt(draft.updatedAt)}</span></Link><button type="button" className="draft-delete" onClick={(event) => void removeDraft(event, draft)} disabled={deletingDraftIds.has(draft.id)} aria-label={`${draft.title || "제목 없는 임시글"} 삭제`}>{deletingDraftIds.has(draft.id) ? <><span className="draft-spinner" aria-hidden="true" /> <span className="sr-only">삭제 중</span></> : "삭제"}</button></div>) : <p className="empty-list">저장된 임시글이 없습니다.</p>}
       </section>
       <section className="draft-list">
         <h2>발행한 글</h2>

@@ -928,6 +928,18 @@ input {
 }
 .draft-delete:hover { color: var(--ink); }
 .draft-delete:disabled { cursor: wait; opacity: .55; }
+.draft-spinner {
+  animation: draft-spin .75s linear infinite;
+  border: 2px solid var(--line);
+  border-radius: 50%;
+  border-top-color: var(--ink);
+  display: inline-block;
+  height: 13px;
+  vertical-align: -2px;
+  width: 13px;
+}
+@keyframes draft-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .draft-spinner { animation: none; } }
 .draft-list span {
   color: var(--muted);
   font-size: 13px;

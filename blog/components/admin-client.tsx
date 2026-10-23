@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { FormEvent, useCallback, useEffect, useEffectEvent, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { FormEvent, useCallback, useEffect, useEffectEvent, useLayoutEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import { Button } from "@base-ui/react/button";
 import { Input } from "@base-ui/react/input";
 import { formatPostDate } from "@/lib/post-date";
@@ -100,6 +100,7 @@ export function AdminClient({ authenticated: initiallyAuthenticated, initialPost
   const [draftStatus, setDraftStatus] = useState("");
   const [publishedPostId, setPublishedPostId] = useState<string | null>(null);
   const [deployment, setDeployment] = useState<{ id: string; version: string; shouldRedirect: boolean } | null>(null);
+  const [deletedDraftIds, setDeletedDraftIds] = useState<Set<string>>(() => new Set());
   const draftKey = `blog-draft:${postId ?? "new"}`;
   const editorMentions = useMemo<EditorMention[]>(() => [
     { title: "프로필", href: "/profile", description: "블로그 운영자" },
@@ -107,6 +108,17 @@ export function AdminClient({ authenticated: initiallyAuthenticated, initialPost
     ...series.map((item) => ({ title: item.name, href: `/series/${item.id}`, description: "아티클 시리즈" })),
     ...posts.map((item) => ({ title: item.title, href: `/posts/${item.id}`, description: "게시글" })),
   ], [posts, series]);
+  const removeDraft = useCallback(async (event: MouseEvent<HTMLButtonElement>, draft: DraftMeta) => {
+    event.preventDefault();
+    event.stopPropagation();
+    if (!window.confirm(`“${draft.title || "제목 없는 임시글"}”을 삭제할까요?`)) return;
+    const response = await fetch("/api/draft", { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id: draft.id }) });
+    const result = await response.json().catch(() => null) as { error?: string } | null;
+    if (!response.ok) { setMessage(result?.error ?? "임시글을 삭제하지 못했습니다."); return; }
+    setDeletedDraftIds((current) => new Set(current).add(draft.id));
+    window.localStorage.removeItem(`blog-draft:${draft.id}`);
+    if (draft.id === postId) window.location.href = "/ykk";
+  }, [postId]);
 
   useEffect(() => {
     // A published post is the authoritative starting point for editing. A
@@ -370,7 +382,7 @@ export function AdminClient({ authenticated: initiallyAuthenticated, initialPost
       {publishedPostId && <Link className="published-link" href={`/posts/${publishedPostId}`}>발행된 글 보기</Link>}
       <section className="draft-list">
         <h2>임시글</h2>
-        {drafts.length > 0 ? drafts.map((draft) => <Link key={draft.id} href={`/ykk?draft=${draft.id}`}>{draft.title || "제목 없는 임시글"}<span>{formatPostDate(draft.updatedAt)}</span></Link>) : <p className="empty-list">저장된 임시글이 없습니다.</p>}
+        {drafts.filter((draft) => !deletedDraftIds.has(draft.id)).length > 0 ? drafts.filter((draft) => !deletedDraftIds.has(draft.id)).map((draft) => <div className="draft-list-row" key={draft.id}><Link href={`/ykk?draft=${draft.id}`}>{draft.title || "제목 없는 임시글"}<span>{formatPostDate(draft.updatedAt)}</span></Link><button type="button" className="draft-delete" onClick={(event) => void removeDraft(event, draft)} aria-label={`${draft.title || "제목 없는 임시글"} 삭제`}>삭제</button></div>) : <p className="empty-list">저장된 임시글이 없습니다.</p>}
       </section>
       <section className="draft-list">
         <h2>발행한 글</h2>

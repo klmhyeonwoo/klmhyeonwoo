@@ -906,6 +906,27 @@ input {
 .draft-list a:hover {
   color: var(--accent-text);
 }
+.draft-list-row {
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  gap: 12px;
+}
+.draft-list-row a {
+  border-bottom: 0;
+  flex: 1;
+  min-width: 0;
+}
+.draft-delete {
+  background: transparent;
+  border: 0;
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  padding: 8px 0 8px 8px;
+}
+.draft-delete:hover { color: var(--ink); }
 .draft-list span {
   color: var(--muted);
   font-size: 13px;

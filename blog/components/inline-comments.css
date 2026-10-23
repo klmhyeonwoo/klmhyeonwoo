@@ -12,6 +12,8 @@
 .inline-comment-send svg { height: 100%; width: 100%; }
 .inline-comment-send:disabled { cursor: not-allowed; opacity: .3; }
 
+.post-content-with-comments .prose::selection, .post-content-with-comments .prose ::selection { background: color-mix(in srgb, #ffd54a 52%, transparent); color: inherit; }
+.prose mark[data-inline-comment-draft] { background: color-mix(in srgb, #ffd54a 38%, transparent); border-radius: .1rem; box-decoration-break: clone; padding: .03em .06em; text-decoration: underline; text-decoration-color: #e6ae00; text-decoration-thickness: 2px; text-underline-offset: .14em; }
 .prose mark[data-inline-comment-anchor] { background: color-mix(in srgb, var(--ink) 7%, transparent); border-radius: .12rem; box-decoration-break: clone; cursor: pointer; padding: .03em .06em; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--ink) 34%, transparent); text-decoration-thickness: 1px; text-underline-offset: .14em; }
 .prose mark[data-inline-comment-anchor]::after { background: var(--ink); border: 1px solid var(--surface, Canvas); border-radius: 50%; content: ""; display: inline-block; height: .38rem; margin-left: .18rem; vertical-align: .55em; width: .38rem; }
 .prose mark[data-inline-comment-anchor]:hover, .prose mark[data-inline-comment-anchor]:focus-visible { background: color-mix(in srgb, var(--ink) 12%, transparent); outline: 1px solid color-mix(in srgb, var(--ink) 25%, transparent); outline-offset: 2px; }

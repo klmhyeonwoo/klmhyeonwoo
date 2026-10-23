@@ -39,6 +39,7 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
   const [busy, setBusy] = useState(false);
   const [attempt, setAttempt] = useState(0);
   const form = useRef<HTMLFormElement>(null);
+  const selectionInProgress = useRef(false);
   const endpoint = `/api/posts/${encodeURIComponent(postId)}/inline-comments`;
 
   useEffect(() => {
@@ -60,7 +61,7 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
 
   useEffect(() => {
     if (!canWrite) return;
-    function selectionChanged() {
+    function prepareComment() {
       if (composing) return;
       const element = root.current;
       const selection = window.getSelection();
@@ -78,9 +79,43 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
       setActiveAnchorKey(null);
       setComposing(true);
     }
+    const selectionChanged = () => {
+      // Browsers emit selectionchange continuously while dragging. Wait for the
+      // gesture to end so the editor never covers text before it is selected.
+      if (!selectionInProgress.current) prepareComment();
+    };
+    const startSelection = () => { selectionInProgress.current = true; };
+    const finishSelection = () => {
+      selectionInProgress.current = false;
+      requestAnimationFrame(prepareComment);
+    };
+    const element = root.current;
+    element?.addEventListener("pointerdown", startSelection);
+    window.addEventListener("pointerup", finishSelection);
+    window.addEventListener("pointercancel", finishSelection);
     document.addEventListener("selectionchange", selectionChanged);
-    return () => document.removeEventListener("selectionchange", selectionChanged);
+    return () => {
+      element?.removeEventListener("pointerdown", startSelection);
+      window.removeEventListener("pointerup", finishSelection);
+      window.removeEventListener("pointercancel", finishSelection);
+      document.removeEventListener("selectionchange", selectionChanged);
+    };
   }, [canWrite, composing, root]);
+
+  useEffect(() => {
+    const element = root.current;
+    if (!element) return;
+    const unwrap = () => element.querySelectorAll<HTMLElement>("mark[data-inline-comment-draft]").forEach((mark) => mark.replaceWith(...Array.from(mark.childNodes)));
+    unwrap();
+    if (!composing || !anchor) return unwrap;
+    const range = anchorRange(element, anchor);
+    if (!range) return unwrap;
+    const marker = document.createElement("mark");
+    marker.dataset.inlineCommentDraft = "true";
+    try { range.surroundContents(marker); }
+    catch { const fragment = range.extractContents(); marker.append(fragment); range.insertNode(marker); }
+    return unwrap;
+  }, [anchor, composing, root]);
 
   useEffect(() => {
     const element = root.current;

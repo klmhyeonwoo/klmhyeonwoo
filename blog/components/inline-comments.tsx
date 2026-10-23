@@ -23,7 +23,6 @@ function CommentGlyph() {
 /** Selection anchored discussion UI. The persistent anchor is text context, never DOM offsets. */
 export function InlineComments({ postId, root }: { postId: string; root: RefObject<HTMLDivElement | null> }) {
   const { authenticated } = useAdminSession();
-  const [author, setAuthor] = useState<{ name: string; image: string } | null>(null);
   const [canCreate, setCanCreate] = useState(false);
   const canWrite = authenticated === true && canCreate;
   const [comments, setComments] = useState<InlineComment[]>([]);
@@ -49,7 +48,7 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
       const data = await response.json();
       if (!response.ok) throw new Error(data.error);
       if (controller.signal.aborted) return;
-      setComments(data.comments); setCanDelete(data.canDelete === true); setCanCreate(data.canCreate === true); setAuthor(data.author); setError("");
+      setComments(data.comments); setCanDelete(data.canDelete === true); setCanCreate(data.canCreate === true); setError("");
     }).catch((fetchError) => {
       if (!controller.signal.aborted) setError(fetchError instanceof Error ? fetchError.message : "댓글을 불러오지 못했습니다.");
     }).finally(() => { if (!controller.signal.aborted) setLoading(false); });
@@ -194,18 +193,16 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
 
   return <section className="inline-comments" aria-label="본문 댓글">
     <button className="inline-comments-summary" type="button" aria-label={`본문 댓글 ${comments.length}개 보기`} onClick={() => { setActiveAnchorKey(null); setPanelOpen((value) => !value); }} aria-expanded={panelOpen}><CommentGlyph /><span>{loading ? "…" : comments.length}</span></button>
-    {canWrite && anchor && !composing && <button className="inline-comment-start" style={selectionPoint ? { left: selectionPoint.left, top: selectionPoint.top } : undefined} type="button" onMouseDown={(event) => event.preventDefault()} onClick={startComment}>댓글 추가</button>}
+    {canWrite && anchor && !composing && <button className="inline-comment-start" style={selectionPoint ? { left: selectionPoint.left, top: selectionPoint.top } : undefined} type="button" onMouseDown={(event) => event.preventDefault()} onClick={startComment}><CommentGlyph />댓글</button>}
     {canWrite && composing && anchor && <aside className="inline-comment-composer" role="region" aria-label="본문 댓글 작성" style={composerPoint ? { left: composerPoint.left, top: composerPoint.top, maxHeight: `calc(100dvh - ${composerPoint.top + 12}px)` } : undefined}>
       <form ref={form} onSubmit={submit} aria-busy={busy}>
-        <blockquote>{anchor.quote}</blockquote>
+        <div className="inline-comment-composer-header"><blockquote>{anchor.quote}</blockquote><button type="button" aria-label="댓글 작성 닫기" onClick={() => { setComposing(false); setAnchor(null); setSelectionPoint(null); }}>×</button></div>
         <div className="inline-comment-entry">
-          <span className="inline-comment-avatar" title={author?.name} aria-hidden="true">{author?.image ? <img src={author.image} alt="" /> : (author?.name || "관리자").slice(0, 1)}</span>
           <textarea required maxLength={2000} rows={2} value={body} onChange={(event) => { setBody(event.target.value); event.target.style.height = "auto"; event.target.style.height = `${event.target.scrollHeight}px`; }} placeholder="댓글 추가…" aria-label="댓글" onKeyDown={(event) => {
             if (event.key === "Enter" && (event.metaKey || event.ctrlKey) && !event.nativeEvent.isComposing) { event.preventDefault(); form.current?.requestSubmit(); }
           }} />
           <button className="inline-comment-send" type="submit" disabled={busy || !body.trim()} aria-label={busy ? "댓글 등록 중" : "댓글 등록"} title="댓글 등록 (⌘/Ctrl + Enter)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg></button>
         </div>
-        <footer><small>{author?.name || "관리자"}</small><span /><button type="button" disabled={busy} onClick={() => { setComposing(false); setAnchor(null); setSelectionPoint(null); }}>닫기</button></footer>
         {error && <p className="inline-comment-error" role="alert">{error}</p>}
       </form>
     </aside>}

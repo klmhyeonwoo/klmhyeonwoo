@@ -93,7 +93,9 @@ function ImageBlockView({ node, selected, updateAttributes }: NodeViewProps) {
     const fromLeft = handle.dataset.edge === "left";
     let nextWidth = startWidth;
     const move = (moveEvent: globalThis.PointerEvent) => {
-      nextWidth = Math.round(Math.min(maxWidth, Math.max(9.5 * 16, startWidth + 2 * (fromLeft ? startX - moveEvent.clientX : moveEvent.clientX - startX))));
+      // Allow compact inline images too. 48px preserves a usable resize handle
+      // while removing the old 152px floor that made thumbnails impossible.
+      nextWidth = Math.round(Math.min(maxWidth, Math.max(48, startWidth + 2 * (fromLeft ? startX - moveEvent.clientX : moveEvent.clientX - startX))));
       setDragWidth(nextWidth);
     };
     const cleanup = () => {
@@ -110,7 +112,7 @@ function ImageBlockView({ node, selected, updateAttributes }: NodeViewProps) {
     window.addEventListener("pointercancel", cancel, { once: true });
   };
 
-  return <NodeViewWrapper as="figure" className={`tiptap-image-block${selected ? " is-selected" : ""}`} style={{ width: (dragWidth ?? width) ? `${dragWidth ?? width}px` : undefined }}>
+  return <NodeViewWrapper as="figure" className={`tiptap-image-block${selected ? " is-selected" : ""}`} style={{ width: (dragWidth ?? width) ? `${dragWidth ?? width}px` : undefined, minWidth: 48 }}>
     <div className="tiptap-image-frame" contentEditable={false}>
       {src ? <img src={src} alt={typeof node.attrs.alt === "string" ? node.attrs.alt : ""} /> : <div className="tiptap-image-empty"><span aria-hidden="true">▧</span><strong>이미지</strong><small>파일을 올리거나 이미지 주소를 입력하세요.</small><div><button type="button" onPointerDown={(event) => event.preventDefault()} onClick={requestFile}>파일 선택</button><button type="button" onPointerDown={(event) => event.preventDefault()} onClick={requestUrl}>링크 입력</button></div></div>}
       {src && <div className="tiptap-image-actions"><button type="button" onPointerDown={(event) => event.preventDefault()} onClick={requestFile}>파일 변경</button><button type="button" onPointerDown={(event) => event.preventDefault()} onClick={requestUrl}>링크 변경</button></div>}

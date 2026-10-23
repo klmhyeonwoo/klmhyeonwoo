@@ -1,6 +1,6 @@
 "use client";
 
-import { Extension } from "@tiptap/core";
+import { Extension, InputRule } from "@tiptap/core";
 import { EditorFileDrop } from "./editor-file-drop";
 import { SlashEditorTools, slashLabel } from "./slash-editor-tools";
 import { BookmarkNode, LinkMentionNode, LinkPasteTools, linkFormatEvent } from "./slash-link-blocks";
@@ -28,6 +28,24 @@ const imageRequestEvent = "wavy:editor-image-request";
 
 const imageUrlRequestEvent = "wavy:editor-image-url-request";
 const linkRequestEvent = "wavy:editor-link-request";
+
+// Keep small, familiar writing shortcuts in prose without changing code or
+// URLs. The rule runs as soon as `->` is complete; undo restores the source
+// characters as a single edit.
+const TypographicShortcuts = Extension.create({
+  name: "typographicShortcuts",
+  addInputRules() {
+    return [new InputRule({
+      // Start of a block or whitespace avoids rewriting an identifier such as
+      // `foo->bar`, where the ASCII characters can be meaningful.
+      find: /(?<!\S)->$/,
+      handler: ({ state, range, commands }) => {
+        if (state.selection.$from.parent.type.spec.code) return null;
+        commands.insertContentAt(range, "→");
+      },
+    })];
+  },
+});
 
 // Preserve legacy presentation metadata when old posts are edited with the native callout.
 const LegacyCalloutMetadata = Extension.create({
@@ -268,7 +286,7 @@ function TiptapSurface({ initial, mentions, onChange }: { initial: JsonNode; men
     } },
     placeholder: { text: { paragraph: "내용을 입력하거나 '/'로 블록을 추가하세요", heading1: "제목 1", heading2: "제목 2", heading3: "제목 3", callout: "강조할 내용을 입력하세요", listItem: "목록", taskItem: "할 일" } },
     slash: { items: defaultSlashItems.map(item => ({ ...item, title: slashLabel(item.id, item.title), aliases: [...(item.aliases ?? []), item.title], ...(item.id === "image" ? { run: ({ editor, range }: Parameters<typeof item.run>[0]) => { editor.chain().focus().deleteRange(range).setImage({ src: "" }).run(); } } : {}) })) },
-    extend: [EditorFileDrop, LegacyCalloutMetadata, ImageBlock.configure({ inline: false, allowBase64: false }), BookmarkNode, LinkMentionNode],
+    extend: [EditorFileDrop, LegacyCalloutMetadata, TypographicShortcuts, ImageBlock.configure({ inline: false, allowBase64: false }), BookmarkNode, LinkMentionNode],
   }).map(extension => nativeMediaNodes.find(node => node.name === extension.name) ?? extension), []);
   const onChangeRef = useRef(onChange);
   useEffect(() => { onChangeRef.current = onChange; }, [onChange]);

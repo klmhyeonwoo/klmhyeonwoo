@@ -1,7 +1,7 @@
 {
   "name": "현우",
   "image": "https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/main/blog/public/uploads/1792216650443-e3ea43e2.png",
-  "markdown": "안녕하세요, **프론트엔드 엔지니어 김현우**입니다. 2023년부터 소프트웨어를 개발해왔고, 현재도 프론트엔드 엔지니어로 일하고 있습니다. 웹 에디터를 비롯해 보안 서비스를 거치며 사용자 화면부터 배포 환경까지 다뤘습니다. 현재는 서버에 관심이 많아 노드 기반의 백엔드를 학습하고 있습니다.\n\n단순히 스펙 문서만을 보고 개발하는 사람이 아닌, 팀원들과 함께 항상 더 나은 방향성을 위해 고민하는 것을 좋아합니다. 다양한 개발문화를 팀에 도입하며 변화시킨 것처럼 소속감과 선한 영향력을 공유하는 것을 좋아합니다. 최근에는 업무에서 에이전트의 도입을 적극적으로 하고 있으며 AI*(V0, Copilot, Claude, etc)*를 통해 효율적으로 생산성을 올리는데 관심이 많습니다.\n\n---\n\n<Bookmark url=\"http://github.com/klmhyeonwoo\" title=\"klmhyeonwoo - Overview\" description=\"klmhyeonwoo has 124 repositories available. Follow their code on GitHub.\" image=\"https://avatars.githubusercontent.com/u/19422885?v=4?s=400\" layout=\"bookmark\" />\n\n\n<Bookmark url=\"https://ripe-launch-04b.notion.site/Kim-Hyeonwoo-a92f74b56d11400587da628990426723\" title=\"Notion | Where teams and agents work together\" description=\"Made in Notion, the connected workspace where AI agents and teams organize docs, projects and knowledge together.\" image=\"https://app.notion.com/images/meta/default.png\" layout=\"bookmark\" />\n",
+  "markdown": "안녕하세요, **프론트엔드 엔지니어 김현우**입니다. 2023년부터 소프트웨어를 개발해왔고, 현재도 프론트엔드 엔지니어로 일하고 있습니다. 웹 에디터를 비롯해 보안 서비스를 거치며 사용자 화면부터 배포 환경까지 다뤘습니다. 현재는 서버에 관심이 많아 노드 기반의 백엔드를 학습하고 있습니다.\n\n단순히 스펙 문서만을 보고 개발하는 사람이 아닌, 팀원들과 함께 항상 더 나은 방향성을 위해 고민하는 것을 좋아합니다. 다양한 개발문화를 팀에 도입하며 변화시킨 것처럼 소속감과 선한 영향력을 공유하는 것을 좋아합니다. 최근에는 업무에서 에이전트의 도입을 적극적으로 하고 있으며 AI*(V0, Copilot, Claude, etc)*를 통해 효율적으로 생산성을 올리는데 관심이 많습니다.\n\n<Bookmark url=\"http://github.com/klmhyeonwoo\" title=\"klmhyeonwoo - Overview\" description=\"klmhyeonwoo has 124 repositories available. Follow their code on GitHub.\" image=\"https://avatars.githubusercontent.com/u/19422885?v=4?s=400\" layout=\"bookmark\" />\n\n\n<Bookmark url=\"https://ripe-launch-04b.notion.site/Kim-Hyeonwoo-a92f74b56d11400587da628990426723\" title=\"Notion | Where teams and agents work together\" description=\"Made in Notion, the connected workspace where AI agents and teams organize docs, projects and knowledge together.\" image=\"https://app.notion.com/images/meta/default.png\" layout=\"bookmark\" />\n",
   "blocks": [
     {
       "type": "slash-content",
@@ -37,7 +37,7 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "8g3HwIMmRt-L"
+              "id": "XA1STxacEvkM"
             },
             "content": [
               {
@@ -60,9 +60,9 @@
             ]
           },
           {
-            "type": "horizontalRule",
+            "type": "paragraph",
             "attrs": {
-              "id": "qhaUhkguJGLl"
+              "id": "8g3HwIMmRt-L"
             }
           },
           {

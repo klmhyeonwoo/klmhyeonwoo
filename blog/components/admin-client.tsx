@@ -370,8 +370,8 @@ export function AdminClient({ authenticated: initiallyAuthenticated, initialPost
         <div aria-label="글 작성 동작" className="admin-actions">
           {draftStatus && <span aria-live="polite" className="draft-status" role="status">{draftStatus}</span>}
           {postId && <Link className="new-post-button" href="/ykk">새 글</Link>}
-          <Button aria-keyshortcuts="Meta+S Control+S" className="draft-button" onClick={saveDraft} disabled={saving || savingDraft} title="⌘S 또는 Ctrl+S">{savingDraft ? "임시 저장 중…" : "임시 저장"}</Button>
-          <Button onClick={publish} disabled={saving || savingDraft}>{saving ? "저장 중…" : "발행하기"}</Button>
+          <Button aria-keyshortcuts="Meta+S Control+S" className="draft-button" onClick={saveDraft} disabled={saving || savingDraft} title="⌘S 또는 Ctrl+S">{savingDraft ? <><span className="async-spinner" aria-hidden="true" />임시 저장 중…</> : "임시 저장"}</Button>
+          <Button onClick={publish} disabled={saving || savingDraft}>{saving ? <><span className="async-spinner" aria-hidden="true" />저장 중…</> : "발행하기"}</Button>
         </div>
       </header>
       <TitleField value={title} onValueChange={setTitle} />

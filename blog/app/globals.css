@@ -938,6 +938,17 @@ input {
   vertical-align: -2px;
   width: 13px;
 }
+.async-spinner {
+  animation: draft-spin .75s linear infinite;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  height: .9em;
+  margin-right: .35em;
+  vertical-align: -.12em;
+  width: .9em;
+}
 @keyframes draft-spin { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .draft-spinner { animation: none; } }
 .draft-list span {

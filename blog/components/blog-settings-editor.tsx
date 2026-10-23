@@ -76,7 +76,7 @@ export function BlogSettingsEditor({ initialSettings }: { initialSettings: SiteS
   }
 
   return <main className="settings-page">
-    <header className="settings-page-header"><div><h1>블로그 관리</h1><p>공개 화면에 표시할 알림을 설정합니다.</p></div><button onClick={save} disabled={saving}>{saving ? "저장 중…" : "저장하기"}</button></header>
+    <header className="settings-page-header"><div><h1>블로그 관리</h1><p>공개 화면에 표시할 알림을 설정합니다.</p></div><button onClick={save} disabled={saving}>{saving ? <><span className="async-spinner" aria-hidden="true" />저장 중…</> : "저장하기"}</button></header>
 
     <section className="settings-panel">
       <header><h2>상단 배너</h2><Toggle label={settings.banner.enabled ? "켜짐" : "꺼짐"} checked={settings.banner.enabled} onChange={(enabled) => setSettings((current) => ({ ...current, banner: { ...current.banner, enabled } }))} /></header>

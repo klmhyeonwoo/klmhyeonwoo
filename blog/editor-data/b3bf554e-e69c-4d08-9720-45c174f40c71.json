@@ -168,6 +168,11 @@
           "content": [
             {
               "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
               "text": "화면 해설자막랩"
             }
           ]

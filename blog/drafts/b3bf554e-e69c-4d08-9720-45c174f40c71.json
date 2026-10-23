@@ -1,10 +1,10 @@
 {
   "id": "b3bf554e-e69c-4d08-9720-45c174f40c71",
-  "title": "모두의 AI 연구 사업",
+  "title": "모두의 AI 베리어 프리 연구 지원 사업",
   "description": "",
   "categoryId": "category-1f4a4fd0",
   "seriesId": "",
-  "markdown": "### 아옳 버스 오래타고 오리엔테이션\n\n- 최종 결과물과 소개서 제출\n- 활동비 사용내역 등 제출\n- 운영진 확인 후 지급\n\n활동비 : 프로젝트에 필요한 AI 도구 구독료, 장소 대관비, 회의 식비 등\n\n- Cluade Pro, Codex Plus 구독\n\n(선정 과제와 직접 관련된 활동에 사용하고 계획에 따라 지출)",
+  "markdown": "### 아옳 버스 오래타고 오리엔테이션\n\n- 최종 결과물과 소개서 제출\n- 활동비 사용내역 등 제출\n- 운영진 확인 후 지급\n\n활동비 : 프로젝트에 필요한 AI 도구 구독료, 장소 대관비, 회의 식비 등\n\n- Cluade Pro, Codex Plus 구독\n\n(선정 과제와 직접 관련된 활동에 사용하고 계획에 따라 지출)\n\n### 페르소나를 구체화하기\n\n화면 해설자막랩\n\n동네 소식을 영상으로 보는 저시력 어르신\n\n해설 밀도(짧게/자세히)와 말 속도 선택, 큰 글씨, 고대비 자막 켜기",
   "blocks": [
     {
       "type": "slash-content",
@@ -153,16 +153,62 @@
             ]
           },
           {
+            "type": "heading",
+            "attrs": {
+              "id": "hU0e9V8475Gm",
+              "textAlign": "left",
+              "level": 3
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "페르소나를 구체화하기"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "X4JjFr__cQKl",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "화면 해설자막랩"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "lKDKtf83GWQU",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "동네 소식을 영상으로 보는 저시력 어르신"
+              }
+            ]
+          },
+          {
             "type": "paragraph",
             "attrs": {
               "id": "y6owtaJPVhuo",
               "textAlign": "left"
-            }
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "해설 밀도(짧게/자세히)와 말 속도 선택, 큰 글씨, 고대비 자막 켜기"
+              }
+            ]
           }
         ]
       }
     }
   ],
   "isPrivate": true,
-  "updatedAt": "2026-10-23T10:47:36.377Z"
+  "updatedAt": "2026-10-23T11:22:45.419Z"
 }

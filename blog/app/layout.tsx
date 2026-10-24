@@ -11,8 +11,11 @@ import { SystemThemeSync } from "@/components/theme-toggle";
 
 const systemThemeScript = `
   (() => {
+    let preference = "";
+    try { preference = localStorage.getItem("theme") || ""; } catch {}
     const applyTheme = () => {
-      document.documentElement.dataset.theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.dataset.theme = preference === "dark" || preference === "light" ? preference : systemTheme;
     };
     applyTheme();
   })();

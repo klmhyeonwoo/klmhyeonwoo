@@ -1924,6 +1924,64 @@ html[data-theme="dark"] .editor .bn-container {
   outline: 2px solid var(--ink);
   outline-offset: 4px;
 }
+.theme-control {
+  position: relative;
+}
+.theme-toggle {
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--ink);
+  cursor: pointer;
+  display: inline-flex;
+  height: 31px;
+  justify-content: center;
+  padding: 0;
+  width: 31px;
+}
+.theme-toggle:hover,
+.theme-toggle[aria-expanded="true"] {
+  border-color: var(--ink);
+  background: var(--interactive-subtle);
+}
+.theme-toggle:focus-visible,
+.theme-menu button:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+.theme-menu {
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 12px 28px rgb(0 0 0 / .12);
+  display: grid;
+  gap: 2px;
+  padding: 4px;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  width: 130px;
+  z-index: 70;
+}
+.theme-menu button {
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  color: var(--ink);
+  cursor: pointer;
+  font-size: .75rem;
+  padding: 8px 10px;
+  text-align: left;
+}
+.theme-menu button:hover,
+.theme-menu button[aria-checked="true"] {
+  background: var(--interactive-subtle);
+}
+.theme-menu button[aria-checked="true"]::after {
+  content: "✓";
+  float: right;
+}
 .draft-status {
   color: var(--muted);
   font-size: 12px;

@@ -22,6 +22,16 @@
   --code-muted: #626262;
   --accent-ink: #fff;
 }
+
+/* The feed title token is the final source of truth for card headings. */
+.kb-post h2 {
+  font-size: var(--type-list-title) !important;
+}
+@media (max-width: 760px) {
+  .kb-post h2 {
+    font-size: var(--type-list-title) !important;
+  }
+}
 * {
   box-sizing: border-box;
 }
@@ -926,10 +936,15 @@ input {
   font-size: 12px;
   padding: 8px 0 8px 8px;
 }
-.draft-delete:hover { color: var(--ink); }
-.draft-delete:disabled { cursor: wait; opacity: .55; }
+.draft-delete:hover {
+  color: var(--ink);
+}
+.draft-delete:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
 .draft-spinner {
-  animation: draft-spin .75s linear infinite;
+  animation: draft-spin 0.75s linear infinite;
   border: 2px solid var(--line);
   border-radius: 50%;
   border-top-color: var(--ink);
@@ -939,18 +954,26 @@ input {
   width: 13px;
 }
 .async-spinner {
-  animation: draft-spin .75s linear infinite;
+  animation: draft-spin 0.75s linear infinite;
   border: 2px solid currentColor;
   border-right-color: transparent;
   border-radius: 50%;
   display: inline-block;
-  height: .9em;
-  margin-right: .35em;
-  vertical-align: -.12em;
-  width: .9em;
+  height: 0.9em;
+  margin-right: 0.35em;
+  vertical-align: -0.12em;
+  width: 0.9em;
 }
-@keyframes draft-spin { to { transform: rotate(360deg); } }
-@media (prefers-reduced-motion: reduce) { .draft-spinner { animation: none; } }
+@keyframes draft-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .draft-spinner {
+    animation: none;
+  }
+}
 .draft-list span {
   color: var(--muted);
   font-size: 13px;
@@ -2682,7 +2705,7 @@ html[data-theme="dark"] .notion-select-options .notion-select-create > span {
   --type-meta: 1.0625rem;
   --type-body: 1.125rem;
   --type-summary: clamp(1.125rem, 1.55vw, 1.375rem);
-  --type-list-title: clamp(1.2rem, 1.5vw, 1.65rem);
+  --type-list-title: clamp(0.8rem, 0.5vw, 1rem);
   --type-page-title: clamp(2rem, 3vw, 2.75rem);
 }
 .shared-logo {

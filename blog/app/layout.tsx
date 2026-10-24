@@ -6,6 +6,7 @@ import "@/components/editor-interactions.css";
 import { ToastProvider } from "@/components/toast-provider";
 import { AdminSessionProvider } from "@/components/admin-session";
 import { PixelWaves } from "@/components/pixel-waves";
+import { CursorEffect } from "@/components/cursor-effect";
 
 function getSiteUrl() {
   const value = process.env.NEXT_PUBLIC_SITE_URL
@@ -51,7 +52,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ko">
-      <body><PixelWaves /><ToastProvider><AdminSessionProvider>{children}</AdminSessionProvider></ToastProvider></body>
+      <body><PixelWaves /><CursorEffect /><ToastProvider><AdminSessionProvider>{children}</AdminSessionProvider></ToastProvider></body>
     </html>
   );
 }

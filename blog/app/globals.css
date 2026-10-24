@@ -1,6 +1,47 @@
 @import url("https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.1/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css");
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+@font-face {
+  font-family: "Arita Buri";
+  src: url("/fonts/arita-buri-hairline.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 250;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Arita Buri";
+  src: url("/fonts/arita-buri-light.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Arita Buri";
+  src: url("/fonts/arita-buri-medium.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Arita Buri";
+  src: url("/fonts/arita-buri-semibold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Arita Buri";
+  src: url("/fonts/arita-buri-bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
 
 :root {
+  --font-text: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --font-display: "Arita Buri", "Apple SD Gothic Neo", serif;
+  --font-logo:
+    "Wanted Sans Variable", "Wanted Sans", "Apple SD Gothic Neo", sans-serif;
   --ink: #222;
   --muted: #777;
   --line: #e7e7e7;
@@ -23,15 +64,6 @@
   --accent-ink: #fff;
 }
 
-/* The feed title token is the final source of truth for card headings. */
-.kb-post h2 {
-  font-size: var(--type-list-title) !important;
-}
-@media (max-width: 760px) {
-  .kb-post h2 {
-    font-size: var(--type-list-title) !important;
-  }
-}
 * {
   box-sizing: border-box;
 }
@@ -42,15 +74,16 @@ body {
   margin: 0;
   color: var(--ink);
   background: var(--paper);
-  font-family:
-    "Wanted Sans Variable", "Wanted Sans", "Apple SD Gothic Neo", sans-serif;
+  font-family: var(--font-text);
 }
 a {
   color: inherit;
   text-decoration: none;
 }
 button,
-input {
+input,
+textarea,
+select {
   font: inherit;
 }
 .shell,
@@ -67,9 +100,7 @@ input {
   padding: 28px 0;
 }
 .brand {
-  font:
-    700 24px/1 "Wanted Sans Variable",
-    sans-serif;
+  font: 700 24px/1 var(--font-logo);
   letter-spacing: -1px;
 }
 .brand span {
@@ -89,9 +120,7 @@ input {
 .hero h1,
 .article h1,
 .admin-shell h1 {
-  font:
-    700 clamp(44px, 8vw, 78px)/1.15 "Wanted Sans Variable",
-    sans-serif;
+  font: 700 clamp(44px, 8vw, 78px)/1.15 var(--font-text);
   margin: 12px 0 24px;
   letter-spacing: -3px;
 }
@@ -119,9 +148,7 @@ input {
   margin: 0 0 9px;
 }
 .post-card h2 {
-  font:
-    650 27px/1.2 "Wanted Sans Variable",
-    sans-serif;
+  font: 650 27px/1.2 var(--font-text);
   margin: 0;
 }
 .post-card h2 a:hover {
@@ -146,14 +173,10 @@ input {
   margin: 0 0 46px;
 }
 .prose {
-  font:
-    17px/1.9 "Wanted Sans Variable",
-    sans-serif;
+  font: 17px/1.9 var(--font-text);
 }
 .prose h2 {
-  font:
-    700 30px/1.25 "Wanted Sans Variable",
-    sans-serif;
+  font: 700 30px/1.25 var(--font-text);
   margin: 56px 0 12px;
 }
 .prose p,
@@ -354,21 +377,21 @@ input {
 }
 .kb-post a {
   display: block;
-  padding: clamp(38px, 5vw, 70px) 0;
+  padding: clamp(22px, 2.8vw, 34px) 0;
 }
 .kb-post-author {
   align-items: center;
   display: flex;
   gap: 18px;
-  margin-bottom: 42px;
+  margin-bottom: 20px;
 }
 .kb-post-author img,
 .kb-post-avatar {
   background: var(--soft-green);
   border-radius: 50%;
-  height: 76px;
+  height: 3.25rem;
   object-fit: cover;
-  width: 76px;
+  width: 3.25rem;
 }
 .kb-post-avatar {
   align-items: center;
@@ -393,8 +416,7 @@ input {
   margin: 0 6px;
 }
 .kb-post h2 {
-  font-size: clamp(34px, 4.25vw, 62px);
-  font-weight: 720;
+  font-weight: 650;
   letter-spacing: -0.085em;
   line-height: 1.27;
   margin: 0;
@@ -403,9 +425,8 @@ input {
 }
 .kb-post-description {
   color: var(--muted);
-  font-size: clamp(17px, 1.7vw, 23px);
   line-height: 1.65;
-  margin: 30px 0 0;
+  margin: 14px 0 0;
   max-width: 1210px;
   word-break: keep-all;
 }
@@ -413,13 +434,12 @@ input {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 42px;
+  margin-top: 18px;
 }
 .kb-post-tags span {
   background: var(--interactive-subtle);
   border-radius: 999px;
   color: var(--ink);
-  font-size: 15px;
   padding: 10px 18px;
 }
 .kb-post:hover h2 {
@@ -829,9 +849,7 @@ input {
   outline: none;
 }
 .title-input {
-  font:
-    650 clamp(38px, 6vw, 62px)/1.1 "Wanted Sans Variable",
-    sans-serif;
+  font: 650 clamp(38px, 6vw, 62px)/1.1 var(--font-text);
   letter-spacing: -2px;
   margin: 10px 0 25px;
 }
@@ -1038,9 +1056,7 @@ input {
   padding: 22px 0;
 }
 .masthead .brand {
-  font:
-    750 20px/1 "Wanted Sans Variable",
-    sans-serif;
+  font: 750 20px/1 var(--font-logo);
   letter-spacing: -0.9px;
 }
 .masthead .brand span {
@@ -1488,7 +1504,7 @@ input {
   --bn-colors-border: var(--line);
   --bn-colors-shadow: rgba(0, 0, 0, 0.12);
   --bn-colors-side-menu: var(--muted);
-  --bn-font-family: "Wanted Sans Variable", "Wanted Sans", sans-serif;
+  --bn-font-family: var(--font-text);
 }
 html[data-theme="dark"] .editor .bn-container {
   --bn-colors-shadow: rgba(0, 0, 0, 0.35);
@@ -1611,6 +1627,7 @@ html[data-theme="dark"] .editor .bn-container {
   padding: 0 34px;
 }
 .shared-logo {
+  font-family: var(--font-logo);
   font-size: 22px;
   font-weight: 700;
   letter-spacing: -0.09em;
@@ -2042,16 +2059,16 @@ html[data-theme="dark"] .post-admin-actions button {
     white-space: nowrap;
   }
   .kb-post a {
-    padding: 34px 0;
+    padding: 18px 0;
   }
   .kb-post-author {
     gap: 12px;
-    margin-bottom: 25px;
+    margin-bottom: 16px;
   }
   .kb-post-author img,
   .kb-post-avatar {
-    height: 48px;
-    width: 48px;
+    height: 2.375rem;
+    width: 2.375rem;
   }
   .kb-post-avatar {
     font-size: 18px;
@@ -2062,15 +2079,11 @@ html[data-theme="dark"] .post-admin-actions button {
   .kb-post-author p {
     font-size: 13px;
   }
-  .kb-post h2 {
-    font-size: 29px;
-  }
   .kb-post-description {
-    font-size: 16px;
-    margin-top: 18px;
+    margin-top: 11px;
   }
   .kb-post-tags {
-    margin-top: 26px;
+    margin-top: 16px;
   }
   .kb-post-tags span {
     font-size: 13px;
@@ -2701,12 +2714,16 @@ html[data-theme="dark"] .notion-select-options .notion-select-create > span {
 
 /* Editorial type scale: clear hierarchy without making supporting information disappear. */
 :root {
+  --site-content-max: 80rem;
   --type-label: 0.8125rem;
-  --type-meta: 1.0625rem;
-  --type-body: 1.125rem;
-  --type-summary: clamp(1.125rem, 1.55vw, 1.375rem);
-  --type-list-title: clamp(0.8rem, 0.5vw, 1rem);
-  --type-page-title: clamp(2rem, 3vw, 2.75rem);
+  --type-meta: 0.875rem;
+  --type-body: 1rem;
+  --type-heading-1: 1.625rem;
+  --type-heading-2: 1.3125rem;
+  --type-heading-3: 1.0625rem;
+  --type-summary: clamp(0.85rem, 1.4vw, 0.9375rem);
+  --type-list-title: clamp(1.3125rem, 1.4vw, 1.625rem);
+  --type-page-title: clamp(1.625rem, 1.375rem + 1vw, 2rem);
 }
 .shared-logo {
   font-size: 28px;
@@ -2721,7 +2738,7 @@ html[data-theme="dark"] .notion-select-options .notion-select-create > span {
   font-size: 15px;
 }
 .kb-post-author strong {
-  font-size: 21px;
+  font-size: 15px;
   letter-spacing: -0.045em;
 }
 .kb-post-author p {
@@ -2753,7 +2770,7 @@ html[data-theme="dark"] .notion-select-options .notion-select-create > span {
 }
 .prose {
   font-size: var(--type-body);
-  line-height: 1.88;
+  line-height: 1.8;
 }
 .prose h1 {
   font-size: clamp(1.65rem, 2.5vw, 2.05rem);
@@ -2809,6 +2826,44 @@ html[data-theme="dark"] .notion-select-options .notion-select-create > span {
 .profile-name-input {
   font-size: clamp(1.9rem, 2.6vw, 2.35rem);
 }
+
+/* Display type uses the supplied Arita Buri family. Article body and editing
+   surfaces inherit Pretendard through --font-text for sustained reading. */
+:is(.hero h1, .article h1, .kb-intro h1, .kb-post h2, .post-card h2, .series-card h2, .series-page-header h1, .series-post-list h2, .settings-page-header h1, .profile-card h1) {
+  font-family: var(--font-display);
+}
+:is(.hero h1, .article h1, .kb-intro h1, .series-page-header h1, .settings-page-header h1, .profile-card h1) {
+  font-weight: 700;
+}
+:is(.kb-post h2, .post-card h2, .series-card h2, .series-post-list h2) {
+  font-weight: 600;
+}
+.kb-category-nav a,
+.article-header .eyebrow,
+.series-card small {
+  font-family: var(--font-display);
+  font-weight: 500;
+}
+.kb-post-description,
+.kb-post-author,
+.kb-post-tags,
+.kb-content-layout .recent-comments {
+  font-family: var(--font-display);
+}
+.kb-post-description,
+.kb-post-author p,
+.kb-post-tags span,
+.kb-content-layout .recent-comment-author small,
+.kb-content-layout .recent-comments a > small {
+  font-weight: 300;
+}
+.kb-content-layout .recent-comments h2 {
+  font-weight: 700;
+}
+.kb-content-layout .recent-comment-author strong,
+.kb-content-layout .recent-comment-body {
+  font-weight: 500;
+}
 @media (max-width: 760px) {
   .shared-logo {
     font-size: 24px;
@@ -2820,18 +2875,10 @@ html[data-theme="dark"] .notion-select-options .notion-select-create > span {
     font-size: 14px;
   }
   .kb-post-author strong {
-    font-size: 16px;
+    font-size: 0.9375rem;
   }
   .kb-post-author p {
     font-size: 14px;
-  }
-  .kb-post h2 {
-    font-size: clamp(1.2rem, 5.2vw, 1.55rem);
-    line-height: 1.3;
-  }
-  .kb-post-description {
-    font-size: 16px;
-    line-height: 1.65;
   }
   .article h1,
   .series-page-header h1,
@@ -3834,40 +3881,11 @@ html[data-theme="dark"] .popup-preview b {
 
 /* Writing is an editing surface, so its title stays distinct without competing with the document itself. */
 .admin-shell .title-input {
-  font:
-    650 clamp(1.6rem, 2.7vw, 2.3rem)/1.2 "Wanted Sans Variable",
-    sans-serif;
+  font: 650 clamp(1.6rem, 2.7vw, 2.3rem)/1.2 var(--font-text);
   letter-spacing: -0.06em;
   margin: 6px 0 20px;
 }
 
-/* Keep the feed scan-friendly without the oversized gaps of a feature layout. */
-.kb-post a {
-  padding: clamp(30px, 3.4vw, 46px) 0;
-}
-.kb-post-author {
-  margin-bottom: 27px;
-}
-.kb-post-description {
-  margin-top: 21px;
-}
-.kb-post-tags {
-  margin-top: 28px;
-}
-@media (max-width: 760px) {
-  .kb-post a {
-    padding: 27px 0;
-  }
-  .kb-post-author {
-    margin-bottom: 20px;
-  }
-  .kb-post-description {
-    margin-top: 15px;
-  }
-  .kb-post-tags {
-    margin-top: 21px;
-  }
-}
 @media (max-width: 960px) {
   .kb-content-layout:has(.recent-comments) {
     grid-template-columns: minmax(0, 1fr) minmax(230px, 280px);

@@ -69,6 +69,7 @@
 }
 html {
   background: var(--paper);
+  color-scheme: light;
 }
 body {
   margin: 0;
@@ -1922,23 +1923,6 @@ html[data-theme="dark"] .editor .bn-container {
 .header-logout:focus-visible {
   outline: 2px solid var(--ink);
   outline-offset: 4px;
-}
-.theme-toggle {
-  align-items: center;
-  background: transparent;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  color: var(--ink);
-  cursor: pointer;
-  display: inline-flex;
-  font-size: 16px;
-  height: 31px;
-  justify-content: center;
-  padding: 0;
-  width: 31px;
-}
-.theme-toggle:hover {
-  border-color: var(--ink);
 }
 .draft-status {
   color: var(--muted);

@@ -7,6 +7,16 @@ import { ToastProvider } from "@/components/toast-provider";
 import { AdminSessionProvider } from "@/components/admin-session";
 import { PixelWaves } from "@/components/pixel-waves";
 import { CursorEffect } from "@/components/cursor-effect";
+import { SystemThemeSync } from "@/components/theme-toggle";
+
+const systemThemeScript = `
+  (() => {
+    const applyTheme = () => {
+      document.documentElement.dataset.theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    };
+    applyTheme();
+  })();
+`;
 
 function getSiteUrl() {
   const value = process.env.NEXT_PUBLIC_SITE_URL
@@ -51,8 +61,9 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="ko">
-      <body><PixelWaves /><CursorEffect /><ToastProvider><AdminSessionProvider>{children}</AdminSessionProvider></ToastProvider></body>
+    <html lang="ko" data-theme="light" suppressHydrationWarning>
+      <head><script dangerouslySetInnerHTML={{ __html: systemThemeScript }} /></head>
+      <body><SystemThemeSync /><PixelWaves /><CursorEffect /><ToastProvider><AdminSessionProvider>{children}</AdminSessionProvider></ToastProvider></body>
     </html>
   );
 }

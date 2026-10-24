@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { useAdminSession } from "./admin-session";
 import { MobileMenu } from "./mobile-menu";
-import { ThemeToggle } from "./theme-toggle";
 import { useToast } from "./toast-provider";
 
 export function HeaderNavigation() {
@@ -33,6 +32,5 @@ export function HeaderNavigation() {
       {authenticated && <><Link href="/ykk" prefetch={false}>글쓰기</Link><Link href="/manage" prefetch={false}>블로그 관리</Link><button type="button" className="header-logout" disabled={loggingOut} onClick={logout}>{loggingOut ? "로그아웃 중…" : "로그아웃"}</button></>}
     </nav>
     <MobileMenu authenticated={authenticated === true} onLogout={logout} loggingOut={loggingOut}/>
-    <ThemeToggle/>
   </div>;
 }

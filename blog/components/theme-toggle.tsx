@@ -1,33 +1,21 @@
 "use client";
 
-import { Button } from "@base-ui/react/button";
-import { useEffect, useState } from "react";
-import { IconMoonLine, IconSunLine } from "@karrotmarket/react-monochrome-icon";
+import { useEffect } from "react";
 
-type Theme = "light" | "dark";
-
-function setTheme(theme: Theme) {
-  document.documentElement.dataset.theme = theme;
-  window.localStorage.setItem("theme", theme);
+function applySystemTheme(mediaQuery: MediaQueryList) {
+  document.documentElement.dataset.theme = mediaQuery.matches ? "dark" : "light";
 }
 
-export function ThemeToggle() {
-  const [theme, setCurrentTheme] = useState<Theme>("light");
-
+/** Keeps the document in sync with the operating system color preference. */
+export function SystemThemeSync() {
   useEffect(() => {
-    const savedTheme = window.localStorage.getItem("theme");
-    const nextTheme: Theme = savedTheme === "dark" || savedTheme === "light"
-      ? savedTheme
-      : window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    setCurrentTheme(nextTheme);
-    setTheme(nextTheme);
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const updateTheme = () => applySystemTheme(mediaQuery);
+
+    updateTheme();
+    mediaQuery.addEventListener("change", updateTheme);
+    return () => mediaQuery.removeEventListener("change", updateTheme);
   }, []);
 
-  function toggleTheme() {
-    const nextTheme = theme === "dark" ? "light" : "dark";
-    setCurrentTheme(nextTheme);
-    setTheme(nextTheme);
-  }
-
-  return <Button type="button" className="theme-toggle" onClick={toggleTheme} aria-label={theme === "dark" ? "라이트 모드로 전환" : "다크 모드로 전환"}>{theme === "dark" ? <IconSunLine size={18} /> : <IconMoonLine size={18} />}</Button>;
+  return null;
 }

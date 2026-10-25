@@ -1,0 +1,18 @@
+body { isolation: isolate; }
+
+.shared-header { position: relative; }
+.shared-header-inner { position: relative; }
+
+.ocean-waves {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+.ocean-waves canvas { display: block; width: 100%; height: 100%; }
+
+@media (prefers-contrast: more), (forced-colors: active), print {
+  .ocean-waves { display: none; }
+}

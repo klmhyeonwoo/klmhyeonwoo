@@ -23,7 +23,7 @@ export function PostContent({ children, postId }: { children: ReactNode; postId?
   }
 
   return <>
-    <div className="post-content-with-comments"><div ref={root} className="prose" onClickCapture={confirmExternalLink}>{children}</div>
+    <div className="post-content-with-comments"><div ref={root} className="prose" data-reading-content onClickCapture={confirmExternalLink}>{children}</div>
     {postId && <InlineComments postId={postId} root={root} />}</div>
     {externalUrl && <div className="external-link-backdrop" role="presentation" onMouseDown={() => setExternalUrl(null)}>
       <section className="external-link-dialog" role="dialog" aria-modal="true" aria-labelledby="external-link-title" onMouseDown={(event) => event.stopPropagation()}>

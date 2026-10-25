@@ -13,6 +13,7 @@ import { PostDiagram } from "@/components/post-diagram";
 import { PostContent } from "@/components/post-content";
 import { PostLinkCopy } from "@/components/post-link-copy";
 import { ArticleTableOfContents } from "@/components/article-table-of-contents";
+import { ArticleReadingProgress } from "@/components/article-reading-progress";
 import { isAdmin } from "@/lib/auth";
 import { hasPostAccess } from "@/lib/post-access";
 import { formatPostDate, formatPostUpdatedLabel, postPublishedAtValue, postWasUpdated } from "@/lib/post-date";
@@ -175,6 +176,7 @@ export default async function PostPage({ params }: { params: Params }) {
         {frontmatter.description && <p className="lede">{frontmatter.description}</p>}
       </header>
       <div className="article-content-layout">{tableOfContents.length > 0 && <ArticleTableOfContents items={tableOfContents} />}<PostContent postId={data.private === true ? undefined : id}>{content}</PostContent></div>
+      <ArticleReadingProgress title={frontmatter.title} />
       {data.private !== true && <PostAdminActions id={id} title={frontmatter.title} />}
       {data.private === true && authenticated && <PostAdminActions id={id} title={frontmatter.title} />}
       <CommentSection />

@@ -3,6 +3,7 @@ import { getSiteSettings } from "@/lib/site-settings";
 import { SiteBanner } from "./site-banner";
 import { HeaderNavigation } from "./header-navigation";
 import { SitePopup } from "./site-popup";
+import { OceanWaves } from "./ocean-waves";
 
 export async function SiteHeader() {
   const settings = getSiteSettings();
@@ -10,6 +11,7 @@ export async function SiteHeader() {
   return (
     <>
       <header className="shared-header">
+        <OceanWaves />
         <div className="shared-header-inner">
           <Link href="/" className="shared-logo">wavy studio</Link>
           <HeaderNavigation />

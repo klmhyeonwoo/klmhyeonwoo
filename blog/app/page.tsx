@@ -30,7 +30,7 @@ export default async function HomePage() {
             <RecentComments posts={posts} />
           </Suspense>
         </HomeFeed>
-        <footer className="kb-footer"><div><p>© 2026 wavy studio</p><small>이 제작물은 아모레퍼시픽의 아리따글꼴을 사용하여 디자인 되었습니다.</small></div><a href="#top">맨 위로 ↑</a></footer>
+        <footer className="kb-footer"><div><p>© 2026 wavy studio</p><small>이 제작물은 아모레퍼시픽의 아리따글꼴을 사용하여 디자인 되었습니다.</small></div></footer>
       </main>
     </>
   );

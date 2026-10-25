@@ -2,6 +2,7 @@
 
 import type { MouseEvent, ReactNode } from "react";
 import { useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { InlineComments } from "./inline-comments";
 
 export function PostContent({ children, postId }: { children: ReactNode; postId?: string }) {
@@ -25,7 +26,7 @@ export function PostContent({ children, postId }: { children: ReactNode; postId?
   return <>
     <div className="post-content-with-comments"><div ref={root} className="prose" data-reading-content onClickCapture={confirmExternalLink}>{children}</div>
     {postId && <InlineComments postId={postId} root={root} />}</div>
-    {externalUrl && <div className="external-link-backdrop" role="presentation" onMouseDown={() => setExternalUrl(null)}>
+    {externalUrl && createPortal(<div className="external-link-backdrop" role="presentation" onMouseDown={() => setExternalUrl(null)}>
       <section className="external-link-dialog" role="dialog" aria-modal="true" aria-labelledby="external-link-title" onMouseDown={(event) => event.stopPropagation()}>
         <p className="external-link-kicker">외부 링크</p>
         <h2 id="external-link-title">외부 사이트로 이동할까요?</h2>
@@ -35,6 +36,6 @@ export function PostContent({ children, postId }: { children: ReactNode; postId?
           <a href={externalUrl} target="_blank" rel="noreferrer">이동하기</a>
         </div>
       </section>
-    </div>}
+    </div>, document.body)}
   </>;
 }

@@ -2908,11 +2908,11 @@ html[data-theme="dark"] .article-reading-progress { box-shadow: 0 10px 28px rgb(
 .article-scroll-veil {
   backdrop-filter: blur(0) saturate(108%);
   height: clamp(3.25rem, 9vh, 6rem);
-  left: 0;
+  left: var(--reading-column-left);
   opacity: 0;
   pointer-events: none;
   position: fixed;
-  right: 0;
+  width: var(--reading-column-width);
   transition: opacity .18s ease-out, backdrop-filter .18s ease-out;
   z-index: 30;
 }

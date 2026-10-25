@@ -1,11 +1,12 @@
 import { randomUUID } from "crypto";
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { isAdmin } from "@/lib/auth";
 import { isContentReferenceId } from "@/lib/content-reference";
 import { deleteDraft, savePost } from "@/lib/github";
 import { hashPostPassword } from "@/lib/post-access";
 import { getPostPasswordHash, getPostPublishedAt, getPosts } from "@/lib/posts";
+import { postsCacheTag } from "@/lib/post-cache";
 import { convertBlocks, markdownFor } from "@/lib/slash-content";
 
 const validPostId = /^[a-z0-9]+(?:[a-z0-9-]*[a-z0-9])?$/;
@@ -79,6 +80,7 @@ export async function POST(request: Request) {
       passwordHash,
     });
     if (fromDraft) await deleteDraft(postId, title.trim());
+    revalidateTag(postsCacheTag, "max");
     revalidatePath("/");
     revalidatePath(`/posts/${postId}`);
     revalidatePath("/series");

@@ -17,7 +17,7 @@ import { ArticleReadingProgress } from "@/components/article-reading-progress";
 import { isAdmin } from "@/lib/auth";
 import { hasPostAccess } from "@/lib/post-access";
 import { formatPostDate, formatPostUpdatedLabel, postPublishedAtValue, postWasUpdated } from "@/lib/post-date";
-import { getPost, getPostBlocks, getPosts } from "@/lib/posts";
+import { getCachedPost, getCachedPostBlocks, getCachedPosts } from "@/lib/post-cache";
 import { getProfile } from "@/lib/profile";
 import { restoreCallouts } from "@/lib/callout-markdown";
 import { restoreBookmarks } from "@/lib/bookmark-markdown";
@@ -28,11 +28,10 @@ import { getTableOfContents, rehypeHeadingIds } from "@/lib/table-of-contents";
 import { absoluteUrl } from "@/lib/site-url";
 import { convertBlocks, markdownFor } from "@/lib/slash-content";
 
-// A single post URL can change between public and password-protected states.
-// Next cannot safely combine that cookie-dependent branch with a pre-rendered
-// dynamic segment, so render this leaf per request. The post list, assets and
-// all non-article routes keep their existing cache policies.
-export const dynamic = "force-dynamic";
+// Public posts are generated at build/ISR time. Password-protected posts are
+// deliberately omitted from generateStaticParams, so their cookie-dependent
+// branch still renders dynamically without making every public view dynamic.
+export const revalidate = 3600;
 
 type Params = Promise<{ id: string }>;
 
@@ -64,11 +63,11 @@ function sourceWithEditorFallback(source: string, blocks: unknown[]) {
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { id } = await params;
-  const source = getPost(id);
+  const source = await getCachedPost(id);
   if (!source) return {};
 
   const { data } = matter(source);
-  const post = getPosts(true).find((item) => item.id === id);
+  const post = (await getCachedPosts(true)).find((item) => item.id === id);
   const profile = getProfile();
   const postTitle = typeof data.title === "string" && data.title.trim() ? data.title.trim() : "글";
   const isPrivate = data.private === true;
@@ -125,13 +124,13 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   };
 }
 
-export function generateStaticParams() {
-  return getPosts().map(({ id }) => ({ id }));
+export async function generateStaticParams() {
+  return (await getCachedPosts()).map(({ id }) => ({ id }));
 }
 
 export default async function PostPage({ params }: { params: Params }) {
   const { id } = await params;
-  const source = getPost(id);
+  const source = await getCachedPost(id);
   if (!source) notFound();
   const profile = getProfile();
   const { data } = matter(source);
@@ -142,11 +141,11 @@ export default async function PostPage({ params }: { params: Params }) {
     return <><SiteHeader /><main className="article-shell"><PostUnlockForm id={id} /></main></>;
   }
 
-  const blocks = getPostBlocks(id);
+  const blocks = await getCachedPostBlocks(id);
   const renderSource = restoreBookmarks(restoreCallouts(sourceWithEditorFallback(source, blocks), blocks), blocks);
   const tableOfContents = getTableOfContents(renderSource);
   const { content, frontmatter } = await compileMDX<{ title: string; date: string; description?: string; publishedAt?: string; updatedAt?: string }>({ components: { Diagram: PostDiagram, Callout: PostCallout, Bookmark: PostBookmark, Gallery: PostGallery, Columns: PostColumns, Column: PostColumn }, source: renderSource, options: { mdxOptions: { remarkPlugins: [remarkGfm], rehypePlugins: [[rehypeShiki, { themes: { light: "github-light", dark: "github-dark" } }], rehypeHeadingIds(tableOfContents)] }, parseFrontmatter: true } });
-  const post = getPosts(true).find((item) => item.id === id);
+  const post = (await getCachedPosts(true)).find((item) => item.id === id);
   const description = postDescription(source, data) || `${frontmatter.title}에 관한 글입니다.`;
   const canonicalUrl = absoluteUrl(`/posts/${id}`);
   const publishedAt = postPublishedAtValue(frontmatter.publishedAt ?? frontmatter.date);

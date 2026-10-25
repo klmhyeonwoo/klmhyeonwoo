@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { isAdmin } from "@/lib/auth";
 import { saveSeries } from "@/lib/github";
+import { postsCacheTag } from "@/lib/post-cache";
 
 const validId = /^[a-z0-9-]{1,64}$/;
 
@@ -21,6 +22,7 @@ export async function PUT(request: Request) {
       ...(item.coverImage?.trim() ? { coverImage: item.coverImage.trim() } : {}),
     }));
     await saveSeries(normalized);
+    revalidateTag(postsCacheTag, "max");
     revalidatePath("/");
     revalidatePath("/series");
     normalized.forEach((item) => revalidatePath(`/series/${item.id}`));

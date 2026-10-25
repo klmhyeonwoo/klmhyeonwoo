@@ -1,7 +1,7 @@
 import { unstable_cache } from "next/cache";
 import { Suspense } from "react";
 import { SiteHeader } from "@/components/site-header";
-import { getPosts } from "@/lib/posts";
+import { getCachedPosts, postsCacheTag } from "@/lib/post-cache";
 import { getCategories } from "@/lib/posts";
 import { getProfile } from "@/lib/profile";
 import { RecentComments, RecentCommentsFallback } from "@/components/recent-comments";
@@ -13,9 +13,9 @@ import { HomeFeed } from "@/components/home-feed";
 export const revalidate = 3600;
 
 const getHomeContent = unstable_cache(
-  async () => ({ posts: getPosts(true), categories: getCategories(), profile: getProfile() }),
-  ["home-content"],
-  { revalidate: 3600 },
+  async () => ({ posts: await getCachedPosts(true), categories: getCategories(), profile: getProfile() }),
+  ["home-content-v2"],
+  { revalidate: 3600, tags: [postsCacheTag] },
 );
 
 export default async function HomePage() {

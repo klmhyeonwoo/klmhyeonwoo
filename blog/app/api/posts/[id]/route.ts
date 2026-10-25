@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { isAdmin } from "@/lib/auth";
 import { deletePost } from "@/lib/github";
 import { getPosts } from "@/lib/posts";
+import { postsCacheTag } from "@/lib/post-cache";
 
 const validPostId = /^[a-z0-9]+(?:[a-z0-9-]*[a-z0-9])?$/;
 
@@ -17,6 +18,7 @@ export async function DELETE(_: Request, { params }: { params: Promise<{ id: str
 
   try {
     await deletePost(id, post.title);
+    revalidateTag(postsCacheTag, "max");
     revalidatePath("/");
     revalidatePath(`/posts/${id}`);
     revalidatePath("/series");

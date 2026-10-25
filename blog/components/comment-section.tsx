@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const utterancesRepository = process.env.NEXT_PUBLIC_UTTERANCES_REPO ?? "klmhyeonwoo/klmhyeonwoo";
 const giscus = {
@@ -19,8 +19,26 @@ function currentTheme(provider: "giscus" | "utterances") {
 /** Prefers Giscus when configured while keeping existing Issue threads as a fallback. */
 export function CommentSection() {
   const container = useRef<HTMLDivElement>(null);
+  const section = useRef<HTMLElement>(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
 
   useEffect(() => {
+    const element = section.current;
+    if (!element || !("IntersectionObserver" in window)) {
+      setShouldLoad(true);
+      return;
+    }
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      setShouldLoad(true);
+      observer.disconnect();
+    }, { rootMargin: "700px 0px" });
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!shouldLoad) return;
     const provider = hasGiscusConfiguration ? "giscus" : "utterances";
     const script = document.createElement("script");
     script.async = true;
@@ -61,9 +79,11 @@ export function CommentSection() {
     const observer = new MutationObserver(syncTheme);
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
     return () => observer.disconnect();
-  }, []);
+  }, [shouldLoad]);
 
   return (
-    <section className="comments" aria-label="댓글"><div ref={container} /></section>
+    <section ref={section} className="comments" aria-label="댓글">
+      <div ref={container}>{!shouldLoad && <p className="comments-placeholder">댓글을 불러오는 중…</p>}</div>
+    </section>
   );
 }

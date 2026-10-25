@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { isAdmin } from "@/lib/auth";
 import { saveCategories } from "@/lib/github";
+import { postsCacheTag } from "@/lib/post-cache";
 
 type Category = { id: string; name: string };
 const validId = /^[a-z0-9-]{1,64}$/;
@@ -16,6 +17,7 @@ export async function PUT(request: Request) {
   try {
     const normalized = categories.map((item) => ({ id: item.id, name: item.name.trim() }));
     await saveCategories(normalized);
+    revalidateTag(postsCacheTag, "max");
     revalidatePath("/");
     return NextResponse.json({ ok: true, categories: normalized });
   } catch (error) {

@@ -2831,10 +2831,19 @@ html[data-theme="dark"] .notion-select-options .notion-select-create > span {
     transform: translateY(0);
   }
 }
-.kb-list-page,
-.article {
+.kb-list-page > .kb-list-controls,
+.kb-list-page > .kb-content-layout,
+.kb-list-page > .kb-footer,
+.article > .article-header,
+.article > .article-content-layout,
+.article > .post-admin-actions,
+.article > .comments {
   animation: page-content-enter .42s cubic-bezier(.22, 1, .36, 1) both;
 }
+.kb-list-page > .kb-content-layout,
+.article > .article-content-layout { animation-delay: .06s; }
+.kb-list-page > .kb-footer,
+.article > .comments { animation-delay: .12s; }
 .article-reading-progress {
   align-items: center;
   backdrop-filter: blur(16px) saturate(130%);
@@ -2852,13 +2861,15 @@ html[data-theme="dark"] .notion-select-options .notion-select-create > span {
   padding: .48rem .85rem .48rem .5rem;
   pointer-events: none;
   position: fixed;
-  transform: translate(-50%, calc(100% + 1.25rem)) scale(.96);
-  transition: opacity .22s ease, transform .28s cubic-bezier(.2, .8, .2, 1);
+  transform: translate(-50%, 0) scale(.98);
+  transition: filter .3s ease, opacity .3s ease, transform .3s cubic-bezier(.22, 1, .36, 1);
+  filter: blur(3px);
   z-index: 35;
 }
 .article-reading-progress.is-visible {
   opacity: 1;
   transform: translate(-50%, 0) scale(1);
+  filter: blur(0);
 }
 .article-reading-ring {
   --reading-progress: 0;
@@ -2909,11 +2920,11 @@ html[data-theme="dark"] .article-reading-progress { box-shadow: 0 10px 28px rgb(
   backdrop-filter: blur(2.5px) saturate(108%);
   opacity: 1;
 }
-.article-scroll-veil.is-scrolling-down {
+.article-scroll-veil-top {
   background: linear-gradient(to bottom, color-mix(in srgb, var(--paper) 74%, transparent), transparent);
   top: 0;
 }
-.article-scroll-veil.is-scrolling-up {
+.article-scroll-veil-bottom {
   background: linear-gradient(to top, color-mix(in srgb, var(--paper) 74%, transparent), transparent);
   bottom: 0;
 }

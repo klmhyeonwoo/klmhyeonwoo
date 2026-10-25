@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 
 type Props = { title: string };
 type ReadingState = { progress: number; isWithinArticle: boolean; left: number; width: number };
@@ -26,9 +26,7 @@ function getReadingState(): ReadingState {
 export function ArticleReadingProgress({ title }: Props) {
   const [progress, setProgress] = useState(0);
   const [isWithinArticle, setIsWithinArticle] = useState(false);
-  const [isScrolling, setIsScrolling] = useState(false);
   const [readingColumn, setReadingColumn] = useState({ left: 0, width: 0 });
-  const scrollEndTimer = useRef<number | null>(null);
 
   useEffect(() => {
     let frame = 0;
@@ -44,37 +42,30 @@ export function ArticleReadingProgress({ title }: Props) {
     const requestUpdate = () => {
       if (!frame) frame = requestAnimationFrame(update);
     };
-    const handleScroll = () => {
-      setIsScrolling(true);
-      if (scrollEndTimer.current) window.clearTimeout(scrollEndTimer.current);
-      scrollEndTimer.current = window.setTimeout(() => setIsScrolling(false), 160);
-      requestUpdate();
-    };
     const article = document.querySelector<HTMLElement>("[data-reading-content]");
     const observer = article ? new ResizeObserver(requestUpdate) : null;
 
     observer?.observe(article!);
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("scroll", requestUpdate, { passive: true });
     window.addEventListener("resize", requestUpdate);
     requestUpdate();
     return () => {
       cancelAnimationFrame(frame);
-      if (scrollEndTimer.current) window.clearTimeout(scrollEndTimer.current);
       observer?.disconnect();
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", requestUpdate);
       window.removeEventListener("resize", requestUpdate);
     };
   }, []);
 
   const visible = isWithinArticle && progress > 0.1;
+  const hasPassedContent = isWithinArticle && progress > 3;
   const roundedProgress = Math.round(progress);
   const veilStyle = {
     "--reading-column-left": `${readingColumn.left}px`,
     "--reading-column-width": `${readingColumn.width}px`,
   } as CSSProperties;
   return <>
-    <div className={`article-scroll-veil article-scroll-veil-top${isScrolling ? " is-scrolling" : ""}`} style={veilStyle} aria-hidden="true" />
-    <div className={`article-scroll-veil article-scroll-veil-bottom${isScrolling ? " is-scrolling" : ""}`} style={veilStyle} aria-hidden="true" />
+    <div className={`article-scroll-veil article-scroll-veil-top${hasPassedContent ? " is-visible" : ""}`} style={veilStyle} aria-hidden="true" />
     <aside className={`article-reading-progress${visible ? " is-visible" : ""}`} aria-label="읽기 진행률">
       <span className="article-reading-ring" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={roundedProgress} style={{ "--reading-progress": progress.toFixed(2) } as CSSProperties}>
         <span>{roundedProgress}</span>

@@ -2907,26 +2907,22 @@ html[data-theme="dark"] .notion-select-options .notion-select-create > span {
 html[data-theme="dark"] .article-reading-progress { box-shadow: 0 10px 28px rgb(0 0 0 / .32); }
 .article-scroll-veil {
   backdrop-filter: blur(0) saturate(108%);
-  height: clamp(3.25rem, 9vh, 6rem);
+  height: clamp(5rem, 16vh, 9rem);
   left: var(--reading-column-left);
   opacity: 0;
   pointer-events: none;
   position: fixed;
   width: var(--reading-column-width);
-  transition: opacity .18s ease-out, backdrop-filter .18s ease-out;
+  transition: opacity .32s ease, backdrop-filter .32s ease;
   z-index: 30;
 }
-.article-scroll-veil.is-scrolling {
-  backdrop-filter: blur(2.5px) saturate(108%);
+.article-scroll-veil.is-visible {
+  backdrop-filter: blur(3px) saturate(108%);
   opacity: 1;
 }
 .article-scroll-veil-top {
-  background: linear-gradient(to bottom, color-mix(in srgb, var(--paper) 74%, transparent), transparent);
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--paper) 90%, transparent), color-mix(in srgb, var(--paper) 34%, transparent) 52%, transparent);
   top: 0;
-}
-.article-scroll-veil-bottom {
-  background: linear-gradient(to top, color-mix(in srgb, var(--paper) 74%, transparent), transparent);
-  bottom: 0;
 }
 @media (max-width: 42rem) {
   .article-reading-progress { bottom: 1rem; gap: .45rem; padding-right: .72rem; }

@@ -6,7 +6,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/site-header";
 import { PostAdminActions } from "@/components/post-admin-actions";
-import { PostUnlockForm } from "@/components/post-unlock-form";
 import { CommentSection } from "@/components/comment-section";
 import { PostCallout } from "@/components/post-callout";
 import { PostDiagram } from "@/components/post-diagram";
@@ -15,7 +14,6 @@ import { PostLinkCopy } from "@/components/post-link-copy";
 import { ArticleTableOfContents } from "@/components/article-table-of-contents";
 import { ArticleReadingProgress } from "@/components/article-reading-progress";
 import { isAdmin } from "@/lib/auth";
-import { hasPostAccess } from "@/lib/post-access";
 import { formatPostDate, formatPostUpdatedLabel, postPublishedAtValue, postWasUpdated } from "@/lib/post-date";
 import { getCachedPost, getCachedPostBlocks, getCachedPosts } from "@/lib/post-cache";
 import { getProfile } from "@/lib/profile";
@@ -134,12 +132,11 @@ export default async function PostPage({ params }: { params: Params }) {
   if (!source) notFound();
   const profile = getProfile();
   const { data } = matter(source);
-  const passwordHash = typeof data.passwordHash === "string" ? data.passwordHash : null;
   const authenticated = data.private === true ? await isAdmin() : false;
 
-  if (data.private === true && !authenticated && (!passwordHash || !(await hasPostAccess(id, passwordHash)))) {
-    return <><SiteHeader /><main className="article-shell"><PostUnlockForm id={id} /></main></>;
-  }
+  // Private posts are an administrator-only workspace, not shareable links.
+  // Deliberately return 404 so a private URL does not disclose its existence.
+  if (data.private === true && !authenticated) notFound();
 
   const blocks = await getCachedPostBlocks(id);
   const renderSource = restoreBookmarks(restoreCallouts(sourceWithEditorFallback(source, blocks), blocks), blocks);

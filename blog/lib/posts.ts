@@ -129,13 +129,6 @@ export function postSourceVersion(source: string) {
   return createHash("sha256").update(source).digest("hex");
 }
 
-export function getPostPasswordHash(id: string) {
-  const source = getPost(id);
-  if (!source) return null;
-  const { data } = matter(source);
-  return typeof data.passwordHash === "string" ? data.passwordHash : null;
-}
-
 export function getEditablePost(id: string): EditablePost | null {
   const safeId = safePostId(id);
   if (safeId !== id) return null;

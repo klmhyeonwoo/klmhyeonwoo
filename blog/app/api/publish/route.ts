@@ -4,8 +4,7 @@ import { revalidatePath, revalidateTag } from "next/cache";
 import { isAdmin } from "@/lib/auth";
 import { isContentReferenceId } from "@/lib/content-reference";
 import { deleteDraft, savePost } from "@/lib/github";
-import { hashPostPassword } from "@/lib/post-access";
-import { getPostPasswordHash, getPostPublishedAt, getPosts } from "@/lib/posts";
+import { getPostPublishedAt, getPosts } from "@/lib/posts";
 import { postsCacheTag } from "@/lib/post-cache";
 import { convertBlocks, markdownFor } from "@/lib/slash-content";
 
@@ -15,7 +14,7 @@ export async function POST(request: Request) {
   if (!(await isAdmin())) return NextResponse.json({ error: "로그인이 필요합니다." }, { status: 401 });
 
   const body = await request.json().catch(() => null);
-  const { title, id: rawId, description, categoryId = "essay", seriesId = "", markdown, blocks, isPrivate = false, fromDraft = false, password = "" } = body ?? {};
+  const { title, id: rawId, description, categoryId = "essay", seriesId = "", markdown, blocks, isPrivate = false, fromDraft = false } = body ?? {};
   const id = rawId ?? undefined;
   if (
     typeof title !== "string" || !title.trim() ||
@@ -24,7 +23,7 @@ export async function POST(request: Request) {
     typeof categoryId !== "string" ||
     typeof seriesId !== "string" ||
     typeof markdown !== "string" ||
-    typeof isPrivate !== "boolean" || typeof fromDraft !== "boolean" || typeof password !== "string" ||
+    typeof isPrivate !== "boolean" || typeof fromDraft !== "boolean" ||
     !Array.isArray(blocks)
   ) {
     return NextResponse.json({ error: "제목, 본문, 카테고리 입력값을 확인해 주세요." }, { status: 400 });
@@ -56,15 +55,6 @@ export async function POST(request: Request) {
   const previousSeriesId = id ? getPosts(true).find((post) => post.id === id)?.seriesId : undefined;
   const publishedAt = id ? getPostPublishedAt(id) ?? new Date().toISOString() : new Date().toISOString();
   const updatedAt = new Date().toISOString();
-  const existingPasswordHash = id ? getPostPasswordHash(id) : null;
-  if (isPrivate && password.length === 0 && !existingPasswordHash) {
-    return NextResponse.json({ error: "비밀번호 보호 글에는 비밀번호를 입력해 주세요." }, { status: 400 });
-  }
-  if (isPrivate && password.length > 0 && password.length < 4) {
-    return NextResponse.json({ error: "비밀번호는 4자 이상 입력해 주세요." }, { status: 400 });
-  }
-  const passwordHash = isPrivate ? (password ? hashPostPassword(password) : existingPasswordHash ?? undefined) : undefined;
-
   try {
     const version = await savePost({
       title: title.trim(),
@@ -77,7 +67,6 @@ export async function POST(request: Request) {
       markdown: renderMarkdown,
       blocks,
       isPrivate,
-      passwordHash,
     });
     if (fromDraft) await deleteDraft(postId, title.trim());
     revalidateTag(postsCacheTag, "max");

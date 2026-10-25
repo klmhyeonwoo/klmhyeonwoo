@@ -14,10 +14,9 @@ type Post = {
   markdown: string;
   blocks: unknown[];
   isPrivate: boolean;
-  passwordHash?: string;
 };
 
-type Draft = Omit<Post, "passwordHash" | "publishedAt"> & { updatedAt: string };
+type Draft = Omit<Post, "publishedAt"> & { updatedAt: string };
 type GitHubConfig = { owner: string; repo: string; branch: string; token: string };
 
 function config(): GitHubConfig {
@@ -99,7 +98,7 @@ export async function saveAttachment(file: { name: string; type: string; bytes: 
 
 export async function savePost(post: Post) {
   const date = post.publishedAt.slice(0, 10);
-  const protection = post.isPrivate && post.passwordHash ? `private: true\npasswordHash: ${yaml(post.passwordHash)}\n` : "private: false\n";
+  const protection = post.isPrivate ? "private: true\n" : "private: false\n";
   const series = post.seriesId ? `series: ${yaml(post.seriesId)}\n` : "";
   const mdx = `---\ntitle: ${yaml(post.title)}\ndate: ${date}\npublishedAt: ${yaml(post.publishedAt)}\nupdatedAt: ${yaml(post.updatedAt)}\ndescription: ${yaml(post.description)}\ncategory: ${yaml(post.categoryId)}\n${series}${protection}---\n\n${post.markdown}\n`;
   await writeFile(`blog/editor-data/${post.id}.json`, JSON.stringify(post.blocks, null, 2), `Save editor data: ${post.title}`);

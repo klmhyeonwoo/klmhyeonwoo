@@ -88,7 +88,6 @@ export function AdminClient({ authenticated: initiallyAuthenticated, initialPost
   const [categories, setCategories] = useState(initialCategories);
   const [series, setSeries] = useState(initialSeries);
   const [isPrivate, setIsPrivate] = useState(initialEntry?.isPrivate ?? false);
-  const [postPassword, setPostPassword] = useState("");
   const isDraftRef = useRef(Boolean(initialDraft));
   const [markdown, setMarkdown] = useState("");
   const [blocks, setBlocks] = useState<unknown[]>([]);
@@ -212,7 +211,7 @@ export function AdminClient({ authenticated: initiallyAuthenticated, initialPost
       const response = await fetch("/api/publish", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ title, id: postId, description, categoryId, seriesId, markdown, blocks, isPrivate, fromDraft: isDraftRef.current, password: postPassword }),
+        body: JSON.stringify({ title, id: postId, description, categoryId, seriesId, markdown, blocks, isPrivate, fromDraft: isDraftRef.current }),
       });
 
       if (response.ok) {
@@ -221,7 +220,6 @@ export function AdminClient({ authenticated: initiallyAuthenticated, initialPost
         setDraftStatus("발행됨");
         setPostId(id);
         isDraftRef.current = false;
-        setPostPassword("");
         const localPreview = ["localhost", "127.0.0.1"].includes(window.location.hostname);
         if (localPreview) {
           setMessage("GitHub에 저장했습니다. 로컬에서 보려면 최신 변경을 받아오세요.");
@@ -379,8 +377,7 @@ export function AdminClient({ authenticated: initiallyAuthenticated, initialPost
         <Input value={description} onValueChange={setDescription} placeholder="짧은 소개 (선택)" aria-label="짧은 소개" />
         <div className="metadata-selects"><NotionSelect label="카테고리" value={categoryId} options={categories} placeholder="카테고리 선택" onValueChange={setCategoryId} onCreate={createCategory} onDelete={deleteCategory} /><NotionSelect label="아티클 시리즈" value={seriesId} options={series} placeholder="시리즈 없음" allowEmpty onValueChange={setSeriesId} onCreate={createSeries} onDelete={deleteSeries} /></div>
         <div className="private-post-controls">
-          <label className="private-toggle"><input type="checkbox" checked={isPrivate} onChange={(event) => setIsPrivate(event.target.checked)} />비밀번호 보호 글</label>
-          {isPrivate && <Input className="private-password-input" type="password" value={postPassword} onValueChange={setPostPassword} placeholder={initialEntry?.isPrivate ? "새 비밀번호 입력 (변경할 때만)" : "글 비밀번호 (4자 이상)"} aria-label="글 비밀번호" />}
+          <label className="private-toggle"><input type="checkbox" checked={isPrivate} onChange={(event) => setIsPrivate(event.target.checked)} />비공개 글 <span>관리자만 볼 수 있습니다</span></label>
         </div>
       </div>
       {draftReady ? <Editor initialBlocks={initialBlocks} mentions={editorMentions} onChange={updateContent} /> : <section className="editor-loading">임시 저장본을 불러오는 중…</section>}

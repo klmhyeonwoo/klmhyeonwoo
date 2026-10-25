@@ -2814,11 +2814,10 @@ html[data-theme="dark"] .prose pre.shiki span {
   accent-color: var(--ink);
 }
 
-.admin-shell .metadata input.private-password-input {
-  border-radius: 0.375rem;
-  min-height: 2.5rem;
-  padding: 0.5rem 0.625rem;
-  width: min(100%, 22rem);
+.admin-shell .private-toggle span {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 400;
 }
 
 @media (max-width: 760px) {
@@ -2827,9 +2826,6 @@ html[data-theme="dark"] .prose pre.shiki span {
     display: grid;
   }
 
-  .admin-shell .metadata input.private-password-input {
-    width: 100%;
-  }
 }
 
 .admin-header button,

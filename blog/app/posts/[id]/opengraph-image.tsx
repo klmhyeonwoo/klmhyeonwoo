@@ -5,9 +5,15 @@ import { getPost, getPosts } from "@/lib/posts";
 export const alt = "wavy studio 게시글";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const dynamic = "force-dynamic";
+export const revalidate = 86400;
 
 type Params = Promise<{ id: string }>;
+
+// Article writes create a new deployment, so pre-rendering keeps crawler and
+// share-preview traffic off the Fluid Function runtime.
+export function generateStaticParams() {
+  return getPosts().map(({ id }) => ({ id }));
+}
 
 function summary(source: string, data: Record<string, unknown>) {
   if (typeof data.description === "string" && data.description.trim()) return data.description.trim();

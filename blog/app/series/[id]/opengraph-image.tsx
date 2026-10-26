@@ -5,8 +5,13 @@ import { getSeries } from "@/lib/series";
 export const alt = "wavy studio 아티클 시리즈";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+export const revalidate = 86400;
 
 type Params = Promise<{ id: string }>;
+
+export function generateStaticParams() {
+  return getSeries().map(({ id }) => ({ id }));
+}
 
 export default async function SeriesOpenGraphImage({ params }: { params: Params }) {
   const { id } = await params;

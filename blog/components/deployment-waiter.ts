@@ -1,8 +1,8 @@
 "use client";
 
-const initialRetryDelay = 5_000;
-const maxRetryDelay = 20_000;
-const timeout = 4 * 60 * 1_000;
+const initialRetryDelay = 8_000;
+const maxRetryDelay = 30_000;
+const timeout = 3 * 60 * 1_000;
 
 type WaitForDeploymentOptions = {
   id: string;
@@ -29,8 +29,7 @@ export async function waitForDeployment({ id, version, deleted = false, signal }
     }
 
     // Deployment completion is normally not observable for tens of seconds.
-    // Back off after the first checks so one publish does not create nearly
-    // fifty uncached status-route invocations during a slow deployment.
+    // The longer backoff limits one publish to roughly eight status checks.
     const delay = Math.min(initialRetryDelay * (1.5 ** attempts), maxRetryDelay);
     attempts += 1;
     await new Promise<void>((resolve) => window.setTimeout(resolve, delay));

@@ -31,13 +31,14 @@
 }
 .inline-comment-composer-slot,
 .inline-comment-thread-slot {
-  position: relative;
+  box-sizing: border-box;
+  position: absolute;
   height: 0;
   margin: 0;
   padding: 0;
   border: 0;
   max-width: 100%;
-  z-index: 45;
+  z-index: 75;
 }
 .inline-comment-composer-slot > .inline-comment-composer,
 .inline-comment-thread-slot > .inline-comment-thread {

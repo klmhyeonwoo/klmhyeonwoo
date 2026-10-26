@@ -14,7 +14,7 @@ export async function POST(request: Request) {
   if (!(await isAdmin())) return NextResponse.json({ error: "로그인이 필요합니다." }, { status: 401 });
 
   const body = await request.json().catch(() => null);
-  const { title, id: rawId, description, categoryId = "essay", seriesId = "", markdown, blocks, isPrivate = false, fromDraft = false } = body ?? {};
+  const { title, id: rawId, description, categoryId = "essay", seriesId = "", markdown, blocks, isPrivate = false, showInList = true, coverImage = "", fromDraft = false } = body ?? {};
   const id = rawId ?? undefined;
   if (
     typeof title !== "string" || !title.trim() ||
@@ -23,7 +23,7 @@ export async function POST(request: Request) {
     typeof categoryId !== "string" ||
     typeof seriesId !== "string" ||
     typeof markdown !== "string" ||
-    typeof isPrivate !== "boolean" || typeof fromDraft !== "boolean" ||
+    typeof isPrivate !== "boolean" || typeof showInList !== "boolean" || typeof coverImage !== "string" || coverImage.length > 2000 || typeof fromDraft !== "boolean" ||
     !Array.isArray(blocks)
   ) {
     return NextResponse.json({ error: "제목, 본문, 카테고리 입력값을 확인해 주세요." }, { status: 400 });
@@ -67,6 +67,8 @@ export async function POST(request: Request) {
       markdown: renderMarkdown,
       blocks,
       isPrivate,
+      showInList,
+      coverImage,
     });
     if (fromDraft) await deleteDraft(postId, title.trim());
     revalidateTag(postsCacheTag, "max");

@@ -3150,6 +3150,8 @@ html[data-theme="dark"] .prose pre.shiki span {
   display: flex;
   gap: 1rem;
   justify-content: space-between;
+  position: relative;
+  z-index: 40;
 }
 
 .kb-list-controls .kb-category-nav {
@@ -3170,6 +3172,7 @@ html[data-theme="dark"] .prose pre.shiki span {
   min-width: 10rem;
   padding: 0.25rem;
   position: relative;
+  z-index: 41;
 }
 
 .kb-post-search input {
@@ -3226,7 +3229,7 @@ html[data-theme="dark"] .prose pre.shiki span {
   right: 0;
   top: calc(100% + 0.5rem);
   width: min(22rem, calc(100vw - 2rem));
-  z-index: 30;
+  z-index: 75;
 }
 
 .kb-search-suggestions section {

@@ -11,12 +11,12 @@ export async function POST(request: Request) {
   if (!(await isAdmin())) return NextResponse.json({ error: "로그인이 필요합니다." }, { status: 401 });
 
   const body = await request.json().catch(() => null);
-  const { id: rawId, title = "", description = "", categoryId = "essay", seriesId = "", markdown = "", blocks, isPrivate = false } = body ?? {};
+  const { id: rawId, title = "", description = "", categoryId = "essay", seriesId = "", markdown = "", blocks, isPrivate = false, showInList = true, coverImage = "" } = body ?? {};
   const id = rawId ?? undefined;
   if (
     (id !== undefined && (typeof id !== "string" || !validPostId.test(id))) ||
     typeof title !== "string" || typeof description !== "string" || typeof categoryId !== "string" || typeof seriesId !== "string" || typeof markdown !== "string" ||
-    typeof isPrivate !== "boolean" || !Array.isArray(blocks)
+    typeof isPrivate !== "boolean" || typeof showInList !== "boolean" || typeof coverImage !== "string" || coverImage.length > 2000 || !Array.isArray(blocks)
   ) return NextResponse.json({ error: "임시 저장할 내용을 확인해 주세요." }, { status: 400 });
 
   const category = categoryId.trim();
@@ -31,7 +31,7 @@ export async function POST(request: Request) {
 
   const draftId = id ?? randomUUID();
   try {
-    await saveDraft({ id: draftId, title: title.trim(), description: description.trim(), categoryId: category, seriesId: series, markdown, blocks, isPrivate, updatedAt: new Date().toISOString() });
+    await saveDraft({ id: draftId, title: title.trim(), description: description.trim(), categoryId: category, seriesId: series, markdown, blocks, isPrivate, showInList, coverImage: coverImage.trim(), updatedAt: new Date().toISOString() });
     return NextResponse.json({ ok: true, id: draftId });
   } catch (error) {
     console.error(error);

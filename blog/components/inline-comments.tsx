@@ -29,21 +29,23 @@ function commentBlockFor(node: Node, root: HTMLElement) {
 
 /** Renders a discussion surface immediately after its text block. */
 function AnchoredSurface({ target, className, children }: { target: HTMLElement | null; className: string; children: ReactNode }) {
-  const [host, setHost] = useState<HTMLElement | null>(null);
+  const [position, setPosition] = useState<{ top: number; left: number; width: number } | null>(null);
 
   useEffect(() => {
     if (!target) return;
-    const slot = document.createElement("div");
-    slot.className = `${className}-slot`;
-    // The slot follows the paragraph's bottom margin. Offset that spacing so
-    // the discussion stays close to its text without moving other content.
-    slot.style.top = `-${Math.max(0, parseFloat(getComputedStyle(target).marginBottom) || 0)}px`;
-    target.insertAdjacentElement("afterend", slot);
-    setHost(slot);
-    return () => { setHost(null); slot.remove(); };
+    const update = () => {
+      const bounds = target.getBoundingClientRect();
+      setPosition({ top: bounds.bottom + window.scrollY, left: bounds.left + window.scrollX, width: bounds.width });
+    };
+    const observer = new ResizeObserver(update);
+    observer.observe(target);
+    window.addEventListener("scroll", update, { passive: true, capture: true });
+    window.addEventListener("resize", update);
+    update();
+    return () => { observer.disconnect(); window.removeEventListener("scroll", update, true); window.removeEventListener("resize", update); };
   }, [className, target]);
 
-  return host ? createPortal(children, host) : null;
+  return position ? createPortal(<div className={`${className}-slot`} style={{ top: position.top, left: position.left, width: position.width }}>{children}</div>, document.body) : null;
 }
 
 /** Selection anchored discussion UI. The persistent anchor is text context, never DOM offsets. */

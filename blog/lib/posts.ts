@@ -43,6 +43,7 @@ export type PostMeta = {
   excerpt?: string;
   featured: boolean;
   isPrivate: boolean;
+  showInList: boolean;
   thumbnail?: string;
 };
 
@@ -53,6 +54,8 @@ export type EditablePost = {
   categoryId: string;
   seriesId: string;
   isPrivate: boolean;
+  coverImage: string;
+  showInList: boolean;
   blocks: unknown[];
 };
 
@@ -87,6 +90,7 @@ export function getPosts(includePrivate = false): PostMeta[] {
         series: series?.name,
         featured: data.featured === true,
         isPrivate: data.private === true,
+        showInList: data.showInList !== false,
         thumbnail: data.coverImage ? String(data.coverImage) : image,
       };
     })
@@ -139,12 +143,12 @@ export function getEditablePost(id: string): EditablePost | null {
     const source = getPost(safeId);
     return source ? [{ type: "tiptap-content", version: 1, content: markdownEditorDocument(source) }] : [];
   };
-  if (!fs.existsSync(editorFile)) return { id: safeId, title: meta.title, description: meta.description ?? "", categoryId: meta.categoryId, seriesId: meta.seriesId ?? "", isPrivate: meta.isPrivate, blocks: fallback() };
+  if (!fs.existsSync(editorFile)) return { id: safeId, title: meta.title, description: meta.description ?? "", categoryId: meta.categoryId, seriesId: meta.seriesId ?? "", isPrivate: meta.isPrivate, coverImage: meta.thumbnail ?? "", showInList: meta.showInList, blocks: fallback() };
   try {
     const blocks: unknown = JSON.parse(fs.readFileSync(editorFile, "utf8"));
-    return { id: safeId, title: meta.title, description: meta.description ?? "", categoryId: meta.categoryId, seriesId: meta.seriesId ?? "", isPrivate: meta.isPrivate, blocks: Array.isArray(blocks) ? blocks : fallback() };
+    return { id: safeId, title: meta.title, description: meta.description ?? "", categoryId: meta.categoryId, seriesId: meta.seriesId ?? "", isPrivate: meta.isPrivate, coverImage: meta.thumbnail ?? "", showInList: meta.showInList, blocks: Array.isArray(blocks) ? blocks : fallback() };
   } catch {
-    return { id: safeId, title: meta.title, description: meta.description ?? "", categoryId: meta.categoryId, seriesId: meta.seriesId ?? "", isPrivate: meta.isPrivate, blocks: fallback() };
+    return { id: safeId, title: meta.title, description: meta.description ?? "", categoryId: meta.categoryId, seriesId: meta.seriesId ?? "", isPrivate: meta.isPrivate, coverImage: meta.thumbnail ?? "", showInList: meta.showInList, blocks: fallback() };
   }
 }
 
@@ -158,7 +162,7 @@ export function getDrafts(): DraftMeta[] {
       try {
         const draft = JSON.parse(fs.readFileSync(path.join(draftsDirectory, file), "utf8")) as Partial<DraftMeta>;
         if (!Array.isArray(draft.blocks) || typeof draft.title !== "string" || typeof draft.description !== "string") return [];
-        return [{ id, title: draft.title, description: draft.description, categoryId: typeof draft.categoryId === "string" ? draft.categoryId : "essay", seriesId: typeof draft.seriesId === "string" ? draft.seriesId : "", isPrivate: draft.isPrivate === true, blocks: draft.blocks, updatedAt: typeof draft.updatedAt === "string" ? draft.updatedAt : "" }];
+        return [{ id, title: draft.title, description: draft.description, categoryId: typeof draft.categoryId === "string" ? draft.categoryId : "essay", seriesId: typeof draft.seriesId === "string" ? draft.seriesId : "", isPrivate: draft.isPrivate === true, coverImage: typeof draft.coverImage === "string" ? draft.coverImage : "", showInList: draft.showInList !== false, blocks: draft.blocks, updatedAt: typeof draft.updatedAt === "string" ? draft.updatedAt : "" }];
       } catch {
         return [];
       }

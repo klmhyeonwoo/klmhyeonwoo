@@ -50,6 +50,7 @@ type Props = { posts: PostMeta[]; categories: Category[]; profile: Profile; chil
 export function HomeFeed({ posts, categories, profile, children }: Props) {
   const router = useRouter();
   const [filters, setFilters] = useState<Filters>({ page: 1, query: "" });
+  const listedPosts = useMemo(() => posts.filter((post) => post.showInList), [posts]);
 
   useEffect(() => {
     const sync = () => setFilters(fromLocation());
@@ -58,8 +59,8 @@ export function HomeFeed({ posts, categories, profile, children }: Props) {
     return () => window.removeEventListener("popstate", sync);
   }, []);
 
-  const filteredPosts = useMemo(() => posts.filter((post) => (!filters.category || post.categoryId === filters.category) && matches(post, filters.query)), [filters.category, filters.query, posts]);
-  const categoryCounts = useMemo(() => posts.reduce((counts, post) => counts.set(post.categoryId, (counts.get(post.categoryId) ?? 0) + 1), new Map<string, number>()), [posts]);
+  const filteredPosts = useMemo(() => listedPosts.filter((post) => (!filters.category || post.categoryId === filters.category) && matches(post, filters.query)), [filters.category, filters.query, listedPosts]);
+  const categoryCounts = useMemo(() => listedPosts.reduce((counts, post) => counts.set(post.categoryId, (counts.get(post.categoryId) ?? 0) + 1), new Map<string, number>()), [listedPosts]);
   const totalPages = Math.max(1, Math.ceil(filteredPosts.length / postsPerPage));
   const currentPage = Math.min(filters.page, totalPages);
   const pagedPosts = filteredPosts.slice((currentPage - 1) * postsPerPage, currentPage * postsPerPage);
@@ -89,7 +90,7 @@ export function HomeFeed({ posts, categories, profile, children }: Props) {
   return <>
     <div className="kb-list-controls">
       <nav className="kb-category-nav" id="topics" aria-label="글 카테고리">
-        <Link className={!filters.category ? "active" : ""} href={hrefFor({ page: 1, query: filters.query })} onClick={(event) => intercept(event, { page: 1, query: filters.query })}>전체 <span>{posts.length}</span></Link>
+        <Link className={!filters.category ? "active" : ""} href={hrefFor({ page: 1, query: filters.query })} onClick={(event) => intercept(event, { page: 1, query: filters.query })}>전체 <span>{listedPosts.length}</span></Link>
         {categories.map((category) => <Link key={category.id} className={filters.category === category.id ? "active" : ""} href={hrefFor({ category: category.id, page: 1, query: filters.query })} onClick={(event) => intercept(event, { category: category.id, page: 1, query: filters.query })}>{category.name} <span>{categoryCounts.get(category.id) ?? 0}</span></Link>)}
       </nav>
       <PostSearch categoryId={filters.category} initialQuery={filters.query} posts={posts} onSearch={(query) => navigate({ category: filters.category, page: 1, query: query.trim() })} onNavigate={navigateHref} />

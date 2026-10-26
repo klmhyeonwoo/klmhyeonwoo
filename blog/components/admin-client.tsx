@@ -24,6 +24,8 @@ type InitialPost = {
   categoryId: string;
   seriesId: string;
   isPrivate: boolean;
+  coverImage: string;
+  showInList: boolean;
   blocks: unknown[];
 };
 
@@ -37,6 +39,8 @@ type Draft = {
   categoryId: string;
   seriesId: string;
   isPrivate: boolean;
+  coverImage: string;
+  showInList: boolean;
   markdown: string;
   blocks: unknown[];
 };
@@ -88,6 +92,8 @@ export function AdminClient({ authenticated: initiallyAuthenticated, initialPost
   const [categories, setCategories] = useState(initialCategories);
   const [series, setSeries] = useState(initialSeries);
   const [isPrivate, setIsPrivate] = useState(initialEntry?.isPrivate ?? false);
+  const [coverImage, setCoverImage] = useState(initialEntry?.coverImage ?? "");
+  const [showInList, setShowInList] = useState(initialEntry?.showInList ?? true);
   const isDraftRef = useRef(Boolean(initialDraft));
   const [markdown, setMarkdown] = useState("");
   const [blocks, setBlocks] = useState<unknown[]>([]);
@@ -143,6 +149,8 @@ export function AdminClient({ authenticated: initiallyAuthenticated, initialPost
       if (typeof draft.categoryId === "string") setCategoryId(draft.categoryId);
       if (typeof draft.seriesId === "string") setSeriesId(draft.seriesId);
       if (typeof draft.isPrivate === "boolean") setIsPrivate(draft.isPrivate);
+      if (typeof draft.coverImage === "string") setCoverImage(draft.coverImage);
+      if (typeof draft.showInList === "boolean") setShowInList(draft.showInList);
       if (typeof draft.markdown === "string") setMarkdown(draft.markdown);
       if (Array.isArray(draft.blocks)) {
         setBlocks(draft.blocks);
@@ -179,12 +187,12 @@ export function AdminClient({ authenticated: initiallyAuthenticated, initialPost
     if (!draftReady) return;
 
     const timer = window.setTimeout(() => {
-      window.localStorage.setItem(draftKey, JSON.stringify({ title, description, categoryId, seriesId, isPrivate, markdown, blocks }));
+      window.localStorage.setItem(draftKey, JSON.stringify({ title, description, categoryId, seriesId, isPrivate, coverImage, showInList, markdown, blocks }));
       setDraftStatus("임시 저장됨");
     }, 700);
 
     return () => window.clearTimeout(timer);
-  }, [blocks, categoryId, description, draftKey, draftReady, isPrivate, markdown, seriesId, title]);
+  }, [blocks, categoryId, coverImage, description, draftKey, draftReady, isPrivate, markdown, seriesId, showInList, title]);
 
   const updateContent = useCallback((nextBlocks: unknown[], nextMarkdown: string) => {
     setBlocks(nextBlocks);
@@ -211,7 +219,7 @@ export function AdminClient({ authenticated: initiallyAuthenticated, initialPost
       const response = await fetch("/api/publish", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ title, id: postId, description, categoryId, seriesId, markdown, blocks, isPrivate, fromDraft: isDraftRef.current }),
+        body: JSON.stringify({ title, id: postId, description, categoryId, seriesId, markdown, blocks, isPrivate, coverImage, showInList, fromDraft: isDraftRef.current }),
       });
 
       if (response.ok) {
@@ -245,7 +253,7 @@ export function AdminClient({ authenticated: initiallyAuthenticated, initialPost
       const response = await fetch("/api/draft", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ title, id: postId, description, categoryId, seriesId, markdown, blocks, isPrivate }),
+        body: JSON.stringify({ title, id: postId, description, categoryId, seriesId, markdown, blocks, isPrivate, coverImage, showInList }),
       });
 
       if (response.ok) {
@@ -375,9 +383,11 @@ export function AdminClient({ authenticated: initiallyAuthenticated, initialPost
       <TitleField value={title} onValueChange={setTitle} />
       <div className="metadata">
         <Input value={description} onValueChange={setDescription} placeholder="짧은 소개 (선택)" aria-label="짧은 소개" />
+        <Input value={coverImage} onValueChange={setCoverImage} placeholder="대표 이미지 URL (선택)" aria-label="대표 이미지 URL" />
         <div className="metadata-selects"><NotionSelect label="카테고리" value={categoryId} options={categories} placeholder="카테고리 선택" onValueChange={setCategoryId} onCreate={createCategory} onDelete={deleteCategory} /><NotionSelect label="아티클 시리즈" value={seriesId} options={series} placeholder="시리즈 없음" allowEmpty onValueChange={setSeriesId} onCreate={createSeries} onDelete={deleteSeries} /></div>
         <div className="private-post-controls">
           <label className="private-toggle"><input type="checkbox" checked={isPrivate} onChange={(event) => setIsPrivate(event.target.checked)} />비공개 글 <span>관리자만 볼 수 있습니다</span></label>
+          <label className="private-toggle"><input type="checkbox" checked={showInList} onChange={(event) => setShowInList(event.target.checked)} />전체 목록에 노출</label>
         </div>
       </div>
       {draftReady ? <Editor initialBlocks={initialBlocks} mentions={editorMentions} onChange={updateContent} /> : <section className="editor-loading">임시 저장본을 불러오는 중…</section>}

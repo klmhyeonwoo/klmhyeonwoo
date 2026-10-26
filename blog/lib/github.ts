@@ -2,6 +2,7 @@ import { randomUUID } from "crypto";
 import { attachmentExtension } from "./editor-media";
 import type { SiteSettings } from "./site-settings";
 import { postSourceVersion } from "./posts";
+import matter from "gray-matter";
 
 type Post = {
   title: string;
@@ -14,6 +15,8 @@ type Post = {
   markdown: string;
   blocks: unknown[];
   isPrivate: boolean;
+  coverImage: string;
+  showInList: boolean;
 };
 
 type Draft = Omit<Post, "publishedAt"> & { updatedAt: string };
@@ -100,10 +103,29 @@ export async function savePost(post: Post) {
   const date = post.publishedAt.slice(0, 10);
   const protection = post.isPrivate ? "private: true\n" : "private: false\n";
   const series = post.seriesId ? `series: ${yaml(post.seriesId)}\n` : "";
-  const mdx = `---\ntitle: ${yaml(post.title)}\ndate: ${date}\npublishedAt: ${yaml(post.publishedAt)}\nupdatedAt: ${yaml(post.updatedAt)}\ndescription: ${yaml(post.description)}\ncategory: ${yaml(post.categoryId)}\n${series}${protection}---\n\n${post.markdown}\n`;
+  const coverImage = post.coverImage.trim() ? `coverImage: ${yaml(post.coverImage.trim())}\n` : "";
+  const listVisibility = post.showInList ? "" : "showInList: false\n";
+  const mdx = `---\ntitle: ${yaml(post.title)}\ndate: ${date}\npublishedAt: ${yaml(post.publishedAt)}\nupdatedAt: ${yaml(post.updatedAt)}\ndescription: ${yaml(post.description)}\ncategory: ${yaml(post.categoryId)}\n${series}${coverImage}${listVisibility}${protection}---\n\n${post.markdown}\n`;
   await writeFile(`blog/editor-data/${post.id}.json`, JSON.stringify(post.blocks, null, 2), `Save editor data: ${post.title}`);
   await writeFile(`blog/content/posts/${post.id}.mdx`, mdx, `Publish: ${post.title}`);
   return postSourceVersion(mdx);
+}
+
+export async function updatePostPresentation(post: { id: string; title: string; description: string; coverImage: string; showInList: boolean }) {
+  const { getPost } = await import("./posts");
+  const source = getPost(post.id);
+  if (!source) throw new Error("Post not found");
+  const parsed = matter(source);
+  const data = { ...parsed.data, title: post.title, description: post.description, updatedAt: new Date().toISOString() } as Record<string, unknown>;
+  if (post.coverImage) data.coverImage = post.coverImage;
+  else delete data.coverImage;
+  if (post.showInList) delete data.showInList;
+  else data.showInList = false;
+  const next = matter.stringify(parsed.content, {
+    ...data,
+  });
+  await writeFile(`blog/content/posts/${post.id}.mdx`, next, `Update series article: ${post.title}`);
+  return postSourceVersion(next);
 }
 
 export async function saveDraft(draft: Draft) {

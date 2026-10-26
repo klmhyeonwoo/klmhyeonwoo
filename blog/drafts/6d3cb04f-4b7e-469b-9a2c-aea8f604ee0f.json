@@ -1,0 +1,30 @@
+{
+  "id": "6d3cb04f-4b7e-469b-9a2c-aea8f604ee0f",
+  "title": "",
+  "description": "",
+  "categoryId": "category-4fb7400e",
+  "seriesId": "series-9a197820",
+  "markdown": "",
+  "blocks": [
+    {
+      "type": "slash-content",
+      "version": 1,
+      "content": {
+        "type": "doc",
+        "content": [
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "R_GPAlqbkyjP",
+              "textAlign": "left"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "isPrivate": false,
+  "showInList": false,
+  "coverImage": "",
+  "updatedAt": "2026-10-26T14:26:38.754Z"
+}

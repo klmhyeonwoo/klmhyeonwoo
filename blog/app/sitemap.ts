@@ -10,18 +10,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl("/series"), changeFrequency: "weekly", priority: 0.7 },
   ];
 
-  const posts = getPosts().map((post) => ({
+  const allPosts = getPosts();
+  const posts = allPosts.map((post) => ({
     url: absoluteUrl(`/posts/${post.id}`),
     lastModified: post.updatedAt || post.publishedAt || post.date,
     changeFrequency: "monthly" as const,
     priority: 0.8,
   }));
 
-  const series = getSeries().map((item) => ({
-    url: absoluteUrl(`/series/${item.id}`),
-    changeFrequency: "weekly" as const,
-    priority: 0.7,
-  }));
+  const series = getSeries().map((item) => {
+    const lastModified = allPosts
+      .filter((post) => post.seriesId === item.id)
+      .map((post) => post.updatedAt || post.publishedAt || post.date)
+      .sort((left, right) => right.localeCompare(left))[0];
+    return {
+      url: absoluteUrl(`/series/${item.id}`),
+      ...(lastModified ? { lastModified } : {}),
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    };
+  });
 
   return [...staticPages, ...series, ...posts];
 }

@@ -7,6 +7,7 @@ import { ToastProvider } from "@/components/toast-provider";
 import { AdminSessionProvider } from "@/components/admin-session";
 import { CursorEffect } from "@/components/cursor-effect";
 import { SystemThemeSync } from "@/components/theme-toggle";
+import { absoluteUrl, getSiteUrl } from "@/lib/site-url";
 
 const systemThemeScript = `
   (() => {
@@ -20,25 +21,15 @@ const systemThemeScript = `
   })();
 `;
 
-function getSiteUrl() {
-  const value = process.env.NEXT_PUBLIC_SITE_URL
-    ?? (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
-  try {
-    return new URL(value);
-  } catch {
-    return new URL("http://localhost:3000");
-  }
-}
-
 export const metadata: Metadata = {
   title: { default: "wavy studio", template: "%s | wavy studio" },
   description: "기록을 쌓아가는 개인 블로그, wavy studio",
   metadataBase: getSiteUrl(),
-  alternates: { canonical: "/" },
+  alternates: { canonical: "/", types: { "application/rss+xml": absoluteUrl("/rss.xml") } },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
   verification: {
     other: {
-      "naver-site-verification": "7186ca39127c40df126d2de419d19f1aad8029d9",
+      "naver-site-verification": "1203d34a59acbfa0df7e70a917d4691008bb1feb",
     },
   },
   openGraph: {

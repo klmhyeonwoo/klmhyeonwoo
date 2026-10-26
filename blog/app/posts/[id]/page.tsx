@@ -169,7 +169,6 @@ export default async function PostPage({ params }: { params: Params }) {
       {articleSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema).replace(/</g, "\\u003c") }} />}
       <header className="article-header"><h1>{frontmatter.title}</h1>
         <div className="article-meta-row"><div className="author-byline">{profile.image ? <img src={profile.image} alt="" /> : <span>{profile.name.slice(0, 1)}</span>}<p><strong>{profile.name}</strong><small>{formatPostDate(frontmatter.date)}{postWasUpdated(frontmatter.publishedAt ?? frontmatter.date, frontmatter.updatedAt) && <> · {formatPostUpdatedLabel(frontmatter.updatedAt)}</>}</small></p></div><PostLinkCopy /></div>
-        {frontmatter.description && <p className="lede">{frontmatter.description}</p>}
       </header>
       <div className="article-content-layout">{tableOfContents.length > 0 && <ArticleTableOfContents items={tableOfContents} />}<PostContent postId={data.private === true ? undefined : id}>{content}</PostContent></div>
       <ArticleReadingProgress title={frontmatter.title} />

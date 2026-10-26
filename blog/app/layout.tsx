@@ -31,9 +31,11 @@ function getSiteUrl() {
 }
 
 export const metadata: Metadata = {
-  title: "wavy studio",
+  title: { default: "wavy studio", template: "%s | wavy studio" },
   description: "기록을 쌓아가는 개인 블로그, wavy studio",
   metadataBase: getSiteUrl(),
+  alternates: { canonical: "/" },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
   verification: {
     other: {
       "naver-site-verification": "7186ca39127c40df126d2de419d19f1aad8029d9",
@@ -53,6 +55,7 @@ export const metadata: Metadata = {
     description: "기록을 쌓아가는 개인 블로그, wavy studio",
     images: ["/opengraph-image"],
   },
+  category: "technology",
 };
 
 export const viewport: Viewport = {

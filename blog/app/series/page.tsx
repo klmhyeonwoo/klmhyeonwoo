@@ -3,6 +3,14 @@ import { SeriesCreateGate, SeriesEmptyMessage } from "@/components/series-admin-
 import { SiteHeader } from "@/components/site-header";
 import { getPosts } from "@/lib/posts";
 import { getSeries } from "@/lib/series";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "아티클 시리즈",
+  description: "주제별로 이어지는 wavy studio의 아티클 컬렉션입니다.",
+  alternates: { canonical: "/series" },
+  openGraph: { title: "아티클 시리즈", description: "주제별로 이어지는 wavy studio의 아티클 컬렉션입니다.", url: "/series", images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "wavy studio 아티클 시리즈" }] },
+};
 
 export const revalidate = 3600;
 

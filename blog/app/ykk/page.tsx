@@ -3,6 +3,9 @@ import { SiteHeader } from "@/components/site-header";
 import { isAdmin } from "@/lib/auth";
 import { getCategories, getEditableDraft, getEditablePost, getDrafts, getPosts } from "@/lib/posts";
 import { getSeries } from "@/lib/series";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = { robots: { index: false, follow: false } };
 
 export const dynamic = "force-dynamic";
 

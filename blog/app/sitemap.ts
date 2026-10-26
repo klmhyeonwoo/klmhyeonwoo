@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getPosts } from "@/lib/posts";
+import { getSeries } from "@/lib/series";
 import { absoluteUrl } from "@/lib/site-url";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -16,5 +17,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...posts];
+  const series = getSeries().map((item) => ({
+    url: absoluteUrl(`/series/${item.id}`),
+    changeFrequency: "weekly" as const,
+    priority: 0.7,
+  }));
+
+  return [...staticPages, ...series, ...posts];
 }

@@ -1,11 +1,21 @@
 import { unstable_cache } from "next/cache";
 import { Suspense } from "react";
+import type { Metadata } from "next";
 import { SiteHeader } from "@/components/site-header";
 import { getCachedPosts, postsCacheTag } from "@/lib/post-cache";
 import { getCategories } from "@/lib/posts";
 import { getProfile } from "@/lib/profile";
 import { RecentComments, RecentCommentsFallback } from "@/components/recent-comments";
 import { HomeFeed } from "@/components/home-feed";
+import { absoluteUrl } from "@/lib/site-url";
+
+export const metadata: Metadata = {
+  title: "wavy studio",
+  description: "개발과 일상, 배움을 기록하는 현우의 개인 블로그입니다.",
+  alternates: { canonical: "/" },
+  openGraph: { title: "wavy studio", description: "개발과 일상, 배움을 기록하는 현우의 개인 블로그입니다.", url: "/", type: "website", images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "wavy studio" }] },
+  twitter: { card: "summary_large_image", title: "wavy studio", description: "개발과 일상, 배움을 기록하는 현우의 개인 블로그입니다.", images: ["/opengraph-image"] },
+};
 
 // Content changes explicitly invalidate this route in the publishing APIs.
 // A longer fallback window keeps ordinary reads on the CDN instead of
@@ -20,11 +30,20 @@ const getHomeContent = unstable_cache(
 
 export default async function HomePage() {
   const { posts, categories, profile } = await getHomeContent();
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "wavy studio",
+    url: absoluteUrl("/"),
+    description: "개발과 일상, 배움을 기록하는 현우의 개인 블로그입니다.",
+    author: { "@type": "Person", name: profile.name, url: absoluteUrl("/profile") },
+  };
 
   return (
     <>
       <SiteHeader />
       <main className="kb-list-page" id="top">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema).replace(/</g, "\\u003c") }} />
         <HomeFeed posts={posts} categories={categories} profile={profile}>
           <Suspense fallback={<RecentCommentsFallback />}>
             <RecentComments posts={posts} />

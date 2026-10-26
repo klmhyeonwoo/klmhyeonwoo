@@ -2377,11 +2377,88 @@ html[data-theme="dark"] .post-admin-actions button {
 .series-manager-actions { align-items: center; display: flex; gap: 0.5rem; justify-content: flex-end; }
 .series-manager-actions a { color: var(--muted); font-size: 0.75rem; font-weight: 600; margin-right: auto; text-decoration: underline; text-underline-offset: 0.16em; }
 
+/* Series are editorial lists, not product tiles: let the cover and copy carry
+   the hierarchy with generous whitespace and a quiet divider. */
+.series-grid {
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 0;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.series-card {
+  background: transparent;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  column-gap: 1.5rem;
+  display: grid;
+  grid-template-columns: 10rem minmax(0, 1fr) auto;
+  grid-template-rows: auto auto 1fr;
+  min-height: 0;
+  padding: 1.5rem 0;
+  text-decoration: none;
+  transition: background .18s ease, padding-inline .18s ease;
+}
+
+.series-card:hover,
+.series-card:focus-visible {
+  background: color-mix(in srgb, var(--interactive-subtle) 72%, transparent);
+  transform: none;
+}
+
+.series-card .series-book {
+  grid-row: 1 / 4;
+  height: 7rem;
+  margin: 0;
+  perspective: none;
+  width: 10rem;
+}
+
+.series-card .series-book-cover {
+  border-radius: 0.75rem;
+  box-shadow: none;
+  position: relative;
+  transform: none;
+}
+
+.series-card .series-book-pages,
+.series-card .series-book-spine { display: none; }
+
+.series-card:hover .series-book-cover,
+.series-card:focus-visible .series-book-cover,
+.series-card.is-opening .series-book-cover { box-shadow: none; transform: none; }
+
+.series-card h2 { align-self: end; font-size: 1.1875rem; grid-column: 2; line-height: 1.3; margin: 0; }
+.series-card > p { font-size: 0.875rem; grid-column: 2; line-height: 1.55; margin: 0.35rem 0 0; }
+.series-card small { align-self: start; background: transparent; border-radius: 0; font-size: 0.75rem; grid-column: 3; grid-row: 1; margin: 0; padding: 0.2rem 0 0; white-space: nowrap; }
+
+.series-metadata-editor { margin-top: 1rem; }
+.series-edit-trigger { background: transparent; border: 1px solid var(--line); border-radius: 0.625rem; color: var(--ink); font-size: 0.75rem; font-weight: 600; min-height: 2.25rem; padding: 0 0.75rem; }
+.series-edit-panel { align-items: start; background: color-mix(in srgb, var(--surface-raised) 84%, transparent); border: 1px solid var(--line); border-radius: 1rem; display: grid; gap: 1rem; grid-template-columns: 8rem minmax(0, 1fr); margin-top: 0.75rem; padding: 0.875rem; }
+.series-edit-cover { background: var(--interactive-subtle); border-radius: 0.75rem; height: 6rem; overflow: hidden; position: relative; }
+.series-edit-cover img { height: 100%; object-fit: cover; width: 100%; }
+.series-edit-cover > span { align-items: center; color: var(--muted); display: flex; font-size: 1.5rem; height: 100%; justify-content: center; }
+.series-edit-cover label { align-items: center; background: color-mix(in srgb, var(--ink) 70%, transparent); bottom: 0; color: white; cursor: pointer; display: flex; font-size: 0.625rem; inset-inline: 0; justify-content: center; min-height: 1.65rem; position: absolute; }
+.series-edit-cover input { height: 1px; opacity: 0; position: absolute; width: 1px; }
+.series-edit-fields { display: grid; gap: 0.55rem; }
+.series-edit-fields > label { color: var(--muted); display: grid; font-size: 0.6875rem; font-weight: 600; gap: 0.3rem; }
+.series-edit-fields :is(input, textarea) { background: var(--surface); border: 1px solid var(--line); border-radius: 0.5rem; color: var(--ink); font: inherit; font-size: 0.8125rem; padding: 0.5rem 0.625rem; width: 100%; }
+.series-edit-fields textarea { line-height: 1.45; resize: vertical; }
+.series-edit-fields button { background: var(--ink); border: 0; border-radius: 0.625rem; color: var(--surface); font-size: 0.75rem; font-weight: 600; min-height: 2.25rem; padding: 0 0.75rem; }
+
 @media (max-width: 42rem) {
   .series-post-list > li > a { align-items: start; grid-template-columns: minmax(0, 1fr) 4.5rem; }
   .series-post-thumbnail { border-radius: 0.625rem; height: 3.5rem; width: 4.5rem; }
   .series-manager-row { grid-template-columns: 1.25rem 4.5rem minmax(0, 1fr); padding: 0.625rem; }
   .series-manager-image { height: 4rem; }
+  .series-card { column-gap: 0.875rem; grid-template-columns: 5.5rem minmax(0, 1fr); padding: 1rem 0; }
+  .series-card .series-book { height: 4.5rem; width: 5.5rem; }
+  .series-card h2, .series-card > p { grid-column: 2; }
+  .series-card h2 { align-self: end; font-size: 1rem; }
+  .series-card > p { font-size: 0.75rem; margin-top: 0.2rem; }
+  .series-card small { font-size: 0.625rem; grid-column: 2; grid-row: 3; padding-top: 0.4rem; }
+  .series-edit-panel { grid-template-columns: 1fr; }
+  .series-edit-cover { height: 9rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   .series-card,

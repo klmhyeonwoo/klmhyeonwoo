@@ -77,7 +77,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     };
   }
 
-  const title = `${postTitle} | wavy studio`;
+  const title = postTitle;
   const description = postDescription(source, data) || `${postTitle}에 관한 글입니다.`;
   const canonical = `/posts/${id}`;
   const publishedTime = postPublishedAtValue(data.publishedAt ?? data.date);

@@ -1,12 +1,12 @@
 {
   "banner": {
     "enabled": false,
-    "title": "같이 매일 5분 동안 회고하실 분을 모집하고 있어요-!",
+    "title": "노드 열심히 공부하고 있어요",
     "action": {
-      "label": "한 자리 남은 회고하기",
-      "href": "https://open.kakao.com/o/s8SjtnRi"
+      "label": "",
+      "href": ""
     },
-    "backgroundColor": "#000222",
+    "backgroundColor": "#222222",
     "textColor": "#ffffff"
   },
   "popup": {

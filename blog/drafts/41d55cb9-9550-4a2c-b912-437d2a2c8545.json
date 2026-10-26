@@ -1,10 +1,10 @@
 {
   "id": "41d55cb9-9550-4a2c-b912-437d2a2c8545",
-  "title": "Vue",
+  "title": "Vue에서 React 마이그레이션을 위한 끄적이기",
   "description": "",
-  "categoryId": "category-1f4a4fd0",
-  "seriesId": "",
-  "markdown": "",
+  "categoryId": "category-4fb7400e",
+  "seriesId": "-",
+  "markdown": "사내에서 백오피스 프로젝트를 React 프로젝트로 마이그레이션을 진행해보려고 한다.",
   "blocks": [
     {
       "type": "slash-content",
@@ -15,7 +15,20 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "0XlG96DX-_wA",
+              "id": "j1-UVYFwtLpZ",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "사내에서 백오피스 프로젝트를 React 프로젝트로 마이그레이션을 진행해보려고 한다."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "3OCQ4T1fafmZ",
               "textAlign": "left"
             }
           }
@@ -26,5 +39,5 @@
   "isPrivate": false,
   "showInList": true,
   "coverImage": "",
-  "updatedAt": "2026-10-26T11:54:39.431Z"
+  "updatedAt": "2026-10-26T11:56:40.693Z"
 }

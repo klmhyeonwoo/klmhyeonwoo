@@ -2384,20 +2384,20 @@ html[data-theme="dark"] .post-admin-actions button {
   display: grid;
   gap: 0;
   grid-template-columns: minmax(0, 1fr);
-  /* Keep editorial rows comfortably inset from the page edge, including their dividers. */
-  padding-inline: clamp(1rem, 2.5vw, 2.25rem);
 }
 
 .series-card {
   background: transparent;
   border-bottom: 1px solid var(--line);
-  border-radius: 0;
+  border-radius: 0.875rem;
   column-gap: 1.5rem;
   display: grid;
   grid-template-columns: 10rem minmax(0, 1fr) auto;
   grid-template-rows: auto auto 1fr;
+  /* The row owns its inset so its hover surface and content always move together. */
+  margin-inline: clamp(1rem, 2.5vw, 2rem);
   min-height: 0;
-  padding: 1.5rem 0;
+  padding: 1.5rem clamp(1rem, 2vw, 1.5rem);
   text-decoration: none;
   transition: background .18s ease, padding-inline .18s ease;
 }
@@ -2453,7 +2453,7 @@ html[data-theme="dark"] .post-admin-actions button {
   .series-post-thumbnail { border-radius: 0.625rem; height: 3.5rem; width: 4.5rem; }
   .series-manager-row { grid-template-columns: 1.25rem 4.5rem minmax(0, 1fr); padding: 0.625rem; }
   .series-manager-image { height: 4rem; }
-  .series-card { column-gap: 0.875rem; grid-template-columns: 5.5rem minmax(0, 1fr); padding: 1rem 0; }
+  .series-card { column-gap: 0.875rem; grid-template-columns: 5.5rem minmax(0, 1fr); margin-inline: 0.5rem; padding: 1rem 0.75rem; }
   .series-card .series-book { height: 4.5rem; width: 5.5rem; }
   .series-card h2, .series-card > p { grid-column: 2; }
   .series-card h2 { align-self: end; font-size: 1rem; }

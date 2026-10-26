@@ -2384,6 +2384,8 @@ html[data-theme="dark"] .post-admin-actions button {
   display: grid;
   gap: 0;
   grid-template-columns: minmax(0, 1fr);
+  /* Keep editorial rows comfortably inset from the page edge, including their dividers. */
+  padding-inline: clamp(1rem, 2.5vw, 2.25rem);
 }
 
 .series-card {

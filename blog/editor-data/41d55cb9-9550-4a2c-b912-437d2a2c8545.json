@@ -1,0 +1,516 @@
+[
+  {
+    "type": "slash-content",
+    "version": 1,
+    "content": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "callout",
+          "attrs": {
+            "id": "K2RGGZ_lL_6N",
+            "fluentUrl": "",
+            "background": "default",
+            "icon": "💡"
+          },
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "id": "FyEFOjBrVZ8J",
+                "textAlign": "left"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "마이그레이션하면서 생각들을 계속 "
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "끄적끄적"
+                },
+                {
+                  "type": "text",
+                  "text": "이고 있는 글"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "q0EI3qVHZ6-u",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "사내에서 백오피스 프로젝트를 React 프로젝트로 마이그레이션을 진행해보려고 한다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "-vA43tmqW2Sk",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "여기서 처음 부딪혔던 "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "문제점"
+            },
+            {
+              "type": "text",
+              "text": "들이 몇가지 있었다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "V4-VGSNyHTqa",
+            "textAlign": "left",
+            "level": 3
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "자바스크립트를 사용하니까 상관 없다고는 하지만, 시장은 React 점유율이 점차 커진다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "Qnc7i6iyYGRV",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Vue를 사용하면서 요새 느끼는 점들은 나의 경우에는 React를 같이 사용하고 있지만, 팀 내에 메인 서비스에서는 여전히 Vue를 사용하고 있고 모든 국해외 시장을 둘러보면 React의 점유율이 더 많아져 Vue가 나설 시장이 점차 줄어들고 있다는 생각이 들었다. 또, 컨퍼런스를 다니면 Vue 코드보다는 React 코드 샘플이 정말 많다. (나 같은 경우 사내에서도 일부 프로젝트는 React로 진행을 하기 때문에 상관은 없지만, 다른 분들의 경우 Vue를 메인 진영으로 많이 다루고 있다) 그래서 팀 내에 트렌드한 지식이 필요했다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "bqppXd4jUbmb",
+            "textAlign": "left",
+            "level": 3
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "병목이 엄청 클 것이라고 판단이 들었다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "tqmaHtvr2Gyd",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "바꿔야지, 바꿔야지 생각을 하고 있지만 워낙 프로젝트 단위가 크다보니까 운영 이슈들을 같이 해결하면서 마이그레이션을 할 엄두가 도저히 나질 않는다. 그리고 신규 기능이 계속해서 추가가 된다면 마이그레이션 되고 있는 프로덕트에도 같이 동기화를 시켜줘야하는데 이 동기화되는 속도와 업데이트되는 속도가 일정하지 않으면 어느 한 쪽으로 치우쳐져 어느샌가 마이그레이션 작업은 중단이 되어버린다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "QIiJMnpkj8s4",
+            "textAlign": "left",
+            "level": 3
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "매니저 입장에서는 왜 마이그레이션 되어야하는지 모른다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "PxGAG_Um5YGe",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "이게 가장 큰 문제였는데 팀장님과 이야기하면서 두 입장에서 공감이 많이 되었다. 회사라는 조직은 돈을 버는 조직이다. 더군다나 테크 서비스를 하는 조직이 아닌 이상, 왠만한 기술 부채가 아닌 경우 잘 동작하는 서비스의 내부 기술스택을 바꾸는 것은 위험 요소 중 하나가 될 수 있다. (마이그레이션을 하다가 사이드 이펙트가 발생할 수 있기 때문이다)"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "m0eEFcFnd58i",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "다른 한편으로 프론트엔드 조직 내에서는 최신 트렌드에 발맞출 수 있기 때문에 기술적으로 큰 성장을 할 수 있다고 생각했다. 여러 컨퍼런스에서 기술 지식에 대한 정보들을 많이 듣고 내부적으로 공유가 되고 있지만, 그게 마냥 Vue의 영역만은 아니기 때문에 Vue로 매번 포팅하는 작업을 필요로한다. 이걸 어떻게 설득할 수 있을까.. 생각을 하다가 다음 내용들로 설득을 했다."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "attrs": {
+            "id": "WfNERZwRcLNF"
+          },
+          "content": [
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "xAhq5BBrIC1q"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "pQdeCGRQo_wE",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "채용 측면에서 최신 기술 스택, 국내에서 많이 사용하는 스택을 사용하면 유리하다."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "XxjbTYK63UvX"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "DuulVw-ljF8Z",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "조직 내 프론트엔드 개발자들의 배고픔을 채워줄 수 있으며, 최신 트렌드를 배워갈 수 있다."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "ZztFzyqNmvvy"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "UTtHWGJtKKCL",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "새로운 것에 도전하고, 매번 반복적인 작업보다는 개발자들이 즐거움을 느끼고 개발할 수 있다."
+                    },
+                    {
+                      "type": "hardBreak"
+                    },
+                    {
+                      "type": "text",
+                      "text": "그리고, 모든 구성원들이 React를 사용하고 싶어하는 니즈가 정말 많다."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "LUAXJGS56ByC",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "1번과 2번의 이유는 사실 당연한 이야기지만, 팀장님은 항상 \"재밌게\" 일을 하는 것을 정말 중요시 여기시는 분이었다. 마지막 3번째의 이유 덕에 마이그레이션 작업 진행에 착수할 수 있게 되었다. 다만, 메인 플랫폼 서비스로의 마이그레이션은 여러 팀들과의 비즈니스 영역이 접점을 이루는 부분이기 때문에 민감할 수 있는 사항이라 백오피스 서비스를 먼저 진행하고, 이 과정에서 나온 인사이트들을 기반으로 나중에 메인 서비스에 그대로 적용을 해보는 말그대로 파일럿 형식으로 프로젝트를 진행했다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "waLqTeeYq1iC",
+            "textAlign": "left",
+            "level": 3
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "어떻게 진행해볼까"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "Ybg7M-magj5I",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "조금 빠르게 진행을 하고 싶었고, 이 큰 프로젝트들을 몇달동안 끌고가기에는 너무 시간이 아까웠다. 효율을 중심으로 프로젝트를 진행하고 싶었기 때문에 도큐먼트 아키텍쳐 느낌으로 문서들을 정의했다. 문서들에는 다음 내용들로 구성이 된다."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "attrs": {
+            "id": "FytJz3cfTKLK"
+          },
+          "content": [
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "7QXlWeg3x8ts"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "b66OTsZSpfXU",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "백오피스의 마이그레이션 목록 (기능 복잡도, 우선순위), 사실상 우선순위 매트릭스"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "ivOd-JqTr17N"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "mDT8TsdgHEnq",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "마이그레이션 및 진행 시에 확인하기 위한 기존 백오피스 프로젝트 구성도 및 아키텍쳐"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "P2NmrhBLW_0c",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "또, 에이전트가 해당 마이그레이션 작업의 주체로 진행을 하기 위해 위 문서들은 에이전트의 컨텍스트가 될 것이었다. 다만 여기서 발생한 문제점들은 협업 시에 누가 어떤 작업을 하는지에 대한 컨텍스트를 잃어버린다는 문제점이 발견되었다. 그래서 협업을 위한 문서들을 추가로 작성했다."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "attrs": {
+            "id": "KEzBhjmtoBr7"
+          },
+          "content": [
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "LzdP_JnsDYDy"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "vDIMk2tDs5ZW",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "우선순위 매트릭스를 기반으로 설계된 기능 별 마이그레이션 순서"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "SFx3uZkCLw8B"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "l8fRflXGTzPG",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "트래커 문서 (현재 작업 내용, 이전 작업 내용, 다음 작업 내용)"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "kbUydQnmRkyo",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "사실 이 문서는 내가 설계한 것이 아니라, 내 사수 분이 설계하셨는데 무척이나 똑똑하다.. 에이전트를 통해 기능 마이그레이션을 메인 드리븐 하던 사람이 토큰을 다 사용하거나, 일정이 있어 진행을 못하게 되면 해당 작업 관련 내용들이 트래커 문서에 기재가 된다. 그러면 다음 작업의 사람이 이어받아 트래커 문서를 참고하여 다음 작업을 이어 진행하게 된다. 트래커 문서는 우선순위 매트릭스를 기반으로 설계된 기능 별 마이그레이션 순서를 따라가기 때문에 병목 현상이 전혀 없어지게 된다. 트래커 문서라는거 자체를 생각을 못했는데 메모리에서 사라지는 것들을 고려하여 문서들을 고려했던 부분이, 여기서 아키텍쳐링의 짬차이가 너무 많이 느껴졌다. "
+            },
+            {
+              "type": "emoji",
+              "attrs": {
+                "name": "melting_face"
+              }
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "nkLlljywDC_x",
+            "textAlign": "left"
+          }
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "eI0zVlLUOC8K",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "지금도 계속 작업을 진행하고 있고, 어느덧 토큰들을 소모하면서 80%의 기능 구현이 완료되었다. 다만 Vue와 React의 문법 체계가 좀 다르다보니 스타일들이 약간 차이가 있는 부분들이 있는데, 이런 경우에는 직접 스타일을 수정해줘야하나 생각이 들기도 한다. 갑자기 오늘 문득 생각나는 부분들이 있다."
+            }
+          ]
+        },
+        {
+          "type": "orderedList",
+          "attrs": {
+            "id": "4IFkBvysx_PW",
+            "start": 1,
+            "type": null
+          },
+          "content": [
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "mDmjLr-ugUMX"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "HGJs0KBcXICL",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "기존 백오피스의 모든 메뉴들을 스크린샷화"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "3b3Z9LYTFPlr"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "hFI-A8_0JybM",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "진행하는 마이그레이션되고 있는 서비스에 기존 백오피스의 스크린샷 대로 스타일을 진행"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "VGOVMJGbjdIk",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "이렇게 하면 코드로 뭐가 달라 뭐가 달라보다 컨텍스트가 보다 명확해지지 않을까 라는 생각을 하고 있다. 이 프로젝트가 아마 완성되면 해당 게시글의 내용도 달라지겠지만 스크린샷을 컨텍스트로 하는 방법도 한번 내일 출근해서 테스트해봐야겠다."
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

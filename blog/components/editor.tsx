@@ -27,8 +27,10 @@ import { Bookmark } from "./bookmark-block";
 import { Callout } from "./callout-block";
 import { Column, ColumnList } from "./columns-block";
 import { Gallery } from "./gallery-block";
+import { Image } from "./editor-image-block";
 import { bookmarkMarkdown, bookmarkTitle as savedBookmarkTitle } from "@/lib/bookmark-markdown";
 import { galleryImages, galleryMarkdown } from "@/lib/gallery-markdown";
+import { imageCropFrom, imageMarkdown } from "@/lib/image-crop";
 
 export type EditorMention = { title: string; href: string; description: string };
 const noMentions: EditorMention[] = [];
@@ -145,6 +147,7 @@ const schema = BlockNoteSchema.create().extend({
   // server-rendered page.
   blockSpecs: {
     codeBlock: createCodeBlockSpec(codeBlockOptions),
+    image: Image(),
     bookmark: Bookmark(),
     callout: Callout(),
     gallery: Gallery(),
@@ -348,6 +351,18 @@ function Editor({ initialBlocks, mentions, onChange }: Props) {
       if (block.type === "gallery") {
         return galleryMarkdown(galleryImages((block.props as { images?: unknown }).images));
       }
+      if (block.type === "image") {
+        const props = block.props as Record<string, unknown>;
+        const url = typeof props.url === "string" ? props.url : "";
+        if (normalizedHttpUrl(url)) {
+          return imageMarkdown({
+            src: url,
+            alt: typeof props.caption === "string" ? props.caption : "",
+            width: props.previewWidth,
+            crop: imageCropFrom(props),
+          });
+        }
+      }
       return block.type === "callout"
         ? calloutMarkdown(serialized, block.props as { emoji?: unknown; fluent?: unknown; fluentUrl?: unknown })
         : serialized;
@@ -481,6 +496,9 @@ function Editor({ initialBlocks, mentions, onChange }: Props) {
       const target = event.target;
       if (!(target instanceof Element) || !target.closest(".bn-visual-media")) return;
       if (target.closest(".bn-resize-handle")) return;
+      // The visible edit control owns its dialog. Do not intercept its press
+      // here, otherwise BlockNote's selection guard prevents the button click.
+      if (target.closest("[data-image-crop-edit]")) return;
 
       const blockElement = target.closest<HTMLElement>("[data-id]");
       const id = blockElement?.dataset.id;

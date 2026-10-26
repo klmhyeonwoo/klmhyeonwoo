@@ -1145,6 +1145,350 @@ html[data-theme="dark"] .editor [data-content-type="codeBlock"] .shiki {
   }
 }
 
+/* Image crop — the editor stores only the presentation crop, never a second
+   raster copy. This keeps uploads small while published posts stay faithful. */
+.editor-image-block {
+  box-sizing: border-box;
+  margin: 1rem 0;
+  max-width: 100%;
+}
+
+.editor-image-block .bn-file-block-content-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.editor-image-block .bn-visual-media {
+  background: var(--interactive-subtle);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.editor-image-block .bn-visual-media img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+  transition: transform 160ms ease-out;
+  width: 100%;
+}
+
+.editor-image-block .bn-visual-media.is-cropped img {
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  transition: transform 160ms ease-out;
+}
+
+.editor-image-crop-edit {
+  background: color-mix(in srgb, var(--ink) 82%, transparent);
+  border: 1px solid color-mix(in srgb, var(--surface) 35%, transparent);
+  border-radius: 0.55rem;
+  color: var(--surface);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 650;
+  opacity: 0;
+  padding: 0.42rem 0.55rem;
+  position: absolute;
+  right: 0.65rem;
+  top: 0.65rem;
+  transition: opacity 150ms ease, transform 150ms ease;
+}
+
+.editor-image-block:hover .editor-image-crop-edit,
+.editor-image-block:focus-within .editor-image-crop-edit {
+  opacity: 1;
+}
+
+.editor-image-crop-edit:focus-visible {
+  opacity: 1;
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.editor-image-crop-edit:active {
+  transform: scale(0.96);
+}
+
+.editor-image-empty {
+  align-items: center;
+  background: var(--interactive-subtle);
+  border: 1px dashed var(--line);
+  border-radius: 0.875rem;
+  box-sizing: border-box;
+  color: var(--muted);
+  display: grid;
+  gap: 0.35rem;
+  justify-items: center;
+  margin: 1rem 0;
+  padding: 2.25rem 1.25rem;
+  text-align: center;
+}
+
+.editor-image-empty > span {
+  color: var(--ink);
+  font-size: 1.5rem;
+}
+
+.editor-image-empty > strong {
+  color: var(--ink);
+  font-size: 0.875rem;
+}
+
+.editor-image-empty > small {
+  font-size: 0.75rem;
+}
+
+.editor-image-empty > div {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.65rem;
+  max-width: 100%;
+}
+
+.editor-image-empty label,
+.editor-image-empty input {
+  font: inherit;
+  font-size: 0.75rem;
+}
+
+.editor-image-empty label {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+  color: var(--ink);
+  cursor: pointer;
+  padding: 0.5rem 0.65rem;
+  white-space: nowrap;
+}
+
+.editor-image-empty label input {
+  display: none;
+}
+
+.editor-image-empty > div > input {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+  color: var(--ink);
+  min-width: 0;
+  padding: 0.5rem 0.65rem;
+}
+
+.image-crop-backdrop {
+  align-items: center;
+  background: color-mix(in srgb, #000 38%, transparent);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: 1rem;
+  position: fixed;
+  z-index: 120;
+}
+
+.image-crop-dialog {
+  animation: image-crop-enter 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 1.125rem;
+  box-shadow: 0 1.25rem 5rem color-mix(in srgb, #000 22%, transparent);
+  box-sizing: border-box;
+  max-height: calc(100dvh - 2rem);
+  max-width: 34rem;
+  overflow: auto;
+  padding: 1.125rem;
+  width: min(100%, 34rem);
+}
+
+.image-crop-dialog header,
+.image-crop-dialog footer {
+  align-items: center;
+  display: flex;
+}
+
+.image-crop-dialog header {
+  justify-content: space-between;
+}
+
+.image-crop-dialog header p {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin: 0 0 0.18rem;
+}
+
+.image-crop-dialog h2 {
+  color: var(--ink);
+  font-size: 1.125rem;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.image-crop-dialog header button,
+.image-crop-dialog footer button,
+.image-crop-aspects button {
+  background: transparent;
+  border: 0;
+  border-radius: 0.5rem;
+  color: var(--ink);
+  cursor: pointer;
+  font: inherit;
+}
+
+.image-crop-dialog header button {
+  color: var(--muted);
+  font-size: 1.5rem;
+  height: 2rem;
+  line-height: 1;
+  width: 2rem;
+}
+
+.image-crop-dialog > p {
+  color: var(--muted);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  margin: 0.75rem 0 1rem;
+}
+
+.image-crop-canvas {
+  background: #151515;
+  border-radius: 0.75rem;
+  cursor: grab;
+  max-height: min(56dvh, 28rem);
+  overflow: hidden;
+  position: relative;
+  touch-action: none;
+  user-select: none;
+  width: 100%;
+}
+
+.image-crop-canvas:active {
+  cursor: grabbing;
+}
+
+.image-crop-canvas.is-original {
+  cursor: default;
+}
+
+.image-crop-canvas img {
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+  width: 100%;
+}
+
+.image-crop-grid {
+  background-image: linear-gradient(to right, transparent 33.1%, rgb(255 255 255 / 45%) 33.33%, transparent 33.55%, transparent 66.43%, rgb(255 255 255 / 45%) 66.66%, transparent 66.88%), linear-gradient(to bottom, transparent 33.1%, rgb(255 255 255 / 45%) 33.33%, transparent 33.55%, transparent 66.43%, rgb(255 255 255 / 45%) 66.66%, transparent 66.88%);
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.image-crop-options {
+  display: grid;
+  gap: 0.9rem;
+  margin: 1rem 0;
+}
+
+.image-crop-aspects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.image-crop-aspects button {
+  background: var(--interactive-subtle);
+  font-size: 0.75rem;
+  padding: 0.42rem 0.58rem;
+}
+
+.image-crop-aspects button.is-selected {
+  background: var(--ink);
+  color: var(--surface);
+}
+
+.image-crop-zoom {
+  align-items: center;
+  color: var(--muted);
+  display: grid;
+  font-size: 0.75rem;
+  gap: 0.75rem;
+  grid-template-columns: auto 1fr auto;
+}
+
+.image-crop-zoom input {
+  accent-color: var(--ink);
+  min-width: 0;
+}
+
+.image-crop-zoom output {
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  min-width: 2.75rem;
+  text-align: right;
+}
+
+.image-crop-dialog footer {
+  border-top: 1px solid var(--line);
+  gap: 0.375rem;
+  margin: 0 -1.125rem -1.125rem;
+  padding: 0.8rem 1.125rem;
+}
+
+.image-crop-dialog footer span {
+  flex: 1;
+}
+
+.image-crop-dialog footer button {
+  font-size: 0.8125rem;
+  padding: 0.5rem 0.625rem;
+}
+
+.image-crop-dialog footer button.is-primary {
+  background: var(--ink);
+  color: var(--surface);
+}
+
+@keyframes image-crop-enter {
+  from { opacity: 0; transform: scale(0.98) translateY(0.375rem); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.post-image-crop {
+  margin: 1.75rem 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.post-image-crop img {
+  display: block;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  width: 100%;
+}
+
+@media (hover: none) {
+  .editor-image-crop-edit { opacity: 1; }
+}
+
+@media (max-width: 560px) {
+  .editor-image-empty > div { align-items: stretch; flex-direction: column; width: 100%; }
+  .editor-image-empty > div > input { width: 100%; }
+  .image-crop-dialog { border-radius: 0.875rem; padding: 1rem; }
+  .image-crop-dialog footer { margin: 0 -1rem -1rem; padding: 0.75rem 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image-crop-dialog { animation: none; }
+  .editor-image-block .bn-visual-media img,
+  .editor-image-crop-edit { transition: none; }
+}
+
 /* Yoopta keeps the editing controls close to the block without turning the
    writing surface into an application dashboard. */
 .yoopta-editor-shell {

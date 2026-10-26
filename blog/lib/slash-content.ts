@@ -1,6 +1,7 @@
 import { bookmarkMarkdown } from "./bookmark-markdown";
 import { emoji } from "@slash-editor/core/emoji";
 import { mediaUrl } from "./editor-media";
+import { imageCropFrom, imageMarkdown } from "./image-crop";
 import { inlineMarkdown } from "./markdown-editor-document";
 const emojiGlyphs = new Map(emoji().options.emojis.map(item => [item.name, item.emoji]));
 export type JsonNode = { type?: string; attrs?: Record<string, unknown>; content?: JsonNode[]; text?: string; marks?: Array<{ type: string; attrs?: Record<string, unknown> }>; [key: string]: unknown };
@@ -75,7 +76,18 @@ export function convertBlocks(blocks?: unknown[]): JsonNode {
     if (type === "codeBlock" || type === "code_block") return [{ type: "codeBlock", attrs: { language: props.language ?? node.lang ?? "text" }, content: children }];
     if (type === "divider" || type === "hr") return [{ type: "horizontalRule" }];
     if (type === "callout") return [{ type: "callout", attrs: { emoji: props.emoji ?? node.icon ?? "💡", fluentUrl: props.fluentUrl ?? "" }, content: children }];
-    if (type === "image" || type === "img") { const src = typeof props.url === "string" ? props.url : typeof node.url === "string" ? node.url : typeof props.src === "string" ? props.src : ""; return [{ type: "image", attrs: { src, alt: props.caption ?? node.caption ?? "", width: props.width ?? node.width ?? null } }]; }
+    if (type === "image" || type === "img") {
+      const src = typeof props.url === "string" ? props.url : typeof node.url === "string" ? node.url : typeof props.src === "string" ? props.src : "";
+      return [{ type: "image", attrs: {
+        src,
+        alt: props.caption ?? node.caption ?? "",
+        width: props.previewWidth ?? props.width ?? node.width ?? null,
+        cropAspect: props.cropAspect,
+        cropX: props.cropX,
+        cropY: props.cropY,
+        cropZoom: props.cropZoom,
+      } }];
+    }
     if (!["p", "paragraph"].includes(type)) throw new Error(`지원되지 않는 기존 블록: ${type}. 원본 데이터는 변경하지 않았습니다.`);
     return [paragraph(children)];
   });
@@ -126,7 +138,12 @@ export function markdownFor(document: JsonNode): string {
       const url = mediaUrl(node.attrs?.url);
       return node.attrs?.mode === "iframe" ? `<iframe src="${attribute(url)}" title="${attribute(node.attrs?.title || "외부 콘텐츠")}" sandbox="allow-scripts allow-presentation" referrerPolicy="no-referrer" loading="lazy" />` : bookmarkMarkdown(url, String(node.attrs?.title || url), String(node.attrs?.description ?? ""), mediaUrl(node.attrs?.thumbnail));
     }
-    if (node.type === "image") return `<img src="${attribute(node.attrs?.src)}" alt="${attribute(node.attrs?.alt)}"${typeof node.attrs?.width === "number" ? ` width="${node.attrs.width}"` : ""} />`;
+    if (node.type === "image") return imageMarkdown({
+      src: String(node.attrs?.src ?? ""),
+      alt: String(node.attrs?.alt ?? ""),
+      width: node.attrs?.width,
+      crop: imageCropFrom(node.attrs ?? {}),
+    });
     if (node.type === "bookmark") return bookmarkMarkdown(String(node.attrs?.url ?? ""), String(node.attrs?.title ?? ""), String(node.attrs?.description ?? ""), String(node.attrs?.image ?? ""), String(node.attrs?.layout ?? "bookmark"));
     if (node.type === "callout") return `<Callout emoji="${attribute(node.attrs?.icon ?? node.attrs?.emoji ?? "💡")}" image="${attribute(node.attrs?.fluentUrl)}" background="${attribute(node.attrs?.background ?? "default")}">\n\n${(node.content ?? []).map(child => block(child)).join("\n\n") || " "}\n\n</Callout>`;
     if (node.type === "details") {

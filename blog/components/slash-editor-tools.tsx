@@ -97,6 +97,7 @@ export function SlashEditorTools({ editor }: { editor: Editor }) {
     </Floating>}
     {drag.dropAnchor && <Floating anchor={drag.dropAnchor} className="slash-drop"><div style={{ width: drag.dropAnchor.getBoundingClientRect().width }} /></Floating>}
     {menu.target && menu.anchor && <Floating anchor={menu.anchor} className="slash-menu"><div role="dialog" aria-label="블록 메뉴">
+      <button type="button" onMouseDown={e => e.preventDefault()} onClick={() => { const pos = menu.target!.pos + menu.target!.size; editor.chain().focus().insertContentAt(pos, { type: "imageCarousel", content: [{ type: "image", attrs: { src: "" } }] }).run(); menu.close(); }}>아래에 이미지 캐러셀 추가</button>
       {editor.isActive("column") && <><small>현재 칸 세로 정렬</small>{([["top", "위"], ["center", "가운데"], ["bottom", "아래"]] as const).map(([verticalAlign, label]) => <button type="button" key={verticalAlign} aria-pressed={editor.isActive("column", { verticalAlign })} onMouseDown={e => e.preventDefault()} onClick={() => { editor.chain().focus().updateAttributes("column", { verticalAlign }).run(); menu.close(); }}>{label}</button>)}<hr /></>}
       <small>블록 전환</small>
       {types.items.map(type => <button type="button" key={type.id} onMouseDown={e => e.preventDefault()} onClick={() => { types.convert(type, menu.target!.pos); menu.close(); }}>{slashLabel(type.id, type.title)}</button>)}

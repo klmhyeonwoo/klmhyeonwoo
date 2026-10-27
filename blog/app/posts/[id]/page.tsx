@@ -21,6 +21,8 @@ import { restoreCallouts } from "@/lib/callout-markdown";
 import { restoreBookmarks } from "@/lib/bookmark-markdown";
 import { PostBookmark } from "@/components/post-bookmark";
 import { PostGallery } from "@/components/post-gallery";
+import { remarkPostImages } from "@/lib/remark-post-images";
+import { PostCarousel } from "@/components/post-carousel";
 import { PostImage } from "@/components/post-image";
 import { PostColumn, PostColumns } from "@/components/post-columns";
 import { getTableOfContents, rehypeHeadingIds } from "@/lib/table-of-contents";
@@ -142,7 +144,7 @@ export default async function PostPage({ params }: { params: Params }) {
   const blocks = await getCachedPostBlocks(id);
   const renderSource = restoreBookmarks(restoreCallouts(sourceWithEditorFallback(source, blocks), blocks), blocks);
   const tableOfContents = getTableOfContents(renderSource);
-  const { content, frontmatter } = await compileMDX<{ title: string; date: string; description?: string; publishedAt?: string; updatedAt?: string }>({ components: { Diagram: PostDiagram, Callout: PostCallout, Bookmark: PostBookmark, Gallery: PostGallery, PostImage, img: PostImage, Columns: PostColumns, Column: PostColumn }, source: renderSource, options: { mdxOptions: { remarkPlugins: [remarkGfm], rehypePlugins: [[rehypeShiki, { themes: { light: "github-light", dark: "github-dark" } }], rehypeHeadingIds(tableOfContents)] }, parseFrontmatter: true } });
+  const { content, frontmatter } = await compileMDX<{ title: string; date: string; description?: string; publishedAt?: string; updatedAt?: string }>({ components: { Diagram: PostDiagram, Callout: PostCallout, Bookmark: PostBookmark, Gallery: PostGallery, PostCarousel, PostImage, img: PostImage, Columns: PostColumns, Column: PostColumn }, source: renderSource, options: { mdxOptions: { remarkPlugins: [remarkGfm, remarkPostImages], rehypePlugins: [[rehypeShiki, { themes: { light: "github-light", dark: "github-dark" } }], rehypeHeadingIds(tableOfContents)] }, parseFrontmatter: true } });
   const post = (await getCachedPosts(true)).find((item) => item.id === id);
   const description = postDescription(source, data) || `${frontmatter.title}에 관한 글입니다.`;
   const canonicalUrl = absoluteUrl(`/posts/${id}`);

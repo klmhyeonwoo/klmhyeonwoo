@@ -2,6 +2,7 @@
 
 import { Extension, InputRule } from "@tiptap/core";
 import { EditorFileDrop } from "./editor-file-drop";
+import { ImageCarousel } from "./image-carousel";
 import { imageFileAccept, imageUploadStatus, uploadImage as uploadOptimizedImage, type ImageUploadProgress } from "@/lib/client-image-upload";
 import { cropRatio, imageCropAspects, imageCropFrom, type ImageCropAspect } from "@/lib/image-crop";
 import { SlashEditorTools, slashLabel } from "./slash-editor-tools";
@@ -64,7 +65,12 @@ const headingFourSlashItem: SlashItem = {
 };
 
 const blockTypesWithHeadingFour = defaultBlockTypes.flatMap((item) => item.id === "heading-3" ? [item, headingFourBlockType] : [item]);
-const slashItemsWithHeadingFour = defaultSlashItems.flatMap((item) => item.id === "heading-3" ? [item, headingFourSlashItem] : [item]);
+const carouselSlashItem: SlashItem = {
+  id: "image-carousel", title: "이미지 캐러셀", group: "Media", description: "여러 사진을 넘겨볼 수 있습니다", aliases: ["캐러셀", "사진 모음", "carousel", "gallery"], icon: "image",
+  when: (editor) => Boolean(editor.schema.nodes.imageCarousel),
+  run: ({ editor, range }) => editor.chain().focus().deleteRange(range).insertContent({ type: "imageCarousel", content: [{ type: "image", attrs: { src: "" } }] }).run(),
+};
+const slashItemsWithHeadingFour = defaultSlashItems.flatMap((item) => item.id === "paragraph" ? [item, carouselSlashItem] : item.id === "heading-3" ? [item, headingFourSlashItem] : [item]);
 
 // Keep small, familiar writing shortcuts in prose without changing code or
 // URLs. The rule runs as soon as `->` is complete; undo restores the source
@@ -283,8 +289,13 @@ const imageWidthPresets = [
   { id: "full", label: "↔", ratio: null, tooltip: "본문 너비에 맞춤" },
 ] as const;
 
+function imageWidthContainer(element: HTMLElement | null) {
+  const renderer = element?.closest<HTMLElement>(".react-renderer");
+  return (renderer?.closest(".editor-carousel") ? renderer : renderer?.parentElement) ?? element?.parentElement;
+}
+
 function imageAvailableWidth(element: HTMLElement | null) {
-  const parent = element?.closest(".react-renderer")?.parentElement ?? element?.parentElement;
+  const parent = imageWidthContainer(element);
   if (!element || !parent) return element?.getBoundingClientRect().width ?? 0;
   const parentStyle = getComputedStyle(parent);
   return Math.max(48, parent.clientWidth - parseFloat(parentStyle.paddingLeft || "0") - parseFloat(parentStyle.paddingRight || "0"));
@@ -306,7 +317,7 @@ function ImageBlockView({ node, selected, updateAttributes, editor, getPos }: No
   useEffect(() => () => resizeCleanup.current(), []);
   useEffect(() => {
     const element = blockRef.current;
-    const parent = element?.closest(".react-renderer")?.parentElement ?? element?.parentElement;
+    const parent = imageWidthContainer(element);
     if (!element) return;
     const updateAvailableWidth = () => {
       const nextWidth = imageAvailableWidth(element);
@@ -591,9 +602,12 @@ function TiptapSurface({ initial, mentions, onChange }: { initial: JsonNode; men
       element.setAttribute("aria-expanded", String(isOpen));
     } },
     placeholder: { text: { paragraph: "내용을 입력하거나 '/'로 블록을 추가하세요", heading1: "제목 1", heading2: "제목 2", heading3: "제목 3", callout: "강조할 내용을 입력하세요", listItem: "목록", taskItem: "할 일" } },
-    slash: { items: slashItemsWithHeadingFour.map(item => ({ ...item, title: slashLabel(item.id, item.title), aliases: [...(item.aliases ?? []), item.title], ...(item.id === "image" ? { run: ({ editor, range }: Parameters<typeof item.run>[0]) => { editor.chain().focus().deleteRange(range).setImage({ src: "" }).run(); } } : {}) })) },
-    extend: [EditorFileDrop, LegacyCalloutMetadata, TypographicShortcuts, ImageBlock.configure({ inline: false, allowBase64: false }), BookmarkNode, LinkMentionNode],
-  }).map(extension => nativeMediaNodes.find(node => node.name === extension.name) ?? extension), []);
+    slash: {},
+    extend: [EditorFileDrop, LegacyCalloutMetadata, TypographicShortcuts, ImageBlock.configure({ inline: false, allowBase64: false }), ImageCarousel, BookmarkNode, LinkMentionNode],
+  }).map(extension => {
+    if (extension.name === "slashCommand") return extension.configure({ items: slashItemsWithHeadingFour.map(item => ({ ...item, title: slashLabel(item.id, item.title), aliases: [...(item.aliases ?? []), item.title], ...(item.id === "image" ? { run: ({ editor, range }: Parameters<typeof item.run>[0]) => { editor.chain().focus().deleteRange(range).setImage({ src: "" }).run(); } } : {}) })) });
+    return nativeMediaNodes.find(node => node.name === extension.name) ?? extension;
+  }), []);
   const onChangeRef = useRef(onChange);
   useEffect(() => { onChangeRef.current = onChange; }, [onChange]);
   const editor = useSlashEditor({ blockKit: false, extensions, content: initial,

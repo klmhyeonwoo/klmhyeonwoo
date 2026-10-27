@@ -14,7 +14,7 @@ function bounded(value: number | string | undefined, fallback: number, minimum: 
 }
 
 /** Server-rendered counterpart for an image crop authored in the editor. */
-export function PostImage({ src = "", alt = "", aspect = "original", focusX, focusY, zoom, width, style: imageStyle, ...imageProps }: Props) {
+export function PostImage({ src = "", alt = "", aspect = "original", focusX, focusY, zoom, width, className, style: imageStyle, ...imageProps }: Props) {
   const cropAspect: ImageCropAspect = imageCropAspects.includes(aspect as ImageCropAspect) ? aspect as ImageCropAspect : "original";
   const ratio = cropRatio(cropAspect);
   const x = bounded(focusX, 50, 0, 100);
@@ -23,7 +23,7 @@ export function PostImage({ src = "", alt = "", aspect = "original", focusX, foc
   const imageWidth = bounded(width, 0, 0, 10_000);
   const style = imageWidth > 0 ? { ...imageStyle, maxWidth: "100%", width: `${imageWidth}px` } : imageStyle;
 
-  if (!ratio) return <img {...imageProps} alt={alt} src={src} style={style} />;
+  if (!ratio) return <img {...imageProps} alt={alt} className={["post-image", className].filter(Boolean).join(" ")} src={src} style={style} />;
   const [ratioWidth, ratioHeight] = ratio.split("/").map(Number);
-  return <figure className="post-image-crop" style={{ ...style, aspectRatio: ratio, "--carousel-crop-max-width": `${100 * ratioWidth / ratioHeight}cqh` } as CSSProperties}><img {...imageProps} alt={alt} src={src} style={{ objectPosition: `${x}% ${y}%`, transform: `scale(${scale})`, transformOrigin: `${x}% ${y}%` }} /></figure>;
+  return <figure className="post-image-crop" style={{ ...style, aspectRatio: ratio, "--carousel-crop-max-width": `${100 * ratioWidth / ratioHeight}cqh` } as CSSProperties}><img {...imageProps} alt={alt} className={className} src={src} style={{ objectPosition: `${x}% ${y}%`, transform: `scale(${scale})`, transformOrigin: `${x}% ${y}%` }} /></figure>;
 }

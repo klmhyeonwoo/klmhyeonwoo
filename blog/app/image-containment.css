@@ -1487,10 +1487,12 @@ html[data-theme="dark"] .editor [data-content-type="codeBlock"] .shiki {
 }
 
 .post-image-crop {
-  margin: 1.75rem 0;
+  margin: 1.75rem auto;
   max-width: 100%;
   overflow: hidden;
 }
+
+.prose .post-image { margin-inline: auto; }
 
 .post-image-crop img {
   display: block;
@@ -3942,30 +3944,23 @@ html[data-theme="dark"] .prose pre.shiki span {
   }
 }
 .editor-carousel { margin: 1rem 0; min-width: 0; }
-.editor-carousel-viewport, .post-carousel-viewport { overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: thin; }
+.editor-carousel-viewport, .post-carousel-viewport { overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
 .editor-carousel-viewport { padding: .5rem; }
 .carousel-editor-strip > [data-node-view-content-react] { display: flex; align-items: center; gap: .5rem; }
-.carousel-editor-strip > [data-node-view-content-react] > .react-renderer { flex: 0 0 100%; min-width: 0; aspect-ratio: 1; container-type: size; display: flex; align-items: center; justify-content: center; scroll-snap-align: start; }
+.carousel-editor-strip > [data-node-view-content-react] > .react-renderer { flex: 0 0 min(82%, 24rem); min-width: 0; aspect-ratio: 1; container-type: size; display: flex; align-items: center; justify-content: center; scroll-snap-align: start; }
 .editor-carousel .tiptap-image-block { max-height: 100cqh; }
 .editor-carousel .tiptap-image-block:has(.is-cropped) { max-width: min(100%, var(--carousel-crop-max-width, 100%)); }
 .editor-carousel .tiptap-image-frame > img { max-height: 100cqh; object-fit: contain; }
 .editor-carousel .tiptap-image-frame.is-cropped > img { object-fit: cover; }
 .editor-carousel-controls, .post-carousel-controls { display: flex; align-items: center; gap: .35rem; color: var(--muted); font-size: .8rem; }
 .editor-carousel-controls { flex-wrap: wrap; margin-top: .5rem; }
-.carousel-display-count { display: flex; align-items: center; gap: .45rem; white-space: nowrap; }
-.carousel-display-options { display: inline-flex; align-items: center; gap: .125rem; padding: .15rem; border: 1px solid var(--line); border-radius: .5rem; background: var(--surface); }
 .editor-carousel-controls button, .post-carousel-controls button { border: 0; border-radius: .4rem; padding: .35rem .6rem; background: var(--interactive-subtle); color: var(--ink); cursor: pointer; }
-.editor-carousel-controls .carousel-display-options button { padding: .25rem .45rem; background: transparent; color: var(--muted); font: inherit; }
-.editor-carousel-controls .carousel-display-options button:hover { background: var(--interactive-subtle); color: var(--ink); }
-.editor-carousel-controls .carousel-display-options button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
 .editor-carousel-controls button:disabled, .post-carousel-controls button:disabled { opacity: .35; cursor: default; }
 .editor-carousel-controls button:focus-visible, .post-carousel-controls button:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
 .carousel-control-spacer { flex: 1; }
 .post-carousel { margin: 1.5rem 0; min-width: 0; }
 .post-carousel-viewport { display: flex; align-items: center; gap: .5rem; }
-.post-carousel-slide { flex: 0 0 100%; min-width: 0; aspect-ratio: 1; container-type: size; display: flex; align-items: center; justify-content: center; scroll-snap-align: start; text-align: center; }
-.editor-carousel[data-visible="2"] .carousel-editor-strip > [data-node-view-content-react] > .react-renderer, .post-carousel[data-visible="2"] .post-carousel-slide { flex-basis: calc(50% - .25rem); }
-.editor-carousel[data-visible="3"] .carousel-editor-strip > [data-node-view-content-react] > .react-renderer, .post-carousel[data-visible="3"] .post-carousel-slide { flex-basis: calc(33.333333% - .333333rem); }
+.post-carousel-slide { flex: 0 0 min(82%, 24rem); min-width: 0; aspect-ratio: 1; container-type: size; display: flex; align-items: center; justify-content: center; scroll-snap-align: start; text-align: center; }
 .prose .post-carousel-slide > img, .prose .post-carousel-slide > figure { margin: 0 auto; max-width: 100%; max-height: 100cqh; }
 .prose .post-carousel-slide > .post-image-crop { max-width: min(100%, var(--carousel-crop-max-width, 100%)); }
 .prose .post-carousel-slide > img { object-fit: contain; }

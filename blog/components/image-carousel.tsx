@@ -4,11 +4,10 @@ import { Node, mergeAttributes } from "@tiptap/core";
 import { NodeViewContent, NodeViewWrapper, ReactNodeViewRenderer, type NodeViewProps } from "@tiptap/react";
 import { useRef, useState } from "react";
 
-function CarouselView({ node, editor, getPos, updateAttributes }: NodeViewProps) {
+function CarouselView({ node, editor, getPos }: NodeViewProps) {
   const [active, setActive] = useState(0);
   const viewport = useRef<HTMLDivElement>(null);
   const count = node.childCount;
-  const slidesPerView = [1, 2, 3].includes(Number(node.attrs.slidesPerView)) ? Number(node.attrs.slidesPerView) : 1;
   const navigate = (index: number) => {
     const target = Math.max(0, Math.min(count - 1, index));
     const strip = viewport.current?.querySelector<HTMLElement>(".carousel-editor-strip [data-node-view-content-react]");
@@ -36,7 +35,7 @@ function CarouselView({ node, editor, getPos, updateAttributes }: NodeViewProps)
     const slide = strip?.children[index] as HTMLElement | undefined;
     if (slide && viewport.current) viewport.current.scrollTo({ left: viewport.current.scrollLeft + slide.getBoundingClientRect().left - viewport.current.getBoundingClientRect().left });
   };
-  return <NodeViewWrapper className="editor-carousel" data-type="image-carousel" data-visible={slidesPerView}>
+  return <NodeViewWrapper className="editor-carousel" data-type="image-carousel">
     <div ref={viewport} className="editor-carousel-viewport" onPointerDownCapture={(event) => {
       const strip = event.currentTarget.querySelector<HTMLElement>(".carousel-editor-strip [data-node-view-content-react]");
       const target = event.target as HTMLElement;
@@ -47,7 +46,6 @@ function CarouselView({ node, editor, getPos, updateAttributes }: NodeViewProps)
       <button type="button" disabled={active === 0} onClick={() => navigate(active - 1)} aria-label="이전 사진">‹</button>
       <span aria-live="polite">{Math.min(active + 1, count)} / {count}</span>
       <button type="button" disabled={active >= count - 1} onClick={() => navigate(active + 1)} aria-label="다음 사진">›</button>
-      <div className="carousel-display-count" role="group" aria-label="한 화면에 보이는 사진 수"><span>한 화면에</span><div className="carousel-display-options">{[1, 2, 3].map((value) => <button type="button" key={value} aria-label={`${value}장 보기`} aria-pressed={slidesPerView === value} onClick={() => { updateAttributes({ slidesPerView: value }); setActive(0); requestAnimationFrame(() => viewport.current?.scrollTo({ left: 0, behavior: "auto" })); }}>{value}장</button>)}</div></div>
       <span className="carousel-control-spacer" />
       <button type="button" disabled={active === 0} onClick={() => updateChildren("previous")}>앞으로</button>
       <button type="button" disabled={active >= count - 1} onClick={() => updateChildren("next")}>뒤로</button>

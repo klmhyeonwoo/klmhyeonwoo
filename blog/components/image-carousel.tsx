@@ -43,11 +43,11 @@ function CarouselView({ node, editor, getPos, updateAttributes }: NodeViewProps)
       const slide = target.closest(".react-renderer.node-image");
       if (strip && slide?.parentElement === strip) setActive(Array.from(strip.children).indexOf(slide));
     }}><NodeViewContent className="carousel-editor-strip" /></div>
-    <div className="editor-carousel-controls" contentEditable={false} onPointerDown={(event) => event.stopPropagation()} onMouseDown={(event) => { if (!(event.target as HTMLElement).closest("select")) event.preventDefault(); }}>
+    <div className="editor-carousel-controls" contentEditable={false} onPointerDown={(event) => event.stopPropagation()} onMouseDown={(event) => event.preventDefault()}>
       <button type="button" disabled={active === 0} onClick={() => navigate(active - 1)} aria-label="이전 사진">‹</button>
       <span aria-live="polite">{Math.min(active + 1, count)} / {count}</span>
       <button type="button" disabled={active >= count - 1} onClick={() => navigate(active + 1)} aria-label="다음 사진">›</button>
-      <label>한 화면에 <select aria-label="한 화면에 보이는 사진 수" value={slidesPerView} onChange={(event) => updateAttributes({ slidesPerView: Number(event.currentTarget.value) })}>{[1, 2, 3].map((value) => <option key={value} value={value}>{value}장</option>)}</select></label>
+      <div className="carousel-display-count" role="group" aria-label="한 화면에 보이는 사진 수"><span>한 화면에</span><div className="carousel-display-options">{[1, 2, 3].map((value) => <button type="button" key={value} aria-label={`${value}장 보기`} aria-pressed={slidesPerView === value} onClick={() => updateAttributes({ slidesPerView: value })}>{value}장</button>)}</div></div>
       <span className="carousel-control-spacer" />
       <button type="button" disabled={active === 0} onClick={() => updateChildren("previous")}>앞으로</button>
       <button type="button" disabled={active >= count - 1} onClick={() => updateChildren("next")}>뒤로</button>

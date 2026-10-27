@@ -3946,7 +3946,7 @@ html[data-theme="dark"] .prose pre.shiki span {
 .editor-carousel { margin: 1rem 0; min-width: 0; }
 .editor-carousel-viewport, .post-carousel-viewport { overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
 .editor-carousel-viewport { padding: .5rem; }
-.carousel-editor-strip > [data-node-view-content-react] { display: flex; align-items: center; gap: .5rem; }
+.carousel-editor-strip > [data-node-view-content-react] { display: flex; align-items: center; gap: .375rem; }
 .carousel-editor-strip > [data-node-view-content-react] > .react-renderer { flex: 0 0 min(82%, 24rem); min-width: 0; aspect-ratio: 1; container-type: size; display: flex; align-items: center; justify-content: center; scroll-snap-align: start; }
 .editor-carousel .tiptap-image-block { max-height: 100cqh; }
 .editor-carousel .tiptap-image-block:has(.is-cropped) { max-width: min(100%, var(--carousel-crop-max-width, 100%)); }
@@ -3959,8 +3959,11 @@ html[data-theme="dark"] .prose pre.shiki span {
 .editor-carousel-controls button:focus-visible, .post-carousel-controls button:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
 .carousel-control-spacer { flex: 1; }
 .post-carousel { margin: 1.5rem 0; min-width: 0; }
-.post-carousel-viewport { display: flex; align-items: center; gap: .5rem; }
+.post-carousel-viewport { display: flex; align-items: center; gap: .375rem; }
 .post-carousel-slide { flex: 0 0 min(82%, 24rem); min-width: 0; aspect-ratio: 1; container-type: size; display: flex; align-items: center; justify-content: center; scroll-snap-align: start; text-align: center; }
+/* Portrait crops need a portrait-sized slot, not empty space on either side. */
+.carousel-editor-strip > [data-node-view-content-react] > .react-renderer:has(.tiptap-image-frame.is-cropped[style*="3 / 4"]),
+.post-carousel-slide:has(> .post-image-crop[style*="3 / 4"]) { flex-basis: min(61.5%, 18rem); aspect-ratio: 3 / 4; }
 .prose .post-carousel-slide > img, .prose .post-carousel-slide > figure { margin: 0 auto; max-width: 100%; max-height: 100cqh; }
 .prose .post-carousel-slide > .post-image-crop { max-width: min(100%, var(--carousel-crop-max-width, 100%)); }
 .prose .post-carousel-slide > img { object-fit: contain; }

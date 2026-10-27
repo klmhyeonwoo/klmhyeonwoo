@@ -34,9 +34,9 @@
                 "title": null,
                 "width": null,
                 "height": null,
-                "cropAspect": "original",
+                "cropAspect": "3:4",
                 "cropX": 50,
-                "cropY": 50,
+                "cropY": 80.20635608478848,
                 "cropZoom": 1
               }
             },
@@ -49,9 +49,9 @@
                 "title": null,
                 "width": null,
                 "height": null,
-                "cropAspect": "original",
+                "cropAspect": "3:4",
                 "cropX": 50,
-                "cropY": 50,
+                "cropY": 76.72650036925593,
                 "cropZoom": 1
               }
             }
@@ -109,9 +109,9 @@
                 "title": null,
                 "width": null,
                 "height": null,
-                "cropAspect": "original",
+                "cropAspect": "3:4",
                 "cropX": 50,
-                "cropY": 50,
+                "cropY": 80.70897139334606,
                 "cropZoom": 1
               }
             },
@@ -124,9 +124,9 @@
                 "title": null,
                 "width": null,
                 "height": null,
-                "cropAspect": "original",
+                "cropAspect": "3:4",
                 "cropX": 50,
-                "cropY": 50,
+                "cropY": 46.23999804691076,
                 "cropZoom": 1
               }
             }
@@ -171,9 +171,9 @@
                 "title": null,
                 "width": null,
                 "height": null,
-                "cropAspect": "original",
+                "cropAspect": "3:4",
                 "cropX": 50,
-                "cropY": 50,
+                "cropY": 67.48991412510757,
                 "cropZoom": 1
               }
             },
@@ -186,7 +186,7 @@
                 "title": null,
                 "width": null,
                 "height": null,
-                "cropAspect": "original",
+                "cropAspect": "3:4",
                 "cropX": 50,
                 "cropY": 50,
                 "cropZoom": 1
@@ -201,7 +201,7 @@
                 "title": null,
                 "width": null,
                 "height": null,
-                "cropAspect": "original",
+                "cropAspect": "3:4",
                 "cropX": 50,
                 "cropY": 50,
                 "cropZoom": 1
@@ -266,9 +266,9 @@
                 "title": null,
                 "width": null,
                 "height": null,
-                "cropAspect": "original",
+                "cropAspect": "3:4",
                 "cropX": 50,
-                "cropY": 50,
+                "cropY": 91.16581590647127,
                 "cropZoom": 1
               }
             },
@@ -296,9 +296,9 @@
                 "title": null,
                 "width": null,
                 "height": null,
-                "cropAspect": "original",
+                "cropAspect": "3:4",
                 "cropX": 50,
-                "cropY": 50,
+                "cropY": 100,
                 "cropZoom": 1
               }
             }

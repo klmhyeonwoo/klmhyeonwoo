@@ -305,7 +305,11 @@ function imageAvailableWidth(element: HTMLElement | null) {
   const parent = imageWidthContainer(element);
   if (!element || !parent) return element?.getBoundingClientRect().width ?? 0;
   const parentStyle = getComputedStyle(parent);
-  return Math.max(48, parent.clientWidth - parseFloat(parentStyle.paddingLeft || "0") - parseFloat(parentStyle.paddingRight || "0"));
+  const width = parent.clientWidth - parseFloat(parentStyle.paddingLeft || "0") - parseFloat(parentStyle.paddingRight || "0");
+  const crop = element.closest(".editor-carousel") && element.querySelector<HTMLElement>(".tiptap-image-frame.is-cropped");
+  const [cropWidth, cropHeight] = crop ? crop.style.aspectRatio.split("/").map(Number) : [];
+  const heightLimit = cropWidth > 0 && cropHeight > 0 ? parent.clientHeight * cropWidth / cropHeight : width;
+  return Math.max(48, Math.min(width, heightLimit));
 }
 
 function ImageBlockView({ node, selected, updateAttributes, editor, getPos }: NodeViewProps) {
@@ -447,7 +451,9 @@ function ImageBlockView({ node, selected, updateAttributes, editor, getPos }: No
 
   const imageInteractionActive = selected || resizing;
 
-  return <NodeViewWrapper as="figure" className={`tiptap-image-block${imageInteractionActive ? " is-selected" : ""}${resizing ? " is-resizing" : ""}`} onPointerMove={isolateImagePointer} onPointerEnter={isolateImagePointer} onMouseDownCapture={preserveImageSelection} onPointerDownCapture={selectImage} ref={blockRef} style={{ width: (dragWidth ?? width) ? `${dragWidth ?? width}px` : "100%", minWidth: 48 }}>
+  const [cropWidth, cropHeight] = cropStyle?.aspectRatio?.split("/").map(Number) ?? [];
+  const maxCropWidth = cropWidth && cropHeight ? `${100 * cropWidth / cropHeight}cqh` : "100%";
+  return <NodeViewWrapper as="figure" className={`tiptap-image-block${imageInteractionActive ? " is-selected" : ""}${resizing ? " is-resizing" : ""}`} onPointerMove={isolateImagePointer} onPointerEnter={isolateImagePointer} onMouseDownCapture={preserveImageSelection} onPointerDownCapture={selectImage} ref={blockRef} style={{ width: (dragWidth ?? width) ? `${dragWidth ?? width}px` : "100%", minWidth: 48, "--carousel-crop-max-width": maxCropWidth } as CSSProperties}>
     <input ref={imageInput} className="tiptap-file-input" type="file" accept={imageFileAccept} onChange={onFileChange} />
     <div className={`tiptap-image-frame${crop.aspect !== "original" ? " is-cropped" : ""}`} contentEditable={false} style={cropStyle}>
       <ImageBlockContent alt={typeof node.attrs.alt === "string" ? node.attrs.alt : ""} crop={crop} dismiss={dismissUpload} openCrop={openCrop} requestFile={requestFile} requestUrl={requestUrl} retry={retry} src={src} upload={upload} />

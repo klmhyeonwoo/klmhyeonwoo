@@ -24,5 +24,6 @@ export function PostImage({ src = "", alt = "", aspect = "original", focusX, foc
   const style = imageWidth > 0 ? { ...imageStyle, maxWidth: "100%", width: `${imageWidth}px` } : imageStyle;
 
   if (!ratio) return <img {...imageProps} alt={alt} src={src} style={style} />;
-  return <figure className="post-image-crop" style={{ ...style, aspectRatio: ratio } as CSSProperties}><img {...imageProps} alt={alt} src={src} style={{ objectPosition: `${x}% ${y}%`, transform: `scale(${scale})`, transformOrigin: `${x}% ${y}%` }} /></figure>;
+  const [ratioWidth, ratioHeight] = ratio.split("/").map(Number);
+  return <figure className="post-image-crop" style={{ ...style, aspectRatio: ratio, "--carousel-crop-max-width": `${100 * ratioWidth / ratioHeight}cqh` } as CSSProperties}><img {...imageProps} alt={alt} src={src} style={{ objectPosition: `${x}% ${y}%`, transform: `scale(${scale})`, transformOrigin: `${x}% ${y}%` }} /></figure>;
 }

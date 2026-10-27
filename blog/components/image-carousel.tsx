@@ -47,7 +47,7 @@ function CarouselView({ node, editor, getPos, updateAttributes }: NodeViewProps)
       <button type="button" disabled={active === 0} onClick={() => navigate(active - 1)} aria-label="이전 사진">‹</button>
       <span aria-live="polite">{Math.min(active + 1, count)} / {count}</span>
       <button type="button" disabled={active >= count - 1} onClick={() => navigate(active + 1)} aria-label="다음 사진">›</button>
-      <div className="carousel-display-count" role="group" aria-label="한 화면에 보이는 사진 수"><span>한 화면에</span><div className="carousel-display-options">{[1, 2, 3].map((value) => <button type="button" key={value} aria-label={`${value}장 보기`} aria-pressed={slidesPerView === value} onClick={() => updateAttributes({ slidesPerView: value })}>{value}장</button>)}</div></div>
+      <div className="carousel-display-count" role="group" aria-label="한 화면에 보이는 사진 수"><span>한 화면에</span><div className="carousel-display-options">{[1, 2, 3].map((value) => <button type="button" key={value} aria-label={`${value}장 보기`} aria-pressed={slidesPerView === value} onClick={() => { updateAttributes({ slidesPerView: value }); setActive(0); requestAnimationFrame(() => viewport.current?.scrollTo({ left: 0, behavior: "auto" })); }}>{value}장</button>)}</div></div>
       <span className="carousel-control-spacer" />
       <button type="button" disabled={active === 0} onClick={() => updateChildren("previous")}>앞으로</button>
       <button type="button" disabled={active >= count - 1} onClick={() => updateChildren("next")}>뒤로</button>

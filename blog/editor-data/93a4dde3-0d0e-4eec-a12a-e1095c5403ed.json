@@ -289,28 +289,28 @@
         {
           "type": "paragraph",
           "attrs": {
-            "id": "05r97nuPHZI_",
+            "id": "ebK7zTjYDZ02",
             "textAlign": "left"
           },
           "content": [
             {
               "type": "text",
-              "text": "그리고 서촌에서 저녁을 해결하기 위해 \"김진목삼 2호점\"으로 왔다. 5시 정도에 도착을 해서 들어갔는데 몇 테이블의 경우에 먼저 식사를 하고 있었고, 우리가 식사를 마치는 시간 정도에 사람들이 몰렸다. 이 날 약간 미리미리 하는 느낌이라 거의 서촌에서 웨이팅이라는걸 안해본 것 같다. \"김진목삼\"은 완도리가 추천해줬는데 진~짜 맛있었다. "
+              "text": "그리고 서촌에서 저녁을 해결하기 위해 \"김진목삼 2호점\"으로 왔다. 5시 정도에 도착을 해서 들어갔는데 몇 테이블의 경우에 먼저 식사를 하고 있었고, 우리가 식사를 마치는 시간 정도에 사람들이 몰렸다. 이 날 약간 미리미리 하는 느낌이라 거의 서촌에서 웨이팅이라는걸 안해본 것 같다. \"김진목삼\"은 완도리가 추천해줬는데 진~짜 맛있었다."
             }
           ]
         },
         {
           "type": "image",
           "attrs": {
-            "id": "XWHYB78MTCFp",
-            "src": "https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/main/blog/public/uploads/1793109173302-43ee8510.webp",
+            "id": "mnhYrcM8s652",
+            "src": "https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/main/blog/public/uploads/1793112885636-62421b90.webp",
             "alt": "IMG_6610.heic",
             "title": null,
-            "width": 251,
+            "width": 306,
             "height": null,
             "cropAspect": "3:4",
             "cropX": 50,
-            "cropY": 61.919323238056876,
+            "cropY": 50,
             "cropZoom": 1
           }
         },
@@ -393,7 +393,7 @@
         {
           "type": "paragraph",
           "attrs": {
-            "id": "dd4g1f93AX8s",
+            "id": "k30J1lui9vpa",
             "textAlign": "left"
           }
         }

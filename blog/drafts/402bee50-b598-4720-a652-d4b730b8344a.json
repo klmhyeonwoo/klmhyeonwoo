@@ -1,0 +1,93 @@
+{
+  "id": "402bee50-b598-4720-a652-d4b730b8344a",
+  "title": "",
+  "description": "",
+  "categoryId": "category-1f4a4fd0",
+  "seriesId": "",
+  "markdown": "<Columns columns=\"2\">\n\n<Column verticalAlign=\"top\">\n\n<img src=\"https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/main/blog/public/uploads/1793110289566-18a9bba8.webp\" alt=\"IMG_6609.heic\" width=\"251\" />\n\n</Column>\n\n<Column verticalAlign=\"top\">\n\n<img src=\"https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/main/blog/public/uploads/1793110294656-b9462b91.webp\" alt=\"IMG_6610.heic\" width=\"251\" />\n\n</Column>\n\n</Columns>",
+  "blocks": [
+    {
+      "type": "slash-content",
+      "version": 1,
+      "content": {
+        "type": "doc",
+        "content": [
+          {
+            "type": "columns",
+            "attrs": {
+              "id": "kZP14J_kZ_um"
+            },
+            "content": [
+              {
+                "type": "column",
+                "attrs": {
+                  "id": "TcDI0UzC_9CW",
+                  "verticalAlign": "top"
+                },
+                "content": [
+                  {
+                    "type": "image",
+                    "attrs": {
+                      "id": "7Tt8t9w4Qzrp",
+                      "src": "https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/main/blog/public/uploads/1793110289566-18a9bba8.webp",
+                      "alt": "IMG_6609.heic",
+                      "title": null,
+                      "width": 251,
+                      "height": null,
+                      "cropAspect": "original",
+                      "cropX": 50,
+                      "cropY": 50,
+                      "cropZoom": 1
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "column",
+                "attrs": {
+                  "id": "5nTDJAvxSv4e",
+                  "verticalAlign": "top"
+                },
+                "content": [
+                  {
+                    "type": "image",
+                    "attrs": {
+                      "id": "jDMRlC2WqjbI",
+                      "src": "https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/main/blog/public/uploads/1793110294656-b9462b91.webp",
+                      "alt": "IMG_6610.heic",
+                      "title": null,
+                      "width": 251,
+                      "height": null,
+                      "cropAspect": "original",
+                      "cropX": 50,
+                      "cropY": 50,
+                      "cropZoom": 1
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "N1Ioui50ctDb",
+              "textAlign": "left"
+            }
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "DRTzRdQyiJBE",
+              "textAlign": "left"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "isPrivate": false,
+  "showInList": true,
+  "coverImage": "",
+  "updatedAt": "2026-10-27T14:14:43.397Z"
+}

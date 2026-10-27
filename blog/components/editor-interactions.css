@@ -160,7 +160,7 @@
 .editor-block-drop-indicator { position: fixed; height: 3px; border-radius: 2px; background: #438cf5; z-index: 60; pointer-events: none; }
 .tiptap-prose .is-block-dragging { opacity: .4; outline: 1px dashed var(--line); }
 .editor-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
-.tiptap-editor-shell .tiptap-prose { padding-inline: 80px 1rem; padding-bottom: 5rem; }
+.tiptap-editor-shell .tiptap-prose { box-sizing: border-box; max-width: 100%; min-width: 0; padding-inline: 80px 1rem; padding-bottom: 5rem; width: 100%; }
 .tiptap-editor-shell .tiptap-callout { position: relative; }
 .tiptap-editor-shell .tiptap-callout-background { position: absolute; right: .5rem; bottom: calc(100% + 3px); padding: 6px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); opacity: 0; visibility: hidden; z-index: 5; }
 .tiptap-editor-shell .tiptap-callout:hover .tiptap-callout-background,
@@ -171,8 +171,38 @@
 .tiptap-editor-shell .tiptap-image-resize { touch-action: none; }
 .tiptap-editor-shell .novel-command-menu { max-height: min(22rem, 50vh); overflow-y: auto; }
 @media (max-width: 720px) {
-  .tiptap-editor-shell .tiptap-prose { padding-inline: 80px .25rem; }
+  /* The desktop gutter reserves room for the block controls. On a phone that
+     much content-box padding pushes the writing surface past the viewport. */
+  .tiptap-editor-shell .tiptap-prose { padding-inline: 3rem .75rem; }
   .editor-block-buttons button { min-height: 36px; }
+}
+@media (max-width: 600px) {
+  .tiptap-editor-shell .slash-content [data-type="columns"] {
+    display: grid;
+    gap: .875rem;
+    grid-auto-columns: minmax(78%, 22rem);
+    grid-auto-flow: column;
+    grid-template-columns: none;
+    max-width: 100%;
+    overscroll-behavior-x: contain;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    padding: .125rem .25rem .75rem;
+    scroll-padding-inline: .25rem;
+    scroll-snap-type: x proximity;
+    scrollbar-color: color-mix(in srgb, var(--line) 88%, transparent) transparent;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tiptap-editor-shell .slash-content [data-type="column"] {
+    border: 1px solid var(--line);
+    border-radius: .75rem;
+    box-sizing: border-box;
+    flex: none;
+    min-width: 0;
+    padding: .875rem;
+    scroll-snap-align: start;
+  }
 }
 .editor-upload-status {
   align-items: center;

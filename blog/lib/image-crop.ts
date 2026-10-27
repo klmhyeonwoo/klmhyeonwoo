@@ -49,9 +49,8 @@ function jsxNumber(value: number) {
  */
 export function imageMarkdown({ src, alt = "", width, crop }: { src: string; alt?: string; width?: unknown; crop: ImageCrop }) {
   const safeWidth = numberInRange(width, 0, 0, 10_000);
-  if (crop.aspect === "original" && crop.zoom === 1 && crop.focusX === 50 && crop.focusY === 50) {
-    return `<img src="${attribute(src)}" alt="${attribute(alt)}"${safeWidth ? ` width="${safeWidth}"` : ""} />`;
-  }
-
+  // Use one public renderer for untouched and cropped images. Relying on an
+  // HTML `width` attribute for plain images made width persistence differ from
+  // cropped images across the MDX/server rendering path.
   return `<PostImage src="${attribute(src)}" alt="${attribute(alt)}" aspect="${crop.aspect}" focusX={${jsxNumber(crop.focusX)}} focusY={${jsxNumber(crop.focusY)}} zoom={${jsxNumber(crop.zoom)}}${safeWidth ? ` width={${safeWidth}}` : ""} />`;
 }

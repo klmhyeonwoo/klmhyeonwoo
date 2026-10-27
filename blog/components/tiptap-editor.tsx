@@ -17,7 +17,7 @@ import { emoji } from "@slash-editor/core/emoji";
 import { nativeMediaNodes } from "./slash-media-blocks";
 import { EditorContent, EditorContext, useCurrentEditor, useSlashEditor } from "@slash-editor/react";
 import TiptapImage from "@tiptap/extension-image";
-import { type ChangeEvent, type CSSProperties, type FormEvent, type PointerEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { memo, type ChangeEvent, type CSSProperties, type FormEvent, type MouseEvent as ReactMouseEvent, type PointerEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 const lowlight = createLowlight(common);
 
@@ -203,22 +203,26 @@ type UpdateImageAttributes = (attrs: Record<string, unknown>) => void;
 function useImageUploader(updateAttributes: UpdateImageAttributes) {
   const [upload, setUpload] = useState<ImageUploadState | null>(null);
   const imageInput = useRef<HTMLInputElement>(null);
-  const uploadFile = async (file: File) => {
+  const updateAttributesRef = useRef(updateAttributes);
+  useEffect(() => { updateAttributesRef.current = updateAttributes; }, [updateAttributes]);
+  const uploadFile = useCallback(async (file: File) => {
     setUpload({ file, progress: { stage: "converting", progress: 0 } });
     try {
       const result = await uploadOptimizedImage(file, (progress) => setUpload((current) => current?.file === file ? { ...current, progress } : current));
-      updateAttributes({ src: result.url, alt: file.name, width: null, cropAspect: "original", cropX: 50, cropY: 50, cropZoom: 1 });
+      updateAttributesRef.current({ src: result.url, alt: file.name, width: null, cropAspect: "original", cropX: 50, cropY: 50, cropZoom: 1 });
       setUpload(null);
     } catch (error) {
       setUpload({ file, error: error instanceof Error ? error.message : "이미지 업로드에 실패했습니다." });
     }
-  };
-  const onFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+  }, []);
+  const onFileChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     const file = event.currentTarget.files?.[0];
     event.currentTarget.value = "";
     if (file) void uploadFile(file);
-  };
-  return { imageInput, onFileChange, requestFile: () => imageInput.current?.click(), retry: () => upload && void uploadFile(upload.file), setUpload, upload };
+  }, [uploadFile]);
+  const requestFile = useCallback(() => imageInput.current?.click(), []);
+  const retry = useCallback(() => { if (upload) void uploadFile(upload.file); }, [upload, uploadFile]);
+  return { imageInput, onFileChange, requestFile, retry, setUpload, upload };
 }
 
 function ImageUploadCard({ upload, retry, dismiss }: { upload: ImageUploadState; retry: () => void; dismiss: () => void }) {
@@ -236,7 +240,7 @@ function ImageUploadCard({ upload, retry, dismiss }: { upload: ImageUploadState;
   </div>;
 }
 
-function ImageBlockContent({ src, alt, crop, upload, requestFile, requestUrl, openCrop, retry, dismiss }: {
+type ImageBlockContentProps = {
   src: string;
   alt: string;
   crop: ReturnType<typeof imageCropFrom>;
@@ -246,73 +250,201 @@ function ImageBlockContent({ src, alt, crop, upload, requestFile, requestUrl, op
   openCrop: () => void;
   retry: () => void;
   dismiss: () => void;
-}) {
+};
+
+const ImageBlockContent = memo(function ImageBlockContent({ src, alt, crop, upload, requestFile, requestUrl, openCrop, retry, dismiss }: ImageBlockContentProps) {
+  const keepImageSelection = (event: PointerEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+  };
   if (upload) return <ImageUploadCard upload={upload} retry={retry} dismiss={dismiss} />;
   if (src) {
     const imageStyle = crop.aspect === "original" ? undefined : { objectPosition: `${crop.focusX}% ${crop.focusY}%`, transform: `scale(${crop.zoom})`, transformOrigin: `${crop.focusX}% ${crop.focusY}%` };
-    return <><img src={src} alt={alt} style={imageStyle} /><div className="tiptap-image-actions"><button type="button" onPointerDown={(event) => event.preventDefault()} onClick={requestFile}>파일 변경</button><button type="button" onPointerDown={(event) => event.preventDefault()} onClick={requestUrl}>링크 변경</button><button type="button" onPointerDown={(event) => event.preventDefault()} onClick={openCrop}>사진 편집</button></div></>;
+    return <><img draggable={false} src={src} alt={alt} style={imageStyle} /><div className="tiptap-image-actions"><button type="button" onPointerDown={keepImageSelection} onClick={(event) => { event.stopPropagation(); requestFile(); }}>파일 변경</button><button type="button" onPointerDown={keepImageSelection} onClick={(event) => { event.stopPropagation(); requestUrl(); }}>링크 변경</button><button type="button" onPointerDown={keepImageSelection} onClick={(event) => { event.stopPropagation(); openCrop(); }}>사진 편집</button></div></>;
   }
-  return <div className="tiptap-image-empty"><span aria-hidden="true">▧</span><strong>이미지</strong><small>파일을 올리거나 이미지 주소를 입력하세요.</small><div><button type="button" onPointerDown={(event) => event.preventDefault()} onClick={requestFile}>파일 선택</button><button type="button" onPointerDown={(event) => event.preventDefault()} onClick={requestUrl}>링크 입력</button></div></div>;
+  return <div className="tiptap-image-empty"><span aria-hidden="true">▧</span><strong>이미지</strong><small>파일을 올리거나 이미지 주소를 입력하세요.</small><div><button type="button" onPointerDown={keepImageSelection} onClick={(event) => { event.stopPropagation(); requestFile(); }}>파일 선택</button><button type="button" onPointerDown={keepImageSelection} onClick={(event) => { event.stopPropagation(); requestUrl(); }}>링크 입력</button></div></div>;
+}, (previous, next) => previous.src === next.src
+  && previous.alt === next.alt
+  && previous.upload === next.upload
+  && previous.crop.aspect === next.crop.aspect
+  && previous.crop.focusX === next.crop.focusX
+  && previous.crop.focusY === next.crop.focusY
+  && previous.crop.zoom === next.crop.zoom
+  && previous.requestFile === next.requestFile
+  && previous.requestUrl === next.requestUrl
+  && previous.openCrop === next.openCrop
+  && previous.retry === next.retry
+  && previous.dismiss === next.dismiss);
+
+const imageWidthPresets = [
+  { id: "small", label: "S", ratio: 1 / 3, tooltip: "작게 · 본문 폭 1/3" },
+  { id: "medium", label: "M", ratio: 1 / 2, tooltip: "중간 · 본문 폭 1/2" },
+  { id: "large", label: "L", ratio: 2 / 3, tooltip: "크게 · 본문 폭 2/3" },
+  { id: "full", label: "↔", ratio: null, tooltip: "본문 너비에 맞춤" },
+] as const;
+
+function imageAvailableWidth(element: HTMLElement | null) {
+  const parent = element?.closest(".react-renderer")?.parentElement ?? element?.parentElement;
+  if (!element || !parent) return element?.getBoundingClientRect().width ?? 0;
+  const parentStyle = getComputedStyle(parent);
+  return Math.max(48, parent.clientWidth - parseFloat(parentStyle.paddingLeft || "0") - parseFloat(parentStyle.paddingRight || "0"));
 }
 
-function ImageBlockView({ node, selected, updateAttributes }: NodeViewProps) {
+function ImageBlockView({ node, selected, updateAttributes, editor, getPos }: NodeViewProps) {
   const src = typeof node.attrs.src === "string" ? node.attrs.src : "";
   const width = typeof node.attrs.width === "number" && node.attrs.width > 0 ? node.attrs.width : null;
   const crop = imageCropFrom(node.attrs);
   const [dragWidth, setDragWidth] = useState<number | null>(null);
+  const [resizing, setResizing] = useState(false);
   const [editing, setEditing] = useState(false);
   const { imageInput, onFileChange, requestFile, retry, setUpload, upload } = useImageUploader(updateAttributes);
+  const updateAttributesRef = useRef(updateAttributes);
+  const blockRef = useRef<HTMLElement>(null);
   const resizeCleanup = useRef<() => void>(() => {});
+  const [availableWidth, setAvailableWidth] = useState(0);
+  useEffect(() => { updateAttributesRef.current = updateAttributes; }, [updateAttributes]);
   useEffect(() => () => resizeCleanup.current(), []);
-  const requestUrl = () => window.dispatchEvent(new CustomEvent<ImageRequestDetail>(imageUrlRequestEvent, { detail: { onSelect: (url) => updateAttributes({ src: url, alt: "", width: null, cropAspect: "original", cropX: 50, cropY: 50, cropZoom: 1 }) } }));
+  useEffect(() => {
+    const element = blockRef.current;
+    const parent = element?.closest(".react-renderer")?.parentElement ?? element?.parentElement;
+    if (!element) return;
+    const updateAvailableWidth = () => {
+      const nextWidth = imageAvailableWidth(element);
+      setAvailableWidth((currentWidth) => Math.abs(currentWidth - nextWidth) < 1 ? currentWidth : nextWidth);
+    };
+    updateAvailableWidth();
+    if (!parent || typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(updateAvailableWidth);
+    observer.observe(parent);
+    return () => observer.disconnect();
+  }, []);
+  // NodeView's updateAttributes function can receive a new identity whenever
+  // a parent grid updates its selection. Keep a stable action callback so its
+  // hover controls do not get replaced while the pointer is over the image.
+  const requestUrl = useCallback(() => window.dispatchEvent(new CustomEvent<ImageRequestDetail>(imageUrlRequestEvent, { detail: { onSelect: (url) => updateAttributesRef.current({ src: url, alt: "", width: null, cropAspect: "original", cropX: 50, cropY: 50, cropZoom: 1 }) } })), []);
+  const dismissUpload = useCallback(() => setUpload(null), [setUpload]);
+  const openCrop = useCallback(() => setEditing(true), []);
+
+  const isolateImagePointer = useCallback((event: PointerEvent<HTMLElement>) => {
+    // The block-drag plugin listens on document. Its gutter can overlap the
+    // neighbouring column's image and repeatedly steal its hover target.
+    if (editor.storage.blockDrag?.state.dragging) return;
+    event.stopPropagation();
+    editor.storage.blockDrag?.setHovered(null);
+  }, [editor]);
+
+  // Explicitly select the image node before ProseMirror can move selection to
+  // an enclosing column/table. This keeps resize handles stable in grids.
+  const selectImageNode = useCallback(() => {
+    const position = getPos();
+    if (typeof position !== "number") return;
+    editor.chain().setNodeSelection(position).focus(undefined, { scrollIntoView: false }).run();
+  }, [editor, getPos]);
+
+  const selectImage = useCallback((event: PointerEvent<HTMLElement>) => {
+    const target = event.target as HTMLElement;
+    if (target.closest("button, input, select, textarea, a, label")) return;
+    event.preventDefault();
+    event.stopPropagation();
+    selectImageNode();
+  }, [selectImageNode]);
+
+  // ProseMirror still receives a compatibility `mousedown` after pointerdown
+  // on some browsers. Prevent it from selecting the preceding columns node.
+  const preserveImageSelection = useCallback((event: ReactMouseEvent<HTMLElement>) => {
+    const target = event.target as HTMLElement;
+    if (target.closest("button, input, select, textarea, a, label")) return;
+    event.preventDefault();
+    event.stopPropagation();
+  }, []);
+
+  const setWidthPreset = (ratio: number | null) => {
+    // Presets are interactive controls, so they bypass the wrapper's pointer
+    // handler. Select the image here as well to prevent a grid from taking the
+    // selection when its child image is resized.
+    selectImageNode();
+    if (ratio === null) {
+      updateAttributes({ width: null });
+      return;
+    }
+    updateAttributes({ width: Math.round(imageAvailableWidth(blockRef.current) * ratio) });
+  };
+
+  const visibleWidth = dragWidth ?? width;
+  const isPresetActive = (ratio: number | null) => ratio === null
+    ? visibleWidth === null
+    : availableWidth > 0 && visibleWidth !== null && Math.abs(visibleWidth - availableWidth * ratio) <= Math.max(4, availableWidth * 0.025);
 
   const resize = (event: PointerEvent) => {
     event.preventDefault();
     event.stopPropagation();
+    // A resize handle is outside the image frame, and was previously excluded
+    // from the wrapper's selection handler. Pin the image selection first so
+    // an enclosing columns/grid block cannot replace it while dragging.
+    selectImageNode();
     const handle = event.currentTarget as HTMLElement;
     const element = handle.closest<HTMLElement>(".tiptap-image-block");
     if (!element) return;
+    setResizing(true);
     handle.setPointerCapture?.(event.pointerId);
     const startX = event.clientX;
     const startWidth = element.getBoundingClientRect().width;
-    const parent = element.parentElement;
-    const parentStyle = parent ? getComputedStyle(parent) : null;
-    const maxWidth = parent ? parent.clientWidth - parseFloat(parentStyle?.paddingLeft ?? "0") - parseFloat(parentStyle?.paddingRight ?? "0") : startWidth;
+    const maxWidth = imageAvailableWidth(element);
     const fromLeft = handle.dataset.edge === "left";
     let nextWidth = startWidth;
     const move = (moveEvent: globalThis.PointerEvent) => {
+      if (moveEvent.pointerId !== event.pointerId) return;
+      moveEvent.stopPropagation();
       // Allow compact inline images too. 48px preserves a usable resize handle
       // while removing the old 152px floor that made thumbnails impossible.
       nextWidth = Math.round(Math.min(maxWidth, Math.max(48, startWidth + 2 * (fromLeft ? startX - moveEvent.clientX : moveEvent.clientX - startX))));
       setDragWidth(nextWidth);
     };
     const cleanup = () => {
-      window.removeEventListener("pointermove", move);
-      window.removeEventListener("pointerup", finish);
-      window.removeEventListener("pointercancel", cancel);
+      window.removeEventListener("pointermove", move, true);
+      window.removeEventListener("pointerup", finish, true);
+      window.removeEventListener("pointercancel", cancel, true);
       if (handle.hasPointerCapture(event.pointerId)) handle.releasePointerCapture(event.pointerId);
     };
-    const finish = () => { cleanup(); updateAttributes({ width: nextWidth }); setDragWidth(null); };
-    const cancel = () => { cleanup(); setDragWidth(null); };
+    const finish = (upEvent: globalThis.PointerEvent) => {
+      if (upEvent.pointerId !== event.pointerId) return;
+      upEvent.stopPropagation();
+      cleanup();
+      updateAttributes({ width: nextWidth });
+      setDragWidth(null);
+      setResizing(false);
+    };
+    const cancel = (cancelEvent: globalThis.PointerEvent) => {
+      if (cancelEvent.pointerId !== event.pointerId) return;
+      cancelEvent.stopPropagation();
+      cleanup(); setDragWidth(null); setResizing(false);
+    };
     resizeCleanup.current = cleanup;
-    window.addEventListener("pointermove", move);
-    window.addEventListener("pointerup", finish, { once: true });
-    window.addEventListener("pointercancel", cancel, { once: true });
+    window.addEventListener("pointermove", move, true);
+    window.addEventListener("pointerup", finish, true);
+    window.addEventListener("pointercancel", cancel, true);
   };
 
   const cropStyle = crop.aspect === "original" ? undefined : { aspectRatio: cropRatio(crop.aspect) };
 
-  return <NodeViewWrapper as="figure" className={`tiptap-image-block${selected ? " is-selected" : ""}`} style={{ width: (dragWidth ?? width) ? `${dragWidth ?? width}px` : undefined, minWidth: 48 }}>
+  const imageInteractionActive = selected || resizing;
+
+  return <NodeViewWrapper as="figure" className={`tiptap-image-block${imageInteractionActive ? " is-selected" : ""}${resizing ? " is-resizing" : ""}`} onPointerMove={isolateImagePointer} onPointerEnter={isolateImagePointer} onMouseDownCapture={preserveImageSelection} onPointerDownCapture={selectImage} ref={blockRef} style={{ width: (dragWidth ?? width) ? `${dragWidth ?? width}px` : "100%", minWidth: 48 }}>
     <input ref={imageInput} className="tiptap-file-input" type="file" accept={imageFileAccept} onChange={onFileChange} />
     <div className={`tiptap-image-frame${crop.aspect !== "original" ? " is-cropped" : ""}`} contentEditable={false} style={cropStyle}>
-      <ImageBlockContent alt={typeof node.attrs.alt === "string" ? node.attrs.alt : ""} crop={crop} dismiss={() => setUpload(null)} openCrop={() => setEditing(true)} requestFile={requestFile} requestUrl={requestUrl} retry={retry} src={src} upload={upload} />
+      <ImageBlockContent alt={typeof node.attrs.alt === "string" ? node.attrs.alt : ""} crop={crop} dismiss={dismissUpload} openCrop={openCrop} requestFile={requestFile} requestUrl={requestUrl} retry={retry} src={src} upload={upload} />
     </div>
-    {selected && <><button type="button" className="tiptap-image-resize top-left" data-edge="left" aria-label="이미지 너비 조절" onPointerDown={resize} /><button type="button" className="tiptap-image-resize top-right" data-edge="right" aria-label="이미지 너비 조절" onPointerDown={resize} /><button type="button" className="tiptap-image-resize bottom-left" data-edge="left" aria-label="이미지 너비 조절" onPointerDown={resize} /><button type="button" className="tiptap-image-resize bottom-right" data-edge="right" aria-label="이미지 너비 조절" onPointerDown={resize} /></>}
+    <div className="tiptap-image-size-presets" role="group" aria-label="이미지 고정 크기">{imageWidthPresets.map((preset) => <button type="button" aria-label={preset.tooltip} aria-pressed={isPresetActive(preset.ratio)} className={isPresetActive(preset.ratio) ? "is-active" : undefined} key={preset.id} onPointerDown={(event) => { event.preventDefault(); event.stopPropagation(); selectImageNode(); }} onClick={(event) => { event.stopPropagation(); setWidthPreset(preset.ratio); }} title={preset.tooltip}>{preset.label}</button>)}</div>
+    <button type="button" className="tiptap-image-resize top-left" data-edge="left" aria-label="이미지 너비 조절" onPointerDown={resize} />
+    <button type="button" className="tiptap-image-resize top-right" data-edge="right" aria-label="이미지 너비 조절" onPointerDown={resize} />
+    <button type="button" className="tiptap-image-resize bottom-left" data-edge="left" aria-label="이미지 너비 조절" onPointerDown={resize} />
+    <button type="button" className="tiptap-image-resize bottom-right" data-edge="right" aria-label="이미지 너비 조절" onPointerDown={resize} />
     {editing && src && <TiptapImageCropDialog crop={crop} onClose={() => setEditing(false)} src={src} updateAttributes={updateAttributes} />}
   </NodeViewWrapper>;
 }
 
 const ImageBlock = TiptapImage.extend({
+  draggable: false,
   addAttributes() {
     return {
       ...(this.parent?.() ?? {}),
@@ -335,10 +467,11 @@ const ImageBlock = TiptapImage.extend({
   },
   addNodeView() {
     return ReactNodeViewRenderer(ImageBlockView, {
-      // Keep ProseMirror from resetting the node selection before a resize drag begins.
+      // Keep ProseMirror from resetting image selection to an enclosing column,
+      // table, or preceding grid block during pointer and mouse compatibility events.
       stopEvent: ({ event }) => {
         const target = event.target as HTMLElement | null;
-        return Boolean(target?.closest(".tiptap-image-resize, .tiptap-image-actions, .tiptap-image-empty, .editor-upload-status"));
+        return Boolean(target?.closest(".tiptap-image-block, .tiptap-image-frame, .tiptap-image-resize, .tiptap-image-size-presets, .tiptap-image-actions, .tiptap-image-empty, .editor-upload-status"));
       },
     });
   },

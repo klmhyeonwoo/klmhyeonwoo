@@ -951,18 +951,37 @@ html[data-theme="dark"] .editor [data-content-type="codeBlock"] .shiki {
   .editor-columns[data-columns="3"],
   .post-columns,
   .post-columns[data-columns="3"] {
-    grid-template-columns: 1fr;
+    /* Keep a useful line length instead of compressing multi-column writing
+       into unreadable slivers. The next column peeks in to invite a swipe. */
+    gap: 0.875rem;
+    grid-auto-columns: minmax(78%, 22rem);
+    grid-auto-flow: column;
+    grid-template-columns: none;
+    max-width: 100%;
+    overscroll-behavior-x: contain;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    padding: 0.125rem 0.25rem 0.75rem;
+    scroll-padding-inline: 0.25rem;
+    scroll-snap-type: x proximity;
+    scrollbar-color: color-mix(in srgb, var(--line) 88%, transparent) transparent;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
   }
 
-  .editor-column {
-    border-left: 0;
-    border-top: 1px solid var(--line);
-    padding: 0.875rem 0 0;
+  .editor-column,
+  .post-column {
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+    box-sizing: border-box;
+    min-width: 0;
+    padding: 0.875rem;
+    scroll-snap-align: start;
   }
 
   .editor-column:first-child {
-    border-top: 0;
-    padding-top: 0;
+    border: 1px solid var(--line);
+    padding: 0.875rem;
   }
 
   .editor-gallery-grid,
@@ -1857,7 +1876,13 @@ html[data-theme="dark"] .tiptap-code-block-header select {
   height: auto;
   max-width: 100%;
 }
+.tiptap-prose .react-renderer.node-image {
+  width: 100%;
+  min-width: 0;
+  flex-shrink: 0;
+}
 .tiptap-image-block {
+  box-sizing: border-box;
   margin: 0.75rem 0;
   max-width: 100%;
   position: relative;
@@ -1959,11 +1984,14 @@ html[data-theme="dark"] .tiptap-code-block-header select {
     opacity 140ms ease-out,
     transform 140ms ease-out;
   transform: translateY(-0.25rem);
+  visibility: hidden;
 }
 .tiptap-image-block.is-selected .tiptap-image-actions,
-.tiptap-image-frame:hover .tiptap-image-actions {
+.tiptap-image-block:hover .tiptap-image-actions,
+.tiptap-image-block:focus-within .tiptap-image-actions {
   opacity: 1;
   transform: translateY(0);
+  visibility: visible;
 }
 .tiptap-image-resize {
   background: var(--surface-raised);
@@ -1972,10 +2000,22 @@ html[data-theme="dark"] .tiptap-code-block-header select {
   cursor: ew-resize;
   height: 0.75rem;
   margin: 0;
+  opacity: 0;
   padding: 0;
   position: absolute;
+  pointer-events: none;
+  transform: scale(0.75);
+  transition: opacity 140ms ease-out, transform 140ms ease-out;
+  visibility: hidden;
   width: 0.75rem;
   z-index: 2;
+}
+.tiptap-image-block.is-selected .tiptap-image-resize,
+.tiptap-image-block:hover .tiptap-image-resize {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+  visibility: visible;
 }
 .tiptap-image-resize.top-left {
   left: -0.4375rem;
@@ -1992,6 +2032,57 @@ html[data-theme="dark"] .tiptap-code-block-header select {
 .tiptap-image-resize.bottom-right {
   bottom: -0.4375rem;
   right: -0.4375rem;
+}
+.tiptap-image-size-presets {
+  align-items: center;
+  background: color-mix(in srgb, var(--surface-raised) 90%, transparent);
+  border: 1px solid color-mix(in srgb, var(--line) 88%, transparent);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 1rem color-mix(in srgb, var(--ink) 10%, transparent);
+  display: flex;
+  gap: 0.125rem;
+  left: 0.625rem;
+  opacity: 0;
+  padding: 0.25rem;
+  position: absolute;
+  bottom: 0.625rem;
+  pointer-events: none;
+  top: auto;
+  transform: translateY(0.25rem);
+  transition: opacity 140ms ease-out, transform 140ms ease-out;
+  visibility: hidden;
+  z-index: 3;
+}
+.tiptap-image-block.is-selected .tiptap-image-size-presets,
+.tiptap-image-block:hover .tiptap-image-size-presets {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  visibility: visible;
+}
+.tiptap-image-size-presets button {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: 0.3125rem;
+  color: var(--muted);
+  cursor: pointer;
+  display: inline-flex;
+  font: 600 0.625rem/1 inherit;
+  height: 1.5rem;
+  justify-content: center;
+  min-width: 1.5rem;
+  padding: 0 0.25rem;
+}
+.tiptap-image-size-presets button:hover,
+.tiptap-image-size-presets button:focus-visible {
+  background: var(--interactive-subtle);
+  color: var(--ink);
+  outline: 0;
+}
+.tiptap-image-size-presets button.is-active {
+  background: var(--accent);
+  color: var(--surface-raised);
 }
 .tiptap-prose .tableWrapper {
   max-width: 100%;

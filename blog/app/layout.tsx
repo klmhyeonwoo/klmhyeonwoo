@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { Viewport } from "next";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import "./image-containment.css";
 import "@/components/editor-interactions.css";
@@ -59,7 +60,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="ko" data-theme="light" suppressHydrationWarning>
       <head><script dangerouslySetInnerHTML={{ __html: systemThemeScript }} /></head>
-      <body><SystemThemeSync /><CursorEffect /><ToastProvider><AdminSessionProvider>{children}</AdminSessionProvider></ToastProvider></body>
+      <body><SystemThemeSync /><CursorEffect /><ToastProvider><AdminSessionProvider>{children}</AdminSessionProvider></ToastProvider><Analytics /></body>
     </html>
   );
 }

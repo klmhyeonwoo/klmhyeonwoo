@@ -1,29 +1,28 @@
-import type { CSSProperties } from "react";
+import type { ComponentPropsWithoutRef, CSSProperties } from "react";
 import { cropRatio, imageCropAspects, type ImageCropAspect } from "@/lib/image-crop";
 
-type Props = {
-  src: string;
-  alt?: string;
+type Props = ComponentPropsWithoutRef<"img"> & {
   aspect?: string;
   focusX?: number;
   focusY?: number;
   zoom?: number;
-  width?: number;
 };
 
-function bounded(value: number | undefined, fallback: number, minimum: number, maximum: number) {
-  return typeof value === "number" && Number.isFinite(value) ? Math.min(maximum, Math.max(minimum, value)) : fallback;
+function bounded(value: number | string | undefined, fallback: number, minimum: number, maximum: number) {
+  const number = typeof value === "number" ? value : Number(value);
+  return Number.isFinite(number) ? Math.min(maximum, Math.max(minimum, number)) : fallback;
 }
 
 /** Server-rendered counterpart for an image crop authored in the editor. */
-export function PostImage({ src, alt = "", aspect = "original", focusX, focusY, zoom, width }: Props) {
+export function PostImage({ src = "", alt = "", aspect = "original", focusX, focusY, zoom, width, style: imageStyle, ...imageProps }: Props) {
   const cropAspect: ImageCropAspect = imageCropAspects.includes(aspect as ImageCropAspect) ? aspect as ImageCropAspect : "original";
   const ratio = cropRatio(cropAspect);
   const x = bounded(focusX, 50, 0, 100);
   const y = bounded(focusY, 50, 0, 100);
   const scale = bounded(zoom, 1, 1, 3);
-  const style = width && Number.isFinite(width) ? { maxWidth: "100%", width: `${Math.max(1, Math.min(width, 10_000))}px` } : undefined;
+  const imageWidth = bounded(width, 0, 0, 10_000);
+  const style = imageWidth > 0 ? { ...imageStyle, maxWidth: "100%", width: `${imageWidth}px` } : imageStyle;
 
-  if (!ratio) return <img alt={alt} src={src} style={style} />;
-  return <figure className="post-image-crop" style={{ ...style, aspectRatio: ratio } as CSSProperties}><img alt={alt} src={src} style={{ objectPosition: `${x}% ${y}%`, transform: `scale(${scale})`, transformOrigin: `${x}% ${y}%` }} /></figure>;
+  if (!ratio) return <img {...imageProps} alt={alt} src={src} style={style} />;
+  return <figure className="post-image-crop" style={{ ...style, aspectRatio: ratio } as CSSProperties}><img {...imageProps} alt={alt} src={src} style={{ objectPosition: `${x}% ${y}%`, transform: `scale(${scale})`, transformOrigin: `${x}% ${y}%` }} /></figure>;
 }

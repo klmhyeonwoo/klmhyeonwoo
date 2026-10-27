@@ -162,16 +162,23 @@ function TiptapImageCropDialog({ src, crop, updateAttributes, onClose }: {
   }, []);
 
   const beginDrag = (event: PointerEvent<HTMLDivElement>) => {
-    if (aspect === "original") return;
+    if (aspect === "original" || !naturalAspect || event.button !== 0) return;
+    event.preventDefault();
     event.currentTarget.setPointerCapture(event.pointerId);
     drag.current = { pointerId: event.pointerId, x: event.clientX, y: event.clientY, focusX, focusY };
   };
   const moveDrag = (event: PointerEvent<HTMLDivElement>) => {
     const state = drag.current;
     const bounds = canvasRef.current?.getBoundingClientRect();
-    if (!state || state.pointerId !== event.pointerId || !bounds) return;
-    setFocusX(Math.min(100, Math.max(0, state.focusX - ((event.clientX - state.x) / bounds.width) * 100)));
-    setFocusY(Math.min(100, Math.max(0, state.focusY - ((event.clientY - state.y) / bounds.height) * 100)));
+    if (!state || state.pointerId !== event.pointerId || !bounds || !naturalAspect) return;
+    // object-fit: cover and the zoom transform both contribute to the hidden
+    // image area. One pixel of pointer movement should move the image one pixel.
+    const imageWidth = Math.max(bounds.width, bounds.height * naturalAspect) * zoom;
+    const imageHeight = Math.max(bounds.height, bounds.width / naturalAspect) * zoom;
+    const overflowX = Math.max(0, imageWidth - bounds.width);
+    const overflowY = Math.max(0, imageHeight - bounds.height);
+    if (overflowX > 0.01) setFocusX(Math.min(100, Math.max(0, state.focusX - ((event.clientX - state.x) / overflowX) * 100)));
+    if (overflowY > 0.01) setFocusY(Math.min(100, Math.max(0, state.focusY - ((event.clientY - state.y) / overflowY) * 100)));
   };
   const endDrag = (event: PointerEvent<HTMLDivElement>) => { if (drag.current?.pointerId === event.pointerId) drag.current = null; };
   const reset = () => { setAspect("original"); setFocusX(50); setFocusY(50); setZoom(1); };
@@ -354,7 +361,7 @@ function ImageBlockView({ node, selected, updateAttributes, editor, getPos }: No
 
   const selectImage = useCallback((event: PointerEvent<HTMLElement>) => {
     const target = event.target as HTMLElement;
-    if (target.closest("button, input, select, textarea, a, label")) return;
+    if (target.closest(".image-crop-backdrop, button, input, select, textarea, a, label")) return;
     event.preventDefault();
     event.stopPropagation();
     selectImageNode();
@@ -364,7 +371,7 @@ function ImageBlockView({ node, selected, updateAttributes, editor, getPos }: No
   // on some browsers. Prevent it from selecting the preceding columns node.
   const preserveImageSelection = useCallback((event: ReactMouseEvent<HTMLElement>) => {
     const target = event.target as HTMLElement;
-    if (target.closest("button, input, select, textarea, a, label")) return;
+    if (target.closest(".image-crop-backdrop, button, input, select, textarea, a, label")) return;
     event.preventDefault();
     event.stopPropagation();
   }, []);

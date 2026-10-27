@@ -147,7 +147,7 @@ export function markdownFor(document: JsonNode): string {
     if (node.type === "imageCarousel") {
       const slides = (node.content ?? []).filter(child => child.type === "image" && child.attrs?.src).map(child => `<div className="post-carousel-slide">\n\n${block(child)}\n\n</div>`);
       const slidesPerView = [1, 2, 3].includes(Number(node.attrs?.slidesPerView)) ? Number(node.attrs?.slidesPerView) : 1;
-      return slides.length ? `<PostCarousel slidesPerView={${slidesPerView}}>\n\n${slides.join("\n\n")}\n\n</PostCarousel>` : "";
+      return slides.length ? `<PostCarousel slidesPerView="${slidesPerView}">\n\n${slides.join("\n\n")}\n\n</PostCarousel>` : "";
     }
     if (node.type === "bookmark") return bookmarkMarkdown(String(node.attrs?.url ?? ""), String(node.attrs?.title ?? ""), String(node.attrs?.description ?? ""), String(node.attrs?.image ?? ""), String(node.attrs?.layout ?? "bookmark"));
     if (node.type === "callout") return `<Callout emoji="${attribute(node.attrs?.icon ?? node.attrs?.emoji ?? "💡")}" image="${attribute(node.attrs?.fluentUrl)}" background="${attribute(node.attrs?.background ?? "default")}">\n\n${(node.content ?? []).map(child => block(child)).join("\n\n") || " "}\n\n</Callout>`;

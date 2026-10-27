@@ -3,9 +3,9 @@ import { cropRatio, imageCropAspects, type ImageCropAspect } from "@/lib/image-c
 
 type Props = ComponentPropsWithoutRef<"img"> & {
   aspect?: string;
-  focusX?: number;
-  focusY?: number;
-  zoom?: number;
+  focusX?: number | string;
+  focusY?: number | string;
+  zoom?: number | string;
 };
 
 function bounded(value: number | string | undefined, fallback: number, minimum: number, maximum: number) {

@@ -52,5 +52,5 @@ export function imageMarkdown({ src, alt = "", width, crop }: { src: string; alt
   // Use one public renderer for untouched and cropped images. Relying on an
   // HTML `width` attribute for plain images made width persistence differ from
   // cropped images across the MDX/server rendering path.
-  return `<PostImage src="${attribute(src)}" alt="${attribute(alt)}" aspect="${crop.aspect}" focusX={${jsxNumber(crop.focusX)}} focusY={${jsxNumber(crop.focusY)}} zoom={${jsxNumber(crop.zoom)}}${safeWidth ? ` width={${safeWidth}}` : ""} />`;
+  return `<PostImage src="${attribute(src)}" alt="${attribute(alt)}" aspect="${crop.aspect}" focusX="${jsxNumber(crop.focusX)}" focusY="${jsxNumber(crop.focusY)}" zoom="${jsxNumber(crop.zoom)}"${safeWidth ? ` width="${safeWidth}"` : ""} />`;
 }

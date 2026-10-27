@@ -8,7 +8,7 @@
         {
           "type": "paragraph",
           "attrs": {
-            "id": "vaud_qmvxEL3",
+            "id": "d4YHSprGW28h",
             "textAlign": "left"
           },
           "content": [
@@ -19,58 +19,41 @@
           ]
         },
         {
-          "type": "columns",
+          "type": "imageCarousel",
           "attrs": {
-            "id": "Pv84l_belEuP"
+            "id": "EhSPs9Ikl67_",
+            "slidesPerView": 2
           },
           "content": [
             {
-              "type": "column",
+              "type": "image",
               "attrs": {
-                "id": "_I_xX9SPX3Tu",
-                "verticalAlign": "top"
-              },
-              "content": [
-                {
-                  "type": "image",
-                  "attrs": {
-                    "id": "dPzCiPEUkDUV",
-                    "src": "https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/main/blog/public/uploads/1793094925443-2d83a8f5.webp",
-                    "alt": "IMG_6572.heic",
-                    "title": null,
-                    "width": 272,
-                    "height": null,
-                    "cropAspect": "original",
-                    "cropX": 50,
-                    "cropY": 50,
-                    "cropZoom": 1
-                  }
-                }
-              ]
+                "id": "N-DiHNDr6kAW",
+                "src": "https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/main/blog/public/uploads/1793113889444-7612be8f.webp",
+                "alt": "IMG_6572.heic",
+                "title": null,
+                "width": null,
+                "height": null,
+                "cropAspect": "original",
+                "cropX": 50,
+                "cropY": 50,
+                "cropZoom": 1
+              }
             },
             {
-              "type": "column",
+              "type": "image",
               "attrs": {
-                "id": "fIlkzmfAniqv",
-                "verticalAlign": "top"
-              },
-              "content": [
-                {
-                  "type": "image",
-                  "attrs": {
-                    "id": "vvEe4-JLy3Pi",
-                    "src": "https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/main/blog/public/uploads/1793094931642-cbaa2138.webp",
-                    "alt": "IMG_6573.heic",
-                    "title": null,
-                    "width": 276,
-                    "height": null,
-                    "cropAspect": "original",
-                    "cropX": 50,
-                    "cropY": 50,
-                    "cropZoom": 1
-                  }
-                }
-              ]
+                "id": "OscNLM2K786L",
+                "src": "https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/main/blog/public/uploads/1793113984746-1b3e84f9.webp",
+                "alt": "IMG_6573.heic",
+                "title": null,
+                "width": null,
+                "height": null,
+                "cropAspect": "original",
+                "cropX": 50,
+                "cropY": 50,
+                "cropZoom": 1
+              }
             }
           ]
         },

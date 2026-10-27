@@ -1,0 +1,52 @@
+{
+  "id": "402bee50-b598-4720-a652-d4b730b8344a",
+  "title": "",
+  "description": "",
+  "categoryId": "category-1f4a4fd0",
+  "seriesId": "",
+  "markdown": "<img src=\"https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/main/blog/public/uploads/1793063162142-7d3b7a94.webp\" alt=\"IMG_6610.heic\" width=\"314\" />",
+  "blocks": [
+    {
+      "type": "slash-content",
+      "version": 1,
+      "content": {
+        "type": "doc",
+        "content": [
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "3F0yBcCnKx7Q",
+              "textAlign": "left"
+            }
+          },
+          {
+            "type": "image",
+            "attrs": {
+              "id": "_BpgTXKWc5zl",
+              "src": "https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/main/blog/public/uploads/1793063162142-7d3b7a94.webp",
+              "alt": "IMG_6610.heic",
+              "title": null,
+              "width": 314,
+              "height": null,
+              "cropAspect": "original",
+              "cropX": 50,
+              "cropY": 50,
+              "cropZoom": 1
+            }
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "GZrvydxD3yvI",
+              "textAlign": "left"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "isPrivate": false,
+  "showInList": true,
+  "coverImage": "",
+  "updatedAt": "2026-10-27T01:06:29.509Z"
+}

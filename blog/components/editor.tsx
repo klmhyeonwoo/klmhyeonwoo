@@ -31,6 +31,7 @@ import { Image } from "./editor-image-block";
 import { bookmarkMarkdown, bookmarkTitle as savedBookmarkTitle } from "@/lib/bookmark-markdown";
 import { galleryImages, galleryMarkdown } from "@/lib/gallery-markdown";
 import { imageCropFrom, imageMarkdown } from "@/lib/image-crop";
+import { imageFileAccept, uploadImage } from "@/lib/client-image-upload";
 
 export type EditorMention = { title: string; href: string; description: string };
 const noMentions: EditorMention[] = [];
@@ -230,15 +231,8 @@ function Editor({ initialBlocks, mentions, onChange }: Props) {
   const isComposingRef = useRef(false);
   const uploadFile = useCallback(async (file: File) => {
     try {
-      if (!file.type.startsWith("image/")) throw new Error("이미지 파일만 올릴 수 있습니다.");
-      if (file.size > 5 * 1024 * 1024) throw new Error("이미지는 5MB 이하여야 합니다.");
-
-      const form = new FormData();
-      form.append("file", file);
-      const response = await fetch("/api/upload", { method: "POST", body: form });
-      const body = await response.json() as { url?: string; error?: string };
-      if (!response.ok || !body.url) throw new Error(body.error ?? "이미지 업로드에 실패했습니다.");
-      return body.url;
+      const { url } = await uploadImage(file);
+      return url;
     } catch (error) {
       setUploadError(errorMessage(error));
       throw error;
@@ -704,7 +698,7 @@ function Editor({ initialBlocks, mentions, onChange }: Props) {
         </label>
         <label className="image-properties-upload" onMouseDown={(event) => event.stopPropagation()} onPointerDown={(event) => event.stopPropagation()} style={{ cursor: "pointer" }}>
           이미지 바꾸기
-          <input type="file" accept="image/*" onChange={replaceSelectedImage} />
+          <input type="file" accept={imageFileAccept} onChange={replaceSelectedImage} />
         </label>
         <button type="button" onClick={() => { setSelectedImageId(null); setImagePropertiesPosition(null); }} onMouseDown={(event) => { event.preventDefault(); event.stopPropagation(); }} onPointerDown={(event) => { event.preventDefault(); event.stopPropagation(); }}>닫기</button>
       </aside>}

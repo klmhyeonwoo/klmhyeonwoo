@@ -5,6 +5,7 @@ import { createReactBlockSpec, type ReactCustomBlockRenderProps } from "@blockno
 import { createPortal } from "react-dom";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { cropRatio, imageCropAspects, imageCropFrom, type ImageCropAspect } from "@/lib/image-crop";
+import { imageFileAccept, uploadImage } from "@/lib/client-image-upload";
 
 const createImageBlockConfig = createBlockConfig(
   () => ({
@@ -39,6 +40,8 @@ function ImageCropDialog({ block, editor, onClose }: Pick<ImageBlock, "block" | 
   const [focusX, setFocusX] = useState(currentCrop.focusX);
   const [focusY, setFocusY] = useState(currentCrop.focusY);
   const [zoom, setZoom] = useState(currentCrop.zoom);
+  const [naturalAspect, setNaturalAspect] = useState<number | null>(null);
+  const [canvasHeight, setCanvasHeight] = useState(448);
   const canvasRef = useRef<HTMLDivElement>(null);
   const drag = useRef<{ pointerId: number; x: number; y: number; focusX: number; focusY: number } | null>(null);
 
@@ -49,6 +52,12 @@ function ImageCropDialog({ block, editor, onClose }: Pick<ImageBlock, "block" | 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [onClose]);
+  useEffect(() => {
+    const updateCanvasHeight = () => setCanvasHeight(Math.min(window.innerHeight * 0.56, 560));
+    updateCanvasHeight();
+    window.addEventListener("resize", updateCanvasHeight);
+    return () => window.removeEventListener("resize", updateCanvasHeight);
+  }, []);
 
   const beginDrag = (event: React.PointerEvent<HTMLDivElement>) => {
     if (aspect === "original") return;
@@ -77,6 +86,11 @@ function ImageCropDialog({ block, editor, onClose }: Pick<ImageBlock, "block" | 
     editor.updateBlock(block, { props: { cropAspect: aspect, cropX: focusX, cropY: focusY, cropZoom: zoom } });
     onClose();
   };
+  const fixedAspect = cropRatio(aspect);
+  const [aspectWidth, aspectHeight] = fixedAspect?.split("/").map(Number) ?? [];
+  const previewAspect = aspectWidth && aspectHeight ? aspectWidth / aspectHeight : naturalAspect ?? (9 / 16);
+  const isPortraitPreview = previewAspect < 1;
+  const portraitWidth = Math.round(Math.min(320, canvasHeight * previewAspect));
 
   return createPortal(<div className="image-crop-backdrop" onMouseDown={onClose} role="presentation">
     <section aria-describedby="image-crop-description" aria-labelledby="image-crop-title" className="image-crop-dialog" onMouseDown={(event) => event.stopPropagation()} role="dialog" aria-modal="true">
@@ -84,14 +98,14 @@ function ImageCropDialog({ block, editor, onClose }: Pick<ImageBlock, "block" | 
       <p id="image-crop-description">비율을 고른 뒤 사진을 직접 드래그해 보여줄 영역을 맞추세요.</p>
       <div
         aria-label="사진 자르기 영역"
-        className={`image-crop-canvas${aspect === "original" ? " is-original" : ""}`}
+        className={`image-crop-canvas${aspect === "original" ? " is-original" : ""}${isPortraitPreview ? " is-portrait" : ""}`}
         onPointerCancel={endDrag}
         onPointerDown={beginDrag}
         onPointerMove={moveDrag}
         onPointerUp={endDrag}
         ref={canvasRef}
-        style={{ aspectRatio: cropRatio(aspect) ?? "4 / 3" }}
-      ><img alt="" draggable={false} src={block.props.url} style={{ objectPosition: `${focusX}% ${focusY}%`, transform: `scale(${zoom})`, transformOrigin: `${focusX}% ${focusY}%` }} /><span aria-hidden="true" className="image-crop-grid" /></div>
+        style={{ aspectRatio: previewAspect, ...(isPortraitPreview ? { width: `${portraitWidth}px` } : {}) }}
+      ><img alt="" draggable={false} onLoad={(event) => { const { naturalHeight, naturalWidth } = event.currentTarget; if (naturalWidth && naturalHeight) setNaturalAspect(naturalWidth / naturalHeight); }} src={block.props.url} style={{ objectPosition: `${focusX}% ${focusY}%`, transform: `scale(${zoom})`, transformOrigin: `${focusX}% ${focusY}%` }} /><span aria-hidden="true" className="image-crop-grid" /></div>
       <div className="image-crop-options">
         <div aria-label="자르기 비율" className="image-crop-aspects" role="group">
           {imageCropAspects.map((option) => <button className={aspect === option ? "is-selected" : undefined} key={option} onClick={() => { setAspect(option); if (option === "original") { setFocusX(50); setFocusY(50); setZoom(1); } }} type="button">{option === "original" ? "원본" : option}</button>)}
@@ -106,7 +120,8 @@ function ImageCropDialog({ block, editor, onClose }: Pick<ImageBlock, "block" | 
 function ImageBlock({ block, editor }: ImageBlock) {
   const [editing, setEditing] = useState(false);
   const [url, setUrl] = useState(block.props.url);
-  const [uploading, setUploading] = useState(false);
+  const [uploadStatus, setUploadStatus] = useState("");
+  const [uploadError, setUploadError] = useState("");
   const crop = imageCropFrom(block.props);
   const width = typeof block.props.previewWidth === "number" ? block.props.previewWidth : undefined;
   const alignment = block.props.textAlignment === "right" ? { marginLeft: "auto" } : block.props.textAlignment === "center" ? { marginInline: "auto" } : undefined;
@@ -126,28 +141,21 @@ function ImageBlock({ block, editor }: ImageBlock) {
     const file = event.currentTarget.files?.[0];
     event.currentTarget.value = "";
     if (!file) return;
-    setUploading(true);
+    setUploadError("");
     try {
-      if (!file.type.startsWith("image/")) throw new Error("이미지 파일만 올릴 수 있습니다.");
-      if (file.size > 5 * 1024 * 1024) throw new Error("이미지는 5MB 이하여야 합니다.");
-      const form = new FormData();
-      form.append("file", file);
-      const response = await fetch("/api/upload", { method: "POST", body: form });
-      const payload = await response.json() as { url?: string; error?: string };
-      if (!response.ok || !payload.url) throw new Error(payload.error ?? "이미지를 올리지 못했습니다.");
-      editor.updateBlock(block, { props: { url: payload.url, name: file.name, cropAspect: "original", cropX: 50, cropY: 50, cropZoom: 1 } });
-    } catch {
-      // Upload errors are also surfaced by the editor's save flow; keeping the
-      // empty block lets the author immediately choose another file.
+      const { url: uploadedUrl, file: prepared } = await uploadImage(file, ({ stage, progress }) => setUploadStatus(stage === "uploading" ? "업로드 중…" : `WebP 변환 중…${typeof progress === "number" ? ` ${Math.round(progress)}%` : ""}`));
+      editor.updateBlock(block, { props: { url: uploadedUrl, name: prepared.name, cropAspect: "original", cropX: 50, cropY: 50, cropZoom: 1 } });
+    } catch (error) {
+      setUploadError(error instanceof Error ? error.message : "이미지를 올리지 못했습니다.");
     } finally {
-      setUploading(false);
+      setUploadStatus("");
     }
   };
 
   if (!block.props.url) {
     return <section className="editor-image-empty" contentEditable={false} onMouseDown={(event) => event.stopPropagation()} onPointerDown={(event) => event.stopPropagation()}>
       <span aria-hidden="true">▧</span><strong>이미지</strong><small>파일을 올리거나 이미지 주소를 입력하세요.</small>
-      <div><label><input accept="image/*" onChange={upload} type="file" />{uploading ? "업로드 중…" : "파일 선택"}</label><input aria-label="이미지 주소" onBlur={commitUrl} onChange={(event) => setUrl(event.currentTarget.value)} onKeyDown={(event) => { if (event.key === "Enter") { event.preventDefault(); commitUrl(); } }} placeholder="https://" value={url} /></div>
+      <div><label><input accept={imageFileAccept} onChange={upload} type="file" />{uploadStatus || "파일 선택"}</label><input aria-label="이미지 주소" onBlur={commitUrl} onChange={(event) => setUrl(event.currentTarget.value)} onKeyDown={(event) => { if (event.key === "Enter") { event.preventDefault(); commitUrl(); } }} placeholder="https://" value={url} /></div>{uploadError && <small role="alert">{uploadError}</small>}
     </section>;
   }
 

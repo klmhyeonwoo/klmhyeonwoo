@@ -6,6 +6,7 @@ import { Button } from "@base-ui/react/button";
 import { Input } from "@base-ui/react/input";
 import type { Series } from "@/lib/series";
 import { ToastMessage } from "./toast-message";
+import { imageFileAccept, uploadImage } from "@/lib/client-image-upload";
 
 function seriesId(name: string) {
   const normalized = name.trim().toLowerCase().replace(/[가-힣]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
@@ -20,6 +21,7 @@ export function SeriesCreate({ series }: { series: Series[] }) {
   const [coverImage, setCoverImage] = useState("");
   const [coverFile, setCoverFile] = useState<File | null>(null);
   const [saving, setSaving] = useState(false);
+  const [uploadStatus, setUploadStatus] = useState("");
   const [message, setMessage] = useState("");
 
   async function create(event: FormEvent<HTMLFormElement>) {
@@ -32,16 +34,14 @@ export function SeriesCreate({ series }: { series: Series[] }) {
     }
     setSaving(true);
     setMessage("");
+    setUploadStatus("");
     try {
       let nextCoverImage = coverImage.trim();
       if (coverFile) {
-        const form = new FormData();
-        form.append("file", coverFile);
-        const uploadResponse = await fetch("/api/upload", { method: "POST", body: form });
-        const uploadPayload = await uploadResponse.json() as { url?: string; error?: string };
-        if (!uploadResponse.ok || !uploadPayload.url) throw new Error(uploadPayload.error ?? "표지 이미지를 업로드하지 못했습니다.");
-        nextCoverImage = uploadPayload.url;
+        const { url } = await uploadImage(coverFile, ({ stage, progress }) => setUploadStatus(stage === "uploading" ? "이미지 업로드 중…" : `WebP 변환 중…${typeof progress === "number" ? ` ${Math.round(progress)}%` : ""}`));
+        nextCoverImage = url;
       }
+      setUploadStatus("시리즈 만드는 중…");
       const response = await fetch("/api/series", { method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify({ series: [...series, { id: seriesId(title), name: title, description: description.trim(), ...(nextCoverImage ? { coverImage: nextCoverImage } : {}) }] }) });
       const payload = await response.json() as { error?: string };
       if (!response.ok) throw new Error(payload.error ?? "시리즈를 만들지 못했습니다.");
@@ -55,9 +55,10 @@ export function SeriesCreate({ series }: { series: Series[] }) {
       setMessage(error instanceof Error ? error.message : "시리즈를 만들지 못했습니다.");
     } finally {
       setSaving(false);
+      setUploadStatus("");
     }
   }
 
   if (!open) return <Button className="series-card series-create-card" onClick={() => setOpen(true)}><div className="series-book" aria-hidden="true"><div className="series-book-spine" /><div className="series-book-cover"><span>+</span></div><div className="series-book-pages" /></div><h2>새 시리즈</h2></Button>;
-  return <form className="series-card series-create-card series-create-form" onSubmit={create}><div className="series-book" aria-hidden="true"><div className="series-book-spine" /><div className="series-book-cover"><span>+</span></div><div className="series-book-pages" /></div><Input autoFocus value={name} onValueChange={setName} placeholder="시리즈 이름" aria-label="시리즈 이름" required /><Input value={description} onValueChange={setDescription} placeholder="소개 (선택)" aria-label="시리즈 소개" /><Input value={coverImage} onValueChange={(value) => { setCoverFile(null); setCoverImage(value); }} placeholder="표지 이미지 URL" aria-label="표지 이미지 URL" /><label className="series-cover-upload">GitHub에 업로드<input type="file" accept="image/*" onChange={(event) => setCoverFile(event.currentTarget.files?.[0] ?? null)} /><span>{coverFile ? coverFile.name : "파일 선택"}</span></label><div className="series-create-actions"><Button type="button" onClick={() => setOpen(false)}>취소</Button><Button type="submit" disabled={saving}>{saving ? <><span className="async-spinner" aria-hidden="true" />만드는 중…</> : "만들기"}</Button></div><ToastMessage message={message} tone="error" /></form>;
+  return <form className="series-card series-create-card series-create-form" onSubmit={create}><div className="series-book" aria-hidden="true"><div className="series-book-spine" /><div className="series-book-cover"><span>+</span></div><div className="series-book-pages" /></div><Input autoFocus value={name} onValueChange={setName} placeholder="시리즈 이름" aria-label="시리즈 이름" required /><Input value={description} onValueChange={setDescription} placeholder="소개 (선택)" aria-label="시리즈 소개" /><Input value={coverImage} onValueChange={(value) => { setCoverFile(null); setCoverImage(value); }} placeholder="표지 이미지 URL" aria-label="표지 이미지 URL" /><label className="series-cover-upload">GitHub에 업로드<input type="file" accept={imageFileAccept} onChange={(event) => setCoverFile(event.currentTarget.files?.[0] ?? null)} /><span>{coverFile ? coverFile.name : "파일 선택"}</span></label><div className="series-create-actions"><Button type="button" onClick={() => setOpen(false)}>취소</Button><Button type="submit" disabled={saving}>{saving ? <><span className="async-spinner" aria-hidden="true" />{uploadStatus || "만드는 중…"}</> : "만들기"}</Button></div><ToastMessage message={message} tone="error" /></form>;
 }

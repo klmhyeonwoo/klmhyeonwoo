@@ -77,12 +77,18 @@ dependencies:
   '@tiptap/starter-kit':
     specifier: ^3.32.0
     version: 3.32.0
+  browser-image-compression:
+    specifier: 2.0.2
+    version: 2.0.2
   emoji-picker-react:
     specifier: ^5.0.0
     version: 5.0.0(react@19.3.1)
   gray-matter:
     specifier: ^4.0.3
     version: 4.0.3
+  heic-to:
+    specifier: 1.6.6
+    version: 1.6.6
   lowlight:
     specifier: ^3.3.0
     version: 3.3.0
@@ -2826,6 +2832,12 @@ packages:
       fill-range: 7.1.1
     dev: true
 
+  /browser-image-compression@2.0.2:
+    resolution: {integrity: sha512-pBLlQyUf6yB8SmmngrcOw3EoS4RpQ1BcylI3T9Yqn7+4nrQTXJD4sJDe5ODnJdrvNMaio5OicFo75rDyJD2Ucw==}
+    dependencies:
+      uzip: 0.20201231.0
+    dev: false
+
   /browserslist@4.29.3:
     resolution: {integrity: sha512-1R4kiYKXGViqEN0CnoDrXc1StD9niAwu+j2dukWzrD4bJgsD4lDmEp0CRbc6E/vYJIfTHwPmwyaKtVSudICdPA==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
@@ -4341,6 +4353,11 @@ packages:
     resolution: {integrity: sha512-88JUN06ipLwsnv+dVn+OIYOvAuvBMy/Qoi6O7mQHxdPXpjy+Cd6xRkWwux7DKO+4sYILtLBRIKgsdpS2gQc7qw==}
     dependencies:
       '@types/hast': 3.0.5
+    dev: false
+
+  /heic-to@1.6.6:
+    resolution: {integrity: sha512-PYpOtPFEzgPxIoGF4LQ+oBD8o/tMvcFDNynrNzK1fLXfE6mTe2W+AHOvBKc5MwnVak4/Pnb51g9CJAtWL5YGWA==}
+    requiresBuild: true
     dev: false
 
   /hermes-estree@0.25.1:
@@ -6911,6 +6928,10 @@ packages:
   /uuid@14.0.3:
     resolution: {integrity: sha512-Sc5u1VVln93y1Xnz4R+CunOZc7R9LUcTmhj7Rc7Eg3HVcf7rVn2FOoa812fe0W8p3jD7xeoGSYbfqCGGH2B6xw==}
     hasBin: true
+    dev: false
+
+  /uzip@0.20201231.0:
+    resolution: {integrity: sha512-OZeJfZP+R0z9D6TmBgLq2LHzSSptGMGDGigGiEe0pr8UBe/7fdflgHlHBNDASTXB5jnFuxHpNaJywSg8YFeGng==}
     dev: false
 
   /vfile-matter@5.0.1:

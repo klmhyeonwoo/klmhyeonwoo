@@ -1295,6 +1295,7 @@ html[data-theme="dark"] .editor [data-content-type="codeBlock"] .shiki {
   border-radius: 1.125rem;
   box-shadow: 0 1.25rem 5rem color-mix(in srgb, #000 22%, transparent);
   box-sizing: border-box;
+  margin: 0;
   max-height: calc(100dvh - 2rem);
   max-width: 34rem;
   overflow: auto;
@@ -1372,6 +1373,10 @@ html[data-theme="dark"] .editor [data-content-type="codeBlock"] .shiki {
 .image-crop-canvas.is-original {
   cursor: default;
 }
+.image-crop-canvas.is-original .image-crop-grid { display: none; }
+.image-crop-canvas.is-portrait {
+  margin-inline: auto;
+}
 
 .image-crop-canvas img {
   height: 100%;
@@ -1380,6 +1385,7 @@ html[data-theme="dark"] .editor [data-content-type="codeBlock"] .shiki {
   user-select: none;
   width: 100%;
 }
+.image-crop-canvas.is-original img { object-fit: contain; }
 
 .image-crop-grid {
   background-image: linear-gradient(to right, transparent 33.1%, rgb(255 255 255 / 45%) 33.33%, transparent 33.55%, transparent 66.43%, rgb(255 255 255 / 45%) 66.66%, transparent 66.88%), linear-gradient(to bottom, transparent 33.1%, rgb(255 255 255 / 45%) 33.33%, transparent 33.55%, transparent 66.43%, rgb(255 255 255 / 45%) 66.66%, transparent 66.88%);
@@ -1420,13 +1426,16 @@ html[data-theme="dark"] .editor [data-content-type="codeBlock"] .shiki {
   grid-template-columns: auto 1fr auto;
 }
 
+.image-crop-zoom label { display: contents; }
+
 .image-crop-zoom input {
   accent-color: var(--ink);
   min-width: 0;
 }
 
-.image-crop-zoom output {
+.image-crop-zoom-value {
   color: var(--ink);
+  font-size: 0.75rem;
   font-variant-numeric: tabular-nums;
   min-width: 2.75rem;
   text-align: right;
@@ -1868,6 +1877,23 @@ html[data-theme="dark"] .tiptap-code-block-header select {
   height: auto;
   max-width: 100%;
   width: 100%;
+}
+.tiptap-image-frame.is-cropped {
+  background: var(--interactive-subtle);
+}
+.tiptap-image-frame.is-cropped > img {
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  transition: transform 160ms ease-out;
+}
+.tiptap-image-frame > .editor-upload-status {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0;
+  min-height: 10rem;
+  padding: 1.25rem;
 }
 .tiptap-image-empty {
   align-items: center;

@@ -7,6 +7,7 @@ import { Button } from "@base-ui/react/button";
 import type { PostMeta } from "@/lib/posts";
 import { useAdminSession } from "./admin-session";
 import { ToastMessage } from "./toast-message";
+import { imageFileAccept, uploadImage } from "@/lib/client-image-upload";
 
 type Row = Pick<PostMeta, "id" | "title" | "description" | "thumbnail" | "showInList">;
 
@@ -16,6 +17,7 @@ export function SeriesArticleManager({ posts }: { posts: PostMeta[] }) {
   const [open, setOpen] = useState(false);
   const [rows, setRows] = useState<Row[]>(posts.map(({ id, title, description, thumbnail, showInList }) => ({ id, title, description, thumbnail, showInList })));
   const [savingId, setSavingId] = useState<string | null>(null);
+  const [uploadStatus, setUploadStatus] = useState("");
   const [message, setMessage] = useState("");
 
   if (authenticated !== true) return null;
@@ -27,17 +29,15 @@ export function SeriesArticleManager({ posts }: { posts: PostMeta[] }) {
   async function upload(id: string, file: File) {
     setSavingId(id);
     setMessage("");
+    setUploadStatus("");
     try {
-      const form = new FormData();
-      form.append("file", file);
-      const response = await fetch("/api/upload", { method: "POST", body: form });
-      const payload = await response.json() as { url?: string; error?: string };
-      if (!response.ok || !payload.url) throw new Error(payload.error ?? "이미지를 업로드하지 못했습니다.");
-      update(id, { thumbnail: payload.url });
+      const { url } = await uploadImage(file, ({ stage, progress }) => setUploadStatus(stage === "uploading" ? "이미지 업로드 중…" : `WebP 변환 중…${typeof progress === "number" ? ` ${Math.round(progress)}%` : ""}`));
+      update(id, { thumbnail: url });
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "이미지를 업로드하지 못했습니다.");
     } finally {
       setSavingId(null);
+      setUploadStatus("");
     }
   }
 
@@ -45,6 +45,7 @@ export function SeriesArticleManager({ posts }: { posts: PostMeta[] }) {
     if (!row.title.trim()) { setMessage("아티클 제목을 입력해 주세요."); return; }
     setSavingId(row.id);
     setMessage("");
+    setUploadStatus("저장 중…");
     try {
       const response = await fetch(`/api/posts/${row.id}/presentation`, {
         method: "PUT",
@@ -59,6 +60,7 @@ export function SeriesArticleManager({ posts }: { posts: PostMeta[] }) {
       setMessage(error instanceof Error ? error.message : "아티클 정보를 저장하지 못했습니다.");
     } finally {
       setSavingId(null);
+      setUploadStatus("");
     }
   }
 
@@ -69,7 +71,7 @@ export function SeriesArticleManager({ posts }: { posts: PostMeta[] }) {
         <div className="series-manager-index">{String(index + 1).padStart(2, "0")}</div>
         <div className="series-manager-image">
           {row.thumbnail ? <img src={row.thumbnail} alt="" /> : <span>{row.title.slice(0, 1)}</span>}
-          <label>이미지 변경<input type="file" accept="image/*" onChange={(event) => { const file = event.currentTarget.files?.[0]; event.currentTarget.value = ""; if (file) void upload(row.id, file); }} /></label>
+          <label>{savingId === row.id ? <><span className="async-spinner" aria-hidden="true" />{uploadStatus || "처리 중…"}</> : "이미지 변경"}<input type="file" accept={imageFileAccept} disabled={savingId !== null} onChange={(event) => { const file = event.currentTarget.files?.[0]; event.currentTarget.value = ""; if (file) void upload(row.id, file); }} /></label>
         </div>
         <div className="series-manager-fields">
           <input value={row.title} onChange={(event) => update(row.id, { title: event.target.value })} aria-label={`${row.title} 제목`} placeholder="아티클 제목" />

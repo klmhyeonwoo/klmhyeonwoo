@@ -6,6 +6,7 @@ import type { SiteSettings } from "@/lib/site-settings";
 import { AnnouncementIcon } from "./announcement-icon";
 import { IconXmarkLine } from "@karrotmarket/react-monochrome-icon";
 import { ToastMessage } from "./toast-message";
+import { imageFileAccept, uploadImage } from "@/lib/client-image-upload";
 
 type ActionKey = "action" | "primaryAction" | "secondaryAction";
 
@@ -22,6 +23,7 @@ export function BlogSettingsEditor({ initialSettings }: { initialSettings: SiteS
   const [popupFile, setPopupFile] = useState<File | null>(null);
   const [popupPreview, setPopupPreview] = useState(initialSettings.popup.image);
   const [saving, setSaving] = useState(false);
+  const [uploadStatus, setUploadStatus] = useState("");
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -37,12 +39,12 @@ export function BlogSettingsEditor({ initialSettings }: { initialSettings: SiteS
   function selectImage(event: ChangeEvent<HTMLInputElement>) {
     const file = event.currentTarget.files?.[0];
     if (!file) return;
-    if (!file.type.startsWith("image/") || file.size > 5 * 1024 * 1024) {
-      setMessage("5MB 이하의 이미지 파일만 선택할 수 있습니다.");
+    if ((!file.type.startsWith("image/") && !/\.(heic|heif)$/i.test(file.name)) || file.size > 20 * 1024 * 1024) {
+      setMessage("20MB 이하의 이미지 파일만 선택할 수 있습니다.");
       return;
     }
     setPopupFile(file);
-    setMessage("이미지를 선택했습니다. 저장하기를 누르면 GitHub에 업로드됩니다.");
+    setMessage("이미지를 선택했습니다. 저장할 때 WebP로 변환됩니다.");
   }
 
   function updateAction(section: "banner" | "popup", key: ActionKey, action: { label: string; href: string }) {
@@ -52,16 +54,14 @@ export function BlogSettingsEditor({ initialSettings }: { initialSettings: SiteS
   async function save() {
     setSaving(true);
     setMessage("");
+    setUploadStatus("");
     try {
       let next = settings;
       if (popupFile) {
-        const form = new FormData();
-        form.append("file", popupFile);
-        const upload = await fetch("/api/upload", { method: "POST", body: form });
-        const payload = await upload.json() as { url?: string; error?: string };
-        if (!upload.ok || !payload.url) throw new Error(payload.error ?? "이미지 업로드에 실패했습니다.");
-        next = { ...next, popup: { ...next.popup, image: payload.url } };
+        const { url } = await uploadImage(popupFile, ({ stage, progress }) => setUploadStatus(stage === "uploading" ? "이미지 업로드 중…" : `WebP 변환 중…${typeof progress === "number" ? ` ${Math.round(progress)}%` : ""}`));
+        next = { ...next, popup: { ...next.popup, image: url } };
       }
+      setUploadStatus("설정 저장 중…");
       const response = await fetch("/api/site-settings", { method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify(next) });
       const payload = await response.json() as { error?: string };
       if (!response.ok) throw new Error(payload.error ?? "블로그 설정을 저장하지 못했습니다.");
@@ -72,11 +72,12 @@ export function BlogSettingsEditor({ initialSettings }: { initialSettings: SiteS
       setMessage(error instanceof Error ? error.message : "저장 중 연결 오류가 발생했습니다.");
     } finally {
       setSaving(false);
+      setUploadStatus("");
     }
   }
 
   return <main className="settings-page">
-    <header className="settings-page-header"><div><h1>블로그 관리</h1><p>공개 화면에 표시할 알림을 설정합니다.</p></div><button onClick={save} disabled={saving}>{saving ? <><span className="async-spinner" aria-hidden="true" />저장 중…</> : "저장하기"}</button></header>
+    <header className="settings-page-header"><div><h1>블로그 관리</h1><p>공개 화면에 표시할 알림을 설정합니다.</p></div><button onClick={save} disabled={saving}>{saving ? <><span className="async-spinner" aria-hidden="true" />{uploadStatus || "저장 중…"}</> : "저장하기"}</button></header>
 
     <section className="settings-panel">
       <header><h2>상단 배너</h2><Toggle label={settings.banner.enabled ? "켜짐" : "꺼짐"} checked={settings.banner.enabled} onChange={(enabled) => setSettings((current) => ({ ...current, banner: { ...current.banner, enabled } }))} /></header>
@@ -89,7 +90,7 @@ export function BlogSettingsEditor({ initialSettings }: { initialSettings: SiteS
     <section className="settings-panel">
       <header><h2>팝업</h2><Toggle label={settings.popup.enabled ? "켜짐" : "꺼짐"} checked={settings.popup.enabled} onChange={(enabled) => setSettings((current) => ({ ...current, popup: { ...current.popup, enabled } }))} /></header>
       <div className="settings-panel-content">
-        <div className="settings-fields"><label>이미지 URL<input value={popupFile ? "" : settings.popup.image} onChange={(event) => { const image = event.currentTarget.value; setPopupFile(null); setSettings((current) => ({ ...current, popup: { ...current.popup, image } })); }} placeholder="https://…" /></label><label className="settings-upload">GitHub에 이미지 업로드<input type="file" accept="image/*" onChange={selectImage} /><span>{popupFile ? popupFile.name : "파일 선택"}</span></label><label>제목<input value={settings.popup.title} maxLength={130} onChange={(event) => { const title = event.currentTarget.value; setSettings((current) => ({ ...current, popup: { ...current.popup, title } })); }} placeholder="팝업 제목" /></label><label>설명<textarea value={settings.popup.description} maxLength={400} onChange={(event) => { const description = event.currentTarget.value; setSettings((current) => ({ ...current, popup: { ...current.popup, description } })); }} placeholder="방문자에게 전달할 내용" /></label><ActionFields title="기본 버튼" action={settings.popup.primaryAction} onChange={(action) => updateAction("popup", "primaryAction", action)} /><ActionFields title="보조 버튼" action={settings.popup.secondaryAction} onChange={(action) => updateAction("popup", "secondaryAction", action)} /></div>
+        <div className="settings-fields"><label>이미지 URL<input value={popupFile ? "" : settings.popup.image} onChange={(event) => { const image = event.currentTarget.value; setPopupFile(null); setSettings((current) => ({ ...current, popup: { ...current.popup, image } })); }} placeholder="https://…" /></label><label className="settings-upload">GitHub에 이미지 업로드<input type="file" accept={imageFileAccept} onChange={selectImage} /><span>{popupFile ? popupFile.name : "파일 선택"}</span></label><label>제목<input value={settings.popup.title} maxLength={130} onChange={(event) => { const title = event.currentTarget.value; setSettings((current) => ({ ...current, popup: { ...current.popup, title } })); }} placeholder="팝업 제목" /></label><label>설명<textarea value={settings.popup.description} maxLength={400} onChange={(event) => { const description = event.currentTarget.value; setSettings((current) => ({ ...current, popup: { ...current.popup, description } })); }} placeholder="방문자에게 전달할 내용" /></label><ActionFields title="기본 버튼" action={settings.popup.primaryAction} onChange={(action) => updateAction("popup", "primaryAction", action)} /><ActionFields title="보조 버튼" action={settings.popup.secondaryAction} onChange={(action) => updateAction("popup", "secondaryAction", action)} /></div>
         <div className="settings-preview popup-preview-area"><div className="popup-preview"><button aria-label="미리보기 닫기" type="button"><IconXmarkLine size={18} /></button>{popupPreview ? <img src={popupPreview} alt="" /> : <div className="popup-preview-placeholder"><AnnouncementIcon /></div>}<div><h3>{settings.popup.title || "팝업 제목"}</h3><p>{settings.popup.description || "팝업 설명"}</p>{settings.popup.primaryAction.label && <b>{settings.popup.primaryAction.label}</b>}</div></div></div>
       </div>
     </section>

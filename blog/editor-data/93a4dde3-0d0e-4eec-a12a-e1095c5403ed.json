@@ -396,6 +396,28 @@
             "id": "k30J1lui9vpa",
             "textAlign": "left"
           }
+        },
+        {
+          "type": "image",
+          "attrs": {
+            "id": "lDI1bcgkVbDH",
+            "src": "https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/main/blog/public/uploads/1793113079392-4567697f.webp",
+            "alt": "IMG_6610.heic",
+            "title": null,
+            "width": 252,
+            "height": null,
+            "cropAspect": "original",
+            "cropX": 50,
+            "cropY": 50,
+            "cropZoom": 1
+          }
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "ayS65owYFBV0",
+            "textAlign": "left"
+          }
         }
       ]
     }

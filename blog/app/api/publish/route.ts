@@ -70,7 +70,9 @@ export async function POST(request: Request) {
       showInList,
       coverImage,
     });
-    if (fromDraft) await deleteDraft(postId, title.trim());
+    // Publishing has succeeded even if removing the draft fails; never invite
+    // a retry that would create another production commit for the same post.
+    if (fromDraft) await deleteDraft(postId, title.trim()).catch((error) => console.error("Draft cleanup failed", error));
     revalidateTag(postsCacheTag, "max");
     revalidatePath("/");
     revalidatePath(`/posts/${postId}`);

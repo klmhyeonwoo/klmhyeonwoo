@@ -1590,7 +1590,9 @@ html[data-theme="dark"] .editor .bn-container {
   background: #fff;
   border-bottom: 1px solid #1d1d1d;
   position: relative;
-  z-index: 40;
+  /* Keep header popovers above the cursor canvas (40), while modal dialogs
+     (60) and toasts (100) remain the topmost UI. */
+  z-index: 50;
 }
 .shared-header-inner {
   align-items: center;

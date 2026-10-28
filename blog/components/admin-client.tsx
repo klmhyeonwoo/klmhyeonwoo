@@ -207,7 +207,7 @@ export function AdminClient({ authenticated: initiallyAuthenticated, initialPost
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ password: adminPassword }),
     });
-    if (response.ok) { updateSession(true); setAdminPassword(""); }
+    if (response.ok) { updateSession(true); window.location.reload(); }
     else setMessage((await response.json()).error);
   }
 

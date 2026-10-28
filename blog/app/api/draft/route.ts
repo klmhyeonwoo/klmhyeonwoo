@@ -2,8 +2,7 @@ import { randomUUID } from "crypto";
 import { NextResponse } from "next/server";
 import { isAdmin } from "@/lib/auth";
 import { isContentReferenceId } from "@/lib/content-reference";
-import { deleteDraft, saveDraft } from "@/lib/github";
-import { getDrafts } from "@/lib/posts";
+import { deleteDraft, getRemoteDrafts, saveDraft } from "@/lib/github";
 
 const validPostId = /^[a-z0-9]+(?:[a-z0-9-]*[a-z0-9])?$/;
 
@@ -44,9 +43,9 @@ export async function DELETE(request: Request) {
   const body = await request.json().catch(() => null) as { id?: unknown } | null;
   const id = typeof body?.id === "string" ? body.id : "";
   if (!validPostId.test(id)) return NextResponse.json({ error: "삭제할 임시글을 확인해 주세요." }, { status: 400 });
-  const draft = getDrafts().find((item) => item.id === id);
-  if (!draft) return NextResponse.json({ error: "임시글을 찾을 수 없습니다." }, { status: 404 });
   try {
+    const draft = (await getRemoteDrafts()).find((item) => item.id === id);
+    if (!draft) return NextResponse.json({ error: "임시글을 찾을 수 없습니다." }, { status: 404 });
     await deleteDraft(id, draft.title);
     return NextResponse.json({ ok: true, id });
   } catch (error) {

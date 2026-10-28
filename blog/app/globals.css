@@ -1589,6 +1589,8 @@ html[data-theme="dark"] .editor .bn-container {
 .shared-header {
   background: #fff;
   border-bottom: 1px solid #1d1d1d;
+  position: relative;
+  z-index: 40;
 }
 .shared-header-inner {
   align-items: center;
@@ -3594,7 +3596,7 @@ html[data-theme="dark"] .article-reading-progress { box-shadow: 0 10px 28px rgb(
 }
 @media (max-width: 760px) {
   .shared-header-inner {
-    overflow: hidden;
+    overflow: visible;
   }
   .header-actions {
     min-width: 0;

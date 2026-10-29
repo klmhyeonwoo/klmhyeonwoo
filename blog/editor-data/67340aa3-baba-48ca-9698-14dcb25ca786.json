@@ -166,9 +166,135 @@
           ]
         },
         {
+          "type": "heading",
+          "attrs": {
+            "id": "E8JFbX8HoN9E",
+            "textAlign": "left",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "타인보다 자기 리듬에 집중하기"
+            }
+          ]
+        },
+        {
           "type": "paragraph",
           "attrs": {
-            "id": "th746fkRrgp8",
+            "id": "SfF0S16P5VHx",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "주변을 의식하지 않고, 지금 해야 할 일을 묵묵히 해낸다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "y_QrK78W_MHS",
+            "textAlign": "left",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "나무처럼 굳건하기"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "f4M3SR05FLtk",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "겉으로 평범해보여도 안에서 매일 쌓고, 흔들려도 기준은 무너지지 않는다. "
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "Z6v26XfNdUL7",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "모든게 막혀도 자리를 지킨다. 조급할수록 속도를 늦추고, 불확실 할 수록 구조를 먼저 세운다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "6GAYIGsH9r2j",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "말은 적지만 움직임은 일관되며, 결과는 조용히 증명한다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "FfazCQbucW6J",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "성공은 화려함이 아니라 집요한 태도에서 태어난다. 조용한 사람이 끝까지 간다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "mYXu7vtTrUeX",
+            "textAlign": "left"
+          }
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "SKLMN_NW-l_U",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "결국 남는 것은 단하나다."
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": " “흔들리지 않는 태도”"
+            },
+            {
+              "type": "text",
+              "text": " 이것이 성공의 본질이다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "3giv97Thnktu",
             "textAlign": "left"
           }
         }

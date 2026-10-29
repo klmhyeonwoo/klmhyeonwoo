@@ -21,5 +21,10 @@
     "name": "일상 이야기",
     "description": "일상입니다요",
     "coverImage": "https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/main/blog/public/uploads/1792678588776-94366e43.jpg"
+  },
+  {
+    "id": "series-90fb5487",
+    "name": "집 찾기 프로젝트",
+    "description": "내 집 좀 다오"
   }
 ]

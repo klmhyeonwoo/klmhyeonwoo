@@ -1,0 +1,713 @@
+[
+  {
+    "type": "slash-content",
+    "version": 1,
+    "content": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "ilmDOa5R8tCT",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "백오피스 개발을 진행할 때 대량의 데이터를 다루는 대시보드 형태와 리스트 형태를 많이 다루다보니 리스트에 여러 페이지네이션 뿐만 아니라 검색 필터조건들이 정말 많은 편이다. 그 과정에서 데이터 패칭 시에 서버 데이터의 상태 관리를 위한 tanstack query를 사용하고 있다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "4kwIPz0lJRAW",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "tanstack query에서는 해당 데이터의 재패치를 하기 위해 의존성으로 "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "code"
+                }
+              ],
+              "text": "queryKey"
+            },
+            {
+              "type": "text",
+              "text": "라는 값을 설정하게 되는데, 이 "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "code"
+                }
+              ],
+              "text": "queryKey"
+            },
+            {
+              "type": "text",
+              "text": "에 설정된 데이터들이 바뀌게 되면 데이터의 재패치가 일어난다. 그런데, 아래와 같은 코드가 있다고 가정해보자. 정말 신기한 일이 일어난다."
+            }
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "attrs": {
+            "id": "VFjwkuRWoRPw",
+            "language": "javascript"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "// Vue3 Watch\nwatch([\n  searchDate,\n  searchCustomerType,\n  searchCustomer,\n  searchUserName,\n  searchFeedbackStatus,\n  searchPageRows,\n], () => {\n  currentPage.value = 1;\n}, { deep: true });"
+            }
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "attrs": {
+            "id": "vsUluD4q7tV1",
+            "language": "javascript"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "// Tanstack Data Fetch\n...\nqueryKey: () => ({\n\tcomputed(() => currentPage.value\n\tcomputed(() => searchDate.value\n  ...\n})"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "JctOeTcOwPC4",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "React를 본래 메인 기술 스택을 하던 사람이라면 위의 코드에서 이상한 점을 느꼈을 수도 있다. 바로 "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "code"
+                }
+              ],
+              "text": "queryKey"
+            },
+            {
+              "type": "text",
+              "text": "에 의존성으로 들어간 값을 "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "code"
+                }
+              ],
+              "text": "watch"
+            },
+            {
+              "type": "text",
+              "text": "에서 다른 값들이 변할 때 "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "code"
+                }
+              ],
+              "text": "currentPage"
+            },
+            {
+              "type": "text",
+              "text": "라는 값을 강제로 바꿔주면서 데이터가 여러 번 재패치가 일어날 수도 있다. 하지만 현실은 그렇지 않다. 단 1번의 패칭만이 일어나게 된다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "aCMkc3Ff7q63",
+            "textAlign": "left",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Vue의 배치 업데이트"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "eOkjRb0tLgjm",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "여기서의 핵심은 "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "code"
+                }
+              ],
+              "text": "queryKey"
+            },
+            {
+              "type": "text",
+              "text": "의 변경이 값을 대입하는 즉시 요청을 보내는 방식이 아니다. Vue의 반응성 업데이트가 한번에 모인뒤 최종 상태를 보고 처리된다는 점이다. 그래서 의존성에 들어간 값을 아무리 바꿔도 실제로 패치는 한번 실행이 된다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "tD64k9pOrxZb",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "예를 들어 아래와 같이 3번째 페이지에 도달했을 때 검색 필터를 바꾸게 되면 올바른 검색 결과를 위해 1번째 페이지로 이동을 해줘야한다, 이럴 때와 같이 동기 실행 흐름을 확인할 수 있다. "
+            }
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "attrs": {
+            "id": "9-vA-JgyjARf",
+            "language": "text"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "searchUserName = ‘홍길동‘\n→ 기존 watch 의존성 안에 searchUserName이 존재하기 때문에 watch 예약\n→ useQuery의 queryKey 갱신도 예약\n\nwatch 실행\n→ currentPage = 1\n→ queryKey 갱신이 다시 예약됨\n\n반응성 큐 flush\n→ 최종 queryKey: [‘…’, ‘홍길동’, 1]\n→ 이 키로 1회 조회됨"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "p0oBBECLqbgy",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Vue는 같은 tick 안에서 동일한 watcher/effect를 여러 번 실행하지 않도록 묶는다. 그래서 “새 필터 + 세번째 페이지” 라는 중간 키는 실제 요청으로 이어지기 전에, “새 필터 + 첫 번째 페이지”로 덮이게 된다. 반대로 아래처럼 페이지 변경을 다음 tick으로 미루번 2번 호출될 수 있다."
+            }
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "attrs": {
+            "id": "eNdkZrvVmJTG",
+            "language": "javascript"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "watch(searchUserName, async () => {\n\tawait nextTick();\n\tcurrentPage.value = 1;\n})"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "pk-hQk7EwTsz",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "이렇게 다음 tick으로 먼저 미룬 경우에는, 우리가 처음에 예상하던 바처럼 먼저 검색어 변경과 세번째 페이지로 한번 조회되고, 다음 tick에서 검색어 변경과 첫 번째 페이지로 두번 조회가 될 수 있다. 현재 구현은 await이나 setTimeout 없이 동기적으로 페이지를 바꾸므로, useQuery가 최종 키만 받아 보통 한 번 요청하는 구조를 가진다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "A0WmJsjCBZrA",
+            "textAlign": "left",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "반면 React에서는?"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "M2CTMtHW83YD",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "React도 queryKey에 의존성을 넣어놓으면 값이 변경될 때 재패치가 일어나는 원리는 같지만, useEffect 안에서 의존성 값을 바꿔주는 경우에는 2번 실행된다는 Vue와의 동작 차이점을 가지고 있다."
+            }
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "attrs": {
+            "id": "XR6mvaxwHHFk",
+            "language": "javascript"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "const [page, setPage] = useState(3);\nconst [keyword, seyKeyword] = useState(‘’);\n\n…\nuseQuery({\n\tqueryKey: [‘chat-list’, keyword, page],\n\tqueryFn: fetchChats\n});\n\nuseEffect(() => {\n\tsetPage(1);\n}. [keyword])"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "Es3vArzQXLRp",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "위와 같이 코드를 구성했다고 가정하고, 검색어 변경이 일어났을 때 검색어 변경 동작에 대한 렌더가 먼저 커밋되고, useQuery의 keyword + 기존 page로 요청한다. 이후 effect가 실행되어 page = 1에 대한 렌더 요청이 한번 더 일어나게 된다. 그래서 React에서는 검색 이벤트와 함께 이벤트로 명시적인 갱신처리를 하는 것이 안전하다."
+            }
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "attrs": {
+            "id": "iDJSiCVQW2iB",
+            "language": "javascript"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "const onChangeKeyword = (value: string) => {\n\tsetKeyword(value);\n\tsetPage(1);\n}"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "_C6kI6Eo_T03",
+            "textAlign": "left",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "useEffect와 watch는 왜 다를까?"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "nkZpdw71RKEG",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Vue가 React와 동작이 다른 점은, Vue의 watch는 기본적으로 렌더 전(pre-flush)에 실행되어, 이 React의 useEffect보다 “상태를 먼저 정리하는” 흐름에 가깝기에 한번에 처리할 수 있는 것이다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "5Q2vKooTHR5i",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "여기서 중요한 점은 페이지를 1번으로 바꾸는 코드가 어느 업데이트 단계에서 실행되느냐에 대한 차이이다. 현재 Vue 코드는 watch를 기반으로 업데이트가 되는 것을 확인할 수 있었다."
+            }
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "attrs": {
+            "id": "HG5VaSkcmc-c",
+            "language": "javascript"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "watch([…filters], () => {\n\tcurrentPage.value = 1;\n});"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "Sa209zSYdQSW",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Vue의 watch의 기본 실행 시점은 flush: ‘pre’, 즉 화면 렌더 및 반응성 작업 전에 실행되는 큐이다. 게다가 이 watch가 useQuery보다 먼저 등록되기 때문에 한번의 반응성 flush 안에서 아래와 같은 작업을 거쳐 1번 실행되게 되는 것이다."
+            }
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "attrs": {
+            "id": "84PhtGWZ03W0",
+            "language": "text"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "필터 변경\n→ 페이지 초기화 watch 실행\n→ queryKey가 최종 값이 새 필터, 1페이지가 됨\n→ Vue Query가 최종 키를 보고 조회 "
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "4jf5AbmjGzuw",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "반면 React에서의 useEffect는 렌더가 커밋된 다음 실행이 된다."
+            }
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "attrs": {
+            "id": "RhP3Sb3VanDU",
+            "language": "javascript"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "useEffect(() => {\n\tsetPage(1);\n}, [keyword]);"
+            }
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "attrs": {
+            "id": "EXQkhlaNY1ld",
+            "language": "text"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "keyword 변경\n→ 렌더 커밋 : 새 keyword + 기존 세번째 페이지 조회\n→ React Query가 해당 키로 조회 가능 (1번 실행)\n→ useEffect 실행\n→ page를 1로 변경\n→ 다시 렌더 : 새 keyword + 첫번째 페이지 조회 (2번 실행)\n→ 다시 조회 가능"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "yFLYuPXIhIsJ",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "즉 두 프레임워크의 차이점을 정리해면 Vue의 watch는 렌더 전 상태 정리를, useEffect는 렌더 후 부수 효과라는 실행 순서에 있다."
+            }
+          ]
+        },
+        {
+          "type": "details",
+          "attrs": {
+            "id": "87YrqjJ9u-Pt",
+            "open": true,
+            "level": 0
+          },
+          "content": [
+            {
+              "type": "detailsSummary",
+              "content": [
+                {
+                  "type": "text",
+                  "text": " React에서는 렌더 전 상태 정리를 하지 못할까?"
+                }
+              ]
+            },
+            {
+              "type": "detailsContent",
+              "attrs": {
+                "id": "kTDn_GV2ACxS"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "1Mk9YwA1vQTW",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "React에서는 "
+                    },
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "code"
+                        }
+                      ],
+                      "text": "useLayoutEffect"
+                    },
+                    {
+                      "type": "text",
+                      "text": "라는 훅이 존재한다. React가 DOM 변경을 반영한 직후 브라우저에 화면을 그릴 때의 작업인 "
+                    },
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "code"
+                        }
+                      ],
+                      "text": "paint"
+                    },
+                    {
+                      "type": "text",
+                      "text": " 작업 전에 "
+                    },
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "text": "동기적으로"
+                    },
+                    {
+                      "type": "text",
+                      "text": " 실행하는 훅이다."
+                    }
+                  ]
+                },
+                {
+                  "type": "codeBlock",
+                  "attrs": {
+                    "id": "esqddL_pdgdh",
+                    "language": "text"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "렌더 계산\n→ DOM 반영 (commit)\n→ useLayoutEffect\n→ 화면 표시 (paint)\n→ useEffect"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "vjkYNNTBwePC",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "보통은 useEffect를 사용하고, DOM을 측정하거나 화면이 보이기 전에 DOM 위치를 보정해야 할 경우에만 사용한다. 그 이유는 이 훅은 동기 작업을 진행하기 때문에 내부 작업이 마칠 때까지 화면 표시를 막는다는 것이다. 네트워크 요청, 데이터 조회, 일반 상태 동기화, 구독 등록에는 useEffect를 사용해야한다."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "XpTqABrjXiqo",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "위 내용에서 Vue의 watch는 useQuery보다 먼저 실행이 되었고, 이로 인해 하나의 반응성 flush에서 안에서 합쳐진다. 반면, React "
+                    },
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "code"
+                        }
+                      ],
+                      "text": "useLayoutEffect"
+                    },
+                    {
+                      "type": "text",
+                      "text": "는 paint 전에 실행될 뿐 useQuery가 실행되는 render보다 먼저 실행되지 않는다. 그래서 "
+                    },
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "code"
+                        }
+                      ],
+                      "text": "useLayoutEffect"
+                    },
+                    {
+                      "type": "text",
+                      "text": "에서 currentPage = 1 값을 넣으면 watch와 똑같이 되는거 아닐까? 라는 생각은 잘못된 생각일 수 있다."
+                    }
+                  ]
+                },
+                {
+                  "type": "codeBlock",
+                  "attrs": {
+                    "id": "Jql0xQzj49JY",
+                    "language": "text"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "필터 변경\n→ render: 새 필터 + 세번째 페이지\n  ㄴ useQuery도 이 시점의 queryKey를 동시에 받음\n→ commit\n→ useLayoutEffect 실행\n→ setPage(1)\n→ 두 번째 render: 새 필터 + 첫번째 페이지\n  ㄴ useQuery가 두번째 queryKey를 받음\n→ paint"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "XXUeKvlF_npQ",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "* Vue watch의 경우 렌더 전 상태 정리 뿐만 아니라 속성을 주어 렌더 후 부수효과처럼 사용도 가능하니 참고하자. "
+            }
+          ]
+        },
+        {
+          "type": "blockquote",
+          "attrs": {
+            "id": "fzjnUnSZLPLH"
+          },
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "id": "1rnIyiZBprks",
+                "textAlign": "left"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "두 프레임워크는 애초에 다르게 설계되었다. Vue는 기본적으로 Proxy 기반의 반응성 그래프 중심이기 때문에 스케쥴러 단계들을 선택해서 처리가 가능하다. 반면 React는 render 과정 자체가 순수해야한다는 원칙이 강하기 때문에 렌더 결과의 스냅샷 중심으로 이루어져있다."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "JVqp4SSJGD8p",
+            "textAlign": "left",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "부록 : React에서 예외적으로 허용하는 보정 패턴"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "kMpacyzKWhzF",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "위의 내용들을 기반으로 렌더 함수 내부에서 처리를 하는 것보다는 이벤트 안에서 명시적으로 처리하는 것이 안전하다는 것을 알았다. 그 밖에 다른 React가 예외적으로 허용하는 “렌더 중 조건부 상태 보정” 패턴이다. 이전 props · state를 저장해두고, 값이 달라졌을 때만 렌더 함수 안에서 상태를 바꾸는 방식이다."
+            }
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "attrs": {
+            "id": "9TajqndZy4o9",
+            "language": "typescript"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "function ChatList({ keyword }: { keyword: string }) {\n\tconst [previousKeyword, setPreviousKeyword] = useState(keyword);\n\tconst [page, setPage] = useState(1);\n\n\tif (keyword !== previousKeyword) {\n\t\tsetPreviousKeyword(keyword);\n\t\tsetPage(1);\n\t}\t\n\t\n\t// 여기서 page는 다시 렌더될 때 첫 번째 페이지 값을 가진다.\n\treturn <List keyword={keyword} page={page}/>;\n}"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "ovztL_VpSVSd",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "여기서 중요한 점은 조건이 없으면 무한 렌더가 될 수 있다는 점을 주의해야한다. useEffect처럼 커미션 후에 상태를 고치는 것이 아니라 커밋 전에 렌더를 한 번 재시도한다는 점이 다르다."
+            }
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "attrs": {
+            "id": "9KetuoGtHxTu",
+            "language": "text"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "keyword props 변경\n→ 이전 page를 가진 상태로 컴포넌트 함수 실행\n→ keyword가 이전이랑 다른지 검사\n→ setPage(1)\n→ React가 이번 렌더 결과를 버리고 즉시 다시 렌더\n→ 새 keyword + 첫 번째 페이지로 렌더 결과 커밋"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "Wi9GjlnEe_9G",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "keyword 대신 매 렌더마다 새로 만들어지는 객체를 비교 대상으로 쓰면, 계속 “변경됨” 으로 판단할 수 있어 위험하다. 이 패턴의 경우 부모 props 변경처럼 이벤트 핸들러를 직접 제어할 수 없을 때 한정하여 유용하다. 검색 입력처럼 변경 이벤트를 직접 처리할 수 있는 현재 경우라면 이벤트에서 처리하는 것이 명확하고 좋은 방법이라 굳이 사용할 필요는 없지만, 알아두면 좋을 것 같다."
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

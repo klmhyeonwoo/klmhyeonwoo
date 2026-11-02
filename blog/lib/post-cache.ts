@@ -12,7 +12,7 @@ export const postsCacheTag = "blog-posts";
 // so local and self-hosted workflows still receive a timely refresh.
 export const getCachedPosts = unstable_cache(
   async (includePrivate = false): Promise<PostMeta[]> => getPosts(includePrivate),
-  ["post-index-v1"],
+  ["post-index-v3"],
   { revalidate: 3600, tags: [postsCacheTag] },
 );
 

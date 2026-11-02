@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { ChangeEvent } from "react";
+import type { ChangeEvent, ReactNode } from "react";
 import type { SiteSettings } from "@/lib/site-settings";
 import { AnnouncementIcon } from "./announcement-icon";
 import { IconXmarkLine } from "@karrotmarket/react-monochrome-icon";
@@ -18,7 +18,7 @@ function ActionFields({ title, action, onChange }: { title: string; action: { la
   return <div className="settings-action-fields"><p>{title}</p><input value={action.label} onChange={(event) => onChange({ ...action, label: event.currentTarget.value })} placeholder="버튼명 (선택)" aria-label={`${title} 버튼명`} /><input value={action.href} onChange={(event) => onChange({ ...action, href: event.currentTarget.value })} placeholder="URL (선택)" aria-label={`${title} 연결 주소`} /></div>;
 }
 
-export function BlogSettingsEditor({ initialSettings }: { initialSettings: SiteSettings }) {
+export function BlogSettingsEditor({ initialSettings, children }: { initialSettings: SiteSettings; children?: ReactNode }) {
   const [settings, setSettings] = useState<SiteSettings>(initialSettings);
   const [popupFile, setPopupFile] = useState<File | null>(null);
   const [popupPreview, setPopupPreview] = useState(initialSettings.popup.image);
@@ -77,7 +77,9 @@ export function BlogSettingsEditor({ initialSettings }: { initialSettings: SiteS
   }
 
   return <main className="settings-page">
-    <header className="settings-page-header"><div><h1>블로그 관리</h1><p>공개 화면에 표시할 알림을 설정합니다.</p></div><button onClick={save} disabled={saving}>{saving ? <><span className="async-spinner" aria-hidden="true" />{uploadStatus || "저장 중…"}</> : "저장하기"}</button></header>
+    <header className="settings-page-header"><div><h1>블로그 관리</h1><p>최근 댓글을 확인하고 공개 화면의 알림을 설정합니다.</p></div><button onClick={save} disabled={saving}>{saving ? <><span className="async-spinner" aria-hidden="true" />{uploadStatus || "저장 중…"}</> : "저장하기"}</button></header>
+
+    <div className="settings-comments">{children}</div>
 
     <section className="settings-panel">
       <header><h2>상단 배너</h2><Toggle label={settings.banner.enabled ? "켜짐" : "꺼짐"} checked={settings.banner.enabled} onChange={(enabled) => setSettings((current) => ({ ...current, banner: { ...current.banner, enabled } }))} /></header>

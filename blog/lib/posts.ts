@@ -41,6 +41,7 @@ export type PostMeta = {
   seriesId?: string;
   series?: string;
   excerpt?: string;
+  cardExcerpt?: string;
   featured: boolean;
   isPrivate: boolean;
   showInList: boolean;
@@ -71,7 +72,9 @@ export function getPosts(includePrivate = false): PostMeta[] {
       const id = file.replace(/\.mdx$/, "");
       const source = fs.readFileSync(path.join(postsDirectory, file), "utf8");
       const { data, content } = matter(source);
-      const image = source.match(/!\[[^\]]*\]\(([^\s)]+)(?:\s+[^)]*)?\)/)?.[1];
+      const imageSource = content.replace(/```[\s\S]*?```|~~~[\s\S]*?~~~|`[^`]*`|<!--[\s\S]*?-->/g, " ");
+      const imageMatch = /!\[[^\]]*\]\(<?([^\s)>]+)>?(?:\s+[^)]*)?\)|<(?:PostImage|img)\b[^>]*?\bsrc\s*=\s*["']([^"']+)["']/gi.exec(imageSource);
+      const image = imageMatch?.[1] ?? imageMatch?.[2];
       const categoryValue = String(data.category ?? "essay");
       const category = categories.find((item) => item.id === categoryValue || item.name === categoryValue);
       const seriesValue = typeof data.series === "string" ? data.series : "";
@@ -84,6 +87,7 @@ export function getPosts(includePrivate = false): PostMeta[] {
         updatedAt: postPublishedAtValue(data.updatedAt),
         description: data.description ? String(data.description) : undefined,
         excerpt: data.description ? postExcerpt(String(data.description)) : data.private === true ? undefined : postExcerpt(content),
+        cardExcerpt: data.private === true ? undefined : postExcerpt(content, 360) ?? (data.description ? postExcerpt(String(data.description), 360) : undefined),
         categoryId: category?.id ?? categoryValue,
         category: category?.name ?? "미분류",
         seriesId: series?.id,

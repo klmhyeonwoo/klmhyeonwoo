@@ -180,6 +180,23 @@ select {
   font: 700 30px/1.25 var(--font-text);
   margin: 56px 0 12px;
 }
+.prose details {
+  background: var(--interactive-subtle);
+  border-radius: 8px;
+  margin: 1.25em 0;
+  padding: .75em 1em;
+}
+.prose details > summary {
+  cursor: pointer;
+}
+.prose details > summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.prose details > summary :is(h1, h2, h3) {
+  display: inline;
+  margin: 0;
+}
 .prose p,
 .prose ul {
   margin: 0 0 24px;

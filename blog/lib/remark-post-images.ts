@@ -7,6 +7,10 @@ const carouselNumbers = new Set(["slidesPerView"]);
 export function remarkPostImages() {
   return (tree: unknown) => {
     const visit = (node: TreeNode) => {
+      // Existing MDX may have persisted the editor's expanded state.
+      if (node.type === "mdxJsxFlowElement" && node.name === "details") {
+        node.attributes = node.attributes?.filter((attribute) => attribute.name !== "open");
+      }
       if ((node.type === "mdxJsxFlowElement" || node.type === "mdxJsxTextElement") && node.name === "img") node.name = "PostImage";
       // next-mdx-remote blocks JSX expressions by default. Convert only numeric
       // literals on our known components before its safety plugin strips them.

@@ -156,7 +156,7 @@ export function markdownFor(document: JsonNode): string {
       const body = node.content?.find(child => child.type === "detailsContent");
       const level = Number(node.attrs?.level);
       const title = inline(summary?.content);
-      return `<details${node.attrs?.open === true ? " open" : ""}>\n<summary>${[1, 2, 3].includes(level) ? `<h${level}>${title}</h${level}>` : title}</summary>\n\n${(body?.content ?? []).map(child => block(child)).join("\n\n")}\n\n</details>`;
+      return `<details>\n<summary>${[1, 2, 3].includes(level) ? `<h${level}>${title}</h${level}>` : title}</summary>\n\n${(body?.content ?? []).map(child => block(child)).join("\n\n")}\n\n</details>`;
     }
     if (["columns", "column", "detailsContent", "detailsSummary"].includes(node.type ?? "")) {
       const tag = ({ columns: "Columns", column: "Column", details: "details", detailsSummary: "summary" } as Record<string, string>)[node.type!];

@@ -4,7 +4,7 @@ import { IconAndroidshareLine } from "@karrotmarket/react-monochrome-icon";
 import { useEffect, useState } from "react";
 import { useToast } from "./toast-provider";
 
-export function PostLinkCopy() {
+export function PostLinkCopy({ sharePath }: { sharePath: string }) {
   const [copied, setCopied] = useState(false);
   const toast = useToast();
 
@@ -15,12 +15,13 @@ export function PostLinkCopy() {
   }, [copied]);
 
   async function copyLink() {
+    const url = new URL(sharePath, window.location.origin).href;
     try {
-      await navigator.clipboard.writeText(window.location.href);
+      await navigator.clipboard.writeText(url);
       setCopied(true);
       toast({ message: "게시글 주소를 복사했습니다.", tone: "success" });
     } catch {
-      window.prompt("아래 주소를 복사해 주세요.", window.location.href);
+      window.prompt("아래 주소를 복사해 주세요.", url);
     }
   }
 

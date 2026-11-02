@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   title: { default: "wavy studio", template: "%s | wavy studio" },
   description: "기록을 쌓아가는 개인 블로그, wavy studio",
   metadataBase: getSiteUrl(),
-  alternates: { canonical: "/", types: { "application/rss+xml": absoluteUrl("/rss.xml") } },
+  alternates: { types: { "application/rss+xml": absoluteUrl("/rss.xml") } },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
   verification: {
     other: {

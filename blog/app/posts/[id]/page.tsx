@@ -28,6 +28,8 @@ import { PostColumn, PostColumns } from "@/components/post-columns";
 import { getTableOfContents, rehypeHeadingIds } from "@/lib/table-of-contents";
 import { absoluteUrl } from "@/lib/site-url";
 import { convertBlocks, markdownFor } from "@/lib/slash-content";
+import { postExcerpt } from "@/lib/post-excerpt";
+import { shortPostId } from "@/lib/short-post-id";
 
 // Public posts are generated at build/ISR time. Password-protected posts are
 // deliberately omitted from generateStaticParams, so their cookie-dependent
@@ -37,16 +39,8 @@ export const revalidate = 3600;
 type Params = Promise<{ id: string }>;
 
 function postDescription(source: string, data: Record<string, unknown>) {
-  if (typeof data.description === "string" && data.description.trim()) return data.description.trim();
-  const text = source
-    .replace(/^---[\s\S]*?---/, "")
-    .replace(/```[\s\S]*?```/g, " ")
-    .replace(/!\[[^\]]*\]\([^)]*\)/g, " ")
-    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
-    .replace(/[#>*_`~-]/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-  return text.length > 180 ? `${text.slice(0, 180).trimEnd()}…` : text;
+  if (typeof data.description === "string" && data.description.trim()) return postExcerpt(data.description) ?? "";
+  return postExcerpt(matter(source).content) ?? "";
 }
 
 /**
@@ -171,7 +165,7 @@ export default async function PostPage({ params }: { params: Params }) {
     <><SiteHeader /><main className="article-shell"><article className={`article${tableOfContents.length > 0 ? " article-with-toc" : ""}`}>
       {articleSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema).replace(/</g, "\\u003c") }} />}
       <header className="article-header"><h1>{frontmatter.title}</h1>
-        <div className="article-meta-row"><div className="author-byline">{profile.image ? <img src={profile.image} alt="" /> : <span>{profile.name.slice(0, 1)}</span>}<p><strong>{profile.name}</strong><small>{formatPostDate(frontmatter.date)}{postWasUpdated(frontmatter.publishedAt ?? frontmatter.date, frontmatter.updatedAt) && <> · {formatPostUpdatedLabel(frontmatter.updatedAt)}</>}</small></p></div><PostLinkCopy /></div>
+        <div className="article-meta-row"><div className="author-byline">{profile.image ? <img src={profile.image} alt="" /> : <span>{profile.name.slice(0, 1)}</span>}<p><strong>{profile.name}</strong><small>{formatPostDate(frontmatter.date)}{postWasUpdated(frontmatter.publishedAt ?? frontmatter.date, frontmatter.updatedAt) && <> · {formatPostUpdatedLabel(frontmatter.updatedAt)}</>}</small></p></div><PostLinkCopy sharePath={shortPostId(id) ? `/p/${shortPostId(id)}` : `/posts/${id}`} /></div>
       </header>
       <div className="article-content-layout">{tableOfContents.length > 0 && <ArticleTableOfContents items={tableOfContents} />}<PostContent postId={data.private === true ? undefined : id}>{content}</PostContent></div>
       <ArticleReadingProgress title={frontmatter.title} />

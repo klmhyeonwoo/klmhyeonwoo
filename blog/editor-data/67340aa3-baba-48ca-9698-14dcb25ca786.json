@@ -8,9 +8,23 @@
         {
           "type": "heading",
           "attrs": {
-            "id": "TrBDFgkwKRsx",
+            "id": "BNvpCvxE3OCd",
             "textAlign": "left",
             "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "성공을 위한 태도"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "TrBDFgkwKRsx",
+            "textAlign": "left",
+            "level": 3
           },
           "content": [
             {
@@ -50,7 +64,7 @@
           "attrs": {
             "id": "lQV8X9o9o6qM",
             "textAlign": "left",
-            "level": 2
+            "level": 3
           },
           "content": [
             {
@@ -88,9 +102,9 @@
         {
           "type": "heading",
           "attrs": {
-            "id": "pqQ_88FOVsZL",
+            "id": "vbepNDXk1kBE",
             "textAlign": "left",
-            "level": 2
+            "level": 3
           },
           "content": [
             {
@@ -128,9 +142,9 @@
         {
           "type": "heading",
           "attrs": {
-            "id": "Gw0-O9y2uKdc",
+            "id": "nFJ3_002r6iL",
             "textAlign": "left",
-            "level": 2
+            "level": 3
           },
           "content": [
             {
@@ -170,7 +184,7 @@
           "attrs": {
             "id": "E8JFbX8HoN9E",
             "textAlign": "left",
-            "level": 2
+            "level": 3
           },
           "content": [
             {
@@ -182,7 +196,7 @@
         {
           "type": "paragraph",
           "attrs": {
-            "id": "SfF0S16P5VHx",
+            "id": "e81xv6FkMq0t",
             "textAlign": "left"
           },
           "content": [
@@ -193,18 +207,11 @@
           ]
         },
         {
-          "type": "heading",
+          "type": "paragraph",
           "attrs": {
-            "id": "y_QrK78W_MHS",
-            "textAlign": "left",
-            "level": 2
-          },
-          "content": [
-            {
-              "type": "text",
-              "text": "나무처럼 굳건하기"
-            }
-          ]
+            "id": "SfF0S16P5VHx",
+            "textAlign": "left"
+          }
         },
         {
           "type": "paragraph",
@@ -261,13 +268,6 @@
         {
           "type": "paragraph",
           "attrs": {
-            "id": "mYXu7vtTrUeX",
-            "textAlign": "left"
-          }
-        },
-        {
-          "type": "paragraph",
-          "attrs": {
             "id": "SKLMN_NW-l_U",
             "textAlign": "left"
           },
@@ -283,18 +283,58 @@
                   "type": "bold"
                 }
               ],
-              "text": " “흔들리지 않는 태도”"
+              "text": " 흔들리지 않는 태도"
             },
             {
               "type": "text",
-              "text": " 이것이 성공의 본질이다."
+              "text": " 이것이 성공의 본질이라고 한다."
             }
           ]
         },
         {
+          "type": "heading",
+          "attrs": {
+            "id": "Lr5UoUsvRtts",
+            "textAlign": "left",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "보면 좋을만한 레퍼런스"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "F8iQIHtjs_c5",
+            "textAlign": "left",
+            "level": 3
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "팔란티어의 채용 법칙"
+            }
+          ]
+        },
+        {
+          "type": "bookmark",
+          "attrs": {
+            "id": "ID9G7PLctqBq",
+            "url": "https://lnkd.in/p/gQft9VNz",
+            "title": "#palantir #ai | 임근영",
+            "description": "자신이 틀렸음을 인정하고 수용하는 태도\n\n최근 원티드에서 팔란티어가 채용을 시작했습니다. 팔란티어 알렉스 카프는 똑똑한 괴짜로 유명하지만, 회사를 운영하는데 있어 중요하게 여기는 원칙이 있었습니다. 공감되는 부분이 많은 것 같습니다. \n\n——\n\n✅ 조직 내에서는 겸손함과 예술가 정신이 필요\n\n조직 내에서 본인 보다 뛰어난 사람은 존재합니다. 그들이 더 창의적인 아이디어나 방법론을 제시할수 있는데 이것을 인정하는 과정에서 굴욕감이 동반될수 있다고 합니다. 하지만 ",
+            "image": "https://media.licdn.com/dms/image/v2/D5622AQGe8NtME2u6eA/feedshare-shrink_800/B56aGZqcdeKAAc-/0/1793579403355?e=2147483647&v=beta&t=e7zCrp0LJ3dKWOtv3N3BjqA7b02Cm7_KjjGr6ybUXFs",
+            "layout": "card",
+            "resolved": true
+          }
+        },
+        {
           "type": "paragraph",
           "attrs": {
-            "id": "3giv97Thnktu",
+            "id": "j3dFoKBX4oo2",
             "textAlign": "left"
           }
         }

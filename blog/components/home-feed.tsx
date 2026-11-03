@@ -9,6 +9,7 @@ import type { Profile } from "@/lib/profile";
 import { PrefetchLink } from "./prefetch-link";
 import { PostSearch } from "./post-search";
 import { LayoutGrid, List } from "lucide-react";
+import { PrivateLockIcon } from "./private-lock-icon";
 
 const postsPerPage = 9;
 type Filters = { category?: string; page: number; query: string };
@@ -107,7 +108,7 @@ export function HomeFeed({ posts, categories, profile }: Props) {
       {filteredPosts.length > 0 ? pagedPosts.map((post) => {
         const author = <div className="kb-post-author">
           {profile.image ? <img src={profile.image} alt="" /> : <span className="kb-post-avatar">{profile.name.slice(0, 1)}</span>}
-          <div><strong>{profile.name}</strong><p>{formatPostDate(post.date)}{postWasUpdated(post.publishedAt, post.updatedAt) && <><span>·</span> {formatPostUpdatedLabel(post.updatedAt)}</>}{post.series && <><span>·</span> {post.series}</>}{post.isPrivate && " 🔒"}</p></div>
+          <div><strong>{profile.name}</strong><p>{formatPostDate(post.date)}{postWasUpdated(post.publishedAt, post.updatedAt) && <><span>·</span> {formatPostUpdatedLabel(post.updatedAt)}</>}{post.series && <><span>·</span> {post.series}</>}{post.isPrivate && <PrivateLockIcon />}</p></div>
         </div>;
         return (
         <article className="kb-post" key={post.id}>

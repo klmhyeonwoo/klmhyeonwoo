@@ -14,6 +14,7 @@ import type { EditorMention } from "./tiptap-editor";
 import { waitForDeployment } from "./deployment-waiter";
 import { ToastMessage } from "./toast-message";
 import { useAdminSession } from "./admin-session";
+import { PrivateLockIcon } from "./private-lock-icon";
 
 const Editor = dynamic(() => import("./tiptap-editor"), { ssr: false });
 
@@ -399,7 +400,7 @@ export function AdminClient({ authenticated: initiallyAuthenticated, initialPost
       </section>
       <section className="draft-list">
         <h2>발행한 글</h2>
-        {posts.map((post) => <Link key={post.id} href={`/ykk?id=${post.id}`}>{post.isPrivate && "🔒 "}{post.title}<span>{formatPostDate(post.date)}</span></Link>)}
+        {posts.map((post) => <Link key={post.id} href={`/ykk?id=${post.id}`}>{post.title}{post.isPrivate && <PrivateLockIcon />}<span>{formatPostDate(post.date)}</span></Link>)}
       </section>
     </main>
   );

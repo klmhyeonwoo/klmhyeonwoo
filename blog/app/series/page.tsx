@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export const revalidate = 3600;
 
 export default async function SeriesPage() {
-  const posts = getPosts();
+  const posts = getPosts(true).filter((post) => !post.isPrivate || post.showInList);
   const series = getSeries();
   const postCounts = Object.fromEntries(series.map((item) => [item.id, posts.filter((post) => post.seriesId === item.id).length]));
 

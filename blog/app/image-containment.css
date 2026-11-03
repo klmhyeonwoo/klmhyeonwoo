@@ -842,6 +842,7 @@ html[data-theme="dark"] .editor [data-content-type="codeBlock"] .shiki {
 .editor-column,
 .post-column {
   min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .editor-column {
@@ -951,37 +952,11 @@ html[data-theme="dark"] .editor [data-content-type="codeBlock"] .shiki {
   .editor-columns[data-columns="3"],
   .post-columns,
   .post-columns[data-columns="3"] {
-    /* Keep a useful line length instead of compressing multi-column writing
-       into unreadable slivers. The next column peeks in to invite a swipe. */
-    gap: 0.875rem;
-    grid-auto-columns: minmax(78%, 22rem);
-    grid-auto-flow: column;
-    grid-template-columns: none;
-    max-width: 100%;
-    overscroll-behavior-x: contain;
-    overflow-x: auto;
-    overscroll-behavior-inline: contain;
-    padding: 0.125rem 0.25rem 0.75rem;
-    scroll-padding-inline: 0.25rem;
-    scroll-snap-type: x proximity;
-    scrollbar-color: color-mix(in srgb, var(--line) 88%, transparent) transparent;
-    scrollbar-width: thin;
-    -webkit-overflow-scrolling: touch;
+    gap: 0.5rem;
   }
 
-  .editor-column,
-  .post-column {
-    border: 1px solid var(--line);
-    border-radius: 0.75rem;
-    box-sizing: border-box;
-    min-width: 0;
-    padding: 0.875rem;
-    scroll-snap-align: start;
-  }
-
-  .editor-column:first-child {
-    border: 1px solid var(--line);
-    padding: 0.875rem;
+  .editor-column {
+    padding-left: 0.5rem;
   }
 
   .editor-gallery-grid,

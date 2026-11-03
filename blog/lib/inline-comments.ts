@@ -1,4 +1,5 @@
 import "server-only";
+import { unstable_cache } from "next/cache";
 import { validComment, type InlineComment } from "./inline-comment-types";
 
 type Issue = { number: number; title: string; body: string; pull_request?: unknown };
@@ -40,6 +41,20 @@ export async function listInlineComments(postId: string): Promise<InlineComment[
     }
   }
   return result.sort((a, b) => a.id - b.id);
+}
+
+export function inlineCommentsTag(postId: string) {
+  return `inline-comments:${postId}`;
+}
+
+// Only public comment data is cached. Session-dependent permissions are
+// computed separately for every request in the route handler.
+export function getCachedInlineComments(postId: string) {
+  return unstable_cache(
+    () => listInlineComments(postId),
+    ["inline-comments-v1", postId],
+    { revalidate: 60, tags: [inlineCommentsTag(postId)] },
+  )();
 }
 
 export async function createInlineComment(postId: string, value: Omit<InlineComment, "id" | "createdAt">) {

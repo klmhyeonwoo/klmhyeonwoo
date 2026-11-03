@@ -69,6 +69,7 @@ export function InlineComments({ postId, root }: { postId: string; root: RefObje
   const endpoint = `/api/posts/${encodeURIComponent(postId)}/inline-comments`;
 
   useEffect(() => {
+    if (authenticated === null) return;
     const controller = new AbortController();
     fetch(endpoint, { signal: controller.signal, cache: "no-store" }).then(async (response) => {
       const data = await response.json();

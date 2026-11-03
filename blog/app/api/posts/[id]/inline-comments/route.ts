@@ -1,8 +1,10 @@
 import { createHash } from "crypto";
+import matter from "gray-matter";
+import { revalidateTag } from "next/cache";
 import { isAdmin } from "@/lib/auth";
-import { getPosts } from "@/lib/posts";
+import { getPost } from "@/lib/posts";
 import { getProfile } from "@/lib/profile";
-import { createInlineComment, deleteInlineComment, listInlineComments } from "@/lib/inline-comments";
+import { createInlineComment, deleteInlineComment, getCachedInlineComments, inlineCommentsTag } from "@/lib/inline-comments";
 import { validComment } from "@/lib/inline-comment-types";
 
 type Context = { params: Promise<{ id: string }> };
@@ -11,7 +13,14 @@ const json = (value: unknown, status = 200) => Response.json(value, { status, he
 
 async function publicPost(context: Context) {
   const { id } = await context.params;
-  return /^[a-z0-9][a-z0-9-]*$/.test(id) && getPosts().some(post => post.id === id) ? id : null;
+  if (!/^[a-z0-9][a-z0-9-]*$/.test(id)) return null;
+  const source = getPost(id);
+  return source && matter(source).data.private !== true ? id : null;
+}
+
+function invalidateComments(id: string) {
+  try { revalidateTag(inlineCommentsTag(id), { expire: 0 }); }
+  catch (error) { console.error("Inline comment cache invalidation failed", error); }
 }
 
 export async function GET(_: Request, context: Context) {
@@ -20,7 +29,7 @@ export async function GET(_: Request, context: Context) {
   try {
     const admin = await isAdmin();
     const { name, image } = getProfile();
-    return json({ comments: await listInlineComments(id), canCreate: admin, canDelete: admin, author: admin ? { name, image } : null });
+    return json({ comments: await getCachedInlineComments(id), canCreate: admin, canDelete: admin, author: admin ? { name, image } : null });
   }
   catch { return json({ error: "댓글을 불러오지 못했습니다. 잠시 후 다시 시도해주세요." }, 503); }
 }
@@ -53,7 +62,9 @@ export async function POST(request: Request, context: Context) {
     // Identity belongs to the authenticated blog owner, never the request payload.
     value = value && typeof value === "object" ? { ...value, name: getProfile().name.trim().slice(0, 40) } : value;
     if (!validComment(value)) return json({ error: "본문 선택 영역과 댓글을 확인해주세요." }, 400);
-    return json({ comment: await createInlineComment(id, { name: value.name.trim(), body: value.body.trim(), anchor: value.anchor }) }, 201);
+    const comment = await createInlineComment(id, { name: value.name.trim(), body: value.body.trim(), anchor: value.anchor });
+    invalidateComments(id);
+    return json({ comment }, 201);
   } catch { return json({ error: "댓글을 저장하지 못했습니다. 잠시 후 다시 시도해주세요." }, 503); }
 }
 
@@ -64,6 +75,10 @@ export async function DELETE(request: Request, context: Context) {
   if (!id) return json({ error: "글을 찾을 수 없습니다." }, 404);
   const commentId = Number(new URL(request.url).searchParams.get("commentId"));
   if (!Number.isSafeInteger(commentId) || commentId <= 0) return json({ error: "잘못된 댓글입니다." }, 400);
-  try { return await deleteInlineComment(id, commentId) ? json({ ok: true }) : json({ error: "댓글을 찾을 수 없습니다." }, 404); }
+  try {
+    if (!(await deleteInlineComment(id, commentId))) return json({ error: "댓글을 찾을 수 없습니다." }, 404);
+    invalidateComments(id);
+    return json({ ok: true });
+  }
   catch { return json({ error: "댓글을 삭제하지 못했습니다." }, 503); }
 }

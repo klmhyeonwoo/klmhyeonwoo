@@ -35,7 +35,7 @@ export default async function SeriesDetailPage({ params }: { params: Promise<{ i
   const { id } = await params;
   const series = getSeries().find((item) => item.id === id);
   if (!series) notFound();
-  const posts = getPosts(true).filter((post) => post.seriesId === id && (!post.isPrivate || post.showInList));
+  const posts = getPosts(true).filter((post) => post.seriesId === id);
   const seriesSchema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -50,6 +50,6 @@ export default async function SeriesDetailPage({ params }: { params: Promise<{ i
 
   return <><SiteHeader /><main className="series-page series-detail"><Link className="series-back" href="/series">아티클 시리즈</Link><header className="series-page-header"><p className="series-page-eyebrow">COLLECTION</p><h1>{series.name}</h1>{series.description && <p>{series.description}</p>}<SeriesWriteGate seriesId={series.id} /><SeriesMetadataEditor series={series} /></header>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(seriesSchema).replace(/</g, "\\u003c") }} />
-    <SeriesPostList seriesId={id} posts={posts} />
+    <SeriesPostList posts={posts} />
   </main></>;
 }

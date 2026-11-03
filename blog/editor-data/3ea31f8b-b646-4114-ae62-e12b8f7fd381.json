@@ -1,0 +1,305 @@
+[
+  {
+    "type": "slash-content",
+    "version": 1,
+    "content": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "5LYGJJejjkoj",
+            "textAlign": "left"
+          }
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "nvyHKNUWHyrj",
+            "textAlign": "left",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "[컷] 광교 든든전세"
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "attrs": {
+            "id": "wE9P-dpWMkSJ"
+          },
+          "content": [
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "PYhqV-8k_SHG"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "ZtpFxPMUYD9i",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "세대 전원 무주택이여야 지원 가능하다."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "0I82lfkKEbIA"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "x3nxByqoReqH",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "떨어졌음 ^^,,"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "CAfuWXas6sGj",
+            "textAlign": "left",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "[예정] 광교 자연앤 센트레빌"
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "attrs": {
+            "id": "oCWjTYlfiHtJ"
+          },
+          "content": [
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "fFFlnZzXs1O3"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "CyifkAgtoeqW",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "청년 특공, 일반 공급 (2순위)"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "diT2W3LPtC5h"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "z06c8_EDG-fo",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "소득 관련 보수월액 문의는 남겨놓은 상태 (아 성과급 때문에 소득 점수가 생각보다 낮은데, 소득 점수 높은 사람들은 대체 이 집을 어떻게 계속 내려고 하는거지..?)"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "file",
+          "attrs": {
+            "id": "74bbc166-d585-478f-9727-c9c17fcb5b1b",
+            "src": "https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/blog-content/blog/public/uploads/cd6a975f-0834-4ede-a20f-6082b81e1202.pdf",
+            "name": "2026000527 입주자모집공고문.pdf",
+            "size": 2394955,
+            "mime": "application/pdf",
+            "status": "ready",
+            "error": null
+          }
+        },
+        {
+          "type": "file",
+          "attrs": {
+            "id": "b9174723-ef72-4171-b78b-5913ccae9b19",
+            "src": "https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/blog-content/blog/public/uploads/80c39e96-8691-4052-9dd6-93e77530158e.pdf",
+            "name": "2026000528 광교 자연앤 센트레빌(A17BL) 공공분양주택 입주자모집공고문.pdf",
+            "size": 2502966,
+            "mime": "application/pdf",
+            "status": "ready",
+            "error": null
+          }
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "XonmJiTflTHG",
+            "textAlign": "left",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "[진행 중] 청년 행복주택"
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "attrs": {
+            "id": "AfZ5CapH2ace"
+          },
+          "content": [
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "oA8_McJMVP2x"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "rB2oUQyzhSb4",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "이것도 일단 그냥 신청하긴했는데 집이 좀 좁은 편이다."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "aJkzeBk0HLWR"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "ZDTlezIUWvXS",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "원래는 제 2동탄으로 쓰려고 했는데, 생각보다 판교랑 너무 멀어서 나도 모르게 경기 광교로 넣게 되었다."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "QbpVlks8OWvn"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "FKtRzV-Y-rxd",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "경기 광교는 38 타입으로 썼는데, 둘이 살기에 적당하려나 잘 모르겠음.. 이것도 지원자가 정말 많아서 확률이 희박할 수 있다."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "d5Y-6pFRZox8",
+            "textAlign": "left",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "[예정] 제 2 동탄 행복주택"
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "attrs": {
+            "id": "ZTb0LIcdGi4v"
+          },
+          "content": [
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "xlQyJQvysd8U"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "knD2XMNA276v",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "이거 원래 보지도 않으려고 하다가, A1 지역의 경우에는 판교랑 생각보다 가깝길래 지원을 하려고 한다. 44타입도 제공을 해주길래 생각보다 집이 넓은 편이라서 괜찮을 것 같다는 생각이 든다. 동탄역이랑도 엄청 먼 편은 아니여서.. 그렇다고 걸어가지 못하는 거리.. 일단 이것도 한번 줍줍으로 넣어보자.  "
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "bcoimGUr1DIu",
+            "textAlign": "left"
+          }
+        }
+      ]
+    }
+  }
+]

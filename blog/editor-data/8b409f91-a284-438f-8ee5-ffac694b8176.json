@@ -1,0 +1,1362 @@
+[
+  {
+    "type": "slash-content",
+    "version": 1,
+    "content": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "KpRFn0fnbPpw",
+            "textAlign": "left",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "애자일과 스크럼"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "aXNApQoG_WFd",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "2001년 Agile Manifesta에서 시작된 개발 방법론으로 핵심은 크게 한번 출시하는 대신, 작게 빠르게 만들어 계속해서 개선한다는 문화를 바탕으로 이루어진다. 스크럼은 애자일을 구현하는 프레임워크이다. 핵심은 스프린트라는 짧은 반복주기를 기반으로 진행이 된다. 스크럼에는 크게 세가지 역할로 구분된다."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "attrs": {
+            "id": "nwKRFNB_fGhE"
+          },
+          "content": [
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "RKEt43cC_T25"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "e5k4VU0HYW86",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Product Owner (PO) : 제품 방향과 우선순위를 결정하며, 백로그를 관리한다."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "h1MNDyJVvGfR"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "Pt1JLmje0Sdo",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Scrum Master : 스크럼 프로세스를 관리하고 팀의 방해물을 제거한다."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "oRaTU0-GNH3c"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "Pb8o6TSVAor9",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Developmet Team : 실제로 제품을 만드는 팀을 의미하며 개발자 · 디자이너 · QA 등이다."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "attrs": {
+            "id": "FCWyg2IY3Il6",
+            "language": "text"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "[Product Backlog] → [Sprint Planning] → [Sprint 실행] → [Sprint Review] → [Retrospective]\n        ↑                                                                         |\n        └──────────────────────────── 다음 스프린트 ──────────────────────────────┘"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "Cx1aaKx_Az-j",
+            "textAlign": "left",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "애자일 문화를 위한 이슈 티어 구분"
+            }
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "attrs": {
+            "id": "36hcrehPhVs1",
+            "language": "text"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Initiative  — 조직 전체의 연간 목표·전략\n  └── Epic  — 여러 스프린트에 걸친 큰 기능 단위\n        ├── Story    — 사용자에게 가치를 주는 기능\n        ├── Task     — 기술적·관리적 작업\n        └── Bug      — 발생한 결함·오류\n              └── Sub-task  — Story/Task를 더 작게 쪼갠 단위"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "FOIhL5HWfUYn",
+            "textAlign": "left",
+            "level": 3
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Initiative"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "cpwZZT5NRYqJ",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Initiative는 여러 개의 Epic으로 구성되며 Epic보다 더 광범위한 범위를 의미한다. 여러 팀으로부터 진행된 Epic이 취합되어 이룰 수 있는 넓은 의미의 "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "목표 "
+            },
+            {
+              "type": "text",
+              "text": "라고 볼 수 있다. Epic이 한 달 또는 한 분기 내에 완료되는 반면에 Initiative는 일반적으로 여러 분기 또는 1년이 걸리는 경우가 많다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "GEDkaqVJAw0_",
+            "textAlign": "left",
+            "level": 3
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Epic"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "pNsCyyzhgW24",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "완료하기까지 긴 시간이 필요하거나 몇 번의 스프린트가 요구되는 큰 업무 덩어리, 여러 개의 스토리로 또는 태스크로 쪼개질 수 있다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "238xnC_G1Ems",
+            "textAlign": "left",
+            "level": 3
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Story"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "AYFcuvrRDdGI",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "유저 스토리로 불리며, 엔드 유저의 관점에서 쓰여진 간단한 요구사항이다. 스토리는 하나의 심플한 이야기라고 할 수 있으며, 연관된 스토리들이 모여서 하나의 에픽을 생성한다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "r_uVLziiZWko",
+            "textAlign": "left",
+            "level": 3
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Task"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "9bRk0CPBk3o6",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "스토리를 완료하기 위해 개발자가 작업해야하는 단위 작업들을 분류할 수 있다. 보통 사용자와 직접적으로 관련이 없는 작업들을 의미한다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "pMcaPHho3MO1",
+            "textAlign": "left",
+            "level": 3
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Bug"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "AROtPiZRShsQ",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "서비스에서 발생한 결함 · 오류를 기록하는 유형이다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "yo3tcPNSapjn",
+            "textAlign": "left",
+            "level": 3
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "이슈 생성을 위한 예시"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "Al9N3R4GUKJ6",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "스토리와 태스크를 구분하는 작업이 약간 헷갈릴 수 있다, 이때 판단하는 기준은 \"이 작업이 과연 사용자 경험에 직접적으로 영향을 주는가\"를 판단하면 된다. 맞다면 스토리 이슈로, 아니라면 태스크 이슈로 보내면 된다."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "attrs": {
+            "id": "HaAAXRUcNJkK"
+          },
+          "content": [
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "6d6SIXxDBrvb"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "QgqMZdaULTDT",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "비밀 번호 규칙 안내 문구를 추가해야하는 상황 → Story (사용자가 직접 보고 혜택을 받는다)"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "h0VKZVeWjRnn"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "16a5N0AgElFq",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "비밀번호 유효성 검사 로직 리팩토링 → Task (사용자에게 보이지 않는 내부 작업)"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "1Ar35wR0Rd-j"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "oJgDL6qjBbKc",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "결제 완료 후 이메일 발송 기능 → Story (사용자가 이메일을 받는 경험)"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "2gn1GrTjEqGT"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "XUcJ_OC4Bm05",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "이메일 발송 서버 설정 → Task (인프라 작업, 사용자 무관)"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "_5Q1M6Pekhe4",
+            "textAlign": "left",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "누가, 언제 만들까"
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "attrs": {
+            "id": "GkpqiJOyii9Y",
+            "fullWidth": false
+          },
+          "content": [
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "id": "vzCYU3KaIzll",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "_O9nlwFbAVZ_",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "유형"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "id": "XwU9gI6tsxL3",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "IXvZaZ1OE7K1",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "크기"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "id": "mpT6Twr9V3Gt",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "bq9FCxfwnxTw",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "기간"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "id": "dsF4sv208YcZ",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "0e-spi-B-2DV",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "핵심 특징"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "id": "4Top338bXqz_",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "bCXY3G-6sMv_",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "주로 작성하는 사람"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "KTkyxNVmvI4i",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "bp3o9jv9tqFP",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Epic"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "jk3kvAKMdQ0d",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "HvKf05cS0Fi2",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "매우 큼"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "lZTM_7q2d8G6",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "g71U6axo3zkm",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "여러 스프린트"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "bRUu9lC19fI4",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "-S0rvIPLpnqc",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "여러 스토리의 묶음, 마일스톤"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "2ixA1CIX7rKt",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "DLJvbmlR6YNx",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "PO / 팀장"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "ngKKa0COaF9i",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "x72x7a8qTnGI",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Story"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "ZmmgJT8zbcyM",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "qe_aqg-m8C5K",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "중간"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "3GyOX6lCNl3l",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "tuZ4yF-c_wYu",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "하나의 스프린트 사이클 이내 "
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "3TEmlO1Ez8D-",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "JQW4Wqpk7obt",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "사용자 가치 중심, 비기술 언어"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "npsf364g011k",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "EB5citSvUsAY",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "PO / 기획자"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "eLJ0-nvv9vJ-",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "4y3tUIhFi5uO",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Task"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "_iR6oIK9yvxq",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "3vobZzBdpCis",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "중간"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "HwdmNZern8nL",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "BvcFi9IiR6k5",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "하나의 스프린트 사이클 이내"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "ZR2ZYL_QM2DB",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "d73tfJZ-J0BO",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "기술 · 관리 작업, 사용자 무관"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "d_-msZwAnbZq",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "m_Fy9Om83ydJ",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "개발자 / 팀원"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "GJ-92XUd4z_O",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "i_6QdsLro73_",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Bug"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "ihxRWQt5oQm2",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "OYb-Fs9Pr6vi",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "작음"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "enuhXGuJ6cnp",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "WI2BZtAR1a0K",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "빠르게 처리"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "BxfdePCcQ3-R",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "oTvUn4J4nfaL",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "결함 기록, 재현 절차 포함"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "pffEhRkodq_e",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "JEmJ8KCjPqqT",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "QA / 누구나"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "CcQkI-xmc912",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "Dnz4FO0q86go",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Sub Task"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "nqiI70zgj38u",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "J7L5EY9nCWWu",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "매우 작음"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "klAGwOL13Se8",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "MPK6owo2UJcK",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "1~3일"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "f84gjBqghvTj",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "VcZJj3nHAInd",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "스토리 · 태스크의 하위 단위"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "id": "2o45UiqlqziS",
+                    "colspan": 1,
+                    "rowspan": 1,
+                    "colwidth": null,
+                    "align": null
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "NaMjB_s0qI9r",
+                        "textAlign": "left"
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "개발자"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "sJTMfvDpH69d",
+            "textAlign": "left",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "스프린트 기간"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "GjKoB5kArs65",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "보통의 팀은 2주 정도 진행한다. 나도 2주 정도가 계획부터 회고까지의 사이클이 딱 적당하는 느낌이 들었다. 1주는 계획하고, 진행하고 회고하는 오버헤드가 정말 크다."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "attrs": {
+            "id": "0fxHN4anB3FT"
+          },
+          "content": [
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "REtmwOug1dSS"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "lwYn-pXjDsH7",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "1주 : 피드백이 빠르지만 계획, 리뷰, 회고의 오버헤드가 정말 크다."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "vD6U7Tpis1D6"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "tnt_MZYR0imD",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "2주 : 가장 일반적이며 대부분의 팀이 여기서 시작한다."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "-zmGWsD7ZdFA"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "P1ITuSn4YRcz",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "3주 : 큰 기능을 다룰 때, 중간 피드백이 느리다는 단점이 있다."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "yWz-Flvo6yLz",
+            "textAlign": "left",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "레퍼런스"
+            }
+          ]
+        },
+        {
+          "type": "bookmark",
+          "attrs": {
+            "id": "vuJH88ZlRvyk",
+            "url": "https://uiop5809.tistory.com/383#1.%20Jira%EB%9E%80-1",
+            "title": "Epic, Story, Task 헷갈리는 JIRA 용어를 정리해보자",
+            "description": "회사에서 협업 도구로 Jira를 사용하고 있다. 팀에 합류한 뒤 자연스럽게 Jira를 쓰기 시작했지만 사용할수록 익숙하게 쓰는 것과 제대로 이해하고 쓰는 것은 다르다는 생각이 들었다. Epic, Story, Task의 차이, 스프린트 운영 방식 같은 개념들을 얼핏 알고는 있었지만 막상 설명하려고 하면 흐릿한 부분이 많았다. 이번 글에서는 Atlassian 공식 문서를 바탕으로 Jira의 핵심 개념을 다시 정리하고, 실무에서 헷갈리기 쉬운 포인트들을 함께 정리해보",
+            "image": "https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2F8Do5R%2FdJMcadnUfIv%2FAAAAAAAAAAAAAAAAAAAAAOqT90HXf1UQJkDQUdU3TLu4ocnBqRoW6OXukcSe8P4l%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1796050799%26allow_ip%3D%26allow_referer%3D%26signature%3Df5%252B%252B%252B%252FZqWUx6b0rsyG8raqkAEIk%253D",
+            "layout": "bookmark",
+            "resolved": true
+          }
+        },
+        {
+          "type": "bookmark",
+          "attrs": {
+            "id": "TNL6jfbktLzo",
+            "url": "https://coding-food-court.tistory.com/146",
+            "title": "애자일 방법론 - 스크럼(Scrum)",
+            "description": "1. 폭포수 방법론 폭포수 방법론은 과제 초기의 수립한 계획과 요구사항을 그대로 따르는 방식이라 변경이 용이하지 않습니다. 2. 애자일 방법론 일정한 주기를 가지고 끊임없이 프로토 타입을 만들어내며 그때 그때 필요한 요구를 더하고 수정하여 하나의 커다란 소프트웨어를 개발 합니다. 요구 사항 변경을 수용할 수 있는 가변적 계획 수립과 신속한 소프트웨어 개발을 가능 하게 합니다. 상황이 바뀌는 경우 바로 피봇을 할수 있습니다. 3. 애자일 소프트웨어 방법론 애자일 ",
+            "image": "https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FTETHP%2FbtqNOKvME5U%2FAAAAAAAAAAAAAAAAAAAAAANgy9lUif-D3lq0QJCDB6PU8gBM5rxz4JLf2e6cEZOG%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1796050799%26allow_ip%3D%26allow_referer%3D%26signature%3DNeFGFM%252FQIbA%252BBa9J6e6%252FA0HjAL0%253D",
+            "layout": "bookmark",
+            "resolved": true
+          }
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "ieiqbpIjFC1c",
+            "textAlign": "left"
+          }
+        }
+      ]
+    }
+  }
+]

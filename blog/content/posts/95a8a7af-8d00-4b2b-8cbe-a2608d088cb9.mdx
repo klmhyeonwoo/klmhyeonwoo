@@ -1,0 +1,118 @@
+---
+title: "build & tsc 와 dts (vite-plugin-dts) 차이"
+date: 2026-11-06
+publishedAt: "2026-11-06T07:32:48.115Z"
+updatedAt: "2026-11-06T07:32:48.115Z"
+description: "vue-simplekit 패키지를 개발하다가 발견한 차이"
+category: "category-9606d629"
+series: "-"
+private: false
+---
+
+보통 패키지에서 타입 파일을 추출할 때, vite build &amp; tsc 를 사용한다. Vite 빌드가 끝난 뒤 타입스크립트 컴파일러를 별도로 실행하게 되는데, 이때 선언 파일용 타입스크립트 설정이 필요하다. tsc 방식의 경우 추가 플러그인이 필요없지만 tsconfig.json 안에 noEmit과 declaration 필드에 영향을 받는다.
+
+반면 vite-plugin-dts 방식은 Vite 설정 한곳에서 빌드를 관리할 수 있고, 타입 진입점 생성이나 선언 파일 묶기 같은 욥선도 제공한다. 대신 vite.config.js에 플러그인이라는 개발 의존성이 하나 추가된다. dts는 tsconfig.json 안에 noEmit과 declartion에 영향을 받지 않고 자체적으로 선언파일을 만들게 된다.
+
+## vite-plugin-dts란?
+
+vite-plugin-dts는 Vite로 타입스크립트 라이브러리르 빌드할 떄 타입 선언 파일인 .d.ts를 만들어주는 플러그인이다. Vite는 타입스크립트 코드를 실행 가능한 자바스크립트로 변환하지만, 기본적으로 타입 선언 파일은 만들지 않는다. (빌드 시점에서 타입스크립트 tsc를 실행해줘야함) 이 플러그인을 삽입하게 되면 vite build 한 번으로 두 결과물을 만들 수 있다. 
+
+```text
+src/index.ts
+    ↓ vite build
+dist/index.js    # 실행할 JavaScript
+dist/index.d.ts  # 사용자를 위한 TypeScript 타입 정보
+```
+
+.d.ts 덕분에 패키지 사용자는 함수의 인자와 반환 타입을 확인하고, 자동 완성과 타입 검사를 사용할 수 있다.
+
+## noEmit과 declaration
+
+- noEmit : 파일을 생성할지 말지 결정한다. true 면 타입 검사만 하고 아무 파일도 만들지 않는다.
+- declaration : 파일을 생성할 때 타입 선언 파일(.d.ts)도 만들지 결정한다.
+
+noEmit: false 만으로는 .d.ts가 생기지 않는다. 이 설정은 파일 출력을 허용하겠다를 알려주는 것이고, tsc로 선언 파일을 만드려면 declaration: true의 도움이 필요하다.
+
+```json
+{
+	"complierOptions": {
+		"noEmit": false,
+		"declaration": true
+	}
+}
+```
+
+이 상태에서는 tsc를 실행하면 .js와 .d.ts가 생성된다. .d.ts만 원하면 emitDeclarationOnly: true도 추가하면 된다.
+
+<table data-full-width="true">
+<tbody>
+<tr>
+<th colSpan="1" rowSpan="1">
+
+noEmit
+
+</th>
+<th colSpan="1" rowSpan="1">
+
+declaration
+
+</th>
+<th colSpan="1" rowSpan="1">
+
+결과
+
+</th>
+</tr>
+<tr>
+<td colSpan="1" rowSpan="1">
+
+true
+
+</td>
+<td colSpan="1" rowSpan="1">
+
+어느 값이든
+
+</td>
+<td colSpan="1" rowSpan="1">
+
+타입 검사만하고 파일 생성 안함
+
+</td>
+</tr>
+<tr>
+<td colSpan="1" rowSpan="1">
+
+false
+
+</td>
+<td colSpan="1" rowSpan="1">
+
+false
+
+</td>
+<td colSpan="1" rowSpan="1">
+
+자바스크립트만 생성
+
+</td>
+</tr>
+<tr>
+<td colSpan="1" rowSpan="1">
+
+false
+
+</td>
+<td colSpan="1" rowSpan="1">
+
+true
+
+</td>
+<td colSpan="1" rowSpan="1">
+
+자바스크립트와 .d.ts 생성
+
+</td>
+</tr>
+</tbody>
+</table>

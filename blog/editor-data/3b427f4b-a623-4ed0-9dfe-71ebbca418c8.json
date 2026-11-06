@@ -1,0 +1,370 @@
+[
+  {
+    "type": "slash-content",
+    "version": 1,
+    "content": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "pTUtRUEjqYyT",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "mention",
+              "attrs": {
+                "id": "/posts/b48465a9-e10d-4473-93e9-1b7f6e55cc05",
+                "label": "스레드 작업 분배를 통한 레이아웃 성능 최적화하기"
+              }
+            },
+            {
+              "type": "text",
+              "text": " 게시글에서 이어지는 내용이다. 문득 GIF 파일이 하나가 아닌 여러 개라면 웹 워커 스레드도 여러 개로 늘려 각 개별 연산을 하게 한다면 응답 속도도 더 빠를 수 있을 거라고 생각했다. 그러면 과연 웹 워커를 동적으로 증분해서 사용할 수 있을까?"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "-akuP8Mju-gd",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "여러 웹 워커를 필요할 때마다 생성해서 늘릴 수 있다. 각 웹 워커는 별도 실행 컨텍스트에서 병렬로 작업을 진행한다."
+            }
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "attrs": {
+            "id": "nYPmr5yBR9Tc",
+            "language": "typescript"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "const workers: Worker[] = []\n\nconst createGifWorker = () => {\n  const worker = new GifWorker()\n  workers.push(worker)\n  return worker\n}\n\nconst removeGifWorker = (worker: Worker) => {\n  worker.terminate()\n  workers.splice(workers.indexOf(worker), 1)\n}"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "1oKguJ3rkvXy",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "만약 사용자가 GIF 파일을 이미지 파일로 변환하는 작업을 웹 워커에서 실행한다고 가정했을 때, GIF 파일 3개래르 동시에 변환한다면 웹 워커도 3개로 증분시켜 각각의 테스크들을 맡길 수 있다."
+            }
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "attrs": {
+            "id": "OgpwbxJPinJO",
+            "language": "text"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "GIF A → Worker 1\nGIF B → Worker 2\nGIF C → Worker 3"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "qdVyOkhplRCr",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "다만 웹 워커를 무한정으로 늘리면 속도가 빨라지는 것은 아니다. CPU 코엇 수보다 많이 만들게되면 서로 CPU 시간을 경쟁하기 때문에 오히려 느려지고 메모리 사용량도 늘어날 수 있다. 그래서 보통 웹 워커 개수의 상한선은 논리 코어 수 이하로 두는 것이 바람직하다."
+            }
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "attrs": {
+            "id": "eXyinKtvpw45",
+            "language": "typescript"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "const maxWorkers = Math.min(navigator.hardwareConcurrency ?? 2, 4)"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "_eQbY1q6vF4x",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "또 하나의 예제에서 확인해보면, 이랙트에서 단순히 reduce 메서드를 화용하여 덧셈을 웹 워커에서 처리하는 예제이다. 이 예제는 하나의 웹 워커 스레드에서 연산을 처리하는 것 아닌 동적으로 각 연산들을 개별 웹 워커 스레드에서 처리하고 있다."
+            }
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "attrs": {
+            "id": "ZcRWlIhi0ANk",
+            "language": "typescript"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "// sum.worker.ts\nself.onmessage = (event: MessageEvent<number[]>) => {\n  const result = event.data.reduce((sum, value) => sum + value, 0)\n\n  self.postMessage(result)\n}"
+            }
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "attrs": {
+            "id": "hK1Y3n9vEeh3",
+            "language": "typescript"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "// app.tsx\nimport { useEffect, useRef, useState } from 'react'\n\nconst jobs = [\n  [1, 2, 3],\n  [10, 20, 30],\n  [100, 200, 300],\n]\n\nexport default function App() {\n  const [results, setResults] = useState<number[]>([])\n  const workers = useRef(new Set<Worker>())\n\n  const runWorker = (numbers: number[]) =>\n    new Promise<number>((resolve, reject) => {\n      const worker = new Worker(\n        new URL('./sum.worker.ts', import.meta.url),\n        { type: 'module' },\n      )\n\n      workers.current.add(worker)\n\n      worker.onmessage = (event: MessageEvent<number>) => {\n        resolve(event.data)\n        worker.terminate()\n        workers.current.delete(worker)\n      }\n\n      worker.onerror = () => {\n        reject(new Error('Worker 작업 실패'))\n        worker.terminate()\n        workers.current.delete(worker)\n      }\n\n      worker.postMessage(numbers)\n    })\n\n  const handleClick = async () => {\n    // jobs 개수만큼 Worker가 동적으로 생성되어 동시에 처리됨\n    const values = await Promise.all(jobs.map(runWorker))\n    setResults(values)\n  }\n\n  useEffect(() => {\n    return () => {\n      // 컴포넌트가 사라질 때 아직 실행 중인 Worker 정리\n      workers.current.forEach((worker) => worker.terminate())\n    }\n  }, [])\n\n  return (\n    <>\n      <button onClick={handleClick}>동시 계산</button>\n\n      <ul>\n        {results.map((result, index) => (\n          <li key={index}>작업 {index + 1}: {result}</li>\n        ))}\n      </ul>\n    </>\n  )\n}"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "2IbnXO5MO_BQ",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "버튼을 누르게 되면 아래 흐름대로 동작을 하게 된다. 정말 간단한 동적 생성을 보여주기 위한 예지이기에 작업마다 생성 및 종료를 진행한다. 만약 실제로 이와 같은 변환을 자주 실행한다면 웹 워커를 종료하지 않고 재사용하는 pool 방식이 더 효율적이다."
+            }
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "attrs": {
+            "id": "dT0XVgeiSdGf",
+            "language": "text"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "jobs 3개\n→ Worker 3개 동적 생성\n→ 각 작업 동시 실행\n→ 결과 수신\n→ 각각 terminate()"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "cOAaEM465xzk",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "웹 워커 스레드를 증분해서 사용하면 아래와 같은 장 · 단점을 얻을 수 있다. 먼저 장점은 여러 작업을 실제로 겹쳐 처리할 수 있다는 점이다."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "attrs": {
+            "id": "2FCXNeptWSPE"
+          },
+          "content": [
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "bOIp7lTYq9Mg"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "LVuNzVoeRFS3",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "서로 독립적인 작업을 동시에 처리할 수 있다."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "AvcREGc-YiFJ"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "H37QwXWRkIIt",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "메인 스레드가 계속 가벼워서 클릭, 스크롤, 타이머, 렌더링의 버벅임 현상을 방지할 수 있다."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "gdGTwdoyZskh"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "1BtijPkscRg8",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "CPU 코어가 여러 개라면 전체 처리 완료 시간이 줄어들 수 있다."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "2vxeF0b0jfXl",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "반대로 단점도 분명하다."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "attrs": {
+            "id": "qDauQEX6-3VK"
+          },
+          "content": [
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "mlNOEKxAUr6A"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "KvDwmrPVEMb-",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "웹 워커마다 메모리와 초기화 비용이 발생한다. 라이브러리도 각 워커에서 로드된다."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "c02Q4_AIRkJl"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "bFkXIwqfrkVc",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "CPU 코어보다 많이 만들면 워커끼리 CPU를 경쟁해서 오히려 느려질 수 있다."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "cTRefmDwUT2U"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "__FOmN-JTS3H",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "postMessage로 데이터를 주고받는 비용이 생긴다. transferable 못 쓰는 데이터는 복사 비용도 생각보다 큰 편이다."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "caKwdZuYrHkK"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "9C4M-F6hM_jb",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "결과 순서, 에러, 취소, 종료, 작업 분배를 관리해야해서 코드가 복잡해진다."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "dQKiK45FfKxw",
+            "textAlign": "left"
+          }
+        }
+      ]
+    }
+  }
+]

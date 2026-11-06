@@ -1,0 +1,142 @@
+---
+title: "웹 워커를 동적으로 증분해서 사용하기"
+date: 2026-11-06
+publishedAt: "2026-11-06T03:58:15.331Z"
+updatedAt: "2026-11-06T03:58:15.331Z"
+description: ""
+category: "category-9606d629"
+series: "-"
+private: false
+---
+
+<a className="post-link-mention" href="/posts/b48465a9-e10d-4473-93e9-1b7f6e55cc05">스레드 작업 분배를 통한 레이아웃 성능 최적화하기</a> 게시글에서 이어지는 내용이다. 문득 GIF 파일이 하나가 아닌 여러 개라면 웹 워커 스레드도 여러 개로 늘려 각 개별 연산을 하게 한다면 응답 속도도 더 빠를 수 있을 거라고 생각했다. 그러면 과연 웹 워커를 동적으로 증분해서 사용할 수 있을까?
+
+여러 웹 워커를 필요할 때마다 생성해서 늘릴 수 있다. 각 웹 워커는 별도 실행 컨텍스트에서 병렬로 작업을 진행한다.
+
+```typescript
+const workers: Worker[] = []
+
+const createGifWorker = () => {
+  const worker = new GifWorker()
+  workers.push(worker)
+  return worker
+}
+
+const removeGifWorker = (worker: Worker) => {
+  worker.terminate()
+  workers.splice(workers.indexOf(worker), 1)
+}
+```
+
+만약 사용자가 GIF 파일을 이미지 파일로 변환하는 작업을 웹 워커에서 실행한다고 가정했을 때, GIF 파일 3개래르 동시에 변환한다면 웹 워커도 3개로 증분시켜 각각의 테스크들을 맡길 수 있다.
+
+```text
+GIF A → Worker 1
+GIF B → Worker 2
+GIF C → Worker 3
+```
+
+다만 웹 워커를 무한정으로 늘리면 속도가 빨라지는 것은 아니다. CPU 코엇 수보다 많이 만들게되면 서로 CPU 시간을 경쟁하기 때문에 오히려 느려지고 메모리 사용량도 늘어날 수 있다. 그래서 보통 웹 워커 개수의 상한선은 논리 코어 수 이하로 두는 것이 바람직하다.
+
+```typescript
+const maxWorkers = Math.min(navigator.hardwareConcurrency ?? 2, 4)
+```
+
+또 하나의 예제에서 확인해보면, 이랙트에서 단순히 reduce 메서드를 화용하여 덧셈을 웹 워커에서 처리하는 예제이다. 이 예제는 하나의 웹 워커 스레드에서 연산을 처리하는 것 아닌 동적으로 각 연산들을 개별 웹 워커 스레드에서 처리하고 있다.
+
+```typescript
+// sum.worker.ts
+self.onmessage = (event: MessageEvent<number[]>) => {
+  const result = event.data.reduce((sum, value) => sum + value, 0)
+
+  self.postMessage(result)
+}
+```
+
+```typescript
+// app.tsx
+import { useEffect, useRef, useState } from 'react'
+
+const jobs = [
+  [1, 2, 3],
+  [10, 20, 30],
+  [100, 200, 300],
+]
+
+export default function App() {
+  const [results, setResults] = useState<number[]>([])
+  const workers = useRef(new Set<Worker>())
+
+  const runWorker = (numbers: number[]) =>
+    new Promise<number>((resolve, reject) => {
+      const worker = new Worker(
+        new URL('./sum.worker.ts', import.meta.url),
+        { type: 'module' },
+      )
+
+      workers.current.add(worker)
+
+      worker.onmessage = (event: MessageEvent<number>) => {
+        resolve(event.data)
+        worker.terminate()
+        workers.current.delete(worker)
+      }
+
+      worker.onerror = () => {
+        reject(new Error('Worker 작업 실패'))
+        worker.terminate()
+        workers.current.delete(worker)
+      }
+
+      worker.postMessage(numbers)
+    })
+
+  const handleClick = async () => {
+    // jobs 개수만큼 Worker가 동적으로 생성되어 동시에 처리됨
+    const values = await Promise.all(jobs.map(runWorker))
+    setResults(values)
+  }
+
+  useEffect(() => {
+    return () => {
+      // 컴포넌트가 사라질 때 아직 실행 중인 Worker 정리
+      workers.current.forEach((worker) => worker.terminate())
+    }
+  }, [])
+
+  return (
+    <>
+      <button onClick={handleClick}>동시 계산</button>
+
+      <ul>
+        {results.map((result, index) => (
+          <li key={index}>작업 {index + 1}: {result}</li>
+        ))}
+      </ul>
+    </>
+  )
+}
+```
+
+버튼을 누르게 되면 아래 흐름대로 동작을 하게 된다. 정말 간단한 동적 생성을 보여주기 위한 예지이기에 작업마다 생성 및 종료를 진행한다. 만약 실제로 이와 같은 변환을 자주 실행한다면 웹 워커를 종료하지 않고 재사용하는 pool 방식이 더 효율적이다.
+
+```text
+jobs 3개
+→ Worker 3개 동적 생성
+→ 각 작업 동시 실행
+→ 결과 수신
+→ 각각 terminate()
+```
+
+웹 워커 스레드를 증분해서 사용하면 아래와 같은 장 · 단점을 얻을 수 있다. 먼저 장점은 여러 작업을 실제로 겹쳐 처리할 수 있다는 점이다.
+
+- 서로 독립적인 작업을 동시에 처리할 수 있다.
+- 메인 스레드가 계속 가벼워서 클릭, 스크롤, 타이머, 렌더링의 버벅임 현상을 방지할 수 있다.
+- CPU 코어가 여러 개라면 전체 처리 완료 시간이 줄어들 수 있다.
+
+반대로 단점도 분명하다.
+
+- 웹 워커마다 메모리와 초기화 비용이 발생한다. 라이브러리도 각 워커에서 로드된다.
+- CPU 코어보다 많이 만들면 워커끼리 CPU를 경쟁해서 오히려 느려질 수 있다.
+- postMessage로 데이터를 주고받는 비용이 생긴다. transferable 못 쓰는 데이터는 복사 비용도 생각보다 큰 편이다.
+- 결과 순서, 에러, 취소, 종료, 작업 분배를 관리해야해서 코드가 복잡해진다.

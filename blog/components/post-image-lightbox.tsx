@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type HTMLAttributeReferrerPolicy, type ReactNode, type RefObject } from "react";
 import { createPortal } from "react-dom";
+import { X } from "lucide-react";
 
 type SelectedImage = {
   src: string;
@@ -105,7 +106,7 @@ export function PostImageLightbox({ root, content }: {
         backdropPress.current = false;
       }}
     >
-      <button className="post-image-lightbox-close" type="button" onClick={() => setSelected(null)} aria-label="이미지 닫기">닫기 <span aria-hidden="true">×</span></button>
+      <button className="post-image-lightbox-close" type="button" onClick={() => setSelected(null)} aria-label="이미지 닫기"><span>닫기</span><X size={18} aria-hidden="true" /></button>
       <img src={selected.src} alt={selected.alt} referrerPolicy={selected.referrerPolicy} />
     </dialog>,
     document.body,

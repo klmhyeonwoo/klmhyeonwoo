@@ -57,12 +57,13 @@
   background: #222;
   color: white;
   font: inherit;
+  line-height: 1.25;
   cursor: pointer;
 }
 
 .post-image-lightbox-close:hover { background: #444; }
 .post-image-lightbox-close:focus-visible { outline: 2px solid white; outline-offset: 4px; }
-.post-image-lightbox-close > span { font-size: 1.5rem; line-height: 1; }
+.post-image-lightbox-close > svg { display: block; flex-shrink: 0; }
 
 .prose img {
   display: block;

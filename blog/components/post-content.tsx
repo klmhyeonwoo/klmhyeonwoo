@@ -4,6 +4,7 @@ import type { MouseEvent, ReactNode } from "react";
 import { useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { InlineComments } from "./inline-comments";
+import { PostImageLightbox } from "./post-image-lightbox";
 
 export function PostContent({ children, postId }: { children: ReactNode; postId?: string }) {
   const root = useRef<HTMLDivElement>(null);
@@ -26,6 +27,7 @@ export function PostContent({ children, postId }: { children: ReactNode; postId?
   return <>
     <div className="post-content-with-comments"><div ref={root} className="prose" data-reading-content onClickCapture={confirmExternalLink}>{children}</div>
     {postId && <InlineComments postId={postId} root={root} />}</div>
+    <PostImageLightbox root={root} content={children} />
     {externalUrl && createPortal(<div className="external-link-backdrop" role="presentation" onMouseDown={() => setExternalUrl(null)}>
       <section className="external-link-dialog" role="dialog" aria-modal="true" aria-labelledby="external-link-title" onMouseDown={(event) => event.stopPropagation()}>
         <p className="external-link-kicker">외부 링크</p>

@@ -1,0 +1,604 @@
+[
+  {
+    "type": "slash-content",
+    "version": 1,
+    "content": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "fgUsacrlvkA-",
+            "textAlign": "left",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "배경"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "aJsKdP-YxxX9",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "사내 VM에서 악성코드 분석 후 내려오는 분석 과정에 따른 스크린샷이 프레임이 합쳐진 GIF 파일 형태로 제공이 되는데, 보고서 내 스크린샷의 요구사항은 시간 순서대로 캡쳐된 이미지 단위를 나누어서 제공되어야한다. 이때 단위 이미지를 플레이어 형태로 ( → 기존 만들어진 라이트박스 컴포넌트 같은) 하나하나 단일로도 확인할 수 있어야한다. 이를 위해 GIF 파일의 프레임을 분리하여 이미지로 제공을 하고자 했다. 추가로 이를 위한 연구는 "
+            },
+            {
+              "type": "mention",
+              "attrs": {
+                "id": "/posts/b48465a9-e10d-4473-93e9-1b7f6e55cc05",
+                "label": "스레드 작업 분배를 통한 레이아웃 성능 최적화하기"
+              }
+            },
+            {
+              "type": "text",
+              "text": ", "
+            },
+            {
+              "type": "mention",
+              "attrs": {
+                "id": "/posts/3b427f4b-a623-4ed0-9dfe-71ebbca418c8",
+                "label": "웹 워커를 동적으로 증분해서 사용하기"
+              }
+            },
+            {
+              "type": "text",
+              "text": " 문서들과 연관된다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "VmJ0iKRMPduh",
+            "textAlign": "left",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "기술 검토"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "24ssE5cJY9Ts",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "생각보다 정말 많은 라이브러리가 있다. 하지만 여기서 라이브러리에 선정기준은 아래와 같이 잡았다."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "attrs": {
+            "id": "EzXR-qITb6RI"
+          },
+          "content": [
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "CH9XaJq0Uhau"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "8Q5i5cxTD_fR",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "POC를 진행하고 있지 않는 다른 사람들도 라이브러리 공식 문서를 보고 쉽게 파악이 가능한가?"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "aQuHRznQD7JB"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "akIdZYKgvrCN",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "라이브러리가 만들어진 배경과 우리의 배경이 비슷하고, 쉽게 사용 가능한가?"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "FB1kyr7AF7fd"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "Z8YakzdAYz5Y",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "라이브러리를 도입했을 때, 성능 상 이슈가 없는가?"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "yZSCg1GtdveC",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "구글링도 하고, 에이전트에게 물음을 던지면서 몇가지 라이브러리를 알게 되었고 관련 라이브러리들에 대해 한번 알아보았다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "qEeDafTzWDXg",
+            "textAlign": "left",
+            "level": 3
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "omggif"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "DwxDTmZ35km3",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "낮은 수준의 GIF 디코딩 도구, 디코딩뿐만 아니라 프레임을 읽어서 수정하고 새 GIF를 만드는 용도까지 커버된다. 대신 캔버스 재생이나 완성된 PNG 프렝미을 바로 주는 라이브러리는 아니고, 화면 출력 · 프레임 합성 코드는 직접 작성해야한다. GIF 포맷을 세밀하게 다룰 필요가 있다면 선택할만한 선택지이다. → 우리가 원하는 것은 단순 단일 이미지들의 묶음이지, GIF의 코어한 레벨까지 내려가 편집을 하는 것은 아니므로 배제했다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "QLkuo23V08SH",
+            "textAlign": "left",
+            "level": 3
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "gifuct-js"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "7VkFgplCBf2b",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "GIF 바이트를 parseGIF()로 구조화하고, decompressFrames()로 픽셀 데이터와 프레임 메타데이터를 얻는다. 그 뒤 캔버스에 직접 그리고 PNG Blob 형태로 바꾸는 방식이며 사용법도 간단하다. 개발자가 Ruffle 이라는 서비스에서 우리와 비슷한 고민을 하다가 jsgif, libgif-js의 GIF 프레임 단위 제어 라이브러리들이 코드가 너무 어렵고, 업데이트도 안되어서 직접 만들었다고 한다."
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "attrs": {
+            "id": "DbJWHYzvb9Hb",
+            "src": "https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/blog-content/blog/public/uploads/1794270947955-94601758.webp",
+            "alt": "image-2026-11-6_9-28-28.png",
+            "title": null,
+            "width": null,
+            "height": null,
+            "cropAspect": "original",
+            "cropX": 50,
+            "cropY": 50,
+            "cropZoom": 1
+          }
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "wVppUk4SU0MH",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "각각의 주요 메서드는 아래와 같다."
+            }
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "attrs": {
+            "id": "iJ_FKscrMQbx",
+            "language": "typescript"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "const gif = parseGIF(buffer);\nconst frames = decompressFrames(gif, true);"
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "attrs": {
+            "id": "jpYcjaR5TBv6"
+          },
+          "content": [
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "O0jRGA2UwqDi"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "7WnIIUEEaFHZ",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "parseGIF : GIF 파일 데이터를 읽어 헤더, 프레임, 압축 정보로 구조화하는 함수"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "ZYNclTE7QoZO"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "apXLzksxQLQo",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "decompressFrames : 구조화된 GIF의 각 프레임을 실제 RGBA 픽셀 데이터로 압축 해제하는 함수"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "attrs": {
+            "id": "W_7spba5h0HB",
+            "src": "https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/blog-content/blog/public/uploads/1794271120245-5f077139.webp",
+            "alt": "image-2026-11-6_9-48-30.png",
+            "title": null,
+            "width": null,
+            "height": null,
+            "cropAspect": "original",
+            "cropX": 50,
+            "cropY": 50,
+            "cropZoom": 1
+          }
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "jHNTIPfqqQwc",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "위의 브라우저 개발자 도구에서 성능 탭을 확인해보면, 하나의 자바스크립트 코드 안에서 GIF 파일을 읽어 프레임을 여러 단위로 쪼개는 작업을 하는 것을 확인할 수 있다. 대략 289ms 정도가 소요되었다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "yuMOPWpNSHqZ",
+            "textAlign": "left",
+            "level": 3
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "ImageDecoder"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "VUBqDpAv2Dfe",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "라이브러리가 아니라 WebCodecs의 브라우저 API이다. GIF 바이트를 넣으면 브라우저 네이티브 디코더가 프레임 별 VideoFrame을 반환한다. 이때 사용자는 필요한 프레임 ( → 우리가 흔히 알고있는 순서를 뜻하는 index, 여기서는 frameIndex를 활용할 수 있다) 순서대로 디코딩할 수 있고, GIF 프레임을 캔버스에 바로 그릴 수 있어 픽셀 배열 관리 관련 로직 처리가 줄어든다. 단, 단점으로는 일부 모던 브라우저를 지원하지 않는다. "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "가장 최근으로 파이어폭스가 지원 브라우저로 합류했고, 사파리와 사파리 모바일은 아직 지원이 되지 않는다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "mC5JFCNAibRn",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "ImageDecoder는 GIF 압축을 푸는 일을 브라우저의 네이티브 코드에 위임하고, 브라우저 내부 디코더가 프레임을 VideoFrame으로 변환한다. 자바스크립트로 직접 수행하는 것이 아니라 자바스크립트 힙에 프레임별 RGBA 배열을 대량 생성하는 비용이 줄고, 내부 메모리를 더 효율적으로 다룰 수 있다."
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "attrs": {
+            "id": "0EzLgl_metdU",
+            "src": "https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/blog-content/blog/public/uploads/1794271652022-3dd80961.webp",
+            "alt": "image-2026-11-6_9-19-17.png",
+            "title": null,
+            "width": null,
+            "height": null,
+            "cropAspect": "original",
+            "cropX": 50,
+            "cropY": 50,
+            "cropZoom": 1
+          }
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "HVkcZX_yAv_1",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "위의 gifuct-js 라이브러리와 비교를 하게 되면, gifuct-js는 decompressFrames()를 통해 모든 프레임의 RGBA patch를 JS 메모리에 생성하여 메인스레드에서 처리하게 된다면, ImageDecoder는 필요한 frameIndex만 디코딩 할 수 있을 뿐만 아니라 decode()는 프레임 디코딩을 브라우저 내부 작업 큐에 등록하고, 결과가 준비되면 Promise를 완료한다. gifuct-js가 메인스레드에서 병목을 야기했다면, 메인스레드에 병목 없이 처리할 수 있다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "ECDDPDsz365g",
+            "textAlign": "left",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "웹 워커 방식 도입"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "7bj49GwLL7_M",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "GIF를 파싱하고, LZW 압축 해제를 진행할 때 CPU 작업이기 때문에 GIF가 크거나 프레임이 많으면 실행 중 레이아웃 상호작용 중 멈추는 현상이 발생할 수 있다. 그래서 이를 해결하기 위해 메인스레드의 부담을 덜고자 웹 워커 스레드를 사용한다. 무거운 동작을 웹 워커 안에서 실행하면 무거운 GIF 파싱 동안 메인 화면이 멈추지 않는다. 메인 스레드는 파일 선택, 버튼, 클릭 렌더링만을 담당하고 웹 워커에서는 프레임 데이터를 돌려준다."
+            }
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "attrs": {
+            "id": "2d1LRbXldtxP",
+            "language": "text"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "일반 방식\n메인 스레드: GIF 분해 → 화면 갱신\n             └─ 한 줄로 처리\n\nWorker 방식\n메인 스레드: 화면 · 인터렉션 · 클릭 처리\nWorker:      GIF 분해\n             └─ 동시에 처리 가능"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "ovrQfn9pqbNJ",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "조금 더 쉽게 다이어그램으로 설명을 하게 되면 아래와 같은 변화점을 찾아볼 수 있다."
+            }
+          ]
+        },
+        {
+          "type": "imageCarousel",
+          "attrs": {
+            "id": "TAXxOBzEMt9G",
+            "slidesPerView": 1
+          },
+          "content": [
+            {
+              "type": "image",
+              "attrs": {
+                "id": "Np_b0REjq7vc",
+                "src": "https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/blog-content/blog/public/uploads/1794272115051-40bbbcf6.webp",
+                "alt": "image-2026-11-6_9-46-18.png",
+                "title": null,
+                "width": null,
+                "height": null,
+                "cropAspect": "original",
+                "cropX": 50,
+                "cropY": 50,
+                "cropZoom": 1
+              }
+            },
+            {
+              "type": "image",
+              "attrs": {
+                "id": "JR8OH4j6qL61",
+                "src": "https://raw.githubusercontent.com/klmhyeonwoo/klmhyeonwoo/blog-content/blog/public/uploads/1794272117506-e1416c73.webp",
+                "alt": "image-2026-11-6_9-46-35.png",
+                "title": null,
+                "width": null,
+                "height": null,
+                "cropAspect": "original",
+                "cropX": 50,
+                "cropY": 50,
+                "cropZoom": 1
+              }
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "bdsoHWDHxqgA",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "이러한 부분들을 비교해보고 테스트를 해보니 고민이 되었다. 사실 성능과 가장 친화적인 부분은 브라우저의 네이티브한 부분들을 사용하는 것이라고 생각이 되며 판단이 된다. 하지만 웹 서비스 특성 상 크로스 브라우징 문제가 발생하게 되면 상당히 치명적인 부분이기 때문에 해당 부분을 무시하고 지나갈 수도 없는 노릇이다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "HknoHqqFXlN_",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "일단은 POC를 진행하고 리뷰하면서 팀원들에게 아래와 같은 안을 제시했다."
+            }
+          ]
+        },
+        {
+          "type": "orderedList",
+          "attrs": {
+            "id": "WWsNlX5Ts4kM",
+            "start": 1,
+            "type": null
+          },
+          "content": [
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "EUF8lhYpaQty"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "ScXqOhUjTw-t",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "ImageDecoder를 메인으로 가져가며, 모던 브라우저에서 지원을 하지 않는 경우를 체킹하여 폴백 처리는 gifuct-js로 기능을 구현"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "GPfjEFhhpIoA"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "FztN5fpPy4c0",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "gifuct-js 로직으로 구성된 소스코드로 기능을 구현"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "gplhfIclBVU_",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "1번은 성능 상 유리할 수 있다는 장점을 가지고 있으나, 폴백 · 네비게이터 헤더 체크 · gifuct 워커 생성 등의 여러 작업들을 진행해줘야하는데 이 작업들이 조그마한 기능을 위해 어쩌면 오버엔지니어링이 되어버리지 않을까하는 우려가 있다. 2번은 단순히 POC 한 내용들을 그대로 옮겨놓으면 되기에 생각보다 복잡하지 않다. 이러한 내용들은 코드 리뷰를 통해 또 한번 \"어느 것이 더 좋은 방법일지\"는 논의가 이루어질 것 같다."
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

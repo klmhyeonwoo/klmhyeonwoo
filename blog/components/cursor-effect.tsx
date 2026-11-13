@@ -14,5 +14,6 @@ export function CursorEffect() {
     media.addEventListener("change", sync);
     return () => media.removeEventListener("change", sync);
   }, []);
-  return enabled && !pathname.startsWith("/ykk") ? <Splash key={pathname} /> : null;
+  const isReadingPost = /^\/(?:posts|private-posts)\/[^/]+\/?$/.test(pathname);
+  return enabled && !pathname.startsWith("/ykk") && !isReadingPost ? <Splash key={pathname} /> : null;
 }

@@ -558,54 +558,85 @@
           ]
         },
         {
-          "type": "paragraph",
+          "type": "bulletList",
           "attrs": {
-            "id": "iQzEggjxScOy",
-            "textAlign": "left"
+            "id": "CY6WKC0EM-zk"
           },
           "content": [
             {
-              "type": "text",
-              "marks": [
+              "type": "listItem",
+              "attrs": {
+                "id": "YYCoZFJW68d4"
+              },
+              "content": [
                 {
-                  "type": "link",
+                  "type": "paragraph",
                   "attrs": {
-                    "href": "https://www.anthropic.com/engineering/redesigning-source-control",
-                    "target": "_blank",
-                    "rel": "noopener noreferrer nofollow",
-                    "class": null,
-                    "title": null
-                  }
+                    "id": "j3W8j_77hWcR",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "link",
+                          "attrs": {
+                            "href": "https://www.anthropic.com/engineering/redesigning-source-control",
+                            "target": "_blank",
+                            "rel": "noopener noreferrer nofollow",
+                            "class": null,
+                            "title": null
+                          }
+                        }
+                      ],
+                      "text": "Anthropic · Redesigning source control at Anthropic (2026.10.13)"
+                    }
+                  ]
                 }
-              ],
-              "text": "Anthropic · Redesigning source control at Anthropic (2026.10.13)"
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "v_St7InNNJqJ"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "-EIXg2nHpobB",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "link",
+                          "attrs": {
+                            "href": "https://news.hada.io/topic?id=35309",
+                            "target": "_blank",
+                            "rel": "noopener noreferrer nofollow",
+                            "class": null,
+                            "title": null
+                          }
+                        }
+                      ],
+                      "text": "GeekNews · Anthropic, AI 코딩으로 늘어난 변경량에 대응해 Git을 자체 버전 관리 시스템으로 이전"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
         {
           "type": "paragraph",
           "attrs": {
-            "id": "-EIXg2nHpobB",
+            "id": "skEO_Bo2a8Ue",
             "textAlign": "left"
-          },
-          "content": [
-            {
-              "type": "text",
-              "marks": [
-                {
-                  "type": "link",
-                  "attrs": {
-                    "href": "https://news.hada.io/topic?id=35309",
-                    "target": "_blank",
-                    "rel": "noopener noreferrer nofollow",
-                    "class": null,
-                    "title": null
-                  }
-                }
-              ],
-              "text": "GeekNews · Anthropic, AI 코딩으로 늘어난 변경량에 대응해 Git을 자체 버전 관리 시스템으로 이전"
-            }
-          ]
+          }
         }
       ]
     }

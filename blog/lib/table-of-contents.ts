@@ -4,13 +4,25 @@ export type TableOfContentsItem = {
   title: string;
 };
 
-function headingTitle(value: string) {
-  return value
+function headingTitle(value: string, decode = false) {
+  const text = value
     .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+    .replace(/<[^>]*>/g, "");
+  return (decode ? displayHeadingTitle(text) : text)
     .replace(/`([^`]+)`/g, "$1")
     .replace(/[~*_]/g, "")
-    .replace(/<[^>]*>/g, "")
     .trim();
+}
+
+// The editor escapes MDX-sensitive characters in text, but not inside code spans.
+// Decode one layer so literal text such as "&amp;" stays literal in the TOC.
+function displayHeadingTitle(value: string) {
+  return value.split(/(`+[^`]*`+)/g).map((part) => {
+    if (part.startsWith("`")) return part;
+    return part.replace(/&#123;|&#125;|&amp;|&lt;|&gt;/g, (entity) => ({
+      "&#123;": "{", "&#125;": "}", "&amp;": "&", "&lt;": "<", "&gt;": ">",
+    })[entity] ?? entity);
+  }).join("");
 }
 
 function headingId(title: string) {
@@ -43,7 +55,7 @@ export function getTableOfContents(markdown: string): TableOfContentsItem[] {
     const baseId = headingId(title);
     const count = (counts.get(baseId) ?? 0) + 1;
     counts.set(baseId, count);
-    items.push({ id: count === 1 ? baseId : `${baseId}-${count}`, level: match[1].length as 2 | 3, title });
+    items.push({ id: count === 1 ? baseId : `${baseId}-${count}`, level: match[1].length as 2 | 3, title: headingTitle(match[2], true) });
   }
 
   return items;

@@ -9,8 +9,10 @@ import { postExcerpt } from "@/lib/post-excerpt";
 import { postPublishedAtValue } from "@/lib/post-date";
 import { absoluteUrl } from "@/lib/site-url";
 
-// Public articles remain prerendered; private articles use a separate dynamic route.
-export const revalidate = 3600;
+// Public articles are prerendered at build and only change through a new
+// deployment (publishing commits to GitHub), so never regenerate them on a timer.
+// Hourly regeneration re-ran MDX + syntax highlighting and burned Active CPU.
+export const revalidate = false;
 type Params = Promise<{ id: string }>;
 
 function postDescription(source: string, data: Record<string, unknown>) {

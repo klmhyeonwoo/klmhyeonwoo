@@ -32,6 +32,12 @@ import { shortPostId } from "@/lib/short-post-id";
 import { createHash } from "node:crypto";
 import { PrivatePostCode } from "@/components/private-post-code";
 
+// Load only the grammars posts actually use. The plugin default registers every
+// bundled language (hundreds of grammars) on each cold start, which dominated
+// Fluid Active CPU. Any other language is loaded lazily on demand.
+const shikiLanguages = ["javascript", "typescript", "jsx", "tsx", "json", "html", "css", "scss", "vue", "bash", "shell", "yaml", "markdown", "diff", "python", "sql", "java", "kotlin", "go", "rust", "c", "cpp", "xml", "ini", "toml", "dockerfile", "graphql"];
+const shikiOptions = { themes: { light: "github-light", dark: "github-dark" }, langs: shikiLanguages, lazy: true, fallbackLanguage: "text" } as const;
+
 type ArticleFrontmatter = { title: string; date: string; description?: string; publishedAt?: string; updatedAt?: string };
 type CompiledArticle = {
   content: React.ReactElement;
@@ -47,7 +53,7 @@ const maxCachedSourceBytes = 256 * 1024;
 
 async function compileArticle(source: string, isPrivate = false): Promise<CompiledArticle> {
   const tableOfContents = getTableOfContents(source);
-  const { content, frontmatter } = await compileMDX<ArticleFrontmatter>({ components: { Diagram: PostDiagram, Callout: PostCallout, Bookmark: PostBookmark, Gallery: PostGallery, PostCarousel, PostImage, img: PostImage, Columns: PostColumns, Column: PostColumn, ...(isPrivate ? { code: PrivatePostCode } : {}) }, source, options: { mdxOptions: { remarkPlugins: [remarkGfm, remarkPostImages], rehypePlugins: isPrivate ? [rehypeHeadingIds(tableOfContents)] : [[rehypeShiki, { themes: { light: "github-light", dark: "github-dark" } }], rehypeHeadingIds(tableOfContents)] }, parseFrontmatter: true } });
+  const { content, frontmatter } = await compileMDX<ArticleFrontmatter>({ components: { Diagram: PostDiagram, Callout: PostCallout, Bookmark: PostBookmark, Gallery: PostGallery, PostCarousel, PostImage, img: PostImage, Columns: PostColumns, Column: PostColumn, ...(isPrivate ? { code: PrivatePostCode } : {}) }, source, options: { mdxOptions: { remarkPlugins: [remarkGfm, remarkPostImages], rehypePlugins: isPrivate ? [rehypeHeadingIds(tableOfContents)] : [[rehypeShiki, shikiOptions], rehypeHeadingIds(tableOfContents)] }, parseFrontmatter: true } });
   return { content, frontmatter, tableOfContents };
 }
 

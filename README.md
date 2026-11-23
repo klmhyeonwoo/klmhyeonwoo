@@ -6,7 +6,7 @@
     <br>
     김현우 ﹒ Hyeonwoo Kim
     <br>
-    Frontend Engineer at AhnLab.
+    Software Engineer at AhnLab.
     <br><br>
     <a href="https://wavystudio.xyz">Blog</a>
     /

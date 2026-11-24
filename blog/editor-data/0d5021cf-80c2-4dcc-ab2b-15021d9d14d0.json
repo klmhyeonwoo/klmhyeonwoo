@@ -1,0 +1,459 @@
+[
+  {
+    "type": "slash-content",
+    "version": 1,
+    "content": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "9afS5nNMW0o2",
+            "textAlign": "left",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "왜 Orca 라는 도구가 갑자기 주목받을까?"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "MD4jXYZX1F7I",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "최근 AI 기반 코딩 도구들이 빠르게 발전하면서, 터미널 환경에서 직접 코드를 수정하고 실행하는 CLI 에이전트들을 여러 개 동시에 활용하는 개발자가 늘고있다. 하지만 에이전트가 많아지면 많아질수록 터미널 탭이 끊없이 늘어나 작업 현황을 파악하기 어려워지고, 같은 프로젝트 폴더 내에서 여러 에이전트가 동시에 파일을 건드리다 코드가 충돌하는 문제도 빈번하게 발생할 수 있다. 이러한 멀티 에이전트 시대의 번거로움을 해결하기 위해 등장한 오픈소스 데스크톱 개발 환경이 바로 Orca이다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "216FvcJ-WJvF",
+            "textAlign": "left",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "멀티 에이전트 시대의 번거로움을 해결하기위해 등장한 Orca"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "esNPsaqK4R9o",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Orca는새로운 AI 모델이나 IDE 같은 코드 에디터라기보다는, 이미 로컬 환경에 설치해 새로운 AI 모델이 아니라 사용중인 Claude Code나 OpenAI Codex 같은 기존에 사용하던 AI 에이전트들을 띄우고 조율하는 관제탑 역할을 한다. 개발자는 Orca의 통합 인터페이스를 통해 서로 다른 AI 에이전트들을 동시에 실행하고, 각 에이전트가 현재 어떤 작업을 수행 중인지 칸반 형태의 대시보드로 한눈에 파악할 수 있다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "v1zC0cQk7REw",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "* Orca는 ADE (Agent Development Environment), 에이전트 개발 환경이라고 한다. IDE에서는 주인공이 개발자가 되어 코드를 직접 작성했다면 ADE는 주인공이 AI 코딩 에이전트가 되며, 사람은 지휘자 및 검토자 역할을 맡게 된다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "DQOyoVobSOQA",
+            "textAlign": "left",
+            "level": 3
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Git Worktree 기반의 독립적인 병렬 작업을 할 수 있다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "64SjZTaE8VR_",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "개발자는 Orca의 통합 인터페이스를 통해 서로 다른 AI 에이전트들을 동시에 실행하고, 각 에이전트가 현재 어떤 작업을 수행 중인지 칸반 형태의 대시보드로 한눈에 파악할 수 있다. 내가 Orca를 필요하게 된 이유 중 하나는 Git worktree를 활용해 독립적인 작업 공간을 분리할 수 있다는 점이다. 메인 이슈를 진행하는데, 내 에이전트는 다른 작업 공간에서 별개의 브랜치에서 다른 작업을 독립적으로 할 수 있다는 것이다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "xtPjTizDFkpP",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "에이전트 세션마다 별도의 워크트리를 할당하기 때문에, 한쪽에서 에이전트가 급한 버그를 수정하는 동안 다른 쪽 에이전트는 코드 충돌 걱정 없이 새로운 기능을 병렬로 개발할 수 있다. 작업이 끝난 뒤에는 내장된 코드 Diff 뷰어를 통해 변경 내역을 즉시 비교하고 검토할 수 있어, 동일한 지시를 여러 에이전트에게 내린 뒤 가장 완성도 높은 결과물만 골라 병합하는 식의 활용도 수월하다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "u5uf0w9U_x1G",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "사실 요새 에이전트 데스크탑에서도 Git Worktree 기반의 작업이 프롬프팅을 통해 가능하긴하지만, 어떻게 작업을 하고 있는지에 대한 요소들을 확인하기 어렵다는 단점이 있다. Orca는 현재 작업을 별도의 상태 창으로 확인할 수 있어 정말 보기 편했다."
+            }
+          ]
+        },
+        {
+          "type": "details",
+          "attrs": {
+            "id": "nSq5OEN2ll-4",
+            "open": true,
+            "level": 0
+          },
+          "content": [
+            {
+              "type": "detailsSummary",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "병렬 실행과 오케스트레이션은 다르다."
+                }
+              ]
+            },
+            {
+              "type": "detailsContent",
+              "attrs": {
+                "id": "OCKcn8lOS2bv"
+              },
+              "content": [
+                {
+                  "type": "bulletList",
+                  "attrs": {
+                    "id": "G4IONTtllLv2"
+                  },
+                  "content": [
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "id": "ircyjJTxVsm-"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "attrs": {
+                            "id": "FNxMQw__qd7_",
+                            "textAlign": "left"
+                          },
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "병렬 실행 (Parallel Exeution) : “일꾼 여러 명에게 각자 다른 일을 동시에 시킨다”"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "ZMpHHq4sBGt5",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "한 작업이 끝날 때까지 기다리지 않고, 여러 AI 에이전트에게 동시에 띄워 각기 다른 작업을 한꺼번에 처리하는 방식이다. 단순 예전 방식의 프롬프트 방식은 순차적이었다. 에이전트에게 A 기능 개발 진행 → 끝날 때까지 멍하니 대기 → 끝나면 B 버그 수정을 시켰다. 하지만 여기서 병렬 실행을 하게 되면 아래와 같이 여러 에이전트가 다중 작업을 진행하게 된다."
+                    }
+                  ]
+                },
+                {
+                  "type": "orderedList",
+                  "attrs": {
+                    "id": "pyRPXAKTsZ7W",
+                    "start": 1,
+                    "type": null
+                  },
+                  "content": [
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "id": "bTiFt0DWd56O"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "attrs": {
+                            "id": "Hq4RDpCkhpCw",
+                            "textAlign": "left"
+                          },
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "1번 창 (Claude Code) : 로그인 버그 수정"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "id": "sdM33XhmhB7H"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "attrs": {
+                            "id": "hCGHw0DoEfxQ",
+                            "textAlign": "left"
+                          },
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "2번 창 (Codex) : 결제 페이지 UI 개발"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "id": "mLcJ74SkdQNK"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "attrs": {
+                            "id": "arGu0qi6DUcM",
+                            "textAlign": "left"
+                          },
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "3번 창 (Claude Code) : 기존 코드 테스트 코드 작성"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "apPi1jVWZbc7",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "이로써 기다리는 시간이 사라지며 병목이 제거되고 작업 속도가 향상되게 되는 것이다."
+                    }
+                  ]
+                },
+                {
+                  "type": "bulletList",
+                  "attrs": {
+                    "id": "8noxLjcjYkJ8"
+                  },
+                  "content": [
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "id": "ZB-tIEwBj9K-"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "attrs": {
+                            "id": "3-jCHtiB_crB",
+                            "textAlign": "left"
+                          },
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "오케스트레이션 (Orchestration) : “오케스트라 지휘자처럼 역할 분담하고 연결한다“"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "-CQMOHnj_S59",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "단순히 여러 개를 동시에 켜두는 것을 넘어, 큰 목표를 달성하기 위해 여러 에이전트에게 역할을 나누고 작업 순서와 맥락을 조율하는 개념이다. Orca에서 오케스트레이션의 작동 방식은 아래와 같다."
+                    }
+                  ]
+                },
+                {
+                  "type": "orderedList",
+                  "attrs": {
+                    "id": "09dWz3tyquBa",
+                    "start": 1,
+                    "type": null
+                  },
+                  "content": [
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "id": "K_XmhRYUYPe9"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "attrs": {
+                            "id": "QNxWjvItH_-k",
+                            "textAlign": "left"
+                          },
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "조정자 (Coordinator) ㅡ 작업자 (Worker) 구조 : 팀장 역할을 하는 에이전트가 큰 기획을 작은 단위로 쪼갠 뒤, 여러 작업자 에이전트에게 일을 분배하고 결과를 취합한다."
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "id": "AHhic9CMk1Cb"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "attrs": {
+                            "id": "-kR_CM299KTD",
+                            "textAlign": "left"
+                          },
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "핸드오프 (작업 인계) : A 에이전트가 백엔드 API 설계를 마치면, 그 작업 맥락을 B 에이전트에게 넘겨주어 이어서 프론트엔드 화면을 개발하게 만든다."
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "9tPlY9sCkJoI",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "이로써 사람이 일일이 중간 결과를 복사해서 다른 창에 붙여넣지 않아도, 에이전트끼리 유기적으로 맞물려 들어간다. 일종의 스타트업의 소규모 팀처럼 알아서 움직이는 형태가 구성된다."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "s3TJh5BzeYJB",
+            "textAlign": "left",
+            "level": 3
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "개발 생산성을 높이는 올인원 편의 기능을 제공한다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "nAp7SRlguKV1",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "개발 편의성을 높여주는 부가 기능도 존재한다. 별도의 브라우저 창을 오갈 필요 없이 내장 브라우저로 실행 화면을 바로 확인할 수 있으며, 화면 속 특정 UI 요소를 직접 클릭해 주석을 남기고 에이전트에게 수정을 지시하는 직관적인 워크플로우를 지원한다. 또한 조정자와 작업자 형태로 역할을 나누어 작업을 분배하거나, 한 에이전트의 작업 맥락을 다른 에이전트로 넘기는 핸드오프 기능, 그리고 작업 성격에 따라 수동 승인부터 자동 실행까지 권한 수준을 조절하는 옵션도 갖추고 있다. 추가로 LAN이나 릴레이, SSH 연동을 지원하여 외부나 모바일 환경에서도 원격으로 진행상황을 살피고 개입할 수 있다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "wc3mPo4EPM-w",
+            "textAlign": "left",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "글을 마치며"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "ECW0LZFtEF_T",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "사실 단일 에이전트 모델을 사용하는 개발자라면 Orca를 굳이 사용하지 않아도 되긴한다. 요새 에이전트 데스크탑 어플리케이션들 또한 이 기능들을 대체적으로 지원을 하기 때문이다. Orca는 단일 AI 에이전트 사용을 넘어 여러 에이전트를 지휘하며 개발 생산성을 극대화하고자 하는 개발자에게 매력적인 선택지이다. 메인 기능을 직접 구현하면서 백그라운드 에이전트에게 테스트 코드 작성이나 리팩토링을 맡기고 싶을 때, 혹시 프론트엔드 화면을 보며 빠르고 직관적으로 UI를 다듬고 싶을 때 훌륭한 작업 허브가 될 수 있다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "gB0lVNUXUGWF",
+            "textAlign": "left"
+          }
+        }
+      ]
+    }
+  }
+]

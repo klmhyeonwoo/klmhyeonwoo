@@ -8,7 +8,7 @@
         {
           "type": "bookmark",
           "attrs": {
-            "id": "2K7Fv_a8vgKC",
+            "id": "F_TCZdELOPpL",
             "url": "https://orca.dev/",
             "title": "Orca — The agent development environment",
             "description": "Orca is the Agent Development Environment (ADE) for shipping with coding agents. Run Claude Code, Codex, Gemini, Cursor CLI, and every other CLI agent in parallel across isolated worktrees. Get work done dramatically faster than any IDE. New features shipped e",
@@ -145,7 +145,7 @@
         {
           "type": "details",
           "attrs": {
-            "id": "KBcWdzkducD9",
+            "id": "Zaa0aXyrtQx-",
             "open": true,
             "level": 0
           },
@@ -162,19 +162,19 @@
             {
               "type": "detailsContent",
               "attrs": {
-                "id": "OQGsMeC5ii6o"
+                "id": "6xcbsm0anxU4"
               },
               "content": [
                 {
                   "type": "bulletList",
                   "attrs": {
-                    "id": "uX9GA934qzCL"
+                    "id": "IWvKRA2zIJPQ"
                   },
                   "content": [
                     {
                       "type": "listItem",
                       "attrs": {
-                        "id": "AxEcXJTCmDrb"
+                        "id": "gwqePE5i87Au"
                       },
                       "content": [
                         {
@@ -210,7 +210,7 @@
                 {
                   "type": "orderedList",
                   "attrs": {
-                    "id": "2xRyi1BN8-Bk",
+                    "id": "K6sKoM84ihxV",
                     "start": 1,
                     "type": null
                   },
@@ -218,7 +218,7 @@
                     {
                       "type": "listItem",
                       "attrs": {
-                        "id": "SXoNv2VTTmuR"
+                        "id": "3hok70u8CGX6"
                       },
                       "content": [
                         {
@@ -239,7 +239,7 @@
                     {
                       "type": "listItem",
                       "attrs": {
-                        "id": "opD0fOREQF8c"
+                        "id": "NKfHFaiYmmoY"
                       },
                       "content": [
                         {
@@ -260,7 +260,7 @@
                     {
                       "type": "listItem",
                       "attrs": {
-                        "id": "G6oNOo144Ubh"
+                        "id": "FINV2VtCMDGq"
                       },
                       "content": [
                         {
@@ -296,13 +296,13 @@
                 {
                   "type": "bulletList",
                   "attrs": {
-                    "id": "EDvuYDH6RxTk"
+                    "id": "b4x0NwpcM7fX"
                   },
                   "content": [
                     {
                       "type": "listItem",
                       "attrs": {
-                        "id": "8TGBx_RnQxKy"
+                        "id": "EOjjlPxB79Ei"
                       },
                       "content": [
                         {
@@ -338,7 +338,7 @@
                 {
                   "type": "orderedList",
                   "attrs": {
-                    "id": "9bBmJEtH6jzH",
+                    "id": "vBoxCgU9Lt_f",
                     "start": 1,
                     "type": null
                   },
@@ -346,7 +346,7 @@
                     {
                       "type": "listItem",
                       "attrs": {
-                        "id": "39dh6NzkS8O-"
+                        "id": "mtJqeeb42k6N"
                       },
                       "content": [
                         {
@@ -367,7 +367,7 @@
                     {
                       "type": "listItem",
                       "attrs": {
-                        "id": "gvt-CWhx5Aby"
+                        "id": "yErGBlSDlyus"
                       },
                       "content": [
                         {

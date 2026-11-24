@@ -6,35 +6,21 @@
       "type": "doc",
       "content": [
         {
-          "type": "heading",
+          "type": "bookmark",
           "attrs": {
-            "id": "NWqPwEShTsGp",
-            "textAlign": "left",
-            "level": 2
-          },
-          "content": [
-            {
-              "type": "text",
-              "marks": [
-                {
-                  "type": "link",
-                  "attrs": {
-                    "href": "https://orca.dev/",
-                    "target": "_blank",
-                    "rel": "noopener noreferrer nofollow",
-                    "class": null,
-                    "title": null
-                  }
-                }
-              ],
-              "text": "Orca — The agent development environment"
-            }
-          ]
+            "id": "2K7Fv_a8vgKC",
+            "url": "https://orca.dev/",
+            "title": "Orca — The agent development environment",
+            "description": "Orca is the Agent Development Environment (ADE) for shipping with coding agents. Run Claude Code, Codex, Gemini, Cursor CLI, and every other CLI agent in parallel across isolated worktrees. Get work done dramatically faster than any IDE. New features shipped e",
+            "image": "https://orca.dev/og-image.png",
+            "layout": "bookmark",
+            "resolved": true
+          }
         },
         {
           "type": "heading",
           "attrs": {
-            "id": "YwEx2w298rZA",
+            "id": "9afS5nNMW0o2",
             "textAlign": "left",
             "level": 2
           },
@@ -48,7 +34,7 @@
         {
           "type": "paragraph",
           "attrs": {
-            "id": "DDct_TP2ahYJ",
+            "id": "MD4jXYZX1F7I",
             "textAlign": "left"
           },
           "content": [
@@ -61,7 +47,7 @@
         {
           "type": "heading",
           "attrs": {
-            "id": "PN78bjKWWSnD",
+            "id": "216FvcJ-WJvF",
             "textAlign": "left",
             "level": 2
           },
@@ -75,25 +61,30 @@
         {
           "type": "paragraph",
           "attrs": {
-            "id": "_z0iGWq05geM",
+            "id": "esNPsaqK4R9o",
             "textAlign": "left"
           },
           "content": [
             {
               "type": "text",
-              "text": "Orca는 새로운 AI 모델이나 IDE 같은 코드 에디터라기보다는, 기존에 사용하던 Claude Code나 OpenAI Codex 같은 AI 에이전트들을 띄우고 조율하는 관제탑 역할을 한다. 개발자는 Orca의 통합 인터페이스를 통해 서로 다른 AI 에이전트들을 동시에 실행하고, 각 에이전트가 현재 어떤 작업을 수행 중인지 한눈에 파악할 수 있다."
+              "text": "Orca는새로운 AI 모델이나 IDE 같은 코드 에디터라기보다는, 이미 로컬 환경에 설치해 새로운 AI 모델이 아니라 사용중인 Claude Code나 OpenAI Codex 같은 기존에 사용하던 AI 에이전트들을 띄우고 조율하는 관제탑 역할을 한다. 개발자는 Orca의 통합 인터페이스를 통해 서로 다른 AI 에이전트들을 동시에 실행하고, 각 에이전트가 현재 어떤 작업을 수행 중인지 칸반 형태의 대시보드로 한눈에 파악할 수 있다."
             }
           ]
         },
         {
           "type": "paragraph",
           "attrs": {
-            "id": "eedVxxX3CKx6",
+            "id": "v1zC0cQk7REw",
             "textAlign": "left"
           },
           "content": [
             {
               "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
               "text": "* Orca는 ADE (Agent Development Environment), 에이전트 개발 환경이라고 한다. IDE에서는 주인공이 개발자가 되어 코드를 직접 작성했다면 ADE는 주인공이 AI 코딩 에이전트가 되며, 사람은 지휘자 및 검토자 역할을 맡게 된다."
             }
           ]
@@ -101,7 +92,7 @@
         {
           "type": "heading",
           "attrs": {
-            "id": "nzHxpQs3O46s",
+            "id": "DQOyoVobSOQA",
             "textAlign": "left",
             "level": 3
           },
@@ -115,7 +106,7 @@
         {
           "type": "paragraph",
           "attrs": {
-            "id": "f37-xRERTszb",
+            "id": "64SjZTaE8VR_",
             "textAlign": "left"
           },
           "content": [
@@ -128,20 +119,20 @@
         {
           "type": "paragraph",
           "attrs": {
-            "id": "m_q3TYuAegM5",
+            "id": "xtPjTizDFkpP",
             "textAlign": "left"
           },
           "content": [
             {
               "type": "text",
-              "text": "에이전트 세션마다 별도의 워크트리를 할당하기 때문에, 한쪽에서 에이전트가 급한 버그를 수정하는 동안 다른 쪽 에이전트는 새로운 기능을 병렬로 개발할 수 있다. 작업이 끝난 뒤에는 내장된 코드 Diff 뷰어를 통해 변경 내역을 즉시 비교하고 검토할 수 있어, 동일한 지시를 여러 에이전트에게 내린 뒤 가장 완성도 높은 결과물만 골라 병합하는 식의 활용도 수월하다."
+              "text": "에이전트 세션마다 별도의 워크트리를 할당하기 때문에, 한쪽에서 에이전트가 급한 버그를 수정하는 동안 다른 쪽 에이전트는 코드 충돌 걱정 없이 새로운 기능을 병렬로 개발할 수 있다. 작업이 끝난 뒤에는 내장된 코드 Diff 뷰어를 통해 변경 내역을 즉시 비교하고 검토할 수 있어, 동일한 지시를 여러 에이전트에게 내린 뒤 가장 완성도 높은 결과물만 골라 병합하는 식의 활용도 수월하다."
             }
           ]
         },
         {
           "type": "paragraph",
           "attrs": {
-            "id": "gIPj4YAZkuEv",
+            "id": "u5uf0w9U_x1G",
             "textAlign": "left"
           },
           "content": [
@@ -152,232 +143,271 @@
           ]
         },
         {
+          "type": "details",
+          "attrs": {
+            "id": "KBcWdzkducD9",
+            "open": true,
+            "level": 0
+          },
+          "content": [
+            {
+              "type": "detailsSummary",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "병렬 실행과 오케스트레이션은 다르다."
+                }
+              ]
+            },
+            {
+              "type": "detailsContent",
+              "attrs": {
+                "id": "OQGsMeC5ii6o"
+              },
+              "content": [
+                {
+                  "type": "bulletList",
+                  "attrs": {
+                    "id": "uX9GA934qzCL"
+                  },
+                  "content": [
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "id": "AxEcXJTCmDrb"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "attrs": {
+                            "id": "FNxMQw__qd7_",
+                            "textAlign": "left"
+                          },
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "병렬 실행 (Parallel Exeution) : “일꾼 여러 명에게 각자 다른 일을 동시에 시킨다”"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "ZMpHHq4sBGt5",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "한 작업이 끝날 때까지 기다리지 않고, 여러 AI 에이전트에게 동시에 띄워 각기 다른 작업을 한꺼번에 처리하는 방식이다. 단순 예전 방식의 프롬프트 방식은 순차적이었다. 에이전트에게 A 기능 개발 진행 → 끝날 때까지 멍하니 대기 → 끝나면 B 버그 수정을 시켰다. 하지만 여기서 병렬 실행을 하게 되면 아래와 같이 여러 에이전트가 다중 작업을 진행하게 된다."
+                    }
+                  ]
+                },
+                {
+                  "type": "orderedList",
+                  "attrs": {
+                    "id": "2xRyi1BN8-Bk",
+                    "start": 1,
+                    "type": null
+                  },
+                  "content": [
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "id": "SXoNv2VTTmuR"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "attrs": {
+                            "id": "Hq4RDpCkhpCw",
+                            "textAlign": "left"
+                          },
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "1번 창 (Claude Code) : 로그인 버그 수정"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "id": "opD0fOREQF8c"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "attrs": {
+                            "id": "hCGHw0DoEfxQ",
+                            "textAlign": "left"
+                          },
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "2번 창 (Codex) : 결제 페이지 UI 개발"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "id": "G6oNOo144Ubh"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "attrs": {
+                            "id": "arGu0qi6DUcM",
+                            "textAlign": "left"
+                          },
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "3번 창 (Claude Code) : 기존 코드 테스트 코드 작성"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "apPi1jVWZbc7",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "이로써 기다리는 시간이 사라지며 병목이 제거되고 작업 속도가 향상되게 되는 것이다."
+                    }
+                  ]
+                },
+                {
+                  "type": "bulletList",
+                  "attrs": {
+                    "id": "EDvuYDH6RxTk"
+                  },
+                  "content": [
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "id": "8TGBx_RnQxKy"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "attrs": {
+                            "id": "3-jCHtiB_crB",
+                            "textAlign": "left"
+                          },
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "오케스트레이션 (Orchestration) : “오케스트라 지휘자처럼 역할 분담하고 연결한다“"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "-CQMOHnj_S59",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "단순히 여러 개를 동시에 켜두는 것을 넘어, 큰 목표를 달성하기 위해 여러 에이전트에게 역할을 나누고 작업 순서와 맥락을 조율하는 개념이다. Orca에서 오케스트레이션의 작동 방식은 아래와 같다."
+                    }
+                  ]
+                },
+                {
+                  "type": "orderedList",
+                  "attrs": {
+                    "id": "9bBmJEtH6jzH",
+                    "start": 1,
+                    "type": null
+                  },
+                  "content": [
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "id": "39dh6NzkS8O-"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "attrs": {
+                            "id": "QNxWjvItH_-k",
+                            "textAlign": "left"
+                          },
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "조정자 (Coordinator) ㅡ 작업자 (Worker) 구조 : 팀장 역할을 하는 에이전트가 큰 기획을 작은 단위로 쪼갠 뒤, 여러 작업자 에이전트에게 일을 분배하고 결과를 취합한다."
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "attrs": {
+                        "id": "gvt-CWhx5Aby"
+                      },
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "attrs": {
+                            "id": "-kR_CM299KTD",
+                            "textAlign": "left"
+                          },
+                          "content": [
+                            {
+                              "type": "text",
+                              "text": "핸드오프 (작업 인계) : A 에이전트가 백엔드 API 설계를 마치면, 그 작업 맥락을 B 에이전트에게 넘겨주어 이어서 프론트엔드 화면을 개발하게 만든다."
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "9tPlY9sCkJoI",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "이로써 사람이 일일이 중간 결과를 복사해서 다른 창에 붙여넣지 않아도, 에이전트끼리 유기적으로 맞물려 들어간다. 일종의 스타트업의 소규모 팀처럼 알아서 움직이는 형태가 구성된다."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
           "type": "heading",
           "attrs": {
-            "id": "PTRIc3-MJfKl",
-            "textAlign": "left",
-            "level": 3
-          },
-          "content": [
-            {
-              "type": "text",
-              "text": "병렬 실행과 오케스트레이션은 다르다."
-            }
-          ]
-        },
-        {
-          "type": "paragraph",
-          "attrs": {
-            "id": "PuT2NB_qhiBN",
-            "textAlign": "left"
-          },
-          "content": [
-            {
-              "type": "text",
-              "marks": [
-                {
-                  "type": "bold"
-                }
-              ],
-              "text": "병렬 실행 (Parallel Execution) : “일꾼 여러 명에게 각자 다른 일을 동시에 시킨다”"
-            }
-          ]
-        },
-        {
-          "type": "paragraph",
-          "attrs": {
-            "id": "Hg8rtEgG9OBm",
-            "textAlign": "left"
-          },
-          "content": [
-            {
-              "type": "text",
-              "text": "한 작업이 끝날 때까지 기다리지 않고, 여러 AI 에이전트를 동시에 띄워 각기 다른 작업을 한꺼번에 처리하는 방식이다. 단순 예전 방식의 프롬프트 방식은 순차적이었다. 에이전트에게 A 기능 개발 진행 → 끝날 때까지 멍하니 대기 → 끝나면 B 버그 수정을 시켰다. 하지만 여기서 병렬 실행을 하게 되면 아래와 같이 여러 에이전트가 다중 작업을 진행하게 된다."
-            }
-          ]
-        },
-        {
-          "type": "bulletList",
-          "attrs": {
-            "id": "nkj4WEineg3v"
-          },
-          "content": [
-            {
-              "type": "listItem",
-              "attrs": {
-                "id": "7uMEreVqS0bn"
-              },
-              "content": [
-                {
-                  "type": "paragraph",
-                  "attrs": {
-                    "id": "p70hWLJPIBws",
-                    "textAlign": "left"
-                  },
-                  "content": [
-                    {
-                      "type": "text",
-                      "text": "1번 창 (Claude Code) : 로그인 버그 수정"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "listItem",
-              "attrs": {
-                "id": "2ham4yLiNieQ"
-              },
-              "content": [
-                {
-                  "type": "paragraph",
-                  "attrs": {
-                    "id": "f3q-twd7q1-k",
-                    "textAlign": "left"
-                  },
-                  "content": [
-                    {
-                      "type": "text",
-                      "text": "2번 창 (Codex) : 결제 페이지 UI 개발"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "listItem",
-              "attrs": {
-                "id": "Hcc1U95wgpfs"
-              },
-              "content": [
-                {
-                  "type": "paragraph",
-                  "attrs": {
-                    "id": "cuwv4Oa_PK0s",
-                    "textAlign": "left"
-                  },
-                  "content": [
-                    {
-                      "type": "text",
-                      "text": "3번 창 (Claude Code) : 기존 코드 테스트 코드 작성"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "paragraph",
-          "attrs": {
-            "id": "4AGuFQD_XmhZ",
-            "textAlign": "left"
-          },
-          "content": [
-            {
-              "type": "text",
-              "text": "이렇게 서로 독립적인 작업을 동시에 진행해 기다리는 시간을 줄일 수 있다."
-            }
-          ]
-        },
-        {
-          "type": "paragraph",
-          "attrs": {
-            "id": "wmFjBwPZF_ry",
-            "textAlign": "left"
-          },
-          "content": [
-            {
-              "type": "text",
-              "marks": [
-                {
-                  "type": "bold"
-                }
-              ],
-              "text": "오케스트레이션 (Orchestration) : “오케스트라 지휘자처럼 역할 분담하고 연결한다”"
-            }
-          ]
-        },
-        {
-          "type": "paragraph",
-          "attrs": {
-            "id": "Qo_7sK1ArdVW",
-            "textAlign": "left"
-          },
-          "content": [
-            {
-              "type": "text",
-              "text": "단순히 여러 개를 동시에 켜두는 것을 넘어, 큰 목표를 달성하기 위해 여러 에이전트에게 역할을 나누고 작업 순서와 맥락을 조율하는 개념이다. Orca에서 오케스트레이션의 작동 방식은 아래와 같다."
-            }
-          ]
-        },
-        {
-          "type": "bulletList",
-          "attrs": {
-            "id": "ZD3aXxlo_ShY"
-          },
-          "content": [
-            {
-              "type": "listItem",
-              "attrs": {
-                "id": "KeUvEJMmNd33"
-              },
-              "content": [
-                {
-                  "type": "paragraph",
-                  "attrs": {
-                    "id": "k1YzLNUn9TN9",
-                    "textAlign": "left"
-                  },
-                  "content": [
-                    {
-                      "type": "text",
-                      "text": "조정자 (Coordinator) - 작업자 (Worker) 구조 : 팀장 역할을 하는 에이전트가 큰 기획을 작은 단위로 쪼갠 뒤, 여러 작업자 에이전트에게 일을 분배하고 결과를 취합한다."
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "listItem",
-              "attrs": {
-                "id": "0rux10JD5jTp"
-              },
-              "content": [
-                {
-                  "type": "paragraph",
-                  "attrs": {
-                    "id": "v0hajG3ayRXZ",
-                    "textAlign": "left"
-                  },
-                  "content": [
-                    {
-                      "type": "text",
-                      "text": "핸드오프 (작업 인계) : A 에이전트가 백엔드 API 설계를 마치면, 그 작업 맥락을 B 에이전트에게 넘겨주어 이어서 프론트엔드 화면을 개발하게 만든다."
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "paragraph",
-          "attrs": {
-            "id": "gnzLwCWu8wXM",
-            "textAlign": "left"
-          },
-          "content": [
-            {
-              "type": "text",
-              "text": "이처럼 사람이 일일이 중간 결과를 복사해서 다른 창에 붙여넣는 대신, 에이전트의 역할과 작업을 연결할 수 있다. 일종의 스타트업의 소규모 팀처럼 역할을 나누어 움직이는 형태를 구성하는 것이다."
-            }
-          ]
-        },
-        {
-          "type": "heading",
-          "attrs": {
-            "id": "aQZ7BfSxMpo8",
+            "id": "s3TJh5BzeYJB",
             "textAlign": "left",
             "level": 3
           },
@@ -391,7 +421,7 @@
         {
           "type": "paragraph",
           "attrs": {
-            "id": "7hYlWnN010uM",
+            "id": "nAp7SRlguKV1",
             "textAlign": "left"
           },
           "content": [
@@ -564,7 +594,7 @@
         {
           "type": "heading",
           "attrs": {
-            "id": "q5kkOkN4Hd2b",
+            "id": "wc3mPo4EPM-w",
             "textAlign": "left",
             "level": 2
           },
@@ -578,15 +608,22 @@
         {
           "type": "paragraph",
           "attrs": {
-            "id": "yvAtg8TBaJzL",
+            "id": "ECW0LZFtEF_T",
             "textAlign": "left"
           },
           "content": [
             {
               "type": "text",
-              "text": "사실 단일 에이전트 모델을 사용하는 개발자라면 Orca를 굳이 사용하지 않아도 되긴한다. 요새 에이전트 데스크탑 어플리케이션들 또한 이 기능들을 대체적으로 지원을 하기 때문이다. Orca는 단일 AI 에이전트 사용을 넘어 여러 에이전트를 지휘하며 개발 생산성을 높이고자 하는 개발자에게 매력적인 선택지이다. 메인 기능을 직접 구현하면서 백그라운드 에이전트에게 테스트 코드 작성이나 리팩토링을 맡기고 싶을 때, 혹시 프론트엔드 화면을 보며 빠르고 직관적으로 UI를 다듬고 싶을 때 훌륭한 작업 허브가 될 수 있다."
+              "text": "사실 단일 에이전트 모델을 사용하는 개발자라면 Orca를 굳이 사용하지 않아도 되긴한다. 요새 에이전트 데스크탑 어플리케이션들 또한 이 기능들을 대체적으로 지원을 하기 때문이다. Orca는 단일 AI 에이전트 사용을 넘어 여러 에이전트를 지휘하며 개발 생산성을 극대화하고자 하는 개발자에게 매력적인 선택지이다. 메인 기능을 직접 구현하면서 백그라운드 에이전트에게 테스트 코드 작성이나 리팩토링을 맡기고 싶을 때, 혹시 프론트엔드 화면을 보며 빠르고 직관적으로 UI를 다듬고 싶을 때 훌륭한 작업 허브가 될 수 있다."
             }
           ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "gB0lVNUXUGWF",
+            "textAlign": "left"
+          }
         },
         {
           "type": "heading",

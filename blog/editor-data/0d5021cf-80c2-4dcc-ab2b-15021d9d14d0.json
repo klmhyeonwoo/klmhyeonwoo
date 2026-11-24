@@ -6,78 +6,56 @@
       "type": "doc",
       "content": [
         {
-          "type": "bookmark",
-          "attrs": {
-            "id": "-BKNrn2EI0RY",
-            "url": "https://orca.dev/",
-            "title": "Orca — The agent development environment",
-            "description": "Orca is the Agent Development Environment (ADE) for shipping with coding agents. Run Claude Code, Codex, Gemini, Cursor CLI, and every other CLI agent in parallel across isolated worktrees. Get work done dramatically faster than any IDE. New features shipped e",
-            "image": "https://orca.dev/og-image.png",
-            "layout": "bookmark",
-            "resolved": true
-          }
-        },
-        {
           "type": "heading",
           "attrs": {
-            "id": "9afS5nNMW0o2",
+            "id": "peBZuoP7EaGh",
             "textAlign": "left",
             "level": 2
           },
           "content": [
             {
               "type": "text",
-              "text": "왜 Orca 라는 도구가 갑자기 주목받을까?"
+              "text": "AI 에이전트가 늘어날수록 무엇이 불편해질까?"
             }
           ]
         },
         {
           "type": "paragraph",
           "attrs": {
-            "id": "MD4jXYZX1F7I",
+            "id": "AbFMsB-i26-I",
             "textAlign": "left"
           },
           "content": [
             {
               "type": "text",
-              "text": "최근 AI 기반 코딩 도구들이 빠르게 발전하면서, 터미널 환경에서 직접 코드를 수정하고 실행하는 CLI 에이전트들을 여러 개 동시에 활용하는 개발자가 늘고있다. 하지만 에이전트가 많아지면 많아질수록 터미널 탭이 끊없이 늘어나 작업 현황을 파악하기 어려워지고, 같은 프로젝트 폴더 내에서 여러 에이전트가 동시에 파일을 건드리다 코드가 충돌하는 문제도 빈번하게 발생할 수 있다. 이러한 멀티 에이전트 시대의 번거로움을 해결하기 위해 등장한 오픈소스 데스크톱 개발 환경이 바로 Orca이다."
-            }
-          ]
-        },
-        {
-          "type": "heading",
-          "attrs": {
-            "id": "216FvcJ-WJvF",
-            "textAlign": "left",
-            "level": 2
-          },
-          "content": [
-            {
-              "type": "text",
-              "text": "멀티 에이전트 시대의 번거로움을 해결하기위해 등장한 Orca"
+              "text": "Claude Code나 Codex 같은 코딩 에이전트를 사용하다 보면, 하나의 작업이 끝나기를 기다리는 시간이 아쉽게 느껴질 때가 있다. 기능을 구현하는 동안 테스트 코드를 작성하거나, 다른 에이전트에게 별도의 버그 수정을 맡기고 싶어지기 때문이다."
             }
           ]
         },
         {
           "type": "paragraph",
           "attrs": {
-            "id": "esNPsaqK4R9o",
+            "id": "CedDv1UzDsTp",
             "textAlign": "left"
           },
           "content": [
             {
               "type": "text",
-              "text": "Orca는새로운 AI 모델이나 IDE 같은 코드 에디터라기보다는, 이미 로컬 환경에 설치해 새로운 AI 모델이 아니라 사용중인 Claude Code나 OpenAI Codex 같은 기존에 사용하던 AI 에이전트들을 띄우고 조율하는 관제탑 역할을 한다. 개발자는 Orca의 통합 인터페이스를 통해 서로 다른 AI 에이전트들을 동시에 실행하고, 각 에이전트가 현재 어떤 작업을 수행 중인지 칸반 형태의 대시보드로 한눈에 파악할 수 있다."
+              "text": "하지만 에이전트를 여러 개 띄우는 순간 새로운 문제가 생긴다. 터미널 창이 늘어나면 어떤 에이전트가 무슨 작업을 하고 있는지 파악하기 어렵다. 같은 프로젝트 폴더에서 동시에 작업하면 한 에이전트가 수정 중인 파일을 다른 에이전트가 덮어쓸 수도 있다."
             }
           ]
         },
         {
           "type": "paragraph",
           "attrs": {
-            "id": "v1zC0cQk7REw",
+            "id": "Z7BcWEQJIEdc",
             "textAlign": "left"
           },
           "content": [
+            {
+              "type": "text",
+              "text": "각 작업을 별도의 브랜치와 폴더로 나누면 어느 정도 해결할 수 있다. 다만 작업 공간을 만들고, 에이전트를 실행하고, 결과를 비교하는 과정을 매번 직접 관리해야 한다. "
+            },
             {
               "type": "text",
               "marks": [
@@ -85,318 +63,206 @@
                   "type": "bold"
                 }
               ],
-              "text": "* Orca는 ADE (Agent Development Environment), 에이전트 개발 환경이라고 한다. IDE에서는 주인공이 개발자가 되어 코드를 직접 작성했다면 ADE는 주인공이 AI 코딩 에이전트가 되며, 사람은 지휘자 및 검토자 역할을 맡게 된다."
+              "text": "Orca는 이런 과정을 하나의 화면에서 관리할 수 있도록 만든 에이전트 개발 환경이다."
             }
           ]
         },
         {
           "type": "heading",
           "attrs": {
-            "id": "DQOyoVobSOQA",
+            "id": "zWPY-l0L6_dZ",
             "textAlign": "left",
-            "level": 3
+            "level": 2
           },
           "content": [
             {
               "type": "text",
-              "text": "Git Worktree 기반의 독립적인 병렬 작업을 할 수 있다."
+              "text": "Orca는 어떤 도구일까?"
             }
           ]
         },
         {
           "type": "paragraph",
           "attrs": {
-            "id": "64SjZTaE8VR_",
+            "id": "Z9J5o5Ol8Xai",
             "textAlign": "left"
           },
           "content": [
             {
               "type": "text",
-              "text": "개발자는 Orca의 통합 인터페이스를 통해 서로 다른 AI 에이전트들을 동시에 실행하고, 각 에이전트가 현재 어떤 작업을 수행 중인지 칸반 형태의 대시보드로 한눈에 파악할 수 있다. 내가 Orca를 필요하게 된 이유 중 하나는 Git worktree를 활용해 독립적인 작업 공간을 분리할 수 있다는 점이다. 메인 이슈를 진행하는데, 내 에이전트는 다른 작업 공간에서 별개의 브랜치에서 다른 작업을 독립적으로 할 수 있다는 것이다."
+              "text": "Orca는 새로운 AI 모델이 아니다. Claude Code, Codex, Gemini CLI처럼 이미 사용하고 있는 코딩 에이전트를 실행하고 관리하는 데 초점을 맞춘 오픈소스 데스크톱 도구다."
             }
           ]
         },
         {
           "type": "paragraph",
           "attrs": {
-            "id": "xtPjTizDFkpP",
+            "id": "tKrOmSoVApvn",
             "textAlign": "left"
           },
           "content": [
             {
               "type": "text",
-              "text": "에이전트 세션마다 별도의 워크트리를 할당하기 때문에, 한쪽에서 에이전트가 급한 버그를 수정하는 동안 다른 쪽 에이전트는 코드 충돌 걱정 없이 새로운 기능을 병렬로 개발할 수 있다. 작업이 끝난 뒤에는 내장된 코드 Diff 뷰어를 통해 변경 내역을 즉시 비교하고 검토할 수 있어, 동일한 지시를 여러 에이전트에게 내린 뒤 가장 완성도 높은 결과물만 골라 병합하는 식의 활용도 수월하다."
+              "text": "개발자가 에디터에서 코드를 직접 작성하는 데 집중하는 환경과 달리, Orca가 제안하는 환경에서는 여러 에이전트에게 작업을 나누어 맡기고 그 결과를 확인하는 과정이 중요해진다. Orca는 이를 ADE, Agent Development Environment라고 부른다."
             }
           ]
         },
         {
           "type": "paragraph",
           "attrs": {
-            "id": "u5uf0w9U_x1G",
+            "id": "dJ5CpQ6mWQV-",
             "textAlign": "left"
           },
           "content": [
             {
               "type": "text",
-              "text": "사실 요새 에이전트 데스크탑에서도 Git Worktree 기반의 작업이 프롬프팅을 통해 가능하긴하지만, 어떻게 작업을 하고 있는지에 대한 요소들을 확인하기 어렵다는 단점이 있다. Orca는 현재 작업을 별도의 상태 창으로 확인할 수 있어 정말 보기 편했다."
+              "text": "물론 ADE와 IDE가 완전히 다른 도구라는 뜻은 아니다. Orca 역시 편집기, 터미널, 변경 사항 비교 화면을 제공한다. 차이는 코드를 직접 작성하는 공간뿐 아니라 "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "여러 에이전트의 작업 공간과 진행 상황을 함께 관리하는 데 무게를 둔다"
+            },
+            {
+              "type": "text",
+              "text": "는 점이다."
             }
           ]
         },
         {
-          "type": "details",
+          "type": "paragraph",
           "attrs": {
-            "id": "nSq5OEN2ll-4",
-            "open": true,
-            "level": 0
+            "id": "X6J2iEbEhQRz",
+            "textAlign": "left"
           },
           "content": [
             {
-              "type": "detailsSummary",
+              "type": "text",
+              "text": "Orca는 여러 CLI 에이전트를 지원하지만, 에이전트마다 상태 표시나 사용량 확인처럼 깊게 연동되는 기능에는 차이가 있다. 사용할 에이전트의 설치와 로그인, 이용 요금도 별도로 확인해야 한다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "vShX9rvI5AbS",
+            "textAlign": "left",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Git worktree로 작업 공간을 나누는 이유"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "ziPO82zUdNR-",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "내가 Orca에서 특히 유용하다고 느낀 부분은 Git worktree를 기반으로 작업 공간을 분리한다는 점이다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "YIo_G5yYpEwo",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Git worktree는 하나의 Git 저장소에서 여러 작업 디렉터리를 만들어 각각 다른 브랜치를 체크아웃할 수 있는 기능이다. 저장소를 매번 새로 복제하지 않고도 작업별로 분리된 파일 공간을 가질 수 있다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "_ssPQH7fp7i1",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "예를 들어 다음과 같이 작업을 나눌 수 있다."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "attrs": {
+            "id": "ClkwNno_PeMz"
+          },
+          "content": [
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "IuB-7lgV6oEc"
+              },
               "content": [
                 {
-                  "type": "text",
-                  "text": "병렬 실행과 오케스트레이션은 다르다."
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "zNttMOLxqPSW",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "메인 작업 공간: 내가 새로운 기능을 직접 구현한다."
+                    }
+                  ]
                 }
               ]
             },
             {
-              "type": "detailsContent",
+              "type": "listItem",
               "attrs": {
-                "id": "OCKcn8lOS2bv"
+                "id": "c347hFBn5hCs"
               },
               "content": [
                 {
-                  "type": "bulletList",
-                  "attrs": {
-                    "id": "G4IONTtllLv2"
-                  },
-                  "content": [
-                    {
-                      "type": "listItem",
-                      "attrs": {
-                        "id": "ircyjJTxVsm-"
-                      },
-                      "content": [
-                        {
-                          "type": "paragraph",
-                          "attrs": {
-                            "id": "FNxMQw__qd7_",
-                            "textAlign": "left"
-                          },
-                          "content": [
-                            {
-                              "type": "text",
-                              "text": "병렬 실행 (Parallel Exeution) : “일꾼 여러 명에게 각자 다른 일을 동시에 시킨다”"
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
                   "type": "paragraph",
                   "attrs": {
-                    "id": "ZMpHHq4sBGt5",
+                    "id": "FZvW2eMxuDLT",
                     "textAlign": "left"
                   },
                   "content": [
                     {
                       "type": "text",
-                      "text": "한 작업이 끝날 때까지 기다리지 않고, 여러 AI 에이전트에게 동시에 띄워 각기 다른 작업을 한꺼번에 처리하는 방식이다. 단순 예전 방식의 프롬프트 방식은 순차적이었다. 에이전트에게 A 기능 개발 진행 → 끝날 때까지 멍하니 대기 → 끝나면 B 버그 수정을 시켰다. 하지만 여기서 병렬 실행을 하게 되면 아래와 같이 여러 에이전트가 다중 작업을 진행하게 된다."
+                      "text": "작업 공간 A: 에이전트에게 로그인 버그 수정을 맡긴다."
                     }
                   ]
-                },
-                {
-                  "type": "orderedList",
-                  "attrs": {
-                    "id": "pyRPXAKTsZ7W",
-                    "start": 1,
-                    "type": null
-                  },
-                  "content": [
-                    {
-                      "type": "listItem",
-                      "attrs": {
-                        "id": "bTiFt0DWd56O"
-                      },
-                      "content": [
-                        {
-                          "type": "paragraph",
-                          "attrs": {
-                            "id": "Hq4RDpCkhpCw",
-                            "textAlign": "left"
-                          },
-                          "content": [
-                            {
-                              "type": "text",
-                              "text": "1번 창 (Claude Code) : 로그인 버그 수정"
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "type": "listItem",
-                      "attrs": {
-                        "id": "sdM33XhmhB7H"
-                      },
-                      "content": [
-                        {
-                          "type": "paragraph",
-                          "attrs": {
-                            "id": "hCGHw0DoEfxQ",
-                            "textAlign": "left"
-                          },
-                          "content": [
-                            {
-                              "type": "text",
-                              "text": "2번 창 (Codex) : 결제 페이지 UI 개발"
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "type": "listItem",
-                      "attrs": {
-                        "id": "mLcJ74SkdQNK"
-                      },
-                      "content": [
-                        {
-                          "type": "paragraph",
-                          "attrs": {
-                            "id": "arGu0qi6DUcM",
-                            "textAlign": "left"
-                          },
-                          "content": [
-                            {
-                              "type": "text",
-                              "text": "3번 창 (Claude Code) : 기존 코드 테스트 코드 작성"
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                },
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "CT0Z-aT-nYiQ"
+              },
+              "content": [
                 {
                   "type": "paragraph",
                   "attrs": {
-                    "id": "apPi1jVWZbc7",
+                    "id": "ZAkGVZkfarT1",
                     "textAlign": "left"
                   },
                   "content": [
                     {
                       "type": "text",
-                      "text": "이로써 기다리는 시간이 사라지며 병목이 제거되고 작업 속도가 향상되게 되는 것이다."
-                    }
-                  ]
-                },
-                {
-                  "type": "bulletList",
-                  "attrs": {
-                    "id": "8noxLjcjYkJ8"
-                  },
-                  "content": [
-                    {
-                      "type": "listItem",
-                      "attrs": {
-                        "id": "ZB-tIEwBj9K-"
-                      },
-                      "content": [
-                        {
-                          "type": "paragraph",
-                          "attrs": {
-                            "id": "3-jCHtiB_crB",
-                            "textAlign": "left"
-                          },
-                          "content": [
-                            {
-                              "type": "text",
-                              "text": "오케스트레이션 (Orchestration) : “오케스트라 지휘자처럼 역할 분담하고 연결한다“"
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "paragraph",
-                  "attrs": {
-                    "id": "-CQMOHnj_S59",
-                    "textAlign": "left"
-                  },
-                  "content": [
-                    {
-                      "type": "text",
-                      "text": "단순히 여러 개를 동시에 켜두는 것을 넘어, 큰 목표를 달성하기 위해 여러 에이전트에게 역할을 나누고 작업 순서와 맥락을 조율하는 개념이다. Orca에서 오케스트레이션의 작동 방식은 아래와 같다."
-                    }
-                  ]
-                },
-                {
-                  "type": "orderedList",
-                  "attrs": {
-                    "id": "09dWz3tyquBa",
-                    "start": 1,
-                    "type": null
-                  },
-                  "content": [
-                    {
-                      "type": "listItem",
-                      "attrs": {
-                        "id": "K_XmhRYUYPe9"
-                      },
-                      "content": [
-                        {
-                          "type": "paragraph",
-                          "attrs": {
-                            "id": "QNxWjvItH_-k",
-                            "textAlign": "left"
-                          },
-                          "content": [
-                            {
-                              "type": "text",
-                              "text": "조정자 (Coordinator) ㅡ 작업자 (Worker) 구조 : 팀장 역할을 하는 에이전트가 큰 기획을 작은 단위로 쪼갠 뒤, 여러 작업자 에이전트에게 일을 분배하고 결과를 취합한다."
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "type": "listItem",
-                      "attrs": {
-                        "id": "AHhic9CMk1Cb"
-                      },
-                      "content": [
-                        {
-                          "type": "paragraph",
-                          "attrs": {
-                            "id": "-kR_CM299KTD",
-                            "textAlign": "left"
-                          },
-                          "content": [
-                            {
-                              "type": "text",
-                              "text": "핸드오프 (작업 인계) : A 에이전트가 백엔드 API 설계를 마치면, 그 작업 맥락을 B 에이전트에게 넘겨주어 이어서 프론트엔드 화면을 개발하게 만든다."
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "paragraph",
-                  "attrs": {
-                    "id": "9tPlY9sCkJoI",
-                    "textAlign": "left"
-                  },
-                  "content": [
-                    {
-                      "type": "text",
-                      "text": "이로써 사람이 일일이 중간 결과를 복사해서 다른 창에 붙여넣지 않아도, 에이전트끼리 유기적으로 맞물려 들어간다. 일종의 스타트업의 소규모 팀처럼 알아서 움직이는 형태가 구성된다."
+                      "text": "작업 공간 B: 다른 에이전트에게 기존 기능의 테스트 코드 작성을 맡긴다."
                     }
                   ]
                 }
@@ -405,36 +271,515 @@
           ]
         },
         {
-          "type": "heading",
+          "type": "paragraph",
           "attrs": {
-            "id": "s3TJh5BzeYJB",
-            "textAlign": "left",
-            "level": 3
+            "id": "qtdwVLhcrexJ",
+            "textAlign": "left"
           },
           "content": [
             {
               "type": "text",
-              "text": "개발 생산성을 높이는 올인원 편의 기능을 제공한다."
+              "text": "각 작업이 별도의 worktree에서 진행되면 한쪽에서 파일을 수정하더라도 다른 작업 공간의 파일을 직접 건드리지 않는다. 브랜치를 바꾸기 위해 현재 변경 사항을 임시 저장하는 과정도 줄일 수 있다."
             }
           ]
         },
         {
           "type": "paragraph",
           "attrs": {
-            "id": "nAp7SRlguKV1",
+            "id": "SjUlXhmdHutk",
             "textAlign": "left"
           },
           "content": [
             {
               "type": "text",
-              "text": "개발 편의성을 높여주는 부가 기능도 존재한다. 별도의 브라우저 창을 오갈 필요 없이 내장 브라우저로 실행 화면을 바로 확인할 수 있으며, 화면 속 특정 UI 요소를 직접 클릭해 주석을 남기고 에이전트에게 수정을 지시하는 직관적인 워크플로우를 지원한다. 또한 조정자와 작업자 형태로 역할을 나누어 작업을 분배하거나, 한 에이전트의 작업 맥락을 다른 에이전트로 넘기는 핸드오프 기능, 그리고 작업 성격에 따라 수동 승인부터 자동 실행까지 권한 수준을 조절하는 옵션도 갖추고 있다. 추가로 LAN이나 릴레이, SSH 연동을 지원하여 외부나 모바일 환경에서도 원격으로 진행상황을 살피고 개입할 수 있다."
+              "text": "Orca에서는 작업별 worktree와 브랜치, 에이전트 터미널을 연결해 관리한다. 작업이 끝나면 변경 사항을 비교하는 Diff 화면에서 결과를 확인한 뒤 필요한 내용을 병합할 수 있다."
             }
           ]
         },
         {
           "type": "heading",
           "attrs": {
-            "id": "wc3mPo4EPM-w",
+            "id": "3rssrZwnaLYu",
+            "textAlign": "left",
+            "level": 3
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "그렇다고 충돌이 완전히 사라지는 것은 아니다"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "9AqgbpkP5osw",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Worktree가 분리하는 것은 작업 중인 파일 공간이다. 서로 다른 브랜치에서 같은 코드를 수정했다면 나중에 병합할 때 충돌할 수 있다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "zBoSHDjLBUND",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "또한 로컬 서버 포트, 데이터베이스, 외부 API, 환경 변수처럼 worktree 밖에서 공유하는 자원까지 자동으로 격리되는 것은 아니다. 두 에이전트가 같은 포트로 개발 서버를 실행하거나 같은 데이터베이스를 수정하지 않도록 따로 확인해야 한다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "hotkwhtO6QI4",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "따라서 병렬 작업을 맡길 때는 가능하면 수정할 영역과 완료 조건을 나누는 편이 좋다. 예를 들어 한 에이전트에게는 로그인 화면의 유효성 검사 수정을, 다른 에이전트에게는 로그인 API 테스트 코드 작성을 맡길 수 있다. 인증 관련 설정 파일처럼 공통으로 건드릴 수 있는 부분은 수정 전에 알려달라는 조건을 함께 적어두는 방법도 있다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "wsvqFfcnWF7_",
+            "textAlign": "left",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "병렬 실행과 오케스트레이션은 어떻게 다를까?"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "ExYAj0dLoyKk",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "멀티 에이전트 도구를 이야기할 때 병렬 실행과 오케스트레이션이 자주 함께 등장한다. 둘은 관련이 있지만 같은 뜻은 아니다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "JJbpjSt-diXs",
+            "textAlign": "left",
+            "level": 3
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "병렬 실행: 여러 작업을 동시에 진행한다"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "rYkRcNZQttrg",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "병렬 실행은 여러 에이전트에게 각각 작업을 맡기고 동시에 실행하는 방식이다. 예를 들어 한 에이전트는 로그인 버그를 수정하고, 다른 에이전트는 결제 페이지 UI를 만들고, 또 다른 에이전트는 테스트 코드를 작성할 수 있다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "HjYUJ3gtnkkH",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "이때 작업을 어떻게 나눌지 결정하고 결과를 합치는 역할은 개발자가 직접 맡을 수도 있다. 중요한 것은 작업이 동시에 진행된다는 점이다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "U4YSYXvPQoYr",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "다만 에이전트를 많이 띄운다고 무조건 빨라지는 것은 아니다. 작업 간 의존성이 높거나 같은 파일을 자주 수정하면 결과를 검토하고 병합하는 데 오히려 더 많은 시간이 들 수 있다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "n468UnbbzX4X",
+            "textAlign": "left",
+            "level": 3
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "오케스트레이션: 작업의 순서와 관계까지 조율한다"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "jG5o_xXLmqZU",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "오케스트레이션은 여러 작업의 역할, 순서, 의존 관계, 결과 전달 방식까지 조율하는 개념이다. 예를 들어 새로운 결제 기능을 만든다고 해보자."
+            }
+          ]
+        },
+        {
+          "type": "orderedList",
+          "attrs": {
+            "id": "KYpiibR2zzbz",
+            "start": 1,
+            "type": null
+          },
+          "content": [
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "80oY4SL0IdD9"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "9a3b3xzH1nJA",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "먼저 API 요구 사항과 데이터 형식을 정리한다."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "vere9xUDp_eE"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "FMjndeh_pXyn",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "정리된 내용을 바탕으로 백엔드와 프론트엔드 작업을 나눈다."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "YXL7gs3cq1Nw"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "n6hgXZrWM8Nx",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "각 작업이 끝나면 변경 사항을 검토하고 연결한다."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "X2saBM569h6A"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "ZtsUvxTf8g1S",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "마지막으로 전체 흐름을 테스트한다."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "WZ3xFnrngFI5",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "이 과정에서는 무작정 동시에 실행하는 것보다 어떤 작업이 먼저 끝나야 하는지와 결과를 다음 작업에 어떻게 전달할지가 중요하다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "dT38k4-K307v",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Orca는 여러 에이전트를 한 화면에서 실행하는 것뿐 아니라 에이전트가 작업자를 만들고 조율할 수 있는 기능도 제공한다. 다만 도구가 에이전트를 실행해준다는 것과 모든 작업이 자동으로 올바르게 연결된다는 것은 다르다. 작업 경계와 결과 검토는 여전히 신경 써야 한다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "T0JWY8FCPDpV",
+            "textAlign": "left",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "브라우저와 Diff를 함께 보는 작업 방식"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "v_ZY-8uslf7e",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "에이전트에게 코드를 맡긴 뒤에는 결과를 확인하는 과정이 필요하다. Orca는 이를 위해 터미널뿐 아니라 브라우저와 Diff 화면을 작업 공간 안에 함께 배치할 수 있도록 한다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "s-guHJOXA-oe",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "예를 들어 UI 수정 작업이라면 에이전트에게 수정을 요청한 뒤 내장 브라우저에서 실행 중인 화면을 확인할 수 있다. 수정이 필요한 요소를 선택해 관련 정보를 에이전트에게 전달하고, 수정 결과와 코드 변경 범위를 다시 확인하는 식이다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "h3XH0H7Dp6M6",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Orca의 Design Mode에서는 브라우저의 요소를 클릭해 HTML, 스타일, 선택자 정보를 복사하고 에이전트 대화에 전달할 수 있다. 화면을 보며 수정 위치를 설명하기 어려울 때 활용할 만한 기능이다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "aQU74aIDaEQy",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "화면이 원하는 대로 바뀌었다고 해서 검토가 끝나는 것은 아니다. 의도하지 않은 파일 수정은 없는지, 기존 동작은 유지되는지, 테스트가 필요한 부분은 없는지 코드도 함께 살펴봐야 한다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "pGPK0pOfKf7Y",
+            "textAlign": "left",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "사용하기 전에 확인할 점"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "loXk0LR5DNKn",
+            "textAlign": "left",
+            "level": 3
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "1. 에이전트의 실행 권한을 살펴보자"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "tWS6gk-2nS_T",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Worktree가 분리되어 있다고 해서 에이전트가 컴퓨터 전체에서 완전히 격리되는 것은 아니다. 에이전트가 가진 권한에 따라 셸 명령을 실행하거나 공유 자원에 접근할 수 있기 때문이다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "p6HFpha6eUTK",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "특히 Orca 공식 문서에는 새 에이전트를 실행할 때 지원되는 CLI의 권한 확인 우회 옵션을 미리 채워 넣는다고 안내되어 있다. 기본으로 채워지는 옵션은 에이전트마다 다르다. 민감한 파일이나 운영 환경에 접근할 수 있는 작업이라면 실행 전에 옵션을 확인하고 필요한 수준으로 권한을 조정하는 것이 좋다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "RVPH0wkOq9xx",
+            "textAlign": "left",
+            "level": 3
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "2. 병렬 작업의 비용과 사용량을 고려하자"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "098LbM2H88-f",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "여러 에이전트를 동시에 실행하면 그만큼 모델 사용량도 늘어날 수 있다. 같은 문제를 여러 에이전트에게 풀게 하는 방식은 결과를 비교하기 좋지만, 작업 성격에 따라 비용 대비 효용이 낮을 수도 있다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "X5MiOAOhSQCX",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "처음에는 서로 독립적인 두 작업 정도로 시작해 보고, 결과를 검토하는 데 드는 시간까지 포함해 자신에게 맞는 작업 방식을 찾는 것이 좋다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "09hvqieQHnki",
+            "textAlign": "left",
+            "level": 3
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "3. 개발 환경이 worktree마다 준비되어 있는지 확인하자"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "CxQ5uXhFtCBY",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "새 worktree에는 브랜치의 추적 파일이 준비되지만, 무시된 환경 변수 파일이나 설치된 의존성처럼 별도로 관리되는 항목은 기존 작업 공간과 다를 수 있다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "yePJMyYHGfkl",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "실행이 되지 않는다면 코드부터 수정하기보다 환경 변수, 패키지 설치, 개발 서버 포트, 테스트용 데이터베이스 설정을 먼저 확인해 보는 편이 좋다. 민감한 설정 파일은 무심코 복사하거나 에이전트에게 노출하지 않도록 주의해야 한다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "iNoxzbs_q5Dl",
             "textAlign": "left",
             "level": 2
           },
@@ -448,20 +793,213 @@
         {
           "type": "paragraph",
           "attrs": {
-            "id": "ECW0LZFtEF_T",
+            "id": "-ADHrFcATcMz",
             "textAlign": "left"
           },
           "content": [
             {
               "type": "text",
-              "text": "사실 단일 에이전트 모델을 사용하는 개발자라면 Orca를 굳이 사용하지 않아도 되긴한다. 요새 에이전트 데스크탑 어플리케이션들 또한 이 기능들을 대체적으로 지원을 하기 때문이다. Orca는 단일 AI 에이전트 사용을 넘어 여러 에이전트를 지휘하며 개발 생산성을 극대화하고자 하는 개발자에게 매력적인 선택지이다. 메인 기능을 직접 구현하면서 백그라운드 에이전트에게 테스트 코드 작성이나 리팩토링을 맡기고 싶을 때, 혹시 프론트엔드 화면을 보며 빠르고 직관적으로 UI를 다듬고 싶을 때 훌륭한 작업 허브가 될 수 있다."
+              "text": "Orca가 모든 개발자에게 필요한 도구는 아니다. 에이전트 하나로 작업하고 있고 현재 사용하는 앱에서 충분히 진행 상황을 확인할 수 있다면 새로운 도구를 추가할 이유가 크지 않을 수 있다."
             }
           ]
         },
         {
           "type": "paragraph",
           "attrs": {
-            "id": "gB0lVNUXUGWF",
+            "id": "epiq0kk85NSS",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "반면 기능을 직접 구현하면서 테스트나 버그 수정을 별도로 맡기고 싶거나, 여러 에이전트에게 같은 문제를 맡긴 뒤 결과를 비교하고 싶다면 한 번 살펴볼 만하다. worktree와 브랜치를 매번 직접 관리하는 과정이 번거로운 경우에도 도움이 될 수 있다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "LI_c_csdUr0f",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "내게 Orca가 흥미로운 이유도 여기에 있다. AI 에이전트가 코드를 얼마나 잘 작성하는지만큼, 여러 작업을 어떻게 나누고 결과를 어떻게 검토할 것인지가 점점 중요해지고 있기 때문이다."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "yfR9vsbnhCzl",
+            "textAlign": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Orca는 그 과정을 대신 판단해주는 도구라기보다는 개발자가 여러 에이전트의 작업을 더 편하게 관리하고 확인할 수 있도록 돕는 작업 공간에 가깝다. 병렬 작업이 필요한 순간이 자주 찾아온다면 기존 개발 환경과 비교해 볼 만한 선택지다."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "Pe7HS-AlLeBl",
+            "textAlign": "left",
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "참고 자료"
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "attrs": {
+            "id": "Fs_KnFwu0adI"
+          },
+          "content": [
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "CPwNYRSLNITc"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "KB5Di-WAqWSD",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "link",
+                          "attrs": {
+                            "href": "https://orca.dev/",
+                            "target": "_blank",
+                            "rel": "noopener noreferrer nofollow",
+                            "class": null,
+                            "title": null
+                          }
+                        }
+                      ],
+                      "text": "Orca 공식 사이트"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "USF6xSA_RPTq"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "7lLffew0HEoD",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "link",
+                          "attrs": {
+                            "href": "https://orca.dev/docs",
+                            "target": "_blank",
+                            "rel": "noopener noreferrer nofollow",
+                            "class": null,
+                            "title": null
+                          }
+                        }
+                      ],
+                      "text": "Orca Docs: What is Orca?"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "fZIYCNvt4TN_"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "vJwKD1qAPS2F",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "link",
+                          "attrs": {
+                            "href": "https://orca.dev/docs/model/worktrees",
+                            "target": "_blank",
+                            "rel": "noopener noreferrer nofollow",
+                            "class": null,
+                            "title": null
+                          }
+                        }
+                      ],
+                      "text": "Orca Docs: Worktrees"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "attrs": {
+                "id": "uyjt3cOkWE1M"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "KEmrbWni0dgY",
+                    "textAlign": "left"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "link",
+                          "attrs": {
+                            "href": "https://orca.dev/docs/agents/supported",
+                            "target": "_blank",
+                            "rel": "noopener noreferrer nofollow",
+                            "class": null,
+                            "title": null
+                          }
+                        }
+                      ],
+                      "text": "Orca Docs: Supported agents and permissions"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "IbEy35gzbbb2",
             "textAlign": "left"
           }
         }

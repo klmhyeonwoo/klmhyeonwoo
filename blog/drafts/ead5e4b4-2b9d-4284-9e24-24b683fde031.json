@@ -1,0 +1,1362 @@
+{
+  "id": "ead5e4b4-2b9d-4284-9e24-24b683fde031",
+  "title": "브라우저에서 텍스트를 읽어준다면? window.speechSynthesis 알아보기",
+  "description": "Web Speech API로 텍스트를 음성으로 출력하는 방법과 음성 선택, 발화 큐, 브라우저별 동작을 살펴본다.",
+  "categoryId": "category-9606d629",
+  "seriesId": "",
+  "markdown": "## 브라우저만으로 텍스트를 읽어줄 수 있을까?\n\n화면에 표시된 글을 음성으로 읽어주는 기능이 필요하다고 생각해보자. 별도의 TTS 서버에 텍스트를 보내 음성 파일을 받아오는 방법도 있지만, 간단한 읽어주기 기능이라면 브라우저가 제공하는 API부터 살펴볼 수 있다.\n\n브라우저의 ` window.speechSynthesis `는 Web Speech API의 음성 합성 기능을 제어하는 인터페이스다. 읽을 문장을 전달하면 브라우저가 사용할 수 있는 음성 합성 서비스를 통해 소리로 출력한다. 외부 라이브러리 없이 시작할 수 있지만, 어떤 목소리를 사용할 수 있는지는 브라우저와 운영체제, 기기에 따라 달라진다.\n\n## speechSynthesis는 어떻게 텍스트를 읽을까?\n\n음성 출력에는 크게 세 객체가 등장한다.\n\n- **SpeechSynthesis**: 발화 요청을 큐에 넣고, 재생·일시정지·중단을 관리하는 컨트롤러\n- **SpeechSynthesisUtterance**: 읽을 텍스트와 언어, 속도, 높이, 음량을 담은 발화 요청\n- **SpeechSynthesisVoice**: 브라우저에서 사용할 수 있는 개별 목소리의 정보\n\n흐름은 텍스트를 담은 Utterance를 만들고, 필요한 설정을 지정한 뒤 ` speak() `에 전달하는 방식이다.\n\n```javascript\nconst utterance = new SpeechSynthesisUtterance('안녕하세요. 브라우저가 이 문장을 읽습니다.');\nutterance.lang = 'ko-KR';\nwindow.speechSynthesis.speak(utterance);\n```\n\n` speechSynthesis `가 직접 음성 파일을 만들어 반환하는 것은 아니다. 이 API는 발화를 요청하고 상태를 제어하는 인터페이스이며, 실제 출력에는 사용 가능한 합성 서비스가 사용된다. 따라서 같은 코드라도 기기마다 목소리나 발음이 달라질 수 있다.\n\n## 목소리의 언어와 속도는 어떻게 설정할까?\n\n발화 방식은 ` SpeechSynthesisUtterance `의 속성으로 조절할 수 있다.\n\n```javascript\nconst utterance = new SpeechSynthesisUtterance('오늘의 할 일을 알려드릴게요.');\nutterance.lang = 'ko-KR'; // BCP 47 언어 태그\nutterance.rate = 1;      // 발화 속도\nutterance.pitch = 1;     // 목소리 높이\nutterance.volume = 1;    // 출력 음량\n\nwindow.speechSynthesis.speak(utterance);\n```\n\n` lang `은 읽을 언어를 지정하고, ` rate `와 ` pitch `는 각각 속도와 음높이를 설정한다. ` volume `은 해당 발화의 음량이다. 이 값들은 음성 엔진에 전달되는 설정이므로 실제로 들리는 차이는 선택한 목소리와 환경에 따라 다를 수 있다.\n\n다만 ` lang = 'ko-KR' `을 설정하는 것과 특정 한국어 목소리를 직접 선택하는 것은 다르다. 전자는 발화 언어를 지정하고, 후자는 ` voice ` 속성에 ` SpeechSynthesisVoice ` 객체를 할당한다.\n\n## getVoices()가 처음에 빈 배열을 반환하는 이유\n\n사용 가능한 목소리는 ` speechSynthesis.getVoices() `로 조회한다. 그런데 페이지가 처음 실행될 때 바로 호출하면 빈 배열이 나오는 환경이 있다. API가 동작하지 않는 것이 아니라, 브라우저가 아직 음성 목록을 준비하지 못했을 수 있다.\n\n음성 목록은 나중에 변경될 수 있고, 이때 ` voiceschanged ` 이벤트가 발생한다. 따라서 목록을 한 번 조회한 뒤 이벤트가 발생할 때 다시 읽는 방식이 유용하다.\n\n```javascript\nconst synth = window.speechSynthesis;\n\nfunction updateVoices() {\n  const voices = synth.getVoices();\n  const koreanVoices = voices.filter((voice) =>\n    voice.lang.toLowerCase().startsWith('ko')\n  );\n  console.log(koreanVoices.map(({ name, lang, localService }) => ({\n    name, lang, localService,\n  })));\n}\n\n// 이미 목록이 준비된 환경과 나중에 갱신되는 환경을 모두 고려한다.\nsynth.addEventListener('voiceschanged', updateVoices);\nupdateVoices();\n\n// 컴포넌트를 제거할 때는 등록한 리스너를 해제한다.\n// synth.removeEventListener('voiceschanged', updateVoices);\n```\n\n실제 선택 UI를 만든다면 이벤트가 발생할 때마다 기존 옵션을 지우고 다시 구성해야 중복이 쌓이지 않는다. 또 이벤트가 항상 새로 발생할 것이라고 가정하기보다 초기 조회도 함께 수행하는 편이 좋다. 목록이 끝내 비어 있다면 해당 시점에는 선택 가능한 목소리를 찾지 못한 것이다.\n\n### 한국어 목소리를 선택해보자\n\n목소리의 ` lang `을 확인해 한국어 음성을 찾을 수 있다. 아래 코드는 이미 음성 목록이 준비된 뒤 실행하는 예제다.\n\n```javascript\nconst synth = window.speechSynthesis;\nconst utterance = new SpeechSynthesisUtterance('한국어 음성을 선택해 읽습니다.');\nutterance.lang = 'ko-KR';\n\nconst voice = synth.getVoices().find((item) =>\n  item.lang.toLowerCase().startsWith('ko')\n);\nif (voice) utterance.voice = voice;\n\nsynth.speak(utterance);\n```\n\n목소리를 찾지 못하면 ` voice `를 따로 지정하지 않고 언어 설정만 전달한다. 이 경우 어떤 음성이 선택될지는 환경에 달려 있으므로, 한국어 목소리가 반드시 제공된다고 가정해서는 안 된다. 음성 선택을 사용자에게 제공한다면 이름뿐 아니라 언어와 기본 음성 여부도 함께 보여줄 수 있다.\n\n` voice.localService `는 해당 음성이 로컬 합성 서비스인지 알려준다. 모든 음성이 기기 안에서만 처리된다고 단정할 수는 없기 때문에, 민감한 텍스트를 읽는 서비스라면 사용하는 음성과 처리 방식도 확인해야 한다.\n\n## speak()는 즉시 교체가 아니라 큐에 추가한다\n\n` speak() `를 여러 번 호출하면 새 발화가 기존 발화를 자동으로 대체하는 것이 아니라 대기열에 추가된다. 앞선 발화가 끝난 뒤 다음 발화를 읽는 구조다.\n\n```javascript\nconst synth = window.speechSynthesis;\n\nsynth.speak(new SpeechSynthesisUtterance('첫 번째 문장'));\nsynth.speak(new SpeechSynthesisUtterance('두 번째 문장'));\n// 먼저 등록한 문장부터 차례대로 읽는다.\n\nsynth.pause();  // 현재 발화를 일시정지\nsynth.resume(); // 일시정지 상태를 해제\nsynth.cancel(); // 현재 발화를 중단하고 대기 중인 발화도 제거\n```\n\n같은 읽기 버튼을 여러 번 누를 때 문장이 반복해서 재생된다면 큐에 요청이 계속 쌓이고 있을 수 있다. 새로운 요청만 읽고 싶다면 호출 전에 ` cancel() `을 사용할 수 있지만, 현재 발화뿐 아니라 대기 중인 다른 발화도 모두 제거한다. 여러 컴포넌트에서 같은 페이지의 컨트롤러를 사용한다면 이 범위를 고려해야 한다.\n\n` speaking `, ` pending `, ` paused ` 속성으로 전체 합성기의 상태를 확인할 수 있다. 특히 ` speaking `은 발화 도중 일시정지된 상태에서도 참일 수 있으므로, 재생 버튼의 상태를 판단할 때 ` paused `와 함께 살펴봐야 한다.\n\n## 발화가 끝났는지 어떻게 알 수 있을까?\n\n` speak() `는 음성이 끝날 때까지 기다리는 Promise를 반환하지 않는다. 화면의 재생 상태를 바꾸려면 각각의 Utterance에서 발생하는 이벤트를 구독해야 한다.\n\n```javascript\nconst utterance = new SpeechSynthesisUtterance('발화 상태를 확인합니다.');\nutterance.lang = 'ko-KR';\n\nutterance.addEventListener('start', () => console.log('읽기 시작'));\nutterance.addEventListener('end', () => console.log('읽기 완료'));\nutterance.addEventListener('error', (event) => {\n  console.error('음성 출력 실패:', event.error);\n});\n\nwindow.speechSynthesis.speak(utterance);\n```\n\n` start `는 읽기 시작, ` end `는 발화 완료, ` error `는 발화에 실패한 상황을 나타낸다. 사용자가 중간에 중단하는 흐름도 있으므로 모든 중단을 정상 완료로 취급하기보다 이벤트와 현재 요청의 상태를 함께 관리하는 것이 좋다.\n\n` boundary ` 이벤트로 단어나 문장 경계를 받을 수도 있지만 지원 여부와 동작은 환경에 따라 다르다. 읽는 위치를 하이라이트하는 기능을 만든다면 이를 필수 전제로 삼기보다, 사용할 수 없는 환경에서도 본문과 재생 제어가 동작하도록 구성하는 편이 안전하다.\n\n## 읽기 버튼에 연결해보자\n\n아래 예제는 본문 요소와 읽기·중단 버튼이 이미 있다고 가정한다. 사용자가 읽기 버튼을 눌렀을 때만 발화를 시작하고, 다시 누르면 앞선 요청을 비운 뒤 새로 읽는다.\n\n```html\n<article id=\"article\">브라우저에서 이 문장을 읽어줍니다.</article>\n<button id=\"read\" type=\"button\">읽어주기</button>\n<button id=\"stop\" type=\"button\">중단하기</button>\n```\n\n```javascript\nconst readButton = document.querySelector('#read');\nconst stopButton = document.querySelector('#stop');\nconst article = document.querySelector('#article');\n\nif ('speechSynthesis' in window && 'SpeechSynthesisUtterance' in window) {\n  const synth = window.speechSynthesis;\n\n  readButton.addEventListener('click', () => {\n    const text = article.textContent.trim();\n    if (!text) return;\n\n    // 이 페이지에서 진행 중이거나 대기 중인 발화를 비운다.\n    synth.cancel();\n    // 이전에 pause()된 상태라면 재생 가능 상태로 돌린다.\n    synth.resume();\n\n    const utterance = new SpeechSynthesisUtterance(text);\n    utterance.lang = 'ko-KR';\n    const voice = synth.getVoices().find((item) =>\n      item.lang.toLowerCase().startsWith('ko')\n    );\n    if (voice) utterance.voice = voice;\n    utterance.addEventListener('error', (event) => {\n      console.error('음성 출력 오류:', event.error);\n    });\n\n    synth.speak(utterance);\n  });\n\n  stopButton.addEventListener('click', () => synth.cancel());\n} else {\n  readButton.disabled = true;\n  stopButton.disabled = true;\n}\n```\n\nChrome은 사용자 활성화 없이 음성을 자동 재생하는 것을 제한한다. 클릭이나 탭처럼 사용자가 명시적으로 읽기를 요청하는 흐름에서 시작하는 것이 좋다. 브라우저별 정책이 다를 수 있으므로 실제 대상 기기에서도 확인해야 한다.\n\n위 예제는 클릭 시점에 준비된 목소리 목록에서 한국어 음성을 찾는다. 페이지 진입 직후 음성 선택 목록을 미리 보여주고 싶다면 앞에서 살펴본 ` voiceschanged ` 처리도 함께 연결하면 된다.\n\n## 브라우저 TTS와 서버 TTS는 무엇이 다를까?\n\n브라우저의 음성 합성은 간단한 읽어주기 기능을 별도의 TTS 서버 연동 없이 시작하기 좋다. 하지만 서비스가 목소리와 발음을 모든 기기에서 동일하게 통제하거나 생성된 음성 파일을 저장해야 한다면, 이 API만으로는 요구사항을 충족하기 어려울 수 있다.\n\n반면 서버 또는 클라우드 TTS는 제공자가 지원하는 음성과 설정을 선택하고 음성 데이터를 받아 재사용하는 방식으로 구성할 수 있다. 대신 별도 서비스 연동과 비용, 네트워크 요청 및 텍스트 처리 방식까지 함께 고려해야 한다. 어느 쪽이 더 좋다기보다 **기기별 음성 차이를 허용할 수 있는지, 파일이 필요한지**가 선택 기준이 된다.\n\n또한 ` speechSynthesis `는 텍스트를 읽어주는 기능이지, 사용자의 말을 텍스트로 바꾸는 음성 인식 기능은 아니다. 두 기능 모두 Web Speech API에 속하지만 사용하는 인터페이스와 지원 범위는 다르다.\n\n## 글을 마치며\n\n` window.speechSynthesis `는 브라우저에서 텍스트를 음성으로 출력할 때 살펴볼 수 있는 API다. 짧은 코드로 발화를 요청할 수 있지만 실제 구현에서는 음성 목록의 준비 시점, 발화 큐, 시작과 종료 이벤트를 함께 이해하는 것이 중요하다.\n\n특히 ` getVoices() `의 빈 배열을 곧바로 오류로 해석하지 않고, ` speak() `가 기존 발화를 대체하는지 큐에 추가하는지 구분하면 예상하지 못한 동작을 줄이는 데 도움이 된다.\n\n## 참고 자료\n\n- <a href=\"https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API\">MDN: Web Speech API</a>\n- <a href=\"https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis\">MDN: SpeechSynthesis</a>\n- <a href=\"https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance\">MDN: SpeechSynthesisUtterance</a>\n- <a href=\"https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisVoice\">MDN: SpeechSynthesisVoice</a>\n- <a href=\"https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API/Using_the_Web_Speech_API\">MDN: Using the Web Speech API</a>\n- <a href=\"https://developer.chrome.com/blog/new-in-chrome-71/\">Chrome for Developers: Speech synthesis requires user activation</a>",
+  "blocks": [
+    {
+      "type": "slash-content",
+      "version": 1,
+      "content": {
+        "type": "doc",
+        "content": [
+          {
+            "type": "heading",
+            "attrs": {
+              "id": "pZ5laqSXEIdV",
+              "textAlign": "left",
+              "level": 2
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "브라우저만으로 텍스트를 읽어줄 수 있을까?"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "Xj5KNorsl5SL",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "화면에 표시된 글을 음성으로 읽어주는 기능이 필요하다고 생각해보자. 별도의 TTS 서버에 텍스트를 보내 음성 파일을 받아오는 방법도 있지만, 간단한 읽어주기 기능이라면 브라우저가 제공하는 API부터 살펴볼 수 있다."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "P5ZWs5l5opYe",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "브라우저의 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "window.speechSynthesis"
+              },
+              {
+                "type": "text",
+                "text": "는 Web Speech API의 음성 합성 기능을 제어하는 인터페이스다. 읽을 문장을 전달하면 브라우저가 사용할 수 있는 음성 합성 서비스를 통해 소리로 출력한다. 외부 라이브러리 없이 시작할 수 있지만, 어떤 목소리를 사용할 수 있는지는 브라우저와 운영체제, 기기에 따라 달라진다."
+              }
+            ]
+          },
+          {
+            "type": "heading",
+            "attrs": {
+              "id": "44FEudabm63Q",
+              "textAlign": "left",
+              "level": 2
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "speechSynthesis는 어떻게 텍스트를 읽을까?"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "aIMoi6bCU1SJ",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "음성 출력에는 크게 세 객체가 등장한다."
+              }
+            ]
+          },
+          {
+            "type": "bulletList",
+            "attrs": {
+              "id": "C_CEpSzHXxh_"
+            },
+            "content": [
+              {
+                "type": "listItem",
+                "attrs": {
+                  "id": "_cfQx-2i2Eik"
+                },
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "attrs": {
+                      "id": "f-DB5Bgn4LA8",
+                      "textAlign": "left"
+                    },
+                    "content": [
+                      {
+                        "type": "text",
+                        "marks": [
+                          {
+                            "type": "bold"
+                          }
+                        ],
+                        "text": "SpeechSynthesis"
+                      },
+                      {
+                        "type": "text",
+                        "text": ": 발화 요청을 큐에 넣고, 재생·일시정지·중단을 관리하는 컨트롤러"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "attrs": {
+                  "id": "_dfX0VAfLNhz"
+                },
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "attrs": {
+                      "id": "pvuGl9_OZwRM",
+                      "textAlign": "left"
+                    },
+                    "content": [
+                      {
+                        "type": "text",
+                        "marks": [
+                          {
+                            "type": "bold"
+                          }
+                        ],
+                        "text": "SpeechSynthesisUtterance"
+                      },
+                      {
+                        "type": "text",
+                        "text": ": 읽을 텍스트와 언어, 속도, 높이, 음량을 담은 발화 요청"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "attrs": {
+                  "id": "sVYOhryV3TIX"
+                },
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "attrs": {
+                      "id": "EZrNfL1sLldQ",
+                      "textAlign": "left"
+                    },
+                    "content": [
+                      {
+                        "type": "text",
+                        "marks": [
+                          {
+                            "type": "bold"
+                          }
+                        ],
+                        "text": "SpeechSynthesisVoice"
+                      },
+                      {
+                        "type": "text",
+                        "text": ": 브라우저에서 사용할 수 있는 개별 목소리의 정보"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "nEmH2lRQxrF_",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "흐름은 텍스트를 담은 Utterance를 만들고, 필요한 설정을 지정한 뒤 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "speak()"
+              },
+              {
+                "type": "text",
+                "text": "에 전달하는 방식이다."
+              }
+            ]
+          },
+          {
+            "type": "codeBlock",
+            "attrs": {
+              "id": "om6vI0DEfG_G",
+              "language": "javascript"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "const utterance = new SpeechSynthesisUtterance('안녕하세요. 브라우저가 이 문장을 읽습니다.');\nutterance.lang = 'ko-KR';\nwindow.speechSynthesis.speak(utterance);"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "kOpRsYxPkVPl",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "speechSynthesis"
+              },
+              {
+                "type": "text",
+                "text": "가 직접 음성 파일을 만들어 반환하는 것은 아니다. 이 API는 발화를 요청하고 상태를 제어하는 인터페이스이며, 실제 출력에는 사용 가능한 합성 서비스가 사용된다. 따라서 같은 코드라도 기기마다 목소리나 발음이 달라질 수 있다."
+              }
+            ]
+          },
+          {
+            "type": "heading",
+            "attrs": {
+              "id": "tAR_D_1Hh6K_",
+              "textAlign": "left",
+              "level": 2
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "목소리의 언어와 속도는 어떻게 설정할까?"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "7Qjn6EBHRCej",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "발화 방식은 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "SpeechSynthesisUtterance"
+              },
+              {
+                "type": "text",
+                "text": "의 속성으로 조절할 수 있다."
+              }
+            ]
+          },
+          {
+            "type": "codeBlock",
+            "attrs": {
+              "id": "L5FkI31qd9bC",
+              "language": "javascript"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "const utterance = new SpeechSynthesisUtterance('오늘의 할 일을 알려드릴게요.');\nutterance.lang = 'ko-KR'; // BCP 47 언어 태그\nutterance.rate = 1;      // 발화 속도\nutterance.pitch = 1;     // 목소리 높이\nutterance.volume = 1;    // 출력 음량\n\nwindow.speechSynthesis.speak(utterance);"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "tt9KneiPEOyv",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "lang"
+              },
+              {
+                "type": "text",
+                "text": "은 읽을 언어를 지정하고, "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "rate"
+              },
+              {
+                "type": "text",
+                "text": "와 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "pitch"
+              },
+              {
+                "type": "text",
+                "text": "는 각각 속도와 음높이를 설정한다. "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "volume"
+              },
+              {
+                "type": "text",
+                "text": "은 해당 발화의 음량이다. 이 값들은 음성 엔진에 전달되는 설정이므로 실제로 들리는 차이는 선택한 목소리와 환경에 따라 다를 수 있다."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "fUeLSuBo4Kd0",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "다만 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "lang = 'ko-KR'"
+              },
+              {
+                "type": "text",
+                "text": "을 설정하는 것과 특정 한국어 목소리를 직접 선택하는 것은 다르다. 전자는 발화 언어를 지정하고, 후자는 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "voice"
+              },
+              {
+                "type": "text",
+                "text": " 속성에 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "SpeechSynthesisVoice"
+              },
+              {
+                "type": "text",
+                "text": " 객체를 할당한다."
+              }
+            ]
+          },
+          {
+            "type": "heading",
+            "attrs": {
+              "id": "1K9MxkTvaatz",
+              "textAlign": "left",
+              "level": 2
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "getVoices()가 처음에 빈 배열을 반환하는 이유"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "GGF8jP8C9eIv",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "사용 가능한 목소리는 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "speechSynthesis.getVoices()"
+              },
+              {
+                "type": "text",
+                "text": "로 조회한다. 그런데 페이지가 처음 실행될 때 바로 호출하면 빈 배열이 나오는 환경이 있다. API가 동작하지 않는 것이 아니라, 브라우저가 아직 음성 목록을 준비하지 못했을 수 있다."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "hM-gLgIwyMav",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "음성 목록은 나중에 변경될 수 있고, 이때 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "voiceschanged"
+              },
+              {
+                "type": "text",
+                "text": " 이벤트가 발생한다. 따라서 목록을 한 번 조회한 뒤 이벤트가 발생할 때 다시 읽는 방식이 유용하다."
+              }
+            ]
+          },
+          {
+            "type": "codeBlock",
+            "attrs": {
+              "id": "qy2yxN0Rpeq5",
+              "language": "javascript"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "const synth = window.speechSynthesis;\n\nfunction updateVoices() {\n  const voices = synth.getVoices();\n  const koreanVoices = voices.filter((voice) =>\n    voice.lang.toLowerCase().startsWith('ko')\n  );\n  console.log(koreanVoices.map(({ name, lang, localService }) => ({\n    name, lang, localService,\n  })));\n}\n\n// 이미 목록이 준비된 환경과 나중에 갱신되는 환경을 모두 고려한다.\nsynth.addEventListener('voiceschanged', updateVoices);\nupdateVoices();\n\n// 컴포넌트를 제거할 때는 등록한 리스너를 해제한다.\n// synth.removeEventListener('voiceschanged', updateVoices);"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "IxxW4iTRtrvg",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "실제 선택 UI를 만든다면 이벤트가 발생할 때마다 기존 옵션을 지우고 다시 구성해야 중복이 쌓이지 않는다. 또 이벤트가 항상 새로 발생할 것이라고 가정하기보다 초기 조회도 함께 수행하는 편이 좋다. 목록이 끝내 비어 있다면 해당 시점에는 선택 가능한 목소리를 찾지 못한 것이다."
+              }
+            ]
+          },
+          {
+            "type": "heading",
+            "attrs": {
+              "id": "fFTY6fSWK-j5",
+              "textAlign": "left",
+              "level": 3
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "한국어 목소리를 선택해보자"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "uiygiC2gIXuz",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "목소리의 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "lang"
+              },
+              {
+                "type": "text",
+                "text": "을 확인해 한국어 음성을 찾을 수 있다. 아래 코드는 이미 음성 목록이 준비된 뒤 실행하는 예제다."
+              }
+            ]
+          },
+          {
+            "type": "codeBlock",
+            "attrs": {
+              "id": "uHfIBJsZTJMG",
+              "language": "javascript"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "const synth = window.speechSynthesis;\nconst utterance = new SpeechSynthesisUtterance('한국어 음성을 선택해 읽습니다.');\nutterance.lang = 'ko-KR';\n\nconst voice = synth.getVoices().find((item) =>\n  item.lang.toLowerCase().startsWith('ko')\n);\nif (voice) utterance.voice = voice;\n\nsynth.speak(utterance);"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "bLk3Lr_rOGPP",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "목소리를 찾지 못하면 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "voice"
+              },
+              {
+                "type": "text",
+                "text": "를 따로 지정하지 않고 언어 설정만 전달한다. 이 경우 어떤 음성이 선택될지는 환경에 달려 있으므로, 한국어 목소리가 반드시 제공된다고 가정해서는 안 된다. 음성 선택을 사용자에게 제공한다면 이름뿐 아니라 언어와 기본 음성 여부도 함께 보여줄 수 있다."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "iQsjBPuTotLT",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "voice.localService"
+              },
+              {
+                "type": "text",
+                "text": "는 해당 음성이 로컬 합성 서비스인지 알려준다. 모든 음성이 기기 안에서만 처리된다고 단정할 수는 없기 때문에, 민감한 텍스트를 읽는 서비스라면 사용하는 음성과 처리 방식도 확인해야 한다."
+              }
+            ]
+          },
+          {
+            "type": "heading",
+            "attrs": {
+              "id": "Sd9vSJ6UB0Lw",
+              "textAlign": "left",
+              "level": 2
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "speak()는 즉시 교체가 아니라 큐에 추가한다"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "4Ugat6O1cl6C",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "speak()"
+              },
+              {
+                "type": "text",
+                "text": "를 여러 번 호출하면 새 발화가 기존 발화를 자동으로 대체하는 것이 아니라 대기열에 추가된다. 앞선 발화가 끝난 뒤 다음 발화를 읽는 구조다."
+              }
+            ]
+          },
+          {
+            "type": "codeBlock",
+            "attrs": {
+              "id": "vBiyv5H_TSnB",
+              "language": "javascript"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "const synth = window.speechSynthesis;\n\nsynth.speak(new SpeechSynthesisUtterance('첫 번째 문장'));\nsynth.speak(new SpeechSynthesisUtterance('두 번째 문장'));\n// 먼저 등록한 문장부터 차례대로 읽는다.\n\nsynth.pause();  // 현재 발화를 일시정지\nsynth.resume(); // 일시정지 상태를 해제\nsynth.cancel(); // 현재 발화를 중단하고 대기 중인 발화도 제거"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "cdHNdi66Naci",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "같은 읽기 버튼을 여러 번 누를 때 문장이 반복해서 재생된다면 큐에 요청이 계속 쌓이고 있을 수 있다. 새로운 요청만 읽고 싶다면 호출 전에 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "cancel()"
+              },
+              {
+                "type": "text",
+                "text": "을 사용할 수 있지만, 현재 발화뿐 아니라 대기 중인 다른 발화도 모두 제거한다. 여러 컴포넌트에서 같은 페이지의 컨트롤러를 사용한다면 이 범위를 고려해야 한다."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "it8bHYD8nIcH",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "speaking"
+              },
+              {
+                "type": "text",
+                "text": ", "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "pending"
+              },
+              {
+                "type": "text",
+                "text": ", "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "paused"
+              },
+              {
+                "type": "text",
+                "text": " 속성으로 전체 합성기의 상태를 확인할 수 있다. 특히 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "speaking"
+              },
+              {
+                "type": "text",
+                "text": "은 발화 도중 일시정지된 상태에서도 참일 수 있으므로, 재생 버튼의 상태를 판단할 때 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "paused"
+              },
+              {
+                "type": "text",
+                "text": "와 함께 살펴봐야 한다."
+              }
+            ]
+          },
+          {
+            "type": "heading",
+            "attrs": {
+              "id": "v9PUvKjNMwwd",
+              "textAlign": "left",
+              "level": 2
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "발화가 끝났는지 어떻게 알 수 있을까?"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "0QYrMhN1X7WA",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "speak()"
+              },
+              {
+                "type": "text",
+                "text": "는 음성이 끝날 때까지 기다리는 Promise를 반환하지 않는다. 화면의 재생 상태를 바꾸려면 각각의 Utterance에서 발생하는 이벤트를 구독해야 한다."
+              }
+            ]
+          },
+          {
+            "type": "codeBlock",
+            "attrs": {
+              "id": "i5BVB1lYo4a4",
+              "language": "javascript"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "const utterance = new SpeechSynthesisUtterance('발화 상태를 확인합니다.');\nutterance.lang = 'ko-KR';\n\nutterance.addEventListener('start', () => console.log('읽기 시작'));\nutterance.addEventListener('end', () => console.log('읽기 완료'));\nutterance.addEventListener('error', (event) => {\n  console.error('음성 출력 실패:', event.error);\n});\n\nwindow.speechSynthesis.speak(utterance);"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "DvOFEosqe__m",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "start"
+              },
+              {
+                "type": "text",
+                "text": "는 읽기 시작, "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "end"
+              },
+              {
+                "type": "text",
+                "text": "는 발화 완료, "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "error"
+              },
+              {
+                "type": "text",
+                "text": "는 발화에 실패한 상황을 나타낸다. 사용자가 중간에 중단하는 흐름도 있으므로 모든 중단을 정상 완료로 취급하기보다 이벤트와 현재 요청의 상태를 함께 관리하는 것이 좋다."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "QiwZvuet8yEM",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "boundary"
+              },
+              {
+                "type": "text",
+                "text": " 이벤트로 단어나 문장 경계를 받을 수도 있지만 지원 여부와 동작은 환경에 따라 다르다. 읽는 위치를 하이라이트하는 기능을 만든다면 이를 필수 전제로 삼기보다, 사용할 수 없는 환경에서도 본문과 재생 제어가 동작하도록 구성하는 편이 안전하다."
+              }
+            ]
+          },
+          {
+            "type": "heading",
+            "attrs": {
+              "id": "_DZanOTarXiW",
+              "textAlign": "left",
+              "level": 2
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "읽기 버튼에 연결해보자"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "9hhtq6ebG5TB",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "아래 예제는 본문 요소와 읽기·중단 버튼이 이미 있다고 가정한다. 사용자가 읽기 버튼을 눌렀을 때만 발화를 시작하고, 다시 누르면 앞선 요청을 비운 뒤 새로 읽는다."
+              }
+            ]
+          },
+          {
+            "type": "codeBlock",
+            "attrs": {
+              "id": "MiSFJcl1INoR",
+              "language": "html"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "<article id=\"article\">브라우저에서 이 문장을 읽어줍니다.</article>\n<button id=\"read\" type=\"button\">읽어주기</button>\n<button id=\"stop\" type=\"button\">중단하기</button>"
+              }
+            ]
+          },
+          {
+            "type": "codeBlock",
+            "attrs": {
+              "id": "jctOpvUX26L9",
+              "language": "javascript"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "const readButton = document.querySelector('#read');\nconst stopButton = document.querySelector('#stop');\nconst article = document.querySelector('#article');\n\nif ('speechSynthesis' in window && 'SpeechSynthesisUtterance' in window) {\n  const synth = window.speechSynthesis;\n\n  readButton.addEventListener('click', () => {\n    const text = article.textContent.trim();\n    if (!text) return;\n\n    // 이 페이지에서 진행 중이거나 대기 중인 발화를 비운다.\n    synth.cancel();\n    // 이전에 pause()된 상태라면 재생 가능 상태로 돌린다.\n    synth.resume();\n\n    const utterance = new SpeechSynthesisUtterance(text);\n    utterance.lang = 'ko-KR';\n    const voice = synth.getVoices().find((item) =>\n      item.lang.toLowerCase().startsWith('ko')\n    );\n    if (voice) utterance.voice = voice;\n    utterance.addEventListener('error', (event) => {\n      console.error('음성 출력 오류:', event.error);\n    });\n\n    synth.speak(utterance);\n  });\n\n  stopButton.addEventListener('click', () => synth.cancel());\n} else {\n  readButton.disabled = true;\n  stopButton.disabled = true;\n}"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "owM0byFsuzUO",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Chrome은 사용자 활성화 없이 음성을 자동 재생하는 것을 제한한다. 클릭이나 탭처럼 사용자가 명시적으로 읽기를 요청하는 흐름에서 시작하는 것이 좋다. 브라우저별 정책이 다를 수 있으므로 실제 대상 기기에서도 확인해야 한다."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "PtvFCjGfPqIj",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "위 예제는 클릭 시점에 준비된 목소리 목록에서 한국어 음성을 찾는다. 페이지 진입 직후 음성 선택 목록을 미리 보여주고 싶다면 앞에서 살펴본 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "voiceschanged"
+              },
+              {
+                "type": "text",
+                "text": " 처리도 함께 연결하면 된다."
+              }
+            ]
+          },
+          {
+            "type": "heading",
+            "attrs": {
+              "id": "hfReaSt21lbG",
+              "textAlign": "left",
+              "level": 2
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "브라우저 TTS와 서버 TTS는 무엇이 다를까?"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "3XcataQgQ7Ip",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "브라우저의 음성 합성은 간단한 읽어주기 기능을 별도의 TTS 서버 연동 없이 시작하기 좋다. 하지만 서비스가 목소리와 발음을 모든 기기에서 동일하게 통제하거나 생성된 음성 파일을 저장해야 한다면, 이 API만으로는 요구사항을 충족하기 어려울 수 있다."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "9380Ge7pI9G9",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "반면 서버 또는 클라우드 TTS는 제공자가 지원하는 음성과 설정을 선택하고 음성 데이터를 받아 재사용하는 방식으로 구성할 수 있다. 대신 별도 서비스 연동과 비용, 네트워크 요청 및 텍스트 처리 방식까지 함께 고려해야 한다. 어느 쪽이 더 좋다기보다 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "bold"
+                  }
+                ],
+                "text": "기기별 음성 차이를 허용할 수 있는지, 파일이 필요한지"
+              },
+              {
+                "type": "text",
+                "text": "가 선택 기준이 된다."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "evyIbZna13N5",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "또한 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "speechSynthesis"
+              },
+              {
+                "type": "text",
+                "text": "는 텍스트를 읽어주는 기능이지, 사용자의 말을 텍스트로 바꾸는 음성 인식 기능은 아니다. 두 기능 모두 Web Speech API에 속하지만 사용하는 인터페이스와 지원 범위는 다르다."
+              }
+            ]
+          },
+          {
+            "type": "heading",
+            "attrs": {
+              "id": "ynIITp0x7C-l",
+              "textAlign": "left",
+              "level": 2
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "글을 마치며"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "We-CK_zEfeMX",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "window.speechSynthesis"
+              },
+              {
+                "type": "text",
+                "text": "는 브라우저에서 텍스트를 음성으로 출력할 때 살펴볼 수 있는 API다. 짧은 코드로 발화를 요청할 수 있지만 실제 구현에서는 음성 목록의 준비 시점, 발화 큐, 시작과 종료 이벤트를 함께 이해하는 것이 중요하다."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "jVR9l4h6sclW",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "특히 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "getVoices()"
+              },
+              {
+                "type": "text",
+                "text": "의 빈 배열을 곧바로 오류로 해석하지 않고, "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "speak()"
+              },
+              {
+                "type": "text",
+                "text": "가 기존 발화를 대체하는지 큐에 추가하는지 구분하면 예상하지 못한 동작을 줄이는 데 도움이 된다."
+              }
+            ]
+          },
+          {
+            "type": "heading",
+            "attrs": {
+              "id": "Bd2G63eEEM9w",
+              "textAlign": "left",
+              "level": 2
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "참고 자료"
+              }
+            ]
+          },
+          {
+            "type": "bulletList",
+            "attrs": {
+              "id": "KUz0fUn4dHyT"
+            },
+            "content": [
+              {
+                "type": "listItem",
+                "attrs": {
+                  "id": "PGKuRqQe4ODI"
+                },
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "attrs": {
+                      "id": "dKU9kiy5WpHM",
+                      "textAlign": "left"
+                    },
+                    "content": [
+                      {
+                        "type": "text",
+                        "marks": [
+                          {
+                            "type": "link",
+                            "attrs": {
+                              "href": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API",
+                              "target": "_blank",
+                              "rel": "noopener noreferrer nofollow",
+                              "class": null,
+                              "title": null
+                            }
+                          }
+                        ],
+                        "text": "MDN: Web Speech API"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "attrs": {
+                  "id": "52Yp1q5J5JEA"
+                },
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "attrs": {
+                      "id": "1kcNYuZD5FVk",
+                      "textAlign": "left"
+                    },
+                    "content": [
+                      {
+                        "type": "text",
+                        "marks": [
+                          {
+                            "type": "link",
+                            "attrs": {
+                              "href": "https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis",
+                              "target": "_blank",
+                              "rel": "noopener noreferrer nofollow",
+                              "class": null,
+                              "title": null
+                            }
+                          }
+                        ],
+                        "text": "MDN: SpeechSynthesis"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "attrs": {
+                  "id": "6wM-quE2ef7Y"
+                },
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "attrs": {
+                      "id": "jXG1n7kbWTtF",
+                      "textAlign": "left"
+                    },
+                    "content": [
+                      {
+                        "type": "text",
+                        "marks": [
+                          {
+                            "type": "link",
+                            "attrs": {
+                              "href": "https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance",
+                              "target": "_blank",
+                              "rel": "noopener noreferrer nofollow",
+                              "class": null,
+                              "title": null
+                            }
+                          }
+                        ],
+                        "text": "MDN: SpeechSynthesisUtterance"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "attrs": {
+                  "id": "VBRiyAQXloZN"
+                },
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "attrs": {
+                      "id": "X6K1dmza9u-J",
+                      "textAlign": "left"
+                    },
+                    "content": [
+                      {
+                        "type": "text",
+                        "marks": [
+                          {
+                            "type": "link",
+                            "attrs": {
+                              "href": "https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisVoice",
+                              "target": "_blank",
+                              "rel": "noopener noreferrer nofollow",
+                              "class": null,
+                              "title": null
+                            }
+                          }
+                        ],
+                        "text": "MDN: SpeechSynthesisVoice"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "attrs": {
+                  "id": "UHzLI5CdsaJI"
+                },
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "attrs": {
+                      "id": "alY-tMvEbLB_",
+                      "textAlign": "left"
+                    },
+                    "content": [
+                      {
+                        "type": "text",
+                        "marks": [
+                          {
+                            "type": "link",
+                            "attrs": {
+                              "href": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API/Using_the_Web_Speech_API",
+                              "target": "_blank",
+                              "rel": "noopener noreferrer nofollow",
+                              "class": null,
+                              "title": null
+                            }
+                          }
+                        ],
+                        "text": "MDN: Using the Web Speech API"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "attrs": {
+                  "id": "BIMYoO8728Ji"
+                },
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "attrs": {
+                      "id": "Y_AwDYboOLMz",
+                      "textAlign": "left"
+                    },
+                    "content": [
+                      {
+                        "type": "text",
+                        "marks": [
+                          {
+                            "type": "link",
+                            "attrs": {
+                              "href": "https://developer.chrome.com/blog/new-in-chrome-71/",
+                              "target": "_blank",
+                              "rel": "noopener noreferrer nofollow",
+                              "class": null,
+                              "title": null
+                            }
+                          }
+                        ],
+                        "text": "Chrome for Developers: Speech synthesis requires user activation"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "Dw3a0cZyXXb1",
+              "textAlign": "left"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "isPrivate": false,
+  "showInList": true,
+  "coverImage": "",
+  "updatedAt": "2026-11-25T12:17:24.201Z"
+}

@@ -1,0 +1,216 @@
+---
+title: "브라우저에서 텍스트를 읽어준다면? window.speechSynthesis 알아보기"
+date: 2026-11-25
+publishedAt: "2026-11-25T12:20:26.967Z"
+updatedAt: "2026-11-25T12:20:26.967Z"
+description: "Web Speech API로 텍스트를 음성으로 출력하는 방법과 음성 선택, 발화 큐, 브라우저별 동작을 살펴본다."
+category: "category-9606d629"
+private: false
+---
+
+## 브라우저만으로 텍스트를 읽어줄 수 있을까?
+
+화면에 표시된 글을 음성으로 읽어주는 기능이 필요하다고 생각해보자. 별도의 TTS 서버에 텍스트를 보내 음성 파일을 받아오는 방법도 있지만, 간단한 읽어주기 기능이라면 브라우저가 제공하는 API부터 살펴볼 수 있다.
+
+브라우저의 ` window.speechSynthesis `는 Web Speech API의 음성 합성 기능을 제어하는 인터페이스다. 읽을 문장을 전달하면 브라우저가 사용할 수 있는 음성 합성 서비스를 통해 소리로 출력한다. 외부 라이브러리 없이 시작할 수 있지만, 어떤 목소리를 사용할 수 있는지는 브라우저와 운영체제, 기기에 따라 달라진다.
+
+## speechSynthesis는 어떻게 텍스트를 읽을까?
+
+음성 출력에는 크게 세 객체가 등장한다.
+
+- **SpeechSynthesis**: 발화 요청을 큐에 넣고, 재생·일시정지·중단을 관리하는 컨트롤러
+- **SpeechSynthesisUtterance**: 읽을 텍스트와 언어, 속도, 높이, 음량을 담은 발화 요청
+- **SpeechSynthesisVoice**: 브라우저에서 사용할 수 있는 개별 목소리의 정보
+
+흐름은 텍스트를 담은 Utterance를 만들고, 필요한 설정을 지정한 뒤 ` speak() `에 전달하는 방식이다.
+
+```javascript
+const utterance = new SpeechSynthesisUtterance('안녕하세요. 브라우저가 이 문장을 읽습니다.');
+utterance.lang = 'ko-KR';
+window.speechSynthesis.speak(utterance);
+```
+
+` speechSynthesis `가 직접 음성 파일을 만들어 반환하는 것은 아니다. 이 API는 발화를 요청하고 상태를 제어하는 인터페이스이며, 실제 출력에는 사용 가능한 합성 서비스가 사용된다. 따라서 같은 코드라도 기기마다 목소리나 발음이 달라질 수 있다.
+
+## 목소리의 언어와 속도는 어떻게 설정할까?
+
+발화 방식은 ` SpeechSynthesisUtterance `의 속성으로 조절할 수 있다.
+
+```javascript
+const utterance = new SpeechSynthesisUtterance('오늘의 할 일을 알려드릴게요.');
+utterance.lang = 'ko-KR'; // BCP 47 언어 태그
+utterance.rate = 1;      // 발화 속도
+utterance.pitch = 1;     // 목소리 높이
+utterance.volume = 1;    // 출력 음량
+
+window.speechSynthesis.speak(utterance);
+```
+
+` lang `은 읽을 언어를 지정하고, ` rate `와 ` pitch `는 각각 속도와 음높이를 설정한다. ` volume `은 해당 발화의 음량이다. 이 값들은 음성 엔진에 전달되는 설정이므로 실제로 들리는 차이는 선택한 목소리와 환경에 따라 다를 수 있다.
+
+다만 ` lang = 'ko-KR' `을 설정하는 것과 특정 한국어 목소리를 직접 선택하는 것은 다르다. 전자는 발화 언어를 지정하고, 후자는 ` voice ` 속성에 ` SpeechSynthesisVoice ` 객체를 할당한다.
+
+## getVoices()가 처음에 빈 배열을 반환하는 이유
+
+사용 가능한 목소리는 ` speechSynthesis.getVoices() `로 조회한다. 그런데 페이지가 처음 실행될 때 바로 호출하면 빈 배열이 나오는 환경이 있다. API가 동작하지 않는 것이 아니라, 브라우저가 아직 음성 목록을 준비하지 못했을 수 있다.
+
+음성 목록은 나중에 변경될 수 있고, 이때 ` voiceschanged ` 이벤트가 발생한다. 따라서 목록을 한 번 조회한 뒤 이벤트가 발생할 때 다시 읽는 방식이 유용하다.
+
+```javascript
+const synth = window.speechSynthesis;
+
+function updateVoices() {
+  const voices = synth.getVoices();
+  const koreanVoices = voices.filter((voice) =>
+    voice.lang.toLowerCase().startsWith('ko')
+  );
+  console.log(koreanVoices.map(({ name, lang, localService }) => ({
+    name, lang, localService,
+  })));
+}
+
+// 이미 목록이 준비된 환경과 나중에 갱신되는 환경을 모두 고려한다.
+synth.addEventListener('voiceschanged', updateVoices);
+updateVoices();
+
+// 컴포넌트를 제거할 때는 등록한 리스너를 해제한다.
+// synth.removeEventListener('voiceschanged', updateVoices);
+```
+
+실제 선택 UI를 만든다면 이벤트가 발생할 때마다 기존 옵션을 지우고 다시 구성해야 중복이 쌓이지 않는다. 또 이벤트가 항상 새로 발생할 것이라고 가정하기보다 초기 조회도 함께 수행하는 편이 좋다. 목록이 끝내 비어 있다면 해당 시점에는 선택 가능한 목소리를 찾지 못한 것이다.
+
+### 한국어 목소리를 선택해보자
+
+목소리의 ` lang `을 확인해 한국어 음성을 찾을 수 있다. 아래 코드는 이미 음성 목록이 준비된 뒤 실행하는 예제다.
+
+```javascript
+const synth = window.speechSynthesis;
+const utterance = new SpeechSynthesisUtterance('한국어 음성을 선택해 읽습니다.');
+utterance.lang = 'ko-KR';
+
+const voice = synth.getVoices().find((item) =>
+  item.lang.toLowerCase().startsWith('ko')
+);
+if (voice) utterance.voice = voice;
+
+synth.speak(utterance);
+```
+
+목소리를 찾지 못하면 ` voice `를 따로 지정하지 않고 언어 설정만 전달한다. 이 경우 어떤 음성이 선택될지는 환경에 달려 있으므로, 한국어 목소리가 반드시 제공된다고 가정해서는 안 된다. 음성 선택을 사용자에게 제공한다면 이름뿐 아니라 언어와 기본 음성 여부도 함께 보여줄 수 있다.
+
+` voice.localService `는 해당 음성이 로컬 합성 서비스인지 알려준다. 모든 음성이 기기 안에서만 처리된다고 단정할 수는 없기 때문에, 민감한 텍스트를 읽는 서비스라면 사용하는 음성과 처리 방식도 확인해야 한다.
+
+## speak()는 즉시 교체가 아니라 큐에 추가한다
+
+` speak() `를 여러 번 호출하면 새 발화가 기존 발화를 자동으로 대체하는 것이 아니라 대기열에 추가된다. 앞선 발화가 끝난 뒤 다음 발화를 읽는 구조다.
+
+```javascript
+const synth = window.speechSynthesis;
+
+synth.speak(new SpeechSynthesisUtterance('첫 번째 문장'));
+synth.speak(new SpeechSynthesisUtterance('두 번째 문장'));
+// 먼저 등록한 문장부터 차례대로 읽는다.
+
+synth.pause();  // 현재 발화를 일시정지
+synth.resume(); // 일시정지 상태를 해제
+synth.cancel(); // 현재 발화를 중단하고 대기 중인 발화도 제거
+```
+
+같은 읽기 버튼을 여러 번 누를 때 문장이 반복해서 재생된다면 큐에 요청이 계속 쌓이고 있을 수 있다. 새로운 요청만 읽고 싶다면 호출 전에 ` cancel() `을 사용할 수 있지만, 현재 발화뿐 아니라 대기 중인 다른 발화도 모두 제거한다. 여러 컴포넌트에서 같은 페이지의 컨트롤러를 사용한다면 이 범위를 고려해야 한다.
+
+` speaking `, ` pending `, ` paused ` 속성으로 전체 합성기의 상태를 확인할 수 있다. 특히 ` speaking `은 발화 도중 일시정지된 상태에서도 참일 수 있으므로, 재생 버튼의 상태를 판단할 때 ` paused `와 함께 살펴봐야 한다.
+
+## 발화가 끝났는지 어떻게 알 수 있을까?
+
+` speak() `는 음성이 끝날 때까지 기다리는 Promise를 반환하지 않는다. 화면의 재생 상태를 바꾸려면 각각의 Utterance에서 발생하는 이벤트를 구독해야 한다.
+
+```javascript
+const utterance = new SpeechSynthesisUtterance('발화 상태를 확인합니다.');
+utterance.lang = 'ko-KR';
+
+utterance.addEventListener('start', () => console.log('읽기 시작'));
+utterance.addEventListener('end', () => console.log('읽기 완료'));
+utterance.addEventListener('error', (event) => {
+  console.error('음성 출력 실패:', event.error);
+});
+
+window.speechSynthesis.speak(utterance);
+```
+
+` start `는 읽기 시작, ` end `는 발화 완료, ` error `는 발화에 실패한 상황을 나타낸다. 사용자가 중간에 중단하는 흐름도 있으므로 모든 중단을 정상 완료로 취급하기보다 이벤트와 현재 요청의 상태를 함께 관리하는 것이 좋다.
+
+` boundary ` 이벤트로 단어나 문장 경계를 받을 수도 있지만 지원 여부와 동작은 환경에 따라 다르다. 읽는 위치를 하이라이트하는 기능을 만든다면 이를 필수 전제로 삼기보다, 사용할 수 없는 환경에서도 본문과 재생 제어가 동작하도록 구성하는 편이 안전하다.
+
+## 읽기 버튼에 연결해보자
+
+아래 예제는 본문 요소와 읽기·중단 버튼이 이미 있다고 가정한다. 사용자가 읽기 버튼을 눌렀을 때만 발화를 시작하고, 다시 누르면 앞선 요청을 비운 뒤 새로 읽는다.
+
+```html
+<article id="article">브라우저에서 이 문장을 읽어줍니다.</article>
+<button id="read" type="button">읽어주기</button>
+<button id="stop" type="button">중단하기</button>
+```
+
+```javascript
+const readButton = document.querySelector('#read');
+const stopButton = document.querySelector('#stop');
+const article = document.querySelector('#article');
+
+if ('speechSynthesis' in window && 'SpeechSynthesisUtterance' in window) {
+  const synth = window.speechSynthesis;
+
+  readButton.addEventListener('click', () => {
+    const text = article.textContent.trim();
+    if (!text) return;
+
+    // 이 페이지에서 진행 중이거나 대기 중인 발화를 비운다.
+    synth.cancel();
+    // 이전에 pause()된 상태라면 재생 가능 상태로 돌린다.
+    synth.resume();
+
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'ko-KR';
+    const voice = synth.getVoices().find((item) =>
+      item.lang.toLowerCase().startsWith('ko')
+    );
+    if (voice) utterance.voice = voice;
+    utterance.addEventListener('error', (event) => {
+      console.error('음성 출력 오류:', event.error);
+    });
+
+    synth.speak(utterance);
+  });
+
+  stopButton.addEventListener('click', () => synth.cancel());
+} else {
+  readButton.disabled = true;
+  stopButton.disabled = true;
+}
+```
+
+Chrome은 사용자 활성화 없이 음성을 자동 재생하는 것을 제한한다. 클릭이나 탭처럼 사용자가 명시적으로 읽기를 요청하는 흐름에서 시작하는 것이 좋다. 브라우저별 정책이 다를 수 있으므로 실제 대상 기기에서도 확인해야 한다.
+
+위 예제는 클릭 시점에 준비된 목소리 목록에서 한국어 음성을 찾는다. 페이지 진입 직후 음성 선택 목록을 미리 보여주고 싶다면 앞에서 살펴본 ` voiceschanged ` 처리도 함께 연결하면 된다.
+
+## 브라우저 TTS와 서버 TTS는 무엇이 다를까?
+
+브라우저의 음성 합성은 간단한 읽어주기 기능을 별도의 TTS 서버 연동 없이 시작하기 좋다. 하지만 서비스가 목소리와 발음을 모든 기기에서 동일하게 통제하거나 생성된 음성 파일을 저장해야 한다면, 이 API만으로는 요구사항을 충족하기 어려울 수 있다.
+
+반면 서버 또는 클라우드 TTS는 제공자가 지원하는 음성과 설정을 선택하고 음성 데이터를 받아 재사용하는 방식으로 구성할 수 있다. 대신 별도 서비스 연동과 비용, 네트워크 요청 및 텍스트 처리 방식까지 함께 고려해야 한다. 어느 쪽이 더 좋다기보다 **기기별 음성 차이를 허용할 수 있는지, 파일이 필요한지**가 선택 기준이 된다.
+
+또한 ` speechSynthesis `는 텍스트를 읽어주는 기능이지, 사용자의 말을 텍스트로 바꾸는 음성 인식 기능은 아니다. 두 기능 모두 Web Speech API에 속하지만 사용하는 인터페이스와 지원 범위는 다르다.
+
+## 글을 마치며
+
+` window.speechSynthesis `는 브라우저에서 텍스트를 음성으로 출력할 때 살펴볼 수 있는 API다. 짧은 코드로 발화를 요청할 수 있지만 실제 구현에서는 음성 목록의 준비 시점, 발화 큐, 시작과 종료 이벤트를 함께 이해하는 것이 중요하다.
+
+특히 ` getVoices() `의 빈 배열을 곧바로 오류로 해석하지 않고, ` speak() `가 기존 발화를 대체하는지 큐에 추가하는지 구분하면 예상하지 못한 동작을 줄이는 데 도움이 된다.
+
+## 참고 자료
+
+- <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API">MDN: Web Speech API</a>
+- <a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis">MDN: SpeechSynthesis</a>
+- <a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance">MDN: SpeechSynthesisUtterance</a>
+- <a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisVoice">MDN: SpeechSynthesisVoice</a>
+- <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API/Using_the_Web_Speech_API">MDN: Using the Web Speech API</a>
+- <a href="https://developer.chrome.com/blog/new-in-chrome-71/">Chrome for Developers: Speech synthesis requires user activation</a>

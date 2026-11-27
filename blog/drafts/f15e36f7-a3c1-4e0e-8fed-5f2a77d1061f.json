@@ -1,0 +1,3498 @@
+{
+  "id": "f15e36f7-a3c1-4e0e-8fed-5f2a77d1061f",
+  "title": "Claude Code와 Codex, 모델마다 토큰과 비용은 얼마나 다를까?",
+  "description": "Claude와 Codex의 모델별 API 단가와 실제 토큰 사용 사례, 캐시 과금과 구독 한도의 차이를 살펴본다.",
+  "categoryId": "category-9606d629",
+  "seriesId": "",
+  "markdown": "Claude Code나 Codex로 개발하다 보면 같은 작업을 요청했는데도 모델마다 사용량이 다르게 줄어드는 것을 볼 수 있다. 단순히 프롬프트가 몇 글자인지만으로는 설명하기 어렵다. 에이전트가 코드를 탐색하고, 파일을 읽고, 테스트를 실행하고, 그 결과를 다시 모델에게 전달하는 과정도 모두 작업의 일부이기 때문이다.\n\n그렇다면 Claude와 Codex는 같은 작업에서 실제로 얼마나 다른 토큰을 사용할까? 또 월 구독으로 사용할 때와 API 키로 사용할 때는 무엇이 다를까?\n\n이 글은 2026년 11월 27일 공식 문서에 표시된 가격을 기준으로 정리했다. 가격은 미국 달러 기준이며 세금, 계약 할인, 지역별 추가 요금과 도구별 별도 비용은 제외했다. 모델 접근 가능 여부와 요금은 바뀔 수 있으므로 실제 사용 전에는 각 서비스의 공식 요금표를 확인해야 한다.\n\n## 먼저, Claude Code와 Codex는 모델 이름이 아니다\n\nClaude Code와 Codex는 작업을 수행하는 코딩 에이전트 제품이다. 각각의 제품 안에서 선택한 모델에 따라 실제로 텍스트를 분석하고 생성하는 모델이 달라진다.\n\n예를 들어 Claude Code에서는 Claude Opus나 Sonnet 같은 모델을 선택할 수 있고, Codex에서는 계정과 환경에서 지원하는 GPT 계열 모델을 사용한다. 따라서 비교할 때는 단순히 “Claude 대 Codex”가 아니라 **에이전트, 모델, 설정, 과금 방식**을 함께 적어야 한다.\n\n또한 API 요금표에 모델이 있다고 해서 모든 구독 플랜이나 모든 코딩 도구에서 해당 모델을 사용할 수 있는 것은 아니다. 아래 API 표는 요금 계산을 위한 모델 단가 비교이며, 계정별 제품 내 모델 선택 가능 목록을 뜻하지 않는다.\n\n## 토큰은 내가 입력한 프롬프트에만 쓰이지 않는다\n\n에이전트에게 “로그인 버그를 수정해줘”라고 요청하면 그 한 문장만 모델에 전달되는 것이 아니다. 제품과 설정에 따라 시스템 지침, 대화 이력, 프로젝트 지침 파일, 코드 검색 결과, 읽어온 파일 내용, 테스트 로그, 이전 도구 호출 결과 등이 함께 전달될 수 있다. 에이전트가 다음 행동을 결정할 때마다 이 맥락이 다시 활용되기도 한다.\n\n- **입력 토큰**: 모델이 읽는 프롬프트와 코드, 대화 이력, 도구 결과 등\n- **출력 토큰**: 모델이 생성한 응답과 도구 호출 등에 사용되는 토큰. 지원 모델의 추론 토큰도 과금상 출력에 포함될 수 있다.\n- **캐시 읽기**: 이미 처리한 입력의 일부를 재사용하는 토큰\n- **캐시 쓰기**: 이후 재사용할 입력을 캐시에 저장하는 부분. 제공자와 이용 방식에 따라 별도 단가나 회계 방식이 다르다.\n\n보이는 답변이 짧다고 해서 출력 토큰이 항상 적은 것도 아니다. 모델이나 설정에 따라 화면에 그대로 보이지 않는 추론 토큰이 포함될 수 있다. 반대로 캐시 읽기 토큰이 많다고 해서 그 전체가 일반 입력 단가로 과금되는 것도 아니다.\n\n**중요한 점은 실제 토큰 수가 작업마다 달라진다는 것이다.** 같은 요청이라도 읽은 파일, 도구 호출 횟수, reasoning effort, 대화 길이와 캐시 상태가 다르면 사용량이 달라진다. 서로 다른 모델은 같은 문자열을 토큰으로 나누는 방식도 다를 수 있어, 토큰 수만으로 작업량이나 품질을 단정할 수 없다.\n\n## 모델별 API 가격은 얼마나 다를까?\n\n아래는 주요 모델의 **텍스트 토큰 100만 개당 표준 API 가격**이다. 입력과 출력은 각각 따로 계산한다. 캐시 읽기와 쓰기는 일단 제외했다.\n\n<table data-full-width=\"true\">\n<tbody>\n<tr>\n<th colSpan=\"1\" rowSpan=\"1\">\n\n구분\n\n</th>\n<th colSpan=\"1\" rowSpan=\"1\">\n\n모델\n\n</th>\n<th colSpan=\"1\" rowSpan=\"1\">\n\n입력 100만 토큰\n\n</th>\n<th colSpan=\"1\" rowSpan=\"1\">\n\n출력 100만 토큰\n\n</th>\n</tr>\n<tr>\n<td colSpan=\"1\" rowSpan=\"1\">\n\nClaude\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\nFable 5.2\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n$8\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n$40\n\n</td>\n</tr>\n<tr>\n<td colSpan=\"1\" rowSpan=\"1\">\n\nClaude\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\nOpus 5.5\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n$4\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n$20\n\n</td>\n</tr>\n<tr>\n<td colSpan=\"1\" rowSpan=\"1\">\n\nClaude\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\nSonnet 5.5\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n$2\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n$10\n\n</td>\n</tr>\n<tr>\n<td colSpan=\"1\" rowSpan=\"1\">\n\nClaude\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\nHaiku 5.5\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n$0.10부터\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n$0.50부터\n\n</td>\n</tr>\n<tr>\n<td colSpan=\"1\" rowSpan=\"1\">\n\nOpenAI\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\nGPT-6.2 Astra\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n$8\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n$40\n\n</td>\n</tr>\n<tr>\n<td colSpan=\"1\" rowSpan=\"1\">\n\nOpenAI\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\nGPT-6.2 Sol\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n$2\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n$10\n\n</td>\n</tr>\n<tr>\n<td colSpan=\"1\" rowSpan=\"1\">\n\nOpenAI\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\nGPT-6.1 Sol\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n$2\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n$10\n\n</td>\n</tr>\n</tbody>\n</table>\n\nHaiku 5.5의 표 가격은 **프롬프트 10만 토큰 이하** 기준이다. 10만 토큰 초과 요청은 입력 $0.50, 출력 $2.50으로 별도 단가가 적용된다. GPT-6.2 Sol과 GPT-6.1 Sol은 API 입력이 272K 토큰을 초과하는 요청에서 입력·캐시 단가가 2배, 출력 단가가 1.5배가 된다. 아래 계산 예제는 이런 장문 할증이 없는 범위다.\n\n참고로 두 모델의 입력·출력 단가가 같더라도 같은 작업에 사용하는 토큰 수나 결과가 같다는 뜻은 아니다. 이 표는 **동일 토큰량을 가정했을 때의 단가 비교**다.\n\n출처: <a href=\"https://platform.claude.com/docs/en/about-claude/pricing\">Anthropic API 가격표</a>, <a href=\"https://developers.openai.com/api/docs/pricing\">OpenAI API 가격표</a>, <a href=\"https://developers.openai.com/api/docs/models/gpt-6.2-sol\">GPT-6.2 Sol 모델 요금</a>, <a href=\"https://developers.openai.com/api/docs/models/gpt-6.1-sol\">GPT-6.1 Sol 모델 요금</a>\n\n### 같은 토큰 수라면 비용은 어떻게 달라질까?\n\n어떤 코드 수정 작업에서 **일반 입력 5만 토큰, 출력 5천 토큰**을 썼다고 가정해보자. 캐시, 도구 사용료, 장문 할증과 세금은 제외한 가상의 계산 예시이며, 실제 측정 결과가 아니다.\n\n<table data-full-width=\"true\">\n<tbody>\n<tr>\n<th colSpan=\"1\" rowSpan=\"1\">\n\n모델\n\n</th>\n<th colSpan=\"1\" rowSpan=\"1\">\n\n입력 비용\n\n</th>\n<th colSpan=\"1\" rowSpan=\"1\">\n\n출력 비용\n\n</th>\n<th colSpan=\"1\" rowSpan=\"1\">\n\n합계\n\n</th>\n</tr>\n<tr>\n<td colSpan=\"1\" rowSpan=\"1\">\n\nClaude Opus 5.5\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n$0.20\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n$0.10\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n**$0.30**\n\n</td>\n</tr>\n<tr>\n<td colSpan=\"1\" rowSpan=\"1\">\n\nClaude Sonnet 5.5\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n$0.10\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n$0.05\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n**$0.15**\n\n</td>\n</tr>\n<tr>\n<td colSpan=\"1\" rowSpan=\"1\">\n\nClaude Haiku 5.5\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n$0.005\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n$0.0025\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n**$0.0075**\n\n</td>\n</tr>\n<tr>\n<td colSpan=\"1\" rowSpan=\"1\">\n\nGPT-6.2 Astra\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n$0.40\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n$0.20\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n**$0.60**\n\n</td>\n</tr>\n<tr>\n<td colSpan=\"1\" rowSpan=\"1\">\n\nGPT-6.2 Sol\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n$0.10\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n$0.05\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n**$0.15**\n\n</td>\n</tr>\n</tbody>\n</table>\n\n계산식은 ` 입력 토큰 ÷ 1,000,000 × 입력 단가 + 출력 토큰 ÷ 1,000,000 × 출력 단가 `다. 예를 들어 Opus 5.5는 ` 50,000 ÷ 1,000,000 × $4 + 5,000 ÷ 1,000,000 × $20 = $0.30 `이다.\n\n이 수치를 “버그 수정 한 건의 평균 가격”으로 해석하면 안 된다. 모델마다 실제로 읽고 생성하는 양이 달라지며, 여러 차례 도구를 호출하면 누적 입력이 훨씬 커질 수 있다. Haiku가 같은 작업을 같은 품질로 끝낸다는 뜻도 아니다.\n\n## 실제로 같은 작업을 시키면 토큰도 같을까?\n\nSideHub는 2026년 10월 공개한 비교에서 오픈소스 Python 저장소의 버그 수정, 기능 추가, 리팩터링, 코드 리뷰 네 가지 작업을 Claude Code와 Codex CLI에 각각 두 번씩 맡겼다. 사용한 구성은 Claude Code 2.1.291 + Opus 5.5, Codex CLI 0.160.0 + GPT-6.1 Sol이며, 각 실행은 분리된 worktree에서 시작했다.\n\n그중 **버그 수정의 첫 번째 실행**만 살펴보면 다음과 같다.\n\n<table data-full-width=\"true\">\n<tbody>\n<tr>\n<th colSpan=\"1\" rowSpan=\"1\">\n\n항목\n\n</th>\n<th colSpan=\"1\" rowSpan=\"1\">\n\nClaude Code + Opus 5.5\n\n</th>\n<th colSpan=\"1\" rowSpan=\"1\">\n\nCodex CLI + GPT-6.1 Sol\n\n</th>\n</tr>\n<tr>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n입력 토큰\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n약 75,000\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n약 153,700\n\n</td>\n</tr>\n<tr>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n그중 캐시 읽기\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n약 64,200\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n약 129,000\n\n</td>\n</tr>\n<tr>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n출력 토큰\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n2,378\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n892\n\n</td>\n</tr>\n<tr>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n도구 호출\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n3회\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n8회\n\n</td>\n</tr>\n<tr>\n<td colSpan=\"1\" rowSpan=\"1\">\n\nAPI 단가 기준 추정 비용\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n$0.146\n\n</td>\n<td colSpan=\"1\" rowSpan=\"1\">\n\n$0.071\n\n</td>\n</tr>\n</tbody>\n</table>\n\n이 예시에서 Codex는 입력 토큰을 더 많이 사용했지만, 출력 토큰은 더 적었다. 가격 계산에는 캐시 쓰기와 읽기, 입력·출력 단가가 함께 영향을 준다. 입력 토큰이 더 많다는 사실만으로 총비용도 더 높다고 결론 내릴 수 없는 이유다.\n\n이 실험은 **하나의 작은 Python 저장소에서 네 작업을 각각 두 번 실행한 결과**다. 두 제품의 모든 모델이나 긴 세션, 프론트엔드 작업을 대표하지 않는다. 측정값은 해당 시점의 모델·버전과 API 가격 기준이며, 월 구독 사용자의 실제 결제액이 아니다. 이 실험에서 사용한 Claude Code의 1시간 캐시 쓰기 단가와 Codex 측 기록 방식도 결과를 해석할 때 함께 봐야 한다. <a href=\"https://www.sidehub.io/blog/codex-vs-claude-code\">실험 방법과 원자료</a>\n\n또 다른 Dosu의 Vercel AI SDK PR 49건 재현에서는 Opus 5.5와 GPT-6.1 Sol의 API 환산 추정액이 각각 $44.00과 $27.29였다. 다만 해당 실험은 패치의 정답 여부를 평가하지 않았고, Codex 캐시 쓰기 기록에도 불확실성이 있어 두 결과를 동등한 품질의 작업 비용으로 단정할 수 없다. 작은 범위의 작업에서는 Codex의 추정 비용이 더 높았던 사례도 있다. <a href=\"https://dosu.dev/blog/claude-code-vs-codex-token-costs\">Dosu 실험</a>\n\n## 캐시를 적용하면 왜 계산이 달라질까?\n\n코딩 에이전트는 같은 프로젝트 지침이나 대화 맥락을 여러 차례 다시 참고한다. 프롬프트 캐시는 조건에 맞는 반복 입력을 재사용해 매번 일반 입력과 같은 단가로 처리하지 않도록 한다.\n\n다만 **캐시 읽기와 쓰기**는 구분해야 한다. 예를 들어 Opus 5.5의 API 기준 단가는 100만 토큰당 일반 입력 $4, 5분 캐시 쓰기 $5, 캐시 읽기 $0.20이다. GPT-6.2 Sol은 일반 입력 $2, 30분 캐시 쓰기 $2.50, 캐시 읽기 $0.10이다. 각 상품의 캐시 정책과 유지 시간은 다르다.\n\n가상 작업에서 일반 입력 1만, 캐시 쓰기 1만, 캐시 읽기 3만, 출력 5천 토큰을 각각 썼다고 하자. 네 수치는 **서로 겹치지 않는 과금 항목**으로 가정한다.\n\n- Opus 5.5, 5분 캐시 쓰기: $0.04 + $0.05 + $0.006 + $0.10 = **$0.196**\n- GPT-6.2 Sol, 30분 캐시 쓰기: $0.02 + $0.025 + $0.003 + $0.05 = **$0.098**\n\n둘 다 합계 입력은 5만 토큰이지만, 앞의 캐시 없는 예제와 입력 구성과 단가가 다르다. 따라서 총 토큰 수뿐 아니라 캐시 읽기·쓰기 비중까지 봐야 실제 비용에 가까운 추정이 가능하다. 제공자 응답의 입력 합계에 캐시 토큰이 이미 포함되는지 여부도 확인해야 중복 합산을 피할 수 있다.\n\n이 역시 단가 계산 예시이지 동일한 프롬프트에서 두 서비스가 위와 같은 캐시 적중률을 낸다는 뜻은 아니다. Claude Code는 기본적으로 프롬프트 캐싱을 관리하지만, 모델 변경이나 맥락 변경 등으로 캐시가 다시 만들어질 수 있다. <a href=\"https://code.claude.com/docs/en/prompt-caching\">Claude Code의 프롬프트 캐싱</a>\n\n## 월 구독과 API 과금은 어떻게 다를까?\n\n여기서 혼동하기 쉬운 부분이 있다. **월 구독의 사용량 한도와 API의 토큰별 청구는 같은 계산 방식이 아니다.**\n\nClaude Pro는 미국 기준 월 결제 시 $20, Max는 월 $100이며 Claude Code를 포함한다. 사용량은 모델과 대화 길이, 파일 등 여러 요인에 따라 달라지고 Claude의 다른 사용과 한도를 공유한다. 공식 요금표에서 Max는 Pro 대비 5시간 및 주간 사용량을 각각 5배로 안내한다. 연간 결제나 다른 플랜은 별도 조건이 적용된다. <a href=\"https://claude.com/pricing\">Claude 요금제</a>, <a href=\"https://support.claude.com/en/articles/11145838-use-claude-code-with-your-pro-max-or-ultra-plan\">Claude Code 구독 한도</a>\n\nCodex는 ChatGPT 플랜에 포함된 사용량으로 이용할 수 있으며, 공식 페이지에서 Plus는 월 $20이다. OpenAI는 작업의 모델, 크기와 복잡도, 로컬·클라우드 실행 여부에 따라 사용량이 달라진다고 설명한다. 예를 들어 Plus의 GPT-6.2 Sol은 5시간당 로컬 메시지 **약 17~180개**로 안내되지만, 이는 고정 보장량이 아니라 작업 조건에 따른 추정치다. 주간 제한도 적용될 수 있다. <a href=\"https://learn.chatgpt.com/docs/pricing\">Codex 요금과 사용량</a>\n\nAPI 키를 사용하면 각 API의 사용량 기준으로 별도 과금된다. OpenAI는 API 키 세션이 ChatGPT 플랜의 포함 사용량이 아니라 별도 API 가격을 따른다고 명시한다. Claude도 구독에 포함된 사용량과 API·추가 크레딧은 구분해서 확인해야 한다.\n\n따라서 API 가격을 곱해 얻은 추정액을 월 구독의 실제 청구액이나 “남은 한도를 몇 퍼센트 썼는지”로 환산할 수는 없다. 제품에 표시되는 한도와 리셋 시각은 해당 계정에서 확인하는 것이 가장 정확하다.\n\n## 내가 사용한 토큰은 어디서 확인할까?\n\nClaude Code에서는 ` /usage `의 Session 항목에서 모델별 입력, 출력, 캐시 읽기와 쓰기 등 세션 사용량을 확인할 수 있다. 다만 구독 사용자에게 표시되는 세션 달러 값은 실제 구독 청구액이 아닌 추정치이므로 플랜 사용량 표시와 구분해야 한다. <a href=\"https://code.claude.com/docs/en/costs\">Claude Code 사용량 확인</a>\n\nCodex CLI에서는 ` /status `로 현재 세션 설정과 토큰 사용량, 남은 컨텍스트 등의 정보를 확인할 수 있다. ` /usage `는 계정의 토큰 활동을 살펴보는 메뉴를 제공하며, 플랜 한도와 초기화 시각은 <a href=\"https://chatgpt.com/codex/settings/usage\">Codex 사용량 대시보드</a>에서도 볼 수 있다. 표시 항목은 버전과 로그인 방식에 따라 달라질 수 있다. <a href=\"https://developers.openai.com/codex/cli/reference\">Codex CLI 명령어</a>\n\n직접 비교한다면 같은 저장소의 같은 커밋과 동일한 요청으로 시작하고, 모델명과 effort, 에이전트 버전, 캐시 상태를 기록해보자. 한 번의 실행 결과보다 여러 번의 결과와 테스트 통과 여부를 함께 보는 편이 유용하다. 모델이 적은 토큰을 사용했더라도 필요한 테스트나 수정 작업을 놓쳤다면 단순 비교가 어렵기 때문이다.\n\n## 글을 마치며\n\nClaude Code와 Codex의 비용 차이는 모델 단가 하나로 설명되지 않는다. 어떤 파일을 읽었는지, 몇 번 도구를 호출했는지, 캐시가 얼마나 재사용됐는지, 출력과 추론에 얼마나 사용했는지가 함께 영향을 준다.\n\nAPI를 사용한다면 입력·출력·캐시를 나누어 비용을 계산하고, 구독을 사용한다면 제품이 보여주는 사용량과 한도를 별도로 확인해야 한다. 같은 작업에서 실제로 얼마나 차이가 나는지는 결국 내 프로젝트와 설정에서 측정해보는 것이 가장 정확하다.\n\n## 참고 자료\n\n- <a href=\"https://platform.claude.com/docs/en/about-claude/pricing\">https://platform.claude.com/docs/en/about-claude/pricing</a>\n- <a href=\"https://developers.openai.com/api/docs/pricing\">https://developers.openai.com/api/docs/pricing</a>\n- <a href=\"https://learn.chatgpt.com/docs/pricing\">https://learn.chatgpt.com/docs/pricing</a>\n- <a href=\"https://code.claude.com/docs/en/costs\">https://code.claude.com/docs/en/costs</a>\n- <a href=\"https://www.sidehub.io/blog/codex-vs-claude-code\">https://www.sidehub.io/blog/codex-vs-claude-code</a>\n- <a href=\"https://dosu.dev/blog/claude-code-vs-codex-token-costs\">https://dosu.dev/blog/claude-code-vs-codex-token-costs</a>\n- ",
+  "blocks": [
+    {
+      "type": "slash-content",
+      "version": 1,
+      "content": {
+        "type": "doc",
+        "content": [
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "0BwR_wewgZgd",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Claude Code나 Codex로 개발하다 보면 같은 작업을 요청했는데도 모델마다 사용량이 다르게 줄어드는 것을 볼 수 있다. 단순히 프롬프트가 몇 글자인지만으로는 설명하기 어렵다. 에이전트가 코드를 탐색하고, 파일을 읽고, 테스트를 실행하고, 그 결과를 다시 모델에게 전달하는 과정도 모두 작업의 일부이기 때문이다."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "P03toqpiZ8Hu",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "그렇다면 Claude와 Codex는 같은 작업에서 실제로 얼마나 다른 토큰을 사용할까? 또 월 구독으로 사용할 때와 API 키로 사용할 때는 무엇이 다를까?"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "tVsgB8AH2h6e",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "이 글은 2026년 11월 27일 공식 문서에 표시된 가격을 기준으로 정리했다. 가격은 미국 달러 기준이며 세금, 계약 할인, 지역별 추가 요금과 도구별 별도 비용은 제외했다. 모델 접근 가능 여부와 요금은 바뀔 수 있으므로 실제 사용 전에는 각 서비스의 공식 요금표를 확인해야 한다."
+              }
+            ]
+          },
+          {
+            "type": "heading",
+            "attrs": {
+              "id": "GuyQHjHOWLpK",
+              "textAlign": "left",
+              "level": 2
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "먼저, Claude Code와 Codex는 모델 이름이 아니다"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "Qn9pYDmgd_oV",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Claude Code와 Codex는 작업을 수행하는 코딩 에이전트 제품이다. 각각의 제품 안에서 선택한 모델에 따라 실제로 텍스트를 분석하고 생성하는 모델이 달라진다."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "XGnU5EF7-4e5",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "예를 들어 Claude Code에서는 Claude Opus나 Sonnet 같은 모델을 선택할 수 있고, Codex에서는 계정과 환경에서 지원하는 GPT 계열 모델을 사용한다. 따라서 비교할 때는 단순히 “Claude 대 Codex”가 아니라 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "bold"
+                  }
+                ],
+                "text": "에이전트, 모델, 설정, 과금 방식"
+              },
+              {
+                "type": "text",
+                "text": "을 함께 적어야 한다."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "Q72EYZq1MBbY",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "또한 API 요금표에 모델이 있다고 해서 모든 구독 플랜이나 모든 코딩 도구에서 해당 모델을 사용할 수 있는 것은 아니다. 아래 API 표는 요금 계산을 위한 모델 단가 비교이며, 계정별 제품 내 모델 선택 가능 목록을 뜻하지 않는다."
+              }
+            ]
+          },
+          {
+            "type": "heading",
+            "attrs": {
+              "id": "p--t2v-jL-CL",
+              "textAlign": "left",
+              "level": 2
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "토큰은 내가 입력한 프롬프트에만 쓰이지 않는다"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "qy3KqRJiPReu",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "에이전트에게 “로그인 버그를 수정해줘”라고 요청하면 그 한 문장만 모델에 전달되는 것이 아니다. 제품과 설정에 따라 시스템 지침, 대화 이력, 프로젝트 지침 파일, 코드 검색 결과, 읽어온 파일 내용, 테스트 로그, 이전 도구 호출 결과 등이 함께 전달될 수 있다. 에이전트가 다음 행동을 결정할 때마다 이 맥락이 다시 활용되기도 한다."
+              }
+            ]
+          },
+          {
+            "type": "bulletList",
+            "attrs": {
+              "id": "v9b3rD7hYvAe"
+            },
+            "content": [
+              {
+                "type": "listItem",
+                "attrs": {
+                  "id": "Wjg_DQVKsFNa"
+                },
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "attrs": {
+                      "id": "hdk76aYrxKzr",
+                      "textAlign": "left"
+                    },
+                    "content": [
+                      {
+                        "type": "text",
+                        "marks": [
+                          {
+                            "type": "bold"
+                          }
+                        ],
+                        "text": "입력 토큰"
+                      },
+                      {
+                        "type": "text",
+                        "text": ": 모델이 읽는 프롬프트와 코드, 대화 이력, 도구 결과 등"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "attrs": {
+                  "id": "Np7hXs8JSM2z"
+                },
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "attrs": {
+                      "id": "NasgWKxD0kZh",
+                      "textAlign": "left"
+                    },
+                    "content": [
+                      {
+                        "type": "text",
+                        "marks": [
+                          {
+                            "type": "bold"
+                          }
+                        ],
+                        "text": "출력 토큰"
+                      },
+                      {
+                        "type": "text",
+                        "text": ": 모델이 생성한 응답과 도구 호출 등에 사용되는 토큰. 지원 모델의 추론 토큰도 과금상 출력에 포함될 수 있다."
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "attrs": {
+                  "id": "9JJBMYzFUGbg"
+                },
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "attrs": {
+                      "id": "yoTY9UpkLeFy",
+                      "textAlign": "left"
+                    },
+                    "content": [
+                      {
+                        "type": "text",
+                        "marks": [
+                          {
+                            "type": "bold"
+                          }
+                        ],
+                        "text": "캐시 읽기"
+                      },
+                      {
+                        "type": "text",
+                        "text": ": 이미 처리한 입력의 일부를 재사용하는 토큰"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "attrs": {
+                  "id": "w2J3pIoBBNqx"
+                },
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "attrs": {
+                      "id": "-YD6FfpzYN1G",
+                      "textAlign": "left"
+                    },
+                    "content": [
+                      {
+                        "type": "text",
+                        "marks": [
+                          {
+                            "type": "bold"
+                          }
+                        ],
+                        "text": "캐시 쓰기"
+                      },
+                      {
+                        "type": "text",
+                        "text": ": 이후 재사용할 입력을 캐시에 저장하는 부분. 제공자와 이용 방식에 따라 별도 단가나 회계 방식이 다르다."
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "yEVN_p8Gw17t",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "보이는 답변이 짧다고 해서 출력 토큰이 항상 적은 것도 아니다. 모델이나 설정에 따라 화면에 그대로 보이지 않는 추론 토큰이 포함될 수 있다. 반대로 캐시 읽기 토큰이 많다고 해서 그 전체가 일반 입력 단가로 과금되는 것도 아니다."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "ZTuJrVZHstMD",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "bold"
+                  }
+                ],
+                "text": "중요한 점은 실제 토큰 수가 작업마다 달라진다는 것이다."
+              },
+              {
+                "type": "text",
+                "text": " 같은 요청이라도 읽은 파일, 도구 호출 횟수, reasoning effort, 대화 길이와 캐시 상태가 다르면 사용량이 달라진다. 서로 다른 모델은 같은 문자열을 토큰으로 나누는 방식도 다를 수 있어, 토큰 수만으로 작업량이나 품질을 단정할 수 없다."
+              }
+            ]
+          },
+          {
+            "type": "heading",
+            "attrs": {
+              "id": "eQArANhB3Bse",
+              "textAlign": "left",
+              "level": 2
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "모델별 API 가격은 얼마나 다를까?"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "o50Y4GcRlHrc",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "아래는 주요 모델의 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "bold"
+                  }
+                ],
+                "text": "텍스트 토큰 100만 개당 표준 API 가격"
+              },
+              {
+                "type": "text",
+                "text": "이다. 입력과 출력은 각각 따로 계산한다. 캐시 읽기와 쓰기는 일단 제외했다."
+              }
+            ]
+          },
+          {
+            "type": "table",
+            "attrs": {
+              "id": "RhllFi0a1VjZ",
+              "fullWidth": true
+            },
+            "content": [
+              {
+                "type": "tableRow",
+                "content": [
+                  {
+                    "type": "tableHeader",
+                    "attrs": {
+                      "id": "3vhye40K-eyp",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "3Q72eYV9BdB1",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "구분"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableHeader",
+                    "attrs": {
+                      "id": "prSotmv8uhzt",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "ldTZ6B5zHazM",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "모델"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableHeader",
+                    "attrs": {
+                      "id": "3SkaT-RCwii2",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "8dQ4b0c7Bm19",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "입력 100만 토큰"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableHeader",
+                    "attrs": {
+                      "id": "-83ZXyQRfaXw",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "6uZaeN275Eo0",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "출력 100만 토큰"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "tableRow",
+                "content": [
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "kK9lhMOa7Gnn",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "BuN4Qwo8qtu1",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Claude"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "o9sxLuY-n9FP",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "b__DR1WlQGFQ",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Fable 5.2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "ZYmWu2Qrf85n",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "XRNNLc4HSmJ0",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "$8"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "erg63M0t5Y8t",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "8-K_eaATfTz4",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "$40"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "tableRow",
+                "content": [
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "etxLIUDGwHyy",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "7apIhC90IwwC",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Claude"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "bnlbyu6l_LJd",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "F0LuZ9UnvYpz",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Opus 5.5"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "rXY6SHEGTHYW",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "SOwsnmmVbs0m",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "$4"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "z1olzyWZIjHm",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "LffJHmgimjzw",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "$20"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "tableRow",
+                "content": [
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "2MTkfnn47dEt",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "zYcL-X9X-N17",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Claude"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "Lc-jRH1aLX2L",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "dQQ5YyfLzsGI",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Sonnet 5.5"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "g1xVTk-h2H1t",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "Mxaio6tMk4r_",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "$2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "flEmlOBVX69P",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "biK6EE0S0qI4",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "$10"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "tableRow",
+                "content": [
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "6Ow5jNm-Mzl_",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "cCJoqsQeDm-9",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Claude"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "lNshwk9ejSoq",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "O2ljfBk6jBvy",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Haiku 5.5"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "xiWYmmNVCQ6j",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "FL1KzVqEwQF-",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "$0.10부터"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "jhyQ257W3G3F",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "bWGJ1U3_1llF",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "$0.50부터"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "tableRow",
+                "content": [
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "nks4dSSw8Ff7",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "bvnIm1hOkpYh",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "OpenAI"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "MtcUcwAG_deJ",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "cbOqS0aplQTX",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "GPT-6.2 Astra"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "jt2etLTY1ugR",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "xjTh4M3N4rWI",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "$8"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "K0rwECI020El",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "q9rw0nY29muN",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "$40"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "tableRow",
+                "content": [
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "8tPe2FlRVjb7",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "N6L6S-tFLIii",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "OpenAI"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "KxHYcDCmH74W",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "_XEWdI8JoytL",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "GPT-6.2 Sol"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "NUI6pC0TK8Dg",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "-ipNMWdzgGZI",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "$2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "xc80fGCUid9-",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "Qk8YoV1phu-L",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "$10"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "tableRow",
+                "content": [
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "NrMAX2J2w97Q",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "HdSIy0MUKkRB",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "OpenAI"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "GkNj1HVp9w1B",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "wFi4llb9g3s_",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "GPT-6.1 Sol"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "HljvOKVAE6yI",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "qLfO0_2KYS8-",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "$2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "97XEvTYA1Ufs",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "Ut6jXPaC-UtD",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "$10"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "cilN7SJMdlEa",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Haiku 5.5의 표 가격은 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "bold"
+                  }
+                ],
+                "text": "프롬프트 10만 토큰 이하"
+              },
+              {
+                "type": "text",
+                "text": " 기준이다. 10만 토큰 초과 요청은 입력 $0.50, 출력 $2.50으로 별도 단가가 적용된다. GPT-6.2 Sol과 GPT-6.1 Sol은 API 입력이 272K 토큰을 초과하는 요청에서 입력·캐시 단가가 2배, 출력 단가가 1.5배가 된다. 아래 계산 예제는 이런 장문 할증이 없는 범위다."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "q3XdqJqw1lZY",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "참고로 두 모델의 입력·출력 단가가 같더라도 같은 작업에 사용하는 토큰 수나 결과가 같다는 뜻은 아니다. 이 표는 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "bold"
+                  }
+                ],
+                "text": "동일 토큰량을 가정했을 때의 단가 비교"
+              },
+              {
+                "type": "text",
+                "text": "다."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "w8lbGQp3tsbZ",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "출처: "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://platform.claude.com/docs/en/about-claude/pricing",
+                      "target": "_blank",
+                      "rel": "noopener noreferrer nofollow",
+                      "class": null,
+                      "title": null
+                    }
+                  }
+                ],
+                "text": "Anthropic API 가격표"
+              },
+              {
+                "type": "text",
+                "text": ", "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://developers.openai.com/api/docs/pricing",
+                      "target": "_blank",
+                      "rel": "noopener noreferrer nofollow",
+                      "class": null,
+                      "title": null
+                    }
+                  }
+                ],
+                "text": "OpenAI API 가격표"
+              },
+              {
+                "type": "text",
+                "text": ", "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://developers.openai.com/api/docs/models/gpt-6.2-sol",
+                      "target": "_blank",
+                      "rel": "noopener noreferrer nofollow",
+                      "class": null,
+                      "title": null
+                    }
+                  }
+                ],
+                "text": "GPT-6.2 Sol 모델 요금"
+              },
+              {
+                "type": "text",
+                "text": ", "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+                      "target": "_blank",
+                      "rel": "noopener noreferrer nofollow",
+                      "class": null,
+                      "title": null
+                    }
+                  }
+                ],
+                "text": "GPT-6.1 Sol 모델 요금"
+              }
+            ]
+          },
+          {
+            "type": "heading",
+            "attrs": {
+              "id": "IoE8-SEepKrq",
+              "textAlign": "left",
+              "level": 3
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "같은 토큰 수라면 비용은 어떻게 달라질까?"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "aPC_iCRnvlJe",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "어떤 코드 수정 작업에서 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "bold"
+                  }
+                ],
+                "text": "일반 입력 5만 토큰, 출력 5천 토큰"
+              },
+              {
+                "type": "text",
+                "text": "을 썼다고 가정해보자. 캐시, 도구 사용료, 장문 할증과 세금은 제외한 가상의 계산 예시이며, 실제 측정 결과가 아니다."
+              }
+            ]
+          },
+          {
+            "type": "table",
+            "attrs": {
+              "id": "KeGD3iwpjqow",
+              "fullWidth": true
+            },
+            "content": [
+              {
+                "type": "tableRow",
+                "content": [
+                  {
+                    "type": "tableHeader",
+                    "attrs": {
+                      "id": "rl53w4MDkQ2u",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "dCc3X-X_238w",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "모델"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableHeader",
+                    "attrs": {
+                      "id": "_52YKbNG88Gx",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "o3ntHWmlB5Zj",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "입력 비용"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableHeader",
+                    "attrs": {
+                      "id": "tAWDTIgdHtC5",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "B46QlGjhMT3D",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "출력 비용"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableHeader",
+                    "attrs": {
+                      "id": "SWJ-c4H3jwAp",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "L5W6cVahYRyq",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "합계"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "tableRow",
+                "content": [
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "1UQ7zE0RmXP3",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "hvUu94wJRkgc",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Claude Opus 5.5"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "l0ALWwQG-dZl",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "d_bFFMSKmcaw",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "$0.20"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "9hzCr4wuh2z4",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "A8eNb7hhGKOy",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "$0.10"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "kZdRI8qx3nWE",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "zDs6r57Mao-u",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "text": "$0.30"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "tableRow",
+                "content": [
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "Y1Zg0W68t4Rc",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "OMLmVSTnKVGV",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Claude Sonnet 5.5"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "PqAmRvviwzN1",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "J2sNMvQXpOAt",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "$0.10"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "9HfBHlghF0gW",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "YFmrB1Zk3crM",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "$0.05"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "Y5t-N3XihzuP",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "cFKxfMnxfLJH",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "text": "$0.15"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "tableRow",
+                "content": [
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "6IfzirKe_DeR",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "R-1c2iX2Hxen",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Claude Haiku 5.5"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "f-mXDbYy10gV",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "52ipOajboUzS",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "$0.005"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "V_7CGcjr22ML",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "2Wez5OC5GptF",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "$0.0025"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "1nKQHrYs6CYW",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "ZbMnRNsJbqBP",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "text": "$0.0075"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "tableRow",
+                "content": [
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "zNonDqmM4I6G",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "R8shCfvLEO9G",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "GPT-6.2 Astra"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "8z1Y3lb1Y73d",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "xUm4MhA4CJIm",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "$0.40"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "vyT_99CfIPbY",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "zSQ_7JO0AtAp",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "$0.20"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "5A9OD8JiMwxu",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "xn2cgCv4uhP-",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "text": "$0.60"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "tableRow",
+                "content": [
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "v0ldiPBz6Kw7",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "svpQJNXVe1E6",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "GPT-6.2 Sol"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "RBw0A5g802pg",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "m7de8u2D_ru_",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "$0.10"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "jkJ26CvXHAnU",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "Z99PKkrK8Mmm",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "$0.05"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "3xQ8pvZHgA8n",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "WKiYbSCuyhn-",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "text": "$0.15"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "knN1op0sIssx",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "계산식은 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "입력 토큰 ÷ 1,000,000 × 입력 단가 + 출력 토큰 ÷ 1,000,000 × 출력 단가"
+              },
+              {
+                "type": "text",
+                "text": "다. 예를 들어 Opus 5.5는 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "50,000 ÷ 1,000,000 × $4 + 5,000 ÷ 1,000,000 × $20 = $0.30"
+              },
+              {
+                "type": "text",
+                "text": "이다."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "270ADVIoNMnB",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "이 수치를 “버그 수정 한 건의 평균 가격”으로 해석하면 안 된다. 모델마다 실제로 읽고 생성하는 양이 달라지며, 여러 차례 도구를 호출하면 누적 입력이 훨씬 커질 수 있다. Haiku가 같은 작업을 같은 품질로 끝낸다는 뜻도 아니다."
+              }
+            ]
+          },
+          {
+            "type": "heading",
+            "attrs": {
+              "id": "uNNwO3sCK_mw",
+              "textAlign": "left",
+              "level": 2
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "실제로 같은 작업을 시키면 토큰도 같을까?"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "K6p71DPEutUA",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "SideHub는 2026년 10월 공개한 비교에서 오픈소스 Python 저장소의 버그 수정, 기능 추가, 리팩터링, 코드 리뷰 네 가지 작업을 Claude Code와 Codex CLI에 각각 두 번씩 맡겼다. 사용한 구성은 Claude Code 2.1.291 + Opus 5.5, Codex CLI 0.160.0 + GPT-6.1 Sol이며, 각 실행은 분리된 worktree에서 시작했다."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "cIarVKShdP5l",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "그중 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "bold"
+                  }
+                ],
+                "text": "버그 수정의 첫 번째 실행"
+              },
+              {
+                "type": "text",
+                "text": "만 살펴보면 다음과 같다."
+              }
+            ]
+          },
+          {
+            "type": "table",
+            "attrs": {
+              "id": "j9FNZlz7Qbsu",
+              "fullWidth": true
+            },
+            "content": [
+              {
+                "type": "tableRow",
+                "content": [
+                  {
+                    "type": "tableHeader",
+                    "attrs": {
+                      "id": "DTQoy1I8p9NJ",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "9Z14HIBUxqzE",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "항목"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableHeader",
+                    "attrs": {
+                      "id": "nMoSXSXYMNi-",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "2cnGg82s-hOf",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Claude Code + Opus 5.5"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableHeader",
+                    "attrs": {
+                      "id": "SpkF8DpNqDeJ",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "Kyke6ugx9wS3",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Codex CLI + GPT-6.1 Sol"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "tableRow",
+                "content": [
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "2zsn8fHv2WFA",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "POKVmCK9BInk",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "입력 토큰"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "0aqbk-UY_K3p",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "TZl_H1C4R-D_",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "약 75,000"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "r5MavMMGP42A",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "OC_qJEYFdrWE",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "약 153,700"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "tableRow",
+                "content": [
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "i-CkGsUdUMA1",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "-dDqPdBHoUq-",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "그중 캐시 읽기"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "CkCNj1w3tNvT",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "a2nlnpbXCisW",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "약 64,200"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "_1MPb5KWOegv",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "ZWkC5ewhxNlL",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "약 129,000"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "tableRow",
+                "content": [
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "GZTiGcyEDjXS",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "u4kk1kuzZHcJ",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "출력 토큰"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "Q-G-IN4dO0ja",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "Ft4GmeltYuFa",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "2,378"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "6zbqX8upgpr4",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "dlQdtBxyqEcw",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "892"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "tableRow",
+                "content": [
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "5RwN_ugFzdWL",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "PNKwJ1Z_UoeP",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "도구 호출"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "2M37Vvz8urvX",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "FoxlZrETUXg4",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "3회"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "F9cTrVlWQIRK",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "tD4dhntxR3Me",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "8회"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "tableRow",
+                "content": [
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "8jEubEzAZQCG",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "Nivn3MvqrzcA",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "API 단가 기준 추정 비용"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "GAjR6MN0O0i5",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "bYK1qCOVnnEd",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "$0.146"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tableCell",
+                    "attrs": {
+                      "id": "z6D3hQVxA5WZ",
+                      "colspan": 1,
+                      "rowspan": 1,
+                      "colwidth": null,
+                      "align": null
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "id": "cvIlKm5QIjzk",
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "$0.071"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "9RCQk3UWcNyo",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "이 예시에서 Codex는 입력 토큰을 더 많이 사용했지만, 출력 토큰은 더 적었다. 가격 계산에는 캐시 쓰기와 읽기, 입력·출력 단가가 함께 영향을 준다. 입력 토큰이 더 많다는 사실만으로 총비용도 더 높다고 결론 내릴 수 없는 이유다."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "tt3Ji7LePm_b",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "이 실험은 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "bold"
+                  }
+                ],
+                "text": "하나의 작은 Python 저장소에서 네 작업을 각각 두 번 실행한 결과"
+              },
+              {
+                "type": "text",
+                "text": "다. 두 제품의 모든 모델이나 긴 세션, 프론트엔드 작업을 대표하지 않는다. 측정값은 해당 시점의 모델·버전과 API 가격 기준이며, 월 구독 사용자의 실제 결제액이 아니다. 이 실험에서 사용한 Claude Code의 1시간 캐시 쓰기 단가와 Codex 측 기록 방식도 결과를 해석할 때 함께 봐야 한다. "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://www.sidehub.io/blog/codex-vs-claude-code",
+                      "target": "_blank",
+                      "rel": "noopener noreferrer nofollow",
+                      "class": null,
+                      "title": null
+                    }
+                  }
+                ],
+                "text": "실험 방법과 원자료"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "9lwfw5Da_9Gs",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "또 다른 Dosu의 Vercel AI SDK PR 49건 재현에서는 Opus 5.5와 GPT-6.1 Sol의 API 환산 추정액이 각각 $44.00과 $27.29였다. 다만 해당 실험은 패치의 정답 여부를 평가하지 않았고, Codex 캐시 쓰기 기록에도 불확실성이 있어 두 결과를 동등한 품질의 작업 비용으로 단정할 수 없다. 작은 범위의 작업에서는 Codex의 추정 비용이 더 높았던 사례도 있다. "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://dosu.dev/blog/claude-code-vs-codex-token-costs",
+                      "target": "_blank",
+                      "rel": "noopener noreferrer nofollow",
+                      "class": null,
+                      "title": null
+                    }
+                  }
+                ],
+                "text": "Dosu 실험"
+              }
+            ]
+          },
+          {
+            "type": "heading",
+            "attrs": {
+              "id": "CMSdfomjfawt",
+              "textAlign": "left",
+              "level": 2
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "캐시를 적용하면 왜 계산이 달라질까?"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "A1Tt2REmzIrQ",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "코딩 에이전트는 같은 프로젝트 지침이나 대화 맥락을 여러 차례 다시 참고한다. 프롬프트 캐시는 조건에 맞는 반복 입력을 재사용해 매번 일반 입력과 같은 단가로 처리하지 않도록 한다."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "Yw4CWzvxhsPX",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "다만 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "bold"
+                  }
+                ],
+                "text": "캐시 읽기와 쓰기"
+              },
+              {
+                "type": "text",
+                "text": "는 구분해야 한다. 예를 들어 Opus 5.5의 API 기준 단가는 100만 토큰당 일반 입력 $4, 5분 캐시 쓰기 $5, 캐시 읽기 $0.20이다. GPT-6.2 Sol은 일반 입력 $2, 30분 캐시 쓰기 $2.50, 캐시 읽기 $0.10이다. 각 상품의 캐시 정책과 유지 시간은 다르다."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "bfDsVyyFICdo",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "가상 작업에서 일반 입력 1만, 캐시 쓰기 1만, 캐시 읽기 3만, 출력 5천 토큰을 각각 썼다고 하자. 네 수치는 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "bold"
+                  }
+                ],
+                "text": "서로 겹치지 않는 과금 항목"
+              },
+              {
+                "type": "text",
+                "text": "으로 가정한다."
+              }
+            ]
+          },
+          {
+            "type": "bulletList",
+            "attrs": {
+              "id": "CwE5B3o8-Ryg"
+            },
+            "content": [
+              {
+                "type": "listItem",
+                "attrs": {
+                  "id": "Tfg5VWdkfLq9"
+                },
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "attrs": {
+                      "id": "B2SOSzRSwWRu",
+                      "textAlign": "left"
+                    },
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Opus 5.5, 5분 캐시 쓰기: $0.04 + $0.05 + $0.006 + $0.10 = "
+                      },
+                      {
+                        "type": "text",
+                        "marks": [
+                          {
+                            "type": "bold"
+                          }
+                        ],
+                        "text": "$0.196"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "attrs": {
+                  "id": "882U0UGA_3Ro"
+                },
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "attrs": {
+                      "id": "8DC4J8_FQmwe",
+                      "textAlign": "left"
+                    },
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "GPT-6.2 Sol, 30분 캐시 쓰기: $0.02 + $0.025 + $0.003 + $0.05 = "
+                      },
+                      {
+                        "type": "text",
+                        "marks": [
+                          {
+                            "type": "bold"
+                          }
+                        ],
+                        "text": "$0.098"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "hwe_LcJWyjr8",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "둘 다 합계 입력은 5만 토큰이지만, 앞의 캐시 없는 예제와 입력 구성과 단가가 다르다. 따라서 총 토큰 수뿐 아니라 캐시 읽기·쓰기 비중까지 봐야 실제 비용에 가까운 추정이 가능하다. 제공자 응답의 입력 합계에 캐시 토큰이 이미 포함되는지 여부도 확인해야 중복 합산을 피할 수 있다."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "-W8d27wH-MFr",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "이 역시 단가 계산 예시이지 동일한 프롬프트에서 두 서비스가 위와 같은 캐시 적중률을 낸다는 뜻은 아니다. Claude Code는 기본적으로 프롬프트 캐싱을 관리하지만, 모델 변경이나 맥락 변경 등으로 캐시가 다시 만들어질 수 있다. "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://code.claude.com/docs/en/prompt-caching",
+                      "target": "_blank",
+                      "rel": "noopener noreferrer nofollow",
+                      "class": null,
+                      "title": null
+                    }
+                  }
+                ],
+                "text": "Claude Code의 프롬프트 캐싱"
+              }
+            ]
+          },
+          {
+            "type": "heading",
+            "attrs": {
+              "id": "u1qCYDxcifKa",
+              "textAlign": "left",
+              "level": 2
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "월 구독과 API 과금은 어떻게 다를까?"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "79jW3AdJV18f",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "여기서 혼동하기 쉬운 부분이 있다. "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "bold"
+                  }
+                ],
+                "text": "월 구독의 사용량 한도와 API의 토큰별 청구는 같은 계산 방식이 아니다."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "y2Ge_kGZP0oM",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Claude Pro는 미국 기준 월 결제 시 $20, Max는 월 $100이며 Claude Code를 포함한다. 사용량은 모델과 대화 길이, 파일 등 여러 요인에 따라 달라지고 Claude의 다른 사용과 한도를 공유한다. 공식 요금표에서 Max는 Pro 대비 5시간 및 주간 사용량을 각각 5배로 안내한다. 연간 결제나 다른 플랜은 별도 조건이 적용된다. "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://claude.com/pricing",
+                      "target": "_blank",
+                      "rel": "noopener noreferrer nofollow",
+                      "class": null,
+                      "title": null
+                    }
+                  }
+                ],
+                "text": "Claude 요금제"
+              },
+              {
+                "type": "text",
+                "text": ", "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://support.claude.com/en/articles/11145838-use-claude-code-with-your-pro-max-or-ultra-plan",
+                      "target": "_blank",
+                      "rel": "noopener noreferrer nofollow",
+                      "class": null,
+                      "title": null
+                    }
+                  }
+                ],
+                "text": "Claude Code 구독 한도"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "Lc04QIN2WKqa",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Codex는 ChatGPT 플랜에 포함된 사용량으로 이용할 수 있으며, 공식 페이지에서 Plus는 월 $20이다. OpenAI는 작업의 모델, 크기와 복잡도, 로컬·클라우드 실행 여부에 따라 사용량이 달라진다고 설명한다. 예를 들어 Plus의 GPT-6.2 Sol은 5시간당 로컬 메시지 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "bold"
+                  }
+                ],
+                "text": "약 17~180개"
+              },
+              {
+                "type": "text",
+                "text": "로 안내되지만, 이는 고정 보장량이 아니라 작업 조건에 따른 추정치다. 주간 제한도 적용될 수 있다. "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://learn.chatgpt.com/docs/pricing",
+                      "target": "_blank",
+                      "rel": "noopener noreferrer nofollow",
+                      "class": null,
+                      "title": null
+                    }
+                  }
+                ],
+                "text": "Codex 요금과 사용량"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "RASbKKNLv8Lh",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "API 키를 사용하면 각 API의 사용량 기준으로 별도 과금된다. OpenAI는 API 키 세션이 ChatGPT 플랜의 포함 사용량이 아니라 별도 API 가격을 따른다고 명시한다. Claude도 구독에 포함된 사용량과 API·추가 크레딧은 구분해서 확인해야 한다."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "Ab5yVnFEoj4A",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "따라서 API 가격을 곱해 얻은 추정액을 월 구독의 실제 청구액이나 “남은 한도를 몇 퍼센트 썼는지”로 환산할 수는 없다. 제품에 표시되는 한도와 리셋 시각은 해당 계정에서 확인하는 것이 가장 정확하다."
+              }
+            ]
+          },
+          {
+            "type": "heading",
+            "attrs": {
+              "id": "WYRnppA_oSSM",
+              "textAlign": "left",
+              "level": 2
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "내가 사용한 토큰은 어디서 확인할까?"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "huzz7yjOski6",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Claude Code에서는 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "/usage"
+              },
+              {
+                "type": "text",
+                "text": "의 Session 항목에서 모델별 입력, 출력, 캐시 읽기와 쓰기 등 세션 사용량을 확인할 수 있다. 다만 구독 사용자에게 표시되는 세션 달러 값은 실제 구독 청구액이 아닌 추정치이므로 플랜 사용량 표시와 구분해야 한다. "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://code.claude.com/docs/en/costs",
+                      "target": "_blank",
+                      "rel": "noopener noreferrer nofollow",
+                      "class": null,
+                      "title": null
+                    }
+                  }
+                ],
+                "text": "Claude Code 사용량 확인"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "wnC5CDK-LRC_",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Codex CLI에서는 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "/status"
+              },
+              {
+                "type": "text",
+                "text": "로 현재 세션 설정과 토큰 사용량, 남은 컨텍스트 등의 정보를 확인할 수 있다. "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ],
+                "text": "/usage"
+              },
+              {
+                "type": "text",
+                "text": "는 계정의 토큰 활동을 살펴보는 메뉴를 제공하며, 플랜 한도와 초기화 시각은 "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://chatgpt.com/codex/settings/usage",
+                      "target": "_blank",
+                      "rel": "noopener noreferrer nofollow",
+                      "class": null,
+                      "title": null
+                    }
+                  }
+                ],
+                "text": "Codex 사용량 대시보드"
+              },
+              {
+                "type": "text",
+                "text": "에서도 볼 수 있다. 표시 항목은 버전과 로그인 방식에 따라 달라질 수 있다. "
+              },
+              {
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://developers.openai.com/codex/cli/reference",
+                      "target": "_blank",
+                      "rel": "noopener noreferrer nofollow",
+                      "class": null,
+                      "title": null
+                    }
+                  }
+                ],
+                "text": "Codex CLI 명령어"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "0i_SIZmk578d",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "직접 비교한다면 같은 저장소의 같은 커밋과 동일한 요청으로 시작하고, 모델명과 effort, 에이전트 버전, 캐시 상태를 기록해보자. 한 번의 실행 결과보다 여러 번의 결과와 테스트 통과 여부를 함께 보는 편이 유용하다. 모델이 적은 토큰을 사용했더라도 필요한 테스트나 수정 작업을 놓쳤다면 단순 비교가 어렵기 때문이다."
+              }
+            ]
+          },
+          {
+            "type": "heading",
+            "attrs": {
+              "id": "V2gjoJfiD23M",
+              "textAlign": "left",
+              "level": 2
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "글을 마치며"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "7ZgdtfIv9bH-",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Claude Code와 Codex의 비용 차이는 모델 단가 하나로 설명되지 않는다. 어떤 파일을 읽었는지, 몇 번 도구를 호출했는지, 캐시가 얼마나 재사용됐는지, 출력과 추론에 얼마나 사용했는지가 함께 영향을 준다."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "ITZNa6-QM7MU",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "API를 사용한다면 입력·출력·캐시를 나누어 비용을 계산하고, 구독을 사용한다면 제품이 보여주는 사용량과 한도를 별도로 확인해야 한다. 같은 작업에서 실제로 얼마나 차이가 나는지는 결국 내 프로젝트와 설정에서 측정해보는 것이 가장 정확하다."
+              }
+            ]
+          },
+          {
+            "type": "heading",
+            "attrs": {
+              "id": "9JBYzk2ZVHOp",
+              "textAlign": "left",
+              "level": 2
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "참고 자료"
+              }
+            ]
+          },
+          {
+            "type": "bulletList",
+            "attrs": {
+              "id": "WHLEPy-U2KK-"
+            },
+            "content": [
+              {
+                "type": "listItem",
+                "attrs": {
+                  "id": "fqlfbd9EqhwB"
+                },
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "attrs": {
+                      "id": "08J1EB6xzu69",
+                      "textAlign": "left"
+                    },
+                    "content": [
+                      {
+                        "type": "text",
+                        "marks": [
+                          {
+                            "type": "link",
+                            "attrs": {
+                              "href": "https://platform.claude.com/docs/en/about-claude/pricing",
+                              "target": "_blank",
+                              "rel": "noopener noreferrer nofollow",
+                              "class": null,
+                              "title": null
+                            }
+                          }
+                        ],
+                        "text": "https://platform.claude.com/docs/en/about-claude/pricing"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "attrs": {
+                  "id": "D_Nc7cRPUOR6"
+                },
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "attrs": {
+                      "id": "lbzx-xR_vA0c",
+                      "textAlign": "left"
+                    },
+                    "content": [
+                      {
+                        "type": "text",
+                        "marks": [
+                          {
+                            "type": "link",
+                            "attrs": {
+                              "href": "https://developers.openai.com/api/docs/pricing",
+                              "target": "_blank",
+                              "rel": "noopener noreferrer nofollow",
+                              "class": null,
+                              "title": null
+                            }
+                          }
+                        ],
+                        "text": "https://developers.openai.com/api/docs/pricing"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "attrs": {
+                  "id": "592jMrRnR6jP"
+                },
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "attrs": {
+                      "id": "5LhEw7unygB8",
+                      "textAlign": "left"
+                    },
+                    "content": [
+                      {
+                        "type": "text",
+                        "marks": [
+                          {
+                            "type": "link",
+                            "attrs": {
+                              "href": "https://learn.chatgpt.com/docs/pricing",
+                              "target": "_blank",
+                              "rel": "noopener noreferrer nofollow",
+                              "class": null,
+                              "title": null
+                            }
+                          }
+                        ],
+                        "text": "https://learn.chatgpt.com/docs/pricing"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "attrs": {
+                  "id": "VYYhYNgxKLyD"
+                },
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "attrs": {
+                      "id": "6w6ywAUJZCLI",
+                      "textAlign": "left"
+                    },
+                    "content": [
+                      {
+                        "type": "text",
+                        "marks": [
+                          {
+                            "type": "link",
+                            "attrs": {
+                              "href": "https://code.claude.com/docs/en/costs",
+                              "target": "_blank",
+                              "rel": "noopener noreferrer nofollow",
+                              "class": null,
+                              "title": null
+                            }
+                          }
+                        ],
+                        "text": "https://code.claude.com/docs/en/costs"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "attrs": {
+                  "id": "UtxgcAg4Fuqe"
+                },
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "attrs": {
+                      "id": "Exq6Dj_J6_pO",
+                      "textAlign": "left"
+                    },
+                    "content": [
+                      {
+                        "type": "text",
+                        "marks": [
+                          {
+                            "type": "link",
+                            "attrs": {
+                              "href": "https://www.sidehub.io/blog/codex-vs-claude-code",
+                              "target": "_blank",
+                              "rel": "noopener noreferrer nofollow",
+                              "class": null,
+                              "title": null
+                            }
+                          }
+                        ],
+                        "text": "https://www.sidehub.io/blog/codex-vs-claude-code"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "attrs": {
+                  "id": "V7eUHipmEd8i"
+                },
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "attrs": {
+                      "id": "qAdoMxrjnFfE",
+                      "textAlign": "left"
+                    },
+                    "content": [
+                      {
+                        "type": "text",
+                        "marks": [
+                          {
+                            "type": "link",
+                            "attrs": {
+                              "href": "https://dosu.dev/blog/claude-code-vs-codex-token-costs",
+                              "target": "_blank",
+                              "rel": "noopener noreferrer nofollow",
+                              "class": null,
+                              "title": null
+                            }
+                          }
+                        ],
+                        "text": "https://dosu.dev/blog/claude-code-vs-codex-token-costs"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "attrs": {
+                  "id": "EcEI3oEE7SNC"
+                },
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "attrs": {
+                      "id": "GGVGNXd5_4WQ",
+                      "textAlign": "left"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "m_h6viGch9RX",
+              "textAlign": "left"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "isPrivate": false,
+  "showInList": true,
+  "coverImage": "",
+  "updatedAt": "2026-11-27T06:31:16.479Z"
+}
